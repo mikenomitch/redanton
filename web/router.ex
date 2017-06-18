@@ -45,6 +45,7 @@ defmodule Danton.Router do
     get "/", PageController, :index
     resources "/channels", ChannelController
     resources "/clubs", ClubController
+    resources "/posts", PostController
   end
 
   # pipeline :api do
