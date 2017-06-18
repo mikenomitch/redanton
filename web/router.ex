@@ -17,16 +17,16 @@ defmodule Danton.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session, protected: true  # Add this
+    plug Coherence.Authentication.Session, protected: true
   end
 
-  # Add this block
+  # Added by Coherence
   scope "/" do
     pipe_through :browser
     coherence_routes
   end
 
-  # Add this block
+  # Added by Coherence
   scope "/" do
     pipe_through :protected
     coherence_routes :protected
@@ -44,17 +44,6 @@ defmodule Danton.Router do
     pipe_through :protected
     get "/", PageController, :index
     resources "/clubs", ClubController
-    resources "/channels", ChannelController do
-      resources "/posts", PostController do
-        resources "/comments", CommentController
-      end
-    end
-  end
-
-
-  scope "/", Danton do
-    pipe_through :browser # Use the default browser stack
-
   end
 
   # pipeline :api do
