@@ -6,6 +6,8 @@
 
 - Display lists of these things properly via html.eex
 
+- Add proper seed files
+
 - Properly scope what somebody can see based on membership
 
 - Add api/v1/routes and JSON views for all types
