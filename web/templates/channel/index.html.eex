@@ -1,0 +1,30 @@
+<h2>Listing channels</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Club</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for channel <- @channels do %>
+    <tr>
+      <td><%= channel.name %></td>
+      <td><%= channel.description %></td>
+      <td><%= channel.club_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: channel_path(@conn, :show, channel), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: channel_path(@conn, :edit, channel), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: channel_path(@conn, :delete, channel), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New channel", to: channel_path(@conn, :new) %>

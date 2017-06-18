@@ -23,7 +23,7 @@ defmodule Danton.Router do
   # Added by Coherence
   scope "/" do
     pipe_through :browser
-    coherence_routes
+    coherence_routes()
   end
 
   # Added by Coherence
@@ -43,6 +43,7 @@ defmodule Danton.Router do
   scope "/", Danton do
     pipe_through :protected
     get "/", PageController, :index
+    resources "/channels", ChannelController
     resources "/clubs", ClubController
   end
 

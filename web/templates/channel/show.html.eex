@@ -1,0 +1,23 @@
+<h2>Show channel</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @channel.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @channel.description %>
+  </li>
+
+  <li>
+    <strong>Club:</strong>
+    <%= @channel.club_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: channel_path(@conn, :edit, @channel) %>
+<%= link "Back", to: channel_path(@conn, :index) %>
