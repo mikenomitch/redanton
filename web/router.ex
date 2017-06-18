@@ -45,6 +45,7 @@ defmodule Danton.Router do
     get "/", PageController, :index
     resources "/channels", ChannelController
     resources "/clubs", ClubController
+    resources "/comments", CommentController
     resources "/posts", PostController
   end
 
