@@ -7,6 +7,7 @@ defmodule Danton.Comment do
     belongs_to :comment, Danton.Comment
     belongs_to :post, Danton.Post
     belongs_to :user, Danton.User
+    has_many :comments, Danton.Comment
 
     timestamps()
   end

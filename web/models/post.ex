@@ -8,6 +8,7 @@ defmodule Danton.Post do
     field :url, :string
     belongs_to :channel, Danton.Channel
     belongs_to :user, Danton.User
+    has_many :comments, Danton.Comment  
 
     timestamps()
   end
