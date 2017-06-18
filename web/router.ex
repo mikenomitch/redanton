@@ -13,6 +13,7 @@ defmodule Danton.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/clubs", ClubController
     resources "/channels", ChannelController do
       resources "/posts", PostController do
         resources "/comments", CommentController
