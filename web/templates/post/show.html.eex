@@ -40,5 +40,5 @@
 
 </ul>
 
-<%= link "Edit", to: post_path(@conn, :edit, @post) %>
-<%= link "Back", to: post_path(@conn, :index) %>
+<%= link "Edit", to: club_channel_post_path(@conn, :edit, 1, 1, @post) %>
+<%= link "Back", to: club_channel_post_path(@conn, :index, 1, 1) %>

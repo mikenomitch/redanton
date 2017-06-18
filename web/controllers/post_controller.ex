@@ -20,7 +20,7 @@ defmodule Danton.PostController do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to: club_channel_post_path(conn, :index, 1, 1))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -45,7 +45,7 @@ defmodule Danton.PostController do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post updated successfully.")
-        |> redirect(to: post_path(conn, :show, post))
+        |> redirect(to: club_channel_post_path(conn, :show, post, 1, 1))
       {:error, changeset} ->
         render(conn, "edit.html", post: post, changeset: changeset)
     end
@@ -60,6 +60,6 @@ defmodule Danton.PostController do
 
     conn
     |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: post_path(conn, :index))
+    |> redirect(to: club_channel_post_path(conn, :index, 1, 1))
   end
 end

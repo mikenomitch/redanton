@@ -24,13 +24,13 @@
       <td><%= post.user_id %></td>
 
       <td class="text-right">
-        <%= link "Show", to: post_path(@conn, :show, post), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: post_path(@conn, :edit, post), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: club_channel_post_path(@conn, :show, 1, 1, post), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: club_channel_post_path(@conn, :edit, 1, 1, post), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: club_channel_post_path(@conn, :delete, 1, 1, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New post", to: post_path(@conn, :new) %>
+<%= link "New post", to: club_channel_post_path(@conn, :new, 1, 1) %>

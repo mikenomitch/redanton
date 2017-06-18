@@ -44,10 +44,12 @@ defmodule Danton.Router do
     pipe_through :protected
     get "/", PageController, :index
     resources "/clubs", ClubController do
-      resources "/channels", ChannelController
+      resources "/channels", ChannelController do
+        resources "/posts", PostController
+      end
     end
+
     resources "/comments", CommentController
-    resources "/posts", PostController
   end
 
   # pipeline :api do
