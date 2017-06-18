@@ -2,18 +2,7 @@
 
 ## Backend
 
-- Remove unneeded MCV
-
-- Create Migratsions and Models for
-
-  - club membership
-  - channels
-  - channel/club relationships
-  - channel/user relationships (access via clubs w/ options above that? - keep empty for now)
-  - posts
-  - channel/post join
-  - comments
-  - comments/parent join (post or other comment)
+- Nest routes properly
 
 - Display lists of these things properly via html.eex
 
