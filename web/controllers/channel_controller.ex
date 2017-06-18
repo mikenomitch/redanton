@@ -45,7 +45,7 @@ defmodule Danton.ChannelController do
       {:ok, channel} ->
         conn
         |> put_flash(:info, "Channel updated successfully.")
-        |> redirect(to: club_channel_path(conn, :show, channel))
+        |> redirect(to: channel_path(conn, :show, channel))
       {:error, changeset} ->
         render(conn, "edit.html", channel: channel, changeset: changeset)
     end

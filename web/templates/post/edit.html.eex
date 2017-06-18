@@ -1,6 +1,6 @@
 <h2>Edit post</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: club_channel_post_path(@conn, :update,1, 1, @post) %>
+                        action: post_path(@conn, :update, @post) %>
 
-<%= link "Back", to: club_channel_post_path(@conn, :index, 1, 1) %>
+<%= link "Back", to: channel_post_path(@conn, :index, 1) %>

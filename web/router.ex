@@ -43,10 +43,17 @@ defmodule Danton.Router do
   scope "/", Danton do
     pipe_through :protected
     get "/", PageController, :index
+
     resources "/clubs", ClubController do
-      resources "/channels", ChannelController do
-        resources "/posts", PostController
-      end
+      resources "/channels", ChannelController, only: [:index, :new]
+    end
+
+    resources "/channels", ChannelController do
+      resources "/posts", PostController, only: [:index, :new]
+    end
+
+    resources "/posts", PostController do
+      resources "/comments", CommentController, only: [:index, :new]
     end
 
     resources "/comments", CommentController
