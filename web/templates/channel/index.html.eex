@@ -18,13 +18,13 @@
       <td><%= channel.club_id %></td>
 
       <td class="text-right">
-        <%= link "Show", to: channel_path(@conn, :show, channel), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: channel_path(@conn, :edit, channel), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: channel_path(@conn, :delete, channel), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: club_channel_path(@conn, :show, 1, channel), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: club_channel_path(@conn, :edit, 1, channel), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: club_channel_path(@conn, :delete, 1, channel), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New channel", to: channel_path(@conn, :new) %>
+<%= link "New channel", to: club_channel_path(@conn, :new, 1) %>

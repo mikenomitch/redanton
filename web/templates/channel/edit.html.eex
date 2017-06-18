@@ -1,6 +1,6 @@
 <h2>Edit channel</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: channel_path(@conn, :update, @channel) %>
+                        action: club_channel_path(@conn, :update, @channel) %>
 
-<%= link "Back", to: channel_path(@conn, :index) %>
+<%= link "Back", to: club_channel_path(@conn, :index, 1) %>

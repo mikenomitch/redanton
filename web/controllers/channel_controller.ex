@@ -20,7 +20,7 @@ defmodule Danton.ChannelController do
       {:ok, _channel} ->
         conn
         |> put_flash(:info, "Channel created successfully.")
-        |> redirect(to: channel_path(conn, :index))
+        |> redirect(to: club_channel_path(conn, :index, 1))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -45,7 +45,7 @@ defmodule Danton.ChannelController do
       {:ok, channel} ->
         conn
         |> put_flash(:info, "Channel updated successfully.")
-        |> redirect(to: channel_path(conn, :show, channel))
+        |> redirect(to: club_channel_path(conn, :show, channel))
       {:error, changeset} ->
         render(conn, "edit.html", channel: channel, changeset: changeset)
     end
@@ -60,6 +60,6 @@ defmodule Danton.ChannelController do
 
     conn
     |> put_flash(:info, "Channel deleted successfully.")
-    |> redirect(to: channel_path(conn, :index))
+    |> redirect(to: club_channel_path(conn, :index, 1))
   end
 end

@@ -2,11 +2,9 @@
 
 ## Backend
 
-- Nest routes properly
+- Nest routes properly and link properly
 
-- Display lists of these things properly via html.eex
-
-- Add proper seed files
+- Add good seed files
 
 - Properly scope what somebody can see based on membership
 
