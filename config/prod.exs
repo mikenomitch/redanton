@@ -22,7 +22,7 @@ config :danton, Danton.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   https: [port: 443,
           keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-          certfile: System.get_env("SOME_APP_SSL_CERT_PATH")]
+          certfile: System.get_env("SOME_APP_SSL_CERT_PATH")],
   cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
