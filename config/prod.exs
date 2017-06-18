@@ -32,7 +32,6 @@ config :danton, Danton.Repo,
 # to the previous section and set your `:url` port to 443:
 #
 config :danton, Danton.Endpoint,
-  ...
   url: [scheme: "https", host: "stormy-reef-53700.herokuapp.com", port: 443], force_ssl: [rewrite_on: [:x_forwarded_proto]],
   https: [port: 443,
           keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
