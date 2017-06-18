@@ -31,8 +31,10 @@ config :danton, Danton.Repo,
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
+
 config :danton, Danton.Endpoint,
-  url: [scheme: "https", host: "stormy-reef-53700.herokuapp.com", port: 443], force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  url: [scheme: "https", host: "stormy-reef-53700.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   https: [port: 443,
           keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
           certfile: System.get_env("SOME_APP_SSL_CERT_PATH")]
@@ -59,7 +61,7 @@ config :danton, Danton.Endpoint,
 # Alternatively, you can configure exactly which server to
 # start per endpoint:
 #
-#     config :danton, Danton.Endpoint, server: true
+config :danton, Danton.Endpoint, server: true
 #
 
 # Finally import the config/prod.secret.exs
