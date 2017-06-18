@@ -1,0 +1,3 @@
+<div class="jumbotron">
+  <h2>This is the index page for comments on post <%= @post_id %>!</h2>
+</div>

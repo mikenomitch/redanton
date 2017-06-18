@@ -9,15 +9,20 @@ defmodule Danton.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", Danton do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/channels", ChannelController do
+      resources "/posts", PostController do
+        resources "/comments", CommentController
+      end
+    end
   end
+
+  # pipeline :api do
+  #   plug :accepts, ["json"]
+  # end
 
   # Other scopes may use custom stacks.
   # scope "/api", Danton do
