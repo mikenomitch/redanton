@@ -4,7 +4,7 @@ defmodule Danton.Repo.Migrations.CreateClub do
   def change do
     create table(:clubs) do
       add :name, :string
-      add :description, :string
+      add :description, :text
 
       timestamps()
     end
