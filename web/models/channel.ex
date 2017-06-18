@@ -5,6 +5,7 @@ defmodule Danton.Channel do
     field :name, :string
     field :description, :string
     belongs_to :club, Danton.Club
+    has_many :posts, Danton.Post
 
     timestamps()
   end

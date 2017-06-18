@@ -17,6 +17,11 @@
     <%= @channel.club_id %>
   </li>
 
+  <li>
+    <strong>Posts:</strong>
+    <%= Enum.map(@channel.posts, &(&1.title)) %>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: channel_path(@conn, :edit, @channel) %>

@@ -27,7 +27,7 @@ defmodule Danton.ChannelController do
   end
 
   def show(conn, %{"id" => id}) do
-    channel = Repo.get!(Channel, id)
+    channel = Repo.get!(Channel, id) |> Repo.preload(:posts)
     render(conn, "show.html", channel: channel)
   end
 
