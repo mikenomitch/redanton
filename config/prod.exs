@@ -18,11 +18,9 @@ use Mix.Config
 #   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 config :danton, Danton.Endpoint,
+  http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "stormy-reef-53700.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  https: [port: 443,
-          keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-          certfile: System.get_env("SOME_APP_SSL_CERT_PATH")],
   cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
