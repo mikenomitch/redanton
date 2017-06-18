@@ -4,7 +4,7 @@
 
 - Remove unneeded MCV
 
-- Create MIgratsions and Models for
+- Create Migratsions and Models for
 
   - club membership
   - channels
@@ -31,11 +31,11 @@
 
   - style the following pages (5 min per page)
 
-	- groups list
-  	- group show/chan list
-  	- chan show/post list
-  	- post show/comment list
-  	- user login/auth stuff
+  - groups list
+    - group show/chan list
+    - chan show/post list
+    - post show/comment list
+    - user login/auth stuff
 
 - React Native iOS tutorial
 
@@ -44,5 +44,5 @@
 - Build out the main views of the app
 
 - Re-scope user auth'd stuff and build out auth on iOS
-	- use webviews & normal auth system first? (possible?)
+  - use webviews & normal auth system first? (possible?)
   - use Canary?
