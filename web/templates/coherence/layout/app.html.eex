@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Admin1!</title>
+    <title>Hello Danton!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -15,8 +15,13 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
+          <ul class="nav nav-pills">
+            <li><a href="/clubs">Clubs</a></li>
+            <li><a href="/channels">Channels</a></li>
+            <li><a href="/posts">Posts</a></li>
+            <li><a href="/comments">Comments</a></li>
+          </ul>
         </nav>
-        <span class="logo"></span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
