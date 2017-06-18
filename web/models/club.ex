@@ -4,6 +4,7 @@ defmodule Danton.Club do
   schema "clubs" do
     field :name, :string
     field :description, :string
+    has_many :channels, Danton.Channel
 
     timestamps()
   end
