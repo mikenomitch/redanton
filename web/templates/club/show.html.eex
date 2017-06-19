@@ -14,10 +14,11 @@
 
   <li>
     <strong>Channels:</strong>
-    <%= Enum.map(@club.channels, &(&1.name)) %>
+    <%= Enum.map(@club.channels, &(&1.name || "wat")) %>
   </li>
 
 </ul>
 
+<%= link "Channels", to: club_channel_path(@conn, :index, @club) %>
 <%= link "Edit", to: club_path(@conn, :edit, @club) %>
 <%= link "Back", to: club_path(@conn, :index) %>

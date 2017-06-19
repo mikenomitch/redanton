@@ -24,5 +24,6 @@
 
 </ul>
 
+<%= link "Posts", to: channel_post_path(@conn, :index, @channel) %>
 <%= link "Edit", to: channel_path(@conn, :edit, @channel) %>
-<%= link "Back", to: club_channel_path(@conn, :index, 1) %>
+<%= link "Back", to: club_channel_path(@conn, :index, @channel.club_id) %>

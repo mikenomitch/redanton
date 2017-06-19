@@ -17,4 +17,13 @@ defmodule Danton.Club do
     |> cast(params, [:name, :description])
     |> validate_required([:name, :description])
   end
+
+
+  @doc """
+  Builds a changeset for an associated channel
+  """
+  # def build_channel(club_id, channel_params) do
+  #   club = Danton.Repo.get(Danton.Club, club_id)
+  #   Ecto.build_assoc(club, :channels, channel_params)
+  # end
 end

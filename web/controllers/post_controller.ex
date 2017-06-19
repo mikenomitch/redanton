@@ -3,26 +3,38 @@ defmodule Danton.PostController do
 
   alias Danton.Post
 
-  def index(conn, _params) do
+  def index(conn,  %{"channel_id" => channel_id}) do
     posts = Repo.all(Post)
-    render(conn, "index.html", posts: posts)
+
+    posts = Repo.all(
+      from p in Post,
+      where: p.channel_id == ^channel_id,
+      select: p
+    )
+
+    render(conn, "index.html", posts: posts, channel_id: channel_id)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"channel_id" => channel_id}) do
     changeset = Post.changeset(%Post{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, channel_id: channel_id)
   end
 
-  def create(conn, %{"post" => post_params}) do
-    changeset = Post.changeset(%Post{}, post_params)
+  def create(conn, %{"post" => post_params, "channel_id" => channel_id}) do
+    channel = Danton.Repo.get(Danton.Channel, channel_id)
 
-    case Repo.insert(changeset) do
+    # clean up
+    %Danton.Post{}
+      |> Danton.Post.changeset(post_params)
+      |> Ecto.Changeset.put_assoc(:channel, channel)
+      |> Danton.Repo.insert()
+      |> case do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: channel_post_path(conn, :index, 1))
+        |> redirect(to: channel_post_path(conn, :index, channel_id))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, channel_id: channel_id)
     end
   end
 
@@ -53,6 +65,7 @@ defmodule Danton.PostController do
 
   def delete(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
+    channel_id = post.channel_id
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -60,6 +73,6 @@ defmodule Danton.PostController do
 
     conn
     |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: channel_post_path(conn, :index, 1))
+    |> redirect(to: channel_post_path(conn, :index, channel_id))
   end
 end

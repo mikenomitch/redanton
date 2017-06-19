@@ -3,24 +3,35 @@ defmodule Danton.CommentController do
 
   alias Danton.Comment
 
-  def index(conn, _params) do
-    comments = Repo.all(Comment)
-    render(conn, "index.html", comments: comments)
+  def index(conn,  %{"post_id" => post_id}) do
+    comments = Repo.all(
+      from c in Comment,
+      where: c.post_id == ^post_id,
+      select: c
+    )
+
+    render(conn, "index.html", comments: comments, post_id: post_id)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"post_id" => post_id}) do
     changeset = Comment.changeset(%Comment{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, post_id: post_id)
   end
 
-  def create(conn, %{"comment" => comment_params}) do
-    changeset = Comment.changeset(%Comment{}, comment_params)
+  def create(conn, %{"comment" => comment_params, "post_id" => post_id}) do
+    # this should support comments as well
+    post = Danton.Repo.get(Danton.Comment, post_id)
 
-    case Repo.insert(changeset) do
+     # extract somehow
+    %Danton.Comment{}
+      |> Danton.Comment.changeset(comment_params)
+      |> Ecto.Changeset.put_assoc(:post, post)
+      |> Danton.Repo.insert()
+      |> case do
       {:ok, _comment} ->
         conn
         |> put_flash(:info, "Comment created successfully.")
-        |> redirect(to: comment_path(conn, :index))
+        |> redirect(to: post_comment_path(conn, :index, post_id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -53,6 +64,7 @@ defmodule Danton.CommentController do
 
   def delete(conn, %{"id" => id}) do
     comment = Repo.get!(Comment, id)
+    post_id = comment.post_id
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -60,6 +72,6 @@ defmodule Danton.CommentController do
 
     conn
     |> put_flash(:info, "Comment deleted successfully.")
-    |> redirect(to: comment_path(conn, :index))
+    |> redirect(to: post_comment_path(conn, :index, post_id))
   end
 end

@@ -3,24 +3,34 @@ defmodule Danton.ChannelController do
 
   alias Danton.Channel
 
-  def index(conn, _params) do
-    channels = Repo.all(Channel)
-    render(conn, "index.html", channels: channels)
+  def index(conn, %{"club_id" => club_id}) do
+    channels = Repo.all(
+      from c in Channel,
+      where: c.club_id == ^club_id,
+      select: c
+    )
+
+    render(conn, "index.html", channels: channels, club_id: club_id)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"club_id" => club_id}) do
     changeset = Channel.changeset(%Channel{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, club_id: club_id)
   end
 
-  def create(conn, %{"channel" => channel_params}) do
-    changeset = Channel.changeset(%Channel{}, channel_params)
+  def create(conn, %{"channel" => channel_params, "club_id" => club_id}) do
+    club = Danton.Repo.get(Danton.Club, club_id)
 
-    case Repo.insert(changeset) do
+    # extract somehow
+    %Danton.Channel{}
+      |> Danton.Channel.changeset(channel_params)
+      |> Ecto.Changeset.put_assoc(:club, club)
+      |> Danton.Repo.insert()
+      |> case do
       {:ok, _channel} ->
         conn
         |> put_flash(:info, "Channel created successfully.")
-        |> redirect(to: club_channel_path(conn, :index, 1))
+        |> redirect(to: club_channel_path(conn, :index, club_id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -53,6 +63,7 @@ defmodule Danton.ChannelController do
 
   def delete(conn, %{"id" => id}) do
     channel = Repo.get!(Channel, id)
+    club_id = channel.club_id
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -60,6 +71,6 @@ defmodule Danton.ChannelController do
 
     conn
     |> put_flash(:info, "Channel deleted successfully.")
-    |> redirect(to: club_channel_path(conn, :index, 1))
+    |> redirect(to: club_channel_path(conn, :index, club_id))
   end
 end

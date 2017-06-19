@@ -40,5 +40,6 @@
 
 </ul>
 
+<%= link "Comments", to: post_comment_path(@conn, :index, @post) %>
 <%= link "Edit", to: post_path(@conn, :edit, @post) %>
-<%= link "Back", to: channel_post_path(@conn, :index, 1) %>
+<%= link "Back", to: channel_post_path(@conn, :index, @post.channel_id) %>

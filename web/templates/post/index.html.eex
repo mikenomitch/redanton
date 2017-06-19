@@ -33,4 +33,4 @@
   </tbody>
 </table>
 
-<%= link "New post", to: channel_post_path(@conn, :new, 1) %>
+<%= link "New post", to: channel_post_path(@conn, :new, @channel_id) %>

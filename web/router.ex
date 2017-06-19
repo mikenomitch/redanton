@@ -45,15 +45,15 @@ defmodule Danton.Router do
     get "/", PageController, :index
 
     resources "/clubs", ClubController do
-      resources "/channels", ChannelController, only: [:index, :new]
+      resources "/channels", ChannelController, only: [:index, :new, :create]
     end
 
     resources "/channels", ChannelController do
-      resources "/posts", PostController, only: [:index, :new]
+      resources "/posts", PostController, only: [:index, :new, :create]
     end
 
     resources "/posts", PostController do
-      resources "/comments", CommentController, only: [:index, :new]
+      resources "/comments", CommentController, only: [:index, :new, :create]
     end
 
     resources "/comments", CommentController

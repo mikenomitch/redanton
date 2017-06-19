@@ -27,4 +27,4 @@
   </tbody>
 </table>
 
-<%= link "New channel", to: club_channel_path(@conn, :new, 1) %>
+<%= link "New channel", to: club_channel_path(@conn, :new, @club_id) %>
