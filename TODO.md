@@ -2,7 +2,7 @@
 
 ## Backend
 
-- Add good seed files
+- Add good seed files (half way)
 
 - Properly scope what somebody can see based on membership
 
