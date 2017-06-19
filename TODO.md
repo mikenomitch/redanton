@@ -2,8 +2,6 @@
 
 ## Backend
 
-- Nest routes properly and link properly
-
 - Add good seed files
 
 - Properly scope what somebody can see based on membership
