@@ -2,8 +2,6 @@
 
 ## Backend
 
-- Add Memberships Table
-
 - Properly scope what somebody can see based on membership
 
 - Add api/v1/ routes and JSON views for all types

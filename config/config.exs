@@ -14,6 +14,9 @@ config :danton, Danton.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "Wz/r6VWueC0MVJxhWwAh/VhJY6uxsZYRJnIhYtGYXXheTtumCoDPFNkkUw72SxJZ",
   render_errors: [view: Danton.ErrorView, accepts: ~w(html json)],
+  modules: [
+    Danton.ExAdmin.Dashboard,
+  ],
   pubsub: [name: Danton.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
@@ -40,3 +43,20 @@ config :coherence, Danton.Coherence.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,
   api_key: "your api key here"
 # %% End Coherence Configuration %%
+
+# Configure Ex Admin
+config :ex_admin,
+  repo: Danton.Repo,
+  module: Danton,
+  modules: [
+    Danton.ExAdmin.Dashboard,
+    Danton.ExAdmin.Club,
+    Danton.ExAdmin.Channel,
+    Danton.ExAdmin.Post,
+    Danton.ExAdmin.Comment,
+    Danton.ExAdmin.Membership,
+    Danton.ExAdmin.User
+  ]
+
+config :xain, :after_callback, {Phoenix.HTML, :raw}
+

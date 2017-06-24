@@ -32,6 +32,13 @@ defmodule Danton.Router do
     coherence_routes :protected
   end
 
+  use ExAdmin.Router
+  # your app's routes
+  scope "/admin", ExAdmin do
+    pipe_through :browser
+    admin_routes
+  end
+
   # PRIVATE ROUTES
   scope "/", Danton do
     pipe_through :browser
