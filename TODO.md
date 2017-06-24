@@ -2,13 +2,17 @@
 
 ## Backend
 
-- Add good seed files (half way)
+- Add Memberships Table
 
 - Properly scope what somebody can see based on membership
 
-- Add api/v1/routes and JSON views for all types
+- Add api/v1/ routes and JSON views for all types
 
-- Add realtime chat channels to all groups
+- Get the comment nesting working properly (look into psql recursion for this)
+
+- Add good seed files (half way)
+
+- Add realtime chat channels to all groups (later)
 
 ## Frontend
 

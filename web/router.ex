@@ -37,6 +37,7 @@ defmodule Danton.Router do
     pipe_through :browser
     get "/", PageController, :index
     # Add public routes below
+    resources "/memberships", MembershipController
   end
 
   # PROTECTED ROUTES
