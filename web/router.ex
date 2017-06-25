@@ -68,12 +68,17 @@ defmodule Danton.Router do
     resources "/comments", CommentController
   end
 
-  # pipeline :api do
-  #   plug :accepts, ["json"]
-  # end
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Danton do
-  #   pipe_through :api
-  # end
+  scope "/api", Danton do
+    pipe_through :api
+    pipe_through :protected
+
+    scope "/v1" do
+      resources "/clubs", ClubController
+    end
+  end
 end

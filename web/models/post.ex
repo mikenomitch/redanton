@@ -3,7 +3,7 @@ defmodule Danton.Post do
 
   schema "posts" do
     field :title, :string
-    field :description, :string
+    field :description, :text
     field :type, :string
     field :url, :string
     belongs_to :channel, Danton.Channel
