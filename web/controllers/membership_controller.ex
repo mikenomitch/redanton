@@ -4,7 +4,10 @@ defmodule Danton.MembershipController do
   alias Danton.Membership
 
   def index(conn, _params) do
-    memberships = Repo.all(Membership)
+    memberships = Coherence.current_user(conn)
+      |> Ecto.assoc(:memberships)
+      |> Repo.all
+
     render(conn, "index.html", memberships: memberships)
   end
 

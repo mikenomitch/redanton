@@ -1,10 +1,12 @@
 defmodule Danton.ClubController do
   use Danton.Web, :controller
-
   alias Danton.Club
 
   def index(conn, _params) do
-    clubs = Repo.all(Club)
+    clubs = Coherence.current_user(conn)
+      |> Ecto.assoc(:clubs)
+      |> Repo.all
+
     render(conn, "index.html", clubs: clubs)
   end
 

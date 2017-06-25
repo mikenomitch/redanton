@@ -43,14 +43,15 @@ defmodule Danton.Router do
   scope "/", Danton do
     pipe_through :browser
     get "/", PageController, :index
-    # Add public routes below
-    resources "/memberships", MembershipController
   end
 
   # PROTECTED ROUTES
   scope "/", Danton do
     pipe_through :protected
-    get "/", PageController, :index
+    get "/front", PostController, :front_page
+
+    # Add public routes below
+    resources "/memberships", MembershipController
 
     resources "/clubs", ClubController do
       resources "/channels", ChannelController, only: [:index, :new, :create]

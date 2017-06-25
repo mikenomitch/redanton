@@ -16,8 +16,9 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills">
+            <li><a href="/">Home</a></li>
             <li><a href="/clubs">Clubs</a></li>
-            <li><a href="/">Chat</a></li>
+            <li><a href="/memberships">Memberships</a></li>
           </ul>
         </nav>
       </header>

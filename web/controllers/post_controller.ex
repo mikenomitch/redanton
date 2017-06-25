@@ -15,6 +15,17 @@ defmodule Danton.PostController do
     render(conn, "index.html", posts: posts, channel_id: channel_id)
   end
 
+  def front_page(conn, _params) do
+    clubs = Coherence.current_user(conn)
+      |> Ecto.assoc(:clubs)
+      |> Repo.all
+
+    channels = Repo.all Ecto.assoc(clubs, :channels)
+    posts = Repo.all Ecto.assoc(channels, :posts)
+
+    render(conn, "front_page.html", posts: posts)
+  end
+
   def new(conn, %{"channel_id" => channel_id}) do
     changeset = Post.changeset(%Post{})
     render(conn, "new.html", changeset: changeset, channel_id: channel_id)
