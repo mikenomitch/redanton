@@ -78,7 +78,7 @@ defmodule Danton.Router do
     pipe_through :protected
 
     scope "/v1" do
-      resources "/clubs", ClubController
+      resources "/posts", Api.V1.PostController
     end
   end
 end

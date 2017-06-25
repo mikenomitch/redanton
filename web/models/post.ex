@@ -3,12 +3,12 @@ defmodule Danton.Post do
 
   schema "posts" do
     field :title, :string
-    field :description, :text
+    field :description, :string
     field :type, :string
     field :url, :string
     belongs_to :channel, Danton.Channel
     belongs_to :user, Danton.User
-    has_many :comments, Danton.Comment  
+    has_many :comments, Danton.Comment
 
     timestamps()
   end
