@@ -7,6 +7,9 @@ defmodule Danton.User do
     field :email, :string
     coherence_schema
 
+    has_many :memberships, Danton.Membership
+    many_to_many :clubs, Danton.Club, join_through: "memberships"
+
     timestamps
   end
 

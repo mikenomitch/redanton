@@ -5,6 +5,8 @@ defmodule Danton.Club do
     field :name, :string
     field :description, :string
     has_many :channels, Danton.Channel
+    has_many :memberships, Danton.Membership
+    many_to_many :members, Danton.User, join_through: "memberships"
 
     timestamps()
   end
