@@ -2,13 +2,7 @@
 
 ## Backend
 
-- Add api/v1/ routes and JSON views
-  - Clubs
-  - Channels
-  - Posts
-  - Comments
-  - Memberships
-  - Users
+- Get Neste
 
 - Get the comment nesting working properly (look into psql recursion for this)
 
