@@ -14,6 +14,11 @@
 # query = from u in User, where: u.age > 18 or is_nil(u.email), select: u
 # list_of_users = Repo.all(query)
 
+# =============================
+# updating a model
+# =============================
+
+# Post.changeset(post, %{title: "some new title"}) |> Repo.insert
 
 
 # =============================
