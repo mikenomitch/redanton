@@ -3,7 +3,7 @@ defmodule Danton.Api.V1.ChannelController do
 
   alias Danton.Channel
 
-  def index(conn, %{club_id: club_id}) do
+  def index(conn,  %{"club_id" => club_id}) do
     channels = Repo.all(
       from c in Channel,
       where: c.club_id == ^club_id,

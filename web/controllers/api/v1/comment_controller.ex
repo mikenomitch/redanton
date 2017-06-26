@@ -3,7 +3,7 @@ defmodule Danton.Api.V1.CommentController do
 
   alias Danton.Comment
 
-  def index(conn, %{post_id: post_id}) do
+  def index(conn, %{"post_id" => post_id}) do
     comments = Repo.all(
       from c in Comment,
       where: c.post_id == ^post_id,

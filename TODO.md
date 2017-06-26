@@ -2,7 +2,7 @@
 
 ## Backend
 
-- Get Neste
+- Get nested json indeces working
 
 - Get the comment nesting working properly (look into psql recursion for this)
 
