@@ -21,7 +21,7 @@ defmodule Danton.ChannelController do
   def create(conn, %{"channel" => channel_params, "club_id" => club_id}) do
     club = Danton.Repo.get(Danton.Club, club_id)
 
-    # extract somehow
+    # TODO: extract somehow
     %Danton.Channel{}
       |> Danton.Channel.changeset(channel_params)
       |> Ecto.Changeset.put_assoc(:club, club)

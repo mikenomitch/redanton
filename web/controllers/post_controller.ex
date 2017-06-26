@@ -4,8 +4,6 @@ defmodule Danton.PostController do
   alias Danton.Post
 
   def index(conn,  %{"channel_id" => channel_id}) do
-    posts = Repo.all(Post)
-
     posts = Repo.all(
       from p in Post,
       where: p.channel_id == ^channel_id,

@@ -3,11 +3,17 @@ defmodule Danton.Api.V1.PostController do
 
   alias Danton.Post
 
-  def index(conn, _params) do
-    posts = Repo.all(Post)
+  def index(conn, %{channel_id: channel_id}) do
+    posts = Repo.all(
+      from p in Post,
+      where: p.channel_id == ^channel_id,
+      select: p
+    )
+
     render(conn, "index.json", posts: posts)
   end
 
+  # TODO: add proper relationship logic
   def create(conn, %{"post" => post_params}) do
     changeset = Post.changeset(%Post{}, post_params)
 
