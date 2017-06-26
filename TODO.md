@@ -2,8 +2,6 @@
 
 ## Backend
 
-- Get nested json indeces working
-
 - Get the comment nesting working properly (look into psql recursion for this)
 
 - Add auth system (return error if Post not in one of their clubs)
