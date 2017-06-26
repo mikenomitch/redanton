@@ -6,7 +6,7 @@
 
 - Add auth system (return error if Post not in one of their clubs)
 
-- Add good seed files (half way)
+- Add good seed files (1/4 of the way)
 
 ## Frontend
 
