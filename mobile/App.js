@@ -6,13 +6,16 @@ import {
   View,
   Button,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import {
   Accelerometer,
 } from 'expo';
+
+import {Socket} from "phoenix"
 
 class StreamScreen extends React.Component {
   static navigationOptions = {
@@ -61,7 +64,6 @@ class ClubsScreen extends React.Component {
           onPress={() => navigate('Club')}
           title="See Club"
         />
-        <AccelerometerSensor/>
       </View>
     );
   }
@@ -82,96 +84,59 @@ class ClubScreen extends React.Component {
   }
 }
 
-class ProfileScreen extends React.Component {
+class ChatScreen extends React.Component {
   static navigationOptions = {
-    title: 'Profile',
+    title: 'Chat',
   };
 
+  constructor() {
+    super()
+
+    this.state = {
+      messages: []
+    }
+  }
+
+  componentDidMount() {
+    let socket = new Socket("https://stormy-reef-53700.herokuapp.com/socket",)
+    socket.connect()
+
+    let channel = socket.channel("room:lobby", {})
+    this.ch = channel
+
+    channel.on("new_msg", payload => {
+      let newMsg = this.state.messages.concat([payload.body])
+      this.setState({messages: newMsg})
+    })
+
+    channel.join()
+      .receive("ok", resp => { console.log("Joined successfully", resp) })
+      .receive("error", resp => { console.log("Unable to join", resp) })
+  }
+
+  dispatch = (text) => {
+    this.ch.push("new_msg", {body: this.state.text})
+    this.setState({text: ''})
+  }
+
   render() {
-    // http://mlb.mlb.com/mlb/images/players/head_shot/116539.jpg
     let pic = {
       uri: 'https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-9/1012800_2840495368468_1219514545_n.jpg?oh=2c7042c24ba884d1be7b2ed906e498e9&oe=59C8C060'
     };
 
     return (
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Image source={pic} style={{width: 193, height: 210, marginTop: 100}}/>
-        <Text>This is Erik</Text>
+      <View style={{alignItems: 'center', justifyContent: 'center', marginTop: 100}}>
+        <Text> Simple Chat: </Text>
+        {this.state.messages.map((m, i) => <Text key={i}>{m}</Text>)}
+        <TextInput onChangeText={this.dispatch} /><TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(text) => {this.setState({text})}}
+          onSubmitEditing={this.dispatch}
+          value={this.state.text}
+        />
       </View>
     );
   }
-}
-
-class AccelerometerSensor extends React.Component {
-  state = {
-    accelerometerData: {},
-  }
-
-  componentDidMount() {
-    this._toggle();
-  }
-
-  componentWillUnmount() {
-    this._unsubscribe();
-  }
-
-  _toggle = () => {
-    if (this._subscription) {
-      this._unsubscribe();
-    } else {
-      this._subscribe();
-    }
-  }
-
-  _slow = () => {
-    Accelerometer.setUpdateInterval(1000);
-  }
-
-  _fast = () => {
-    Accelerometer.setUpdateInterval(16);
-  }
-
-  _subscribe = () => {
-    this._subscription = Accelerometer.addListener((result) => {
-      this.setState({accelerometerData: result});
-    });
-  }
-
-  _unsubscribe = () => {
-    this._subscription && this._subscription.remove();
-    this._subscription = null;
-  }
-
-  render() {
-    let { x, y, z } = this.state.accelerometerData;
-
-    return (
-      <View style={styles.sensor}>
-        <Text>Accelerometer:</Text>
-        <Text>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this._toggle} style={styles.button}>
-            <Text>Toggle</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this._slow} style={[styles.button, styles.middleButton]}>
-            <Text>Slow</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this._fast} style={styles.button}>
-            <Text>Fast</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-}
-
-function round(n) {
-  if (!n) {
-    return 0;
-  }
-
-  return Math.floor(n * 100) / 100;
 }
 
 const styles = StyleSheet.create({
@@ -214,7 +179,7 @@ const ClubNavigator = StackNavigator({
 const Danton = TabNavigator({
   Stream: { screen: StreamNavigator },
   Clubs: { screen: ClubNavigator },
-  Profile: { screen: ProfileScreen }
+  Chat: { screen: ChatScreen }
 });
 
 Danton.navigationOptions = {

@@ -12,23 +12,37 @@
 
 ## Frontend
 
-- Style the html enough where you can use w/ dan
+- Read 1 hr on react native
 
-  - make simple layout using html.eex (10 min set timer)
-
-  - style the following pages (5 min per page)
-
-  - groups list
-    - group show/chan list
-    - chan show/post list
-    - post show/comment list
-    - user login/auth stuff
-
-- React Native iOS tutorial
-
-- Unscope the user stuff and hook up APIs to React Native
+- Unscope the user stuff and display front page
+  in a list on react natvie
 
 - Build out the main views of the app
+  - Stream View (can consume any stream, title)
+    - Title (Stream or Channel)
+    - Post List (Name, Activity with who what when, Go)
+    - Add New Post
+  - Channels List
+    - Title (All Channels, or Club Name)
+    - Channel List (Name, Club, Notifications/In Stream?, Go)
+  - Post Show
+    - Title
+    - Who Posted and When
+    - Content (with link)
+    - Chat
+  - Chat Room
+    - Standard Chat
+    - Return to the Post
+  - Post Create
+    - Type
+    - URL
+    - Title (autofills)
+    - Chan (or chans?)
+    - Post Button
+  - Profile
+    - Clubs
+    - Notifications?
+    - Image, Name, Email
 
 - Re-scope user auth'd stuff and build out auth on iOS
   - use webviews & normal auth system first? (possible?)
