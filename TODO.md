@@ -18,6 +18,11 @@
   in a list on react natvie
 
 - Build out the main views of the app
+  - Navigation
+    - Stream
+    - Chans
+    - Add?
+    - Prof
   - Stream View (can consume any stream, title)
     - Title (Stream or Channel)
     - Post List (Name, Activity with who what when, Go)
