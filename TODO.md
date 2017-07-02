@@ -12,8 +12,7 @@
 
 ## Frontend
 
-- Unscope the user stuff and display front page
-  in a list on react natvie
+- display front page in a list on react natvie
 
 - Build out the main views of the app
   - Navigation
