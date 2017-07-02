@@ -2,12 +2,9 @@ import React from 'react'
 import { Text, View, Button } from 'react-native'
 
 class Stream extends React.Component {
-  static navigationOptions = {
-    title: 'Stream',
-  }
-
   render() {
     const { navigate } = this.props.navigation
+
     return (
       <View>
         <Text>Front Page!</Text>

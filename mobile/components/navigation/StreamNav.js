@@ -1,10 +1,10 @@
 import { StackNavigator } from 'react-navigation'
 
-import StreamScreen from '../stream/Stream'
+import MainStream from '../stream/MainStream'
 import PostScreen from '../post/Post'
 
 const StreamNavigator = StackNavigator({
-  Home: { screen: StreamScreen },
+  Home: { screen: MainStream },
   Post: { screen: PostScreen },
 })
 
