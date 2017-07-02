@@ -2,9 +2,9 @@
 
 ## Backend
 
-- Set up create & update json endpoints properly
+- Set up create & update json endpoints properly (and make non jsons work for memberships)
 
-- Get the comment nesting working properly (look into psql recursion for this)
+- Make root level channels index scoped to user
 
 - Add auth system (return error if Post not in one of their clubs)
 
