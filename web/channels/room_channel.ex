@@ -6,8 +6,7 @@ defmodule Danton.RoomChannel do
   end
 
   def join("room:" <> _private_room_id, _params, _socket) do
-    # TODO: Handle Auth
-    {:ok, socket}
+    {:error, %{reason: "unauthorized"}}
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do
