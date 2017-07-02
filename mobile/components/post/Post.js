@@ -1,6 +1,8 @@
 import React from 'react'
 import { Text, View, Link } from 'react-native'
 
+import PostChat from '../chat/PostChat'
+
 class Post extends React.Component {
   static navigationOptions = {
     title: 'Post'
@@ -16,6 +18,7 @@ class Post extends React.Component {
       <View>
         <Text>{post.title}</Text>
         <Text>{post.description}</Text>
+        <PostChat id={33} />
       </View>
     )
   }
