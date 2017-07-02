@@ -1,17 +1,26 @@
-import React from 'react'
-import { Text, View, Button } from 'react-native'
+import React, { Component } from 'react'
+import { Text, View, Button, FlatList } from 'react-native'
 
-class Stream extends React.Component {
-  render() {
+class Stream extends Component {
+  renderItem = (datum) => {
     const { navigate } = this.props.navigation
+    return (
+      <Button
+        onPress={() => navigate('Post')}
+        title={datum.item.title}
+      />
+    )
+  }
 
+  render() {
     return (
       <View>
-        <Text>Front Page!</Text>
-        <Button
-          onPress={() => navigate('Post')}
-          title="See A Post!"
+        <FlatList
+          data={this.props.content}
+          renderItem={this.renderItem}
+          keyExtractor={(item) => item.id}
         />
+
       </View>
     )
   }

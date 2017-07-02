@@ -3,7 +3,7 @@ import Stream from './Stream'
 
 class MainStream extends React.Component {
   static navigationOptions = {
-    title: 'Your Stream',
+    title: 'Your Stream'
   }
 
 	postsResponse () {
@@ -19,10 +19,7 @@ class MainStream extends React.Component {
 
   render() {
 		const streamContent = this.postsResponse()["data"]
-
-    return (
-			<Stream navigation={this.props.navigation} content={streamContent}/>
-		)
+    return <Stream navigation={this.props.navigation} content={streamContent}/>
 	}
 }
 
