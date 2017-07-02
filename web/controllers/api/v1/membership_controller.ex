@@ -4,7 +4,12 @@ defmodule Danton.Api.V1.MembershipController do
   alias Danton.Membership
 
   def index(conn, _params) do
-    memberships = Coherence.current_user(conn)
+
+    # TODO: replace once mobile app handles users
+    # current_user = Coherence.current_user(conn)
+
+    current_user = Repo.get(Danton.User, 1)
+    memberships = current_user
       |> Ecto.assoc(:memberships)
       |> Repo.all
 		render(conn, "index.json", memberships: memberships)

@@ -4,7 +4,12 @@ defmodule Danton.Api.V1.ClubController do
   alias Danton.Club
 
   def index(conn, _params) do
-    clubs = Coherence.current_user(conn)
+    # TODO: replace once mobile app handles users
+    # current_user = Coherence.current_user(conn)
+
+    current_user = Repo.get(Danton.User, 1)
+
+    clubs = current_user
       |> Ecto.assoc(:clubs)
       |> Repo.all
 

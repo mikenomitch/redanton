@@ -13,6 +13,21 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
+  def front_page(conn, _params) do
+    # TODO: replace once mobile app handles users
+    # current_user = Coherence.current_user(conn)
+    current_user = Repo.get(Danton.User, 1)
+
+    clubs = current_user
+      |> Ecto.assoc(:clubs)
+      |> Repo.all
+
+    channels = Repo.all Ecto.assoc(clubs, :channels)
+    posts = Repo.all Ecto.assoc(channels, :posts)
+
+    render(conn, "index.json", posts: posts)
+  end
+
   # TODO: add proper relationship logic
   def create(conn, %{"post" => post_params}) do
     changeset = Post.changeset(%Post{}, post_params)

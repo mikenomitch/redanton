@@ -75,7 +75,9 @@ defmodule Danton.Router do
   # Other scopes may use custom stacks.
   scope "/api", Danton do
     pipe_through :api
-    pipe_through :protected
+
+    # TODO: recomment this once the mobile app handles users
+    # pipe_through :protected
 
     scope "/v1" do
       resources "/memberships", Api.V1.MembershipController

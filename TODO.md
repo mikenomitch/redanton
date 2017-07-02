@@ -12,8 +12,6 @@
 
 ## Frontend
 
-- Read 1 hr on react native
-
 - Unscope the user stuff and display front page
   in a list on react natvie
 

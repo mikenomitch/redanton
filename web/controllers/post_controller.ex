@@ -14,7 +14,8 @@ defmodule Danton.PostController do
   end
 
   def front_page(conn, _params) do
-    clubs = Coherence.current_user(conn)
+    current_user = Coherence.current_user(conn)
+    clubs = current_user
       |> Ecto.assoc(:clubs)
       |> Repo.all
 
