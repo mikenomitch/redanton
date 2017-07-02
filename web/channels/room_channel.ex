@@ -1,12 +1,10 @@
 defmodule Danton.RoomChannel do
   use Phoenix.Channel
+  intercept(["new_msg"])
 
-  def join("room:lobby", _message, socket) do
+  def join("room:" <> _room_id, _params, socket) do
+    # TODO: add authorization
     {:ok, socket}
-  end
-
-  def join("room:" <> _private_room_id, _params, _socket) do
-    {:error, %{reason: "unauthorized"}}
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do
