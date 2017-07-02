@@ -1,46 +1,11 @@
-import React from 'react'
-import {
-  Text, View, Button
-} from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
-class ClubsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Clubs',
-  }
+import ChannelScreen from '../channel/Channel'
+import ChannelListScreen from '../channel/ChannelList'
 
-  render() {
-    const { navigate } = this.props.navigation
-    return (
-      <View>
-        <Text>This is the clubs list</Text>
-        <Button
-          onPress={() => navigate('Club')}
-          title="See Club"
-        />
-      </View>
-    )
-  }
-}
-
-class ClubScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Club',
-  }
-
-  render() {
-    const { navigate } = this.props.navigation
-    return (
-      <View>
-        <Text>This is a club</Text>
-      </View>
-    )
-  }
-}
-
-const ClubNavigator = StackNavigator({
-  Home: { screen: ClubsScreen },
-  Club: { screen: ClubScreen },
+const ChannelNavigator = StackNavigator({
+  Home: { screen: ChannelListScreen },
+  Channel: { screen: ChannelScreen },
 })
 
-export default ClubNavigator
+export default ChannelNavigator
