@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, Button, FlatList } from 'react-native'
+import { View, Button, FlatList } from 'react-native'
 
 class Stream extends Component {
-  renderItem = (datum) => {
+  renderPostLink = (datum) => {
     const { navigate } = this.props.navigation
     return (
       <Button
@@ -17,7 +17,7 @@ class Stream extends Component {
       <View>
         <FlatList
           data={this.props.content}
-          renderItem={this.renderItem}
+          renderItem={this.renderPostLink}
           keyExtractor={(item) => item.id}
         />
       </View>

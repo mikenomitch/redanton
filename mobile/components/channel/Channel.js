@@ -6,11 +6,16 @@ class Channel extends React.Component {
     title: 'Channel'
   }
 
+  getChannel() {
+    return this.props.navigation.state.params.channel
+  }
+
   render() {
-    const { navigate } = this.props.navigation
+    const channel = this.getChannel()
     return (
       <View>
-        <Text>This is a Channel</Text>
+        <Text>{channel.name}</Text>
+        <Text>{channel.description}</Text>
       </View>
     )
   }
