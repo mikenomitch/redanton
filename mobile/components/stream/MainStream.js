@@ -23,7 +23,7 @@ class MainStream extends React.Component {
     return (
 			<Stream navigation={this.props.navigation} content={streamContent}/>
 		)
-}
+	}
 }
 
 export default MainStream
