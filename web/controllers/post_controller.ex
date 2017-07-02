@@ -14,13 +14,15 @@ defmodule Danton.PostController do
   end
 
   def front_page(conn, _params) do
-    current_user = Coherence.current_user(conn)
+    # TODO: replace once mobile can handle users
+    current_user = Repo.get(Danton.User, 1)
+
     clubs = current_user
       |> Ecto.assoc(:clubs)
       |> Repo.all
 
-    channels = Repo.all Ecto.assoc(clubs, :channels)
-    posts = Repo.all Ecto.assoc(channels, :posts)
+    channels = first(clubs) && Ecto.assoc(clubs, :channels) |> Repo.all
+    posts = channels && first(channels) && Ecto.assoc(channels, :posts) |> Repo.all
 
     render(conn, "front_page.html", posts: posts)
   end
