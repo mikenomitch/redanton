@@ -6,7 +6,7 @@ class Stream extends Component {
     const { navigate } = this.props.navigation
     return (
       <Button
-        onPress={() => navigate('Post')}
+        onPress={() => navigate('Post', {post: datum.item})}
         title={datum.item.title}
       />
     )
@@ -20,7 +20,6 @@ class Stream extends Component {
           renderItem={this.renderItem}
           keyExtractor={(item) => item.id}
         />
-
       </View>
     )
   }
