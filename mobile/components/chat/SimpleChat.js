@@ -19,29 +19,28 @@ class SimpleChat extends React.Component {
     let socket = new Socket("https://stormy-reef-53700.herokuapp.com/socket",)
     socket.connect()
 
-    let channel = socket.channel("room:lobby", {})
-    this.ch = channel
+    this.channel = socket.channel("room:lobby", {})
 
-    channel.on("new_msg", payload => {
+    this.channel.on("new_msg", payload => {
       let newMsg = this.state.messages.concat([payload.body])
       this.setState({messages: newMsg})
     })
 
-    channel.join()
+    this.channel.join()
       .receive("ok", resp => { console.log("Joined successfully", resp) })
       .receive("error", resp => { console.log("Unable to join", resp) })
   }
 
+  componentWillUnmount() {
+    this.channel.leave()
+  }
+
   dispatch = (text) => {
-    this.ch.push("new_msg", {body: this.state.text})
+    this.channel.push("new_msg", {body: this.state.text})
     this.setState({text: ''})
   }
 
   render() {
-    let pic = {
-      uri: 'https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-9/1012800_2840495368468_1219514545_n.jpg?oh=2c7042c24ba884d1be7b2ed906e498e9&oe=59C8C060'
-    }
-
     return (
       <View style={{alignItems: 'center', justifyContent: 'center', marginTop: 100}}>
         <Text> Simple Chat: </Text>
