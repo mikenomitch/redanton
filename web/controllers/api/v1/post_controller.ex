@@ -22,8 +22,8 @@ defmodule Danton.Api.V1.PostController do
       |> Ecto.assoc(:clubs)
       |> Repo.all
 
-    channels = Repo.all Ecto.assoc(clubs, :channels)
-    posts = Repo.all Ecto.assoc(channels, :posts)
+    channels = Ecto.assoc(clubs, :channels) |> Repo.all
+    posts = Ecto.assoc(channels, :posts) |> Repo.all
 
     render(conn, "index.json", posts: posts)
   end

@@ -21,8 +21,8 @@ defmodule Danton.PostController do
       |> Ecto.assoc(:clubs)
       |> Repo.all
 
-    channels = first(clubs) && Ecto.assoc(clubs, :channels) |> Repo.all
-    posts = channels && first(channels) && Ecto.assoc(channels, :posts) |> Repo.all
+    channels = Ecto.assoc(clubs, :channels) |> Repo.all
+    posts = Ecto.assoc(channels, :posts) |> Repo.all
 
     render(conn, "front_page.html", posts: posts)
   end
