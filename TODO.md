@@ -2,33 +2,28 @@
 
 ## Backend
 
-- Set up create & update json endpoints properly (and make non jsons work for memberships)
+- Add auth system
 
-- Make root level channels index scoped to user
+- handle emptry front page well
 
-- Add auth system (return error if Post not in one of their clubs)
+- Room channel creates chat messages properly
 
-- Add good seed files (1/4 of the way)
+- Move logic into dedicated modules, clean up todos
 
 ## Frontend
 
-- display front page in a list on react natvie
+- Get front page and display real list
+- Add Post Page with real call
+- Channels list
+- Channel > Stream
+- Chat (plus chat on web as well)
 
 - Build out the main views of the app
-  - Navigation
-    - Stream
-    - Chans
-    - Add?
-    - Prof
-  - Stream View (can consume any stream, title)
-    - Title (Stream or Channel)
     - Post List (Name, Activity with who what when, Go)
     - Add New Post
   - Channels List
-    - Title (All Channels, or Club Name)
     - Channel List (Name, Club, Notifications/In Stream?, Go)
   - Post Show
-    - Title
     - Who Posted and When
     - Content (with link)
     - Chat
@@ -38,7 +33,6 @@
   - Post Create
     - Type
     - URL
-    - Title (autofills)
     - Chan (or chans?)
     - Post Button
   - Profile
