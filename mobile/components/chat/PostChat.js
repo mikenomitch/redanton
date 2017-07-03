@@ -25,7 +25,7 @@ class PostChat extends React.Component {
 
     this.channel.on("new_msg", payload => {
       const newMsg = this.state.messages.concat([{body: payload.body}])
-      this.setState({messages: newMsg, post_id: this.props.id})
+      this.setState({messages: newMsg})
     })
 
     this.channel.join()
@@ -52,7 +52,7 @@ class PostChat extends React.Component {
   }
 
   dispatch = (text) => {
-    this.channel.push("new_msg", {body: this.state.text})
+    this.channel.push("new_msg", {body: this.state.text, post_id: this.props.id})
     this.setState({text: ''})
   }
 
