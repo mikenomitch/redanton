@@ -16,9 +16,9 @@ class Post extends React.Component {
     const post = this.getPost()
     return (
       <View>
+        <PostChat id={post.id} />
         <Text>{post.title}</Text>
         <Text>{post.description}</Text>
-        <PostChat id={post.id} />
       </View>
     )
   }
