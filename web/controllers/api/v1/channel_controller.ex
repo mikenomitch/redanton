@@ -10,6 +10,21 @@ defmodule Danton.Api.V1.ChannelController do
       select: c
     )
 
+    render_index(conn, channels)
+  end
+
+  # Top level index without a specific club
+  def index(conn, _params) do
+    # TODO: replace once mobile can handle users
+    current_user = Repo.get(Danton.User, 1)
+
+    clubs = Repo.all Ecto.assoc(current_user, :clubs)
+    channels = Repo.all Ecto.assoc(clubs, :channels)
+
+    render_index(conn, channels)
+  end
+
+  defp render_index(conn, channels) do
     render(conn, "index.json", channels: channels)
   end
 

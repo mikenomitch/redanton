@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import { View, Button, FlatList } from 'react-native'
 
+import { get } from '../../lib/fetcher'
+
 class ChannelList extends Component {
   static navigationOptions = {
     title: 'Channels'
   }
 
-  channelsData = () => {
-    return {
-      data: [
-        {id: 1, name: 'Videos', description: 'Foo Bar Baz'},
-        {id: 2, name: 'Articles', description: 'Foo Bar Baz'},
-        {id: 3, name: 'Tech', description: 'Foo Bar Baz'}
-      ]
-    }
+  constructor(props) {
+  	super(props)
+  	this.state = {
+  		channels: []
+  	}
+  }
+
+  componentDidMount() {
+  	get('/channels').then((data) => {
+      alert("worked")
+  		// this.setState({
+  		// 	channels: data["data"]
+  		// })
+  	})
   }
 
   renderChannelLink = (datum) => {
@@ -30,7 +38,7 @@ class ChannelList extends Component {
     return (
       <View>
         <FlatList
-          data={this.channelsData()["data"]}
+          data={this.state.channels}
           renderItem={this.renderChannelLink}
           keyExtractor={(item) => item.id}
         />
