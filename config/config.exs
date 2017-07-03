@@ -53,7 +53,6 @@ config :ex_admin,
     Danton.ExAdmin.Club,
     Danton.ExAdmin.Channel,
     Danton.ExAdmin.Post,
-    Danton.ExAdmin.Comment,
     Danton.ExAdmin.Membership,
     Danton.ExAdmin.User
   ]

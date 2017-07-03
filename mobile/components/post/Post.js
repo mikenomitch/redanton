@@ -18,7 +18,7 @@ class Post extends React.Component {
       <View>
         <Text>{post.title}</Text>
         <Text>{post.description}</Text>
-        <PostChat id={33} />
+        <PostChat id={post.id} />
       </View>
     )
   }

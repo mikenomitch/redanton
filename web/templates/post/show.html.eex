@@ -31,15 +31,7 @@
     <strong>User:</strong>
     <%= @post.user_id %>
   </li>
-
-  <li>
-    <strong>Comments:</strong>
-    <%= Enum.map(@post.comments, &(&1.body)) %>
-  </li>
-
-
 </ul>
 
-<%= link "Comments", to: post_comment_path(@conn, :index, @post) %>
 <%= link "Edit", to: post_path(@conn, :edit, @post) %>
 <%= link "Back", to: channel_post_path(@conn, :index, @post.channel_id) %>

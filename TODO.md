@@ -2,6 +2,13 @@
 
 ## Backend
 
+- Replace comments with rooms & messages
+  - remove comments code (can keep it in DBs for now and then reset once seeds are nicer)
+  - add rooms migration
+  - add messages migration
+  - associate the models as one would expect
+  - on Post create, a room is created
+
 - Set up create & update json endpoints properly (and make non jsons work for memberships)
 
 - Make root level channels index scoped to user

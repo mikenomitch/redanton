@@ -44,4 +44,3 @@ Enum.each(channels, fn (club) -> Danton.Repo.insert(person) end)
 
 # Make Posts (2 per channel)
 
-# Make Comments

@@ -51,7 +51,7 @@ defmodule Danton.PostController do
   end
 
   def show(conn, %{"id" => id}) do
-    post = Repo.get!(Post, id) |> Repo.preload(:comments)
+    post = Repo.get!(Post, id)
     render(conn, "show.html", post: post)
   end
 

@@ -2,9 +2,7 @@
 # getting a model from id
 # =============================
 
-# comment = Repo.get(Comment, 13)
-
-
+# message = Repo.get(Message, 13)
 
 # =============================
 # querying by params
@@ -20,21 +18,18 @@
 
 # Post.changeset(post, %{title: "some new title"}) |> Repo.insert
 
-
 # =============================
 # getting an association list
 # =============================
 
 # Repo.all Ecto.assoc(membership, :user)
 
-
-
 # =============================
 # creating an association
 # =============================
 
-# post = Repo.get(Post, 13)
-# comment = build_assoc(post, :comments)
+# room = Repo.get(Room, 13)
+# message = build_assoc(post, :messages)
 # or
-# comment = build_assoc(post, :comments, title: "hey")
+# message = build_assoc(post, :messages, title: "hey")
 
