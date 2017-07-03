@@ -3,8 +3,9 @@ defmodule Danton.MessageController do
 
   alias Danton.Message
 
-  def index(conn, _params) do
-    messages = Repo.all(Message)
+  def index(conn, %{"post_id" => post_id}) do
+    post = Repo.find(Danton.Post, post_id)
+		messages = post.room.messages
     render(conn, "index.html", messages: messages)
   end
 
