@@ -20,6 +20,10 @@ Repo.delete_all Danton.Post
 Repo.delete_all Danton.Channel
 Repo.delete_all Danton.Club
 
+# ==============
+# Make Users
+# ==============
+
 users = [
   %Danton.User{name: "Michael Nomitch", email: "mikenomitch@gmail.com", password: "secret", password_confirmation: "secret"},
   %Danton.User{name: "Dan Mihalov", email: "danmihalov@gmail.com", password: "secret", password_confirmation: "secret"}
@@ -29,7 +33,9 @@ users |> Enum.each(&Repo.insert!/1)
 
 made_users = Repo.all(Danton.User)
 
-# Make Clubs (2)
+# ==============
+# Make Clubs
+# ==============
 
 clubs = [
 	%Danton.Club{name: "Nomitch Fam", description: "link share for the family"},
@@ -39,7 +45,9 @@ clubs = [
 clubs |> Enum.each(&Repo.insert!/1)
 made_clubs = Repo.all(Danton.Club)
 
+# ==============
 # Make Memberships
+# ==============
 
 make_memberships = fn club ->
 	make_membership = fn (user) ->
@@ -52,12 +60,9 @@ end
 memberships = Enum.flat_map(made_clubs, make_memberships)
 memberships |> Enum.each(&Repo.insert!/1)
 
-
-# Enum.each(clubs, fn (club) -> Danton.Repo.insert(person) end)
-
+# ==============
 # Make Channels
-
-# last_club = Danton.Club |> Ecto.Query.last
+# ==============
 
 channels = [
 	%Danton.Channel{name: "Videos", description: "videos that might be of interest", club_id: 1},
@@ -68,7 +73,33 @@ channels = [
 	%Danton.Channel{name: "Gear", description: "sharing gear that the other bugs might like", club_id: 2},
 ]
 
-# Enum.each(channels, fn (club) -> Danton.Repo.insert(person) end)
+assoc_channels = fn (chan) ->
+	club = Repo.get(Danton.Club. chan.club_id)
+	cs = Ecto.build_assoc(club, :channels, chan)
+	Repo.insert!(cs)
+end
 
-# Make Posts (2 per channel)
+made_chans = Repo.all(Danton.Channel)
 
+# ==============
+# Make Posts
+# ==============
+
+posts = [
+	%Danton.Post{},
+	%Danton.Post{}
+]
+
+assoc_channels = fn (chan) ->
+	club = Repo.get(Danton.Club. chan.club_id)
+	cs = Ecto.build_assoc(club, :channels, chan)
+	Repo.insert!(cs)
+end
+
+# ==============
+# Make Rooms
+# ==============
+
+# ==============
+# Make Message
+# ==============
