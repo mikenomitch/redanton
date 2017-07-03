@@ -22,4 +22,12 @@ defmodule Danton.Post do
     |> cast(params, [:title, :description, :type, :url])
     |> validate_required([:title, :description, :type, :url])
   end
+
+  @doc """
+  Makes an associated room for a post
+  """
+  def make_room(post) do
+    cs = Ecto.build_assoc(post, :room, %{})
+    Danton.Repo.insert!(cs)
+  end
 end

@@ -20,12 +20,37 @@ defmodule Danton.Club do
     |> validate_required([:name, :description])
   end
 
+  # ==================
+  # MEMBERSHIP HELPERS
+  # ==================
 
   @doc """
-  Builds a changeset for an associated channel
+  Makes an admin level membership in a club for a user
   """
-  # def build_channel(club_id, channel_params) do
-  #   club = Danton.Repo.get(Danton.Club, club_id)
-  #   Ecto.build_assoc(club, :channels, channel_params)
-  # end
+  def make_admin(club, user) do
+    make_member(club, user, "admin")
+  end
+
+  @doc """
+  Makes an standard level membership in a club for a user
+  """
+  def make_standard_member(club, user) do
+    make_member(club, user, "standard")
+  end
+
+  @doc """
+  Makes an admin level membership in a club for a user
+  """
+  def make_member(club, user, type) do
+    cs = Ecto.build_assoc(club, :memberships, %{user_id: user.id, type: type})
+    Danton.Repo.insert!(cs)
+  end
+
+  @doc """
+  Makes a channel associated to a given club
+  """
+  def make_channel(club, channel_params) do
+    cs = Ecto.build_assoc(club, :channels, channel_params)
+    Danton.Repo.insert!(cs)
+  end
 end

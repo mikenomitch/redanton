@@ -16,4 +16,12 @@ defmodule Danton.Room do
     |> cast(params, [])
     |> validate_required([])
   end
+
+  @doc """
+  Makes and inserts a message for a room
+  """
+  def make_message(room, message_params) do
+    cs = Ecto.build_assoc(room, :messages, message_params)
+    Danton.Repo.insert!(cs)
+  end
 end
