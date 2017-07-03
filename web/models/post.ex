@@ -36,7 +36,7 @@ defmodule Danton.Post do
   """
   def get_room(post) do
      post_id = post.id
-     [room] = Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
+     [room] = Danton.Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
      room
   end
 end

@@ -9,7 +9,7 @@ defmodule Danton.RoomChannel do
 
   def handle_in("new_msg", %{"body" => body, "post_id" => post_id}, socket) do
     broadcast! socket, "new_msg", %{body: body}
-    post = Repo.get(Danton.Post, post_id)
+    post = Danton.Repo.get(Danton.Post, post_id)
     room = Danton.Post.get_room(post)
     Danton.Room.make_message(room, %{body: body})
 
