@@ -29,11 +29,24 @@ defmodule Danton.Api.V1.PostController do
   end
 
   # TODO: add proper relationship logic
-  def create(conn, %{"post" => post_params}) do
-    changeset = Post.changeset(%Post{}, post_params)
+  def create(conn, %{"channel_id" => channel_id, "post" => post_params}) do
+    # TODO: replace once mobile app handles users
+    # current_user = Coherence.current_user(conn)
+    channel = Repo.get(Danton.Channel, channel_id)
+    current_user = Repo.get(Danton.User, 1)
 
-    case Repo.insert(changeset) do
+    # TODO: There must be a nicer way to do this
+    post_struct = %Post{
+      title: post_params["title"],
+      description: post_params["description"],
+      type: post_params["type"],
+      url: post_params["url"],
+    }
+
+    case Danton.Channel.make_post_for_user(channel, current_user, post_struct) do
       {:ok, post} ->
+        # TODO: find a better spot for this
+        Danton.Post.make_room(post)
         conn
         |> put_status(:created)
         |> put_resp_header("location", post_path(conn, :show, post))

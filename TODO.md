@@ -2,21 +2,6 @@
 
 ## Backend
 
-- CRUD via API
-  - Create
-    - Club (Make admin membership)
-    - Chan
-    - Post (Make room)
-    - Membership (set to pending status)
-    - No Message B/C all channel based
-  - Update
-    - Membership (update from pending to accepted)
-  - Destroy
-    - Club (actually just removes your membership?)
-    - Chan
-    - Membership
-    - Post
-
 - Set up create & update json endpoints properly (and make non jsons work for memberships)
 
 - Make root level channels index scoped to user

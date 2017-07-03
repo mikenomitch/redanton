@@ -16,12 +16,18 @@ defmodule Danton.Api.V1.ClubController do
     render(conn, "index.json", clubs: clubs)
   end
 
-  # TODO: add proper relationship logic
   def create(conn, %{"club" => club_params}) do
     changeset = Club.changeset(%Club{}, club_params)
 
+    # TODO: replace once mobile app handles users
+    # current_user = Coherence.current_user(conn)
+    current_user = Repo.get(Danton.User, 1)
+
     case Repo.insert(changeset) do
       {:ok, club} ->
+        # TODO: pull this out somewhere?
+        Club.make_admin(club, current_user)
+
         conn
         |> put_status(:created)
         |> put_resp_header("location", club_path(conn, :show, club))
