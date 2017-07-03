@@ -62,6 +62,8 @@ defmodule Danton.Router do
     end
 
     resources "/posts", PostController
+    resources "/rooms", RoomController
+    resources "/messages", MessageController
   end
 
   pipeline :api do

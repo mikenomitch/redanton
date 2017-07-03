@@ -8,6 +8,8 @@ defmodule Danton.Post do
     field :url, :string
     belongs_to :channel, Danton.Channel
     belongs_to :user, Danton.User
+    has_one :room, Danton.Room
+    many_to_many :messages, Danton.Message, join_through: "room"
 
     timestamps()
   end

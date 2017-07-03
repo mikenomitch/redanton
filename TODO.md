@@ -3,8 +3,6 @@
 ## Backend
 
 - Replace comments with rooms & messages
-  - add rooms migration
-  - add messages migration
   - associate the models as one would expect
   - on Post create, a room is created
 
