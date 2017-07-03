@@ -54,7 +54,9 @@ config :ex_admin,
     Danton.ExAdmin.Channel,
     Danton.ExAdmin.Post,
     Danton.ExAdmin.Membership,
-    Danton.ExAdmin.User
+    Danton.ExAdmin.User,
+    Danton.ExAdmin.Room,
+    Danton.ExAdmin.Message
   ]
 
 config :xain, :after_callback, {Phoenix.HTML, :raw}
