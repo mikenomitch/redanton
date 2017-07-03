@@ -8,9 +8,12 @@ defmodule Danton.Api.V1.ClubView do
   def render("show.json", %{club: club}) do
     %{data: render_one(club, Danton.Api.V1.ClubView, "club.json")}
   end
-
+w
   def render("club.json", %{club: club}) do
-    %{id: club.id}
-
+    %{
+      id: club.id,
+      name: club.name,
+      description: club.description
+    }
   end
 end

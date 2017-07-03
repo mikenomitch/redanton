@@ -10,6 +10,11 @@ defmodule Danton.Api.V1.MessageView do
   end
 
   def render("message.json", %{message: message}) do
-    %{id: message.id, body: message.body}
+    %{
+      id: message.id,
+      body: message.body,
+      room_id: message.room,
+      user_id: message.user
+    }
   end
 end

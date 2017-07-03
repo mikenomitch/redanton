@@ -10,14 +10,11 @@
     - Membership (set to pending status)
     - No Message B/C all channel based
   - Update
-    - Club
-    - Chan
-    - Post
     - Membership (update from pending to accepted)
   - Destroy
     - Club (actually just removes your membership?)
     - Chan
-    - Membership 
+    - Membership
     - Post
 
 - Set up create & update json endpoints properly (and make non jsons work for memberships)

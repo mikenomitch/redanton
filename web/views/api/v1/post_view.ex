@@ -10,8 +10,13 @@ defmodule Danton.Api.V1.PostView do
   end
 
   def render("post.json", %{post: post}) do
-    %{id: post.id,
+    %{
+      id: post.id,
       title: post.title,
-      description: post.description}
+      description: post.description,
+      url: post.url,
+      type: post.type,
+      user_id: post.user_id
+    }
   end
 end

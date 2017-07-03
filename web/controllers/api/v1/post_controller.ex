@@ -51,6 +51,9 @@ defmodule Danton.Api.V1.PostController do
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
+
+    IO.puts(inspect(post_params))
+
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post, post_params)
 
