@@ -3,7 +3,6 @@
 ## Backend
 
 - Replace comments with rooms & messages
-  - remove comments code (can keep it in DBs for now and then reset once seeds are nicer)
   - add rooms migration
   - add messages migration
   - associate the models as one would expect
