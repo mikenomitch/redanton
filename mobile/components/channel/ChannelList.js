@@ -17,10 +17,9 @@ class ChannelList extends Component {
 
   componentDidMount() {
   	get('/channels').then((data) => {
-      alert("worked")
-  		// this.setState({
-  		// 	channels: data["data"]
-  		// })
+  		this.setState({
+  			channels: data["data"]
+  		})
   	})
   }
 
