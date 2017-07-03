@@ -3,8 +3,8 @@ defmodule Danton.Api.V1.MessageController do
   alias Danton.Message
 
   def index(conn, %{"post_id" => post_id}) do
-    [room] = Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
-    messages = Ecto.assoc(room, :messages) |> Repo.all
+    [room] = Danton.Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
+    messages = Ecto.assoc(room, :messages) |> Danton.Repo.all
 
     render(conn, "index.json", messages: messages)
   end
