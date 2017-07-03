@@ -2,9 +2,7 @@
 
 ## Backend
 
-- Replace comments with rooms & messages
-  - associate the models as one would expect
-  - on Post create, a room is created
+- on Post create, a room is created
 
 - Set up create & update json endpoints properly (and make non jsons work for memberships)
 
