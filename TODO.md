@@ -12,9 +12,7 @@
 
 ## Frontend
 
-- Get front page and display real list
 - Add Post Page with real call
-- Channels list
 - Channel > Stream
 - Chat (plus chat on web as well)
 
