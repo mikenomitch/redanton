@@ -30,4 +30,12 @@ defmodule Danton.Post do
     cs = Ecto.build_assoc(post, :room, %{})
     Danton.Repo.insert!(cs)
   end
+
+  @doc """
+  Gets the room associated with a post if it exists
+  """
+  def get_room(post) do
+     [room] = Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
+     room
+  end
 end
