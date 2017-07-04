@@ -56,6 +56,7 @@
 - channel creation and editing
 - user sign up on app
 - club creation and editing
+- web equivalence
 
 ### Next Next Steps
 
