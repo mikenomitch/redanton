@@ -27,7 +27,7 @@ class ChannelList extends Component {
     const { navigate } = this.props.navigation
     return (
       <Button
-        onPress={() => navigate('Channel', {channel: datum.item})}
+        onPress={() => navigate('Channel', {channel: datum.item, id: datum.item.id})}
         title={datum.item.name}
       />
     )

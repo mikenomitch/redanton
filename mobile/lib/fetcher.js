@@ -7,3 +7,11 @@ function jsonify(res) {
 export function get(endpoint) {
   return fetch(base + endpoint).then(jsonify)
 }
+
+export function post(endpoint, params = {}) {
+  return fetch(base + endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params)
+  }).then(jsonify)
+}

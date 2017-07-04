@@ -1,22 +1,32 @@
 import React from 'react'
-import { Text, View, Button } from 'react-native'
+import Stream from '../stream/Stream'
+
+import { get } from '../../lib/fetcher'
 
 class Channel extends React.Component {
-  static navigationOptions = {
-    title: 'Channel'
+  constructor(props) {
+    super(props)
+    this.state = {
+      posts: []
+    }
   }
 
-  getChannel() {
+  get channel() {
     return this.props.navigation.state.params.channel
   }
 
+  componentDidMount() {
+    get(`/channels/${this.channel.id}/posts`).then(data => {
+      this.setState({
+        posts: data['data']
+      })
+    })
+  }
+
   render() {
-    const channel = this.getChannel()
+    const streamContent = this.state.posts
     return (
-      <View>
-        <Text>{channel.name}</Text>
-        <Text>{channel.description}</Text>
-      </View>
+      <Stream navigation={this.props.navigation} content={streamContent} />
     )
   }
 }

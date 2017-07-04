@@ -8,17 +8,16 @@ class Post extends React.Component {
     title: 'Post'
   }
 
-  getPost() {
+  get post() {
     return this.props.navigation.state.params.post
   }
 
   render() {
-    const post = this.getPost()
     return (
       <View>
-        <PostChat id={post.id} />
-        <Text>{post.title}</Text>
-        <Text>{post.description}</Text>
+        <PostChat id={this.post.id} />
+        <Text>{this.post.title}</Text>
+        <Text>{this.post.description}</Text>
       </View>
     )
   }
