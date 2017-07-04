@@ -46,14 +46,15 @@ const MainNav = StackNavigator({
   },
   Post: {
     screen: PostScreen,
-    navigationOptions: {
-      title: 'Post'
-    }
+    path: '/posts/:id',
+    navigationOptions: ({navigation}) => ({
+      title: navigation.state.params.post.title || 'Post'
+    })
   },
   Channel: {
     screen: ChannelScreen,
     navigationOptions: ({navigation}) => ({
-      title: 'Channel',
+      title: navigation.state.params.channel.name || 'Channel',
       headerRight: (<NewPostButton navigation={navigation} />)
     })
   },
@@ -63,13 +64,6 @@ const MainNav = StackNavigator({
       title: 'Add Post'
     }
   }
-  // Profile: {
-  //   screen: MyProfileScreen,
-  //   path: '/people/:name',
-  //   navigationOptions: ({ navigation }) => {
-  //     title: `${navigation.state.params.name}'s Profile!`
-  //   }
-  // }
 })
 
 export default MainNav

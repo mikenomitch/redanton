@@ -3,12 +3,6 @@ import Stream from '../stream/Stream'
 import { get } from '../../lib/fetcher'
 
 class Channel extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'overwritten?'
-    }
-  }
-
   constructor(props) {
     super(props)
     this.state = {

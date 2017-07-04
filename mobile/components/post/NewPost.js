@@ -12,28 +12,24 @@ const defaultState = {
 }
 
 class NewPost extends React.Component {
-  static navigationOptions = {
-    title: 'New Post'
-  }
-
 	constructor(props){
 		super(props)
 		this.state = defaultState
 	}
 
 	onPost = () => {
+		const {navigate} = this.props.navigation
+
 		post(`/channels/${this.state.channel}/posts`, {
 			post: {
 				title: this.state.title,
 				description: this.state.description,
 				url: this.state.url
 			}
-		}).then(() => {
-			alert('posted.')
+		}).then((res) => {
 			this.clearState()
-		}).catch(() => {
-			alert('there was an error. check your inputs')
-		})
+			navigate('Post', {post: res.data})
+		}).catch(() => alert('there was an error. check your inputs'))
 	}
 
 	clearState = () => {
