@@ -11,8 +11,9 @@ defmodule Danton.RoomChannel do
     post = Danton.Repo.get(Danton.Post, post_id)
     room = Danton.Post.get_room(post)
     message = Danton.Room.make_message(room, %{body: body})
+    message_json = Danton.Api.V1.MessageView.render("message.json", %{message: message})
 
-    broadcast! socket, "new_msg", message
+    broadcast! socket, "new_msg", message_json
 
     {:noreply, socket}
   end
