@@ -38,7 +38,7 @@ class PostChat extends Component {
     this.channel = socket.channel(roomId, {})
 
     this.channel.on("new_msg", payload => {
-      const newMsg = this.state.messages.concat([{body: payload.body}])
+      const newMsg = this.state.messages.concat([payload])
       this.setState({messages: newMsg})
     })
 
