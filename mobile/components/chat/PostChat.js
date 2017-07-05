@@ -49,8 +49,7 @@ class PostChat extends Component {
 
   getMessages() {
     const cb = (resp) => {
-      alert(JSON.stringify(resp))
-      this.setState({messages: resp['data']})
+      this.setState({messages: resp.data})
     }
 
     get('/posts/1/messages').then(cb)
