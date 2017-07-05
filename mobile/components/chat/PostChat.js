@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput } from 'react-native'
 import {Socket} from "phoenix"
+import sortBy from 'lodash/sortBy'
+import reverse from 'lodash/reverse'
 import { get } from '../../lib/fetcher'
 import { GiftedChat } from 'react-native-gifted-chat'
 
@@ -15,19 +17,20 @@ class PostChat extends Component {
   }
 
   messagesForGiftedChat() {
-    let i = 1
-    return this.state.messages.map((msg) => {
+    const messages = this.state.messages.map((msg) => {
       return {
-        _id: msg.id || i++,
+        _id: msg.id,
         text: msg.body,
         createdAt: new Date(msg.inserted_at),
         user: {
           _id: 1,
-          name: 'React Native',
+          name: 'Mike Nomitch',
           avatar: 'https://facebook.github.io/react/img/logo_og.png',
         }
       }
     })
+
+    return reverse(sortBy(messages, ['createdAt', '_id']))
   }
 
   setUpChat() {
