@@ -9,6 +9,9 @@ import ChannelListScreen from '../channel/ChannelList'
 
 import PostScreen from '../post/Post'
 import NewPostScreen from '../post/NewPost'
+import PostPreviewScreen from '../post/PostPreview'
+
+import PostChatScreen from '../chat/PostChat'
 
 const NewPostButton = (props) => (
   <Button title="+ Post" onPress={() => props.navigation.navigate('NewPost')} />
@@ -50,6 +53,20 @@ const MainNav = StackNavigator({
     navigationOptions: ({navigation}) => ({
       title: navigation.state.params.post.title || 'Post'
     })
+  },
+  PostChat: {
+    screen: PostChatScreen,
+    path: '/posts/:id/chat',
+    navigationOptions: () => ({
+      title: 'Discussion'
+    })
+  },
+  PostPreview: {
+    screen: PostPreviewScreen,
+    path: '/posts/:id/preview',
+    navigationOptions: {
+      title:'Post Preview'
+    }
   },
   Channel: {
     screen: ChannelScreen,
