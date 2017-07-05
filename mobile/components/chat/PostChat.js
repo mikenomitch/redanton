@@ -20,7 +20,7 @@ class PostChat extends Component {
       return {
         _id: msg.id || i++,
         text: msg.body,
-        createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
+        createdAt: new Date(msg.inserted_at),
         user: {
           _id: 1,
           name: 'React Native',
