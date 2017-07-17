@@ -1,9 +1,20 @@
 import React from 'react'
-import { Text, View, Link, TextInput, Button } from 'react-native'
 
-import { post } from '../../lib/fetcher'
+import {
+	Text,
+	View,
+	Link,
+	TextInput,
+	Button,
+	Picker
+} from 'react-native'
 
-const defaultState = {
+import {
+	get,
+	post
+} from '../../lib/fetcher'
+
+const defaultPostInfo = {
 	url: '',
 	title: '',
 	description: '',
@@ -14,17 +25,28 @@ const defaultState = {
 class NewPost extends React.Component {
 	constructor(props){
 		super(props)
-		this.state = defaultState
+
+		this.state = {
+			showErrors: false,
+			postInfo: defaultPostInfo,
+			channels: []
+		}
+	}
+
+	componentDidMount () {
+		get('/channels').then((res) => {
+			this.setState({channels: res.data})
+		})
 	}
 
 	onPost = () => {
 		const {navigate} = this.props.navigation
 
-		post(`/channels/${this.state.channel}/posts`, {
+		post(`/channels/${this.state.postInfo.channel}/posts`, {
 			post: {
-				title: this.state.title,
-				description: this.state.description,
-				url: this.state.url
+				title: this.state.postInfo.title,
+				description: this.state.postInfo.description,
+				url: this.state.postInfo.url
 			}
 		}).then((res) => {
 			this.clearState()
@@ -33,7 +55,19 @@ class NewPost extends React.Component {
 	}
 
 	clearState = () => {
-		this.setState(defaultState)
+		this.setState({
+			showErrors: false,
+			postInfo: defaultPostInfo
+		})
+	}
+
+	setPostState = (newKV) => {
+		const postInfo = Object.assign({}, this.state.postInfo, newKV)
+		this.setState({postInfo})
+	}
+
+	renderChannels() {
+		return this.state.channels.map((chan) => <Picker.Item label={chan.name} value={chan.id} key={chan.id} />)
 	}
 
   render() {
@@ -44,15 +78,15 @@ class NewPost extends React.Component {
           placeholder="url"
 					keyboardType="url"
 					autoCapitalize="none"
-					value={this.state.url}
-          onChangeText={(url) => this.setState({url})}
+					value={this.state.postInfo.url}
+          onChangeText={(url) => this.setPostState({url})}
         />
 
 				<TextInput
           style={{height: 60, fontSize: 18}}
           placeholder="title"
-					value={this.state.title}
-          onChangeText={(title) => this.setState({title})}
+					value={this.state.postInfo.title}
+          onChangeText={(title) => this.setPostState({title})}
         />
 
 				<TextInput
@@ -60,17 +94,15 @@ class NewPost extends React.Component {
           placeholder="description"
 					multiline={true}
 					numberOfLines={5}
-					value={this.state.description}
-          onChangeText={(description) => this.setState({description})}
+					value={this.state.postInfo.description}
+          onChangeText={(description) => this.setPostState({description})}
         />
 
-				<TextInput
-          style={{height: 60, fontSize: 18}}
-          placeholder="channel id"
-					value={this.state.channel}
-					keyboardType="numeric"
-          onChangeText={(channel) => this.setState({channel})}
-        />
+				<Picker
+					selectedValue={this.state.postInfo.channel}
+					onValueChange={(channel) => this.setPostState({channel})}>
+					{this.renderChannels()}
+				</Picker>
 
 				<Button
 					onPress={this.onPost}
