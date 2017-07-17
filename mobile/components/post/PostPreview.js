@@ -13,9 +13,10 @@ class PostPreview extends Component {
           width: '100%',
           height: '100%'
         }}
+        automaticallyAdjustContentInsets={true}
         javaScriptEnabled={true}
         domStorageEnabled={true}
-        startInLoadingState={false}
+        startInLoadingState={true}
         scalesPageToFit={true}
         source={{uri: this.post.url}}
       />

@@ -16,6 +16,10 @@ class PostChat extends Component {
     }
   }
 
+  get post() {
+    return this.props.navigation.state.params.post
+  }
+
   messagesForGiftedChat() {
     const messages = this.state.messages.map((msg) => {
       return {
@@ -35,7 +39,7 @@ class PostChat extends Component {
 
   setUpChat() {
     const socket = new Socket("https://stormy-reef-53700.herokuapp.com/socket",)
-		const roomId = `room:${this.props.id}`
+		const roomId = `room:${this.post.id}`
 
     socket.connect()
     this.channel = socket.channel(roomId, {})
@@ -55,7 +59,7 @@ class PostChat extends Component {
       this.setState({messages: resp.data})
     }
 
-    get('/posts/1/messages').then(cb)
+    get(`/posts/${this.post.id}/messages`).then(cb)
   }
 
   componentDidMount() {
@@ -72,7 +76,7 @@ class PostChat extends Component {
     this.channel.push("new_msg", {
       body: sentMessage.text,
       user: sentMessage.user,
-      post_id: this.props.id
+      post_id: this.post.id
     })
     this.setState({text: ''})
   }

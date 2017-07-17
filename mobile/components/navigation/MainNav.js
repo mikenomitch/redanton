@@ -57,16 +57,16 @@ const MainNav = StackNavigator({
   PostChat: {
     screen: PostChatScreen,
     path: '/posts/:id/chat',
-    navigationOptions: () => ({
-      title: 'Discussion'
+    navigationOptions: ({navigation}) => ({
+      title: 'Chat: ' + navigation.state.params.post.title
     })
   },
   PostPreview: {
     screen: PostPreviewScreen,
     path: '/posts/:id/preview',
-    navigationOptions: {
-      title:'Post Preview'
-    }
+    navigationOptions: ({navigation}) => ({
+      title: navigation.state.params.post.title
+    })
   },
   Channel: {
     screen: ChannelScreen,

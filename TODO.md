@@ -20,8 +20,6 @@
   - channel select on add
   - edit post
   - delete post
-  -
-
 
 - Re-scope user auth'd stuff and build out auth on iOS
   - use webviews & normal auth system first? (possible?)
