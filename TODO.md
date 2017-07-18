@@ -4,9 +4,7 @@
 
 - Add auth system
 
-- handle emptry front page well
-
-- Room channel creates chat messages properly
+- handle empty front page well
 
 - Move logic into dedicated modules, clean up todos
 
@@ -15,11 +13,9 @@
 - Chat (plus chat on web as well)
 
 - Build out mobile for:
-  - chat
-    - actual id
-  - channel select on add
   - edit post
   - delete post
+  - chat with real user info
 
 - Re-scope user auth'd stuff and build out auth on iOS
   - use webviews & normal auth system first? (possible?)

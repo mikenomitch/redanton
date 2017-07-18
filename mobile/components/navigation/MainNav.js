@@ -9,6 +9,7 @@ import ChannelListScreen from '../channel/ChannelList'
 
 import PostScreen from '../post/Post'
 import NewPostScreen from '../post/NewPost'
+import EditPostScreen from '../post/EditPost'
 import PostPreviewScreen from '../post/PostPreview'
 
 import PostChatScreen from '../chat/PostChat'
@@ -80,7 +81,13 @@ const MainNav = StackNavigator({
     navigationOptions: {
       title: 'Add Post'
     }
-  }
+  },
+  EditPost: {
+    screen: EditPostScreen,
+    navigationOptions: {
+      title: 'Edit Post'
+    }
+  },
 })
 
 export default MainNav

@@ -33,6 +33,10 @@ var styles = StyleSheet.create({
   }
 })
 
+const EditPostButton = (props) => (
+  <Button title="Edit Post" onPress={() => props.navigation.navigate('EditPost', {postInfo: props.post})} />
+)
+
 class Post extends Component {
   static navigationOptions = {
     title: 'Post'
@@ -53,6 +57,7 @@ class Post extends Component {
   render() {
     return (
       <View style={styles.post}>
+        <EditPostButton navigation={this.props.navigation} post={this.post} />
         <Text style={styles.title}> {this.post.title} </Text>
         <Text style={styles.description}> {this.post.description} </Text>
         <Button onPress={this.goToPost} style={styles.previewLink} title={this.post.url} />

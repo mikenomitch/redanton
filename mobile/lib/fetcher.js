@@ -15,3 +15,11 @@ export function post(endpoint, params = {}) {
     body: JSON.stringify(params)
   }).then(jsonify)
 }
+
+export function patch(endpoint, params = {}) {
+  return fetch(base + endpoint, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params)
+  }).then(jsonify)
+}

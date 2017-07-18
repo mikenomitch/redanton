@@ -3,8 +3,6 @@ import React from 'react'
 import {
 	Text,
 	View,
-	Link,
-	TextInput,
 	Button,
 	Picker
 } from 'react-native'
@@ -13,6 +11,8 @@ import {
 	get,
 	post
 } from '../../lib/fetcher'
+
+import EditPostInfo from './EditPostInfo'
 
 const defaultPostInfo = {
 	url: '',
@@ -73,30 +73,7 @@ class NewPost extends React.Component {
   render() {
     return (
 			<View style={{padding: 50}}>
-				<TextInput
-          style={{height: 60, fontSize: 18}}
-          placeholder="url"
-					keyboardType="url"
-					autoCapitalize="none"
-					value={this.state.postInfo.url}
-          onChangeText={(url) => this.setPostState({url})}
-        />
-
-				<TextInput
-          style={{height: 60, fontSize: 18}}
-          placeholder="title"
-					value={this.state.postInfo.title}
-          onChangeText={(title) => this.setPostState({title})}
-        />
-
-				<TextInput
-          style={{height: 60, fontSize: 18}}
-          placeholder="description"
-					multiline={true}
-					numberOfLines={5}
-					value={this.state.postInfo.description}
-          onChangeText={(description) => this.setPostState({description})}
-        />
+				<EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
 
 				<Picker
 					selectedValue={this.state.postInfo.channel}
