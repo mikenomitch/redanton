@@ -32,7 +32,7 @@ class EditPost extends React.Component {
 				url: this.state.postInfo.url
 			}
 		}).then((res) => {
-			// TODO: just make this go back (but with new data)
+			// TODO: make this go back (but with new data)
 			navigate('Post', {post: res.data})
 		}).catch(() => alert('there was an error. check your inputs'))
 	}

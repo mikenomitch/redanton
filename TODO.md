@@ -13,8 +13,8 @@
 - Chat (plus chat on web as well)
 
 - Build out mobile for:
-  - edit post
-  - delete post
+  - edit post (clean up, only show if owner)
+  - delete post (if owner, confirm, remove room & messages?)
   - chat with real user info
 
 - Re-scope user auth'd stuff and build out auth on iOS
