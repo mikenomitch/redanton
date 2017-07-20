@@ -23,7 +23,7 @@ class EditPost extends React.Component {
 	}
 
 	onSave = () => {
-		const {navigate} = this.props.navigation
+		const {goBack} = this.props.navigation
 
 		patch(`/posts/${this.state.postInfo.id}`, {
 			post: {
@@ -32,8 +32,7 @@ class EditPost extends React.Component {
 				url: this.state.postInfo.url
 			}
 		}).then((res) => {
-			// TODO: make this go back (but with new data)
-			navigate('Post', {post: res.data})
+			goBack()
 		}).catch(() => alert('there was an error. check your inputs'))
 	}
 
@@ -45,7 +44,6 @@ class EditPost extends React.Component {
   render() {
     return (
 			<View style={{padding: 50}}>
-				<Text> {this.state.postInfo.id} </Text>
 				<EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
 				<Button onPress={this.onSave} title="save edits" />
 			</View>

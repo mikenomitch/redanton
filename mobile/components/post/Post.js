@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  Alert,
   Text,
   View,
   Link,
@@ -7,6 +8,10 @@ import {
   StyleSheet,
   Button
 } from 'react-native'
+
+import {
+  deleteCall
+} from './../../lib/fetcher'
 
 var styles = StyleSheet.create({
   post: {
@@ -37,6 +42,26 @@ const EditPostButton = (props) => (
   <Button title="Edit Post" onPress={() => props.navigation.navigate('EditPost', {postInfo: props.post})} />
 )
 
+const DeletePostButton = (props) => (
+  <Button title="Remove Post" onPress={() => {
+    Alert.alert(
+      'Remove Post',
+      'Are you sure?', [{
+          text: 'Cancel',
+          style: 'cancel'
+        },
+        {
+          text: 'OK',
+          onPress: props.removePost
+        },
+      ], {
+        cancelable: true
+      }
+    )
+  }
+  } />
+)
+
 class Post extends Component {
   static navigationOptions = {
     title: 'Post'
@@ -54,6 +79,12 @@ class Post extends Component {
      this.props.navigation.navigate('PostChat', {post: this.post})
   }
 
+  removePost = () => {
+    deleteCall(`/posts/${this.post.id}`).then(
+      this.props.navigation.goBack()
+    )
+  }
+
   render() {
     return (
       <View style={styles.post}>
@@ -62,6 +93,7 @@ class Post extends Component {
         <Text style={styles.description}> {this.post.description} </Text>
         <Button onPress={this.goToPost} style={styles.previewLink} title={this.post.url} />
         <Button onPress={this.goToChat} style={styles.chatLink} title="Enter Discussion"/>
+        <DeletePostButton removePost={this.removePost}/>
       </View>
     )
   }

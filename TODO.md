@@ -6,16 +6,16 @@
 
 - handle empty front page well
 
+- Post deletion works
+
 - Move logic into dedicated modules, clean up todos
 
 ## Frontend
 
-- Chat (plus chat on web as well)
-
-- Build out mobile for:
-  - edit post (clean up, only show if owner)
-  - delete post (if owner, confirm, remove room & messages?)
-  - chat with real user info
+- Add user login and auth
+  - login
+  - chat given user IDs
+  - edit and removing posts scoped by user
 
 - Re-scope user auth'd stuff and build out auth on iOS
   - use webviews & normal auth system first? (possible?)

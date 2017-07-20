@@ -40,7 +40,7 @@ class NewPost extends React.Component {
 	}
 
 	onPost = () => {
-		const {navigate} = this.props.navigation
+		const {navigate, goBack} = this.props.navigation
 
 		post(`/channels/${this.state.postInfo.channel}/posts`, {
 			post: {
@@ -50,6 +50,8 @@ class NewPost extends React.Component {
 			}
 		}).then((res) => {
 			this.clearState()
+			// TODO: Make this cleaner
+			goBack()
 			navigate('Post', {post: res.data})
 		}).catch(() => alert('there was an error. check your inputs'))
 	}

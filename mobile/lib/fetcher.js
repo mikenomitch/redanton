@@ -23,3 +23,9 @@ export function patch(endpoint, params = {}) {
     body: JSON.stringify(params)
   }).then(jsonify)
 }
+
+export function deleteCall(endpoint) {
+  return fetch(base + endpoint, {
+    method: 'DELETE'
+  })
+}
