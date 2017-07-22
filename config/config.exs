@@ -39,6 +39,20 @@ config :coherence,
   email_from_email: "yourname@example.com",
   opts: [:authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token, :invitable, :registerable]
 
+# TODO: Set up the secret_key properly (see docs)
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "Danton",
+  ttl: { 30, :days },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  secret_key: %{
+    "k" => "XxSBVJfYyNiEJviIhSv2-jGNXcuZj8yHHg3CypsYD0Xe0WfcA1J1e9vlxo2isc0CmGLAeT_88ut6TGQGTGw2rw",
+    "kty" => "oct"
+  }, # TODO: replace this with something real
+  serializer: Danton.GuardianSerializer
+
 config :coherence, Danton.Coherence.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,
   api_key: "your api key here"

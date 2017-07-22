@@ -39,7 +39,8 @@ defmodule Danton.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:ex_admin, "~> 0.8"},
-     {:coherence, "~> 0.3"}]
+     {:coherence, "~> 0.3"}, # TODO: Remove this
+     {:guardian, "~> 0.14"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
