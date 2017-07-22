@@ -19,7 +19,7 @@ defmodule Danton.Mixfile do
   def application do
     [mod: {Danton, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :coherence, :ueberauth]]
+                    :phoenix_ecto, :postgrex, :ueberauth]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +39,6 @@ defmodule Danton.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:ex_admin, "~> 0.8"},
-     {:coherence, "~> 0.3"}, # TODO: Remove this
      {:guardian, "~> 0.14"},
      {:ueberauth, "~> 0.4"}]
   end

@@ -5,7 +5,6 @@ defmodule Danton.MembershipController do
 
   def index(conn, _params) do
     # TODO: replace once mobile app handles users
-    # current_user = Coherence.current_user(conn)
     current_user = Repo.get(Danton.User, 1)
 
     memberships = current_user

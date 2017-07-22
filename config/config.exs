@@ -29,16 +29,6 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
-# %% Coherence Configuration %%   Don't remove this line
-config :coherence,
-  user_schema: Danton.User,
-  repo: Danton.Repo,
-  module: Danton,
-  logged_out_url: "/",
-  email_from_name: "Your Name",
-  email_from_email: "yourname@example.com",
-  opts: [:authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token, :invitable, :registerable]
-
 # TODO: Set up the secret_key properly (see docs)
 config :guardian, Guardian,
   allowed_algos: ["HS512"], # optional

@@ -15,7 +15,6 @@ defmodule Danton.Api.V1.PostController do
 
   def front_page(conn, _params) do
     # TODO: replace once mobile app handles users
-    # current_user = Coherence.current_user(conn)
     current_user = Repo.get(Danton.User, 1)
 
     clubs = current_user
@@ -31,7 +30,6 @@ defmodule Danton.Api.V1.PostController do
   # TODO: add proper relationship logic
   def create(conn, %{"channel_id" => channel_id, "post" => post_params}) do
     # TODO: replace once mobile app handles users
-    # current_user = Coherence.current_user(conn)
     channel = Repo.get(Danton.Channel, channel_id)
     current_user = Repo.get(Danton.User, 1)
 

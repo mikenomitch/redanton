@@ -5,8 +5,6 @@ defmodule Danton.Api.V1.ClubController do
 
   def index(conn, _params) do
     # TODO: replace once mobile app handles users
-    # current_user = Coherence.current_user(conn)
-
     current_user = Repo.get(Danton.User, 1)
 
     clubs = current_user
@@ -20,7 +18,6 @@ defmodule Danton.Api.V1.ClubController do
     changeset = Club.changeset(%Club{}, club_params)
 
     # TODO: replace once mobile app handles users
-    # current_user = Coherence.current_user(conn)
     current_user = Repo.get(Danton.User, 1)
 
     case Repo.insert(changeset) do

@@ -1,4 +1,4 @@
-defmodule Danton.Repo.Migrations.CreateCoherenceUser do
+defmodule Danton.Repo.Migrations.CreateUser do
   use Ecto.Migration
   def change do
     create table(:users) do
