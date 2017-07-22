@@ -7,6 +7,7 @@ defmodule Danton.User do
     field :password_hash, :string
 
     has_many :memberships, Danton.Membership
+    has_many :authorizations, Danton.Authorization
     many_to_many :clubs, Danton.Club, join_through: "memberships"
 
     timestamps
