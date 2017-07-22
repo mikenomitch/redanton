@@ -22,4 +22,12 @@ defmodule Danton.User do
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
   end
+
+  def registration_changeset(model, params \\ :empty) do
+    model
+      |> cast(params, [:name, :email])
+      # |> validate_required([:name, :email])
+      # |> validate_format(:email, ~r/@/)
+      # |> unique_constraint(:email)
+  end
 end
