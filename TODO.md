@@ -1,8 +1,18 @@
 # Todos
 
+## Overall
+
+- Move mobile dir to same level as server
+
 ## Backend
 
 - Add auth system
+  - Add Guardian in simplest format
+  - Add new User Migration/Model/Views/Templates
+  - Update seeds to reflect new models
+  - Rerun seeds and confirm things work
+  - Enable sign in/out as a user with a jwt
+  - Scope a route by user
 
 - handle empty front page well
 
