@@ -58,11 +58,6 @@ config :ueberauth, Ueberauth,
     identity: {Ueberauth.Strategy.Identity, [callback_methods: ["POST"]]}
   ]
 
-# config :coherence, Danton.Coherence.Mailer,
-#   adapter: Swoosh.Adapters.Sendgrid,
-#   api_key: "your api key here"
-# %% End Coherence Configuration %%
-
 # Configure Ex Admin
 config :ex_admin,
   repo: Danton.Repo,

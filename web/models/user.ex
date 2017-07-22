@@ -1,6 +1,5 @@
 defmodule Danton.User do
   use Danton.Web, :model
-  use Coherence.Schema
 
   schema "users" do
     field :name, :string
