@@ -12,12 +12,6 @@ defmodule Danton.AuthController do
     render conn, "login.html", current_user: current_user, current_auths: auths(current_user)
   end
 
-  # TODO: why is this not getting 4 params like the examples above
-  def login(conn, _params) do
-    current_user = Danton.Repo.get(Danton.User, 1)
-    render conn, "login.html", current_user: current_user, current_auths: auths(current_user)
-  end
-
   def callback(%Plug.Conn{assigns: %{ueberauth_failure: fails}} = conn, _params, current_user, _claims) do
     conn
     |> put_flash(:error, hd(fails.errors).message)
@@ -25,25 +19,7 @@ defmodule Danton.AuthController do
   end
 
   def callback(%Plug.Conn{assigns: %{ueberauth_auth: auth}} = conn, _params, current_user, _claims) do
-    # case UserFromAuth.get_or_insert(auth, current_user, Repo) do
-    current_user = Danton.Repo.get(Danton.User, 1)
-    case {:ok, current_user} do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "Signed in as #{user.name}")
-        |> Guardian.Plug.sign_in(user, :access, perms: %{default: Guardian.Permissions.max})
-        |> redirect(to: club_path(conn, :index))
-      {:error, _reason} ->
-        conn
-        |> put_flash(:error, "Could not authenticate. Error: #{_reason}")
-        |> render("login.html", current_user: current_user, current_auths: auths(current_user))
-    end
-  end
-
-  # TODO: why is this not getting 4 params like the examples above
-  def callback(%Plug.Conn{assigns: %{ueberauth_auth: auth}} = conn, params) do
-    current_user = Danton.Repo.get(Danton.User, 1)
-    case {:ok, current_user} do
+    case UserFromAuth.get_or_insert(auth, current_user, Repo) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Signed in as #{user.name}")

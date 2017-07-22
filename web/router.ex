@@ -76,6 +76,8 @@ defmodule Danton.Router do
     resources "/messages", MessageController
     resources "/rooms", RoomController
 
+    # TODO: replace this with a view
+    get "/logout", AuthController, :logout
     delete "/logout", AuthController, :logout
     resources "/users", UserController
     resources "/authorizations", AuthorizationController

@@ -27,7 +27,7 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
-        <div> <%= current_user(@conn).name %> </div>
+        <div> <%= current_user(@conn) && current_user(@conn).name %> </div>
         <%= render @view_module, @view_template, assigns %>
       </main>
 
