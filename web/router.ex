@@ -28,6 +28,7 @@ defmodule Danton.Router do
 
   # PROTECTED ROUTES
   scope "/", Danton do
+    pipe_through :browser
     get "/front", PostController, :front_page
 
     # Add public routes below
