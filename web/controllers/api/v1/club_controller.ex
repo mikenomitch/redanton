@@ -3,7 +3,7 @@ defmodule Danton.Api.V1.ClubController do
 
   alias Danton.Club
 
-  def index(conn, _params) do
+  def index(conn, _params, _current_user, _claims) do
     # TODO: replace once mobile app handles users
     current_user = Repo.get(Danton.User, 1)
 
@@ -14,7 +14,7 @@ defmodule Danton.Api.V1.ClubController do
     render(conn, "index.json", clubs: clubs)
   end
 
-  def create(conn, %{"club" => club_params}) do
+  def create(conn, %{"club" => club_params}, _current_user, _claims) do
     changeset = Club.changeset(%Club{}, club_params)
 
     # TODO: replace once mobile app handles users
@@ -36,12 +36,12 @@ defmodule Danton.Api.V1.ClubController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id)
     render(conn, "show.json", club: club)
   end
 
-  def update(conn, %{"id" => id, "club" => club_params}) do
+  def update(conn, %{"id" => id, "club" => club_params}, _current_user, _claims) do
     club = Repo.get!(Club, id)
     changeset = Club.changeset(club, club_params)
 
@@ -55,7 +55,7 @@ defmodule Danton.Api.V1.ClubController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id)
 
     # Here we use delete! (with a bang) because we expect

@@ -2,14 +2,14 @@ defmodule Danton.Api.V1.MessageController do
   use Danton.Web, :controller
   alias Danton.Message
 
-  def index(conn, %{"post_id" => post_id}) do
+  def index(conn, %{"post_id" => post_id}, _current_user, _claims) do
     [room] = Danton.Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
     messages = Ecto.assoc(room, :messages) |> Danton.Repo.all
 
     render(conn, "index.json", messages: messages)
   end
 
-  def create(conn, %{"message" => message_params}) do
+  def create(conn, %{"message" => message_params}, _current_user, _claims) do
     changeset = Message.changeset(%Message{}, message_params)
 
     case Repo.insert(changeset) do
@@ -25,12 +25,12 @@ defmodule Danton.Api.V1.MessageController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     message = Repo.get!(Message, id)
     render(conn, "show.html", message: message)
   end
 
-  def update(conn, %{"id" => id, "message" => message_params}) do
+  def update(conn, %{"id" => id, "message" => message_params}, _current_user, _claims) do
     message = Repo.get!(Message, id)
     changeset = Message.changeset(message, message_params)
 
@@ -44,7 +44,7 @@ defmodule Danton.Api.V1.MessageController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     message = Repo.get!(Message, id)
     Repo.delete!(message)
     send_resp(conn, :no_content, "")

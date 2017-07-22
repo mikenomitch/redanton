@@ -2,7 +2,7 @@ defmodule Danton.ClubController do
   use Danton.Web, :controller
   alias Danton.Club
 
-  def index(conn, _params) do
+  def index(conn, _params, _current_user, _claims) do
     # TODO: replace once mobile app handles users
     current_user = Repo.get(Danton.User, 1)
 
@@ -13,12 +13,12 @@ defmodule Danton.ClubController do
     render(conn, "index.html", clubs: clubs)
   end
 
-  def new(conn, _params) do
+  def new(conn, _params, _current_user, _claims) do
     changeset = Club.changeset(%Club{})
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"club" => club_params}) do
+  def create(conn, %{"club" => club_params}, _current_user, _claims) do
     changeset = Club.changeset(%Club{}, club_params)
 
     case Repo.insert(changeset) do
@@ -31,18 +31,18 @@ defmodule Danton.ClubController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id) |> Repo.preload(:channels)
     render(conn, "show.html", club: club)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id)
     changeset = Club.changeset(club)
     render(conn, "edit.html", club: club, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "club" => club_params}) do
+  def update(conn, %{"id" => id, "club" => club_params}, _current_user, _claims) do
     club = Repo.get!(Club, id)
     changeset = Club.changeset(club, club_params)
 
@@ -56,7 +56,7 @@ defmodule Danton.ClubController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id)
 
     # Here we use delete! (with a bang) because we expect

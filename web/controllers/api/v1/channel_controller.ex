@@ -3,7 +3,7 @@ defmodule Danton.Api.V1.ChannelController do
 
   alias Danton.Channel
 
-  def index(conn, %{"club_id" => club_id}) do
+  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
     channels = Repo.all(
       from c in Channel,
       where: c.club_id == ^club_id,
@@ -14,7 +14,7 @@ defmodule Danton.Api.V1.ChannelController do
   end
 
   # Top level index without a specific club
-  def index(conn, _params) do
+  def index(conn, _params, _current_user, _claims) do
     # TODO: replace once mobile can handle users
     current_user = Repo.get(Danton.User, 1)
 
@@ -29,7 +29,7 @@ defmodule Danton.Api.V1.ChannelController do
   end
 
   # TODO: add proper relationship logic
-  def create(conn, %{"channel" => channel_params}) do
+  def create(conn, %{"channel" => channel_params}, _current_user, _claims) do
     changeset = Channel.changeset(%Channel{}, channel_params)
 
     case Repo.insert(changeset) do
@@ -45,12 +45,12 @@ defmodule Danton.Api.V1.ChannelController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, current_user, _claims) do
     channel = Repo.get!(Channel, id)
     render(conn, "show.json", channel: channel)
   end
 
-  def update(conn, %{"id" => id, "channel" => channel_params}) do
+  def update(conn, %{"id" => id, "channel" => channel_params}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
     changeset = Channel.changeset(channel, channel_params)
 
@@ -64,7 +64,7 @@ defmodule Danton.Api.V1.ChannelController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
 
     # Here we use delete! (with a bang) because we expect

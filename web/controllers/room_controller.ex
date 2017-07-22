@@ -3,17 +3,17 @@ defmodule Danton.RoomController do
 
   alias Danton.Room
 
-  def index(conn, _params) do
+  def index(conn, _params, _current_user, _claims) do
     rooms = Repo.all(Room)
     render(conn, "index.html", rooms: rooms)
   end
 
-  def new(conn, _params) do
+  def new(conn, _params, _current_user, _claims) do
     changeset = Room.changeset(%Room{})
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"room" => room_params}) do
+  def create(conn, %{"room" => room_params}, _current_user, _claims) do
     changeset = Room.changeset(%Room{}, room_params)
 
     case Repo.insert(changeset) do
@@ -26,18 +26,18 @@ defmodule Danton.RoomController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     room = Repo.get!(Room, id)
     render(conn, "show.html", room: room)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id}, _current_user, _claims) do
     room = Repo.get!(Room, id)
     changeset = Room.changeset(room)
     render(conn, "edit.html", room: room, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "room" => room_params}) do
+  def update(conn, %{"id" => id, "room" => room_params}, _current_user, _claims) do
     room = Repo.get!(Room, id)
     changeset = Room.changeset(room, room_params)
 
@@ -51,7 +51,7 @@ defmodule Danton.RoomController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     room = Repo.get!(Room, id)
 
     # Here we use delete! (with a bang) because we expect

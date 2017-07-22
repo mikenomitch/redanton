@@ -3,7 +3,7 @@ defmodule Danton.PostController do
 
   alias Danton.Post
 
-  def index(conn,  %{"channel_id" => channel_id}) do
+  def index(conn,  %{"channel_id" => channel_id}, _current_user, _claims) do
     posts = Repo.all(
       from p in Post,
       where: p.channel_id == ^channel_id,
@@ -13,7 +13,7 @@ defmodule Danton.PostController do
     render(conn, "index.html", posts: posts, channel_id: channel_id)
   end
 
-  def front_page(conn, _params) do
+  def front_page(conn, _params, _current_user, _claims) do
     # TODO: replace once mobile can handle users
     current_user = Repo.get(Danton.User, 1)
 
@@ -27,12 +27,12 @@ defmodule Danton.PostController do
     render(conn, "front_page.html", posts: posts)
   end
 
-  def new(conn, %{"channel_id" => channel_id}) do
+  def new(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
     changeset = Post.changeset(%Post{})
     render(conn, "new.html", changeset: changeset, channel_id: channel_id)
   end
 
-  def create(conn, %{"post" => post_params, "channel_id" => channel_id}) do
+  def create(conn, %{"post" => post_params, "channel_id" => channel_id}, _current_user, _claims) do
     channel = Danton.Repo.get(Danton.Channel, channel_id)
 
     # clean up
@@ -50,18 +50,18 @@ defmodule Danton.PostController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id)
     render(conn, "show.html", post: post)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}) do
+  def update(conn, %{"id" => id, "post" => post_params}, _current_user, _claims) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post, post_params)
 
@@ -75,7 +75,7 @@ defmodule Danton.PostController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id)
     channel_id = post.channel_id
 

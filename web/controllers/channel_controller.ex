@@ -3,7 +3,7 @@ defmodule Danton.ChannelController do
 
   alias Danton.Channel
 
-  def index(conn, %{"club_id" => club_id}) do
+  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
     channels = Repo.all(
       from c in Channel,
       where: c.club_id == ^club_id,
@@ -13,12 +13,12 @@ defmodule Danton.ChannelController do
     render(conn, "index.html", channels: channels, club_id: club_id)
   end
 
-  def new(conn, %{"club_id" => club_id}) do
+  def new(conn, %{"club_id" => club_id}, _current_user, _claims) do
     changeset = Channel.changeset(%Channel{})
     render(conn, "new.html", changeset: changeset, club_id: club_id)
   end
 
-  def create(conn, %{"channel" => channel_params, "club_id" => club_id}) do
+  def create(conn, %{"channel" => channel_params, "club_id" => club_id}, _current_user, _claims) do
     club = Danton.Repo.get(Danton.Club, club_id)
 
     # TODO: extract somehow
@@ -36,18 +36,18 @@ defmodule Danton.ChannelController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     channel = Repo.get!(Channel, id) |> Repo.preload(:posts)
     render(conn, "show.html", channel: channel)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
     changeset = Channel.changeset(channel)
     render(conn, "edit.html", channel: channel, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "channel" => channel_params}) do
+  def update(conn, %{"id" => id, "channel" => channel_params}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
     changeset = Channel.changeset(channel, channel_params)
 
@@ -61,7 +61,7 @@ defmodule Danton.ChannelController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
     club_id = channel.club_id
 

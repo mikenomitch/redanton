@@ -3,7 +3,7 @@ defmodule Danton.Api.V1.PostController do
 
   alias Danton.Post
 
-  def index(conn, %{"channel_id" => channel_id}) do
+  def index(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
     posts = Repo.all(
       from p in Post,
       where: p.channel_id == ^channel_id,
@@ -13,7 +13,7 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
-  def front_page(conn, _params) do
+  def front_page(conn, _params, _current_user, _claims) do
     # TODO: replace once mobile app handles users
     current_user = Repo.get(Danton.User, 1)
 
@@ -28,7 +28,7 @@ defmodule Danton.Api.V1.PostController do
   end
 
   # TODO: add proper relationship logic
-  def create(conn, %{"channel_id" => channel_id, "post" => post_params}) do
+  def create(conn, %{"channel_id" => channel_id, "post" => post_params}, _current_user, _claims) do
     # TODO: replace once mobile app handles users
     channel = Repo.get(Danton.Channel, channel_id)
     current_user = Repo.get(Danton.User, 1)
@@ -41,7 +41,7 @@ defmodule Danton.Api.V1.PostController do
       url: post_params["url"],
     }
 
-    case Danton.Channel.make_post_for_user(channel, current_user, post_struct) do
+    case Danton.Channel.make_post_for_user(channel, current_user, post_struct, _current_user, _claims) do
       {:ok, post} ->
         # TODO: find a better spot for this
         Danton.Post.make_room(post)
@@ -56,19 +56,19 @@ defmodule Danton.Api.V1.PostController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id)
     render(conn, "show.json", post: post)
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}) do
+  def update(conn, %{"id" => id, "post" => post_params}, _current_user, _claims) do
 
     IO.puts(inspect(post_params))
 
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post, post_params)
 
-    case Repo.update(changeset) do
+    case Repo.update(changeset, _current_user, _claims) do
       {:ok, post} ->
         render(conn, "show.json", post: post)
       {:error, changeset} ->
@@ -78,7 +78,7 @@ defmodule Danton.Api.V1.PostController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id)
 
     # Here we use delete! (with a bang) because we expect

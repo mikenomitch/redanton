@@ -3,18 +3,18 @@ defmodule Danton.MessageController do
 
   alias Danton.Message
 
-  def index(conn, %{"post_id" => post_id}) do
+  def index(conn, %{"post_id" => post_id}, _current_user, _claims) do
     post = Repo.find(Danton.Post, post_id)
 		messages = post.room.messages
     render(conn, "index.html", messages: messages)
   end
 
-  def new(conn, _params) do
+  def new(conn, _params, _current_user, _claims) do
     changeset = Message.changeset(%Message{})
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"message" => message_params}) do
+  def create(conn, %{"message" => message_params}, _current_user, _claims) do
     changeset = Message.changeset(%Message{}, message_params)
 
     case Repo.insert(changeset) do
@@ -27,18 +27,18 @@ defmodule Danton.MessageController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     message = Repo.get!(Message, id)
     render(conn, "show.html", message: message)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id}, _current_user, _claims) do
     message = Repo.get!(Message, id)
     changeset = Message.changeset(message)
     render(conn, "edit.html", message: message, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "message" => message_params}) do
+  def update(conn, %{"id" => id, "message" => message_params}, _current_user, _claims) do
     message = Repo.get!(Message, id)
     changeset = Message.changeset(message, message_params)
 
@@ -52,7 +52,7 @@ defmodule Danton.MessageController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     message = Repo.get!(Message, id)
 
     # Here we use delete! (with a bang) because we expect

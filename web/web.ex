@@ -29,8 +29,12 @@ defmodule Danton.Web do
   def controller do
     quote do
       use Phoenix.Controller
+      use Guardian.Phoenix.Controller
 
       alias Danton.Repo
+      alias Danton.Plug.EnsureAuthenticated
+      alias Danton.Plug.EnsurePermissions
+
       import Ecto
       import Ecto.Query
 

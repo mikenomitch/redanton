@@ -3,7 +3,7 @@ defmodule Danton.MembershipController do
 
   alias Danton.Membership
 
-  def index(conn, _params) do
+  def index(conn, _params, _current_user, _claims) do
     # TODO: replace once mobile app handles users
     current_user = Repo.get(Danton.User, 1)
 
@@ -14,12 +14,12 @@ defmodule Danton.MembershipController do
     render(conn, "index.html", memberships: memberships)
   end
 
-  def new(conn, _params) do
+  def new(conn, _params, _current_user, _claims) do
     changeset = Membership.changeset(%Membership{})
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"membership" => membership_params}) do
+  def create(conn, %{"membership" => membership_params}, _current_user, _claims) do
     changeset = Membership.changeset(%Membership{}, membership_params)
 
     case Repo.insert(changeset) do
@@ -32,18 +32,18 @@ defmodule Danton.MembershipController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     membership = Repo.get!(Membership, id)
     render(conn, "show.html", membership: membership)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id}, _current_user, _claims) do
     membership = Repo.get!(Membership, id)
     changeset = Membership.changeset(membership)
     render(conn, "edit.html", membership: membership, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "membership" => membership_params}) do
+  def update(conn, %{"id" => id, "membership" => membership_params}, _current_user, _claims) do
     membership = Repo.get!(Membership, id)
     changeset = Membership.changeset(membership, membership_params)
 
@@ -57,7 +57,7 @@ defmodule Danton.MembershipController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     membership = Repo.get!(Membership, id)
 
     # Here we use delete! (with a bang) because we expect

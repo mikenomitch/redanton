@@ -3,8 +3,7 @@ defmodule Danton.Api.V1.MembershipController do
 
   alias Danton.Membership
 
-  def index(conn, _params) do
-
+  def index(conn, _params, _current_user, _claims) do
     # TODO: replace once mobile app handles users
     current_user = Repo.get(Danton.User, 1)
     memberships = current_user
@@ -14,7 +13,7 @@ defmodule Danton.Api.V1.MembershipController do
   end
 
   # TODO add proper relationship login
-  def create(conn, %{"membership" => membership_params}) do
+  def create(conn, %{"membership" => membership_params}, _current_user, _claims) do
     changeset = Membership.changeset(%Membership{status: "pending"}, membership_params)
 
     case Repo.insert(changeset) do
@@ -30,12 +29,12 @@ defmodule Danton.Api.V1.MembershipController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     membership = Repo.get!(Membership, id)
     render(conn, "show.json", membership: membership)
   end
 
-  def update(conn, %{"id" => id, "membership" => membership_params}) do
+  def update(conn, %{"id" => id, "membership" => membership_params}, _current_user, _claims) do
     membership = Repo.get!(Membership, id)
     changeset = Membership.changeset(membership, membership_params)
 
@@ -49,7 +48,7 @@ defmodule Danton.Api.V1.MembershipController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     membership = Repo.get!(Membership, id)
 
     # Here we use delete! (with a bang) because we expect
