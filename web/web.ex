@@ -54,6 +54,7 @@ defmodule Danton.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
+      import Danton.View.Helpers
       import Danton.Router.Helpers
       import Danton.ErrorHelpers
       import Danton.Gettext
