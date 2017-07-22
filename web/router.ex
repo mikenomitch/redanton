@@ -48,6 +48,11 @@ defmodule Danton.Router do
 
     resources "/messages", MessageController
     resources "/rooms", RoomController
+
+    delete "/logout", AuthController, :logout
+    resources "/users", UserController
+    resources "/authorizations", AuthorizationController
+    resources "/tokens", TokenController
   end
 
   pipeline :api do

@@ -35,6 +35,7 @@ defmodule Danton.Web do
       import Ecto.Query
 
       import Danton.Router.Helpers
+      import Danton.Controller.Helpers
       import Danton.Gettext
     end
   end
