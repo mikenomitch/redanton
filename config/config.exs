@@ -53,9 +53,14 @@ config :guardian, Guardian,
   }, # TODO: replace this with something real
   serializer: Danton.GuardianSerializer
 
-config :coherence, Danton.Coherence.Mailer,
-  adapter: Swoosh.Adapters.Sendgrid,
-  api_key: "your api key here"
+config :ueberauth, Ueberauth,
+  providers: [
+    identity: {Ueberauth.Strategy.Identity, [callback_methods: ["POST"]]}
+  ]
+
+# config :coherence, Danton.Coherence.Mailer,
+#   adapter: Swoosh.Adapters.Sendgrid,
+#   api_key: "your api key here"
 # %% End Coherence Configuration %%
 
 # Configure Ex Admin

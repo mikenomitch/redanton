@@ -1,6 +1,6 @@
 defmodule Danton.Router do
   use Danton.Web, :router
-  use Coherence.Router
+  # use Coherence.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -8,28 +8,28 @@ defmodule Danton.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session
+    # plug Coherence.Authentication.Session
   end
 
-  pipeline :protected do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session, protected: true
-  end
+  # pipeline :protected do
+  #   plug :accepts, ["html"]
+  #   plug :fetch_session
+  #   plug :fetch_flash
+  #   plug :protect_from_forgery
+  #   plug :put_secure_browser_headers
+  #   plug Coherence.Authentication.Session, protected: true
+  # end
 
   # Added by Coherence
   scope "/" do
     pipe_through :browser
-    coherence_routes()
+    # coherence_routes()
   end
 
   # Added by Coherence
   scope "/" do
-    pipe_through :protected
-    coherence_routes :protected
+    # pipe_through :protected
+    # coherence_routes :protected
   end
 
   use ExAdmin.Router
@@ -47,7 +47,7 @@ defmodule Danton.Router do
 
   # PROTECTED ROUTES
   scope "/", Danton do
-    pipe_through :protected
+    # pipe_through :protected
     get "/front", PostController, :front_page
 
     # Add public routes below
