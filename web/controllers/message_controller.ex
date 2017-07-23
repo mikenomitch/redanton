@@ -3,6 +3,8 @@ defmodule Danton.MessageController do
 
   alias Danton.Message
 
+  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+
   def index(conn, %{"post_id" => post_id}, _current_user, _claims) do
     post = Repo.find(Danton.Post, post_id)
 		messages = post.room.messages
@@ -62,5 +64,12 @@ defmodule Danton.MessageController do
     conn
     |> put_flash(:info, "Message deleted successfully.")
     |> redirect(to: message_path(conn, :index))
+  end
+
+  # TODO: move this into a shared location
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_flash(:error, "Authentication required")
+    |> redirect(to: auth_path(conn, :login))
   end
 end

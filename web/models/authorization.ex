@@ -1,7 +1,7 @@
 defmodule Danton.Authorization do
   use Danton.Web, :model
 
-  schema "authorizations" do
+  schema "authorization" do
     field :provider, :string
     field :uid, :string
     field :token, :string

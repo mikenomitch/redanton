@@ -85,9 +85,10 @@ defmodule Danton.Router do
   end
 
   # This scope is the main authentication area for Ueberauth
-  scope "/auth", Danton do
+  scope "/login", Danton do
     pipe_through [:browser, :browser_auth] # Use the default browser stack
 
+    get "/", AuthController, :login
     get "/:identity", AuthController, :login
     get "/:identity/callback", AuthController, :callback
     post "/:identity/callback", AuthController, :callback

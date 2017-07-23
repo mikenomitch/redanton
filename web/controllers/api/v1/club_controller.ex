@@ -3,10 +3,7 @@ defmodule Danton.Api.V1.ClubController do
 
   alias Danton.Club
 
-  def index(conn, _params, _current_user, _claims) do
-    # TODO: replace once mobile app handles users
-    current_user = Repo.get(Danton.User, 1)
-
+  def index(conn, _params, current_user, _claims) do
     clubs = current_user
       |> Ecto.assoc(:clubs)
       |> Repo.all
@@ -14,11 +11,8 @@ defmodule Danton.Api.V1.ClubController do
     render(conn, "index.json", clubs: clubs)
   end
 
-  def create(conn, %{"club" => club_params}, _current_user, _claims) do
+  def create(conn, %{"club" => club_params}, current_user, _claims) do
     changeset = Club.changeset(%Club{}, club_params)
-
-    # TODO: replace once mobile app handles users
-    current_user = Repo.get(Danton.User, 1)
 
     case Repo.insert(changeset) do
       {:ok, club} ->

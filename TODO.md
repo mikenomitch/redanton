@@ -7,11 +7,9 @@
 ## Backend
 
 - Add auth system
-  - Enable sign in/out on browser
-  - Scope routes on broswer
   - Issue JWTs to users... somehow
   - Scope api calls by JWT
-  - Update seeds to reflect new models
+  - Update seeds to reflect setup
 
 - handle empty front page well
 

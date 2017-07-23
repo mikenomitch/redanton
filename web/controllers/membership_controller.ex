@@ -3,10 +3,9 @@ defmodule Danton.MembershipController do
 
   alias Danton.Membership
 
-  def index(conn, _params, _current_user, _claims) do
-    # TODO: replace once mobile app handles users
-    current_user = Repo.get(Danton.User, 1)
+  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
+  def index(conn, _params, current_user, _claims) do
     memberships = current_user
       |> Ecto.assoc(:memberships)
       |> Repo.all
@@ -67,5 +66,12 @@ defmodule Danton.MembershipController do
     conn
     |> put_flash(:info, "Membership deleted successfully.")
     |> redirect(to: membership_path(conn, :index))
+  end
+
+  # TODO: move this into a shared location
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_flash(:error, "Authentication required")
+    |> redirect(to: auth_path(conn, :login))
   end
 end

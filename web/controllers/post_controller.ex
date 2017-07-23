@@ -13,10 +13,7 @@ defmodule Danton.PostController do
     render(conn, "index.html", posts: posts, channel_id: channel_id)
   end
 
-  def front_page(conn, _params, _current_user, _claims) do
-    # TODO: replace once mobile can handle users
-    current_user = Repo.get(Danton.User, 1)
-
+  def front_page(conn, _params, current_user, _claims) do
     clubs = current_user
       |> Ecto.assoc(:clubs)
       |> Repo.all
@@ -86,5 +83,12 @@ defmodule Danton.PostController do
     conn
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: channel_post_path(conn, :index, channel_id))
+  end
+
+  # TODO: move this into a shared location
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_flash(:error, "Authentication required")
+    |> redirect(to: auth_path(conn, :login))
   end
 end

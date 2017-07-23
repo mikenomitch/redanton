@@ -3,6 +3,8 @@ defmodule Danton.RoomController do
 
   alias Danton.Room
 
+  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+
   def index(conn, _params, _current_user, _claims) do
     rooms = Repo.all(Room)
     render(conn, "index.html", rooms: rooms)
@@ -61,5 +63,12 @@ defmodule Danton.RoomController do
     conn
     |> put_flash(:info, "Room deleted successfully.")
     |> redirect(to: room_path(conn, :index))
+  end
+
+  # TODO: move this into a shared location
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_flash(:error, "Authentication required")
+    |> redirect(to: auth_path(conn, :login))
   end
 end

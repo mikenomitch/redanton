@@ -1,8 +1,8 @@
-defmodule Danton.Repo.Migrations.CreateAuthorizations do
+defmodule Danton.Repo.Migrations.CreateAuthorization do
   use Ecto.Migration
 
   def change do
-    create table(:authorizations) do
+    create table(:authorization) do
       add :provider, :string
       add :uid, :string
       add :user_id, references(:users, on_delete: :delete_all)
@@ -13,8 +13,8 @@ defmodule Danton.Repo.Migrations.CreateAuthorizations do
       timestamps
     end
 
-    create index(:authorizations, [:provider, :uid], unique: true)
-    create index(:authorizations, [:expires_at])
-    create index(:authorizations, [:provider, :token])
+    create index(:authorization, [:provider, :uid], unique: true)
+    create index(:authorization, [:expires_at])
+    create index(:authorization, [:provider, :token])
   end
 end

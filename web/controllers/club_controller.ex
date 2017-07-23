@@ -2,6 +2,8 @@ defmodule Danton.ClubController do
   use Danton.Web, :controller
   alias Danton.Club
 
+  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+
   def index(conn, _params, current_user, _claims) do
     clubs = current_user
       |> Ecto.assoc(:clubs)
@@ -63,5 +65,12 @@ defmodule Danton.ClubController do
     conn
     |> put_flash(:info, "Club deleted successfully.")
     |> redirect(to: club_path(conn, :index))
+  end
+
+  # TODO: move this into a shared location
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_flash(:error, "Authentication required")
+    |> redirect(to: auth_path(conn, :login))
   end
 end

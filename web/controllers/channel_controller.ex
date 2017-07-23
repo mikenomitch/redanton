@@ -3,6 +3,8 @@ defmodule Danton.ChannelController do
 
   alias Danton.Channel
 
+  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+
   def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
     channels = Repo.all(
       from c in Channel,
@@ -72,5 +74,12 @@ defmodule Danton.ChannelController do
     conn
     |> put_flash(:info, "Channel deleted successfully.")
     |> redirect(to: club_channel_path(conn, :index, club_id))
+  end
+
+  # TODO: move this into a shared location
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_flash(:error, "Authentication required")
+    |> redirect(to: auth_path(conn, :login))
   end
 end

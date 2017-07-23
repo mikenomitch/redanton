@@ -13,10 +13,7 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
-  def front_page(conn, _params, _current_user, _claims) do
-    # TODO: replace once mobile app handles users
-    current_user = Repo.get(Danton.User, 1)
-
+  def front_page(conn, _params, current_user, _claims) do
     clubs = current_user
       |> Ecto.assoc(:clubs)
       |> Repo.all
@@ -28,10 +25,8 @@ defmodule Danton.Api.V1.PostController do
   end
 
   # TODO: add proper relationship logic
-  def create(conn, %{"channel_id" => channel_id, "post" => post_params}, _current_user, _claims) do
-    # TODO: replace once mobile app handles users
+  def create(conn, %{"channel_id" => channel_id, "post" => post_params}, current_user, _claims) do
     channel = Repo.get(Danton.Channel, channel_id)
-    current_user = Repo.get(Danton.User, 1)
 
     # TODO: There must be a nicer way to do this
     post_struct = %Post{
@@ -62,9 +57,6 @@ defmodule Danton.Api.V1.PostController do
   end
 
   def update(conn, %{"id" => id, "post" => post_params}, _current_user, _claims) do
-
-    IO.puts(inspect(post_params))
-
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post, post_params)
 

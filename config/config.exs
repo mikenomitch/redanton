@@ -44,8 +44,14 @@ config :guardian, Guardian,
   serializer: Danton.GuardianSerializer
 
 config :ueberauth, Ueberauth,
+  base_path: "/login",
   providers: [
-    identity: {Ueberauth.Strategy.Identity, [callback_methods: ["POST"]]}
+    identity: {
+      Ueberauth.Strategy.Identity, [
+        callback_methods: ["POST"],
+        request_path: "/login"
+      ]
+    }
   ]
 
 # Configure Ex Admin
