@@ -41,7 +41,7 @@ defmodule Danton.Api.V1.PostController do
       url: post_params["url"],
     }
 
-    case Danton.Channel.make_post_for_user(channel, current_user, post_struct, _current_user, _claims) do
+    case Danton.Channel.make_post_for_user(channel, current_user, post_struct) do
       {:ok, post} ->
         # TODO: find a better spot for this
         Danton.Post.make_room(post)
@@ -68,7 +68,7 @@ defmodule Danton.Api.V1.PostController do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post, post_params)
 
-    case Repo.update(changeset, _current_user, _claims) do
+    case Repo.update(changeset) do
       {:ok, post} ->
         render(conn, "show.json", post: post)
       {:error, changeset} ->

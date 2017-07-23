@@ -26,8 +26,8 @@ Repo.delete_all Danton.Club
 
 # passwords are "secret"
 users = [
-  %Danton.User{name: "Michael Nomitch", email: "mikenomitch@gmail.com", password_hash: "$2b$12$vsW/cD.lV2yryW8fsiBf0.U8n9MCCcyXIO0L0AnrK72pA8T7AhEkG"},
-  %Danton.User{name: "Dan Mihalov", email: "danmihalov@gmail.com", password_hash: "$2b$12$vsW/cD.lV2yryW8fsiBf0.U8n9MCCcyXIO0L0AnrK72pA8T7AhEkG"}
+  %Danton.User{name: "Michael Nomitch", email: "mikenomitch@gmail.com", avatar: "https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-1/p240x240/13934743_4154683422348_4358878110125305408_n.jpg?oh=b9479a030c0b081197e9b4a2e91181f7&oe=5A0CC1DB"},
+  %Danton.User{name: "Dan Mihalov", email: "danmihalov@gmail.com", avatar: "https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-9/1393772_2712932459475_332693732_n.jpg?oh=c8880860965ae1e28637201cd57cdff2&oe=59FA61FB"}
 ]
 
 users |> Enum.each(&Repo.insert!/1)

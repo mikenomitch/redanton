@@ -4,7 +4,7 @@ defmodule Danton.User do
   schema "users" do
     field :name, :string
     field :email, :string
-    field :password_hash, :string
+    field :avatar, :string
 
     has_many :memberships, Danton.Membership
     has_many :authorizations, Danton.Authorization
@@ -13,21 +13,19 @@ defmodule Danton.User do
     timestamps
   end
 
-  @paramlist ~w(name email password_hash reset_password_token reset_password_sent_at failed_attempts locked_at sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip unlock_token)
+  @paramlist ~w(name email avatar)
+  @required_params ~w(email name)
 
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @paramlist)
-    |> validate_required([:name, :email, :password_hash])
+    |> validate_required(@required_params)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
   end
 
+  # TODO: figure out if you can just use changeset above
   def registration_changeset(model, params \\ :empty) do
-    model
-      |> cast(params, [:name, :email])
-      # |> validate_required([:name, :email])
-      # |> validate_format(:email, ~r/@/)
-      # |> unique_constraint(:email)
+    model |> cast(params, [:name, :email])
   end
 end

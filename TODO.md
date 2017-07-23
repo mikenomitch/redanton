@@ -7,12 +7,11 @@
 ## Backend
 
 - Add auth system
-  - Add Guardian in simplest format
-  - Add new User Migration/Model/Views/Templates
+  - Enable sign in/out on browser
+  - Scope routes on broswer
+  - Issue JWTs to users... somehow
+  - Scope api calls by JWT
   - Update seeds to reflect new models
-  - Rerun seeds and confirm things work
-  - Enable sign in/out as a user with a jwt
-  - Scope a route by user
 
 - handle empty front page well
 
