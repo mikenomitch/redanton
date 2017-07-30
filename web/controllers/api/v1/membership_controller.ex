@@ -1,11 +1,14 @@
 defmodule Danton.Api.V1.MembershipController do
   use Danton.Web, :controller
+  # import Danton.Controller.APIHelper, only: [unauthenctiated: 2]
 
   alias Danton.Membership
 
-  def index(conn, _params, _current_user, _claims) do
-    # TODO: replace once mobile app handles users
-    current_user = Repo.get(Danton.User, 1)
+  def index(conn, _params, current_user, _claims) do
+
+    IO.puts "CURRENT USER:"
+    IO.puts current_user.id
+
     memberships = current_user
       |> Ecto.assoc(:memberships)
       |> Repo.all
@@ -56,5 +59,11 @@ defmodule Danton.Api.V1.MembershipController do
     Repo.delete!(membership)
 
     send_resp(conn, :no_content, "")
+  end
+
+  def unauthenctiated(conn, _params) do
+    conn
+      |> put_status(422)
+      |> json %{error: "Authentication required."}
   end
 end

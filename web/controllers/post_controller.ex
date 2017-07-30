@@ -2,6 +2,7 @@ defmodule Danton.PostController do
   use Danton.Web, :controller
 
   alias Danton.Post
+  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
   def index(conn,  %{"channel_id" => channel_id}, _current_user, _claims) do
     posts = Repo.all(

@@ -2,8 +2,8 @@ defmodule Danton.RoomController do
   use Danton.Web, :controller
 
   alias Danton.Room
-
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+
 
   def index(conn, _params, _current_user, _claims) do
     rooms = Repo.all(Room)

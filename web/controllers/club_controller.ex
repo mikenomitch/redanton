@@ -1,7 +1,6 @@
 defmodule Danton.ClubController do
   use Danton.Web, :controller
   alias Danton.Club
-
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
   def index(conn, _params, current_user, _claims) do

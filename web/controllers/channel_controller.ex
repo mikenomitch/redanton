@@ -2,7 +2,6 @@ defmodule Danton.ChannelController do
   use Danton.Web, :controller
 
   alias Danton.Channel
-
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
   def index(conn, %{"club_id" => club_id}, _current_user, _claims) do

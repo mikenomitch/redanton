@@ -104,6 +104,7 @@ defmodule Danton.Router do
   pipeline :api_auth do
     plug Guardian.Plug.VerifyHeader, realm: "Bearer"
     plug Guardian.Plug.LoadResource
+    plug Guardian.Plug.EnsureAuthenticated, handler: Danton.Controller.APIHelper, typ: "access"
   end
 
   # Other scopes may use custom stacks.

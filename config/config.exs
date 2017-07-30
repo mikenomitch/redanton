@@ -31,7 +31,7 @@ import_config "#{Mix.env}.exs"
 
 # TODO: Set up the secret_key properly (see docs)
 config :guardian, Guardian,
-  allowed_algos: ["HS512"], # optional
+  allowed_algos: ["HS256"], # optional
   verify_module: Guardian.JWT,  # optional
   issuer: "Danton",
   ttl: { 30, :days },
