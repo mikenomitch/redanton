@@ -132,4 +132,16 @@ defmodule Danton.Router do
       resources "/messages", Api.V1.MessageController
     end
   end
+
+  # pipeline :api_login do
+  #   plug Guardian.Plug.LoadResource
+  # end
+
+  scope "/api_login", Danton do
+    pipe_through [:api]
+
+    scope "/v1" do
+      post "/", Api.V1.AuthController, :login
+    end
+  end
 end

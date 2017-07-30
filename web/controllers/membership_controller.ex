@@ -9,10 +9,6 @@ defmodule Danton.MembershipController do
       |> Ecto.assoc(:memberships)
       |> Repo.all
 
-    # THIS IS WHAT GOES INTO Bearer
-    IO.puts "token for user"
-    IO.puts Guardian.Plug.current_token(conn)
-
     render(conn, "index.html", memberships: memberships)
   end
 

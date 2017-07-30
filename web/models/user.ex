@@ -28,4 +28,8 @@ defmodule Danton.User do
   def registration_changeset(model, params \\ :empty) do
     model |> cast(params, [:name, :email])
   end
+
+  def find_and_confirm_password(_params) do
+    {:ok, Danton.Repo.get(Danton.User, 1)}
+  end
 end
