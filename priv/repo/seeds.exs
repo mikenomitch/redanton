@@ -39,6 +39,17 @@ first_user = hd made_users
 # Make Clubs
 # ==============
 
+auth_from_user = fn user ->
+	%Danton.Authorization{uid: user.email, provider: "identity", token: "$2b$12$bDyyBttsoYbkQSKMcoryeOtVilqpcFE2WDXsf2.s7lLFwLUoM6BpO", user_id: user.id}
+end
+
+# passwords are "222222222"
+Enum.map(made_users, auth_from_user) |> Enum.each(&Repo.insert!/1)
+
+# ==============
+# Make Clubs
+# ==============
+
 clubs = [
 	%Danton.Club{name: "Nomitch Fam", description: "link share for the family"},
 	%Danton.Club{name: "Brain Food", description: "let's share some interesting stuff"}
