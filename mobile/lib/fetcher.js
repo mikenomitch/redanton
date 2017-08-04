@@ -67,7 +67,6 @@ function __baseCall(endpoint, params, opts, method) {
   const postCall = __getDefaultCb(method, opts)
   const body = __makeBody(method, params)
 
-  // const headers = __makeHeaders(method, opts)
   return __getHeadersAsync(method, opts).then((headers) => {
     return fetch(url, {
       method: method,
