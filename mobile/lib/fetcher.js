@@ -1,31 +1,95 @@
-const base = 'https://stormy-reef-53700.herokuapp.com/api/v1'
+import {
+  AsyncStorage
+} from 'react-native'
 
-function jsonify(res) {
+const nonApiBase = 'https://stormy-reef-53700.herokuapp.com'
+const base = `${nonApiBase}/api/v1`
+
+function __asyncGetToken() {
+  return new Promise((resolve) => {
+    AsyncStorage.getItem('jwt', (err, token) => {
+      resolve(token)
+    })
+  })
+}
+
+function __jsonify(res) {
   return res.json()
 }
 
-export function get(endpoint) {
-  return fetch(base + endpoint).then(jsonify)
+function __identity(input) {
+  return input
 }
 
-export function post(endpoint, params = {}) {
-  return fetch(base + endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(params)
-  }).then(jsonify)
+function __makeUrl(endpoint, opts) {
+  let baseToUse = base
+  if (opts.useNonApi) {
+    baseToUse = nonApiBase
+  }
+
+  return baseToUse + endpoint
 }
 
-export function patch(endpoint, params = {}) {
-  return fetch(base + endpoint, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(params)
-  }).then(jsonify)
-}
+function __getHeadersAsync(method, opts) {
+  return __asyncGetToken().then((token) => {
+    if (opts.headers) return opts.headers
+    let headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
 
-export function deleteCall(endpoint) {
-  return fetch(base + endpoint, {
-    method: 'DELETE'
+    if (method === 'DELETE' || method === 'GET') {
+      headers = {
+        'Authorization': `Bearer ${token}`
+      }
+    }
+
+    return headers
   })
+}
+
+function __makeBody(method, params) {
+  return method === 'DELETE' || method === 'GET' ?
+    null :
+    JSON.stringify(params)
+}
+
+function __getDefaultCb(method, opts) {
+  if (opts.callback) return opts.callback
+
+  return method === 'DELETE' ?
+    __identity :
+    __jsonify
+}
+
+function __baseCall(endpoint, params, opts, method) {
+  const url = __makeUrl(endpoint, opts)
+  const postCall = __getDefaultCb(method, opts)
+  const body = __makeBody(method, params)
+
+  // const headers = __makeHeaders(method, opts)
+  return __getHeadersAsync(method, opts).then((headers) => {
+    return fetch(url, {
+      method: method,
+      headers: headers,
+      body
+    }).then(postCall)
+  })
+}
+
+
+export function get(endpoint, opts = {}) {
+  return __baseCall(endpoint, {}, opts, 'GET')
+}
+
+export function post(endpoint, params = {}, opts = {}) {
+  return __baseCall(endpoint, params, opts, 'POST')
+}
+
+export function patch(endpoint, params = {}, opts = {}) {
+  return __baseCall(endpoint, params, opts, 'PATCH')
+}
+
+export function deleteCall(endpoint, params = {}, opts = {}) {
+  return __baseCall(endpoint, params, opts, 'DELETE')
 }
