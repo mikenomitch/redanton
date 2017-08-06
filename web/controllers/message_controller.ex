@@ -6,7 +6,7 @@ defmodule Danton.MessageController do
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
   def index(conn, %{"post_id" => post_id}, _current_user, _claims) do
-    post = Repo.find(Danton.Post, post_id)
+    post = Repo.get(Danton.Post, post_id)
 		messages = post.room.messages
     render(conn, "index.html", messages: messages)
   end

@@ -42,7 +42,7 @@ defmodule Danton.Api.V1.ChannelController do
     end
   end
 
-  def show(conn, %{"id" => id}, current_user, _claims) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
     render(conn, "show.json", channel: channel)
   end
