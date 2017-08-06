@@ -63,5 +63,22 @@ defmodule Danton.Club do
 			[] -> []
 			_ -> Ecto.assoc(clubs, :channels) |> Repo.all
 		end
+	end
+
+	@doc """
+  gets all the channels for a list of clubs
+  """
+	def memberships_for_club(club_id) do
+		club = Danton.Repo.get(Danton.Club, club_id)
+		Ecto.assoc(club, :memberships) |> Danton.Repo.all
+	end
+
+	@doc """
+	gets all the users in a club
+	"""
+	def users_for_club(club_id) do
+		memberships_for_club(club_id)
+			|> Ecto.assoc(:user)
+		  |> Repo.all
   end
 end

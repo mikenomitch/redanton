@@ -8,7 +8,6 @@
 ## Backend
 
 - Move more logic into dedicated modules
-- add way to get user info (to display in the chats)
 - add proper authorization to create, update, delete calls
 
 ## Frontend

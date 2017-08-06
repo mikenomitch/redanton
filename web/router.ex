@@ -117,10 +117,11 @@ defmodule Danton.Router do
       resources "/memberships", Api.V1.MembershipController
 
       resources "/clubs", Api.V1.ClubController do
-        resources "/channels", Api.V1.ChannelController, only: [:index, :new, :create]
+				get "/users", Api.V1.UserController, :index
+				resources "/channels", Api.V1.ChannelController, only: [:index, :new, :create]
       end
 
-      resources "/channels", Api.V1.ChannelController do
+			resources "/channels", Api.V1.ChannelController do
         resources "/posts", Api.V1.PostController, only: [:index, :new, :create]
       end
 
