@@ -15,12 +15,9 @@ defmodule Danton.PostController do
   end
 
   def front_page(conn, _params, current_user, _claims) do
-    clubs = current_user
-      |> Ecto.assoc(:clubs)
-      |> Repo.all
-
-    channels = Ecto.assoc(clubs, :channels) |> Repo.all
-    posts = Ecto.assoc(channels, :posts) |> Repo.all
+		posts = Danton.User.clubs_for_user(current_user)
+			|> Danton.Club.channels_for_clubs
+			|> Danton.Channel.posts_for_channels
 
     render(conn, "front_page.html", posts: posts)
   end

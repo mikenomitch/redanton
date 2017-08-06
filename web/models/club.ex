@@ -1,4 +1,5 @@
 defmodule Danton.Club do
+	alias Danton.Repo
   use Danton.Web, :model
 
   schema "clubs" do
@@ -52,5 +53,15 @@ defmodule Danton.Club do
   def make_channel(club, channel_params) do
     cs = Ecto.build_assoc(club, :channels, channel_params)
     Danton.Repo.insert!(cs)
+	end
+
+	@doc """
+  gets all the channels for a list of clubs
+  """
+	def channels_for_clubs(clubs) do
+		case clubs do
+			[] -> []
+			_ -> Ecto.assoc(clubs, :channels) |> Repo.all
+		end
   end
 end

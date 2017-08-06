@@ -15,8 +15,8 @@ defmodule Danton.Api.V1.ChannelController do
 
   # Top level index without a specific club
   def index(conn, _params, current_user, _claims) do
-    clubs = Repo.all Ecto.assoc(current_user, :clubs)
-    channels = Repo.all Ecto.assoc(clubs, :channels)
+		channels = Danton.User.clubs_for_user(current_user)
+			|> Danton.Club.channels_for_clubs
 
     render_index(conn, channels)
   end

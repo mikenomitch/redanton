@@ -1,5 +1,6 @@
 defmodule Danton.Channel do
-  use Danton.Web, :model
+  alias Danton.Repo
+	use Danton.Web, :model
 
   schema "channels" do
     field :name, :string
@@ -25,5 +26,15 @@ defmodule Danton.Channel do
   def make_post_for_user(chan, user, post_params) do
     cs = Ecto.build_assoc(chan, :posts, %{post_params | user_id: user.id})
     Danton.Repo.insert(cs)
+	end
+
+	@doc """
+  gets all the channels for a list of clubs
+  """
+	def posts_for_channels(channels) do
+		case channels do
+			[] -> []
+			_ -> Ecto.assoc(channels, :posts) |> Repo.all
+		end
   end
 end

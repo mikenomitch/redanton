@@ -1,7 +1,10 @@
 defmodule Danton.Api.V1.PostController do
   use Danton.Web, :controller
 
-  alias Danton.Post
+	alias Danton.Post
+	alias Danton.User
+	alias Danton.Club
+	alias Danton.Channel
 
   def index(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
     posts = Repo.all(
@@ -14,19 +17,16 @@ defmodule Danton.Api.V1.PostController do
   end
 
   def front_page(conn, _params, current_user, _claims) do
-    clubs = current_user
-      |> Ecto.assoc(:clubs)
-      |> Repo.all
-
-    channels = Ecto.assoc(clubs, :channels) |> Repo.all
-    posts = Ecto.assoc(channels, :posts) |> Repo.all
+		posts = User.clubs_for_user(current_user)
+			|> Club.channels_for_clubs
+			|> Channel.posts_for_channels
 
     render(conn, "index.json", posts: posts)
   end
 
   # TODO: add proper relationship logic
   def create(conn, %{"channel_id" => channel_id, "post" => post_params}, current_user, _claims) do
-    channel = Repo.get(Danton.Channel, channel_id)
+    channel = Repo.get(Channel, channel_id)
 
     # TODO: There must be a nicer way to do this
     post_struct = %Post{
@@ -36,7 +36,7 @@ defmodule Danton.Api.V1.PostController do
       url: post_params["url"],
     }
 
-    case Danton.Channel.make_post_for_user(channel, current_user, post_struct) do
+    case Channel.make_post_for_user(channel, current_user, post_struct) do
       {:ok, post} ->
         # TODO: find a better spot for this
         Danton.Post.make_room(post)

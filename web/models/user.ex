@@ -11,7 +11,7 @@ defmodule Danton.User do
     has_many :authorizations, Danton.Authorization
     many_to_many :clubs, Danton.Club, join_through: "memberships"
 
-    timestamps
+    timestamps()
   end
 
   @paramlist ~w(name email avatar)
@@ -38,5 +38,9 @@ defmodule Danton.User do
 		else
 			{:error, "Invalid Credentials"}
 		end
-  end
+	end
+
+	def clubs_for_user(user) do
+		user |> Ecto.assoc(:clubs) |> Repo.all
+	end
 end

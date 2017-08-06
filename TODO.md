@@ -7,7 +7,6 @@
 
 ## Backend
 
-- handle empty front page well
 - Post deletion works (remove all child elements)
 - Move more logic into dedicated modules
 - add way to get user info (to display in the chats)
