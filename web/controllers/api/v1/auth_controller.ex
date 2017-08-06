@@ -29,7 +29,7 @@ defmodule Danton.Api.V1.AuthController do
 		end
 	end
 
-	def login(conn, params, _, _) do
+	def login(conn, params, current_user, _claims) do
 		case Danton.User.find_and_confirm_password(params) do
 			{:ok, user} ->
 				new_conn = Guardian.Plug.api_sign_in(conn, user)

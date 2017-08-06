@@ -51,6 +51,12 @@ config :ueberauth, Ueberauth,
         callback_methods: ["POST"],
         request_path: "/login"
       ]
+		},
+		identity: {
+      Ueberauth.Strategy.Identity, [
+        callback_methods: ["POST"],
+        request_path: "/api_login/v1"
+      ]
     }
   ]
 

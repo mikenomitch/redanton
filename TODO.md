@@ -8,9 +8,8 @@
 ## Backend
 
 - Add auth system
-  - validate password and username on JWT issue
-  - return real user info on login
-  - Scope all necessary api calls by JWT
+	- return real user info on login
+  - Scope api calls by JWT frd
   - Update seeds to reflect new auth setup
 
 - handle empty front page well
@@ -21,6 +20,8 @@
 
 - add way to get user info (to display in the chats)
 
+- add proper authorization to create, update, delete calls
+
 ## Frontend
 
 - Add user login and auth
@@ -30,6 +31,7 @@
     - store user info
     - store jwt
   - chat shows and uses user info
+	- pass user info to create and update calls
   - edit and removing posts scoped by user
 
 ## Roadmap
@@ -44,8 +46,9 @@
 
 ### Next Steps
 
-- channel creation and editing
 - user sign up on app
+- sorting streams by activity
+- channel creation and editing
 - club creation and editing
 - web equivalence
 

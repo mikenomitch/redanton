@@ -5,12 +5,18 @@
 # message = Repo.get(Message, 13)
 
 # =============================
-# querying by params
+# querying multiple by params
 # =============================
 
 # import Ecto.Query, only: [from: 2]
 # query = from u in User, where: u.age > 18 or is_nil(u.email), select: u
 # list_of_users = Repo.all(query)
+
+# =============================
+# querying multiple by params
+# =============================
+
+# Danton.User |> Repo.get_by(first_name: "Ryan")
 
 # =============================
 # updating a model
@@ -19,10 +25,14 @@
 # Post.changeset(post, %{title: "some new title"}) |> Repo.insert
 
 # =============================
-# getting an association list
+# getting an association
 # =============================
 
+# a list
 # Repo.all Ecto.assoc(membership, :user)
+
+# a single record
+# Repo.one Ecto.assoc(auth, :user)
 
 # =============================
 # creating an association

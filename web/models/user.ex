@@ -1,4 +1,5 @@
 defmodule Danton.User do
+	alias Danton.Repo
   use Danton.Web, :model
 
   schema "users" do
@@ -29,7 +30,13 @@ defmodule Danton.User do
     model |> cast(params, [:name, :email])
   end
 
-  def find_and_confirm_password(_params) do
-    {:ok, Danton.Repo.get(Danton.User, 1)}
+	def find_and_confirm_password(params) do
+		auth = Danton.Authorization |> Repo.get_by(uid: params["email"])
+		if Comeonin.Bcrypt.checkpw(params["password"], auth.token) do
+			user = Repo.one Ecto.assoc(auth, :user)
+			{:ok, user}
+		else
+			{:error, "Invalid Credentials"}
+		end
   end
 end
