@@ -7,10 +7,6 @@
 
 ## Backend
 
-- Add auth system
-  - Scope api calls by JWT frd
-  - Update seeds to reflect new auth setup
-
 - handle empty front page well
 
 - Post deletion works (remove all child elements)
