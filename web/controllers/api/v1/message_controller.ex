@@ -35,7 +35,7 @@ defmodule Danton.Api.V1.MessageController do
     changeset = Message.changeset(message, message_params)
 
     case Repo.update(changeset) do
-      {:ok, post} ->
+      {:ok, _post} ->
         render(conn, "show.json", message: message)
       {:error, changeset} ->
         conn

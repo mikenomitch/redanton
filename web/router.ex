@@ -43,7 +43,7 @@ defmodule Danton.Router do
   # your app's routes
   scope "/admin", ExAdmin do
     pipe_through :browser
-    admin_routes
+    admin_routes()
   end
 
   # PRIVATE ROUTES
