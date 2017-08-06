@@ -8,7 +8,6 @@
 ## Backend
 
 - Add auth system
-	- return real user info on login
   - Scope api calls by JWT frd
   - Update seeds to reflect new auth setup
 

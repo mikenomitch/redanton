@@ -8,37 +8,21 @@ defmodule Danton.Api.V1.AuthController do
   alias Danton.UserFromAuth
   plug Ueberauth
 
-	# TODO: change this to act more like
+	# NOTE: this is based off the app here:
 	# http://blog.overstuffedgorilla.com/simple-guardian-api-authentication/
-	# and give you user info and expiration info
-
-	def login(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
-		case Danton.User.find_and_confirm_password(params) do
-			{:ok, user} ->
-				new_conn = Guardian.Plug.api_sign_in(conn, user)
-				jwt = Guardian.Plug.current_token(new_conn)
-				claims = Guardian.Plug.claims(new_conn)
-
-				new_conn
-				|> put_resp_header("authorization", "Bearer #{jwt}")
-				|> json %{wat: user.id, jwt: jwt}
-			{:error, changeset} ->
-				conn
-				|> put_status(401)
-				|> json %{error: "Could Not Login"}
-		end
-	end
 
 	def login(conn, params, current_user, _claims) do
 		case Danton.User.find_and_confirm_password(params) do
 			{:ok, user} ->
 				new_conn = Guardian.Plug.api_sign_in(conn, user)
 				jwt = Guardian.Plug.current_token(new_conn)
-				claims = Guardian.Plug.claims(new_conn)
+				{:ok, claims} = Guardian.Plug.claims(new_conn)
+				exp = Map.get(claims, "exp")
 
 				new_conn
 				|> put_resp_header("authorization", "Bearer #{jwt}")
-				|> json %{user: user.id, jwt: jwt}
+				# |> put_resp_header("x-expires", exp)
+        |> render "login.json", user: user, jwt: jwt, exp: exp
 			{:error, changeset} ->
 				conn
 				|> put_status(401)
