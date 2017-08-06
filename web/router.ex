@@ -81,7 +81,6 @@ defmodule Danton.Router do
     delete "/logout", AuthController, :logout
     resources "/users", UserController
     resources "/authorizations", AuthorizationController
-    resources "/tokens", TokenController
   end
 
   # This scope is the main authentication area for Ueberauth
