@@ -71,12 +71,7 @@ defmodule Danton.Api.V1.PostController do
   end
 
   def delete(conn, %{"id" => id}, _current_user, _claims) do
-    post = Repo.get!(Post, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(post)
-
+		Danton.Post.destroy(id)
     send_resp(conn, :no_content, "")
   end
 end
