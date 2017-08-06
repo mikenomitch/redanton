@@ -44,12 +44,9 @@ defmodule Danton.Post do
   Removes a post and all associated content
   """
 	def destroy(post_id) do
-		IO.puts("yay")
     # TODO: implement a soft-deletion system
     rooms = Danton.Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id))
 		Danton.Room.destroy_list(rooms)
-
-		IO.puts("destroying poist")
 
 		post = Danton.Repo.get(Danton.Post, post_id)
 		Danton.Repo.delete!(post)

@@ -29,7 +29,6 @@ defmodule Danton.Room do
   Removes all messages associated to a room
   """
 	def destroy_messages(room) do
-		IO.puts("destroying messages")
     # TODO: implement a soft-deletion system
     messages = Danton.Repo.all(from(r in Danton.Message, where: r.room_id == ^room.id))
 		Enum.each(messages, &Danton.Repo.delete!/1)
@@ -41,7 +40,6 @@ defmodule Danton.Room do
 	def destroy_list(rooms) do
     # TODO: implement a soft-deletion system
 		Enum.each(rooms, &Danton.Room.destroy_messages/1)
-		IO.puts("destroying list of rooms")
 		Enum.each(rooms, &Danton.Repo.delete!/1)
 	end
 end
