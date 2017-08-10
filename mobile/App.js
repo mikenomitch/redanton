@@ -1,12 +1,17 @@
-import React from 'react'
-import { AsyncStorage } from 'react-native'
-import { get, post } from './lib/fetcher'
+import React, {Component} from 'react'
+import {Provider} from 'react-redux'
 
+import configureStore from './data/configureStore'
 import Main from './components/Main'
 
-// immediately request a new jwt
-post('/api_login/v1', {}, {useNonApi: true}).then((data) => {
-  AsyncStorage.setItem('jwt', data.jwt)
-})
+const store = configureStore()
 
-export default Main
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Main/>
+      </Provider>
+    )
+  }
+}

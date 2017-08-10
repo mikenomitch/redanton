@@ -6,8 +6,6 @@ import {
   Text
 } from 'react-native'
 
-import { post } from '../lib/fetcher'
-
 import Auth from './auth/Auth'
 import MainNav from './navigation/MainNav'
 
@@ -16,23 +14,9 @@ class Main extends React.Component {
     super(props)
 
     this.state = {
-      isLoading: true,
+      isLoading: false,
       jwt: undefined
     }
-  }
-
-  getInfo () {
-    post('/api_login/v1', {}, {useNonApi: true}).then( (data) => {
-      AsyncStorage.setItem('jwt', data.jwt, () => {
-        this.setState({
-          isLoading: false,
-          jwt: data.jwt
-        })
-      })
-    })
-  }
-  componentDidMount () {
-    this.getInfo()
   }
 
   renderLoading () {

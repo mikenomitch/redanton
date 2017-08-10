@@ -3,7 +3,7 @@ import {
 } from 'react-native'
 
 // const nonApiBase = 'https://stormy-reef-53700.herokuapp.com'
-const nonApiBase = 'https://b45591f3.ngrok.io'
+const nonApiBase = 'https://1956e025.ngrok.io'
 const base = `${nonApiBase}/api/v1`
 
 function __asyncGetToken() {
