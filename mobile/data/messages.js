@@ -9,10 +9,10 @@ import makeHashReducer, {mergeHashActions} from './hashReducer'
 const defaultState = {}
 export default function (state = defaultState, action) {
   switch (action.type) {
-  case 'CUSTOM_USER_ACTION':
+  case 'CUSTOM_MESSAGE_ACTION':
     return state
   default:
-    return makeHashReducer('User')(state, action)
+    return makeHashReducer('Message')(state, action)
   }
 }
 
@@ -22,8 +22,8 @@ export default function (state = defaultState, action) {
 // ==================
 // ==================
 
-const customUserActions = {}
-export const userActions = mergeHashActions(customUserActions, 'User')
+const customMessageActions = {}
+export const messageActions = mergeHashActions(customMessageActions, 'Message')
 
 // ==================
 // ==================
@@ -31,4 +31,4 @@ export const userActions = mergeHashActions(customUserActions, 'User')
 // ==================
 // ==================
 
-// export const userThunks = {}
+// export const messageThunks = {}

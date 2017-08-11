@@ -11,7 +11,6 @@ import {
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { post } from '../../lib/fetcher'
 import { userActions } from '../../data/users'
 import { authThunks } from '../../data/auth'
 
@@ -23,10 +22,6 @@ class Auth extends Component {
       email: null,
       password: null
     }
-	}
-
-	componentDidMount(){
-		this.props.addUsers()
 	}
 
 	getInfo = () => {
@@ -74,7 +69,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return	{
-	  addUsers: bindActionCreators(userActions.addUsers, dispatch),
 	  signIn: bindActionCreators(authThunks.signIn, dispatch)
   }
 }

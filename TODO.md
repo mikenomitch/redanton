@@ -12,25 +12,10 @@
 
 ## Frontend
 
-- Get keys from AsyncStorage (like localstorage works)
 - If jwt is in localstorage onLoad dont show login
 - Login dispatches thunk (create thunks directory)
   - adds auth on return
   - adds user info on return
-- add reducers
-  - clubs
-  - channels
-  - posts
-  - messages
-
-- add list => map actions (DRY)
-- add merge/update actions (DRY)
-
-- add call tracking
-  - api based middleware? (this seems like a good plan)
-  - does not modify fetcher
-  - able to handle multiple calls of the same type
-    out of the gate
 
 - replace local state (when not editing)
   with redux state
@@ -42,6 +27,12 @@
 
 - scope edit & removing posts by user who
   created them
+
+- add call tracking
+  - api based middleware? (this seems like a good plan)
+  - does not modify fetcher
+  - able to handle multiple calls of the same type
+    out of the gate
 
 ## Roadmap
 
