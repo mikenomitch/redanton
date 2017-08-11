@@ -12,15 +12,36 @@
 
 ## Frontend
 
-- Add user login and auth
-  - check for the jwt before asking
-    to login or trying to get the jwt
-  - login makes real post
-    - store user info
-    - store jwt
-  - chat shows and uses user info
-	- pass user info to create and update calls
-  - edit and removing posts scoped by user
+- Get keys from AsyncStorage (like localstorage works)
+- If jwt is in localstorage onLoad dont show login
+- Login dispatches thunk (create thunks directory)
+  - adds auth on return
+  - adds user info on return
+- add reducers
+  - clubs
+  - channels
+  - posts
+  - messages
+
+- add list => map actions (DRY)
+- add merge/update actions (DRY)
+
+- add call tracking
+  - api based middleware? (this seems like a good plan)
+  - does not modify fetcher
+  - able to handle multiple calls of the same type
+    out of the gate
+
+- replace local state (when not editing)
+  with redux state
+- make an optimistic update on post edit
+  - make sure failure works well
+  - make sure success works well
+
+- chat shows and uses user info
+
+- scope edit & removing posts by user who
+  created them
 
 ## Roadmap
 

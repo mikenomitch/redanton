@@ -1,5 +1,4 @@
 function __addUsers() {
-  // TODO: implement action
   return {
     1: {
       id: 1,
@@ -32,7 +31,9 @@ export default function (state = defaultState, action) {
 // ==================
 
 export const userActions = {
-  addUsers: () => ({
-    type: 'ADD_USERS'
-  })
+  addUsers: () => {
+    return {
+     type: 'ADD_USERS'
+    }
+  }
 }

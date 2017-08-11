@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import {
 	AsyncStorage,
@@ -8,12 +8,14 @@ import {
   Text
 } from 'react-native'
 
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { post } from '../../lib/fetcher'
 import { userActions } from '../../data/users'
+import { authThunks } from '../../data/auth'
 
-class Auth extends React.Component {
+class Auth extends Component {
   constructor(props){
     super(props)
 
@@ -28,20 +30,9 @@ class Auth extends React.Component {
 	}
 
 	getInfo = () => {
-    post(
-			'/api_login/v1',
-			{
-				email: this.state.email,
-				password: this.state.password
-			},
-			{useNonApi: true}
-		).then( (data) => {
-      AsyncStorage.setItem('jwt', data.jwt, () => {
-        this.setState({
-          isLoading: false,
-          jwt: data.jwt
-        })
-      })
+    this.props.signIn({
+      email: this.props.email,
+      password: this.state.password
     })
 	}
 
@@ -49,7 +40,7 @@ class Auth extends React.Component {
 		// note: this should be local state
 		// only showing the prop so I can prove redux
 		// is hooked up properly
-		const email = this.props.email
+		const email = this.state.email
     const {password} = this.state
 
     return (
@@ -81,7 +72,14 @@ const mapStateToProps = (state) => {
 	return {email}
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return	{
+	  addUsers: bindActionCreators(userActions.addUsers, dispatch),
+	  signIn: bindActionCreators(authThunks.signIn, dispatch)
+  }
+}
+
 export default connect(
-	mapStateToProps,
-	userActions
+  mapStateToProps,
+  mapDispatchToProps
 )(Auth)
