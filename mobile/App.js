@@ -9,10 +9,6 @@ import {authThunks} from './data/auth'
 const store = configureStore()
 
 export default class App extends Component {
-  componentDidMount(){
-    store.dispatch(authThunks.loadInitialAuth())
-  }
-
   render() {
     return (
       <Provider store={store}>

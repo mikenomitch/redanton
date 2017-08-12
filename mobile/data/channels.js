@@ -22,13 +22,28 @@ export default function (state = defaultState, action) {
 // ==================
 // ==================
 
-const customChannelActions = {}
+const customChannelActions = {
+  onChannelsReturn: (res) => ({
+    type: 'MERGE_CHANNELS',
+    payload: res.data
+  })
+}
+
 export const channelActions = mergeHashActions(customChannelActions, 'Channel')
 
-// ==================
-// ==================
-//      THUNKS
-// ==================
-// ==================
+// =================
+// =================
+//   ASYNC ACTIONS
+// =================
+// =================
 
-// export const channelThunks = {}
+export const getChannels = () => {
+  return {
+    type: 'GET_CHANNELS',
+    call: {
+      action: 'GET',
+      endpoint: '/channels',
+      onSuccess: channelActions.onChannelsReturn
+    }
+  }
+}

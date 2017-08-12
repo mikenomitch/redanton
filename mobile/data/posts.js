@@ -22,13 +22,27 @@ export default function (state = defaultState, action) {
 // ==================
 // ==================
 
-const customPostActions = {}
+const customPostActions = {
+  onPostsReturn: (res) => ({
+    type: 'MERGE_POSTS',
+    payload: res.data
+  })
+}
 export const postActions = mergeHashActions(customPostActions, 'Post')
 
-// ==================
-// ==================
-//      THUNKS
-// ==================
-// ==================
+// =================
+// =================
+//   ASYNC ACTIONS
+// =================
+// =================
 
-// export const postThunks = {}
+export const getFrontPage = () => {
+  return {
+    type: 'GET_FRONT_PAGE',
+    call: {
+      action: 'GET',
+      endpoint: '/front',
+      onSuccess: postActions.onPostsReturn
+    }
+  }
+}

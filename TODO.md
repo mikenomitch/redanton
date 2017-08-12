@@ -12,13 +12,21 @@
 
 ## Frontend
 
-- If jwt is in localstorage onLoad dont show login
-- Login dispatches thunk (create thunks directory)
-  - adds auth on return
-  - adds user info on return
+======
 
-- replace local state (when not editing)
-  with redux state
+- If jwt is in localstorage onLoad dont show login
+
+- If jwt fails, try to reauth behind the scenes?
+
+- If this fails, redirect the user to the login screen
+  and remove the auth info from the store
+
+- Login adds info to store on return
+  and rerenders page
+
+======
+
+- replace react state (when not editing) with redux
 - make an optimistic update on post edit
   - make sure failure works well
   - make sure success works well

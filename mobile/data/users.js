@@ -25,10 +25,10 @@ export default function (state = defaultState, action) {
 const customUserActions = {}
 export const userActions = mergeHashActions(customUserActions, 'User')
 
-// ==================
-// ==================
-//      THUNKS
-// ==================
-// ==================
+// =================
+// =================
+//   ASYNC ACTIONS
+// =================
+// =================
 
 // export const userThunks = {}

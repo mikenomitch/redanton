@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { View, Button, FlatList, StyleSheet, Text } from 'react-native'
 
-import { get } from '../../lib/fetcher'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import { getChannels } from '../../data/channels'
 
 var styles = StyleSheet.create({
   list: {
@@ -49,19 +52,8 @@ class ChannelList extends Component {
     title: 'Channels'
   }
 
-  constructor(props) {
-  	super(props)
-  	this.state = {
-  		channels: []
-  	}
-  }
-
   componentDidMount() {
-  	get('/channels').then((data) => {
-  		this.setState({
-  			channels: data["data"]
-  		})
-  	})
+  	this.props.getChannels()
   }
 
   renderChannelLink = (datum) => {
@@ -70,10 +62,11 @@ class ChannelList extends Component {
   }
 
   render() {
+    const channelsList = Object.values(this.props.channels)
     return (
       <View style={styles.list}>
         <FlatList
-          data={this.state.channels}
+          data={channelsList}
           renderItem={this.renderChannelLink}
           keyExtractor={(item) => item.id}
         />
@@ -82,4 +75,19 @@ class ChannelList extends Component {
   }
 }
 
-export default ChannelList
+const mapStateToProps = (state) => {
+  return {
+    channels: state.channels
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return	{
+    getChannels: bindActionCreators(getChannels, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChannelList)

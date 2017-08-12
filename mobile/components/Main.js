@@ -1,22 +1,21 @@
 import React from 'react'
 
 import {
-	AsyncStorage,
   View,
   Text
 } from 'react-native'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import {authThunks} from '../data/auth'
 
 import Auth from './auth/Auth'
 import MainNav from './navigation/MainNav'
 
 class Main extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      isLoading: false,
-      jwt: undefined
-    }
+  componentDidMount(){
+    this.props.loadInitialAuth()
   }
 
   renderLoading () {
@@ -36,11 +35,11 @@ class Main extends React.Component {
   }
 
   render () {
-    if (this.state.isLoading) {
+    if (this.props.isLoading) {
       return this.renderLoading()
     }
 
-    if (!this.state.jwt) {
+    if (!this.props.jwt) {
       return this.renderLogin()
     }
 
@@ -48,4 +47,20 @@ class Main extends React.Component {
   }
 }
 
-export default Main
+const mapStateToProps = (state) => {
+  return {
+    jwt: state.auth.jwt,
+    isLoading: !state.auth.initialStateLoaded
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return	{
+    loadInitialAuth: bindActionCreators(authThunks.loadInitialAuth, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main)

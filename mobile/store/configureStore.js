@@ -4,8 +4,10 @@ import {
   combineReducers
 } from 'redux'
 
+import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import withAsyncStorage from './middleware/withAsyncStorage'
+import withFetching from './middleware/withFetching'
 
 import auth from '../data/auth'
 import channels from '../data/channels'
@@ -26,7 +28,12 @@ const rootReducer = combineReducers({
 const configureStore = () => {
   const store = createStore(
     rootReducer,
-    applyMiddleware(thunk, withAsyncStorage)
+    applyMiddleware(
+      thunk,
+      withAsyncStorage,
+      withFetching,
+      logger
+    )
   )
 
   return store

@@ -25,10 +25,10 @@ export default function (state = defaultState, action) {
 const customClubActions = {}
 export const clubActions = mergeHashActions(customClubActions, 'Club')
 
-// ==================
-// ==================
-//      THUNKS
-// ==================
-// ==================
+// =================
+// =================
+//   ASYNC ACTIONS
+// =================
+// =================
 
 // export const clubThunks = {}

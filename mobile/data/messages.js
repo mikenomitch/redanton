@@ -25,10 +25,10 @@ export default function (state = defaultState, action) {
 const customMessageActions = {}
 export const messageActions = mergeHashActions(customMessageActions, 'Message')
 
-// ==================
-// ==================
-//      THUNKS
-// ==================
-// ==================
+// =================
+// =================
+//   ASYNC ACTIONS
+// =================
+// =================
 
 // export const messageThunks = {}

@@ -1,32 +1,38 @@
-import React from 'react'
+import React, { Component} from 'react'
 import Stream from './Stream'
 
-import { get } from '../../lib/fetcher'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-class MainStream extends React.Component {
+import { getFrontPage } from '../../data/posts'
+
+class MainStream extends Component {
   static navigationOptions = {
   	title: 'Your Stream'
   }
 
-  constructor(props) {
-  	super(props)
-  	this.state = {
-  		posts: []
-  	}
-  }
-
   componentDidMount() {
-  	get('/front').then((data) => {
-  		this.setState({
-  			posts: data["data"]
-  		})
-  	})
+  	this.props.getFrontPage()
   }
 
   render() {
-		const streamContent = this.state.posts
-    return <Stream navigation={this.props.navigation} content={streamContent}/>
+    return <Stream navigation={this.props.navigation} content={this.props.posts}/>
 	}
 }
 
-export default MainStream
+const mapStateToProps = (state) => {
+  return {
+    posts: Object.values(state.posts)
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return	{
+    getFrontPage: bindActionCreators(getFrontPage, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainStream)
