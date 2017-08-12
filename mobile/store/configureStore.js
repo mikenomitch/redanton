@@ -4,10 +4,20 @@ import {
   combineReducers
 } from 'redux'
 
-import logger from 'redux-logger'
+// ===============
+//    MIDDLEWARE
+// ===============
+
 import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
 import withAsyncStorage from './middleware/withAsyncStorage'
 import withFetching from './middleware/withFetching'
+
+const logger = createLogger({collapsed: true, diff: true})
+
+// ===============
+//    REDUCERS
+// ===============
 
 import auth from '../data/auth'
 import channels from '../data/channels'
@@ -24,6 +34,10 @@ const rootReducer = combineReducers({
   posts,
   users
 })
+
+// ============
+//    CONFIG
+// ============
 
 const configureStore = () => {
   const store = createStore(

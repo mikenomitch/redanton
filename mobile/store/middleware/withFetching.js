@@ -5,6 +5,8 @@ import {
   post
 } from '../../lib/fetcher'
 
+import { authActions } from '../../data/auth'
+
 function noop () {}
 
 function __fetchPromise(callOptions) {
@@ -42,17 +44,22 @@ const withFetching = store => next => action => {
     return successAction && store.dispatch(successAction)
   }
 
-  const onFetchError = (data) => {
+  const onFetchError = (error) => {
+    // TODO: does this know too much about the app now?
+    if (error.message === 'bad auth') {
+      return store.dispatch(authActions.clearCreds())
+    }
+
     // do some fetch tracking heres
     // do the jwt invalidation if it is an unauthorized error
     const onError = callOptions.onError || noop
-    const errorAction = onError(data)
-    return errorAction && store.dispatch(errorAction)
+    const errorAction = onError(error)
+    errorAction && store.dispatch(errorAction)
   }
 
   __fetchPromise(callOptions)
-    .then(onFetchSuccess)
     .catch(onFetchError)
+    .then(onFetchSuccess)
 
   return next(action)
 }

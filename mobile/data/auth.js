@@ -1,21 +1,30 @@
-import { post } from '../lib/fetcher'
+import merge from 'lodash/fp/merge'
 
-function __addAuthInfo(userData) {
-  return {
-    jwt: userData.jwt,
-    exp: userData.exp,
-    userId: userData.user.id,
+function __addAuthInfo(state, authData) {
+  return merge(state, {
+    jwt: authData.jwt,
+    exp: authData.exp,
+    currentUser: authData.user,
     initialStateLoaded: true
-  }
+  })
 }
 
 function __initialAuth(state, jwt) {
-  return {
+  return merge(state, {
     jwt: jwt,
-    exp: 'later',
-    userId: 1,
+    exp: null,
+    currentUser: null,
     initialStateLoaded: true
-  }
+  })
+}
+
+function __clearCreds(state) {
+  return merge(state, {
+    jwt: null,
+    exp: null,
+    currentUser: null,
+    initialStateLoaded: true
+  })
 }
 
 // ==================
@@ -28,7 +37,7 @@ const defaultState = {
   exp: null,
   initialStateLoaded: false,
   jwt: null,
-  userId: null
+  currentUser: null
 }
 
 export default function (state = defaultState, action) {
@@ -37,6 +46,8 @@ export default function (state = defaultState, action) {
     return __addAuthInfo(state, action.payload)
   case 'LOAD_INITIAL_AUTH':
     return __initialAuth(state, action.payload)
+  case 'CLEAR_CREDS':
+    return __clearCreds(state)
   default:
     return state
   }
@@ -59,6 +70,12 @@ export const authActions = {
   loadInitialAuth: (jwt) => ({
     type: 'LOAD_INITIAL_AUTH',
     payload: jwt
+  }),
+
+  clearCreds: () => ({
+    type: 'CLEAR_CREDS',
+    asyncData: null,
+    asyncKey: 'jwt'
   })
 }
 
@@ -68,25 +85,29 @@ export const authActions = {
 // =================
 // =================
 
-export const authThunks = {
-  loadInitialAuth: () => {
-    return {
-      type: 'GET_INITIAL_AUTH',
-      withAsyncData: authActions.loadInitialAuth,
-      asyncKey: 'jwt'
-    }
-  },
+export const loadInitialAuth = () => {
+  return {
+    type: 'GET_INITIAL_AUTH',
+    withAsyncData: authActions.loadInitialAuth,
+    asyncKey: 'jwt'
+  }
+}
 
-  signIn: (userInfo) => {
-    return (dispatch) => {
-      post(
-        '/api_login/v1',
-        {
-          email: userInfo.email,
-          password: userInfo.password
-        },
-        {useNonApi: true}
-      ).then( userData => dispatch(authActions.addAuth(userData)))
+export const signIn = (userInfo) => {
+  return {
+    type: 'SIGN_IN',
+    call: {
+      action: 'POST',
+      endpoint: '/api_login/v1',
+      params: {
+        email: userInfo.email,
+        password: userInfo.password
+      },
+      opts: {
+        useNonApi: true
+      },
+      onSuccess: authActions.addAuth,
+      onError: authActions.onSignInFailure
     }
   }
 }

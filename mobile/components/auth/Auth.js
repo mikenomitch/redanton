@@ -12,21 +12,23 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { userActions } from '../../data/users'
-import { authThunks } from '../../data/auth'
+import { signIn } from '../../data/auth'
 
 class Auth extends Component {
   constructor(props){
     super(props)
 
+    // set initial state to whichever
+    // email is in the store
     this.state = {
-      email: null,
+      email: this.props.email,
       password: null
     }
 	}
 
 	getInfo = () => {
     this.props.signIn({
-      email: this.props.email,
+      email: this.state.email,
       password: this.state.password
     })
 	}
@@ -69,7 +71,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return	{
-	  signIn: bindActionCreators(authThunks.signIn, dispatch)
+    signIn: bindActionCreators(signIn, dispatch)
   }
 }
 

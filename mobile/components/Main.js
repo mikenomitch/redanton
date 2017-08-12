@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import {authThunks} from '../data/auth'
+import { loadInitialAuth } from '../data/auth'
 
 import Auth from './auth/Auth'
 import MainNav from './navigation/MainNav'
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return	{
-    loadInitialAuth: bindActionCreators(authThunks.loadInitialAuth, dispatch)
+    loadInitialAuth: bindActionCreators(loadInitialAuth, dispatch)
   }
 }
 

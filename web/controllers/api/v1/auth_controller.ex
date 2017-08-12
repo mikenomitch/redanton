@@ -39,7 +39,7 @@ defmodule Danton.Api.V1.AuthController do
 			|> json(%{message: "Signed Out"})
     else
       conn
-			|> put_status(422)
+			|> put_status(401)
 			|> json(%{error: "Not Logged In."})
     end
   end

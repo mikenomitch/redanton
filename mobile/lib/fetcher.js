@@ -49,17 +49,30 @@ function __getDefaultCb(method, opts) {
     __jsonify
 }
 
+function __checkStatus(res) {
+  if (res.status === 401 || res.status === 403) {
+    throw new Error('bad auth')
+  }
+
+  if (res.status >= 400) {
+    throw new Error('bad api call')
+  }
+
+  return res
+}
+
 function __baseCall(endpoint, params, opts, method) {
   const url = __makeUrl(endpoint, opts)
   const body = __makeBody(method, params)
   const headers = __makeHeaders(method, opts)
   const onReturn = __getDefaultCb(method, opts)
 
+
   return fetch(url, {
     method: method,
     headers: headers,
     body
-  }).then(onReturn)
+  }).then(__checkStatus).then(onReturn)
 }
 
 

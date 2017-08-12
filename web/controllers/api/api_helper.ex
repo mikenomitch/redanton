@@ -4,7 +4,7 @@ defmodule Danton.Controller.APIHelper do
 
 	def unauthenticated(conn, params) do
     conn
-		|> put_status(422)
+		|> put_status(401)
 		|> json %{error: "Authentication required."}
   end
 end
