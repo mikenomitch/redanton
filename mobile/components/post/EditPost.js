@@ -8,6 +8,8 @@ import {
 
 import { connect } from 'react-redux'
 
+import { updatePost } from '../../data/posts'
+
 import EditPostInfo from './EditPostInfo'
 
 // ===============
