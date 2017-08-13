@@ -12,22 +12,31 @@
 
 ## Frontend
 
-- replace react state (when not editing) with redux
-- make an optimistic update on post edit
-  - make sure failure works well
-  - make sure success works well
+- change onSuccess structure
+- reload posts main page after a post update
 
-- chat shows and uses user info
+- chat hooked into redux flow
+- chat passes and receives user info
+- chat times returned on backend and
+  frontend
 
 - scope edit & removing posts by user who
   created them
+
+- add settings tab
+  - info
+  - sign out
+
+- make an optimistic update on post edit
+  - make sure failure works well
+  - make sure success works well
 
 - auth logic
   - If jwt will expire soon, reauth it before the next call
 
 - add call tracking
-  - api based middleware? (this seems like a good plan)
-  - does not modify fetcher
+  - add to withFetching middleware
+  - add calls reducer
   - able to handle multiple calls of the same type
     out of the gate
 
@@ -43,10 +52,10 @@
 
 ### Next Steps
 
-- user sign up on app
 - sorting streams by activity
 - channel creation and editing
 - club creation and editing
+- user sign up on app
 - web equivalence
 
 ### Next Next Steps
