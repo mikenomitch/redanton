@@ -12,20 +12,21 @@
 
 ## Frontend
 
-- make sure navigation headers can
-  reload properly
 
 - chat hooked into redux flow
 - chat passes and receives user info
 - chat times returned on backend and
   frontend
 
-- scope edit & removing posts by user who
-  created them
-
 - add settings tab
   - info
   - sign out
+
+- scope edit & removing posts by user who
+  created them
+
+- make sure navigation headers can
+  reload properly
 
 - make an optimistic update on post edit
   - make sure failure works well
