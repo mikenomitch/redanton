@@ -7,8 +7,6 @@ import {
 
 import { authActions } from '../../data/auth'
 
-function noop () {}
-
 function __fetchPromise(callOptions) {
   switch (callOptions.action){
   case 'GET':
@@ -38,8 +36,7 @@ const withFetching = store => next => action => {
   }
 
   const onFetchSuccess = (data) => {
-    const onSuccess = callOptions.onSuccess || noop
-    const successAction = onSuccess(data)
+    const successAction = callOptions.successActionCreator && callOptions.successActionCreator(data)
     return successAction && store.dispatch(successAction)
   }
 
@@ -49,8 +46,7 @@ const withFetching = store => next => action => {
       return store.dispatch(authActions.clearCreds())
     }
 
-    const onError = callOptions.onError || noop
-    const errorAction = onError(error)
+    const errorAction = callOptions.errorActionCreator && callOptions.errorActionCreator(error)
     errorAction && store.dispatch(errorAction)
   }
 

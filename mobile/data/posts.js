@@ -42,7 +42,7 @@ export const getFrontPage = () => {
     call: {
       action: 'GET',
       endpoint: '/front',
-      onSuccess: postActions.onPostsReturn
+      successActionCreator: postActions.onPostsReturn
     }
   }
 }
@@ -53,7 +53,7 @@ export const getPostsForChannel = (channelId) => {
     call: {
       action: 'GET',
       endpoint: `/channels/${channelId}/posts`,
-      onSuccess: postActions.onPostsReturn
+      successActionCreator: postActions.onPostsReturn
     }
   }
 }
@@ -64,8 +64,13 @@ export const createPost = (postInfo, onSuccess) => {
     call: {
       action: 'POST',
       endpoint: `/channels/${postInfo.channel}/posts`,
-      onSuccess: onSuccess,
-      onError: () => { alert('there was an issue. check your params') },
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(postActions.mergePosts([res.data]))
+          onSuccess(res)
+        }
+      },
+      errorActionCreator: () => { alert('there was an issue. check your params') },
       params: {
         post: {
           title: postInfo.title,
@@ -83,8 +88,13 @@ export const updatePost = (postInfo, onSuccess) => {
     call: {
       action: 'PATCH',
       endpoint: `/posts/${postInfo.id}`,
-      onSuccess: onSuccess,
-      onError: () => { alert('there was an issue. check your params') },
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(postActions.mergePosts([res.data]))
+          onSuccess(res)
+        }
+      },
+      errorActionCreator: () => { alert('there was an issue. check your params') },
       params: {
         post: {
           title: postInfo.title,
@@ -102,7 +112,7 @@ export const deletePost = (postId) => {
     call: {
       action: 'DELETE',
       endpoint: `/posts/${postId}`,
-      onSuccess: postActions.onPostsReturn
+      successActionCreator: postActions.onPostsReturn
     }
   }
 }

@@ -106,8 +106,8 @@ export const signIn = (userInfo) => {
       opts: {
         useNonApi: true
       },
-      onSuccess: authActions.addAuth,
-      onError: authActions.onSignInFailure
+      successActionCreator: authActions.addAuth,
+      errorActionCreator: authActions.onSignInFailure
     }
   }
 }

@@ -12,7 +12,6 @@
 
 ## Frontend
 
-- change onSuccess structure
 - reload posts main page after a post update
 
 - chat hooked into redux flow

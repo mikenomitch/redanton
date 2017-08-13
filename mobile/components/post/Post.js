@@ -80,7 +80,7 @@ class Post extends Component {
   }
 
   get post() {
-    return this.props.navigation.state.params.post
+    return this.props.post
   }
 
   goToPost = () => {
@@ -115,7 +115,13 @@ class Post extends Component {
 //   CONNECTION
 // ===============
 
+const mapStateToProps = (state, props) => {
+  return {
+    post: state.posts[props.navigation.state.params.post.id]
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { deletePost }
 )(Post)

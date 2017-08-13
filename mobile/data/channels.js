@@ -43,7 +43,7 @@ export const getChannels = () => {
     call: {
       action: 'GET',
       endpoint: '/channels',
-      onSuccess: channelActions.onChannelsReturn
+      successActionCreator: channelActions.onChannelsReturn
     }
   }
 }
