@@ -16,7 +16,8 @@ defmodule Danton.Api.V1.PostView do
       description: post.description,
       url: post.url,
       type: post.type,
-      user_id: post.user_id
+      user_id: post.user_id,
+      channel_id: post.channel_id
     }
   end
 end

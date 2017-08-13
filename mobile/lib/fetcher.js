@@ -1,5 +1,5 @@
 // const nonApiBase = 'https://stormy-reef-53700.herokuapp.com'
-const nonApiBase = 'https://d6e210e2.ngrok.io'
+const nonApiBase = 'https://cd7e4512.ngrok.io'
 const base = `${nonApiBase}/api/v1`
 
 function __jsonify(res) {

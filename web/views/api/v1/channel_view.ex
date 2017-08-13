@@ -13,7 +13,8 @@ defmodule Danton.Api.V1.ChannelView do
     %{
       id: channel.id,
       name: channel.name,
-      description: channel.description
+      description: channel.description,
+      club_id: channel.club_id
     }
   end
 end
