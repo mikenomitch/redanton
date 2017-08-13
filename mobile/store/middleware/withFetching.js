@@ -38,7 +38,6 @@ const withFetching = store => next => action => {
   }
 
   const onFetchSuccess = (data) => {
-    // do some fetch tracking here
     const onSuccess = callOptions.onSuccess || noop
     const successAction = onSuccess(data)
     return successAction && store.dispatch(successAction)
@@ -50,8 +49,6 @@ const withFetching = store => next => action => {
       return store.dispatch(authActions.clearCreds())
     }
 
-    // do some fetch tracking heres
-    // do the jwt invalidation if it is an unauthorized error
     const onError = callOptions.onError || noop
     const errorAction = onError(error)
     errorAction && store.dispatch(errorAction)

@@ -9,9 +9,10 @@ import {
   Button
 } from 'react-native'
 
-import {
-  deleteCall
-} from './../../lib/fetcher'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { deletePost } from '../../data/posts'
 
 var styles = StyleSheet.create({
   post: {
@@ -80,7 +81,7 @@ class Post extends Component {
   }
 
   removePost = () => {
-    deleteCall(`/posts/${this.post.id}`).then(
+    this.props.deletePost(this.post.id).then(
       this.props.navigation.goBack()
     )
   }
@@ -99,4 +100,10 @@ class Post extends Component {
   }
 }
 
-export default Post
+const mapDispatchToProps = (dispatch) => {
+  return	{
+    deletePost: bindActionCreators(deletePost, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Post)

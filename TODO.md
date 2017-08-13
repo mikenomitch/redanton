@@ -12,12 +12,6 @@
 
 ## Frontend
 
-======
-
-- If jwt fails, try to reauth behind the scenes?
-
-======
-
 - replace react state (when not editing) with redux
 - make an optimistic update on post edit
   - make sure failure works well
@@ -27,6 +21,9 @@
 
 - scope edit & removing posts by user who
   created them
+
+- auth logic
+  - If jwt will expire soon, reauth it before the next call
 
 - add call tracking
   - api based middleware? (this seems like a good plan)

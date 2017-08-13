@@ -6,9 +6,10 @@ import {
 	Text
 } from 'react-native'
 
-import {
-	patch
-} from '../../lib/fetcher'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { updatePost } from '../../data/posts'
 
 import EditPostInfo from './EditPostInfo'
 
@@ -24,16 +25,7 @@ class EditPost extends React.Component {
 
 	onSave = () => {
 		const {goBack} = this.props.navigation
-
-		patch(`/posts/${this.state.postInfo.id}`, {
-			post: {
-				title: this.state.postInfo.title,
-				description: this.state.postInfo.description,
-				url: this.state.postInfo.url
-			}
-		}).then((res) => {
-			goBack()
-		}).catch(() => alert('there was an error. check your inputs'))
+    this.props.updatePost(this.state.postInfo, () => goBack())
 	}
 
 	setPostState = (newKV) => {
@@ -51,4 +43,10 @@ class EditPost extends React.Component {
   }
 }
 
-export default EditPost
+const mapDispatchToProps = (dispatch) => {
+  return	{
+    updatePost: bindActionCreators(updatePost, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(EditPost)

@@ -7,10 +7,11 @@ import {
 	Picker
 } from 'react-native'
 
-import {
-	get,
-	post
-} from '../../lib/fetcher'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { getChannels } from '../../data/channels'
+import { createPost } from '../../data/posts'
 
 import EditPostInfo from './EditPostInfo'
 
@@ -28,32 +29,24 @@ class NewPost extends React.Component {
 
 		this.state = {
 			showErrors: false,
-			postInfo: defaultPostInfo,
-			channels: []
+			postInfo: defaultPostInfo
 		}
 	}
 
 	componentDidMount () {
-		get('/channels').then((res) => {
-			this.setState({channels: res.data})
-		})
+		this.props.getChannels()
 	}
 
 	onPost = () => {
-		const {navigate, goBack} = this.props.navigation
+    const {navigate, goBack} = this.props.navigation
 
-		post(`/channels/${this.state.postInfo.channel}/posts`, {
-			post: {
-				title: this.state.postInfo.title,
-				description: this.state.postInfo.description,
-				url: this.state.postInfo.url
-			}
-		}).then((res) => {
-			this.clearState()
-			// TODO: Make this cleaner
+    const onPostSuccess = (res) => {
+      this.clearState()
 			goBack()
 			navigate('Post', {post: res.data})
-		}).catch(() => alert('there was an error. check your inputs'))
+    }
+
+    this.props.createPost(this.state.postInfo, onPostSuccess)
 	}
 
 	clearState = () => {
@@ -69,7 +62,7 @@ class NewPost extends React.Component {
 	}
 
 	renderChannels() {
-		return this.state.channels.map((chan) => <Picker.Item label={chan.name} value={chan.id} key={chan.id} />)
+		return this.props.channels.map((chan) => <Picker.Item label={chan.name} value={chan.id} key={chan.id} />)
 	}
 
   render() {
@@ -92,4 +85,17 @@ class NewPost extends React.Component {
   }
 }
 
-export default NewPost
+const mapStateToProps = (state) => {
+  return {
+    channels: Object.values(state.channels)
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return	{
+    createPost: bindActionCreators(createPost, dispatch),
+    getChannels: bindActionCreators(getChannels, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost)
