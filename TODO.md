@@ -12,7 +12,8 @@
 
 ## Frontend
 
-- reload posts main page after a post update
+- make sure navigation headers can
+  reload properly
 
 - chat hooked into redux flow
 - chat passes and receives user info
