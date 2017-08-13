@@ -9,7 +9,6 @@ import {
   Button
 } from 'react-native'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { deletePost } from '../../data/posts'
@@ -116,10 +115,7 @@ class Post extends Component {
 //   CONNECTION
 // ===============
 
-const mapDispatchToProps = (dispatch) => {
-  return	{
-    deletePost: bindActionCreators(deletePost, dispatch)
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Post)
+export default connect(
+  null,
+  { deletePost }
+)(Post)

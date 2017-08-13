@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, Button, FlatList, StyleSheet, Text } from 'react-native'
 
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import { getChannels } from '../../data/channels'
 
@@ -97,13 +96,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return	{
-    getChannels: bindActionCreators(getChannels, dispatch)
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { getChannels }
 )(ChannelList)

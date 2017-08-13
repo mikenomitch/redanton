@@ -2,7 +2,6 @@ import React, { Component} from 'react'
 import Stream from './Stream'
 
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import { getFrontPage } from '../../data/posts'
 
@@ -34,13 +33,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return	{
-    getFrontPage: bindActionCreators(getFrontPage, dispatch)
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { getFrontPage }
 )(MainStream)

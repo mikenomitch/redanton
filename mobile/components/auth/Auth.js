@@ -8,7 +8,6 @@ import {
   Text
 } from 'react-native'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { userActions } from '../../data/users'
@@ -70,13 +69,7 @@ class Auth extends Component {
 //   CONNECTION
 // ===============
 
-const mapDispatchToProps = (dispatch) => {
-  return	{
-    signIn: bindActionCreators(signIn, dispatch)
-  }
-}
-
 export default connect(
   null,
-  mapDispatchToProps
+  { signIn }
 )(Auth)

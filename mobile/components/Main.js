@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import { loadInitialAuth } from '../data/auth'
 
@@ -62,13 +61,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return	{
-    loadInitialAuth: bindActionCreators(loadInitialAuth, dispatch)
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { loadInitialAuth }
 )(Main)

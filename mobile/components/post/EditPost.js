@@ -6,10 +6,7 @@ import {
 	Text
 } from 'react-native'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
-import { updatePost } from '../../data/posts'
 
 import EditPostInfo from './EditPostInfo'
 
@@ -51,10 +48,7 @@ class EditPost extends Component {
 //   CONNECTION
 // ===============
 
-const mapDispatchToProps = (dispatch) => {
-  return	{
-    updatePost: bindActionCreators(updatePost, dispatch)
-  }
-}
-
-export default connect(null, mapDispatchToProps)(EditPost)
+export default connect(
+  null,
+  { updatePost }
+)(EditPost)

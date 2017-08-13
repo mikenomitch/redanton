@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import Stream from '../stream/Stream'
 
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import { getPostsForChannel } from '../../data/posts'
 
@@ -38,13 +37,7 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return	{
-    getPostsForChannel: bindActionCreators(getPostsForChannel, dispatch)
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { getPostsForChannel }
 )(Channel)

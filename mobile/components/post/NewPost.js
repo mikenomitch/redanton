@@ -7,7 +7,6 @@ import {
 	Picker
 } from 'react-native'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { getChannels } from '../../data/channels'
@@ -99,11 +98,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return	{
-    createPost: bindActionCreators(createPost, dispatch),
-    getChannels: bindActionCreators(getChannels, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewPost)
+export default connect(
+  mapStateToProps,
+  { createPost, getChannels }
+)(NewPost)
