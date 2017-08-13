@@ -1,33 +1,50 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Stream from '../stream/Stream'
-import { get } from '../../lib/fetcher'
 
-class Channel extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      posts: []
-    }
-  }
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+import { getPostsForChannel } from '../../data/posts'
+
+// ===============
+//    PRESENTER
+// ===============
+
+class Channel extends Component {
   get channel() {
     return this.props.navigation.state.params.channel
   }
 
   componentDidMount() {
-    get(`/channels/${this.channel.id}/posts`).then(data => {
-      this.setState({
-        posts: data['data']
-      })
-    })
+    this.props.getPostsForChannel(this.channel.id)
   }
 
   render() {
-    const streamContent = this.state.posts
     return (
-      <Stream navigation={this.props.navigation} content={streamContent} />
+      <Stream navigation={this.props.navigation} content={this.props.posts} />
     )
   }
 }
 
-export default Channel
+// ===============
+//   CONNECTION
+// ===============
+
+const mapStateToProps = (state, props) => {
+  const channelId = props.navigation.state.params.channel.id
+
+  return {
+    posts: Object.values(state.posts).filter((p) => p.channel_id == channelId)
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return	{
+    getPostsForChannel: bindActionCreators(getPostsForChannel, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Channel)

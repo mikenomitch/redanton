@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import {
 	View,
@@ -13,7 +13,11 @@ import { updatePost } from '../../data/posts'
 
 import EditPostInfo from './EditPostInfo'
 
-class EditPost extends React.Component {
+// ===============
+//    PRESENTER
+// ===============
+
+class EditPost extends Component {
 	constructor(props){
 		super(props)
 
@@ -42,6 +46,10 @@ class EditPost extends React.Component {
 		)
   }
 }
+
+// ===============
+//   CONNECTION
+// ===============
 
 const mapDispatchToProps = (dispatch) => {
   return	{

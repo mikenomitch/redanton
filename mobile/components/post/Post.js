@@ -14,6 +14,10 @@ import { connect } from 'react-redux'
 
 import { deletePost } from '../../data/posts'
 
+// ===============
+//     STYLES
+// ===============
+
 var styles = StyleSheet.create({
   post: {
     flex: 1,
@@ -39,6 +43,10 @@ var styles = StyleSheet.create({
   }
 })
 
+// ===============
+//    CHILDREN
+// ===============
+
 const EditPostButton = (props) => (
   <Button title="Edit Post" onPress={() => props.navigation.navigate('EditPost', {postInfo: props.post})} />
 )
@@ -62,6 +70,10 @@ const DeletePostButton = (props) => (
   }
   } />
 )
+
+// ===============
+//    PRESENTER
+// ===============
 
 class Post extends Component {
   static navigationOptions = {
@@ -99,6 +111,10 @@ class Post extends Component {
     )
   }
 }
+
+// ===============
+//   CONNECTION
+// ===============
 
 const mapDispatchToProps = (dispatch) => {
   return	{

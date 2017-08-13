@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Text, View, TextInput } from 'react-native'
 import {Socket} from "phoenix"
 
-class SimpleChat extends React.Component {
+class SimpleChat extends Component {
   static navigationOptions = {
     title: 'Chat',
   }

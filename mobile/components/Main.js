@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component} from 'react'
 
 import {
   View,
@@ -13,7 +13,11 @@ import { loadInitialAuth } from '../data/auth'
 import Auth from './auth/Auth'
 import MainNav from './navigation/MainNav'
 
-class Main extends React.Component {
+// =============
+//   PRESENTER
+// =============
+
+class Main extends Component {
   componentDidMount(){
     this.props.loadInitialAuth()
   }
@@ -46,6 +50,10 @@ class Main extends React.Component {
     return this.renderMainApp()
   }
 }
+
+// ===============
+//   CONNECTION
+// ===============
 
 const mapStateToProps = (state) => {
   return {

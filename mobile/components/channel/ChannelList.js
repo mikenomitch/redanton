@@ -6,6 +6,10 @@ import { bindActionCreators } from 'redux'
 
 import { getChannels } from '../../data/channels'
 
+// ============
+//    STYLES
+// ============
+
 var styles = StyleSheet.create({
   list: {
     height: '100%'
@@ -29,6 +33,10 @@ var styles = StyleSheet.create({
   },
 })
 
+// ===============
+//    CHILDREN
+// ===============
+
 const ChannelItem = (props) => {
   return (
     <View style={styles.channelItem}>
@@ -46,6 +54,10 @@ const ChannelItem = (props) => {
     </View>
   )
 }
+
+// ===============
+//    PRESENTER
+// ===============
 
 class ChannelList extends Component {
   static navigationOptions = {
@@ -75,9 +87,13 @@ class ChannelList extends Component {
   }
 }
 
+// ===============
+//   CONNECTION
+// ===============
+
 const mapStateToProps = (state) => {
   return {
-    channels: state.channels
+    channels: Object.values(state.channels)
   }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import {
 	Text,
@@ -23,7 +23,11 @@ const defaultPostInfo = {
 	showErrors: false,
 }
 
-class NewPost extends React.Component {
+// ===============
+//    PRESENTER
+// ===============
+
+class NewPost extends Component {
 	constructor(props){
 		super(props)
 
@@ -84,6 +88,10 @@ class NewPost extends React.Component {
 		)
   }
 }
+
+// ===============
+//   CONNECTION
+// ===============
 
 const mapStateToProps = (state) => {
   return {

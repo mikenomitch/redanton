@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { View, Button, Text, FlatList, StyleSheet } from 'react-native'
 
+// =============
+//    STYLES
+// =============
+
 var styles = StyleSheet.create({
   stream: {
     height: '100%'
@@ -28,6 +32,10 @@ var styles = StyleSheet.create({
   }
 })
 
+// =============
+//   CHILDREN
+// =============
+
 const StreamItem = (props) => {
   return (
     <View style={styles.streamItem}>
@@ -48,6 +56,10 @@ const StreamItem = (props) => {
     </View>
   )
 }
+
+// =============
+//     MAIN
+// =============
 
 class Stream extends Component {
   renderPostLink = (datum) => {

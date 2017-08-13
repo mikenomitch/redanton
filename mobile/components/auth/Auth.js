@@ -14,14 +14,16 @@ import { connect } from 'react-redux'
 import { userActions } from '../../data/users'
 import { signIn } from '../../data/auth'
 
+// ===============
+//    PRESENTER
+// ===============
+
 class Auth extends Component {
   constructor(props){
     super(props)
 
-    // set initial state to whichever
-    // email is in the store
     this.state = {
-      email: this.props.email,
+      email: null,
       password: null
     }
 	}
@@ -64,10 +66,9 @@ class Auth extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-	const email = state.users[1] && state.users[1].email
-	return {email}
-}
+// ===============
+//   CONNECTION
+// ===============
 
 const mapDispatchToProps = (dispatch) => {
   return	{
@@ -76,6 +77,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Auth)

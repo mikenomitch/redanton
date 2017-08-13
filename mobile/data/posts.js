@@ -47,6 +47,17 @@ export const getFrontPage = () => {
   }
 }
 
+export const getPostsForChannel = (channelId) => {
+  return {
+    type: 'GET_POSTS_FOR_CHANNEL',
+    call: {
+      action: 'GET',
+      endpoint: `/channels/${channelId}/posts`,
+      onSuccess: postActions.onPostsReturn
+    }
+  }
+}
+
 export const createPost = (postInfo, onSuccess) => {
   return {
     type: 'CREATE_POST_CALL',

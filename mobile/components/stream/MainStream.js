@@ -6,6 +6,10 @@ import { bindActionCreators } from 'redux'
 
 import { getFrontPage } from '../../data/posts'
 
+// ===============
+//    PRESENTER
+// ===============
+
 class MainStream extends Component {
   static navigationOptions = {
   	title: 'Your Stream'
@@ -19,6 +23,10 @@ class MainStream extends Component {
     return <Stream navigation={this.props.navigation} content={this.props.posts}/>
 	}
 }
+
+// ===============
+//   CONNECTION
+// ===============
 
 const mapStateToProps = (state) => {
   return {

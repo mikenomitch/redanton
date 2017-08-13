@@ -14,9 +14,17 @@ import PostPreviewScreen from '../post/PostPreview'
 
 import PostChatScreen from '../chat/PostChat'
 
+// ==============
+//    CHILDREN
+// ==============
+
 const NewPostButton = (props) => (
   <Button title="+ Post" onPress={() => props.navigation.navigate('NewPost')} />
 )
+
+// ===============
+//     TAB NAV
+// ===============
 
 const TabNav = TabNavigator(
   {
@@ -43,6 +51,10 @@ const TabNav = TabNavigator(
     swipeEnabled: false,
   }
 )
+
+// ===============
+//    STACK NAV
+// ===============
 
 const MainNav = StackNavigator({
   Root: {
