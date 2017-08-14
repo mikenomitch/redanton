@@ -1,6 +1,5 @@
-// const nonApiBase = 'https://stormy-reef-53700.herokuapp.com'
-const nonApiBase = 'https://cd7e4512.ngrok.io'
-const base = `${nonApiBase}/api/v1`
+import { serverUrl } from './serverInfo'
+const base = `${serverUrl}/api/v1`
 
 function __jsonify(res) {
   return res.json()
@@ -13,7 +12,7 @@ function __identity(input) {
 function __makeUrl(endpoint, opts) {
   let baseToUse = base
   if (opts.useNonApi) {
-    baseToUse = nonApiBase
+    baseToUse = serverUrl
   }
 
   return baseToUse + endpoint

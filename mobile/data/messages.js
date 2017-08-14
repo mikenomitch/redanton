@@ -22,7 +22,11 @@ export default function (state = defaultState, action) {
 // ==================
 // ==================
 
-const customMessageActions = {}
+const customMessageActions = {
+  onMessagesReturn: (res) => {
+    return messageActions.mergeMessages(res.data)
+  }
+}
 export const messageActions = mergeHashActions(customMessageActions, 'Message')
 
 // =================
@@ -31,4 +35,13 @@ export const messageActions = mergeHashActions(customMessageActions, 'Message')
 // =================
 // =================
 
-// export const messageThunks = {}
+export const getMessagesForPost = (postId) => {
+  return {
+    type: 'GET_MESSAGES_FOR_POST',
+    call: {
+      action: 'GET',
+      endpoint: `/posts/${postId}/messages`,
+      successActionCreator: messageActions.onMessagesReturn
+    }
+  }
+}

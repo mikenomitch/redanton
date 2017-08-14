@@ -22,7 +22,11 @@ export default function (state = defaultState, action) {
 // ==================
 // ==================
 
-const customUserActions = {}
+const customUserActions = {
+  onUsersReturn: (res) => {
+    return userActions.mergeUsers(res.users)
+  }
+}
 export const userActions = mergeHashActions(customUserActions, 'User')
 
 // =================
@@ -31,4 +35,13 @@ export const userActions = mergeHashActions(customUserActions, 'User')
 // =================
 // =================
 
-// export const userThunks = {}
+export const getUsersForClub = (clubId) => {
+  return {
+    type: 'GET_USERS_FOR_CLUB',
+    call: {
+      action: 'GET',
+      endpoint: `/clubs/${clubId}/users`,
+      successActionCreator: userActions.onUsersReturn
+    }
+  }
+}
