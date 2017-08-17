@@ -35,12 +35,12 @@ export const userActions = mergeHashActions(customUserActions, 'User')
 // =================
 // =================
 
-export const getUsersForClub = (clubId) => {
+export const getUsersForPost = (postId) => {
   return {
-    type: 'GET_USERS_FOR_CLUB',
+    type: 'GET_USERS_FOR_POST',
     call: {
       action: 'GET',
-      endpoint: `/clubs/${clubId}/users`,
+      endpoint: `/posts/${postId}/users`,
       successActionCreator: userActions.onUsersReturn
     }
   }

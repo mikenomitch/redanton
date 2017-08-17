@@ -13,10 +13,8 @@
 ## Frontend
 
 - finish chat
-  - club id passed into chat via post parent
-  - club id used to get user info
-  - posts return their room_id so this can be used later
-  - room_id used by the chat calls to post to the right room
+  - posts/id/users called from FE
+  - room_id used by the chat calls to message to the right room
   - id of current user passed into the chat
   - socket stuff moved out of react component (once working)
 

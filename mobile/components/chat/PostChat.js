@@ -30,15 +30,22 @@ import {
   getMessagesForPost
 } from '../../data/messages'
 
-import { getUsersForClub } from '../../data/users'
+import { getUsersForPost } from '../../data/users'
 
 // ===============
 //    PRESENTER
 // ===============
 
+function __postFromProps (props) {
+  return props.navigation.state.params.post
+}
+
 class PostChat extends Component {
+
+  // GENERAL HELPERS
+
   get post() {
-    return this.props.navigation.state.params.post
+    return __postFromProps(this.props)
   }
 
   formattedUser = (userId) => {
@@ -67,25 +74,42 @@ class PostChat extends Component {
     )(this.props.messages)
   }
 
-  setUpChat() {
+  // CHAT CHANNEL SETUP AND HANDLERS
+
+  setUpChat = () => {
+    this.addRoomChannel()
+    this.addMessageHandlerToChannel()
+    this.joinChannel()
+  }
+
+  addRoomChannel = () => {
     const socket = new Socket(serverUrl)
-		const roomId = `room:${this.post.id}`
-
     socket.connect()
-    this.channel = socket.channel(roomId, {})
+    this.channel = socket.channel(`room:${this.post.room_id}`, {})
+  }
 
-    this.channel.on("new_msg", payload => {
-      this.props.updateMessage(payload)
-    })
-
+  joinChannel = () => {
     this.channel.join()
       .receive("ok", resp => { console.log("Joined successfully", resp) })
       .receive("error", resp => { console.log("Unable to join", resp) })
   }
 
+  addMessageHandlerToChannel = () => {
+    this.channel.on("new_msg", this.props.updateMessage)
+  }
+
+  pushMessageToChannel = (msg) => {
+    this.channel.push("new_msg", {
+      body: msg.text,
+      user: msg.user,
+      post_id: this.post.id
+    })
+  }
+
+  // COMPONENT LIFECYCLE
+
   componentDidMount() {
-    // TODO: replace with the right club id
-    this.props.getUsersForClub(1)
+    this.props.getUsersForPost(this.post.id)
     this.props.getMessagesForPost(this.post.id)
     this.setUpChat()
   }
@@ -94,15 +118,15 @@ class PostChat extends Component {
     this.channel.leave()
   }
 
+  // ACTIONS
+
   onSend = (messages = []) => {
     const sentMessage = messages[messages.length - 1]
-    this.channel.push("new_msg", {
-      body: sentMessage.text,
-      user: sentMessage.user,
-      post_id: this.post.id
-    })
+    this.pushMessageToChannel(sentMessage)
     this.setState({text: ''})
   }
+
+  // RENDER
 
   render() {
     return (
@@ -119,12 +143,10 @@ class PostChat extends Component {
 //   CONNECTION
 // ===============
 
-const mapStateToProps = (state) => {
-  // TODO: return a post_id on all the messages
-  // so we can filter here
-  // .filter(m => m.room_id === this.props.post.id)
+const mapStateToProps = (state, props) => {
+  const post = __postFromProps(props)
   return {
-    messages: Object.values(state.messages),
+    messages: Object.values(state.messages).filter(m => m.room_id === post.room_id),
     users: state.users
   }
 }
@@ -132,7 +154,7 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {
-    getUsersForClub,
+    getUsersForPost,
     getMessagesForPost,
     updateMessage: messageActions.updateMessage
   }

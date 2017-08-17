@@ -17,7 +17,8 @@ defmodule Danton.Api.V1.PostView do
       url: post.url,
       type: post.type,
       user_id: post.user_id,
-      channel_id: post.channel_id
+      channel_id: post.channel_id,
+      room_id: Danton.Post.get_room_id(post.id) # this could be more efficient
     }
   end
 end

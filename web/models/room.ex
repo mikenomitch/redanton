@@ -41,5 +41,15 @@ defmodule Danton.Room do
     # TODO: implement a soft-deletion system
 		Enum.each(rooms, &Danton.Room.destroy_messages/1)
 		Enum.each(rooms, &Danton.Repo.delete!/1)
-	end
+  end
+
+  @doc """
+  Gets the users associated with its room
+  """
+  def users_for_room(room_id) do
+    # as it stands, this takes an inefficient route to get
+    # its users - do not aggregate these calls
+    room = Danton.Repo.get(Danton.Room, room_id)
+    Danton.Post.users_for_post(room.post_id)
+  end
 end

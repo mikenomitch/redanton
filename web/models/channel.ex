@@ -37,4 +37,12 @@ defmodule Danton.Channel do
 			_ -> Ecto.assoc(channels, :posts) |> Repo.all
 		end
   end
+
+  @doc """
+  Gets the users associated with its club
+  """
+  def users_for_channel(chan_id) do
+    channel = Danton.Repo.get(Danton.Channel, chan_id)
+    Danton.Club.users_for_club(channel.club_id)
+  end
 end

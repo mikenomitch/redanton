@@ -8,8 +8,7 @@ defmodule Danton.RoomChannel do
   end
 
   def handle_in("new_msg", %{"body" => body, "post_id" => post_id}, socket) do
-    post = Danton.Repo.get(Danton.Post, post_id)
-    room = Danton.Post.get_room(post)
+    room = Danton.Post.get_room(post_id)
     message = Danton.Room.make_message(room, %{body: body})
     message_json = Danton.Api.V1.MessageView.render("message.json", %{message: message})
 

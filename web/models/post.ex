@@ -34,10 +34,17 @@ defmodule Danton.Post do
   @doc """
   Gets the room associated with a post if it exists
   """
-  def get_room(post) do
-     post_id = post.id
+  def get_room(post_id) do
      [room] = Danton.Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
      room
+  end
+
+  @doc """
+  Gets the room associated with a post if it exists
+  """
+  def get_room_id(post_id) do
+    # this can be done with a select in the future
+    get_room(post_id).id
 	end
 
 	@doc """
@@ -50,5 +57,15 @@ defmodule Danton.Post do
 
 		post = Danton.Repo.get(Danton.Post, post_id)
 		Danton.Repo.delete!(post)
-	end
+  end
+
+  @doc """
+  Gets the users associated with its channel
+  """
+  def users_for_post(post_id) do
+    # as it stands, this takes an inefficient route to get
+    # its users - do not aggregate these calls
+    post = Danton.Repo.get(Danton.Post, post_id)
+    Danton.Channel.users_for_channel(post.channel_id)
+  end
 end
