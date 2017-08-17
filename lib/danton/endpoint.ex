@@ -1,6 +1,8 @@
 defmodule Danton.Endpoint do
   use Phoenix.Endpoint, otp_app: :danton
 
+  IO.puts "LOADING"
+
   socket "/socket", Danton.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.

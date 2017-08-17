@@ -3,6 +3,7 @@ defmodule Danton.UserSocket do
 
   ## Channels
   channel "room:*", Danton.RoomChannel
+  channel "room:lobby", Danton.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket, timeout: 45_000

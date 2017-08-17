@@ -84,7 +84,7 @@ class PostChat extends Component {
   addRoomChannel = () => {
     const socket = new Socket(serverUrl)
     socket.connect()
-    this.channel = socket.channel(`room:${this.post.room_id}`, {})
+    this.channel = socket.channel(`room:${'lobby' || this.post.room_id}`, {})
   }
 
   joinChannel = () => {
@@ -94,11 +94,11 @@ class PostChat extends Component {
   }
 
   addMessageHandlerToChannel = () => {
-    this.channel.on("new_message", this.props.updateMessage)
+    this.channel.on("new_msg", this.props.updateMessage)
   }
 
   pushMessageToChannel = (msg) => {
-    this.channel.push("new_message", {
+    this.channel.push("new_msg", {
       body: msg.text,
       post_id: this.post.id,
       user_id: this.props.currentUserId

@@ -4,6 +4,8 @@ import { StackNavigator, TabNavigator } from 'react-navigation'
 
 import MainStreamScreen from '../stream/MainStream'
 
+import SettingsScreen from '../settings/Settings'
+
 import ChannelScreen from '../channel/Channel'
 import ChannelListScreen from '../channel/ChannelList'
 
@@ -42,8 +44,15 @@ const TabNav = TabNavigator(
       path: '/channels',
       navigationOptions: {
         title: 'Channels'
-      },
+      }
     },
+    SettingsTab: {
+      screen: SettingsScreen,
+      path: '/settings',
+      navigationOptions: {
+        title: 'Settings'
+      }
+    }
   },
   {
     tabBarPosition: 'bottom',
