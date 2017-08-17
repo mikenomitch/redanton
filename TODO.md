@@ -13,8 +13,7 @@
 ## Frontend
 
 - finish chat
-  - posts/id/users called from FE
-  - room_id used by the chat calls to message to the right room
+  - current user info saved in async storage
   - id of current user passed into the chat
   - socket stuff moved out of react component (once working)
 
