@@ -95,14 +95,14 @@ class PostChat extends Component {
   }
 
   addMessageHandlerToChannel = () => {
-    this.channel.on("new_msg", this.props.updateMessage)
+    this.channel.on("new_message", this.props.updateMessage)
   }
 
   pushMessageToChannel = (msg) => {
-    this.channel.push("new_msg", {
+    this.channel.push("new_message", {
       body: msg.text,
-      user: msg.user,
-      post_id: this.post.id
+      post_id: this.post.id,
+      user_id: this.props.currentUserId
     })
   }
 
@@ -133,7 +133,7 @@ class PostChat extends Component {
       <GiftedChat
         messages={this.formatMessages()}
         onSend={this.onSend}
-        user={{_id: 1}}
+        user={{_id: this.props.currentUserId}}
       />
     )
   }
@@ -147,7 +147,8 @@ const mapStateToProps = (state, props) => {
   const post = __postFromProps(props)
   return {
     messages: Object.values(state.messages).filter(m => m.room_id === post.room_id),
-    users: state.users
+    users: state.users,
+    currentUserId: state.auth.currentUser.id
   }
 }
 
