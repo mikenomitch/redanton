@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 
 import {
   Text,
-  View,
-  TextInput
+  View
 } from 'react-native'
 
 import {
@@ -145,10 +144,11 @@ class PostChat extends Component {
 
 const mapStateToProps = (state, props) => {
   const post = __postFromProps(props)
+  const currentUserId = state.auth && state.auth.currentUser && state.auth.currentUser.id
   return {
     messages: Object.values(state.messages).filter(m => m.room_id === post.room_id),
     users: state.users,
-    currentUserId: state.auth.currentUser.id
+    currentUserId
   }
 }
 

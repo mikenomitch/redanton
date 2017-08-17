@@ -5,9 +5,9 @@ import {
 function noop () {}
 
 const withAsyncStorage = store => next => action => {
-  const hasAsyncKey = !!action.asyncKey
+  const hasAsyncKey = 'asyncKey' in action
   const hasAsyncFunction = typeof action.withAsyncData === 'function'
-  const hasAsyncData = !!action.asyncData
+  const hasAsyncData = 'asyncData' in action
 
   // data being stored
   if (hasAsyncKey && hasAsyncData) {
