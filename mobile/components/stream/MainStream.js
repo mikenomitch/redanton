@@ -19,7 +19,7 @@ class MainStream extends Component {
   }
 
   render() {
-    return <Stream navigation={this.props.navigation} content={this.props.posts}/>
+    return <Stream navigation={this.props.navigation} content={this.props.posts} channels={this.props.channels}/>
 	}
 }
 
@@ -29,7 +29,8 @@ class MainStream extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: Object.values(state.posts)
+    posts: Object.values(state.posts),
+    channels: state.channels
   }
 }
 

@@ -47,10 +47,10 @@ const StreamItem = (props) => {
       </View>
       <View style={styles.details}>
         <View style={styles.channel}>
-          <Text>In Channel: Articles</Text>
+          <Text>In Channel: {props.chanName}</Text>
         </View>
         <View style={styles.action}>
-          <Text>Posted By: <Text>Mike</Text> </Text>
+          <Text>Posted By: <Text>{props.posterName}</Text> </Text>
         </View>
       </View>
     </View>
@@ -64,7 +64,16 @@ const StreamItem = (props) => {
 class Stream extends Component {
   renderPostLink = (datum) => {
     const { navigate } = this.props.navigation
-    return <StreamItem navigate={navigate} post={datum.item} />
+    // TODO: thread in poster info
+    const poster = {name: 'Mike'}
+    const chan = this.props.channels[datum.item.channel_id] || {}
+    return (
+      <StreamItem
+        navigate={navigate}
+        post={datum.item}
+        posterName={poster.name}
+        chanName={chan.name}/>
+    )
   }
 
   render() {
