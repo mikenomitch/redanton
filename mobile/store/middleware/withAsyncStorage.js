@@ -2,16 +2,14 @@ import {
   AsyncStorage
 } from 'react-native'
 
-function noop () {}
-
 const withAsyncStorage = store => next => action => {
   // SETTING
-  const hasAsyncData = action.hasAsyncData
+  const hasAsyncData = action.asyncData
 
   if (hasAsyncData) {
     Object.keys(action.asyncData).forEach((k) => {
       const v = action.asyncData[k]
-      AsyncStorage.setItem(k, v)
+      AsyncStorage.setItem(k, JSON.stringify(v))
     })
   }
 

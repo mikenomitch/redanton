@@ -17,9 +17,9 @@ import MainNav from './navigation/MainNav'
 // =============
 
 class Main extends Component {
-  // componentDidMount(){
-  //   this.props.loadInitialAuth()
-  // }
+  componentDidMount(){
+    this.props.loadInitialAuth()
+  }
 
   renderLoading () {
     return (
