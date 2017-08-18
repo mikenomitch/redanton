@@ -92,20 +92,34 @@ class Post extends Component {
   }
 
   removePost = () => {
-    this.props.deletePost(this.post.id).then(
-      this.props.navigation.goBack()
-    )
+    this.props.deletePost(this.post.id, this.props.navigation.goBack)
+  }
+
+  renderEdit () {
+    if ( this.props.userIsOwner ) {
+      return (
+        <EditPostButton navigation={this.props.navigation} post={this.post} />
+      )
+    }
+  }
+
+  renderDelete () {
+    if ( this.props.userIsOwner ) {
+      return (
+        <DeletePostButton removePost={this.removePost}/>
+      )
+    }
   }
 
   render() {
     return (
       <View style={styles.post}>
-        <EditPostButton navigation={this.props.navigation} post={this.post} />
+        {this.renderEdit()}
         <Text style={styles.title}> {this.post.title} </Text>
         <Text style={styles.description}> {this.post.description} </Text>
         <Button onPress={this.goToPost} style={styles.previewLink} title={this.post.url} />
         <Button onPress={this.goToChat} style={styles.chatLink} title="Enter Discussion"/>
-        <DeletePostButton removePost={this.removePost}/>
+        {this.renderDelete()}
       </View>
     )
   }
@@ -116,9 +130,10 @@ class Post extends Component {
 // ===============
 
 const mapStateToProps = (state, props) => {
-  return {
-    post: state.posts[props.navigation.state.params.post.id]
-  }
+  const post = state.posts[props.navigation.state.params.post.id]
+  const currentUserId = state.auth.currentUser.id
+  const userIsOwner = post.user_id === currentUserId
+  return { post, userIsOwner }
 }
 
 export default connect(

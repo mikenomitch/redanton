@@ -88,9 +88,8 @@ class PostChat extends Component {
 
   addRoomChannel = () => {
     const socket = new Socket(`${serverUrl}/socket`)
-    // const socket = new Socket("https://stormy-reef-53700.herokuapp.com/socket",)
     socket.connect()
-    this.channel = socket.channel(`room:${'lobby' || this.post.room_id}`, {})
+    this.channel = socket.channel(`room:${this.post.room_id}`, {})
   }
 
   joinChannel = () => {
@@ -150,7 +149,7 @@ class PostChat extends Component {
 
 const mapStateToProps = (state, props) => {
   const post = __postFromProps(props)
-  const currentUserId = state.auth && state.auth.currentUser || state.auth.currentUser.id
+  const currentUserId = state.auth && state.auth.currentUser && state.auth.currentUser.id
   return {
     messages: Object.values(state.messages).filter(m => m.room_id === post.room_id),
     users: state.users,

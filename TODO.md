@@ -12,19 +12,12 @@
 
 ## Frontend
 
+- Reseed user data for Dan, push to prod, share w dan
+
 - clean up socket stuff
-
-- add settings tab
-  - show info
-  - sign out
-
-- scope edit & removing posts by user who
-  created them
 
 - make sure navigation headers can
   reload properly
-
-- Reseed user data for Dan, push to prod, share w dan
 
 - make an optimistic update on post edit
   - make sure failure works well
@@ -41,7 +34,7 @@
 
 ## Roadmap
 
-### Needed before release
+### Needed before release - DONE
 
 - general app navigation
 - uber basic chat

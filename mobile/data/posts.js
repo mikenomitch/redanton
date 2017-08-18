@@ -108,13 +108,15 @@ export const updatePost = (postInfo, onSuccess) => {
   }
 }
 
-export const deletePost = (postId) => {
+export const deletePost = (postId, onSuccess) => {
   return {
     type: 'DELETE_POST_CALL',
     call: {
       action: 'DELETE',
       endpoint: `/posts/${postId}`,
-      successActionCreator: postActions.onPostsReturn
+      successActionCreator: () => {
+        onSuccess && onSuccess()
+      }
     }
   }
 }
