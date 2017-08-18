@@ -1,19 +1,10 @@
 import merge from 'lodash/fp/merge'
 
-function __addAuthInfo(state, authData) {
+function __mergeAuthData(state, authData) {
   return merge(state, {
     jwt: authData.jwt,
     exp: authData.exp,
     currentUser: authData.user,
-    initialStateLoaded: true
-  })
-}
-
-function __initialAuth(state, jwt) {
-  return merge(state, {
-    jwt: jwt,
-    exp: null,
-    currentUser: null,
     initialStateLoaded: true
   })
 }
@@ -35,7 +26,7 @@ function __clearCreds(state) {
 
 const defaultState = {
   exp: null,
-  initialStateLoaded: false,
+  initialStateLoaded: true, // change back
   jwt: null,
   currentUser: null
 }
@@ -43,9 +34,9 @@ const defaultState = {
 export default function (state = defaultState, action) {
   switch (action.type) {
   case 'ADD_AUTH':
-    return __addAuthInfo(state, action.payload)
+    return __mergeAuthData(state, action.payload)
   case 'LOAD_INITIAL_AUTH':
-    return __initialAuth(state, action.payload)
+    return __mergeAuthData(state, action.payload)
   case 'CLEAR_CREDS':
     return __clearCreds(state)
   default:
@@ -63,18 +54,17 @@ export const authActions = {
   addAuth: (userData) => ({
     type: 'ADD_AUTH',
     payload: userData,
-    asyncData: userData.jwt,
-    asyncKey: 'jwt'
+    asyncData: { userData }
   }),
 
   loadInitialAuth: (jwt) => ({
     type: 'LOAD_INITIAL_AUTH',
-    payload: jwt
+    payload: {jwt}
   }),
 
   clearCreds: () => ({
     type: 'CLEAR_CREDS',
-    asyncData: null,
+    asyncData: {userData: null},
     asyncKey: 'jwt'
   })
 }
