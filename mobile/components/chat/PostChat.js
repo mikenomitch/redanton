@@ -82,7 +82,8 @@ class PostChat extends Component {
   }
 
   addRoomChannel = () => {
-    const socket = new Socket(serverUrl)
+    const socket = new Socket(`${serverUrl}/socket`)
+    // const socket = new Socket("https://stormy-reef-53700.herokuapp.com/socket",)
     socket.connect()
     this.channel = socket.channel(`room:${'lobby' || this.post.room_id}`, {})
   }

@@ -1,3 +1,3 @@
 // export const serverUrl = 'https://stormy-reef-53700.herokuapp.com'
-export const serverUrl = 'https://a4a9e7c5.ngrok.io'
+export const serverUrl = 'http://192.168.1.62:4000'
 export default { serverUrl }
