@@ -39,6 +39,11 @@ function __postFromProps (props) {
   return props.navigation.state.params.post
 }
 
+const defaultUser = {
+  name: 'unknown',
+  avatar: 'https://d30y9cdsu7xlg0.cloudfront.net/png/60319-200.png'
+}
+
 class PostChat extends Component {
 
   // GENERAL HELPERS
@@ -48,10 +53,10 @@ class PostChat extends Component {
   }
 
   formattedUser = (userId) => {
-    const userInfo = this.props.users[userId] || {}
+    const userInfo = this.props.users[userId] || defaultUser
     return {
       _id: userId,
-      name: userInfo.name,
+      name: userInfo.email,
       avatar: userInfo.avatar,
     }
   }
@@ -133,7 +138,7 @@ class PostChat extends Component {
       <GiftedChat
         messages={this.formatMessages()}
         onSend={this.onSend}
-        user={{_id: this.props.currentUserId}}
+        user={this.formattedUser(this.props.currentUserId)}
       />
     )
   }
@@ -145,7 +150,7 @@ class PostChat extends Component {
 
 const mapStateToProps = (state, props) => {
   const post = __postFromProps(props)
-  const currentUserId = state.auth && state.auth.currentUser && state.auth.currentUser.id
+  const currentUserId = state.auth && state.auth.currentUser || state.auth.currentUser.id
   return {
     messages: Object.values(state.messages).filter(m => m.room_id === post.room_id),
     users: state.users,

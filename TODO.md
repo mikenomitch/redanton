@@ -12,13 +12,10 @@
 
 ## Frontend
 
-- finish chat
-  - current user info saved in async storage
-  - id of current user passed into the chat
-  - socket stuff moved out of react component (once working)
+- clean up socket stuff
 
 - add settings tab
-  - info
+  - show info
   - sign out
 
 - scope edit & removing posts by user who

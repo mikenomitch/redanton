@@ -20,7 +20,7 @@ const withAsyncStorage = store => next => action => {
 
   if (hasAsyncKey && hasAsyncFunction) {
     const getVal = new Promise((resolve) => {
-      AsyncStorage.getItem(action.asyncKey, (err, data) => (resolve(data)))
+      AsyncStorage.getItem(action.asyncKey, (err, data) => (resolve(JSON.parse(data))))
     })
 
     return getVal.then((data) => {

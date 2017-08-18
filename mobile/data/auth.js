@@ -60,7 +60,7 @@ export const authActions = {
   loadInitialAuth: (userData) => {
     return {
       type: 'LOAD_INITIAL_AUTH',
-      payload: JSON.parse(userData)
+      payload: userData
     }
   },
 
