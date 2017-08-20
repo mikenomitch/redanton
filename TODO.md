@@ -5,7 +5,6 @@
   - action-availible alerting
 - URL can handle being http:// or not
 - Posted By should be accurate
-- Editing should not be broken
 - Previewing the content should be easier
 - make sure navigation headers can
   reload properly

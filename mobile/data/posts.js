@@ -83,7 +83,6 @@ export const createPost = (postInfo, onSuccess) => {
 }
 
 export const updatePost = (postInfo, onSuccess) => {
-  console.warn(postInfo.id)
   return {
     type: 'UPDATE_POST_CALL',
     call: {
