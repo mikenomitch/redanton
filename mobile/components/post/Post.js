@@ -84,7 +84,7 @@ class Post extends Component {
   }
 
   goToPost = () => {
-     this.props.navigation.navigate('PostPreview', {post: this.post})
+    this.props.navigation.navigate('PostPreview', {post: this.post})
   }
 
   goToChat = () => {
@@ -101,6 +101,12 @@ class Post extends Component {
         <EditPostButton navigation={this.props.navigation} post={this.post} />
       )
     }
+  }
+
+  renderGoToPost () {
+    return (
+      <Button onPress={this.goToPost} style={styles.previewLink} title={this.post.url} />
+    )
   }
 
   renderDelete () {
@@ -127,7 +133,7 @@ class Post extends Component {
         {this.renderEdit()}
         <Text style={styles.title}> {this.post.title} </Text>
         <Text style={styles.description}> {this.post.description} </Text>
-        <Button onPress={this.goToPost} style={styles.previewLink} title={this.post.url} />
+        {this.renderGoToPost()}
         <Button onPress={this.goToChat} style={styles.chatLink} title="Enter Discussion"/>
         {this.renderDelete()}
       </View>

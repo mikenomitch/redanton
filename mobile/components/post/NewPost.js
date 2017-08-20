@@ -73,6 +73,7 @@ class NewPost extends Component {
 			<View style={{padding: 50}}>
 				<EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
 
+        <Text style={{paddingTop: 30, fontSize: 14}}> Add to channel: </Text>
 				<Picker
 					selectedValue={this.state.postInfo.channel}
 					onValueChange={(channel) => this.setPostState({channel})}>
