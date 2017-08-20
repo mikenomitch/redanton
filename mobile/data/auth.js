@@ -1,5 +1,7 @@
 import merge from 'lodash/fp/merge'
 
+import { alertMessage } from '../lib/uiActions'
+
 function __mergeAuthData(state, authData) {
   return merge(state, {
     jwt: authData && authData.jwt,
@@ -51,11 +53,13 @@ export default function (state = defaultState, action) {
 // ==================
 
 export const authActions = {
-  addAuth: (userData) => ({
-    type: 'ADD_AUTH',
-    payload: userData,
-    asyncData: { userData }
-  }),
+  addAuth: (userData) => {
+    return {
+      type: 'ADD_AUTH',
+      payload: userData,
+      asyncData: { userData }
+    }
+  },
 
   loadInitialAuth: (userData) => {
     return {
@@ -67,7 +71,11 @@ export const authActions = {
   clearCreds: () => ({
     type: 'CLEAR_CREDS',
     asyncData: {userData: null}
-  })
+  }),
+
+  onSignInFailure: () => {
+    alertMessage('Sign In Failed', 'there was an issue signing in. try again.')
+  }
 }
 
 // =================

@@ -56,8 +56,9 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "show.json", post: post)
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}, _current_user, _claims) do
-    post = Repo.get!(Post, id)
+  def update(conn, params, _current_user, _claims) do
+    post = Repo.get!(Post, params["id"])
+    post_params = Map.delete(params, "id")
     changeset = Post.changeset(post, post_params)
 
     case Repo.update(changeset) do

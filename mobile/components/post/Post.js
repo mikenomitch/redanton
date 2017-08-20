@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  Alert,
   Text,
   View,
   Link,
@@ -10,6 +9,8 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux'
+
+import { confirmMessage } from '../../lib/uiActions'
 
 import { deletePost } from '../../data/posts'
 
@@ -52,22 +53,8 @@ const EditPostButton = (props) => (
 
 const DeletePostButton = (props) => (
   <Button title="Remove Post" onPress={() => {
-    Alert.alert(
-      'Remove Post',
-      'Are you sure?', [{
-          text: 'Cancel',
-          style: 'cancel'
-        },
-        {
-          text: 'OK',
-          onPress: props.removePost
-        },
-      ], {
-        cancelable: true
-      }
-    )
-  }
-  } />
+    confirmMessage('Remove Post', 'Are you sure?', props.removePost)
+  }} />
 )
 
 // ===============

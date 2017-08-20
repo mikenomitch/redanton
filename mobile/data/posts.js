@@ -1,7 +1,5 @@
 import makeHashReducer, {mergeHashActions} from './hashReducer'
 
-
-
 // ==================
 // ==================
 //      REDUCER
@@ -85,6 +83,7 @@ export const createPost = (postInfo, onSuccess) => {
 }
 
 export const updatePost = (postInfo, onSuccess) => {
+  console.warn(postInfo.id)
   return {
     type: 'UPDATE_POST_CALL',
     call: {
@@ -98,11 +97,9 @@ export const updatePost = (postInfo, onSuccess) => {
       },
       errorActionCreator: () => { alert('there was an issue. check your params') },
       params: {
-        post: {
-          title: postInfo.title,
-          description: postInfo.description,
-          url: postInfo.url
-        }
+        title: postInfo.title,
+        description: postInfo.description,
+        url: postInfo.url
       }
     }
   }
