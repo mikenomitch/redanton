@@ -79,9 +79,13 @@ class Post extends Component {
     title: 'Post'
   }
 
+  // HELPERS
+
   get post() {
     return this.props.post
   }
+
+  // ACTIONS
 
   goToPost = () => {
     this.props.navigation.navigate('PostPreview', {post: this.post})
@@ -95,18 +99,14 @@ class Post extends Component {
     this.props.deletePost(this.post.id, this.props.navigation.goBack)
   }
 
+  // RENDERING
+
   renderEdit () {
     if ( this.props.userIsOwner ) {
       return (
         <EditPostButton navigation={this.props.navigation} post={this.post} />
       )
     }
-  }
-
-  renderGoToPost () {
-    return (
-      <Button onPress={this.goToPost} style={styles.previewLink} title={this.post.url} />
-    )
   }
 
   renderDelete () {
@@ -133,7 +133,7 @@ class Post extends Component {
         {this.renderEdit()}
         <Text style={styles.title}> {this.post.title} </Text>
         <Text style={styles.description}> {this.post.description} </Text>
-        {this.renderGoToPost()}
+        <Button onPress={this.goToPost} style={styles.previewLink} title={this.post.url} />
         <Button onPress={this.goToChat} style={styles.chatLink} title="Enter Discussion"/>
         {this.renderDelete()}
       </View>
