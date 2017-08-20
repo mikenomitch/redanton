@@ -115,7 +115,10 @@ export const deletePost = (postId, onSuccess) => {
       action: 'DELETE',
       endpoint: `/posts/${postId}`,
       successActionCreator: () => {
-        onSuccess && onSuccess()
+        return (dispatch) => {
+          onSuccess && onSuccess()
+          dispatch(postActions.removePost(postId))
+        }
       }
     }
   }

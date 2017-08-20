@@ -11,8 +11,6 @@
 - Posted By should be accurate
 - Editing should not be broken
 - Previewing the content should be easier
-- Removing a post actually removes it from
-  the stream
 - Redo the seeds
   - Single club (Brain Food)
   - Dan, Steven, Zach, Kevin

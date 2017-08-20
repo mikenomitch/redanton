@@ -111,7 +111,17 @@ class Post extends Component {
     }
   }
 
+  renderNoPost () {
+    return (
+      <View>
+        <Text> This post does not exist </Text>
+      </View>
+    )
+  }
+
   render() {
+    if (!this.post) return this.renderNoPost()
+
     return (
       <View style={styles.post}>
         {this.renderEdit()}
@@ -132,7 +142,7 @@ class Post extends Component {
 const mapStateToProps = (state, props) => {
   const post = state.posts[props.navigation.state.params.post.id]
   const currentUserId = state.auth.currentUser.id
-  const userIsOwner = post.user_id === currentUserId
+  const userIsOwner = post && post.user_id === currentUserId
   return { post, userIsOwner }
 }
 
