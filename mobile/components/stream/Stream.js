@@ -29,6 +29,10 @@ var styles = StyleSheet.create({
   action: {
     paddingLeft: 10,
     paddingRight: 10
+  },
+  empty: {
+    alignItems: 'center',
+    padding: 50
   }
 })
 
@@ -62,6 +66,20 @@ const StreamItem = (props) => {
 // =============
 
 class Stream extends Component {
+
+  get hasNoConent () {
+    return !this.props.content || this.props.content.length === 0
+  }
+
+  renderEmpty () {
+    return (
+      <View style={styles.empty}>
+        <Text> There's nothing here </Text>
+        <Text> Add a post to get started. </Text>
+      </View>
+    )
+  }
+
   renderPostLink = (datum) => {
     const { navigate } = this.props.navigation
     // TODO: thread in poster info
@@ -77,6 +95,8 @@ class Stream extends Component {
   }
 
   render() {
+    if (this.hasNoConent) return this.renderEmpty()
+
     return (
       <View style={styles.stream}>
         <FlatList

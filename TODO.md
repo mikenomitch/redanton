@@ -11,8 +11,6 @@
 - Posted By should be accurate
 - Editing should not be broken
 - Previewing the content should be easier
-- "Nothing Here" with a prompt, for an empty
-  stream
 - Removing a post actually removes it from
   the stream
 - Redo the seeds

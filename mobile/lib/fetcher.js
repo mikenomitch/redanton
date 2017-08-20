@@ -88,5 +88,5 @@ export function patch(endpoint, params = {}, opts = {}) {
 }
 
 export function deleteCall(endpoint, opts = {}) {
-  return __baseCall(endpoint, opts, 'DELETE')
+  return __baseCall(endpoint, {}, opts, 'DELETE')
 }
