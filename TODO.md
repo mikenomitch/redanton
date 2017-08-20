@@ -7,10 +7,6 @@
 - Posted By should be accurate
 - Editing should not be broken
 - Previewing the content should be easier
-- Redo the seeds
-  - Single club (Brain Food)
-  - Dan, Steven, Zach, Kevin
-  - Clubs match actul brain food group
 - make sure navigation headers can
   reload properly
 
