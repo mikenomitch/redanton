@@ -45,3 +45,14 @@ export const getUsersForPost = (postId) => {
     }
   }
 }
+
+export const getUsersForMain = () => {
+  return {
+    type: 'GET_USERS_FOR_MAIN',
+    call: {
+      action: 'GET',
+      endpoint: '/users',
+      successActionCreator: userActions.onUsersReturn
+    }
+  }
+}

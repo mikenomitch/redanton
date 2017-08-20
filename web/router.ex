@@ -130,6 +130,7 @@ defmodule Danton.Router do
         resources "/messages", Api.V1.MessageController, only: [:index, :new, :create]
       end
 
+      get "/users", Api.V1.UserController, :index
       resources "/messages", Api.V1.MessageController
     end
   end

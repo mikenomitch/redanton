@@ -3,6 +3,7 @@ import Stream from '../stream/Stream'
 
 import { connect } from 'react-redux'
 
+import { getUsersForMain } from '../../data/users'
 import { getPostsForChannel } from '../../data/posts'
 
 // ===============
@@ -16,11 +17,17 @@ class Channel extends Component {
 
   componentDidMount() {
     this.props.getPostsForChannel(this.channel.id)
+    this.props.getUsersForMain()
   }
 
   render() {
     return (
-      <Stream navigation={this.props.navigation} content={this.props.posts} channels={this.props.channels}/>
+      <Stream 
+        navigation={this.props.navigation} 
+        content={this.props.posts} 
+        channels={this.props.channels}
+        users={this.props.users}
+      />
     )
   }
 }
@@ -34,11 +41,15 @@ const mapStateToProps = (state, props) => {
 
   return {
     posts: Object.values(state.posts).filter((p) => p.channel_id == channelId),
-    channels: state.channels
+    channels: state.channels,
+    users: state.users
   }
 }
 
 export default connect(
   mapStateToProps,
-  { getPostsForChannel }
+  {
+    getPostsForChannel,
+    getUsersForMain
+  }
 )(Channel)

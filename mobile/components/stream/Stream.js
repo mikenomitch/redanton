@@ -67,6 +67,11 @@ const StreamItem = (props) => {
 
 class Stream extends Component {
 
+  static defaultProps = {
+    channels: {},
+    users: {}
+  }
+
   get hasNoConent () {
     return !this.props.content || this.props.content.length === 0
   }
@@ -82,8 +87,7 @@ class Stream extends Component {
 
   renderPostLink = (datum) => {
     const { navigate } = this.props.navigation
-    // TODO: thread in poster info
-    const poster = {name: 'Mike'}
+    const poster = this.props.users[datum.item.user_id] || {}
     const chan = this.props.channels[datum.item.channel_id] || {}
     return (
       <StreamItem
