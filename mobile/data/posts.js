@@ -70,7 +70,7 @@ export const createPost = (postInfo, onSuccess) => {
           onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue. check your params') },
+      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
       params: {
         post: {
           title: postInfo.title,
@@ -94,7 +94,7 @@ export const updatePost = (postInfo, onSuccess) => {
           onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue. check your params') },
+      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
       params: {
         title: postInfo.title,
         description: postInfo.description,

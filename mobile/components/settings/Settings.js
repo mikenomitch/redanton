@@ -18,19 +18,20 @@ import { authActions } from '../../data/auth'
 class Settings extends Component {
   render() {
     return (
-      <View style={{padding: 80}}>
+      <View style={{padding: 60}}>
         <Text> Email: {this.props.currentUser.email} </Text>
         <Text> Avatar: </Text>
         <Image
           style={{width: 50, height: 50}}
           source={{uri: this.props.currentUser.avatar}}
         />
-        <Text> Club Memberships: Brain Food (member) </Text>
-        <View style={{paddingTop: 50}}>
+        <Text> Club Memberships: </Text>
+        <Text> Brain Food (member) </Text>
+        <View style={{paddingTop: 30}}>
           <Button title="Sign Out" onPress={this.props.signOut} />
         </View>
-        <View style={{paddingTop: 50}}>
-          <Text style={{paddingBottom: 20, fontWeight: 'bold'}}> features coming soon: </Text>
+        <View style={{paddingTop: 20}}>
+          <Text style={{paddingBottom: 15, fontWeight: 'bold'}}> features coming soon: </Text>
           <Text style={{paddingBottom: 5}}> New Channel Creation</Text>
           <Text style={{paddingBottom: 5}}> UX/UI Improvements </Text>
           <Text style={{paddingBottom: 5}}> New Club Creation </Text>

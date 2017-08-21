@@ -6,6 +6,13 @@ class PostPreview extends Component {
     return this.props.navigation.state.params.post
   }
 
+  get uri () {
+    if (!/^(?:f|ht)tps?\:\/\//.test(this.post.url)) {
+      return 'http://' + this.post.url
+    }
+    return this.post.url
+  }
+
   render() {
     return (
       <WebView
@@ -18,7 +25,7 @@ class PostPreview extends Component {
         javaScriptEnabled={true}
         domStorageEnabled={true}
         scalesPageToFit={true}
-        source={{uri: this.post.url}}
+        source={{uri: this.uri}}
       />
     )
   }

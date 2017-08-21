@@ -1,12 +1,6 @@
 # Todos
 
-## Paper Cuts
-- URL can handle being http:// or not
-- make sure navigation headers can
-  reload properly
-
 ## Overall
-
 - Move mobile dir to same level as server
   - have heroku deal with this well
 
@@ -26,3 +20,7 @@
       out of the gate
   - auth logic
     - If jwt will expire soon, reauth it before the next call
+
+## Paper Cuts
+- make sure navigation headers can
+  reload properly
