@@ -4,7 +4,7 @@ defmodule Danton.Mixfile do
   def project do
     [app: :danton,
      version: "0.0.1",
-     elixir: "1.4.4",
+     elixir: "1.4.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
