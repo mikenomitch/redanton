@@ -30,17 +30,42 @@ defmodule Danton.User do
     model |> cast(params, [:name, :email])
   end
 
-	def find_and_confirm_password(params) do
-		auth = Danton.Authorization |> Repo.get_by(uid: params["email"])
-		if Comeonin.Bcrypt.checkpw(params["password"], auth.token) do
-			user = Repo.one Ecto.assoc(auth, :user)
-			{:ok, user}
-		else
-			{:error, "Invalid Credentials"}
-		end
-	end
+  def find_and_confirm_password(params) do
+    with {:ok, uuid} <- parse_email(params),
+         {:ok, password} <- parse_password(params),
+         {:ok, auth} <- get_auth(uuid),
+         {:ok, _} <- check_password(auth.token, password) do
+      user = Repo.one Ecto.assoc(auth, :user)
+      {:ok, user}
+    else
+      _ -> {:error, "Invalid Credentials"}
+    end
+  end
 
-	def clubs_for_user(user) do
+  defp parse_email(params) do
+    if params["email"] do
+      {:ok, params["email"]}
+    end
+  end
+
+  defp parse_password(params) do
+    if params["password"] do
+      {:ok, params["password"]}
+    end
+  end
+
+  defp get_auth(uuid) do
+    auth = Danton.Authorization |> Repo.get_by(uid: uuid)
+    {:ok, auth}
+  end
+
+  defp check_password(token, password) do
+    if Comeonin.Bcrypt.checkpw(password, token) do
+      {:ok, "Password Matches"}
+    end
+  end
+
+  def clubs_for_user(user) do
 		user |> Ecto.assoc(:clubs) |> Repo.all
 	end
 end

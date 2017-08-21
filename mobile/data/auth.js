@@ -74,7 +74,7 @@ export const authActions = {
   }),
 
   onSignInFailure: () => {
-    alertMessage('Sign In Failed', 'there was an issue signing in. try again.')
+    alert('there was an issue signing in. try again.')
   }
 }
 

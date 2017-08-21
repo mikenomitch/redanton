@@ -43,16 +43,14 @@ const withFetching = store => next => action => {
   const onFetchError = (error) => {
     // TODO: does this know too much about the app now?
     if (error.message === 'bad auth') {
-      return store.dispatch(authActions.clearCreds())
+      store.dispatch(authActions.clearCreds())
     }
 
     const errorAction = callOptions.errorActionCreator && callOptions.errorActionCreator(error)
     errorAction && store.dispatch(errorAction)
   }
 
-  __fetchPromise(callOptions)
-    .catch(onFetchError)
-    .then(onFetchSuccess)
+  __fetchPromise(callOptions).then(onFetchSuccess, onFetchError)
 
   return next(action)
 }
