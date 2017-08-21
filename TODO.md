@@ -1,7 +1,6 @@
 # Todos
 
 ## Paper Cuts
-- Sign in failure message
 - URL can handle being http:// or not
 - make sure navigation headers can
   reload properly
