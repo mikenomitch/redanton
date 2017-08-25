@@ -8,12 +8,7 @@ ADD . /code
 
 # Install any needed packages specified in requirements.txt
 RUN mix deps.get
+RUN mix compile
 
-# Make port 4000 available to the world outside this container
-EXPOSE 4000
-
-# Define environment variable
-# ENV NAME World
-
-# # Run app.py when the container launches
-# CMD ["iex -S mix phoenix.server"]
+# # Run when the container launches
+CMD ["echo Launching Container"]

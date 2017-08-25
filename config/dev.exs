@@ -39,5 +39,5 @@ config :danton, Danton.Repo,
   username: "postgres",
   password: "postgres",
   database: "danton_dev",
-  hostname: "localhost",
+  hostname: "db",
   pool_size: 10
