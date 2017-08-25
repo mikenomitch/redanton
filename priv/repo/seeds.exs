@@ -7,12 +7,12 @@
 
 alias Danton.Repo
 
-Repo.delete_all Danton.Membership
-Repo.delete_all Danton.User
 Repo.delete_all Danton.Message
 Repo.delete_all Danton.Room
 Repo.delete_all Danton.Post
 Repo.delete_all Danton.Channel
+Repo.delete_all Danton.Membership
+Repo.delete_all Danton.User
 Repo.delete_all Danton.Club
 
 # ==============
