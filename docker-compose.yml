@@ -10,11 +10,11 @@ services:
       - PORT=4000
     volumes:
       - .:/code
-  links:
-    - db
-db:
-  image: postgres
-  environment:
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=postgres
-    - POSTGRES_HOST=db
+#     links:
+#       - db
+# db:
+#   image: postgres
+#   environment:
+#     - POSTGRES_USER=postgres
+#     - POSTGRES_PASSWORD=postgres
+#     - POSTGRES_HOST=db
