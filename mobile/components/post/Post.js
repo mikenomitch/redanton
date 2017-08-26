@@ -23,7 +23,7 @@ const DeletePostButton = (props) => (
 
 class Post extends Component {
   get post() {
-    return this.props.post
+    return this.props.post || {}
   }
 
   get uri () {
@@ -31,6 +31,10 @@ class Post extends Component {
       return 'http://' + this.post.url
     }
     return this.post.url
+  }
+
+  removePost = () => {
+    this.props.deletePost(this.post.id, this.props.navigation.goBack)
   }
 
   goToChat = () => {
@@ -52,6 +56,7 @@ class Post extends Component {
       )
     }
   }
+
   // TODO: make these into flex
   render() {
     return (
