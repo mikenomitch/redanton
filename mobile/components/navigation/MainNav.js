@@ -12,7 +12,6 @@ import ChannelListScreen from '../channel/ChannelList'
 import PostScreen from '../post/Post'
 import NewPostScreen from '../post/NewPost'
 import EditPostScreen from '../post/EditPost'
-import PostPreviewScreen from '../post/PostPreview'
 
 import PostChatScreen from '../chat/PostChat'
 
@@ -43,7 +42,8 @@ const TabNav = TabNavigator(
       screen: ChannelListScreen,
       path: '/channels',
       navigationOptions: {
-        title: 'Channels'
+        title: 'My Channels',
+        tabBarLabel: 'Channels'
       }
     },
     SettingsTab: {
@@ -81,13 +81,6 @@ const MainNav = StackNavigator({
     path: '/posts/:id/chat',
     navigationOptions: ({navigation}) => ({
       title: 'Chat: ' + navigation.state.params.post.title
-    })
-  },
-  PostPreview: {
-    screen: PostPreviewScreen,
-    path: '/posts/:id/preview',
-    navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.post.title
     })
   },
   Channel: {

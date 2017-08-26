@@ -1,92 +1,41 @@
 import React, { Component } from 'react'
 import {
-  Text,
   View,
-  Link,
-  WebView,
-  StyleSheet,
-  Button
-} from 'react-native'
-
-import { connect } from 'react-redux'
+  Button,
+  WebView
+ } from 'react-native'
 
 import { confirmMessage } from '../../lib/uiActions'
 
 import { deletePost } from '../../data/posts'
 
-// ===============
-//     STYLES
-// ===============
-
-var styles = StyleSheet.create({
-  post: {
-    flex: 1,
-    alignItems: 'center',
-    margin: 50
-  },
-  title: {
-    marginBottom: 30,
-    fontSize: 23,
-    textAlign: 'center'
-  },
-  description: {
-    marginBottom: 30,
-    fontSize: 15,
-    maxWidth: 300
-  },
-  previewLink: {
-    marginBottom: 50,
-    maxWidth: 300
-  },
-  chatLink: {
-    marginBottom: 30
-  }
-})
-
-// ===============
-//    CHILDREN
-// ===============
+import { connect } from 'react-redux'
 
 const EditPostButton = (props) => (
-  <Button title="Edit Post" onPress={() => props.navigation.navigate('EditPost', {postInfo: props.post})} />
+  <Button title="Edit" onPress={() => props.navigation.navigate('EditPost', {postInfo: props.post})} />
 )
 
 const DeletePostButton = (props) => (
-  <Button title="Remove Post" onPress={() => {
+  <Button title="Remove" onPress={() => {
     confirmMessage('Remove Post', 'Are you sure?', props.removePost)
   }} />
 )
 
-// ===============
-//    PRESENTER
-// ===============
-
 class Post extends Component {
-  static navigationOptions = {
-    title: 'Post'
-  }
-
-  // HELPERS
-
   get post() {
     return this.props.post
   }
 
-  // ACTIONS
-
-  goToPost = () => {
-    this.props.navigation.navigate('PostPreview', {post: this.post})
+  get uri () {
+    if (!/^(?:f|ht)tps?\:\/\//.test(this.post.url)) {
+      return 'http://' + this.post.url
+    }
+    return this.post.url
   }
 
   goToChat = () => {
-     this.props.navigation.navigate('PostChat', {post: this.post})
+    this.props.navigation.navigate('PostChat', {post: this.post})
   }
-
-  removePost = () => {
-    this.props.deletePost(this.post.id, this.props.navigation.goBack)
-  }
-
-  // RENDERING
 
   renderEdit () {
     if ( this.props.userIsOwner ) {
@@ -103,26 +52,37 @@ class Post extends Component {
       )
     }
   }
-
-  renderNoPost () {
-    return (
-      <View>
-        <Text> This post does not exist </Text>
-      </View>
-    )
-  }
-
+  // TODO: make these into flex
   render() {
-    if (!this.post) return this.renderNoPost()
-
     return (
-      <View style={styles.post}>
-        {this.renderEdit()}
-        <Text style={styles.title}> {this.post.title} </Text>
-        <Text style={styles.description}> {this.post.description} </Text>
-        <Button onPress={this.goToPost} style={styles.previewLink} title={this.post.url} />
-        <Button onPress={this.goToChat} style={styles.chatLink} title="Enter Discussion"/>
-        {this.renderDelete()}
+      <View style={{
+        width: '100%',
+        height: '100%'
+      }}>
+        <WebView
+          style={{
+            width: '100%',
+            height: '90%'
+          }}
+          startInLoadingState
+          automaticallyAdjustContentInsets={true}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          scalesPageToFit={true}
+          source={{uri: this.uri}}
+        />
+        <View style={{
+          width: '100%',
+          height: '10%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center'
+        }}>
+          {this.renderDelete()}
+          {this.renderEdit()}
+          <Button onPress={this.goToChat} title="Chat >" />
+        </View>
       </View>
     )
   }
