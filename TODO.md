@@ -4,6 +4,12 @@
 - Move mobile dir to same level as server
   - have heroku deal with this well
 
+## Quick Wins
+- Main link takes you to the page
+- Footer on show allows edit/delete if owner
+  - and go to chat?
+- description goes away => becomes first chat msg
+
 ## Backend
   - Move more logic into dedicated modules
   - add proper authorization to create, update, delete calls
