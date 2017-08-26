@@ -74,8 +74,10 @@ export const createPost = (postInfo, onSuccess) => {
       params: {
         post: {
           title: postInfo.title,
-          description: postInfo.description,
           url: postInfo.url
+        },
+        message: {
+          body: postInfo.message
         }
       }
     }

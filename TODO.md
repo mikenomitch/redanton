@@ -5,10 +5,8 @@
   - have heroku deal with this well
 
 ## Quick Wins
-- Main link takes you to the page
-- Footer on show allows edit/delete if owner
-  - and go to chat?
-- description goes away => becomes first chat msg
+- posts without a url just become a discussion post
+- labels are added to the edit page
 
 ## Backend
   - Move more logic into dedicated modules

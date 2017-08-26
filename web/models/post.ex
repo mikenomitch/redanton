@@ -32,6 +32,14 @@ defmodule Danton.Post do
   end
 
   @doc """
+  Makes an associated room for a post, and adds a message
+  """
+  def make_room(post, message_params) do
+    room = Danton.Post.make_room(post)
+    Danton.Room.make_message(room, message_params)
+  end
+
+  @doc """
   Gets the room associated with a post if it exists
   """
   def get_room(post_id) do

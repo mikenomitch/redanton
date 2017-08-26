@@ -25,7 +25,7 @@ defmodule Danton.Api.V1.PostController do
   end
 
   # TODO: add proper relationship logic
-  def create(conn, %{"channel_id" => channel_id, "post" => post_params}, current_user, _claims) do
+  def create(conn, %{"channel_id" => channel_id, "post" => post_params, "message" => message_params}, current_user, _claims) do
     channel = Repo.get(Channel, channel_id)
 
     # TODO: There must be a nicer way to do this
@@ -39,7 +39,8 @@ defmodule Danton.Api.V1.PostController do
     case Channel.make_post_for_user(channel, current_user, post_struct) do
       {:ok, post} ->
         # TODO: find a better spot for this
-        Danton.Post.make_room(post)
+        message = %{user_id: current_user.id, body: message_params["body"]}
+        Danton.Post.make_room(post, message)
         conn
         |> put_status(:created)
         |> put_resp_header("location", post_path(conn, :show, post))

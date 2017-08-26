@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
 import {
-	Text,
-	View,
 	Button,
-	Picker
+	Picker,
+	View,
+  ScrollView,
+  Text,
+  TextInput
 } from 'react-native'
 
 import { connect } from 'react-redux'
@@ -70,20 +72,28 @@ class NewPost extends Component {
 
   render() {
     return (
-			<View style={{padding: 50}}>
-				<EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
-
-        <Text style={{paddingTop: 30, fontSize: 14}}> Add to channel: </Text>
-				<Picker
-					selectedValue={this.state.postInfo.channel}
-					onValueChange={(channel) => this.setPostState({channel})}>
-					{this.renderChannels()}
-				</Picker>
-
-				<Button
-					onPress={this.onPost}
-					title="post it"
-				/>
+      <View style={{padding: 50}}>
+        <ScrollView>
+          <Text style={{fontSize: 16}}> Post to channel: </Text>
+          <Picker
+            selectedValue={this.state.postInfo.channel}
+            onValueChange={(channel) => this.setPostState({channel})}>
+            {this.renderChannels()}
+          </Picker>
+          <EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
+          <Text> message: </Text>
+          <TextInput
+            style={{height: 60, fontSize: 18}}
+            placeholder="start the discussion"
+            value={this.state.postInfo.message}
+            returnKeyType="next"
+            onChangeText={(message) => this.setPostState({message})}
+          />
+          <Button
+            onPress={this.onPost}
+            title="post it"
+          />
+        </ScrollView>
 			</View>
 		)
   }
