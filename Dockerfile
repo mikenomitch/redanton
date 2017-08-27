@@ -47,4 +47,4 @@ ADD . /code
 RUN mix deps.get && mix deps.compile
 
 # # Run when the container launches
-CMD ["echo Launching Container"]
+CMD mix phoenix.server
