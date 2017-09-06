@@ -1,4 +1,5 @@
 import makeHashReducer, {mergeHashActions} from './hashReducer'
+import omitBy from 'lodash/fp/omitBy'
 
 // ==================
 // ==================
@@ -6,12 +7,19 @@ import makeHashReducer, {mergeHashActions} from './hashReducer'
 // ==================
 // ==================
 
+function __postsWithoutChannel (state, channelId) {
+  const belongsToChannel = (post) => {
+    return post.channel_id === channelId
+  }
+
+  return omitBy(state, belongsToChannel)
+}
+
 const defaultState = {}
 export default function (state = defaultState, action) {
   switch (action.type) {
   case 'REMOVE_CHANNEL':
-    // TODO: Remove posts associated to channel
-    return state
+    return __postsWithoutChannel(state, action.payload)
   default:
     return makeHashReducer('Post')(state, action)
   }
