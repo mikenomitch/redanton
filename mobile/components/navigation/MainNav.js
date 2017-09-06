@@ -6,12 +6,14 @@ import MainStreamScreen from '../stream/MainStream'
 
 import SettingsScreen from '../settings/Settings'
 
-import ChannelScreen from '../channel/Channel'
 import ChannelListScreen from '../channel/ChannelList'
+import ChannelScreen from '../channel/Channel'
+import EditChannelScreen from '../channel/EditChannel'
+import NewChannelScreen from '../channel/NewChannel'
 
 import PostScreen from '../post/Post'
-import NewPostScreen from '../post/NewPost'
 import EditPostScreen from '../post/EditPost'
+import NewPostScreen from '../post/NewPost'
 
 import PostChatScreen from '../chat/PostChat'
 
@@ -21,6 +23,10 @@ import PostChatScreen from '../chat/PostChat'
 
 const NewPostButton = (props) => (
   <Button title="+ Post" onPress={() => props.navigation.navigate('NewPost')} />
+)
+
+const NewChannelButton = (props) => (
+  <Button title="+ Channel" onPress={() => props.navigation.navigate('NewChannel')} />
 )
 
 // ===============
@@ -41,10 +47,11 @@ const TabNav = TabNavigator(
     ChannelsTab: {
       screen: ChannelListScreen,
       path: '/channels',
-      navigationOptions: {
+      navigationOptions:  ({navigation}) => ({
         title: 'My Channels',
-        tabBarLabel: 'Channels'
-      }
+        tabBarLabel: 'Channels',
+        headerRight: (<NewChannelButton navigation={navigation} />)
+      })
     },
     SettingsTab: {
       screen: SettingsScreen,
@@ -89,6 +96,18 @@ const MainNav = StackNavigator({
       title: navigation.state.params.channel.name || 'Channel',
       headerRight: (<NewPostButton navigation={navigation} />)
     })
+  },
+  NewChannel: {
+    screen: NewChannelScreen,
+    navigationOptions: {
+      title: 'Add Channel'
+    }
+  },
+  EditChannel: {
+    screen: EditChannelScreen,
+    navigationOptions: {
+      title: 'Edit Channel'
+    }
   },
   NewPost: {
     screen: NewPostScreen,

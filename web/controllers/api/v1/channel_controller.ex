@@ -26,10 +26,14 @@ defmodule Danton.Api.V1.ChannelController do
   end
 
   # TODO: add proper relationship logic
-  def create(conn, %{"channel" => channel_params}, _current_user, _claims) do
-    changeset = Channel.changeset(%Channel{}, channel_params)
-
-    case Repo.insert(changeset) do
+  def create(conn, %{"channel" => channel_params, "club_id" => club_id}, _current_user, _claims) do
+    club = Danton.Repo.get(Danton.Club, club_id)
+    # TODO: extract somehow
+    %Danton.Channel{}
+      |> Danton.Channel.changeset(channel_params)
+      |> Ecto.Changeset.put_assoc(:club, club)
+      |> Danton.Repo.insert()
+      |> case do
       {:ok, channel} ->
         conn
         |> put_status(:created)

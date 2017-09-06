@@ -29,6 +29,7 @@ const customPostActions = {
     payload: res.data
   })
 }
+
 export const postActions = mergeHashActions(customPostActions, 'Post')
 
 // =================

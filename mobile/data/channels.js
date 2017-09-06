@@ -52,8 +52,8 @@ export const createChannel = (channelInfo, onSuccess) => {
   return {
     type: 'CREATE_CHANNEL_CALL',
     call: {
-      action: 'CHANNEL',
-      // ALWAYS GOES TO CLUB 1
+      action: 'POST',
+      // TODO: Take an arbitrary club
       endpoint: '/clubs/1/channels',
       successActionCreator: (res) => {
         return (dispatch) => {
@@ -65,7 +65,7 @@ export const createChannel = (channelInfo, onSuccess) => {
       params: {
         channel: {
           name: channelInfo.name,
-          descrption: channelInfo.descrption
+          description: channelInfo.description
         }
       }
     }
@@ -87,7 +87,7 @@ export const updateChannel = (channelInfo, onSuccess) => {
       errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
       params: {
         name: channelInfo.name,
-        descrption: channelInfo.descrption
+        description: channelInfo.description
       }
     }
   }

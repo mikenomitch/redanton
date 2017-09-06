@@ -8,7 +8,7 @@ import {
 
 import { connect } from 'react-redux'
 
-import { updateChannel } from '../../data/channel'
+import { updateChannel } from '../../data/channels'
 
 import EditChannelInfo from './EditChannelInfo'
 

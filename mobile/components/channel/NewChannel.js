@@ -13,7 +13,7 @@ import { createChannel } from '../../data/channels'
 
 import EditChannelInfo from './EditChannelInfo'
 
-const defaultChannelInfo = { name: ''}
+const defaultChannelInfo = { name: '', description: ''}
 const defaultState = {
   showErrors: false,
   channelInfo: defaultChannelInfo
