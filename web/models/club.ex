@@ -53,7 +53,7 @@ defmodule Danton.Club do
   def make_channel(club, channel_params) do
     cs = Ecto.build_assoc(club, :channels, channel_params)
     Danton.Repo.insert!(cs)
-	end
+  end
 
 	@doc """
   gets all the channels for a list of clubs

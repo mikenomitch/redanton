@@ -21,6 +21,18 @@ defmodule Danton.Channel do
   end
 
   @doc """
+  Removes a channel and all associated content
+  """
+	def destroy(chan_id) do
+    # TODO: implement a soft-deletion system
+    posts = Danton.Repo.all(from(r in Danton.Post, where: r.channel_id == ^chan_id))
+		Danton.Post.destroy_list(posts)
+
+		channel = Danton.Repo.get(Danton.Channel, chan_id)
+		Danton.Repo.delete!(channel)
+  end
+
+  @doc """
   Makes a channel associated to a given club
   """
   def make_post_for_user(chan, user, post_params) do

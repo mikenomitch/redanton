@@ -68,6 +68,16 @@ defmodule Danton.Post do
   end
 
   @doc """
+  Removes a list of posts and all associated content
+  """
+	def destroy_list(post_list) do
+    # TODO: implement
+    post_list
+      |> Enum.map(&(&1.id))
+      |> Enum.each(&Danton.Post.destroy/1)
+  end
+
+  @doc """
   Gets the users associated with its channel
   """
   def users_for_post(post_id) do
