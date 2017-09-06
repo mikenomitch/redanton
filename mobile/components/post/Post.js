@@ -6,8 +6,9 @@ import {
  } from 'react-native'
 
 import { confirmMessage } from '../../lib/uiActions'
-
 import { deletePost } from '../../data/posts'
+
+import Footer from '../ui/Footer'
 
 import { connect } from 'react-redux'
 
@@ -57,7 +58,6 @@ class Post extends Component {
     }
   }
 
-  // TODO: make these into flex
   render() {
     return (
       <View style={{
@@ -76,18 +76,20 @@ class Post extends Component {
           scalesPageToFit={true}
           source={{uri: this.uri}}
         />
-        <View style={{
-          width: '100%',
-          height: '10%',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center'
-        }}>
-          {this.renderDelete()}
-          {this.renderEdit()}
-          <Button onPress={this.goToChat} title="Chat >" />
-        </View>
+        <Footer>
+          <View style={{
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center'
+          }}>
+            {this.renderDelete()}
+            {this.renderEdit()}
+            <Button onPress={this.goToChat} title="Chat >" />
+          </View>
+        </Footer>
       </View>
     )
   }

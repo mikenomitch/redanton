@@ -86,8 +86,10 @@ export const updateChannel = (channelInfo, onSuccess) => {
       },
       errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
       params: {
-        name: channelInfo.name,
-        description: channelInfo.description
+        channel: {
+          name: channelInfo.name,
+          description: channelInfo.description
+        }
       }
     }
   }
