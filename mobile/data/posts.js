@@ -9,7 +9,8 @@ import makeHashReducer, {mergeHashActions} from './hashReducer'
 const defaultState = {}
 export default function (state = defaultState, action) {
   switch (action.type) {
-  case 'CUSTOM_POST_ACTION':
+  case 'REMOVE_CHANNEL':
+    // TODO: Remove posts associated to channel
     return state
   default:
     return makeHashReducer('Post')(state, action)

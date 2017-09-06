@@ -20,8 +20,12 @@ const defaultPostInfo = {
 	url: '',
 	title: '',
 	description: '',
-	channel: '',
-	showErrors: false,
+	channel: ''
+}
+
+const defaultState = {
+  showErrors: false,
+  postInfo: defaultPostInfo
 }
 
 // ===============
@@ -31,11 +35,7 @@ const defaultPostInfo = {
 class NewPost extends Component {
 	constructor(props){
 		super(props)
-
-		this.state = {
-			showErrors: false,
-			postInfo: defaultPostInfo
-		}
+		this.state = defaultState
 	}
 
 	componentDidMount () {
@@ -55,10 +55,7 @@ class NewPost extends Component {
 	}
 
 	clearState = () => {
-		this.setState({
-			showErrors: false,
-			postInfo: defaultPostInfo
-		})
+		this.setState(defaultState)
 	}
 
 	setPostState = (newKV) => {

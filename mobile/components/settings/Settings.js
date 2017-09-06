@@ -34,7 +34,7 @@ class Settings extends Component {
           <Text style={{paddingBottom: 15, fontWeight: 'bold'}}> features coming soon: </Text>
           <Text style={{paddingBottom: 5}}> UX/UI Improvements </Text>
           <Text style={{paddingBottom: 5}}> Push Notifications </Text>
-          <Text style={{paddingBottom: 5}}> New Channel Creation</Text>
+          <Text style={{paddingBottom: 5}}> New Channel Creation </Text>
           <Text style={{paddingBottom: 5}}> Sorting Posts by Recent Activity </Text>
           <Text style={{paddingBottom: 5}}> New Club Creation </Text>
           <Text style={{paddingBottom: 5}}> User Invites and Sign Up </Text>

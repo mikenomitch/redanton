@@ -22,9 +22,9 @@ class Channel extends Component {
 
   render() {
     return (
-      <Stream 
-        navigation={this.props.navigation} 
-        content={this.props.posts} 
+      <Stream
+        navigation={this.props.navigation}
+        content={this.props.posts}
         channels={this.props.channels}
         users={this.props.users}
       />

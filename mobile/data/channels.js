@@ -47,3 +47,64 @@ export const getChannels = () => {
     }
   }
 }
+
+export const createChannel = (channelInfo, onSuccess) => {
+  return {
+    type: 'CREATE_CHANNEL_CALL',
+    call: {
+      action: 'CHANNEL',
+      // ALWAYS GOES TO CLUB 1
+      endpoint: '/clubs/1/channels',
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(channelActions.mergeChannels([res.data]))
+          onSuccess(res)
+        }
+      },
+      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
+      params: {
+        channel: {
+          name: channelInfo.name,
+          descrption: channelInfo.descrption
+        }
+      }
+    }
+  }
+}
+
+export const updateChannel = (channelInfo, onSuccess) => {
+  return {
+    type: 'UPDATE_CHANNEL_CALL',
+    call: {
+      action: 'PATCH',
+      endpoint: `/channels/${channelInfo.id}`,
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(channelActions.mergeChannels([res.data]))
+          onSuccess(res)
+        }
+      },
+      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
+      params: {
+        name: channelInfo.name,
+        descrption: channelInfo.descrption
+      }
+    }
+  }
+}
+
+export const deleteChannel = (channelId, onSuccess) => {
+  return {
+    type: 'DELETE_CHANNEL_CALL',
+    call: {
+      action: 'DELETE',
+      endpoint: `/channels/${channelId}`,
+      successActionCreator: () => {
+        return (dispatch) => {
+          onSuccess && onSuccess()
+          dispatch(channelActions.removeChannel(channelId))
+        }
+      }
+    }
+  }
+}
