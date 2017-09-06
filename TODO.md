@@ -43,3 +43,7 @@
 ## Paper Cuts
 - make sure navigation headers can
   reload properly
+
+## Features
+- push notifications
+  https://docs.expo.io/versions/latest/guides/push-notifications.html
