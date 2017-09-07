@@ -6,7 +6,8 @@ defmodule Danton.Email do
     |> to(person)
     |> subject("This is a Test")
     |> assign(:person, person)
-    |> put_html_layout({Danton.LayoutView, "test_email.html"})
+    |> text_body("some text")
+    # |> put_html_layout({Danton.LayoutView, "test_email.html"})
   end
 
   defp base_email do

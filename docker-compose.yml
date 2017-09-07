@@ -5,6 +5,8 @@ services:
     command: "mix phoenix.server"
     ports:
       - "4000:4000"
+    env_file:
+    - secrets.env
     environment:
       - MIX_ENV=dev
       - PORT=4000

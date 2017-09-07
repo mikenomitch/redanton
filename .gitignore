@@ -23,5 +23,8 @@ erl_crash.dump
 # variables.
 /config/prod.secret.exs
 
+# secrets
+secrets.env
+
 # personal config
 /.vscode
