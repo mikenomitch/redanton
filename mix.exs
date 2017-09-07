@@ -19,7 +19,7 @@ defmodule Danton.Mixfile do
   def application do
     [mod: {Danton, []},
      applications: [:comeonin, :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ueberauth, :ueberauth_identity]]
+                    :phoenix_ecto, :postgrex, :ueberauth, :ueberauth_identity, :bamboo]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,7 +43,8 @@ defmodule Danton.Mixfile do
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"},
      {:comeonin, "~> 4.0-rc"},
-     {:bcrypt_elixir, "~> 0.11"}]
+     {:bcrypt_elixir, "~> 0.11"},
+     {:bamboo, "~> 0.8"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

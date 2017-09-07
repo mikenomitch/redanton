@@ -76,5 +76,8 @@ config :ex_admin,
     Danton.ExAdmin.Message
   ]
 
-config :xain, :after_callback, {Phoenix.HTML, :raw}
+config :danton, Danton.Mailer,
+  adapter: Bamboo.LocalAdapter,
+  api_key: "my_api_key"
 
+config :xain, :after_callback, {Phoenix.HTML, :raw}

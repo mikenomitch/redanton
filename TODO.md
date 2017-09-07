@@ -4,6 +4,16 @@
 - Move mobile dir to same level as server
   - have heroku deal with this well
 
+## Push Notifications
+- Make a views table
+  - post, front_page, channel, chat
+- Every Post and Message create call
+  kick off a job to execute in 10 min
+- If a user has no views since the beginning
+  of the job, send an email
+  - Keep email logic VERY separate
+- Change this to a push notification
+
 ## Quick Wins
 - posts without a url just become a discussion post
 - labels are added to the edit page
