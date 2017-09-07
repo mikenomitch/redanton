@@ -11,7 +11,6 @@
   kick off a job to execute in 10 min
 - If a user has no views since the beginning
   of the job, send an email
-  - Keep email logic VERY separate
 - Change this to a push notification
 
 ## Quick Wins
