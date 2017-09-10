@@ -5,8 +5,6 @@
   - have heroku deal with this well
 
 ## Push Notifications
-- Make a views tables
-  - general, post, chat, channel
 - Insert check in creations on relevant
   controller actions (in both api and non)
 - Every Post and Message create call
