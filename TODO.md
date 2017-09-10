@@ -5,12 +5,16 @@
   - have heroku deal with this well
 
 ## Push Notifications
-- Make a views table
-  - post, front_page, channel, chat
+- Make a views tables
+  - general, post, chat, channel
+- Insert check in creations on relevant
+  controller actions (in both api and non)
 - Every Post and Message create call
-  kick off a job to execute in 10 min
-- If a user has no views since the beginning
+  kick off a job to execute in 1 min
+- If a user has no check-ins since the beginning
   of the job, send an email
+- Make presence on chat create a new check in
+  every N minutes
 - Change this to a push notification
 
 ## Quick Wins

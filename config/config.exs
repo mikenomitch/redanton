@@ -73,7 +73,11 @@ config :ex_admin,
     Danton.ExAdmin.Authorization,
     # Danton.ExAdmin.User,
     Danton.ExAdmin.Room,
-    Danton.ExAdmin.Message
+    Danton.ExAdmin.Message,
+    Danton.ExAdmin.PostCheckIn,
+    Danton.ExAdmin.RoomCheckIn,
+    Danton.ExAdmin.ChannelCheckIn,
+    Danton.ExAdmin.GeneralCheckIn
   ]
 
 config :danton, Danton.Mailer,
