@@ -5,15 +5,8 @@
   - have heroku deal with this well
 
 ## Push Notifications
-- Insert check in creations on relevant
-  controller actions (in both api and non)
-- Every Post and Message create call
-  kick off a job to execute in 1 min
-- If a user has no check-ins since the beginning
-  of the job, send an email
-- Make presence on chat create a new check in
-  every N minutes
 - Change this to a push notification
+- Make the check in creation async
 
 ## Quick Wins
 - posts without a url just become a discussion post

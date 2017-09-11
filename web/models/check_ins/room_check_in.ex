@@ -2,6 +2,8 @@ defmodule Danton.RoomCheckIn do
   use Danton.Web, :model
 
   schema "room_check_ins" do
+    field :user_id, :integer
+    field :room_id, :integer
     has_one :user, Danton.User
     has_one :room, Danton.Room
 

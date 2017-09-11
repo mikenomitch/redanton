@@ -1,10 +1,15 @@
 defmodule Danton.Api.V1.PostController do
   use Danton.Web, :controller
+  use Danton.CheckIn, :controller
 
 	alias Danton.Post
 	alias Danton.User
 	alias Danton.Club
-	alias Danton.Channel
+  alias Danton.Channel
+
+  plug :check_in, :front_page when action in [:front_page]
+  plug :check_in, :channel when action in [:index]
+  plug :check_in, :post when action in [:show]
 
   def index(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
     posts = Repo.all(

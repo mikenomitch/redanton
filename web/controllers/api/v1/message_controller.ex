@@ -2,9 +2,11 @@ defmodule Danton.Api.V1.MessageController do
   use Danton.Web, :controller
   alias Danton.Message
 
-  def index(conn, %{"post_id" => post_id}, _current_user, _claims) do
+  def index(conn, %{"post_id" => post_id}, current_user, _claims) do
     [room] = Danton.Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
     messages = Ecto.assoc(room, :messages) |> Danton.Repo.all
+
+    Danton.CheckIn.check_in_room(room, current_user)
 
     render(conn, "index.json", messages: messages)
   end

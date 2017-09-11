@@ -21,8 +21,7 @@ defmodule Danton.Room do
   Makes and inserts a message for a room
   """
   def make_message(room, message_params) do
-    cs = Ecto.build_assoc(room, :messages, message_params)
-    Danton.Repo.insert!(cs)
+    Danton.Message.create_message_for_room(room, message_params)
 	end
 
   @doc """
