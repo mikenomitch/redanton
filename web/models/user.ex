@@ -67,5 +67,10 @@ defmodule Danton.User do
 
   def clubs_for_user(user) do
 		user |> Ecto.assoc(:clubs) |> Repo.all
+  end
+
+  # TODO: make this just a pluck
+  def club_ids_for_user(user) do
+    clubs_for_user(user) |> Enum.map(&(&1.id))
 	end
 end

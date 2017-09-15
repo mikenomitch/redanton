@@ -1,11 +1,12 @@
 defmodule Danton.Club do
-	alias Danton.Repo
+  alias Danton.Repo
+  alias Danton.Channel
   use Danton.Web, :model
 
   schema "clubs" do
     field :name, :string
     field :description, :string
-    has_many :channels, Danton.Channel
+    has_many :channels, Channel
     has_many :memberships, Danton.Membership
     many_to_many :members, Danton.User, join_through: "memberships"
 
@@ -63,6 +64,13 @@ defmodule Danton.Club do
 			[] -> []
 			_ -> Ecto.assoc(clubs, :channels) |> Repo.all
 		end
+  end
+
+  @doc """
+  gets all the channel_ids for a list of club_ids
+  """
+	def channel_ids_for_club_ids(club_ids) do
+    from(c in Channel, where: c.club_id in ^club_ids, select: c.id) |> Repo.all
 	end
 
 	@doc """
@@ -70,7 +78,7 @@ defmodule Danton.Club do
   """
 	def memberships_for_club(club_id) do
 		club = Danton.Repo.get(Danton.Club, club_id)
-		Ecto.assoc(club, :memberships) |> Danton.Repo.all
+		Ecto.assoc(club, :memberships) |> Repo.all
 	end
 
 	@doc """

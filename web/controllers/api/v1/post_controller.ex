@@ -12,19 +12,14 @@ defmodule Danton.Api.V1.PostController do
   plug :check_in, :post when action in [:show]
 
   def index(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
-    posts = Repo.all(
-      from p in Post,
-      where: p.channel_id == ^channel_id,
-      select: p
-    )
-
+    posts = Channel.posts_for_channel_ids([channel_id])
     render(conn, "index.json", posts: posts)
   end
 
   def front_page(conn, _params, current_user, _claims) do
-		posts = User.clubs_for_user(current_user)
-			|> Club.channels_for_clubs
-			|> Channel.posts_for_channels
+		posts = User.club_ids_for_user(current_user)
+			|> Club.channel_ids_for_club_ids
+			|> Channel.posts_for_channel_ids
 
     render(conn, "index.json", posts: posts)
   end

@@ -6,7 +6,10 @@
 
 ## Push Notifications
 - Change this to a push notification
+- Make presence on chat create a new check in
+  every N minutes
 - Make the check in creation async
+- Clean up module positions
 
 ## Quick Wins
 - posts without a url just become a discussion post
