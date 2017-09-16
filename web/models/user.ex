@@ -32,12 +32,24 @@ defmodule Danton.User do
   # QUERIES
   # ===========================
 
-  # def clubs_for(user_id) do
+  # def for_clubs(club_ids) do
+    # TODO: change the non-query below
+    # when you make this one
+  # end
+
+  # def for_memberships(club_ids) do
   # end
 
   # ===========================
   # OTHER
   # ===========================
+
+  # TODO: replace w/ query
+  def for_clubs(club_ids) do
+    Membership.for_clubs(club_ids)
+    |> Ecto.assoc(:user)
+    |> Repo.all
+  end
 
   # TODO: figure out if you can just use changeset above
   def registration_changeset(model, params \\ :empty) do
@@ -80,7 +92,9 @@ defmodule Danton.User do
   end
 
   def clubs_for_user(user) do
-		user |> Ecto.assoc(:clubs) |> Repo.all
+    user
+      |> Ecto.assoc(:clubs)
+      |> Repo.all
   end
 
   # TODO: make this just a pluck

@@ -6,10 +6,7 @@ defmodule Danton.Api.V1.ClubController do
   # ===========================
 
   def index(conn, _params, current_user, _claims) do
-    clubs = current_user
-      |> Ecto.assoc(:clubs)
-      |> Repo.all
-
+    clubs = Club.for_user(current_user)
     render(conn, "index.json", clubs: clubs)
   end
 

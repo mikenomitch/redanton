@@ -28,11 +28,26 @@ defmodule Danton.Club do
   # QUERIES
   # ===========================
 
-  # TODO: SPLIT OUT ECTO QUERIES
+  # def for_members(query, users) do
+  # end
 
-  # ==================
+  # def for_memberships(query, users) do
+  # end
+
+  # def for_channels(query, users) do
+  # end
+
+  # ===========================
+  # EVENTUAL QUERIES
+  # ===========================
+
+  def for_user(user) do
+    user |> Ecto.assoc(:clubs) |> Repo.all
+  end
+
+  # ===========================
   # MEMBERSHIP HELPERS
-  # ==================
+  # ===========================
 
   @doc """
   Makes an admin level membership in a club for a user
@@ -52,22 +67,25 @@ defmodule Danton.Club do
   Makes an admin level membership in a club for a user
   """
   def make_member(club, user, type) do
-    cs = Ecto.build_assoc(club, :memberships, %{user_id: user.id, type: type})
-    Repo.insert!(cs)
+    club
+    |> Ecto.build_assoc(:memberships, %{user_id: user.id, type: type})
+    |> Repo.insert!()
   end
 
   @doc """
   Makes a channel associated to a given club
   """
   def make_channel(club, channel_params) do
-    cs = Ecto.build_assoc(club, :channels, channel_params)
-    Repo.insert!(cs)
+    club
+    |> Ecto.build_assoc(:channels, channel_params)
+    |> Repo.insert!()
   end
 
 	@doc """
   gets all the channels for a list of clubs
   """
-	def channels_for_clubs(clubs) do
+  def channels_for_clubs(clubs) do
+    # TODO: call query defined in Channel
 		case clubs do
 			[] -> []
 			_ -> Ecto.assoc(clubs, :channels) |> Repo.all
@@ -77,22 +95,26 @@ defmodule Danton.Club do
   @doc """
   gets all the channel_ids for a list of club_ids
   """
-	def channel_ids_for_club_ids(club_ids) do
+  def channel_ids_for_club_ids(club_ids) do
+    # TODO: call query defined in Channel
     from(c in Channel, where: c.club_id in ^club_ids, select: c.id) |> Repo.all
 	end
 
 	@doc """
   gets all the channels for a list of clubs
   """
-	def memberships_for_club(club_id) do
-		club = Repo.get(Club, club_id)
-		Ecto.assoc(club, :memberships) |> Repo.all
+  def memberships_for_club(club_id) do
+    # TODO: call query defined in Membership
+    Repo.get(Club, club_id)
+    |> Ecto.assoc(:memberships)
+    |> Repo.all
 	end
 
 	@doc """
 	gets all the users in a club
 	"""
-	def users_for_club(club_id) do
+  def users_for_club(club_id) do
+    # TODO: call query defined in User
 		memberships_for_club(club_id)
 			|> Ecto.assoc(:user)
 		  |> Repo.all

@@ -6,22 +6,14 @@ defmodule Danton.Api.V1.ChannelController do
   # ===========================
 
   def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
-    # TODO: Split out query
-    channels = Repo.all(
-      from c in Channel,
-      where: c.club_id == ^club_id,
-      select: c
-    )
-
+    channels = Channel.for_club(club_id) |> Repo.all
     render_index(conn, channels)
   end
 
   # Top level index without a specific club
   def index(conn, _params, current_user, _claims) do
     # TODO: Split out query
-		channels = User.clubs_for_user(current_user)
-			|> Club.channels_for_clubs
-
+    channels = Channel.for_user(current_user)
     render_index(conn, channels)
   end
 

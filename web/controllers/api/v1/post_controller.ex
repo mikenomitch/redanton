@@ -11,7 +11,7 @@ defmodule Danton.Api.V1.PostController do
   # ===========================
 
   def index(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
-    posts = Channel.posts_for_channel_ids([channel_id])
+    posts = Channel.posts_for_channel_ids([channel_id]) |> Repo.all
     render(conn, "index.json", posts: posts)
   end
 
