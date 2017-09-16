@@ -6,9 +6,7 @@ defmodule Danton.Api.V1.MembershipController do
   # ===========================
 
   def index(conn, _params, current_user, _claims) do
-    memberships = current_user
-      |> Ecto.assoc(:memberships)
-      |> Repo.all
+    memberships = Membership.for_user(current_user)
 		render(conn, "index.json", memberships: memberships)
   end
 

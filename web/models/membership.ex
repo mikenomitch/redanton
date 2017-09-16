@@ -40,7 +40,7 @@ defmodule Danton.Membership do
   # end
 
   # ===========================
-  # OTHER
+  # EVENTUAL QUERY
   # ===========================
 
   # TODO: replace with query
@@ -51,4 +51,14 @@ defmodule Danton.Membership do
       |> Ecto.assoc(:memberships)
       |> Repo.all()
   end
+
+  def for_user(user) do
+    user
+      |> Ecto.assoc(:memberships)
+      |> Repo.all
+  end)
+
+  # ===========================
+  # OTHER
+  # ===========================
 end

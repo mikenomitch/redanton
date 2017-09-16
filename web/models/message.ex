@@ -29,6 +29,18 @@ defmodule Danton.Message do
   # TODO: SPLIT OUT ECTO QUERIES
 
   # ===========================
+  # EVENTUAL QUERIES
+  # ===========================
+
+  def for_post(post_id) do
+    # TODO: move this into toom
+    # TODO: split out the preload
+    room_query = from(r in Room, where: r.post_id == ^post_id, preload: :post)
+    [room] = Repo.all(room_query)
+    Ecto.assoc(room, :messages) |> Repo.all
+  end
+
+  # ===========================
   # OTHER
   # ===========================
 
