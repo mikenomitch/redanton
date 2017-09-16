@@ -1,11 +1,18 @@
 defmodule Danton.RoomCheckIn do
   use Danton.Web, :model
 
+  alias Danton.Channel
+  alias Danton.User
+
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
+
   schema "room_check_ins" do
     field :user_id, :integer
     field :room_id, :integer
-    has_one :user, Danton.User
-    has_one :room, Danton.Room
+    has_one :user, User
+    has_one :room, Room
 
     timestamps()
   end
@@ -18,3 +25,4 @@ defmodule Danton.RoomCheckIn do
     |> cast(params, [])
   end
 end
+s

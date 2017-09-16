@@ -1,9 +1,15 @@
 defmodule Danton.GeneralCheckIn do
   use Danton.Web, :model
 
+  alias Danton.User
+
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
+
   schema "general_check_ins" do
     field :type, :string
-    has_one :user, Danton.User
+    has_one :user, User
 
     timestamps()
   end

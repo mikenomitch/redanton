@@ -1,7 +1,42 @@
 # TODO: make all of these async
-
 defmodule Danton.CheckIn do
   import Ecto.Query, only: [from: 2]
+
+  alias Danton.Repo
+  alias Danton.ChannelCheckIn
+  alias Danton.GeneralCheckIn
+  alias Danton.PostCheckIn
+  alias Danton.RoomCheckIn
+
+  # ===========================
+  # QUERIES
+  # ===========================
+
+  # TODO: write after_date query
+
+  # ===========================
+  # OTHER
+  # ===========================
+
+  def check_in_room(room, user) do
+    RoomCheckIn.changeset(
+      %RoomCheckIn{},
+      %{user_id: user.id, room_id: room.id}
+    ) |> Repo.insert
+  end
+
+  def users_checked_in_since(time, %{id: id, type: :room}) do
+    # TODO: get this working with the right attrs
+    # saved onto the table/model
+
+    # TODO: pull this into a query
+    query = from c in RoomCheckIn, where: c.inserted_at > ^time and c.room_id == ^id, select: map(c, [:user_id])
+    Repo.all(query)
+  end
+
+  # =============================
+  # USING MACRO
+  # =============================
 
   defmacro __using__(:controller) do
     quote do
@@ -9,10 +44,10 @@ defmodule Danton.CheckIn do
         user_id = get_user_id(conn)
 
         if (user_id) do
-          Danton.GeneralCheckIn.changeset(
-            %Danton.GeneralCheckIn{},
+          GeneralCheckIn.changeset(
+            %GeneralCheckIn{},
             %{user_id: user_id, type: "front"}
-          ) |> Danton.Repo.insert
+          ) |> Repo.insert
         end
 
         conn
@@ -23,10 +58,10 @@ defmodule Danton.CheckIn do
         post_id = conn.params["id"]
 
         if (user_id) do
-          Danton.PostCheckIn.changeset(
-            %Danton.PostCheckIn{},
+          PostCheckIn.changeset(
+            %PostCheckIn{},
             %{user_id: user_id, post_id: post_id}
-          ) |> Danton.Repo.insert
+          ) |> Repo.insert
         end
 
         conn
@@ -37,10 +72,10 @@ defmodule Danton.CheckIn do
         channel_id = conn.params["channel_id"]
 
         if (user_id && channel_id) do
-          Danton.ChannelCheckIn.changeset(
-            %Danton.ChannelCheckIn{},
+          ChannelCheckIn.changeset(
+            %ChannelCheckIn{},
             %{user_id: user_id, channel_id: channel_id}
-          ) |> Danton.Repo.insert
+          ) |> Repo.insert
         end
 
         conn
@@ -50,19 +85,5 @@ defmodule Danton.CheckIn do
         private_params.guardian_default_resource && private_params.guardian_default_resource.id
       end
     end
-  end
-
-  def check_in_room(room, user) do
-    Danton.RoomCheckIn.changeset(
-      %Danton.RoomCheckIn{},
-      %{user_id: user.id, room_id: room.id}
-    ) |> Danton.Repo.insert
-  end
-
-  def users_checked_in_since(time, %{id: id, type: :room}) do
-    # TODO: get this working with the right attrs
-    # saved onto the table/model
-    query = from c in Danton.RoomCheckIn, where: c.inserted_at > ^time and c.room_id == ^id, select: map(c, [:user_id])
-    Danton.Repo.all(query)
   end
 end

@@ -1,9 +1,16 @@
 defmodule Danton.PostCheckIn do
   use Danton.Web, :model
 
+  alias Danton.Channel
+  alias Danton.User
+
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
+
   schema "post_check_ins" do
-    has_one :user, Danton.User
-    has_one :post, Danton.Post
+    has_one :user, User
+    has_one :post, Post
 
     timestamps()
   end

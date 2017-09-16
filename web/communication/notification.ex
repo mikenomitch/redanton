@@ -11,6 +11,7 @@ defmodule Danton.Notification do
   end
 
   def notify_users(user_ids, %{type: type, value: message}) do
+    # TODO: Move into the user model
     users = from(u in Danton.User, where: u.id in ^user_ids) |> Danton.Repo.all
     message = make_notificaiton(type, message)
     Enum.each(users, &(notify(&1, message)))
