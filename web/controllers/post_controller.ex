@@ -1,8 +1,11 @@
 defmodule Danton.PostController do
   use Danton.Web, :controller
 
-  alias Danton.Post
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+
+  # ===========================
+  # ACTIONS
+  # ===========================
 
   def index(conn,  %{"channel_id" => channel_id}, _current_user, _claims) do
     posts = Repo.all(
@@ -15,9 +18,9 @@ defmodule Danton.PostController do
   end
 
   def front_page(conn, _params, current_user, _claims) do
-		posts = Danton.User.clubs_for_user(current_user)
-			|> Danton.Club.channels_for_clubs
-			|> Danton.Channel.posts_for_channels
+		posts = User.clubs_for_user(current_user)
+			|> Club.channels_for_clubs
+			|> Channel.posts_for_channels
 
     render(conn, "front_page.html", posts: posts)
   end
@@ -32,9 +35,9 @@ defmodule Danton.PostController do
 
     # clean up
     %Danton.Post{}
-      |> Danton.Post.changeset(post_params)
+      |> Post.changeset(post_params)
       |> Ecto.Changeset.put_assoc(:channel, channel)
-      |> Danton.Repo.insert()
+      |> Repo.insert()
       |> case do
       {:ok, _post} ->
         conn

@@ -1,10 +1,6 @@
 defmodule Danton.Api.V1.ChannelController do
   use Danton.Web, :controller
 
-  alias Danton.Channel
-  alias Danton.Club
-  alias Danton.User
-
   # ===========================
   # ACTIONS
   # ===========================

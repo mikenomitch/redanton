@@ -1,9 +1,11 @@
 defmodule Danton.MessageController do
   use Danton.Web, :controller
 
-  alias Danton.Message
-
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+
+  # ===========================
+  # ACTIONS
+  # ===========================
 
   def index(conn, %{"post_id" => post_id}, _current_user, _claims) do
     post = Repo.get(Danton.Post, post_id)

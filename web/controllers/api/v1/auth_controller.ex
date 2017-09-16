@@ -9,8 +9,6 @@ defmodule Danton.Api.V1.AuthController do
 
 	use Danton.Web, :controller
 
-	alias Danton.User
-
   plug Ueberauth
 
 	# ===========================

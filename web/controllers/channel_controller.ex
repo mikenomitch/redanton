@@ -1,8 +1,11 @@
 defmodule Danton.ChannelController do
   use Danton.Web, :controller
 
-  alias Danton.Channel
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+  
+  # ===========================
+  # ACTIONS
+  # ===========================
 
   def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
     channels = Repo.all(
@@ -20,13 +23,13 @@ defmodule Danton.ChannelController do
   end
 
   def create(conn, %{"channel" => channel_params, "club_id" => club_id}, _current_user, _claims) do
-    club = Danton.Repo.get(Danton.Club, club_id)
+    club = Repo.get(Club, club_id)
 
     # TODO: extract somehow
     %Danton.Channel{}
-      |> Danton.Channel.changeset(channel_params)
+      |> Channel.changeset(channel_params)
       |> Ecto.Changeset.put_assoc(:club, club)
-      |> Danton.Repo.insert()
+      |> Repo.insert()
       |> case do
       {:ok, _channel} ->
         conn

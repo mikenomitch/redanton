@@ -1,10 +1,6 @@
 defmodule Danton.Api.V1.MessageController do
   use Danton.Web, :controller
 
-  alias Danton.CheckIn
-  alias Danton.Message
-  alias Danton.Room
-
   # ===========================
   # ACTIONS
   # ===========================

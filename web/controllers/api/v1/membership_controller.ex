@@ -1,9 +1,6 @@
 defmodule Danton.Api.V1.MembershipController do
   use Danton.Web, :controller
 
-  alias Danton.Membership
-  alias Danton.Membership
-
   # ===========================
   # ACTIONS
   # ===========================

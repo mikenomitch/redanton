@@ -8,6 +8,10 @@ defmodule Danton.AuthController do
   alias Danton.UserFromAuth
   plug Ueberauth
 
+  # ===========================
+  # ACTIONS
+  # ===========================
+
   def login(conn, _params, current_user, _claims) do
     render conn, "login.html", current_user: current_user, current_auths: auths(current_user)
   end

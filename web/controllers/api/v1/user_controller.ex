@@ -1,9 +1,6 @@
 defmodule Danton.Api.V1.UserController do
   use Danton.Web, :controller
 
-	alias Danton.Club
-	alias Danton.Post
-
   # ===========================
   # ACTIONS
   # ===========================

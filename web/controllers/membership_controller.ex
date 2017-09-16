@@ -1,8 +1,11 @@
 defmodule Danton.MembershipController do
   use Danton.Web, :controller
 
-  alias Danton.Membership
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+
+  # ===========================
+  # ACTIONS
+  # ===========================
 
   def index(conn, _params, current_user, _claims) do
     memberships = current_user
