@@ -16,12 +16,12 @@ defmodule Danton.MembershipController do
   end
 
   def new(conn, _params, _current_user, _claims) do
-    changeset = Membership.changeset(%Membership{})
+    changeset = Membership.changeset(%Danton.Membership{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"membership" => membership_params}, _current_user, _claims) do
-    changeset = Membership.changeset(%Membership{}, membership_params)
+    changeset = Membership.changeset(%Danton.Membership{}, membership_params)
 
     case Repo.insert(changeset) do
       {:ok, _membership} ->

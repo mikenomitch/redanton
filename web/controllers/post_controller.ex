@@ -31,7 +31,7 @@ defmodule Danton.PostController do
   end
 
   def create(conn, %{"post" => post_params, "channel_id" => channel_id}, _current_user, _claims) do
-    channel = Danton.Repo.get(Danton.Channel, channel_id)
+    channel = Repo.get(Danton.Channel, channel_id)
 
     # clean up
     %Danton.Post{}

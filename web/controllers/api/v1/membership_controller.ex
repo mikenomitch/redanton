@@ -14,7 +14,7 @@ defmodule Danton.Api.V1.MembershipController do
 
   # TODO add proper relationship login
   def create(conn, %{"membership" => membership_params}, _current_user, _claims) do
-    changeset = Membership.changeset(%Membership{status: "pending"}, membership_params)
+    changeset = Membership.changeset(%Danton.Membership{status: "pending"}, membership_params)
 
     case Repo.insert(changeset) do
       {:ok, membership} ->

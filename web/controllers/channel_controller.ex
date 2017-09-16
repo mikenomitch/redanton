@@ -2,7 +2,7 @@ defmodule Danton.ChannelController do
   use Danton.Web, :controller
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
-  
+
   # ===========================
   # ACTIONS
   # ===========================

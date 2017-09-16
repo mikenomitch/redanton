@@ -16,6 +16,25 @@ defmodule Danton.Web do
   below.
   """
 
+  def alias_models do
+    quote do
+      alias Danton.Authorization
+      alias Danton.Channel
+      alias Danton.ChannelCheckIn
+      alias Danton.CheckIn
+      alias Danton.Club
+      alias Danton.GeneralCheckIn
+      alias Danton.Membership
+      alias Danton.Message
+      alias Danton.Notification
+      alias Danton.Post
+      alias Danton.PostCheckIn
+      alias Danton.Room
+      alias Danton.RoomCheckIn
+      alias Danton.User
+    end
+  end
+
   def model do
     quote do
       use Ecto.Schema
@@ -26,19 +45,7 @@ defmodule Danton.Web do
 
       alias Danton.Repo
 
-      # ALIAS ALL MODELS
-      alias Danton.Channel
-      alias Danton.Club
-      alias Danton.Post
-      alias Danton.User
-      alias Danton.Room
-      alias Danton.Message
-      alias Danton.Authorization
-      alias Danton.CheckIn
-      alias Danton.GeneralCheckIn
-      alias Danton.PostCheckIn
-      alias Danton.RoomCheckIn
-      alias Danton.ChannelCheckIn
+      use Danton.Web, :alias_models
     end
   end
 
@@ -58,19 +65,7 @@ defmodule Danton.Web do
       import Danton.Controller.Helpers
       import Danton.Gettext
 
-      # ALIAS ALL MODELS
-      alias Danton.Channel
-      alias Danton.Club
-      alias Danton.Post
-      alias Danton.User
-      alias Danton.Room
-      alias Danton.Message
-      alias Danton.Authorization
-      alias Danton.CheckIn
-      alias Danton.GeneralCheckIn
-      alias Danton.PostCheckIn
-      alias Danton.RoomCheckIn
-      alias Danton.ChannelCheckIn
+      use Danton.Web, :alias_models
     end
   end
 
@@ -88,6 +83,8 @@ defmodule Danton.Web do
       import Danton.Router.Helpers
       import Danton.ErrorHelpers
       import Danton.Gettext
+
+      use Danton.Web, :alias_models
     end
   end
 
@@ -105,6 +102,8 @@ defmodule Danton.Web do
       import Ecto
       import Ecto.Query
       import Danton.Gettext
+
+      use Danton.Web, :alias_models
     end
   end
 

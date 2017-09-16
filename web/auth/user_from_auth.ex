@@ -184,7 +184,7 @@ defmodule Danton.UserFromAuth do
       auth.info.name
     else
       [auth.info.first_name, auth.info.last_name]
-      |> Enum.filter(&(&1 != nil and String.strip(&1) != ""))
+      |> Enum.filter(&(&1 != nil and String.trim(&1) != ""))
       |> Enum.join(" ")
     end
   end
@@ -213,7 +213,7 @@ defmodule Danton.UserFromAuth do
   # We don't have any nested structures in our params that we are using scrub with so this is a very simple scrub
   defp scrub(params) do
     result = Enum.filter(params, fn
-      {_key, val} when is_binary(val) -> String.strip(val) != ""
+      {_key, val} when is_binary(val) -> String.trim(val) != ""
       {_key, val} when is_nil(val) -> false
       _ -> true
     end)

@@ -5,7 +5,9 @@ defmodule Danton.AuthController do
   The actual creation and lookup of users/authorizations is handled by UserFromAuth
   """
   use Danton.Web, :controller
+
   alias Danton.UserFromAuth
+
   plug Ueberauth
 
   # ===========================

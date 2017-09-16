@@ -8,7 +8,7 @@ defmodule Danton.MessageController do
   # ===========================
 
   def index(conn, %{"post_id" => post_id}, _current_user, _claims) do
-    post = Repo.get(Danton.Post, post_id)
+    post = Repo.get(Post, post_id)
 		messages = post.room.messages
     render(conn, "index.html", messages: messages)
   end

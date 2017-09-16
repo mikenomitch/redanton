@@ -1,9 +1,10 @@
+import Ecto.Query, only: [from: 2]
+
 # TODO: think about how to split this up sanely
 # this is definitely not the right set up
 
 # the message construction should exist on its own
 # the delivery should exist on its own
-import Ecto.Query, only: [from: 2]
 
 defmodule Danton.Notification do
   def notify(user, message) do

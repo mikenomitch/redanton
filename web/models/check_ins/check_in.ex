@@ -1,5 +1,6 @@
 # TODO: make all of these async
 defmodule Danton.CheckIn do
+  use Danton.Web, :model # for the imports
   import Ecto.Query, only: [from: 2]
 
   # ===========================
