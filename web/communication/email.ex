@@ -4,7 +4,7 @@ defmodule Danton.Email do
   def new_chat_message(user, _message) do
     # TODO: remove the email to me
     base_email()
-    |> to("mikenomitch@gmail.com" || user.email)
+    |> to("mikenomitch@gmail.com") # really should be `user.email`
     |> subject("New Chat Message")
     |> assign(:person, user)
     |> render("new_chat_message.html")

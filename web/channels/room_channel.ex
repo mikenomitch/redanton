@@ -1,5 +1,5 @@
 defmodule Danton.RoomChannel do
-  use Phoenix.Channel
+  use Danton.Web, :channel
 
   intercept(["new_msg"])
 

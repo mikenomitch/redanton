@@ -57,8 +57,8 @@ defmodule Danton.Post do
   Gets the room associated with a post if it exists
   """
   def get_room(post_id) do
-     [room] = Repo.all(from(r in Room, where: r.post_id == ^post_id, preload: :post))
-     room
+    [room] = Repo.all(from(r in Room, where: r.post_id == ^post_id, preload: :post))
+    room
   end
 
   @doc """

@@ -16,7 +16,7 @@ defmodule Danton.Authorization do
 
     belongs_to :user, User
 
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(provider uid user_id token)a
