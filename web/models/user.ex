@@ -1,11 +1,6 @@
 defmodule Danton.User do
   use Danton.Web, :model
 
-  alias Danton.Repo
-  alias Danton.Authorization
-  alias Danton.Club
-  alias Danton.Membership
-
   # ===========================
   # ECTO CONFIG
   # ===========================

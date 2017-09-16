@@ -1,11 +1,6 @@
 defmodule Danton.Room do
   use Danton.Web, :model
 
-  alias Danton.Repo
-  alias Danton.Message
-  alias Danton.Post
-  alias Danton.User
-
   # ===========================
   # ECTO CONFIG
   # ===========================

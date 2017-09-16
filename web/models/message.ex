@@ -1,12 +1,6 @@
 defmodule Danton.Message do
   use Danton.Web, :model
 
-  alias Danton.Repo
-  alias Danton.CheckIn
-  alias Danton.Notification
-  alias Danton.Room
-  alias Danton.User
-
   # ===========================
   # ECTO CONFIG
   # ===========================

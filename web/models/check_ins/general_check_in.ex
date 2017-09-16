@@ -1,8 +1,6 @@
 defmodule Danton.GeneralCheckIn do
   use Danton.Web, :model
 
-  alias Danton.User
-
   # ===========================
   # ECTO CONFIG
   # ===========================

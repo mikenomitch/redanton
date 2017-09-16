@@ -2,12 +2,6 @@
 defmodule Danton.CheckIn do
   import Ecto.Query, only: [from: 2]
 
-  alias Danton.Repo
-  alias Danton.ChannelCheckIn
-  alias Danton.GeneralCheckIn
-  alias Danton.PostCheckIn
-  alias Danton.RoomCheckIn
-
   # ===========================
   # QUERIES
   # ===========================
@@ -20,7 +14,7 @@ defmodule Danton.CheckIn do
 
   def check_in_room(room, user) do
     RoomCheckIn.changeset(
-      %RoomCheckIn{},
+      %Danton.RoomCheckIn{},
       %{user_id: user.id, room_id: room.id}
     ) |> Repo.insert
   end
@@ -45,7 +39,7 @@ defmodule Danton.CheckIn do
 
         if (user_id) do
           GeneralCheckIn.changeset(
-            %GeneralCheckIn{},
+            %Danton.GeneralCheckIn{},
             %{user_id: user_id, type: "front"}
           ) |> Repo.insert
         end
@@ -59,7 +53,7 @@ defmodule Danton.CheckIn do
 
         if (user_id) do
           PostCheckIn.changeset(
-            %PostCheckIn{},
+            %Danton.PostCheckIn{},
             %{user_id: user_id, post_id: post_id}
           ) |> Repo.insert
         end
@@ -73,7 +67,7 @@ defmodule Danton.CheckIn do
 
         if (user_id && channel_id) do
           ChannelCheckIn.changeset(
-            %ChannelCheckIn{},
+            %Danton.ChannelCheckIn{},
             %{user_id: user_id, channel_id: channel_id}
           ) |> Repo.insert
         end

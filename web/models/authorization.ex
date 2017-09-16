@@ -1,6 +1,10 @@
 defmodule Danton.Authorization do
   use Danton.Web, :model
 
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
+
   schema "authorization" do
     field :provider, :string
     field :uid, :string
@@ -10,7 +14,7 @@ defmodule Danton.Authorization do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 
-    belongs_to :user, Danton.User
+    belongs_to :user, User
 
     timestamps
   end

@@ -1,9 +1,6 @@
 defmodule Danton.ChannelCheckIn do
   use Danton.Web, :model
 
-  alias Danton.Channel
-  alias Danton.User
-
   # ===========================
   # ECTO CONFIG
   # ===========================

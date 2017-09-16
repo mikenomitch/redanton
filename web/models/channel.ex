@@ -1,10 +1,6 @@
 defmodule Danton.Channel do
   use Danton.Web, :model
 
-  alias Danton.Repo
-  alias Danton.Club
-  alias Danton.Post
-
   # ===========================
   # ECTO CONFIG
   # ===========================

@@ -1,9 +1,6 @@
 defmodule Danton.RoomCheckIn do
   use Danton.Web, :model
 
-  alias Danton.Channel
-  alias Danton.User
-
   # ===========================
   # ECTO CONFIG
   # ===========================
@@ -25,4 +22,3 @@ defmodule Danton.RoomCheckIn do
     |> cast(params, [])
   end
 end
-s

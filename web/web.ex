@@ -23,6 +23,22 @@ defmodule Danton.Web do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+
+      alias Danton.Repo
+
+      # ALIAS ALL MODELS
+      alias Danton.Channel
+      alias Danton.Club
+      alias Danton.Post
+      alias Danton.User
+      alias Danton.Room
+      alias Danton.Message
+      alias Danton.Authorization
+      alias Danton.CheckIn
+      alias Danton.GeneralCheckIn
+      alias Danton.PostCheckIn
+      alias Danton.RoomCheckIn
+      alias Danton.ChannelCheckIn
     end
   end
 
@@ -41,6 +57,20 @@ defmodule Danton.Web do
       import Danton.Router.Helpers
       import Danton.Controller.Helpers
       import Danton.Gettext
+
+      # ALIAS ALL MODELS
+      alias Danton.Channel
+      alias Danton.Club
+      alias Danton.Post
+      alias Danton.User
+      alias Danton.Room
+      alias Danton.Message
+      alias Danton.Authorization
+      alias Danton.CheckIn
+      alias Danton.GeneralCheckIn
+      alias Danton.PostCheckIn
+      alias Danton.RoomCheckIn
+      alias Danton.ChannelCheckIn
     end
   end
 
