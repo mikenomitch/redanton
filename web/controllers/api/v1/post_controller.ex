@@ -11,6 +11,10 @@ defmodule Danton.Api.V1.PostController do
   plug :check_in, :channel when action in [:index]
   plug :check_in, :post when action in [:show]
 
+  # ===========================
+  # ACTIONS
+  # ===========================
+
   def index(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
     posts = Channel.posts_for_channel_ids([channel_id])
     render(conn, "index.json", posts: posts)
@@ -73,7 +77,7 @@ defmodule Danton.Api.V1.PostController do
   end
 
   def delete(conn, %{"id" => id}, _current_user, _claims) do
-		Danton.Post.destroy(id)
+		Post.destroy(id)
     send_resp(conn, :no_content, "")
   end
 end

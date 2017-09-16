@@ -139,7 +139,7 @@ defmodule Danton.Router do
   #   plug Guardian.Plug.LoadResource
   # end
 
-  scope "/api_login", Danton do
+  scope "/  ", Danton do
     pipe_through [:api]
 
     scope "/v1" do

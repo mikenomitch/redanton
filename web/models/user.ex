@@ -1,15 +1,23 @@
 defmodule Danton.User do
-	alias Danton.Repo
   use Danton.Web, :model
+
+  alias Danton.Repo
+  alias Danton.Authorization
+  alias Danton.Club
+  alias Danton.Membership
+
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
 
   schema "users" do
     field :name, :string
     field :email, :string
     field :avatar, :string
 
-    has_many :memberships, Danton.Membership
-    has_many :authorizations, Danton.Authorization
-    many_to_many :clubs, Danton.Club, join_through: "memberships"
+    has_many :memberships, Membership
+    has_many :authorizations, Authorization
+    many_to_many :clubs, Club, join_through: "memberships"
 
     timestamps()
   end
@@ -24,6 +32,17 @@ defmodule Danton.User do
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
   end
+
+  # ===========================
+  # QUERIES
+  # ===========================
+
+  # def clubs_for(user_id) do
+  # end
+
+  # ===========================
+  # OTHER
+  # ===========================
 
   # TODO: figure out if you can just use changeset above
   def registration_changeset(model, params \\ :empty) do
@@ -55,7 +74,7 @@ defmodule Danton.User do
   end
 
   defp get_auth(uuid) do
-    auth = Danton.Authorization |> Repo.get_by(uid: uuid)
+    auth = Authorization |> Repo.get_by(uid: uuid)
     {:ok, auth}
   end
 

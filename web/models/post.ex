@@ -1,19 +1,29 @@
 defmodule Danton.Post do
   use Danton.Web, :model
 
+  alias Danton.Repo
+  alias Danton.Channel
+  alias Danton.Message
+  alias Danton.Room
+  alias Danton.User
+
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
+
   schema "posts" do
     field :title, :string
     field :description, :string
     field :type, :string
     field :url, :string
-    belongs_to :channel, Danton.Channel
-    belongs_to :user, Danton.User
-    has_one :room, Danton.Room
-    many_to_many :messages, Danton.Message, join_through: "room"
+    belongs_to :channel, Channel
+    belongs_to :user, User
+    has_one :room, Room
+    many_to_many :messages, Message, join_through: "room"
 
     timestamps()
   end
-
+  
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
@@ -23,12 +33,22 @@ defmodule Danton.Post do
     |> validate_required([:title, :url])
   end
 
+  # ===========================
+  # QUERIES
+  # ===========================
+
+  # TODO: SPLIT OUT ECTO QUERIES
+
+  # ===========================
+  # OTHER
+  # ===========================
+
   @doc """
   Makes an associated room for a post
   """
   def make_room(post) do
     cs = Ecto.build_assoc(post, :room, %{})
-    Danton.Repo.insert!(cs)
+    Repo.insert!(cs)
   end
 
   @doc """
@@ -36,14 +56,14 @@ defmodule Danton.Post do
   """
   def make_room(post, message_params) do
     room = Danton.Post.make_room(post)
-    Danton.Room.make_message(room, message_params)
+    Room.make_message(room, message_params)
   end
 
   @doc """
   Gets the room associated with a post if it exists
   """
   def get_room(post_id) do
-     [room] = Danton.Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id, preload: :post))
+     [room] = Repo.all(from(r in Room, where: r.post_id == ^post_id, preload: :post))
      room
   end
 
@@ -60,11 +80,11 @@ defmodule Danton.Post do
   """
 	def destroy(post_id) do
     # TODO: implement a soft-deletion system
-    rooms = Danton.Repo.all(from(r in Danton.Room, where: r.post_id == ^post_id))
-		Danton.Room.destroy_list(rooms)
+    rooms = Repo.all(from(r in Room, where: r.post_id == ^post_id))
+		Room.destroy_list(rooms)
 
-		post = Danton.Repo.get(Danton.Post, post_id)
-		Danton.Repo.delete!(post)
+		post = Repo.get(Post, post_id)
+		Repo.delete!(post)
   end
 
   @doc """
@@ -74,7 +94,7 @@ defmodule Danton.Post do
     # TODO: implement
     post_list
       |> Enum.map(&(&1.id))
-      |> Enum.each(&Danton.Post.destroy/1)
+      |> Enum.each(&Post.destroy/1)
   end
 
   @doc """
@@ -83,7 +103,7 @@ defmodule Danton.Post do
   def users_for_post(post_id) do
     # as it stands, this takes an inefficient route to get
     # its users - do not aggregate these calls
-    post = Danton.Repo.get(Danton.Post, post_id)
-    Danton.Channel.users_for_channel(post.channel_id)
+    post = Repo.get(Post, post_id)
+    Channel.users_for_channel(post.channel_id)
   end
 end

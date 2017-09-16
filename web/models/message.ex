@@ -1,10 +1,20 @@
 defmodule Danton.Message do
   use Danton.Web, :model
 
+  alias Danton.Repo
+  alias Danton.CheckIn
+  alias Danton.Notification
+  alias Danton.Room
+  alias Danton.User
+
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
+
   schema "messages" do
     field :body, :string
-    belongs_to :room, Danton.Room
-    belongs_to :user, Danton.User
+    belongs_to :room, Room
+    belongs_to :user, User
 
     timestamps()
   end
@@ -18,10 +28,19 @@ defmodule Danton.Message do
     |> validate_required([:body])
   end
 
+  # ===========================
+  # QUERIES
+  # ===========================
+
+  # TODO: SPLIT OUT ECTO QUERIES
+
+  # ===========================
+  # OTHER
+  # ===========================
 
   def create_message_for_room(room, message_params) do
     cs = Ecto.build_assoc(room, :messages, message_params)
-    message = Danton.Repo.insert!(cs)
+    message = Repo.insert!(cs)
     Task.start(__MODULE__, :notify_users, [message])
     message
   end
@@ -31,8 +50,8 @@ defmodule Danton.Message do
     seconds_to_sleep = 20
     :timer.sleep(seconds_to_sleep * 1000)
 
-    users_for_room = Enum.map(Danton.Room.users_for_room(message.room_id), &(&1.id))
-    users_checked_in = Danton.CheckIn.users_checked_in_since(
+    users_for_room = Enum.map(Room.users_for_room(message.room_id), &(&1.id))
+    users_checked_in = CheckIn.users_checked_in_since(
       message.inserted_at, %{id: message.room_id, type: :room}
     )
     user_who_sent = [message.user_id]
@@ -40,6 +59,6 @@ defmodule Danton.Message do
     users_to_send_to = users_for_room -- users_to_ignore
 
 
-    Danton.Notification.notify_users(users_to_send_to, %{type: :new_chat_message, value: message})
+    Notification.notify_users(users_to_send_to, %{type: :new_chat_message, value: message})
   end
 end

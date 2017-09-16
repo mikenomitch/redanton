@@ -1,14 +1,22 @@
 defmodule Danton.Club do
+  use Danton.Web, :model
+  
   alias Danton.Repo
   alias Danton.Channel
-  use Danton.Web, :model
+  alias Danton.Club
+  alias Danton.Membership
+  alias Danton.User
+
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
 
   schema "clubs" do
     field :name, :string
     field :description, :string
     has_many :channels, Channel
-    has_many :memberships, Danton.Membership
-    many_to_many :members, Danton.User, join_through: "memberships"
+    has_many :memberships, Membership
+    many_to_many :members, User, join_through: "memberships"
 
     timestamps()
   end
@@ -21,6 +29,12 @@ defmodule Danton.Club do
     |> cast(params, [:name, :description])
     |> validate_required([:name, :description])
   end
+
+  # ===========================
+  # QUERIES
+  # ===========================
+
+  # TODO: SPLIT OUT ECTO QUERIES
 
   # ==================
   # MEMBERSHIP HELPERS
@@ -45,7 +59,7 @@ defmodule Danton.Club do
   """
   def make_member(club, user, type) do
     cs = Ecto.build_assoc(club, :memberships, %{user_id: user.id, type: type})
-    Danton.Repo.insert!(cs)
+    Repo.insert!(cs)
   end
 
   @doc """
@@ -53,7 +67,7 @@ defmodule Danton.Club do
   """
   def make_channel(club, channel_params) do
     cs = Ecto.build_assoc(club, :channels, channel_params)
-    Danton.Repo.insert!(cs)
+    Repo.insert!(cs)
   end
 
 	@doc """
@@ -77,7 +91,7 @@ defmodule Danton.Club do
   gets all the channels for a list of clubs
   """
 	def memberships_for_club(club_id) do
-		club = Danton.Repo.get(Danton.Club, club_id)
+		club = Repo.get(Club, club_id)
 		Ecto.assoc(club, :memberships) |> Repo.all
 	end
 

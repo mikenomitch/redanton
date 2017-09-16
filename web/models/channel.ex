@@ -1,15 +1,19 @@
 defmodule Danton.Channel do
+  use Danton.Web, :model
+
   alias Danton.Repo
-  alias Danton.Channel
   alias Danton.Club
   alias Danton.Post
-	use Danton.Web, :model
+
+  # ===========================
+  # ECTO CONFIG
+  # ===========================
 
   schema "channels" do
     field :name, :string
     field :description, :string
-    belongs_to :club, Danton.Club
-    has_many :posts, Danton.Post
+    belongs_to :club, Club
+    has_many :posts, Post
 
     timestamps()
   end
@@ -22,6 +26,16 @@ defmodule Danton.Channel do
     |> cast(params, [:name, :description])
     |> validate_required([:name, :description])
   end
+
+  # ===========================
+  # QUERIES
+  # ===========================
+
+  # TODO: SPLIT OUT ECTO QUERIES
+
+  # ===========================
+  # OTHER
+  # ===========================
 
   @doc """
   Removes a channel and all associated content

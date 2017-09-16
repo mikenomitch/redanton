@@ -2,15 +2,23 @@ defmodule Danton.Api.V1.AuthController do
   @moduledoc """
   Handles the Überauth integration.
   This controller implements the request and callback phases for all providers.
-  """
-  use Danton.Web, :controller
-  plug Ueberauth
+	"""
 
 	# NOTE: this is based off the app here:
 	# http://blog.overstuffedgorilla.com/simple-guardian-api-authentication/
 
+	use Danton.Web, :controller
+
+	alias Danton.User
+
+  plug Ueberauth
+
+	# ===========================
+  # ACTIONS
+  # ===========================
+
 	def login(conn, params, _current_user, _claims) do
-		case Danton.User.find_and_confirm_password(params) do
+		case User.find_and_confirm_password(params) do
 			{:ok, user} ->
 				new_conn = Guardian.Plug.api_sign_in(conn, user)
 				jwt = Guardian.Plug.current_token(new_conn)

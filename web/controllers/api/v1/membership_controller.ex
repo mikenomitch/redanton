@@ -2,9 +2,13 @@ defmodule Danton.Api.V1.MembershipController do
   use Danton.Web, :controller
 
   alias Danton.Membership
+  alias Danton.Membership
+
+  # ===========================
+  # ACTIONS
+  # ===========================
 
   def index(conn, _params, current_user, _claims) do
-
     memberships = current_user
       |> Ecto.assoc(:memberships)
       |> Repo.all

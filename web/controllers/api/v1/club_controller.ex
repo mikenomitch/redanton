@@ -3,6 +3,10 @@ defmodule Danton.Api.V1.ClubController do
 
   alias Danton.Club
 
+  # ===========================
+  # ACTIONS
+  # ===========================
+
   def index(conn, _params, current_user, _claims) do
     clubs = current_user
       |> Ecto.assoc(:clubs)

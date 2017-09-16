@@ -2,8 +2,15 @@ defmodule Danton.Api.V1.ChannelController do
   use Danton.Web, :controller
 
   alias Danton.Channel
+  alias Danton.Club
+  alias Danton.User
+
+  # ===========================
+  # ACTIONS
+  # ===========================
 
   def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
+    # TODO: Split out query
     channels = Repo.all(
       from c in Channel,
       where: c.club_id == ^club_id,
@@ -15,8 +22,9 @@ defmodule Danton.Api.V1.ChannelController do
 
   # Top level index without a specific club
   def index(conn, _params, current_user, _claims) do
-		channels = Danton.User.clubs_for_user(current_user)
-			|> Danton.Club.channels_for_clubs
+    # TODO: Split out query
+		channels = User.clubs_for_user(current_user)
+			|> Club.channels_for_clubs
 
     render_index(conn, channels)
   end
@@ -27,12 +35,12 @@ defmodule Danton.Api.V1.ChannelController do
 
   # TODO: add proper relationship logic
   def create(conn, %{"channel" => channel_params, "club_id" => club_id}, _current_user, _claims) do
-    club = Danton.Repo.get(Danton.Club, club_id)
+    club = Repo.get(Club, club_id)
     # TODO: extract somehow
     %Channel{}
       |> Channel.changeset(channel_params)
       |> Ecto.Changeset.put_assoc(:club, club)
-      |> Danton.Repo.insert()
+      |> Repo.insert()
       |> case do
       {:ok, channel} ->
         conn
