@@ -44,7 +44,6 @@ defmodule Danton.User do
   # GETTERS
   # ===========================
 
-  # TODO: replace w/ query
   def for_clubs(club_ids) do
     Membership.for_clubs(club_ids)
     |> Ecto.assoc(:user)
@@ -54,11 +53,6 @@ defmodule Danton.User do
   defp get_auth(uuid) do
     auth = Authorization |> Repo.get_by(uid: uuid)
     {:ok, auth}
-  end
-
-  # TODO: make this just a pluck
-  def club_ids_for_user(user) do
-    Club.ids_for_user(user)
   end
 
   def for_auth(auth) do

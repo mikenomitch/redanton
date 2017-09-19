@@ -16,7 +16,7 @@ defmodule Danton.Api.V1.PostController do
   end
 
   def front_page(conn, _params, current_user, _claims) do
-		posts = User.club_ids_for_user(current_user)
+		posts = Club.ids_for_user(current_user)
 			|> Club.channel_ids_for_club_ids()
       |> Channel.posts_for_channel_ids()
       |> Repo.all()

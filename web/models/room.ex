@@ -25,8 +25,6 @@ defmodule Danton.Room do
   # QUERIES
   # ===========================
 
-  # TODO: SPLIT OUT ECTO QUERIES
-
   def for_post(query, post_id) do
     from r in query, where: r.post_id == ^post_id
   end
