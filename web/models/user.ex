@@ -41,7 +41,7 @@ defmodule Danton.User do
   # end
 
   # ===========================
-  # OTHER
+  # GETTERS
   # ===========================
 
   # TODO: replace w/ query
@@ -50,6 +50,30 @@ defmodule Danton.User do
     |> Ecto.assoc(:user)
     |> Repo.all
   end
+
+  defp get_auth(uuid) do
+    auth = Authorization |> Repo.get_by(uid: uuid)
+    {:ok, auth}
+  end
+
+  def clubs_for_user(user) do
+    user
+      |> Ecto.assoc(:clubs)
+      |> Repo.all
+  end
+
+  # TODO: make this just a pluck
+  def club_ids_for_user(user) do
+    clubs_for_user(user) |> Enum.map(&(&1.id))
+  end
+
+  def for_auth(auth) do
+    Repo.one Ecto.assoc(auth, :user)
+  end
+
+  # ===========================
+  # OTHER
+  # ===========================
 
   # TODO: figure out if you can just use changeset above
   def registration_changeset(model, params \\ :empty) do
@@ -61,7 +85,7 @@ defmodule Danton.User do
          {:ok, password} <- parse_password(params),
          {:ok, auth} <- get_auth(uuid),
          {:ok, _} <- check_password(auth.token, password) do
-      user = Repo.one Ecto.assoc(auth, :user)
+      user = User.for_auth(auth)
       {:ok, user}
     else
       _ -> {:error, "Invalid Credentials"}
@@ -80,25 +104,9 @@ defmodule Danton.User do
     end
   end
 
-  defp get_auth(uuid) do
-    auth = Authorization |> Repo.get_by(uid: uuid)
-    {:ok, auth}
-  end
-
   defp check_password(token, password) do
     if Comeonin.Bcrypt.checkpw(password, token) do
       {:ok, "Password Matches"}
     end
   end
-
-  def clubs_for_user(user) do
-    user
-      |> Ecto.assoc(:clubs)
-      |> Repo.all
-  end
-
-  # TODO: make this just a pluck
-  def club_ids_for_user(user) do
-    clubs_for_user(user) |> Enum.map(&(&1.id))
-	end
 end

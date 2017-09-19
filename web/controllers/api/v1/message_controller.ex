@@ -6,6 +6,7 @@ defmodule Danton.Api.V1.MessageController do
   # ===========================
 
   def index(conn, %{"post_id" => post_id}, current_user, _claims) do
+    room = Room.for_and_with_post(post_id)
     CheckIn.check_in_room(room, current_user)
     messages = Message.for_post(post_id)
     render(conn, "index.json", messages: messages)

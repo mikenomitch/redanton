@@ -7,7 +7,7 @@ defmodule Danton.Room do
 
   schema "rooms" do
     belongs_to :post, Post
-    has_many :messages, Message
+    has_many :messages, Message, on_delete: :delete_all
 
     timestamps()
   end
@@ -26,6 +26,29 @@ defmodule Danton.Room do
   # ===========================
 
   # TODO: SPLIT OUT ECTO QUERIES
+
+  def for_post(query, post_id) do
+    # TODO: move the preload out
+    from(r in query, where: r.post_id == ^post_id, preload: :post)
+  end
+
+  def with_post(query) do
+    # TODO: move the preload down here
+    query
+  end
+
+  # ===========================
+  # GETTERS
+  # ===========================
+
+  def for_and_with_post(post_id) do
+    [room] = Room
+      |> for_post(post_id)
+      |> with_post()
+      |> Repo.all()
+
+    room
+  end
 
   # ===========================
   # OTHER

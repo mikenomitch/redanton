@@ -55,8 +55,8 @@ defmodule Danton.Membership do
   def for_user(user) do
     user
       |> Ecto.assoc(:memberships)
-      |> Repo.all
-  end)
+      |> Repo.all()
+  end
 
   # ===========================
   # OTHER

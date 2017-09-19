@@ -33,11 +33,9 @@ defmodule Danton.Message do
   # ===========================
 
   def for_post(post_id) do
-    # TODO: move this into toom
-    # TODO: split out the preload
-    room_query = from(r in Room, where: r.post_id == ^post_id, preload: :post)
-    [room] = Repo.all(room_query)
-    Ecto.assoc(room, :messages) |> Repo.all
+    Room.for_and_with_post(post_id)
+      |> Ecto.assoc(:messages)
+      |> Repo.all()
   end
 
   # ===========================
