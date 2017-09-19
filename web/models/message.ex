@@ -26,8 +26,6 @@ defmodule Danton.Message do
   # QUERIES
   # ===========================
 
-  # TODO: SPLIT OUT ECTO QUERIES
-
   def for_room(query, room_id) do
     from m in Message, where: m.room_id == ^room_id
   end
@@ -49,11 +47,11 @@ defmodule Danton.Message do
   def create_message_for_room(room, message_params) do
     cs = Ecto.build_assoc(room, :messages, message_params)
     message = Repo.insert!(cs)
-    Task.start(__MODULE__, :notify_users, [message])
+    Task.start( __MODULE__, :notify_users, [message] )
     message
   end
 
-  # TODO: this logic should go elsewhere?
+  # TODO: move logic elsewhere?
   def notify_users(message) do
     seconds_to_sleep = 20
     :timer.sleep(seconds_to_sleep * 1000)
@@ -70,7 +68,6 @@ defmodule Danton.Message do
     user_who_sent = [message.user_id]
     users_to_ignore = users_checked_in ++ user_who_sent
     users_to_send_to = users_for_room -- users_to_ignore
-
 
     Notification.notify_users(users_to_send_to, %{type: :new_chat_message, value: message})
   end

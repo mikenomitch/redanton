@@ -10,10 +10,8 @@ defmodule Danton.Api.V1.ChannelController do
     render_index(conn, channels)
   end
 
-  # Top level index without a specific club
   def index(conn, _params, current_user, _claims) do
-    # TODO: Split out query
-    channels = Channel.for_user(current_user)
+    channels = Channel.for_user(current_user) |> Repo.all
     render_index(conn, channels)
   end
 

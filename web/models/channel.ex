@@ -27,47 +27,32 @@ defmodule Danton.Channel do
   # QUERIES
   # ===========================
 
+  # make "query" an arg
   def for_club(club_id) do
     from(c in Channel, where: c.club_id == ^club_id)
   end
 
+  # make "query" an arg
   def for_clubs(club_ids) do
     from(c in Channel, where: c.club_id in ^club_ids)
   end
 
-  @doc """
-  gets all the channels for a list of clubs
-  """
-  def posts_for_channel_ids(channel_ids) do
-    from(p in Post, where: p.channel_id in ^channel_ids)
+  def select_id(query) do
+    from c in query, select: c.id
   end
 
   # ===========================
-  # EVENTUAL QUERIES
+  # GETTERS
   # ===========================
+
+  def ids_for_club_ids(club_ids) do
+    for_clubs(club_ids)
+      |> select_id()
+      |> Repo.all()
+  end
 
   def for_user(user) do
-    User.clubs_for_user(user)
-      |> Club.channels_for_clubs
-  end
-
-  @doc """
-  gets all the channels for a list of clubs
-  """
-  def posts_for_channels(channels) do
-    case channels do
-      [] -> []
-      _ -> Ecto.assoc(channels, :posts) |> Repo.all
-    end
-  end
-
-
-  @doc """
-  Gets the users associated with its club
-  """
-  def users_for_channel(chan_id) do
-    channel = Repo.get(Channel, chan_id)
-    User.for_clubs([channel.club_id])
+    Club.for_user(user) |> for_clubs()
   end
 
   # ===========================

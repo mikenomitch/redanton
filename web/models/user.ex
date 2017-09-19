@@ -33,8 +33,6 @@ defmodule Danton.User do
   # ===========================
 
   # def for_clubs(club_ids) do
-    # TODO: change the non-query below
-    # when you make this one
   # end
 
   # def for_memberships(club_ids) do
@@ -47,7 +45,7 @@ defmodule Danton.User do
   def for_clubs(club_ids) do
     Membership.for_clubs(club_ids)
     |> Ecto.assoc(:user)
-    |> Repo.all
+    |> Repo.all()
   end
 
   defp get_auth(uuid) do
@@ -61,7 +59,8 @@ defmodule Danton.User do
 
   def for_post(post_id) do
     post = Repo.get(Post, post_id)
-    Channel.users_for_channel(post.channel_id)
+    channel = Repo.get(Channel, post.channel_id)
+    User.for_clubs([channel.club_id])
   end
 
   def for_room(room_id) do

@@ -8,12 +8,7 @@ defmodule Danton.ChannelController do
   # ===========================
 
   def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
-    channels = Repo.all(
-      from c in Channel,
-      where: c.club_id == ^club_id,
-      select: c
-    )
-
+    channels = Channel.for_club(club_id) |> Repo.all
     render(conn, "index.html", channels: channels, club_id: club_id)
   end
 

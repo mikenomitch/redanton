@@ -43,9 +43,7 @@ defmodule Danton.Membership do
   # GETTERS
   # ===========================
 
-  # TODO: replace with query
   def for_clubs(club_ids) do
-    # where(m in Membership, m.club_id in ^club_ids)
     from(c in Club, where: c.id in ^club_ids)
       |> Repo.all()
       |> Ecto.assoc(:memberships)

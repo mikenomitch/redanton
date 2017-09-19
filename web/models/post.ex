@@ -31,8 +31,6 @@ defmodule Danton.Post do
   # QUERIES
   # ===========================
 
-  # TODO: SPLIT OUT ECTO QUERIES
-
   @doc """
   gets all the channels for a list of clubs
   """
@@ -80,7 +78,6 @@ defmodule Danton.Post do
   Removes a list of posts and all associated content
   """
 	def destroy_list(post_list) do
-    # TODO: implement
     post_list
       |> Enum.map(&(&1.id))
       |> Enum.each(&Post.destroy/1)
