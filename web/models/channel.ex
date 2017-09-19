@@ -31,6 +31,10 @@ defmodule Danton.Channel do
     from(c in Channel, where: c.club_id == ^club_id)
   end
 
+  def for_clubs(club_ids) do
+    from(c in Channel, where: c.club_id in ^club_ids)
+  end
+
   @doc """
   gets all the channels for a list of clubs
   """
@@ -63,7 +67,7 @@ defmodule Danton.Channel do
   """
   def users_for_channel(chan_id) do
     channel = Repo.get(Channel, chan_id)
-    Danton.Club.users_for_club(channel.club_id)
+    User.for_clubs([channel.club_id])
   end
 
   # ===========================

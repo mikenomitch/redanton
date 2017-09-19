@@ -10,6 +10,7 @@ defmodule Danton.Api.V1.PostView do
   end
 
   def render("post.json", %{post: post}) do
+    room_id = Room.id_for_post(post.id)
     %{
       id: post.id,
       title: post.title,
@@ -18,7 +19,7 @@ defmodule Danton.Api.V1.PostView do
       type: post.type,
       user_id: post.user_id,
       channel_id: post.channel_id,
-      room_id: Danton.Post.get_room_id(post.id) # this could be more efficient
+      room_id: room_id
     }
   end
 end

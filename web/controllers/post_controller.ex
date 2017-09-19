@@ -18,9 +18,10 @@ defmodule Danton.PostController do
   end
 
   def front_page(conn, _params, current_user, _claims) do
-		posts = User.clubs_for_user(current_user)
-			|> Club.channels_for_clubs
-			|> Channel.posts_for_channels
+		posts = User.club_ids_for_user(current_user)
+      |> Club.channel_ids_for_club_ids()
+      |> Channel.posts_for_channel_ids()
+      |> Repo.all()
 
     render(conn, "front_page.html", posts: posts)
   end

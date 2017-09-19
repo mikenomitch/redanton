@@ -56,19 +56,24 @@ defmodule Danton.User do
     {:ok, auth}
   end
 
-  def clubs_for_user(user) do
-    user
-      |> Ecto.assoc(:clubs)
-      |> Repo.all
-  end
-
   # TODO: make this just a pluck
   def club_ids_for_user(user) do
-    clubs_for_user(user) |> Enum.map(&(&1.id))
+    Club.ids_for_user(user)
   end
 
   def for_auth(auth) do
     Repo.one Ecto.assoc(auth, :user)
+  end
+
+  def for_post(post_id) do
+    post = Repo.get(Post, post_id)
+    Channel.users_for_channel(post.channel_id)
+  end
+
+  def for_room(room_id) do
+    room_id
+      |> Room.pluck_post_id()
+      |> User.for_post()
   end
 
   # ===========================

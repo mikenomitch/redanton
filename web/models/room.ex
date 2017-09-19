@@ -28,13 +28,19 @@ defmodule Danton.Room do
   # TODO: SPLIT OUT ECTO QUERIES
 
   def for_post(query, post_id) do
-    # TODO: move the preload out
-    from(r in query, where: r.post_id == ^post_id, preload: :post)
+    from r in query, where: r.post_id == ^post_id
   end
 
   def with_post(query) do
-    # TODO: move the preload down here
-    query
+    from r in query, preload: :post
+  end
+
+  def select_id(query) do
+    from r in query, select: r.id
+  end
+
+  def select_post_id(query) do
+    from r in query, select: r.post_id
   end
 
   # ===========================
@@ -42,16 +48,28 @@ defmodule Danton.Room do
   # ===========================
 
   def for_and_with_post(post_id) do
-    [room] = Room
+    Room
       |> for_post(post_id)
       |> with_post()
-      |> Repo.all()
+      |> Repo.one()
+  end
 
-    room
+  def id_for_post(post_id) do
+    Room
+      |> for_post(post_id)
+      |> select_id()
+      |> Repo.one
+  end
+
+  def pluck_post_id(room_id) do
+    Room
+      |> Repo.get(room_id)
+      |> select_post_id()
+      |> Repo.one
   end
 
   # ===========================
-  # OTHER
+  # CREATE
   # ===========================
 
   @doc """
@@ -59,15 +77,18 @@ defmodule Danton.Room do
   """
   def make_message(room, message_params) do
     Message.create_message_for_room(room, message_params)
-	end
+  end
+
+  # ===========================
+  # DESTROY
+  # ===========================
 
   @doc """
   Removes all messages associated to a room
   """
 	def destroy_messages(room) do
     # TODO: implement a soft-deletion system
-    messages = Repo.all(from(r in Message, where: r.room_id == ^room.id))
-		Enum.each(messages, &Repo.delete!/1)
+    Message.for_room(room.id) |> Repo.delete_all
 	end
 
 	@doc """
@@ -77,15 +98,5 @@ defmodule Danton.Room do
     # TODO: implement a soft-deletion system
 		Enum.each(rooms, &Room.destroy_messages/1)
 		Enum.each(rooms, &Repo.delete!/1)
-  end
-
-  @doc """
-  Gets the users associated with its room
-  """
-  def users_for_room(room_id) do
-    # as it stands, this takes an inefficient route to get
-    # its users - do not aggregate these calls
-    room = Repo.get(Room, room_id)
-    Post.users_for_post(room.post_id)
   end
 end

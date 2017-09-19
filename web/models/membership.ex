@@ -40,7 +40,7 @@ defmodule Danton.Membership do
   # end
 
   # ===========================
-  # EVENTUAL QUERY
+  # GETTERS
   # ===========================
 
   # TODO: replace with query

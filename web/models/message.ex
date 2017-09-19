@@ -28,8 +28,12 @@ defmodule Danton.Message do
 
   # TODO: SPLIT OUT ECTO QUERIES
 
+  def for_room(query, room_id) do
+    from m in Message, where: m.room_id == ^room_id
+  end
+
   # ===========================
-  # EVENTUAL QUERIES
+  # GETTERS
   # ===========================
 
   def for_post(post_id) do
@@ -54,10 +58,15 @@ defmodule Danton.Message do
     seconds_to_sleep = 20
     :timer.sleep(seconds_to_sleep * 1000)
 
-    users_for_room = Enum.map(Room.users_for_room(message.room_id), &(&1.id))
+    users_for_room = Enum.map(
+      User.for_room(message.room_id),
+      &(&1.id)
+    )
+
     users_checked_in = CheckIn.users_checked_in_since(
       message.inserted_at, %{id: message.room_id, type: :room}
     )
+
     user_who_sent = [message.user_id]
     users_to_ignore = users_checked_in ++ user_who_sent
     users_to_send_to = users_for_room -- users_to_ignore

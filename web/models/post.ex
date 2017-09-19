@@ -33,8 +33,15 @@ defmodule Danton.Post do
 
   # TODO: SPLIT OUT ECTO QUERIES
 
+  @doc """
+  gets all the channels for a list of clubs
+  """
+  def for_channel_ids(channel_ids) do
+    from(p in Post, where: p.channel_id in ^channel_ids)
+  end
+
   # ===========================
-  # OTHER
+  # CREATE
   # ===========================
 
   @doc """
@@ -53,21 +60,9 @@ defmodule Danton.Post do
     Room.make_message(room, message_params)
   end
 
-  @doc """
-  Gets the room associated with a post if it exists
-  """
-  def get_room(post_id) do
-    [room] = Repo.all(from(r in Room, where: r.post_id == ^post_id, preload: :post))
-    room
-  end
-
-  @doc """
-  Gets the room associated with a post if it exists
-  """
-  def get_room_id(post_id) do
-    # this can be done with a select in the future
-    get_room(post_id).id
-	end
+  # ===========================
+  # DESTROY
+  # ===========================
 
 	@doc """
   Removes a post and all associated content
@@ -89,15 +84,5 @@ defmodule Danton.Post do
     post_list
       |> Enum.map(&(&1.id))
       |> Enum.each(&Post.destroy/1)
-  end
-
-  @doc """
-  Gets the users associated with its channel
-  """
-  def users_for_post(post_id) do
-    # as it stands, this takes an inefficient route to get
-    # its users - do not aggregate these calls
-    post = Repo.get(Post, post_id)
-    Channel.users_for_channel(post.channel_id)
   end
 end

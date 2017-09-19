@@ -6,7 +6,7 @@ defmodule Danton.Api.V1.ClubController do
   # ===========================
 
   def index(conn, _params, current_user, _claims) do
-    clubs = Club.for_user(current_user)
+    clubs = Club.for_user(current_user) |> Repo.all
     render(conn, "index.json", clubs: clubs)
   end
 
