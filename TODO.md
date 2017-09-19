@@ -1,8 +1,16 @@
 # Todos
 
-## Overall
-- Move mobile dir to same level as server
-  - have heroku deal with this well
+## Ecto Work
+- Go thru controllers and look for things that
+  can be queries
+- Move things from getters to queries
+- Make queries take "query" arg
+- Remove any unused methods from models
+
+## Sort By Activity
+- Add query
+- Use query on frontpage
+  and on streams
 
 ## Push Notifications
 - Change this to a push notification
@@ -15,8 +23,7 @@
 - posts without a url just become a discussion post
 - labels are added to the edit page
 
-## Backend
-  - Move more logic into dedicated modules
+## Geneal Backend
   - add proper authorization to create, update, delete calls
 
 ## Frontend
