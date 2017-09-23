@@ -10,4 +10,14 @@ defmodule Danton.Controller.Helpers do
 
   defp referrer([]), do: nil
   defp referrer([h|_]), do: h
+
+  defmacro __using__(:auth) do
+    quote do
+      def unauthenticated(conn, _params) do
+        conn
+        |> put_flash(:error, "Authentication required")
+        |> redirect(to: Danton.Router.Helpers.auth_path(conn, :login))
+      end
+    end
+  end
 end

@@ -53,6 +53,7 @@ defmodule Danton.Web do
     quote do
       use Phoenix.Controller
       use Guardian.Phoenix.Controller
+      use Danton.Controller.Helpers, :auth
 
       alias Danton.Repo
       alias Danton.Plug.EnsureAuthenticated

@@ -72,11 +72,4 @@ defmodule Danton.ChannelController do
     |> put_flash(:info, "Channel deleted successfully.")
     |> redirect(to: club_channel_path(conn, :index, club_id))
   end
-
-  # TODO: move this into a shared location
-  def unauthenticated(conn, _params) do
-    conn
-    |> put_flash(:error, "Authentication required")
-    |> redirect(to: auth_path(conn, :login))
-  end
 end

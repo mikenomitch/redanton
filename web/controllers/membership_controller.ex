@@ -69,11 +69,4 @@ defmodule Danton.MembershipController do
     |> put_flash(:info, "Membership deleted successfully.")
     |> redirect(to: membership_path(conn, :index))
   end
-
-  # TODO: move this into a shared location
-  def unauthenticated(conn, _params) do
-    conn
-    |> put_flash(:error, "Authentication required")
-    |> redirect(to: auth_path(conn, :login))
-  end
 end
