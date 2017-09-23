@@ -8,12 +8,7 @@ defmodule Danton.PostController do
   # ===========================
 
   def index(conn,  %{"channel_id" => channel_id}, _current_user, _claims) do
-    posts = Repo.all(
-      from p in Post,
-      where: p.channel_id == ^channel_id,
-      select: p
-    )
-
+    posts = Post.for_channel_ids([channel_id]) |> Repo.all
     render(conn, "index.html", posts: posts, channel_id: channel_id)
   end
 

@@ -1,8 +1,7 @@
 # Todos
 
 ## Ecto Work
-- Go thru controllers and look for things that
-  can be queries
+- Move front page into Post module
 - Move things from getters to queries
 - Make queries take "query" arg
 - Remove any unused methods from models
