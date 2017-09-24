@@ -37,11 +37,19 @@ defmodule Danton.Post do
   def for_channel_ids(query \\ Post, channel_ids) do
     from(p in query, where: p.channel_id in ^channel_ids)
   end
-
+Ecto
   def for_front_page(user) do
     Club.ids_for_user(user)
       |> Channel.ids_for_club_ids()
       |> Post.for_channel_ids()
+      |> Post.with_messages()
+  end
+
+  def with_messages(query \\ Post) do
+    query
+      |> join(:left, [p], _ in assoc(p, :room))
+      |> join(:left, [_, room], _ in assoc(room, :messages))
+      |> preload([_, r, m], [room: {r, messages: m}])
   end
 
   # ===========================

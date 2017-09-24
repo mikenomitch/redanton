@@ -35,6 +35,16 @@ defmodule Danton.Message do
   end
 
   # ===========================
+  # GETTERS
+  # ===========================
+
+  def latest_for_post(post) do
+    post.room.messages
+      |> Enum.sort(&(&1.inserted_at >= &2.inserted_at))
+      |> List.first()
+  end
+
+  # ===========================
   # OTHER
   # ===========================
 

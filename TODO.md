@@ -1,10 +1,8 @@
 # Todos
 
 ## Sort By Activity
-- Preload all messages (for now) on all of the posts
-- Add query
-- Use query on frontpage
-  and on streams
+- Backend sorts by activity
+- Frontend sorts by activity
 
 ## Push Notifications
 - Change this to a push notification
