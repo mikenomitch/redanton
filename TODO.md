@@ -1,15 +1,17 @@
 # Todos
 
-## Ecto Work
-- Move front page into Post module
-- Move things from getters to queries
-- Make queries take "query" arg
-- Remove any unused methods from models
+## Overall
+- Move mobile dir to same level as server
+  - have heroku deal with this well
 
-## Sort By Activity
-- Add query
-- Use query on frontpage
-  and on streams
+## Activity Sorting
+- Move Post index things to shared call
+- Preload all messages (for now) on all of the posts
+- Sort out the latest Message
+- Return message count in json
+- Return latest message {time, user} in json
+- Sort response by latest message (FE will
+  do this too, but this'll build in pagination)
 
 ## Push Notifications
 - Change this to a push notification
@@ -22,7 +24,8 @@
 - posts without a url just become a discussion post
 - labels are added to the edit page
 
-## Geneal Backend
+## Backend
+  - Move more logic into dedicated modules
   - add proper authorization to create, update, delete calls
 
 ## Frontend
