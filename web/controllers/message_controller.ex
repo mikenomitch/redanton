@@ -10,7 +10,7 @@ defmodule Danton.MessageController do
   def index(conn, %{"post_id" => post_id}, current_user, _claims) do
     room = Room.for_and_with_post(post_id)
     CheckIn.check_in_room(room, current_user)
-    messages = Message.for_post(post_id)
+    messages = Message.for_post(post_id) |> Repo.all()
     render(conn, "index.html", messages: messages)
   end
 

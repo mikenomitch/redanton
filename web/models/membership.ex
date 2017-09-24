@@ -27,36 +27,7 @@ defmodule Danton.Membership do
   # QUERIES
   # ===========================
 
-  # def for_users(query, users) do
-  # end
-
-  # def for_clubs(query, users) do
-  # end
-
-  # def of_type(query, type) do
-  # end
-
-  # def of_status(query, status) do
-  # end
-
-  # ===========================
-  # GETTERS
-  # ===========================
-
-  def for_clubs(club_ids) do
-    from(c in Club, where: c.id in ^club_ids)
-      |> Repo.all()
-      |> Ecto.assoc(:memberships)
-      |> Repo.all()
-  end
-
   def for_user(user) do
-    user
-      |> Ecto.assoc(:memberships)
-      |> Repo.all()
+    user |> Ecto.assoc(:memberships)
   end
-
-  # ===========================
-  # OTHER
-  # ===========================
 end

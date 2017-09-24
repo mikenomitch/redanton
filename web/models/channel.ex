@@ -35,14 +35,12 @@ defmodule Danton.Channel do
     from(c in query, where: c.club_id in ^club_ids)
   end
 
-  def for_post(query \\ Channel, post_id) do
-    from c in query,
-      join: p in assoc(c, :posts),
-      where: p.id == ^post_id
-  end
-
   def select_id(query) do
     from c in query, select: c.id
+  end
+
+  def for_user(user) do
+    Club.for_user(user) |> for_clubs()
   end
 
   # ===========================
@@ -53,10 +51,6 @@ defmodule Danton.Channel do
     for_clubs(club_ids)
       |> select_id()
       |> Repo.all()
-  end
-
-  def for_user(user) do
-    Club.for_user(user) |> for_clubs()
   end
 
   # ===========================

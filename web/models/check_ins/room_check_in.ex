@@ -21,4 +21,20 @@ defmodule Danton.RoomCheckIn do
     struct
     |> cast(params, [])
   end
+
+  # ===========================
+  # QUERIES
+  # ===========================
+
+  def since_time(query \\ RoomCheckIn, time) do
+    from c in query, where: c.inserted_at > ^time
+  end
+
+  def for_room(query \\ RoomCheckIn, room_id) do
+    from c in query, where: c.room_id == ^room_id
+  end
+
+  def select_user_id(query \\ RoomCheckIn) do
+    from c in query, select: map(c, [:user_id])
+  end
 end

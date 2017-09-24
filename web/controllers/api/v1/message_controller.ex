@@ -8,24 +8,27 @@ defmodule Danton.Api.V1.MessageController do
   def index(conn, %{"post_id" => post_id}, current_user, _claims) do
     room = Room.for_and_with_post(post_id)
     CheckIn.check_in_room(room, current_user)
-    messages = Message.for_post(post_id)
+    messages = Message.for_post(post_id) |> Repo.all()
     render(conn, "index.json", messages: messages)
   end
 
-  def create(conn, %{"message" => message_params}, _current_user, _claims) do
-    changeset = Message.changeset(%Message{}, message_params)
+  def create(conn, %{"message" => message_params, "post_id" => post_id}, current_user, _claims) do
+    # changeset = Message.changeset(
+    #   %Message{user_id: current_user.id, room_id: room_id},
+    #   message_params
+    # )
+    room = Room.for_post(post_id) |> Repo.one
 
-    case Repo.insert(changeset) do
-      {:ok, message} ->
-        conn
-        |> put_status(:created)
-        |> put_resp_header("location", message_path(conn, :show, message))
-        |> render(conn, "show.json", message: message)
-      {:error, changeset} ->
-        conn
-        |> put_status(:unprocessable_entity)
-        |> render(Danton.ChangesetView, "error.json", changeset: changeset)
-    end
+    message = Message.create_message_for_room(
+      room,
+      Map.merge(message_params, %{user_id: current_user.id})
+    )
+
+    # TODO: add error handling
+    conn
+      |> put_status(:created)
+      |> put_resp_header("location", message_path(conn, :show, message))
+      |> render("show.json", message: message)
   end
 
   def show(conn, %{"id" => id}, _current_user, _claims) do

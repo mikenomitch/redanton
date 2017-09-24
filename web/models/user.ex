@@ -44,22 +44,13 @@ defmodule Danton.User do
       where: m.id in ^membership_ids
   end
 
-  def for_post(query \\ User, post_id) do
-    Club.for_post(post_id)
+  def for_auth(auth) do
+    Ecto.assoc(auth, :user)
   end
 
   # ===========================
   # GETTERS
   # ===========================
-
-  defp get_auth(uuid) do
-    auth = Authorization |> Repo.get_by(uid: uuid)
-    {:ok, auth}
-  end
-
-  def for_auth(auth) do
-    Repo.one Ecto.assoc(auth, :user)
-  end
 
   def for_post(post_id) do
     post = Repo.get(Post, post_id)
@@ -84,16 +75,21 @@ defmodule Danton.User do
 
   def find_and_confirm_password(params) do
     with {:ok, uuid} <- parse_email(params),
-         {:ok, password} <- parse_password(params),
-         {:ok, auth} <- get_auth(uuid),
-         {:ok, _} <- check_password(auth.token, password) do
-      user = User.for_auth(auth)
+    {:ok, password} <- parse_password(params),
+    {:ok, auth} <- get_auth(uuid),
+    {:ok, _} <- check_password(auth.token, password) do
+      user = User.for_auth(auth) |> Repo.one
       {:ok, user}
     else
       _ -> {:error, "Invalid Credentials"}
     end
   end
 
+  defp get_auth(uuid) do
+    auth = Authorization |> Repo.get_by(uid: uuid)
+    {:ok, auth}
+  end
+  
   defp parse_email(params) do
     if params["email"] do
       {:ok, params["email"]}

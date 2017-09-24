@@ -34,8 +34,8 @@ defmodule Danton.Post do
   @doc """
   gets all the channels for a list of clubs
   """
-  def for_channel_ids(channel_ids) do
-    from(p in Post, where: p.channel_id in ^channel_ids)
+  def for_channel_ids(query \\ Post, channel_ids) do
+    from(p in query, where: p.channel_id in ^channel_ids)
   end
 
   def for_front_page(user) do

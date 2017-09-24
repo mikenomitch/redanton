@@ -17,16 +17,14 @@ defmodule Danton.CheckIn do
     RoomCheckIn.changeset(
       %Danton.RoomCheckIn{},
       %{user_id: user.id, room_id: room.id}
-    ) |> Repo.insert
+    ) |> Repo.insert()
   end
 
   def users_checked_in_since(time, %{id: id, type: :room}) do
-    # TODO: get this working with the right attrs
-    # saved onto the table/model
-
-    # TODO: pull this into a query
-    query = from c in RoomCheckIn, where: c.inserted_at > ^time and c.room_id == ^id, select: map(c, [:user_id])
-    Repo.all(query)
+    RoomCheckIn.since_time(time)
+      |> RoomCheckIn.for_room(id)
+      |> RoomCheckIn.select_user_id()
+      |> Repo.all()
   end
 
   # =============================

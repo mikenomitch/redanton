@@ -26,18 +26,12 @@ defmodule Danton.Message do
   # QUERIES
   # ===========================
 
-  def for_room(query, room_id) do
-    from m in Message, where: m.room_id == ^room_id
+  def for_room(query \\ Message, room_id) do
+    from m in query, where: m.room_id == ^room_id
   end
 
-  # ===========================
-  # GETTERS
-  # ===========================
-
   def for_post(post_id) do
-    Room.for_and_with_post(post_id)
-      |> Ecto.assoc(:messages)
-      |> Repo.all()
+    Room.for_and_with_post(post_id) |> Ecto.assoc(:messages)
   end
 
   # ===========================
@@ -57,7 +51,7 @@ defmodule Danton.Message do
     :timer.sleep(seconds_to_sleep * 1000)
 
     users_for_room = Enum.map(
-      User.for_room(message.room_id),
+      Repo.all(User.for_room(message.room_id)),
       &(&1.id)
     )
 

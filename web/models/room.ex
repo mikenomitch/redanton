@@ -25,19 +25,19 @@ defmodule Danton.Room do
   # QUERIES
   # ===========================
 
-  def for_post(query, post_id) do
+  def for_post(query \\ Room, post_id) do
     from r in query, where: r.post_id == ^post_id
   end
 
-  def with_post(query) do
+  def with_post(query \\ Room) do
     from r in query, preload: :post
   end
 
-  def select_id(query) do
+  def select_id(query \\ Room) do
     from r in query, select: r.id
   end
 
-  def select_post_id(query) do
+  def select_post_id(query \\ Room) do
     from r in query, select: r.post_id
   end
 
@@ -60,10 +60,7 @@ defmodule Danton.Room do
   end
 
   def pluck_post_id(room_id) do
-    Room
-      |> Repo.get(room_id)
-      |> select_post_id()
-      |> Repo.one
+    Repo.get(Room, room_id).post_id
   end
 
   # ===========================
