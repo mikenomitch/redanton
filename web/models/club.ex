@@ -32,7 +32,7 @@ defmodule Danton.Club do
     user |> Ecto.assoc(:clubs)
   end
 
-  def select_id(query) do
+  def select_id(query \\ Club) do
     from c in query, select: c.id
   end
 

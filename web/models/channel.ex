@@ -35,12 +35,12 @@ defmodule Danton.Channel do
     from(c in query, where: c.club_id in ^club_ids)
   end
 
-  def select_id(query) do
+  def select_id(query \\ Channel) do
     from c in query, select: c.id
   end
 
-  def for_user(user) do
-    Club.for_user(user) |> for_clubs()
+  def for_user(query \\ Channel, user) do
+    Club.for_user(user) |> for_clubs(query)
   end
 
   # ===========================

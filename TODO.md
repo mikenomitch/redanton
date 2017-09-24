@@ -1,10 +1,5 @@
 # Todos
 
-## Ecto Work
-- Move things from getters to queries
-- Make queries take "query" arg
-- Remove any unused methods from models
-
 ## Sort By Activity
 - Preload all messages (for now) on all of the posts
 - Add query
