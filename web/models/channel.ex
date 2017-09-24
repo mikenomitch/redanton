@@ -27,14 +27,18 @@ defmodule Danton.Channel do
   # QUERIES
   # ===========================
 
-  # make "query" an arg
-  def for_club(club_id) do
-    from(c in Channel, where: c.club_id == ^club_id)
+  def for_club(query \\ Channel, club_id) do
+    from(c in query, where: c.club_id == ^club_id)
   end
 
-  # make "query" an arg
-  def for_clubs(club_ids) do
-    from(c in Channel, where: c.club_id in ^club_ids)
+  def for_clubs(query \\ Channel, club_ids) do
+    from(c in query, where: c.club_id in ^club_ids)
+  end
+
+  def for_post(query \\ Channel, post_id) do
+    from c in query,
+      join: p in assoc(c, :posts),
+      where: p.id == ^post_id
   end
 
   def select_id(query) do

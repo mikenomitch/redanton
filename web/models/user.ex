@@ -32,21 +32,25 @@ defmodule Danton.User do
   # QUERIES
   # ===========================
 
-  # def for_clubs(club_ids) do
-  # end
+  def for_clubs(query \\ User, club_ids) do
+    from u in query,
+      join: c in assoc(u, :clubs),
+      where: c.id in ^club_ids
+  end
 
-  # def for_memberships(club_ids) do
-  # end
+  def for_memberships(query \\ User, membership_ids) do
+    from u in query,
+      join: m in assoc(u, :memberships),
+      where: m.id in ^membership_ids
+  end
+
+  def for_post(query \\ User, post_id) do
+    Club.for_post(post_id)
+  end
 
   # ===========================
   # GETTERS
   # ===========================
-
-  def for_clubs(club_ids) do
-    Membership.for_clubs(club_ids)
-    |> Ecto.assoc(:user)
-    |> Repo.all()
-  end
 
   defp get_auth(uuid) do
     auth = Authorization |> Repo.get_by(uid: uuid)

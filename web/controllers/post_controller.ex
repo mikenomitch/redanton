@@ -13,11 +13,7 @@ defmodule Danton.PostController do
   end
 
   def front_page(conn, _params, current_user, _claims) do
-		posts = Club.ids_for_user(current_user)
-      |> Channel.ids_for_club_ids()
-      |> Post.for_channel_ids()
-      |> Repo.all()
-
+		posts = Post.for_front_page(current_user) |> Repo.all()
     render(conn, "front_page.html", posts: posts)
   end
 
@@ -29,7 +25,6 @@ defmodule Danton.PostController do
   def create(conn, %{"post" => post_params, "channel_id" => channel_id}, _current_user, _claims) do
     channel = Repo.get(Danton.Channel, channel_id)
 
-    # clean up
     %Danton.Post{}
       |> Post.changeset(post_params)
       |> Ecto.Changeset.put_assoc(:channel, channel)

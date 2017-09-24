@@ -6,7 +6,7 @@ defmodule Danton.Api.V1.UserController do
   # ===========================
 
   def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
-    users = User.for_clubs([club_id])
+    users = User.for_clubs([club_id]) |> Repo.all()
 		render(conn, "index.json", users: users)
   end
 

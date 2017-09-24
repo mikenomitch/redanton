@@ -37,6 +37,12 @@ defmodule Danton.Club do
   # def for_channels(query, users) do
   # end
 
+  def for_post(query \\ Club, post_id) do
+    from c in query,
+      join: ch in assoc(c, :channels),
+      join: ^Channel.for_post(post_id)
+  end
+
   def for_user(user) do
     user |> Ecto.assoc(:clubs)
   end

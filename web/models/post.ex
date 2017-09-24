@@ -38,6 +38,12 @@ defmodule Danton.Post do
     from(p in Post, where: p.channel_id in ^channel_ids)
   end
 
+  def for_front_page(user) do
+    Club.ids_for_user(user)
+      |> Channel.ids_for_club_ids()
+      |> Post.for_channel_ids()
+  end
+
   # ===========================
   # CREATE
   # ===========================

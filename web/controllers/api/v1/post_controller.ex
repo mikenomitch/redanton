@@ -16,15 +16,10 @@ defmodule Danton.Api.V1.PostController do
   end
 
   def front_page(conn, _params, current_user, _claims) do
-		posts = Club.ids_for_user(current_user)
-			|> Channel.ids_for_club_ids()
-      |> Post.for_channel_ids()
-      |> Repo.all()
-
+    posts = Post.for_front_page(current_user) |> Repo.all()
     render(conn, "index.json", posts: posts)
   end
 
-  # TODO: add proper relationship logic
   def create(conn, %{"channel_id" => channel_id, "post" => post_params, "message" => message_params}, current_user, _claims) do
     channel = Repo.get(Channel, channel_id)
 
