@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
 import {
-	Button,
 	View,
   ScrollView,
   Text,
   TextInput
 } from 'react-native'
+
+import BasicButton from '../ui/BasicButton'
 
 import { connect } from 'react-redux'
 import { createChannel } from '../../data/channels'
@@ -59,10 +60,9 @@ class NewChannel extends Component {
             setChannelState={this.setChannelState}
             channelInfo={this.state.channelInfo}
           />
-          <Button
-            onPress={this.onPost}
-            title="make it"
-          />
+          <BasicButton onPress={this.onPost} >
+            make it
+          </BasicButton>
         </ScrollView>
 			</View>
 		)

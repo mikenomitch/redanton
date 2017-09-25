@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 
 import {
-	Button,
-	Picker,
 	View,
-  ScrollView,
-  Text,
-  TextInput
+  ScrollView
 } from 'react-native'
 
-import ModalPicker from 'react-native-modal-picker'
-import { Hoshi } from 'react-native-textinput-effects'
+import ModalSelector from 'react-native-modal-selector'
+import BasicTextInput from '../ui/BasicTextInput'
+import BasicButton from '../ui/BasicButton'
 
 import { connect } from 'react-redux'
 
@@ -72,35 +69,24 @@ class NewPost extends Component {
     )
 	}
 
-  // <Picker
-  //   selectedValue={this.state.postInfo.channel}
-  //   onValueChange={(channel) => this.setPostState({channel})}>
-  //   {this.renderChannels()}
-  // </Picker>
   render() {
     return (
       <View style={{padding: 50}}>
         <ScrollView>
-          <ModalPicker
+          <ModalSelector
+            style={{borderRadius: 0}}
             data={this.channelData()}
             initValue="select channel"
-            onChange={(option)=> {return true}} />
+            onChange={(option)=> this.setPostState({channel: option.key}) } />
           <EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
-          <Hoshi
-            style={{paddingTop: 5}}
-            label="start the discussion"
-            backgroundColor={'transparent'}
-            labelStyle={{ color: 'black' }}
-            borderColor={'black'}
-
+          <BasicTextInput
+            label="first message"
             value={this.state.postInfo.message}
-            returnKeyType="next"
             onChangeText={(message) => this.setPostState({message})}
           />
-          <Button
-            onPress={this.onPost}
-            title="post it"
-          />
+          <BasicButton onPress={this.onPost}>
+            post it
+          </BasicButton>
         </ScrollView>
 			</View>
 		)

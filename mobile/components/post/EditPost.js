@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
-
-import {
-	View,
-	Button,
-	Text
-} from 'react-native'
-
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 
 import { updatePost } from '../../data/posts'
 
+import BasicButton from '../ui/BasicButton'
 import EditPostInfo from './EditPostInfo'
 
 // ===============
@@ -40,7 +35,9 @@ class EditPost extends Component {
     return (
 			<View style={{padding: 50}}>
 				<EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
-				<Button onPress={this.onSave} title="save edits" />
+				<BasicButton onPress={this.onSave}>
+					save edits
+				</BasicButton>
 			</View>
 		)
   }

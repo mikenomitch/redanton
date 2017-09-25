@@ -7,6 +7,8 @@ import {
   Text
 } from 'react-native'
 
+import BasicButton from '../ui/BasicButton'
+
 import { connect } from 'react-redux'
 
 import { authActions } from '../../data/auth'
@@ -25,11 +27,14 @@ class Settings extends Component {
           style={{width: 50, height: 50}}
           source={{uri: this.props.currentUser.avatar}}
         />
+
         <Text> Club Memberships: </Text>
         <Text> Brain Food (member) </Text>
-        <View style={{paddingTop: 30}}>
-          <Button title="Sign Out" onPress={this.props.signOut} />
-        </View>
+
+        <BasicButton onPress={this.props.signOut}>
+          sign out
+        </BasicButton>
+
         <View style={{paddingTop: 20}}>
           <Text style={{paddingBottom: 15, fontWeight: 'bold'}}> features coming soon: </Text>
           <Text style={{paddingBottom: 5}}> UX Improvements </Text>

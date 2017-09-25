@@ -1,38 +1,21 @@
 import React from 'react'
 
-import {
-  Text,
-  TextInput,
-  View
-} from 'react-native'
-
-import { Hoshi } from 'react-native-textinput-effects'
+import { View } from 'react-native'
+import BasicTextInput from '../ui/BasicTextInput'
 
 const EditPostInfo = (props) => (
   <View>
-    <Hoshi
+    <BasicTextInput
       label="url"
-      backgroundColor={'transparent'}
-      labelStyle={{ color: 'black' }}
-      borderColor={'black'}
-      style={{marginTop: 10}}
-
       keyboardType="url"
-      autoCorrect={false}
-      autoCapitalize="none"
       value={props.postInfo.url}
-      returnKeyType="next"
       onChangeText={(url) => props.setPostState({url})}
+      autoCapitalize="none"
+      autoCorrect={false}
     />
-    <Hoshi
+    <BasicTextInput
       label="title"
-      backgroundColor={'transparent'}
-      labelStyle={{ color: 'black' }}
-      borderColor={'black'}
-      style={{marginTop: 10}}
-
       value={props.postInfo.title}
-      returnKeyType="next"
       onChangeText={(title) => props.setPostState({title})}
     />
   </View>

@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 
 import {
 	AsyncStorage,
-  Button,
-  View,
-  TextInput,
-  Text
+  View
 } from 'react-native'
+
+import BasicTextInput from '../ui/BasicTextInput'
+import BasicButton from '../ui/BasicButton'
 
 import { connect } from 'react-redux'
 
@@ -43,23 +43,25 @@ class Auth extends Component {
 
     return (
       <View style={{paddingTop: 200, paddingLeft: 50, paddingRight: 50}}>
-        <TextInput
-          style={{height: 60, fontSize: 18}}
+        <BasicTextInput
           placeholder="email"
           value={email}
 					onChangeText={(email) => this.setState({email})}
 					keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
         />
 
-        <TextInput
-          style={{height: 60, fontSize: 18}}
+        <BasicTextInput
           placeholder="password"
           value={password}
 					onChangeText={(password) => this.setState({password})}
 					secureTextEntry
         />
 
-        <Button title="Login" onPress={this.getInfo} />
+        <BasicButton onPress={this.getInfo}>
+          login
+        </BasicButton>
       </View>
     )
   }

@@ -2,24 +2,21 @@ import React from 'react'
 
 import {
   Text,
-  TextInput,
   View
 } from 'react-native'
 
+import BasicTextInput from '../ui/BasicTextInput'
+
 const EditChannelInfo = (props) => (
   <View>
-    <Text> name: </Text>
-    <TextInput
-      style={{height: 60, fontSize: 18}}
-      placeholder="name"
+    <BasicTextInput
+      label="name"
       value={props.channelInfo.name}
       returnKeyType="next"
       onChangeText={(name) => props.setChannelState({name})}
     />
-    <Text> description: </Text>
-    <TextInput
-      style={{height: 60, fontSize: 18}}
-      placeholder="description"
+    <BasicTextInput
+      label="description"
       value={props.channelInfo.description}
       returnKeyType="next"
       onChangeText={(description) => props.setChannelState({description})}

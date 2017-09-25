@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
-
-import {
-	View,
-	Button,
-	Text
-} from 'react-native'
+import { View } from 'react-native'
 
 import { connect } from 'react-redux'
 
 import { updateChannel } from '../../data/channels'
 
+import BasicButton from '../ui/BasicButton'
 import EditChannelInfo from './EditChannelInfo'
 
 // ===============
@@ -40,7 +36,9 @@ class EditChannel extends Component {
     return (
 			<View style={{padding: 50}}>
 				<EditChannelInfo setChannelState={this.setChannelState} channelInfo={this.state.channelInfo} />
-				<Button onPress={this.onSave} title="save edits" />
+				<BasicButton onPress={this.onSave} >
+					save edits
+				</BasicButton>
 			</View>
 		)
   }
