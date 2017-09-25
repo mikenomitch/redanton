@@ -12,6 +12,7 @@ import BasicButton from '../ui/BasicButton'
 import { connect } from 'react-redux'
 
 import { getChannels } from '../../data/channels'
+import { getClubs } from '../../data/clubs'
 import { createPost } from '../../data/posts'
 
 import EditPostInfo from './EditPostInfo'
@@ -39,7 +40,8 @@ class NewPost extends Component {
 	}
 
 	componentDidMount () {
-		this.props.getChannels()
+    this.props.getChannels()
+    this.props.getClubs()
 	}
 
 	onPost = () => {
@@ -105,5 +107,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { createPost, getChannels }
+  { createPost, getChannels, getClubs }
 )(NewPost)

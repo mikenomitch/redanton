@@ -22,6 +22,7 @@ const logger = createLogger({collapsed: true, diff: true})
 import auth from '../data/auth'
 import channels from '../data/channels'
 import clubs from '../data/clubs'
+import memberships from '../data/memberships'
 import messages from '../data/messages'
 import posts from '../data/posts'
 import users from '../data/users'
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   auth,
   channels,
   clubs,
+  memberships,
   messages,
   posts,
   users
@@ -40,7 +42,7 @@ const rootReducer = combineReducers({
 // ============
 
 const configureStore = () => {
-  const store = createStore(
+  return createStore(
     rootReducer,
     applyMiddleware(
       thunk,
@@ -49,8 +51,6 @@ const configureStore = () => {
       logger
     )
   )
-
-  return store
 }
 
 export default configureStore

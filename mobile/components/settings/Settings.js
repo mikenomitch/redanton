@@ -11,6 +11,7 @@ import BasicButton from '../ui/BasicButton'
 
 import { connect } from 'react-redux'
 
+import { getClubs } from '../../data/clubs'
 import { authActions } from '../../data/auth'
 
 // ===============
@@ -18,6 +19,10 @@ import { authActions } from '../../data/auth'
 // ===============
 
 class Settings extends Component {
+  componentDidMount () {
+    this.props.getClubs()
+  }
+
   render() {
     return (
       <View style={{padding: 60}}>
@@ -29,7 +34,9 @@ class Settings extends Component {
         />
 
         <Text> Club Memberships: </Text>
-        <Text> Brain Food (member) </Text>
+        {this.props.clubs.map(
+          (c) => (<Text> {c.name} (member) </Text>)
+        )}
 
         <BasicButton onPress={this.props.signOut}>
           sign out
@@ -55,11 +62,12 @@ class Settings extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    clubs: Object.values(state.clubs),
     currentUser: state.auth && state.auth.currentUser || {}
   }
 }
 
 export default connect(
   mapStateToProps,
-  {signOut: authActions.clearCreds}
+  {signOut: authActions.clearCreds, getClubs}
 )(Settings)

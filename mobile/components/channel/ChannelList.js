@@ -4,6 +4,7 @@ import { View, Button, FlatList, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import { getChannels } from '../../data/channels'
+import { getClubs } from '../../data/clubs'
 
 // ============
 //    STYLES
@@ -64,7 +65,8 @@ class ChannelList extends Component {
   }
 
   componentDidMount() {
-  	this.props.getChannels()
+    this.props.getChannels()
+    this.props.getClubs()
   }
 
   renderChannelLink = (datum) => {
@@ -98,5 +100,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { getChannels }
+  { getChannels, getClubs }
 )(ChannelList)

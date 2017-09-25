@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { getUsersForMain } from '../../data/users'
 import { getFrontPage } from '../../data/posts'
+import { getClubs } from '../../data/clubs'
 
 // ===============
 //    PRESENTER
@@ -16,7 +17,8 @@ class MainStream extends Component {
   }
 
   componentDidMount() {
-  	this.props.getFrontPage()
+    this.props.getFrontPage()
+    this.props.getClubs()
     this.props.getUsersForMain()
   }
 
@@ -50,6 +52,7 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {
+    getClubs,
     getFrontPage,
     getUsersForMain
   }
