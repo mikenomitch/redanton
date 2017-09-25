@@ -80,9 +80,14 @@ class Channel extends Component {
 
 const mapStateToProps = (state, props) => {
   const channelId = props.navigation.state.params.channel.id
+  const sortedPosts = Object.values(state.posts)
+    .filter((p) => p.channel_id == channelId)
+    .sort((a, b) => (
+      new Date(b.last_activity_time) - new Date(a.last_activity_time)
+    ))
 
   return {
-    posts: Object.values(state.posts).filter((p) => p.channel_id == channelId),
+    posts: sortedPosts,
     channels: state.channels,
     users: state.users
   }

@@ -53,6 +53,9 @@ var styles = StyleSheet.create({
 // =============
 
 const StreamItem = (props) => {
+  const action = props.post.message_count == 1
+    ? "Posted by: "
+    : "Message from: "
   return (
     <View style={styles.streamItem}>
       <View style={styles.streamItemLeft}>
@@ -67,7 +70,7 @@ const StreamItem = (props) => {
             <Text>In Channel: {props.chanName}</Text>
           </View>
           <View style={styles.action}>
-            <Text>Posted By: <Text>{props.posterName}</Text> </Text>
+            <Text>{action}<Text>{props.actionUserName}</Text></Text>
           </View>
         </View>
       </View>
@@ -86,7 +89,6 @@ const StreamItem = (props) => {
 // =============
 
 class Stream extends Component {
-
   static defaultProps = {
     channels: {},
     users: {}
@@ -109,10 +111,13 @@ class Stream extends Component {
     const { navigate } = this.props.navigation
     const poster = this.props.users[datum.item.user_id] || {}
     const chan = this.props.channels[datum.item.channel_id] || {}
+    const user_id = datum.item.last_message && datum.item.last_message.user_id || datum.item.user_id
+    const actionUser = this.props.users[user_id]
     return (
       <StreamItem
         navigate={navigate}
         post={datum.item}
+        actionUserName={actionUser.name}
         posterName={poster.name}
         chanName={chan.name}/>
     )

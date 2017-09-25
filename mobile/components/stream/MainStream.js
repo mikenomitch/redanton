@@ -35,8 +35,13 @@ class MainStream extends Component {
 // ===============
 
 const mapStateToProps = (state) => {
+  const sortedPosts = Object.values(state.posts)
+    .sort((a, b) => (
+      new Date(b.last_activity_time) - new Date(a.last_activity_time)
+    ))
+
   return {
-    posts: Object.values(state.posts),
+    posts: sortedPosts,
     channels: state.channels,
     users: state.users
   }
