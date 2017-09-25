@@ -1,7 +1,6 @@
 # Todos
 
 ## Sort By Activity
-- Backend sorts by activity
 - Frontend sorts by activity
 
 ## Push Notifications

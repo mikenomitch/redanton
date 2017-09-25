@@ -37,7 +37,11 @@ defmodule Danton.Post do
   def for_channel_ids(query \\ Post, channel_ids) do
     from(p in query, where: p.channel_id in ^channel_ids)
   end
-Ecto
+
+  def for_channel_stream(channel_id) do
+    for_channel_ids([channel_id]) |> with_messages()
+  end
+
   def for_front_page(user) do
     Club.ids_for_user(user)
       |> Channel.ids_for_club_ids()

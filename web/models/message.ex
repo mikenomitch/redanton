@@ -44,6 +44,10 @@ defmodule Danton.Message do
       |> List.first()
   end
 
+  def count_for_post(post) do
+    length(post.room.messages)
+  end
+
   # ===========================
   # OTHER
   # ===========================
