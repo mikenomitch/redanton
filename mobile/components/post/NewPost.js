@@ -9,6 +9,9 @@ import {
   TextInput
 } from 'react-native'
 
+import ModalPicker from 'react-native-modal-picker'
+import { Hoshi } from 'react-native-textinput-effects'
+
 import { connect } from 'react-redux'
 
 import { getChannels } from '../../data/channels'
@@ -63,25 +66,33 @@ class NewPost extends Component {
 		this.setState({postInfo})
 	}
 
-	renderChannels() {
-		return this.props.channels.map((chan) => <Picker.Item label={chan.name} value={chan.id} key={chan.id} />)
+	channelData() {
+		return this.props.channels.map(
+      (chan) => ({ key: chan.id, label: chan.name })
+    )
 	}
 
+  // <Picker
+  //   selectedValue={this.state.postInfo.channel}
+  //   onValueChange={(channel) => this.setPostState({channel})}>
+  //   {this.renderChannels()}
+  // </Picker>
   render() {
     return (
       <View style={{padding: 50}}>
         <ScrollView>
-          <Text style={{fontSize: 16}}> Post to channel: </Text>
-          <Picker
-            selectedValue={this.state.postInfo.channel}
-            onValueChange={(channel) => this.setPostState({channel})}>
-            {this.renderChannels()}
-          </Picker>
+          <ModalPicker
+            data={this.channelData()}
+            initValue="select channel"
+            onChange={(option)=> {return true}} />
           <EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
-          <Text> message: </Text>
-          <TextInput
-            style={{height: 60, fontSize: 18}}
-            placeholder="start the discussion"
+          <Hoshi
+            style={{paddingTop: 5}}
+            label="start the discussion"
+            backgroundColor={'transparent'}
+            labelStyle={{ color: 'black' }}
+            borderColor={'black'}
+
             value={this.state.postInfo.message}
             returnKeyType="next"
             onChangeText={(message) => this.setPostState({message})}

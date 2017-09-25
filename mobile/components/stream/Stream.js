@@ -108,14 +108,15 @@ class Stream extends Component {
   }
 
   renderPostLink = (datum) => {
-    const { navigate } = this.props.navigation
-    const poster = this.props.users[datum.item.user_id] || {}
-    const chan = this.props.channels[datum.item.channel_id] || {}
+    const { channels, navigation, users } = this.props
+
+    const poster = users[datum.item.user_id] || {}
+    const chan = channels[datum.item.channel_id] || {}
     const user_id = datum.item.last_message && datum.item.last_message.user_id || datum.item.user_id
-    const actionUser = this.props.users[user_id]
+    const actionUser = users[user_id] || {}
     return (
       <StreamItem
-        navigate={navigate}
+        navigate={navigation.navigate}
         post={datum.item}
         actionUserName={actionUser.name}
         posterName={poster.name}

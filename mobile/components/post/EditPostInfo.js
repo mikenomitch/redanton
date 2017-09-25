@@ -6,12 +6,17 @@ import {
   View
 } from 'react-native'
 
+import { Hoshi } from 'react-native-textinput-effects'
+
 const EditPostInfo = (props) => (
   <View>
-    <Text> url: </Text>
-    <TextInput
-      style={{height: 60, fontSize: 18}}
-      placeholder="url"
+    <Hoshi
+      label="url"
+      backgroundColor={'transparent'}
+      labelStyle={{ color: 'black' }}
+      borderColor={'black'}
+      style={{marginTop: 10}}
+
       keyboardType="url"
       autoCorrect={false}
       autoCapitalize="none"
@@ -19,11 +24,13 @@ const EditPostInfo = (props) => (
       returnKeyType="next"
       onChangeText={(url) => props.setPostState({url})}
     />
+    <Hoshi
+      label="title"
+      backgroundColor={'transparent'}
+      labelStyle={{ color: 'black' }}
+      borderColor={'black'}
+      style={{marginTop: 10}}
 
-    <Text> title: </Text>
-    <TextInput
-      style={{height: 60, fontSize: 18}}
-      placeholder="title"
       value={props.postInfo.title}
       returnKeyType="next"
       onChangeText={(title) => props.setPostState({title})}
