@@ -100,4 +100,8 @@ defmodule Danton.Post do
       |> Enum.map(&(&1.id))
       |> Enum.each(&Post.destroy/1)
   end
+
+  def load_messages(post) do
+    post |> Repo.preload([room: :messages])
+  end
 end

@@ -39,7 +39,7 @@ defmodule Danton.Api.V1.PostController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", post_path(conn, :show, post))
-        |> render("show.json", post: post)
+        |> render("show.json", post: Post.load_messages(post))
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -59,7 +59,7 @@ defmodule Danton.Api.V1.PostController do
 
     case Repo.update(changeset) do
       {:ok, post} ->
-        render(conn, "show.json", post: post)
+        render(conn, "show.json", post: Post.load_messages(post))
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

@@ -28,19 +28,20 @@ defmodule Danton.Channel do
   # ===========================
 
   def for_club(query \\ Channel, club_id) do
-    from(c in query, where: c.club_id == ^club_id)
+    from(ch in query, where: ch.club_id == ^club_id)
   end
 
   def for_clubs(query \\ Channel, club_ids) do
-    from(c in query, where: c.club_id in ^club_ids)
+    from(ch in query, where: ch.club_id in ^club_ids)
   end
 
   def select_id(query \\ Channel) do
-    from c in query, select: c.id
+    from ch in query, select: ch.id
   end
 
   def for_user(query \\ Channel, user) do
-    Club.for_user(user) |> for_clubs(query)
+    ids = Club.for_user(user) |> Repo.all() |> Enum.map(&(&1.id))
+    for_clubs(query, ids)
   end
 
   # ===========================
