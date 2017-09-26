@@ -38,21 +38,21 @@ var styles = StyleSheet.create({
 
 const ClubItem = (props) => {
   return (
-    <View style={styles.clubItem}>
-      <View style={styles.name}>
-        <Button
-          onPress={() => props.navigate('Club', {club: props.club, id: props.club.id})}
-          title={props.club.name}
-        />
-      </View>
-      <View style={styles.details}>
-        <View style={styles.membership}>
-          <Text>Admin</Text>
-        </View>
-      </View>
-    </View>
+    <Button
+      onPress={() => props.navigate('Club', {club: props.club, id: props.club.id})}
+      title={props.club.name}
+    />
   )
 }
+    // <View style={styles.clubItem}>
+    //   <View style={styles.name}>
+    //   </View>
+    //   <View style={styles.details}>
+    //     <View style={styles.membership}>
+    //       <Text>Admin</Text>
+    //     </View>
+    //   </View>
+    // </View>
 
 // ===============
 //    PRESENTER
@@ -65,7 +65,7 @@ class ClubList extends Component {
 
   renderClubLink = (club) => {
     const { navigate } = this.props.navigation
-    return <ClubItem navigate={navigate} club={club} />
+    return <ClubItem navigate={navigate} club={club} key={club.id} />
   }
 
   render() {
