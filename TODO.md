@@ -1,21 +1,33 @@
 # Todos
 
-## Sort By Activity
-- Frontend sorts by activity
+## Club Mgmt
+- invite user
+  - email with link sent
+    - creates account if they accept
+    - associates with account if they are old
+    - does nothing if they already have a membership
+    - regardless of creds
+- make user admin
+  - does not notify
+- remove user from group
+  - does not notify
+- restrict abilitieks to admin (only FE)
+  - edit
+  - make admin
+  - remove user
+
 
 ## Push Notifications
 - Change this to a push notification
 - Make presence on chat create a new check in
   every N minutes
 - Make the check in creation async
-- Clean up module positions
+- Clean up backend modules
 
 ## Quick Wins
 - posts without a url just become a discussion post
-- labels are added to the edit page
 
 ## Backend
-  - Move more logic into dedicated modules
   - add proper authorization to create, update, delete calls
 
 ## Frontend
