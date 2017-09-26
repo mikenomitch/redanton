@@ -45,3 +45,19 @@ export const getMemberships = (clubId) => {
     }
   }
 }
+
+export const kickMember = (membershipId, onSuccess) => {
+  return {
+    type: 'KICK_MEMBER_CALL',
+    call: {
+      action: 'DELETE',
+      endpoint: `/memberships/${membershipId}`,
+      successActionCreator: () => {
+        return (dispatch) => {
+          onSuccess && onSuccess()
+          dispatch(membershipActions.removeMembership(membershipId))
+        }
+      }
+    }
+  }
+}

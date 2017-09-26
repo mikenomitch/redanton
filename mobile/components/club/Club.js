@@ -13,7 +13,11 @@ import { confirmMessage } from '../../lib/uiActions'
 import {
   leaveClub
 } from '../../data/clubs'
-import { getMemberships } from '../../data/memberships'
+
+import {
+  getMemberships,
+  kickMember
+} from '../../data/memberships'
 
 import Footer from '../ui/Footer'
 
@@ -39,7 +43,11 @@ const Membership = (props) => (
     </View>
 
     <View key="kick">
-      <Button title="kick from club" onPress={() => alert('oh noes')}/>
+      <Button title="kick from club" onPress={() => confirmMessage(
+        'Kick User',
+        'Are you sure? This action is permanent.',
+        props.kickMember
+      )} />
     </View>
   </View>
 )
@@ -65,11 +73,19 @@ class Club extends Component {
     return this.props.users.filter((u) => u.id === membership.user_id)[0] || {email: 'loading...'}
   }
 
+  kickMemberCall = (membershipId) => () => {
+    this.props.kickMember(
+      membershipId,
+      alert('member kicked')
+    )
+  }
+
   renderMemberships () {
     return this.props.memberships.map((membership) => (
       <Membership
         key={membership.user_id}
         membership={membership}
+        kickMember={this.kickMemberCall(membership.id)}
         user={this.userForMembership(membership)}
       />
     ))
@@ -129,6 +145,7 @@ const mapStateToProps = (state, props) => {
 export default connect(
   mapStateToProps, {
     getMemberships,
-    leaveClub
+    leaveClub,
+    kickMember
   }
 )(Club)
