@@ -1,36 +1,11 @@
 import React, {Component} from 'react'
-import { Button, Text, View, StyleSheet } from 'react-native'
+import { Button, Text, View } from 'react-native'
 
 import { connect } from 'react-redux'
 
 import { getClubs } from '../../data/clubs'
 
 import BasicButton from '../ui/BasicButton'
-
-// ============
-//    STYLES
-// ============
-
-// TODO: DRY up with Channel
-var styles = StyleSheet.create({
-  clubItem: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#ddd',
-    display: 'flex',
-    alignItems: 'flex-start'
-  },
-  name: {
-    flex: 1
-  },
-  details: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  membership: {
-    paddingLeft: 10,
-    paddingRight: 10
-  },
-})
 
 // ===============
 //    CHILDREN
@@ -44,15 +19,6 @@ const ClubItem = (props) => {
     />
   )
 }
-    // <View style={styles.clubItem}>
-    //   <View style={styles.name}>
-    //   </View>
-    //   <View style={styles.details}>
-    //     <View style={styles.membership}>
-    //       <Text>Admin</Text>
-    //     </View>
-    //   </View>
-    // </View>
 
 // ===============
 //    PRESENTER
