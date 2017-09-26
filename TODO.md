@@ -9,8 +9,6 @@
     - regardless of creds
 - make user admin
   - does not notify
-- remove user from group
-  - does not notify
 - restrict abilitieks to admin (only FE)
   - edit
   - make admin

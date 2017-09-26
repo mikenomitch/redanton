@@ -16,6 +16,7 @@ import {
 
 import {
   getMemberships,
+  elevateMembership,
   kickMember
 } from '../../data/memberships'
 
@@ -39,7 +40,11 @@ const Membership = (props) => (
     </View>
 
     <View key="elevate">
-      <Button title="make admin" onPress={() => alert('yay admin')}/>
+      <Button title="make admin" onPress={() => confirmMessage(
+        'Make Admin',
+        'Are you sure? This action is permanent.',
+        props.elevateMembership
+      )} />
     </View>
 
     <View key="kick">
@@ -80,11 +85,19 @@ class Club extends Component {
     )
   }
 
+  elevateMembershipCall = (membershipId) => () => {
+    this.props.elevateMembership(
+      membershipId,
+      alert('member made admin')
+    )
+  }
+
   renderMemberships () {
     return this.props.memberships.map((membership) => (
       <Membership
         key={membership.user_id}
         membership={membership}
+        elevateMembership={this.elevateMembershipCall(membership.id)}
         kickMember={this.kickMemberCall(membership.id)}
         user={this.userForMembership(membership)}
       />
@@ -146,6 +159,7 @@ export default connect(
   mapStateToProps, {
     getMemberships,
     leaveClub,
+    elevateMembership,
     kickMember
   }
 )(Club)

@@ -61,3 +61,25 @@ export const kickMember = (membershipId, onSuccess) => {
     }
   }
 }
+
+export const elevateMembership = (membershipId, onSuccess) => {
+  return {
+    type: 'ELEVATE_MEMBERSHIP_CALL',
+    call: {
+      action: 'PATCH',
+      endpoint: `/memberships/${membershipId}`,
+      params: {
+        membership: {
+          type: 'admin'
+        }
+      },
+      errorActionCreator: () => { alert('error elevating memership to admin. try again.') },
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(membershipActions.mergeMemberships([res.data]))
+          onSuccess && onSuccess(res)
+        }
+      }
+    }
+  }
+}

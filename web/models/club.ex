@@ -54,22 +54,22 @@ defmodule Danton.Club do
   Makes an admin level membership in a club for a user
   """
   def make_admin(club, user) do
-    make_member(club, user, "admin")
+    make_member(club, user, "admin", "accepted")
   end
 
   @doc """
   Makes an standard level membership in a club for a user
   """
   def make_standard_member(club, user) do
-    make_member(club, user, "standard")
+    make_member(club, user, "standard", "accepted")
   end
 
   @doc """
   Makes an admin level membership in a club for a user
   """
-  def make_member(club, user, type) do
+  def make_member(club, user, type, status) do
     club
-    |> Ecto.build_assoc(:memberships, %{user_id: user.id, type: type})
+    |> Ecto.build_assoc(:memberships, %{user_id: user.id, type: type, status: status})
     |> Repo.insert!()
   end
 
