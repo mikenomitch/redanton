@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 
 import {
-  Button,
   View,
   Image,
   Text
 } from 'react-native'
 
 import BasicButton from '../ui/BasicButton'
+import ClubList from '../club/ClubList'
 
 import { connect } from 'react-redux'
 
-import { getClubs } from '../../data/clubs'
 import { authActions } from '../../data/auth'
 
 // ===============
@@ -19,10 +18,6 @@ import { authActions } from '../../data/auth'
 // ===============
 
 class Settings extends Component {
-  componentDidMount () {
-    this.props.getClubs()
-  }
-
   render() {
     return (
       <View style={{padding: 60}}>
@@ -33,10 +28,7 @@ class Settings extends Component {
           source={{uri: this.props.currentUser.avatar}}
         />
 
-        <Text> Club Memberships: </Text>
-        {this.props.clubs.map(
-          (c) => (<Text> {c.name} (member) </Text>)
-        )}
+        <ClubList navigation={this.props.navigation} />
 
         <BasicButton onPress={this.props.signOut}>
           sign out
@@ -62,12 +54,11 @@ class Settings extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    clubs: Object.values(state.clubs),
     currentUser: state.auth && state.auth.currentUser || {}
   }
 }
 
 export default connect(
   mapStateToProps,
-  {signOut: authActions.clearCreds, getClubs}
+  {signOut: authActions.clearCreds}
 )(Settings)

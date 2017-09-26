@@ -3,8 +3,7 @@ import React, { Component } from 'react'
 import {
 	View,
   ScrollView,
-  Text,
-  TextInput
+  Text
 } from 'react-native'
 
 import BasicButton from '../ui/BasicButton'
@@ -61,7 +60,7 @@ class NewChannel extends Component {
             channelInfo={this.state.channelInfo}
           />
           <BasicButton onPress={this.onPost} >
-            make it
+            make channel
           </BasicButton>
         </ScrollView>
 			</View>
@@ -74,6 +73,6 @@ class NewChannel extends Component {
 // ===============
 
 export default connect(
-  null,
+  null, 
   { createChannel }
 )(NewChannel)

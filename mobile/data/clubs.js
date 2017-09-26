@@ -42,12 +42,12 @@ export const getClubs = () => {
     call: {
       action: 'GET',
       endpoint: '/clubs',
-      successActionCreator: clubActions.onChannelsReturn
+      successActionCreator: clubActions.onClubsReturn
     }
   }
 }
 
-export const createChannel = (clubInfo, onSuccess) => {
+export const createClub = (clubInfo, onSuccess) => {
   return {
     type: 'CREATE_CLUB_CALL',
     call: {
@@ -55,7 +55,7 @@ export const createChannel = (clubInfo, onSuccess) => {
       endpoint: '/clubs',
       successActionCreator: (res) => {
         return (dispatch) => {
-          dispatch(clubActions.mergeClub([res.data]))
+          dispatch(clubActions.mergeClubs([res.data]))
           onSuccess(res)
         }
       },
@@ -64,6 +64,45 @@ export const createChannel = (clubInfo, onSuccess) => {
         club: {
           name: clubInfo.name,
           description: clubInfo.description
+        }
+      }
+    }
+  }
+}
+
+export const updateClub = (clubInfo, onSuccess) => {
+  return {
+    type: 'UPDATE_CLUB_CALL',
+    call: {
+      action: 'PATCH',
+      endpoint: `/clubs/${clubInfo.id}`,
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(clubActions.mergeClubs([res.data]))
+          onSuccess(res)
+        }
+      },
+      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
+      params: {
+        club: {
+          name: clubInfo.name,
+          description: clubInfo.description
+        }
+      }
+    }
+  }
+}
+
+export const deleteClub = (clubId, onSuccess) => {
+  return {
+    type: 'DELETE_CLUB_CALL',
+    call: {
+      action: 'DELETE',
+      endpoint: `/clubs/${clubId}`,
+      successActionCreator: () => {
+        return (dispatch) => {
+          onSuccess && onSuccess()
+          dispatch(clubActions.removeClub(clubId))
         }
       }
     }

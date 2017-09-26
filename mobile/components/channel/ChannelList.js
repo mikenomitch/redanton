@@ -10,6 +10,7 @@ import { getClubs } from '../../data/clubs'
 //    STYLES
 // ============
 
+// TODO: DRY up with Club
 var styles = StyleSheet.create({
   list: {
     height: '100%'
@@ -94,7 +95,8 @@ class ChannelList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    channels: Object.values(state.channels)
+    channels: Object.values(state.channels),
+    clubs: Object.values(state.clubs)
   }
 }
 

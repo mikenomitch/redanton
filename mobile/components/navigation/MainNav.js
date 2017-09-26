@@ -15,6 +15,10 @@ import PostScreen from '../post/Post'
 import EditPostScreen from '../post/EditPost'
 import NewPostScreen from '../post/NewPost'
 
+import ClubScreen from '../club/Club'
+import EditClubScreen from '../club/EditClub'
+import NewClubScreen from '../club/NewClub'
+
 import PostChatScreen from '../chat/PostChat'
 
 // ==============
@@ -107,6 +111,24 @@ const MainNav = StackNavigator({
     screen: EditChannelScreen,
     navigationOptions: {
       title: 'Edit Channel'
+    }
+  },
+  Club: {
+    screen: ClubScreen,
+    navigationOptions: ({navigation}) => ({
+      title: navigation.state.params.club.name || 'Club'
+    })
+  },
+  NewClub: {
+    screen: NewClubScreen,
+    navigationOptions: {
+      title: 'Create Club'
+    }
+  },
+  EditClub: {
+    screen: EditClubScreen,
+    navigationOptions: {
+      title: 'Edit Club'
     }
   },
   NewPost: {
