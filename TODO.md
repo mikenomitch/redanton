@@ -2,17 +2,25 @@
 
 ## Club Mgmt
 - invite user
-  - email with link sent
-    - creates account if they accept
-    - associates with account if they are old
-    - does nothing if they already have a membership
-    - regardless of creds
-- make user admin
-  - does not notify
-- restrict abilitieks to admin (only FE)
-  - edit
-  - make admin
-  - remove user
+  - inviter puts in email and hits send
+  - finds_or_creates user (with 'pending' status if new)
+  - standard membership created
+  - email send to the person (with just an alert now)
+  - when logged out have the options to sign in or sign up
+  - if sign_up and user is created but pending, they
+    are taken to page to fill out info
+  - if sign up and user is created and not pending,
+    it fails
+  - if sign up and user is not created, give email &
+    password (with confirmation) and then go
+    to the info page
+  - memberships just show up once youre signed in like
+    they had always been there (for now)
+
+- add user status to model/table
+- start w 100% new user sign up
+- add user invite that creates a pending user
+- completion of sign up as that user
 
 ## Push Notifications
 - Change this to a push notification

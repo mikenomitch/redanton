@@ -26,36 +26,61 @@ import Footer from '../ui/Footer'
 //    CHILDREN
 // ===============
 
-const Membership = (props) => (
-  <View
-    key={props.membership.id}
-    style={{
-      width: '100%',
-      display: 'flex',
-      justifyContent: 'center'
-    }}
-  >
-    <View key="info">
-      <Text> Membership for: {props.user.name} </Text>
-    </View>
+class MembershipItem extends Component {
+  get membership () {
+    return this.props.membership
+  }
 
-    <View key="elevate">
-      <Button title="make admin" onPress={() => confirmMessage(
-        'Make Admin',
-        'Are you sure? This action is permanent.',
-        props.elevateMembership
-      )} />
-    </View>
+  get isAdmin () {
+    return this.membership.type === "admin"
+  }
 
-    <View key="kick">
-      <Button title="kick from club" onPress={() => confirmMessage(
-        'Kick User',
-        'Are you sure? This action is permanent.',
-        props.kickMember
-      )} />
-    </View>
-  </View>
-)
+  renderElevation () {
+    if (!this.isAdmin && this.props.currentUserIsAdmin) {
+      return (
+        <View key="elevate">
+          <Button title="make admin" onPress={() => confirmMessage(
+            'Make Admin',
+            'Are you sure? This action is permanent.',
+            this.props.elevateMembership
+          )} />
+        </View>
+      )
+    }
+  }
+
+  renderKickUser () {
+    if (!this.isAdmin && this.props.currentUserIsAdmin) {
+      return (
+        <View key="kick">
+          <Button title="kick from club" onPress={() => confirmMessage(
+            'Kick User',
+            'Are you sure? This action is permanent.',
+            this.props.kickMember
+          )} />
+        </View>
+      )
+    }
+  }
+
+  render() {
+    return (
+      <View
+        style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center'
+        }}
+      >
+        <View key="info">
+          <Text> Membership for: {this.props.user.name} </Text>
+        </View>
+        {this.renderElevation()}
+        {this.renderKickUser()}
+      </View>
+    )
+  }
+}
 
 // ===============
 //    PRESENTER
@@ -94,7 +119,8 @@ class Club extends Component {
 
   renderMemberships () {
     return this.props.memberships.map((membership) => (
-      <Membership
+      <MembershipItem
+        currentUserIsAdmin={this.props.currentUserIsAdmin}
         key={membership.user_id}
         membership={membership}
         elevateMembership={this.elevateMembershipCall(membership.id)}
@@ -102,6 +128,16 @@ class Club extends Component {
         user={this.userForMembership(membership)}
       />
     ))
+  }
+
+  renderEdit() {
+    if (this.props.currentUserIsAdmin) {
+      return (
+        <Button title="Edit Club"
+          onPress={() => this.props.navigation.navigate('EditClub', {clubInfo: this.club})}
+        />
+      )
+    }
   }
 
   render() {
@@ -131,9 +167,7 @@ class Club extends Component {
                 )
               }}
             />
-            <Button title="Edit Club"
-              onPress={() => this.props.navigation.navigate('EditClub', {clubInfo: this.club})}
-            />
+            {this.renderEdit()}
           </View>
         </Footer>
       </View>
@@ -152,7 +186,17 @@ const mapStateToProps = (state, props) => {
     (m) => m.club_id === clubId
   )
 
-  return { memberships, users }
+  const membershipForCurrentUser = memberships.filter(
+    (m) => m.user_id === state.auth.currentUser.id
+  )[0] || {}
+
+  const currentUserIsAdmin = membershipForCurrentUser.type === "admin"
+
+  return {
+    memberships,
+    users,
+    currentUserIsAdmin
+  }
 }
 
 export default connect(
