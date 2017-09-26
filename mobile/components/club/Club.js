@@ -7,7 +7,11 @@ import {
 
 import { connect } from 'react-redux'
 
+import { confirmMessage } from '../../lib/uiActions'
+
+import { leaveClub } from '../../data/clubs'
 import { getMemberships } from '../../data/memberships'
+
 import Footer from '../ui/Footer'
 
 // ===============
@@ -21,6 +25,10 @@ class Club extends Component {
 
   componentDidMount() {
     this.props.getMemberships(this.club.id)
+  }
+
+  leaveClub = () => {
+    this.props.leaveClub(this.club.id, this.props.navigation.goBack)
   }
 
   render() {
@@ -44,7 +52,13 @@ class Club extends Component {
             alignItems: 'center'
           }}>
             <Button title="Leave Club"
-              onPress={() => alert('Not yet!')}
+              onPress={() => {
+                confirmMessage(
+                  'Leave Club',
+                  'Are you sure? This action is permanent.',
+                  this.leaveClub
+                )
+              }}
             />
             <Button title="Edit Club"
               onPress={() => this.props.navigation.navigate('EditClub', {clubInfo: this.club})}
@@ -70,5 +84,8 @@ const mapStateToProps = (state, props) => {
 }
 
 export default connect(
-  mapStateToProps, { getMemberships }
+  mapStateToProps, {
+    getMemberships,
+    leaveClub
+  }
 )(Club)

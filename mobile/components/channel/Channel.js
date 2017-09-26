@@ -64,7 +64,11 @@ class Channel extends Component {
             alignItems: 'center'
           }}>
             <Button title="Remove Channel" onPress={() => {
-              confirmMessage('Remove Channel', 'Are you sure? This will remove all its posts.', this.removeChannel)
+              confirmMessage(
+                'Remove Channel',
+                'Are you sure? This will remove all its posts.',
+                this.removeChannel
+              )
             }} />
             <Button title="Edit Channel" onPress={() => navigation.navigate('EditChannel', {channelInfo: this.channel})} />
           </View>
