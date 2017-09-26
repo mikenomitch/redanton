@@ -17,7 +17,6 @@
   - memberships just show up once youre signed in like
     they had always been there (for now)
 
-- add user status to model/table
 - start w 100% new user sign up
 - add user invite that creates a pending user
 - completion of sign up as that user
