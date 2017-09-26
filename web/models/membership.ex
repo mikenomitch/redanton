@@ -30,4 +30,8 @@ defmodule Danton.Membership do
   def for_user(user) do
     user |> Ecto.assoc(:memberships)
   end
+
+  def for_club(club) do
+    club |> Ecto.assoc(:memberships)
+  end
 end

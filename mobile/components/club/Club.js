@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 
 import {
   Button,
+  Text,
   View
 } from 'react-native'
 
@@ -13,6 +14,18 @@ import { leaveClub } from '../../data/clubs'
 import { getMemberships } from '../../data/memberships'
 
 import Footer from '../ui/Footer'
+
+// ===============
+//    CHILDREN
+// ===============
+
+const Membership = (membership) => (
+  <View key={membership.id}>
+    <Text>
+      Membership for: {membership.user_id}
+    </Text>
+  </View>
+)
 
 // ===============
 //    PRESENTER
@@ -39,7 +52,7 @@ class Club extends Component {
       }}>
         <View style={{height: '90%'}}>
           {this.props.memberships.map((m) => (
-            <Text> User: {m.user_id} </Text>
+            <Text key={m.user_id}> User: {m.user_id} </Text>
           ))}
         </View>
         <Footer>

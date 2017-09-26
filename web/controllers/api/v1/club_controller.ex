@@ -54,6 +54,9 @@ defmodule Danton.Api.V1.ClubController do
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     if membership do
+      # Here we use delete! (with a bang) because we expect
+      # it to always work (and if it does not, it will raise).
+      Repo.delete!(membership)
       json conn, %{successful: true, id: membership.id}
     else
       conn

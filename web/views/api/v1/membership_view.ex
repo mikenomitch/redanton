@@ -10,6 +10,12 @@ defmodule Danton.Api.V1.MembershipView do
   end
 
   def render("membership.json", %{membership: membership}) do
-    %{id: membership.id, type: membership.type, status: membership.status}
+    %{
+      id: membership.id,
+      type: membership.type,
+      status: membership.status,
+      user_id: membership.user_id,
+      club_id: membership.club_id
+    }
   end
 end

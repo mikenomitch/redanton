@@ -118,7 +118,8 @@ defmodule Danton.Router do
 
       resources "/clubs", Api.V1.ClubController do
         delete "/leave", Api.V1.ClubController, :leave
-				get "/users", Api.V1.UserController, :index
+        get "/users", Api.V1.UserController, :index
+        get "/memberships", Api.V1.MembershipController, :index
         resources "/channels", Api.V1.ChannelController, only: [:index, :new, :create]
       end
 

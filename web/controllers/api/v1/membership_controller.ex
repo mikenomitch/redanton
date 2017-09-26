@@ -5,9 +5,16 @@ defmodule Danton.Api.V1.MembershipController do
   # ACTIONS
   # ===========================
 
+  def index(conn, %{"club_id" => club_id}, current_user, _claims) do
+    memberships = Repo.get(Club, club_id)
+    |> Membership.for_club()
+    |> Repo.all()
+		render(conn, "index.json", memberships: memberships)
+  end
+
   def index(conn, _params, current_user, _claims) do
     memberships = Membership.for_user(current_user) |> Repo.all()
-		render(conn, "index.json", memberships: memberships)
+    render(conn, "index.json", memberships: memberships)
   end
 
   # TODO add proper relationship login
