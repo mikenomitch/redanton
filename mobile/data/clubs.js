@@ -99,7 +99,7 @@ export const leaveClub = (clubId, onSuccess) => {
     call: {
       action: 'DELETE',
       endpoint: `/clubs/${clubId}/leave`,
-      successActionCreator: (data) => {
+      successActionCreator: () => {
         return (dispatch) => {
           onSuccess && onSuccess()
           dispatch(clubActions.removeClub(clubId))
