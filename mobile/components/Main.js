@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 
 import { loadInitialAuth } from '../data/auth'
 
-import Auth from './auth/Auth'
+import LoginOrSignUp from './user/LoginOrSignUp'
 import MainNav from './navigation/MainNav'
 
 // =============
@@ -30,7 +30,7 @@ class Main extends Component {
   }
 
   renderLogin () {
-    return <Auth />
+    return <LoginOrSignUp />
   }
 
   renderMainApp () {

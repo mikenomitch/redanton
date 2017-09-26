@@ -1,45 +1,38 @@
 import React, { Component } from 'react'
-
-import {
-	AsyncStorage,
-  View
-} from 'react-native'
+import { View } from 'react-native'
 
 import BasicTextInput from '../ui/BasicTextInput'
 import BasicButton from '../ui/BasicButton'
 
 import { connect } from 'react-redux'
 
-import { userActions } from '../../data/users'
-import { signIn } from '../../data/auth'
+import { signUp, userActions } from '../../data/users'
 
 // ===============
 //    PRESENTER
 // ===============
 
-class Auth extends Component {
+class SignUp extends Component {
   constructor(props){
     super(props)
 
     this.state = {
       email: null,
-      password: null
+      password: null,
+      passwordConfirmation: null
     }
 	}
 
 	getInfo = () => {
-    this.props.signIn({
+    this.props.signUp({
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      passwordConfirmation: this.state.passwordConfirmation
     })
 	}
 
   render() {
-		// note: this should be local state
-		// only showing the prop so I can prove redux
-		// is hooked up properly
-		const email = this.state.email
-    const {password} = this.state
+    const {email, password, passwordConfirmation} = this.state
 
     return (
       <View style={{paddingTop: 200, paddingLeft: 50, paddingRight: 50}}>
@@ -59,8 +52,15 @@ class Auth extends Component {
 					secureTextEntry
         />
 
+        <BasicTextInput
+          placeholder="confirmation"
+          value={}
+          onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
+          secureTextEntry
+        />
+
         <BasicButton onPress={this.getInfo}>
-          login
+          sign up
         </BasicButton>
       </View>
     )
@@ -73,5 +73,5 @@ class Auth extends Component {
 
 export default connect(
   null,
-  { signIn }
-)(Auth)
+  { signUp }
+)(SignUp)
