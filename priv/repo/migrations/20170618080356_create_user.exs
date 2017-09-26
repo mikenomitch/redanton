@@ -5,6 +5,7 @@ defmodule Danton.Repo.Migrations.CreateUser do
       add :name, :string
       add :email, :string
       add :avatar, :string
+      add :status, :string
 
       timestamps()
     end

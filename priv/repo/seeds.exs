@@ -21,11 +21,11 @@ Repo.delete_all Danton.Club
 
 # passwords are "secret"
 users = [
-  %Danton.User{name: "Mike", email: "mikenomitch@gmail.com", avatar: "https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-1/p240x240/13934743_4154683422348_4358878110125305408_n.jpg?oh=b9479a030c0b081197e9b4a2e91181f7&oe=5A0CC1DB"},
-  %Danton.User{name: "Dan", email: "danmihalov@gmail.com", avatar: "https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-9/1393772_2712932459475_332693732_n.jpg?oh=c8880860965ae1e28637201cd57cdff2&oe=59FA61FB"},
-  %Danton.User{name: "Steven", email: "stevenan7@gmail.com", avatar: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/4/005/0b5/026/15086de.jpg"},
-  %Danton.User{name: "Zach", email: "zfertig@gmail.com", avatar: "https://pbs.twimg.com/profile_images/556526218989027328/ERy-0VYQ.jpeg"},
-  %Danton.User{name: "Kevin", email: "kevinzussman@gmail.com", avatar: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAfOAAAAJDJiYTQwM2NhLWZlNjgtNDI2NS1hYTRjLTBkMzBmNjA3MTQxNg.jpg"},
+  %Danton.User{name: "Mike", status: "active", email: "mikenomitch@gmail.com", avatar: "https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-1/p240x240/13934743_4154683422348_4358878110125305408_n.jpg?oh=b9479a030c0b081197e9b4a2e91181f7&oe=5A0CC1DB"},
+  %Danton.User{name: "Dan", status: "active", email: "danmihalov@gmail.com", avatar: "https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-9/1393772_2712932459475_332693732_n.jpg?oh=c8880860965ae1e28637201cd57cdff2&oe=59FA61FB"},
+  %Danton.User{name: "Steven", status: "active", email: "stevenan7@gmail.com", avatar: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/4/005/0b5/026/15086de.jpg"},
+  %Danton.User{name: "Zach", status: "active", email: "zfertig@gmail.com", avatar: "https://pbs.twimg.com/profile_images/556526218989027328/ERy-0VYQ.jpeg"},
+  %Danton.User{name: "Kevin", status: "active", email: "kevinzussman@gmail.com", avatar: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAfOAAAAJDJiYTQwM2NhLWZlNjgtNDI2NS1hYTRjLTBkMzBmNjA3MTQxNg.jpg"},
 ]
 
 users |> Enum.each(&Repo.insert!/1)

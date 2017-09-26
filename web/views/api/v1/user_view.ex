@@ -6,6 +6,12 @@ defmodule Danton.Api.V1.UserView do
 	end
 
 	defp user_json(user) do
-		%{id: user.id, name: user.name, avatar: user.avatar}
+		%{
+      avatar: user.avatar,
+      email: user.email,
+      id: user.id,
+      name: user.name,
+      status: user.status
+    }
 	end
 end

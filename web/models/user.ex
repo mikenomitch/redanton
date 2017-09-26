@@ -9,6 +9,7 @@ defmodule Danton.User do
     field :name, :string
     field :email, :string
     field :avatar, :string
+    field :status, :string
 
     has_many :memberships, Membership
     has_many :authorizations, Authorization
@@ -17,8 +18,8 @@ defmodule Danton.User do
     timestamps()
   end
 
-  @paramlist ~w(name email avatar)
-  @required_params ~w(email name)
+  @paramlist ~w(name email status avatar)
+  @required_params ~w(email name status)
 
   def changeset(model, params \\ %{}) do
     model

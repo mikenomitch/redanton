@@ -63,7 +63,7 @@ defmodule Danton.Api.V1.ClubController do
     end
   end
 
-  def delete(conn, %{"id" => id}, current_user, _claims) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id)
 
     # Here we use delete! (with a bang) because we expect
