@@ -48,7 +48,21 @@ defmodule Danton.Api.V1.ClubController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _current_user, _claims) do
+  def leave(conn, %{"club_id" => club_id}, current_user, _claims) do
+    membership = Membership.for_user(current_user) |> Repo.get_by(club_id: club_id)
+
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
+    if membership do
+      json conn, %{successful: true, id: membership.id}
+    else
+      conn
+      |> put_status(:unprocessable_entity)
+      |> json(%{successful: false})
+    end
+  end
+
+  def delete(conn, %{"id" => id}, current_user, _claims) do
     club = Repo.get!(Club, id)
 
     # Here we use delete! (with a bang) because we expect
