@@ -10,7 +10,9 @@ import { connect } from 'react-redux'
 
 import { confirmMessage } from '../../lib/uiActions'
 
-import { leaveClub } from '../../data/clubs'
+import {
+  leaveClub
+} from '../../data/clubs'
 import { getMemberships } from '../../data/memberships'
 
 import Footer from '../ui/Footer'
@@ -19,11 +21,26 @@ import Footer from '../ui/Footer'
 //    CHILDREN
 // ===============
 
-const Membership = (membership) => (
-  <View key={membership.id}>
-    <Text>
-      Membership for: {membership.user_id}
-    </Text>
+const Membership = (props) => (
+  <View
+    key={props.membership.id}
+    style={{
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center'
+    }}
+  >
+    <View key="info">
+      <Text> Membership for: {props.user.name} </Text>
+    </View>
+
+    <View key="elevate">
+      <Button title="make admin" onPress={() => alert('yay admin')}/>
+    </View>
+
+    <View key="kick">
+      <Button title="kick from club" onPress={() => alert('oh noes')}/>
+    </View>
   </View>
 )
 
@@ -44,6 +61,20 @@ class Club extends Component {
     this.props.leaveClub(this.club.id, this.props.navigation.goBack)
   }
 
+  userForMembership (membership) {
+    return this.props.users.filter((u) => u.id === membership.user_id)[0] || {email: 'loading...'}
+  }
+
+  renderMemberships () {
+    return this.props.memberships.map((membership) => (
+      <Membership
+        key={membership.user_id}
+        membership={membership}
+        user={this.userForMembership(membership)}
+      />
+    ))
+  }
+
   render() {
     return (
       <View style={{
@@ -51,9 +82,7 @@ class Club extends Component {
         height: '100%'
       }}>
         <View style={{height: '90%'}}>
-          {this.props.memberships.map((m) => (
-            <Text key={m.user_id}> User: {m.user_id} </Text>
-          ))}
+          {this.renderMemberships()}
         </View>
         <Footer>
           <View style={{
@@ -88,12 +117,13 @@ class Club extends Component {
 // ===============
 
 const mapStateToProps = (state, props) => {
+  const users = Object.values(state.users)
   const clubId = props.navigation.state.params.club.id
   const memberships = Object.values(state.memberships).filter(
     (m) => m.club_id === clubId
   )
 
-  return { memberships }
+  return { memberships, users }
 }
 
 export default connect(
