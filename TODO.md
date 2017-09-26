@@ -16,7 +16,6 @@
   - make admin
   - remove user
 
-
 ## Push Notifications
 - Change this to a push notification
 - Make presence on chat create a new check in
@@ -26,6 +25,7 @@
 
 ## Quick Wins
 - posts without a url just become a discussion post
+- if sole admin leaves another is elevated
 
 ## Backend
   - add proper authorization to create, update, delete calls
