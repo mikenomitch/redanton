@@ -75,6 +75,10 @@ export const authActions = {
 
   onSignInFailure: () => {
     alert('there was an issue signing in. try again.')
+  },
+
+  onSignUpFailure: () => {
+    alert('there was an issue signing up. try again.')
   }
 }
 
@@ -97,7 +101,7 @@ export const signIn = (userInfo) => {
     type: 'SIGN_IN',
     call: {
       action: 'POST',
-      endpoint: '/api_login/v1',
+      endpoint: '/api_auth/v1/login',
       params: {
         email: userInfo.email,
         password: userInfo.password
@@ -107,6 +111,27 @@ export const signIn = (userInfo) => {
       },
       successActionCreator: authActions.addAuth,
       errorActionCreator: authActions.onSignInFailure
+    }
+  }
+}
+
+export const signUp = (userInfo) => {
+  return {
+    type: 'SIGN_UP',
+    call: {
+      action: 'POST',
+      endpoint: '/login/identity/callback',
+      params: {
+        email: userInfo.email,
+        name: userInfo.name,
+        password: userInfo.password,
+        password_confirmation: userInfo.passwordConfirmation
+      },
+      opts: {
+        useNonApi: true
+      },
+      successActionCreator: authActions.addAuth,
+      errorActionCreator: authActions.onSignUpFailure
     }
   }
 }

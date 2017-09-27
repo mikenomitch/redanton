@@ -37,10 +37,10 @@ defmodule Danton.UserFromAuth do
   defp validate_auth_for_registration(_auth), do: :ok
 
   defp validate_pw_length(pw, email) when is_binary(pw) do
-    if String.length(pw) >= 8 do
+    if String.length(pw) >= 6 do
       validate_email(email)
     else
-      {:error, :password_length_is_less_than_8}
+      {:error, :password_length_is_less_than_6}
     end
   end
 

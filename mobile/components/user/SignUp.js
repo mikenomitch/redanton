@@ -6,7 +6,8 @@ import BasicButton from '../ui/BasicButton'
 
 import { connect } from 'react-redux'
 
-import { signUp, userActions } from '../../data/users'
+import { userActions } from '../../data/users'
+import { signUp } from '../../data/auth'
 
 // ===============
 //    PRESENTER
@@ -18,6 +19,7 @@ class SignUp extends Component {
 
     this.state = {
       email: null,
+      name: null,
       password: null,
       passwordConfirmation: null
     }
@@ -26,22 +28,30 @@ class SignUp extends Component {
 	getInfo = () => {
     this.props.signUp({
       email: this.state.email,
+      name: this.state.name,
       password: this.state.password,
       passwordConfirmation: this.state.passwordConfirmation
     })
 	}
 
   render() {
-    const {email, password, passwordConfirmation} = this.state
+    const {email, password, passwordConfirmation, name} = this.state
 
     return (
-      <View style={{paddingTop: 200, paddingLeft: 50, paddingRight: 50}}>
+      <View style={{paddingTop: 60, paddingLeft: 50, paddingRight: 50}}>
         <BasicTextInput
           placeholder="email"
           value={email}
 					onChangeText={(email) => this.setState({email})}
 					keyboardType="email-address"
           autoCapitalize="none"
+          autoCorrect={false}
+        />
+
+        <BasicTextInput
+          placeholder="name"
+          value={name}
+          onChangeText={(name) => this.setState({name})}
           autoCorrect={false}
         />
 
@@ -54,7 +64,7 @@ class SignUp extends Component {
 
         <BasicTextInput
           placeholder="confirmation"
-          value={}
+          value={passwordConfirmation}
           onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
           secureTextEntry
         />

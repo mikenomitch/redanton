@@ -69,6 +69,30 @@ defmodule Danton.User do
   # OTHER
   # ===========================
 
+  def sign_up(%{"email" => email, "name" => name, "password" => password, "password_confirmation" => password_confirmation}) do
+    # TODO: check validity of email
+    # TODO: check password validity (length and match)
+    # TODO: if user matches it fails
+    # TODO: if auth creation fails it returns an error
+    # TODO: wrap user and auth creation in a transaction
+
+    {:ok, user} = %Danton.User{
+      name: name,
+      status: "active",
+      email: email,
+      avatar: ""
+    } |> Repo.insert()
+
+    {:ok, authorization} = %Danton.Authorization{
+      uid: user.email,
+      provider: "identity",
+      token: Comeonin.Bcrypt.hashpwsalt(password),
+      user_id: user.id
+    } |> Repo.insert()
+
+    {:ok, user}
+  end
+
   # TODO: figure out if you can just use changeset above
   def registration_changeset(model, params \\ :empty) do
     model |> cast(params, [:name, :email])
@@ -90,7 +114,7 @@ defmodule Danton.User do
     auth = Authorization |> Repo.get_by(uid: uuid)
     {:ok, auth}
   end
-  
+
   defp parse_email(params) do
     if params["email"] do
       {:ok, params["email"]}

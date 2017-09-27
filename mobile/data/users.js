@@ -25,6 +25,9 @@ export default function (state = defaultState, action) {
 const customUserActions = {
   onUsersReturn: (res) => {
     return userActions.mergeUsers(res.users)
+  },
+  onUserSignUp: () => {
+    alert('USER SIGN UP SUCCESS')
   }
 }
 export const userActions = mergeHashActions(customUserActions, 'User')
@@ -53,6 +56,17 @@ export const getUsersForMain = () => {
       action: 'GET',
       endpoint: '/users',
       successActionCreator: userActions.onUsersReturn
+    }
+  }
+}
+
+export const signUp = () => {
+  return {
+    type: 'SIGN_UP_USER',
+    call: {
+      action: 'POST',
+      endpoint: '/users',
+      successActionCreator: userActions.onUserSignUp
     }
   }
 }

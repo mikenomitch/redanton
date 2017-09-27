@@ -141,11 +141,12 @@ defmodule Danton.Router do
   #   plug Guardian.Plug.LoadResource
   # end
 
-  scope "/api_login", Danton do
+  scope "/api_auth", Danton do
     pipe_through [:api]
 
     scope "/v1" do
-      post "/", Api.V1.AuthController, :login
+      post "/login", Api.V1.AuthController, :login
+      post "/sign_up", Api.V1.AuthController, :sign_up
     end
   end
 end
