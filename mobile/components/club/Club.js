@@ -140,6 +140,15 @@ class Club extends Component {
     }
   }
 
+  renderMemberIniviteLink() {
+    return (
+      <Button
+        title="+ Invite Member"
+        onPress={() => this.props.navigation.navigate('Invite', {clubId: this.club.id})}
+      />
+    )
+  }
+
   render() {
     return (
       <View style={{
@@ -148,6 +157,7 @@ class Club extends Component {
       }}>
         <View style={{height: '90%'}}>
           {this.renderMemberships()}
+          {this.renderMemberIniviteLink()}
         </View>
         <Footer>
           <View style={{

@@ -18,6 +18,7 @@ import NewPostScreen from '../post/NewPost'
 import ClubScreen from '../club/Club'
 import EditClubScreen from '../club/EditClub'
 import NewClubScreen from '../club/NewClub'
+import InviteScreen from '../club/Invite'
 
 import PostChatScreen from '../chat/PostChat'
 
@@ -129,6 +130,12 @@ const MainNav = StackNavigator({
     screen: EditClubScreen,
     navigationOptions: {
       title: 'Edit Club'
+    }
+  },
+  Invite: {
+    screen: InviteScreen,
+    navigationOptions: {
+      title: 'Invite To Club'
     }
   },
   NewPost: {

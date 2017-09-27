@@ -62,6 +62,24 @@ export const kickMember = (membershipId, onSuccess) => {
   }
 }
 
+export const createMembership = (clubId, email, onSuccess) => {
+  return {
+    type: 'CREATE_MEMBERSHIP',
+    call: {
+      action: 'POST',
+      params: { email },
+      endpoint: `/clubs/${clubId}/memberships`,
+      successActionCreator: () => {
+        return (dispatch) => {
+          onSuccess && onSuccess()
+          dispatch(membershipActions.mergeMemberships([res.data]))
+        }
+      }
+    }
+  }
+}
+
+
 export const elevateMembership = (membershipId, onSuccess) => {
   return {
     type: 'ELEVATE_MEMBERSHIP_CALL',
