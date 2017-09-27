@@ -69,33 +69,57 @@ defmodule Danton.User do
   # OTHER
   # ===========================
 
-  def sign_up(%{"email" => email, "name" => name, "password" => password, "password_confirmation" => password_confirmation}) do
-    # TODO: check validity of email
-    # TODO: check password validity (length and match)
-    # TODO: if user matches it fails
-    # TODO: if auth creation fails it returns an error
-    # TODO: wrap user and auth creation in a transaction
+  def sign_up(params) do
+    case validate_sign_up_params(params) do
+      :ok ->
+        case Repo.transaction(fn -> create_user_and_authorization(params) end) do
+          {:ok, user} -> {:ok, user}
+          {:error, reason} -> {:error, reason}
+          _ -> {:error, :there_was_an_error}
+        end
+      {:error, reason} -> {:error, reason}
+    end
+  end
 
+  def create_user_and_authorization(params) do
     {:ok, user} = %Danton.User{
-      name: name,
+      name: params["name"],
       status: "active",
-      email: email,
+      email: params["email"],
       avatar: ""
     } |> Repo.insert()
 
-    {:ok, authorization} = %Danton.Authorization{
+    {:ok, _authorization} = %Danton.Authorization{
       uid: user.email,
       provider: "identity",
-      token: Comeonin.Bcrypt.hashpwsalt(password),
+      token: Comeonin.Bcrypt.hashpwsalt(params["password"]),
       user_id: user.id
     } |> Repo.insert()
 
+    IO.puts(inspect(user))
+
     {:ok, user}
+  end
+
+  def validate_sign_up_params(params) do
+    case validate_email(params["email"]) do
+      :ok -> Authorization.validate_password_and_confirmation(params["password"], params["password_confirmation"])
+      res -> res
+    end
   end
 
   # TODO: figure out if you can just use changeset above
   def registration_changeset(model, params \\ :empty) do
     model |> cast(params, [:name, :email])
+  end
+
+  def validate_email(email) do
+    case Regex.run(~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/, email) do
+      nil ->
+        {:error, :invalid_email}
+      [_email] ->
+        :ok
+    end
   end
 
   def find_and_confirm_password(params) do

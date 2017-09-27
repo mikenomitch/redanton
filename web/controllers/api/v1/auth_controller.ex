@@ -51,7 +51,6 @@ defmodule Danton.Api.V1.AuthController do
   end
 
   def sign_up(conn, params, _current_user, _claims) do
-    IO.puts "I GOT HERE!"
     case User.sign_up(params) do
       {:ok, user} ->
         new_conn = Guardian.Plug.api_sign_in(conn, user)

@@ -34,4 +34,27 @@ defmodule Danton.Authorization do
     |> foreign_key_constraint(:user_id)
     |> unique_constraint(:provider_uid)
   end
+
+  def validate_password_and_confirmation(pw, pwc) do
+    case validate_password(pw) do
+      :ok -> validate_pw_confirmation(pw, pwc)
+      res -> res
+    end
+  end
+
+  def validate_password(pw) do
+    if String.length(pw) >= 6 do
+      :ok
+    else
+      {:error, :password_length_is_less_than_6}
+    end
+  end
+
+  def validate_pw_confirmation(pw, pwc) do
+    if pw == pwc do
+      :ok
+    else
+      {:error, :password_does_not_match}
+    end
+  end
 end

@@ -45,12 +45,7 @@ defmodule Danton.UserFromAuth do
   end
 
   defp validate_email(email) when is_binary(email) do
-    case Regex.run(~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/, email) do
-      nil ->
-        {:error, :invalid_email}
-      [_email] ->
-        :ok
-    end
+    User.validate_email(email)
   end
 
   defp register_user_from_auth(auth, current_user, repo) do

@@ -56,7 +56,7 @@ defmodule Danton.Room do
     Room
       |> for_post(post_id)
       |> select_id()
-      |> Repo.one
+      |> Repo.one()
   end
 
   def pluck_post_id(room_id) do
