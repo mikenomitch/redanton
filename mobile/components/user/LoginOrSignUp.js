@@ -5,37 +5,27 @@ import Login from './Login'
 import SignUp from './SignUp'
 
 import BasicButton from '../ui/BasicButton'
+import { StackNavigator } from 'react-navigation'
 
 // ===============
 //    PRESENTER
 // ===============
 
 class LoginOrSignUp extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      choice: 'login'
-    }
+  goTo = (location) => () => {
+    this.props.navigation.navigate(location)
   }
 
   render() {
-    if (this.state.choice === 'login') {
-      return <Login />
-    }
-
-    if (this.state.choice === 'signUp') {
-      return <SignUp />
-    }
-
     return (
-      <View style={{paddingTop: 200, paddingLeft: 50, paddingRight: 50}}>
-        <BasicButton onPress={this.getInfo}>
+      <View style={{paddingTop: 160, paddingLeft: 50, paddingRight: 50}}>
+        <BasicButton onPress={this.goTo('Login')}>
           login
         </BasicButton>
 
         <Text> OR: </Text>
 
-        <BasicButton onPress={this.getInfo}>
+        <BasicButton onPress={this.goTo('SignUp')}>
           sign up
         </BasicButton>
       </View>
@@ -47,4 +37,14 @@ class LoginOrSignUp extends Component {
 //   CONNECTION
 // ===============
 
-export default LoginOrSignUp
+export default StackNavigator({
+  Root: {
+    screen: LoginOrSignUp
+  },
+  Login: {
+    screen: Login
+  },
+  SignUp: {
+    screen: SignUp
+  }
+})

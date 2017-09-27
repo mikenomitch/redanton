@@ -39,7 +39,7 @@ defmodule Danton.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:ex_admin, "~> 0.8"},
-     {:guardian, "~> 0.14"},
+     {:guardian, "~> 0.14.1"},
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"},
      {:comeonin, "~> 4.0-rc"},

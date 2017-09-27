@@ -34,7 +34,7 @@ class Login extends Component {
     const {email, password} = this.state
 
     return (
-      <View style={{paddingTop: 200, paddingLeft: 50, paddingRight: 50}}>
+      <View style={{paddingTop: 140, paddingLeft: 50, paddingRight: 50}}>
         <BasicTextInput
           placeholder="email"
           value={email}

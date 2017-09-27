@@ -38,7 +38,7 @@ class SignUp extends Component {
     const {email, password, passwordConfirmation, name} = this.state
 
     return (
-      <View style={{paddingTop: 60, paddingLeft: 50, paddingRight: 50}}>
+      <View style={{paddingTop: 0, paddingLeft: 50, paddingRight: 50}}>
         <BasicTextInput
           placeholder="email"
           value={email}

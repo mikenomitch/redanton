@@ -96,9 +96,7 @@ defmodule Danton.User do
       user_id: user.id
     } |> Repo.insert()
 
-    IO.puts(inspect(user))
-
-    {:ok, user}
+    user
   end
 
   def validate_sign_up_params(params) do

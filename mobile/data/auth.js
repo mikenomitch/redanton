@@ -120,7 +120,7 @@ export const signUp = (userInfo) => {
     type: 'SIGN_UP',
     call: {
       action: 'POST',
-      endpoint: '/login/identity/callback',
+      endpoint: '/api_auth/v1/sign_up',
       params: {
         email: userInfo.email,
         name: userInfo.name,
