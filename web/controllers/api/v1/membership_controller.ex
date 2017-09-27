@@ -17,11 +17,28 @@ defmodule Danton.Api.V1.MembershipController do
     render(conn, "index.json", memberships: memberships)
   end
 
-  # TODO add proper relationship login
+  def create(conn, %{"email" => email, "type"=>type, "club_id" => club_id}, _current_user, _claims) do
+    user = User.get_or_create(%User{email: email})
+    club = Repo.get(Club, club_id)
+    membership_params = %{club: club, type: type, status: "pending"}
+
+    IO.puts("membership_params")
+    IO.puts inspect(membership_params)
+
+    cs = Ecto.build_assoc(user, :memberships, membership_params)
+
+    # changeset = Membership.changeset(%Danton.Membership{status: "pending"}, membership_params)
+
+    create_and_respond(conn, cs)
+  end
+
   def create(conn, %{"membership" => membership_params}, _current_user, _claims) do
     changeset = Membership.changeset(%Danton.Membership{status: "pending"}, membership_params)
+    create_and_respond(conn, changeset)
+  end
 
-    case Repo.insert(changeset) do
+  defp create_and_respond(conn, cs) do
+    case Repo.insert(cs) do
       {:ok, membership} ->
         conn
         |> put_status(:created)

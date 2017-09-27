@@ -69,6 +69,10 @@ defmodule Danton.User do
   # OTHER
   # ===========================
 
+  def get_or_create(params) do
+    Repo.get_by(User, email: params.email) || Repo.insert!(%User{ params | status: "pending"})
+  end
+
   def sign_up(params) do
     case validate_sign_up_params(params) do
       :ok ->

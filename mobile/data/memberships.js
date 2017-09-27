@@ -67,9 +67,9 @@ export const createMembership = (clubId, email, onSuccess) => {
     type: 'CREATE_MEMBERSHIP',
     call: {
       action: 'POST',
-      params: { email },
+      params: { email, type: 'standard' },
       endpoint: `/clubs/${clubId}/memberships`,
-      successActionCreator: () => {
+      successActionCreator: (res) => {
         return (dispatch) => {
           onSuccess && onSuccess()
           dispatch(membershipActions.mergeMemberships([res.data]))
