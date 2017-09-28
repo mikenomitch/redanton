@@ -18,8 +18,8 @@ defmodule Danton.User do
     timestamps()
   end
 
-  @paramlist ~w(name email status avatar)
-  @required_params ~w(email name status)
+  @paramlist ~w(name email status avatar)a
+  @required_params ~w(email name status)a
 
   def changeset(model, params \\ %{}) do
     model

@@ -20,6 +20,12 @@ function __clearCreds(state) {
   })
 }
 
+function __mergeUserData(state, userData) {
+  return merge(state, {
+    currentUser: userData
+  })
+}
+
 // ==================
 // ==================
 //      REDUCER
@@ -41,6 +47,8 @@ export default function (state = defaultState, action) {
     return __mergeAuthData(state, action.payload)
   case 'CLEAR_CREDS':
     return __clearCreds(state)
+  case 'UPDATE_CURRENT_USER':
+    return __mergeUserData(state, action.payload)
   default:
     return state
   }
@@ -71,6 +79,11 @@ export const authActions = {
   clearCreds: () => ({
     type: 'CLEAR_CREDS',
     asyncData: {userData: null}
+  }),
+
+  updateCurrentUser: (userData) => ({
+    type: 'UPDATE_CURRENT_USER',
+    payload: userData
   }),
 
   onSignInFailure: () => {

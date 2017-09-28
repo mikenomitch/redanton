@@ -5,6 +5,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation'
 import MainStreamScreen from '../stream/MainStream'
 
 import SettingsScreen from '../settings/Settings'
+import EditUserScreen from '../user/EditUser'
 
 import ChannelListScreen from '../channel/ChannelList'
 import ChannelScreen from '../channel/Channel'
@@ -150,6 +151,12 @@ const MainNav = StackNavigator({
       title: 'Edit Post'
     }
   },
+  EditUser: {
+    screen: EditUserScreen,
+    navigationOptions: {
+      title: 'Edit User'
+    }
+  }
 })
 
 export default MainNav

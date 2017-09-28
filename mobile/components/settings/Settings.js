@@ -18,6 +18,10 @@ import { authActions } from '../../data/auth'
 // ===============
 
 class Settings extends Component {
+  goToEdit = () => {
+    this.props.navigation.navigate('EditUser', {userInfo: this.props.currentUser})
+  }
+
   render() {
     return (
       <View style={{padding: 60}}>
@@ -27,6 +31,10 @@ class Settings extends Component {
           style={{width: 50, height: 50}}
           source={{uri: this.props.currentUser.avatar}}
         />
+
+        <BasicButton onPress={this.goToEdit}>
+          edit profile
+        </BasicButton>
 
         <ClubList navigation={this.props.navigation} />
 
@@ -38,10 +46,8 @@ class Settings extends Component {
           <Text style={{paddingBottom: 15, fontWeight: 'bold'}}> features coming soon: </Text>
           <Text style={{paddingBottom: 5}}> UX Improvements </Text>
           <Text style={{paddingBottom: 5}}> Push Notifications </Text>
-          <Text style={{paddingBottom: 5}}> User Invites and Sign Up </Text>
           <Text style={{paddingBottom: 5}}> Notification Configuration </Text>
           <Text style={{paddingBottom: 5}}> Website/App Equivalence </Text>
-          <Text style={{paddingBottom: 5}}> New Club Creation </Text>
         </View>
       </View>
     )

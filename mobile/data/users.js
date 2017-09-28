@@ -1,4 +1,5 @@
 import makeHashReducer, {mergeHashActions} from './hashReducer'
+import { authActions } from './auth'
 
 // ==================
 // ==================
@@ -56,6 +57,27 @@ export const getUsersForMain = () => {
       action: 'GET',
       endpoint: '/users',
       successActionCreator: userActions.onUsersReturn
+    }
+  }
+}
+
+export const updateSelf = (params, onSuccess) => {
+  return {
+    type: 'UPDATE_SELF',
+    call: {
+      action: 'PATCH',
+      endpoint: '/users/self',
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(userActions.mergeUsers([res.data]))
+          dispatch(authActions.updateCurrentUser(res.data))
+          onSuccess && onSuccess(res)
+        }
+      },
+      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
+      params: {
+        user: params
+      },
     }
   }
 }

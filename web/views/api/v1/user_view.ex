@@ -3,7 +3,11 @@ defmodule Danton.Api.V1.UserView do
 
 	def render("index.json", %{users: users}) do
     %{users: Enum.map(users, &user_json/1)}
-	end
+  end
+
+  def render("show.json", %{user: user}) do
+    user_json(user)
+  end
 
 	defp user_json(user) do
 		%{

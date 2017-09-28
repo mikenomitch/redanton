@@ -9,6 +9,8 @@ import { connect } from 'react-redux'
 import { userActions } from '../../data/users'
 import { signUp } from '../../data/auth'
 
+import EditUserInfo from './EditUserInfo'
+
 // ===============
 //    PRESENTER
 // ===============
@@ -48,26 +50,7 @@ class SignUp extends Component {
           autoCorrect={false}
         />
 
-        <BasicTextInput
-          placeholder="name"
-          value={name}
-          onChangeText={(name) => this.setState({name})}
-          autoCorrect={false}
-        />
-
-        <BasicTextInput
-          placeholder="password"
-          value={password}
-					onChangeText={(password) => this.setState({password})}
-					secureTextEntry
-        />
-
-        <BasicTextInput
-          placeholder="confirmation"
-          value={passwordConfirmation}
-          onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
-          secureTextEntry
-        />
+        <EditUserInfo userInfo={this.state} changeUserInfo={this.setState} />
 
         <BasicButton onPress={this.getInfo}>
           sign up

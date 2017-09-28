@@ -5,7 +5,7 @@ defmodule Danton.Api.V1.MembershipController do
   # ACTIONS
   # ===========================
 
-  def index(conn, %{"club_id" => club_id}, current_user, _claims) do
+  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
     memberships = Repo.get(Club, club_id)
     |> Membership.for_club()
     |> Repo.all()

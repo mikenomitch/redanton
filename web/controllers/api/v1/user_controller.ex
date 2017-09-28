@@ -20,5 +20,19 @@ defmodule Danton.Api.V1.UserController do
     # OR remove this and have posts return poster names
 		users = Repo.all(User)
 		render(conn, "index.json", users: users)
-	end
+  end
+
+  def update_self(conn, %{"user" => user_params}, current_user, _claims) do
+    user = Repo.get!(User, current_user.id)
+    changeset = User.changeset(user, user_params)
+
+    case Repo.update(changeset) do
+      {:ok, user} ->
+        render(conn, "show.json", user: user)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Danton.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
 end
