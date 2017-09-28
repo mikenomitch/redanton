@@ -22,9 +22,6 @@ defmodule Danton.Api.V1.MembershipController do
     club = Repo.get(Club, club_id)
     membership_params = %{club: club, type: type, status: "pending"}
 
-    IO.puts("membership_params")
-    IO.puts inspect(membership_params)
-
     cs = Ecto.build_assoc(user, :memberships, membership_params)
 
     # changeset = Membership.changeset(%Danton.Membership{status: "pending"}, membership_params)
@@ -38,7 +35,7 @@ defmodule Danton.Api.V1.MembershipController do
   end
 
   defp create_and_respond(conn, cs) do
-    case Repo.insert(cs) do
+    case Membership.invite_and_notify(cs) do
       {:ok, membership} ->
         conn
         |> put_status(:created)

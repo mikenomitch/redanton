@@ -33,6 +33,10 @@ defmodule Danton.User do
   # QUERIES
   # ===========================
 
+  def for_ids(query \\ User, ids) do
+    from(u in query, where: u.id in ^ids)
+  end
+
   def for_clubs(query \\ User, club_ids) do
     from u in query,
       join: c in assoc(u, :clubs),

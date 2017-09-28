@@ -77,6 +77,6 @@ defmodule Danton.Message do
     users_to_ignore = users_checked_in ++ user_who_sent
     users_to_send_to = users_for_room -- users_to_ignore
 
-    Notification.notify_users(users_to_send_to, %{type: :new_chat_message, value: message})
+    Danton.Notification.notify_users(users_to_send_to, :new_chat_message, %{message: message})
   end
 end

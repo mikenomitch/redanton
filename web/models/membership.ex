@@ -24,6 +24,21 @@ defmodule Danton.Membership do
   end
 
   # ===========================
+  # CREATION
+  # ===========================
+
+  def invite_and_notify(cs) do
+    case Repo.insert(cs) do
+      {:ok, membership} ->
+        Task.start(__MODULE__, :notify_new_club_invite, [membership])
+        {:ok, membership}
+      {:error, changeset} ->
+        {:error, changeset}
+    end
+
+  end
+
+  # ===========================
   # QUERIES
   # ===========================
 
@@ -33,5 +48,19 @@ defmodule Danton.Membership do
 
   def for_club(club) do
     club |> Ecto.assoc(:memberships)
+  end
+
+  # ===========================
+  # OTHER
+  # ===========================
+
+  def notify_new_club_invite(membership) do
+    club = Repo.get(Club, membership.club_id)
+
+    Danton.Notification.notify_user(
+      membership.user_id,
+      :new_club_invite,
+      %{club: club}
+    )
   end
 end
