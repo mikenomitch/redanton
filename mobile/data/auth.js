@@ -45,7 +45,7 @@ export default function (state = defaultState, action) {
     return __mergeAuthData(state, action.payload)
   case 'LOAD_INITIAL_AUTH':
     return __mergeAuthData(state, action.payload)
-  case 'CLEAR_CREDS':
+  case 'SIGN_OUT':
     return __clearCreds(state)
   case 'UPDATE_CURRENT_USER':
     return __mergeUserData(state, action.payload)
@@ -76,8 +76,8 @@ export const authActions = {
     }
   },
 
-  clearCreds: () => ({
-    type: 'CLEAR_CREDS',
+  signOut: () => ({
+    type: 'SIGN_OUT',
     asyncData: {userData: null}
   }),
 

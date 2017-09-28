@@ -1,5 +1,7 @@
-import makeHashReducer, {mergeHashActions} from './hashReducer'
 import omitBy from 'lodash/fp/omitBy'
+
+import makeHashReducer, {mergeHashActions} from './hashReducer'
+import withResetState from './withResetState'
 
 // ==================
 // ==================
@@ -16,7 +18,7 @@ function __postsWithoutChannel (state, channelId) {
 }
 
 const defaultState = {}
-export default function (state = defaultState, action) {
+function postReducer (state = defaultState, action) {
   switch (action.type) {
   case 'REMOVE_CHANNEL':
     return __postsWithoutChannel(state, action.payload)
@@ -24,6 +26,8 @@ export default function (state = defaultState, action) {
     return makeHashReducer('Post')(state, action)
   }
 }
+
+export default withResetState(defaultState, 'SIGN_OUT')(postReducer)
 
 // ==================
 // ==================

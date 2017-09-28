@@ -1,4 +1,5 @@
 import makeHashReducer, {mergeHashActions} from './hashReducer'
+import withResetState from './withResetState'
 import { authActions } from './auth'
 
 // ==================
@@ -8,7 +9,7 @@ import { authActions } from './auth'
 // ==================
 
 const defaultState = {}
-export default function (state = defaultState, action) {
+function userReducer (state = defaultState, action) {
   switch (action.type) {
   case 'CUSTOM_USER_ACTION':
     return state
@@ -16,6 +17,9 @@ export default function (state = defaultState, action) {
     return makeHashReducer('User')(state, action)
   }
 }
+
+export default withResetState(defaultState, 'SIGN_OUT')(userReducer)
+
 
 // ==================
 // ==================

@@ -59,5 +59,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  {signOut: authActions.clearCreds}
+  {signOut: authActions.signOut}
 )(Settings)

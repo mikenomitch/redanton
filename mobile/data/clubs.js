@@ -1,4 +1,5 @@
 import makeHashReducer, {mergeHashActions} from './hashReducer'
+import withResetState from './withResetState'
 
 // ==================
 // ==================
@@ -7,7 +8,7 @@ import makeHashReducer, {mergeHashActions} from './hashReducer'
 // ==================
 
 const defaultState = {}
-export default function (state = defaultState, action) {
+function clubReducer (state = defaultState, action) {
   switch (action.type) {
   case 'CUSTOM_CLUB_ACTION':
     return state
@@ -15,6 +16,8 @@ export default function (state = defaultState, action) {
     return makeHashReducer('Club')(state, action)
   }
 }
+
+export default withResetState(defaultState, 'SIGN_OUT')(clubReducer)
 
 // ==================
 // ==================
