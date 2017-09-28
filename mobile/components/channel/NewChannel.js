@@ -6,6 +6,7 @@ import {
   Text
 } from 'react-native'
 
+import ModalSelector from 'react-native-modal-selector'
 import BasicButton from '../ui/BasicButton'
 
 import { connect } from 'react-redux'
@@ -16,6 +17,7 @@ import EditChannelInfo from './EditChannelInfo'
 const defaultChannelInfo = { name: '', description: ''}
 const defaultState = {
   showErrors: false,
+  clubId: null,
   channelInfo: defaultChannelInfo
 }
 
@@ -38,7 +40,7 @@ class NewChannel extends Component {
 			navigate('Channel', {channel: res.data})
     }
 
-    this.props.createChannel(this.state.channelInfo, onPostSuccess)
+    this.props.createChannel(this.state.clubId, this.state.channelInfo, onPostSuccess)
 	}
 
 	clearState = () => {
@@ -48,6 +50,12 @@ class NewChannel extends Component {
 	setChannelState = (newKV) => {
 		const channelInfo = Object.assign({}, this.state.channelInfo, newKV)
 		this.setState({channelInfo})
+  }
+
+  clubData() {
+		return this.props.clubs.map(
+      (club) => ({ key: club.id, label: club.name })
+    )
 	}
 
   render() {
@@ -55,6 +63,11 @@ class NewChannel extends Component {
       <View style={{padding: 50}}>
         <ScrollView>
           <Text style={{fontSize: 16}}> Create a channel: </Text>
+          <ModalSelector
+            style={{borderRadius: 0}}
+            data={this.clubData()}
+            initValue="select club"
+            onChange={(option)=> this.setState({clubId: option.key}) } />
           <EditChannelInfo
             setChannelState={this.setChannelState}
             channelInfo={this.state.channelInfo}
@@ -72,7 +85,12 @@ class NewChannel extends Component {
 //   CONNECTION
 // ===============
 
+const mapStateToProps = (state) => {
+  const clubs = Object.values(state.clubs)
+  return {clubs}
+}
+
 export default connect(
-  null, 
+  mapStateToProps,
   { createChannel }
 )(NewChannel)

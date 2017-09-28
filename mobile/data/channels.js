@@ -51,13 +51,12 @@ export const getChannels = () => {
   }
 }
 
-export const createChannel = (channelInfo, onSuccess) => {
+export const createChannel = (clubId, channelInfo, onSuccess) => {
   return {
     type: 'CREATE_CHANNEL_CALL',
     call: {
       action: 'POST',
-      // TODO: Take an arbitrary club
-      endpoint: '/clubs/1/channels',
+      endpoint: `/clubs/${clubId}/channels`,
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(channelActions.mergeChannels([res.data]))

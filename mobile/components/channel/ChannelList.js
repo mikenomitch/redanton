@@ -49,7 +49,7 @@ const ChannelItem = (props) => {
       </View>
       <View style={styles.details}>
         <View style={styles.club}>
-          <Text>In Club: Brain Food</Text>
+          <Text>In Club: {props.club.name}</Text>
         </View>
       </View>
     </View>
@@ -71,8 +71,17 @@ class ChannelList extends Component {
   }
 
   renderChannelLink = (datum) => {
-    const { navigate } = this.props.navigation
-    return <ChannelItem navigate={navigate} channel={datum.item} />
+    const { clubs, navigation } = this.props
+    const channel = datum.item
+    const club = clubs[channel.club_id] || {}
+
+    return (
+      <ChannelItem
+        navigate={navigation.navigate}
+        channel={channel}
+        club={club}
+      />
+    )
   }
 
   render() {
@@ -96,7 +105,7 @@ class ChannelList extends Component {
 const mapStateToProps = (state) => {
   return {
     channels: Object.values(state.channels),
-    clubs: Object.values(state.clubs)
+    clubs: state.clubs
   }
 }
 
