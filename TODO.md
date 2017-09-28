@@ -1,8 +1,6 @@
 # Todos
 
 ## User Mgmt
-- sign out clears data in reducers
-
 - UI update on
   - clubs list & mgmt
   - member list & mgmt

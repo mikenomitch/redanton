@@ -13,14 +13,14 @@ const EditUserInfo = (props) => (
     />
 
     <BasicTextInput
-      label="new password"
+      label="set password"
       value={props.userInfo.password}
       onChangeText={(password) => props.changeUserInfo({password})}
       secureTextEntry
     />
 
     <BasicTextInput
-      label="confirmation"
+      label="confirm password"
       value={props.userInfo.passwordConfirmation}
       onChangeText={(passwordConfirmation) => props.changeUserInfo({passwordConfirmation})}
       secureTextEntry
