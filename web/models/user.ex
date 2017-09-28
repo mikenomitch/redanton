@@ -24,8 +24,6 @@ defmodule Danton.User do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @paramlist)
-    |> cast_assoc(:memberships)
-    |> cast_assoc(:authorizations)
     |> validate_required(@required_params)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
@@ -79,6 +77,10 @@ defmodule Danton.User do
     Repo.get_by(User, email: params.email) || Repo.insert!(%User{ params | status: "pending"})
   end
 
+  # =====================================
+  # TODO: EXTRACT USER UPDATES INTO OWN MODULE
+  # =====================================
+
   # TODO: this is gross... figure out the idiomatic
   # way of doing this better
 
@@ -107,6 +109,10 @@ defmodule Danton.User do
       params["password_confirmation"] && params["password_confirmation"] != ""
   end
 
+  # =====================================
+  # TODO: EXTRACT SIGN UP INTO OWN MODULE
+  # =====================================
+
   def sign_up(params) do
     case validate_sign_up_params(params) do
       :ok ->
@@ -119,46 +125,56 @@ defmodule Danton.User do
     end
   end
 
+  # TODO: make nicer - perhaps with a when
   def create_user_and_authorization(params) do
-    {:ok, user} = update_or_create(params)
-
-    {:ok, _authorization} = %Danton.Authorization{
-      uid: user.email,
-      provider: "identity",
-      token: Comeonin.Bcrypt.hashpwsalt(params["password"]),
-      user_id: user.id
-    } |> Repo.insert()
-
-    user
+    case update_or_create(params) do
+      {:ok, user} ->
+        case make_user_auth(user, params) do
+          {:ok, _auth} -> user
+          err -> err
+        end
+      err -> err
+    end
   end
 
   defp update_or_create(params) do
-    user = Repo.get_by(User, email: params["email"])
+    user = Repo.get_by(User, email: params["email"], status: "pending")
+
     if user do
-      full_loaded_user = user |> Repo.preload(:memberships) |> Repo.preload(:authorizations)
+      full_loaded_user = user
+        |> Repo.preload(:memberships)
+        |> Repo.preload(:authorizations)
+
       attrs = %{
         status: "active",
         avatar: "",
         name: params["name"]
       }
 
-      User.changeset(full_loaded_user, attrs) |> Repo.update
+      User.changeset(full_loaded_user, attrs) |> Repo.update()
     else
-      %Danton.User{
+      usr_params = %{
         email: params["email"],
         name: params["name"],
         status: "active",
         avatar: ""
-      } |> Repo.insert
+      }
+
+      User.changeset(%User{}, usr_params) |> Repo.insert()
     end
   end
 
-  def validate_sign_up_params(params) do
-    case validate_email(params["email"]) do
-      :ok -> Authorization.validate_password_and_confirmation(params["password"], params["password_confirmation"])
-      res -> res
-    end
+  defp make_user_auth(user, params) do
+    %Danton.Authorization{
+      uid: user.email,
+      provider: "identity",
+      token: Comeonin.Bcrypt.hashpwsalt(params["password"]),
+      user_id: user.id
+    } |> Repo.insert()
   end
+
+  # =================================
+  # =================================
 
   # TODO: figure out if you can just use changeset above
   def registration_changeset(model, params \\ :empty) do
@@ -171,6 +187,13 @@ defmodule Danton.User do
         {:error, :invalid_email}
       [_email] ->
         :ok
+    end
+  end
+
+  def validate_sign_up_params(params) do
+    case validate_email(params["email"]) do
+      :ok -> Authorization.validate_password_and_confirmation(params["password"], params["password_confirmation"])
+      res -> res
     end
   end
 

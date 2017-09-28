@@ -1,7 +1,7 @@
 # Todos
 
 ## User Mgmt
-- full users can't "sign up"
+- sign out clears data in reducers
 
 - UI update on
   - clubs list & mgmt
