@@ -69,15 +69,21 @@ export const updateSelf = (params, onSuccess) => {
       endpoint: '/users/self',
       successActionCreator: (res) => {
         return (dispatch) => {
-          dispatch(userActions.mergeUsers([res.data]))
-          dispatch(authActions.updateCurrentUser(res.data))
+          dispatch(userActions.mergeUsers([res]))
+          dispatch(authActions.updateCurrentUser(res))
           onSuccess && onSuccess(res)
         }
       },
       errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
       params: {
-        user: params
-      },
+        user: {
+          avatar: params.avatar,
+          email: params.email,
+          name: params.name,
+          password: params.password,
+          password_confirmation: params.passwordConfirmation
+        }
+      }
     }
   }
 }

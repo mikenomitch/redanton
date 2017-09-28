@@ -44,7 +44,7 @@ class Invite extends Component {
       <View style={{padding: 50}}>
         <Text style={{fontSize: 16}}> Invite Member: </Text>
         <BasicTextInput
-          placeholder="email"
+          label="email"
           value={this.state.email}
           onChangeText={this.setEmail}
           keyboardType="email-address"

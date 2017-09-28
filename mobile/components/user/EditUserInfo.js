@@ -6,21 +6,21 @@ import BasicTextInput from '../ui/BasicTextInput'
 const EditUserInfo = (props) => (
   <View>
     <BasicTextInput
-      placeholder="name"
+      label="name"
       value={props.userInfo.name}
       onChangeText={(name) => props.changeUserInfo({name})}
       autoCorrect={false}
     />
 
     <BasicTextInput
-      placeholder="new password"
+      label="new password"
       value={props.userInfo.password}
       onChangeText={(password) => props.changeUserInfo({password})}
       secureTextEntry
     />
 
     <BasicTextInput
-      placeholder="confirmation"
+      label="confirmation"
       value={props.userInfo.passwordConfirmation}
       onChangeText={(passwordConfirmation) => props.changeUserInfo({passwordConfirmation})}
       secureTextEntry

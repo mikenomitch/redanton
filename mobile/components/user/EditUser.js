@@ -30,7 +30,7 @@ class EditUser extends Component {
   saveChanges = () => {
     this.props.updateSelf(
       this.state.userInfo,
-      () => { alert('yay it worked') }
+      () => { alert('user info updated') }
     )
   }
 

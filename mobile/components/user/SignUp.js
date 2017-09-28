@@ -42,7 +42,7 @@ class SignUp extends Component {
     return (
       <View style={{paddingTop: 0, paddingLeft: 50, paddingRight: 50}}>
         <BasicTextInput
-          placeholder="email"
+          label="email"
           value={email}
 					onChangeText={(email) => this.setState({email})}
 					keyboardType="email-address"

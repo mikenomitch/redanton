@@ -24,7 +24,8 @@ class Settings extends Component {
 
   render() {
     return (
-      <View style={{padding: 60}}>
+      <View style={{padding: 30}}>
+        <Text> Name: {this.props.currentUser.name} </Text>
         <Text> Email: {this.props.currentUser.email} </Text>
         <Text> Avatar: </Text>
         <Image
@@ -41,14 +42,6 @@ class Settings extends Component {
         <BasicButton onPress={this.props.signOut}>
           sign out
         </BasicButton>
-
-        <View style={{paddingTop: 20}}>
-          <Text style={{paddingBottom: 15, fontWeight: 'bold'}}> features coming soon: </Text>
-          <Text style={{paddingBottom: 5}}> UX Improvements </Text>
-          <Text style={{paddingBottom: 5}}> Push Notifications </Text>
-          <Text style={{paddingBottom: 5}}> Notification Configuration </Text>
-          <Text style={{paddingBottom: 5}}> Website/App Equivalence </Text>
-        </View>
       </View>
     )
   }

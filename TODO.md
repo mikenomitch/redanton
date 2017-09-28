@@ -1,7 +1,6 @@
 # Todos
 
 ## User Mgmt
-- can update name
 - can update pw
 
 - invite user

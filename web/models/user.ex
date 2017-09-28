@@ -77,6 +77,34 @@ defmodule Danton.User do
     Repo.get_by(User, email: params.email) || Repo.insert!(%User{ params | status: "pending"})
   end
 
+  # TODO: this is gross... figure out the idiomatic
+  # way of doing this better
+
+  # updates self and potentially authorization
+  def update_info_and_auth(current_user, params) do
+    case update_authorization_if_needed(params) do
+      {:ok, _auth} ->
+        user = Repo.get!(User, current_user.id)
+        changeset = User.changeset(user, params)
+        Repo.update(changeset)
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
+
+  defp update_authorization_if_needed(params) do
+    if params_have_password(params) do
+      Authorization.update_authorization_for_user_params(params)
+    else
+      {:ok, :no_auth_update_needed}
+    end
+  end
+
+  defp params_have_password(params) do
+    params["password"] && params["password"] != "" &&
+      params["password_confirmation"] && params["password_confirmation"] != ""
+  end
+
   def sign_up(params) do
     case validate_sign_up_params(params) do
       :ok ->

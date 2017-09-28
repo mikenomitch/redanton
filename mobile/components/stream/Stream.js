@@ -54,8 +54,8 @@ var styles = StyleSheet.create({
 
 const StreamItem = (props) => {
   const action = props.post.message_count == 1
-    ? "Posted by: "
-    : "Message from: "
+    ? "posted by "
+    : "message from "
   return (
     <View style={styles.streamItem}>
       <View style={styles.streamItemLeft}>

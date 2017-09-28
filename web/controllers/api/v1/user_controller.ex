@@ -23,10 +23,7 @@ defmodule Danton.Api.V1.UserController do
   end
 
   def update_self(conn, %{"user" => user_params}, current_user, _claims) do
-    user = Repo.get!(User, current_user.id)
-    changeset = User.changeset(user, user_params)
-
-    case Repo.update(changeset) do
+    case User.update_info_and_auth(current_user, user_params) do
       {:ok, user} ->
         render(conn, "show.json", user: user)
       {:error, changeset} ->
