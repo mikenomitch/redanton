@@ -1,40 +1,39 @@
 # Todos
 
-## Club Mgmt
-- invite user
-  - inviter puts in email and hits send
-  - finds_or_creates user (with 'pending' status if new)
-  - standard membership created
-  - email send to the person (with just an alert now)
-  - when logged out have the options to sign in or sign up
-  - if sign_up and user is created but pending, they
-    are taken to page to fill out info
-  - if sign up and user is created and not pending,
-    it fails
-  - if sign up and user is not created, give email &
-    password (with confirmation) and then go
-    to the info page
-  - memberships just show up once youre signed in like
-    they had always been there (for now)
+## User Mgmt
+- can update name
+- can update pw
 
-- start w 100% new user sign up
-- add user invite that creates a pending user
-- completion of sign up as that user
+- invite user
+  - half signed up users can sign up
+    - not full signed up users tho
+    - switches to fully signed up
+
+- UI update on
+  - clubs list & mgmt
+  - member list & mgmt
+  - general settings page (10 min)
+
+## Channel Mgmt
+- channel creation works for multiple clubs
+- front page works for multiple clubs
+
+## Quick Wins
+- adding a post/channel from a specific
+  club locks in that parent
+- posts without a url just become a discussion post
+- navigation headers reload properly
+- if sole admin leaves another is elevated
 
 ## Push Notifications
+- https://docs.expo.io/versions/latest/guides/push-notifications.html
 - Make presence on chat create a new check in
   every N minutes
 - Make the check in creation async
 - Change to a real push notification
 
-## Quick Wins
-- posts without a url just become a discussion post
-- if sole admin leaves another is elevated
-- channel creation work
-- new posts getting a set channel depening on where clicked
-
 ## Backend
-  - add proper authorization to create, update, delete calls
+  - add proper authorization to all create, update, delete calls
 
 ## Frontend
   - clean up socket logic
@@ -63,11 +62,3 @@
   kubernetes/google container builder?
 - remove project on heroku
 - document all
-
-## Paper Cuts
-- make sure navigation headers can
-  reload properly
-
-## Features
-- push notifications
-  https://docs.expo.io/versions/latest/guides/push-notifications.html
