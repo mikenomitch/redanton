@@ -1,12 +1,7 @@
 # Todos
 
 ## User Mgmt
-- can update pw
-
-- invite user
-  - half signed up users can sign up
-    - not full signed up users tho
-    - switches to fully signed up
+- full users can't "sign up"
 
 - UI update on
   - clubs list & mgmt

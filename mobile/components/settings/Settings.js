@@ -30,7 +30,7 @@ class Settings extends Component {
         <Text> Avatar: </Text>
         <Image
           style={{width: 50, height: 50}}
-          source={{uri: this.props.currentUser.avatar}}
+          source={{uri: this.props.currentUser.avatar || "http://www.archeosub.eu/images/BluLabTeamPeople/empty_user.png"}}
         />
 
         <BasicButton onPress={this.goToEdit}>

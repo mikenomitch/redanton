@@ -24,6 +24,8 @@ defmodule Danton.User do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @paramlist)
+    |> cast_assoc(:memberships)
+    |> cast_assoc(:authorizations)
     |> validate_required(@required_params)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
@@ -118,12 +120,7 @@ defmodule Danton.User do
   end
 
   def create_user_and_authorization(params) do
-    {:ok, user} = %Danton.User{
-      name: params["name"],
-      status: "active",
-      email: params["email"],
-      avatar: ""
-    } |> Repo.insert()
+    {:ok, user} = update_or_create(params)
 
     {:ok, _authorization} = %Danton.Authorization{
       uid: user.email,
@@ -133,6 +130,27 @@ defmodule Danton.User do
     } |> Repo.insert()
 
     user
+  end
+
+  defp update_or_create(params) do
+    user = Repo.get_by(User, email: params["email"])
+    if user do
+      full_loaded_user = user |> Repo.preload(:memberships) |> Repo.preload(:authorizations)
+      attrs = %{
+        status: "active",
+        avatar: "",
+        name: params["name"]
+      }
+
+      User.changeset(full_loaded_user, attrs) |> Repo.update
+    else
+      %Danton.User{
+        email: params["email"],
+        name: params["name"],
+        status: "active",
+        avatar: ""
+      } |> Repo.insert
+    end
   end
 
   def validate_sign_up_params(params) do

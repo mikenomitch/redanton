@@ -50,7 +50,7 @@ class SignUp extends Component {
           autoCorrect={false}
         />
 
-        <EditUserInfo userInfo={this.state} changeUserInfo={this.setState} />
+        <EditUserInfo userInfo={this.state} changeUserInfo={this.setState.bind(this)} />
 
         <BasicButton onPress={this.getInfo}>
           sign up
