@@ -22,15 +22,16 @@
 - completion of sign up as that user
 
 ## Push Notifications
-- Change this to a push notification
 - Make presence on chat create a new check in
   every N minutes
 - Make the check in creation async
-- Clean up backend modules
+- Change to a real push notification
 
 ## Quick Wins
 - posts without a url just become a discussion post
 - if sole admin leaves another is elevated
+- channel creation work
+- new posts getting a set channel depening on where clicked
 
 ## Backend
   - add proper authorization to create, update, delete calls
