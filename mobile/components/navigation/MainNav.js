@@ -74,8 +74,8 @@ const TabNav = TabNavigator(
         title: 'Settings',
         tabBarIcon: ({ tintColor }) => (
           <Icon name="gears" size={20} color={tintColor} />
-        ),
-      },
+        )
+      }
     }
   },
   {
