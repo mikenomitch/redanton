@@ -6,16 +6,11 @@
   - member list & mgmt
   - general settings page (10 min)
 
-## Channel Mgmt
-- channel creation works for multiple clubs
-- front page works for multiple clubs
-
 ## Quick Wins
 - adding a post/channel from a specific
   club locks in that parent
 - posts without a url just become a discussion post
 - navigation headers reload properly
-- if sole admin leaves another is elevated
 
 ## Push Notifications
 - https://docs.expo.io/versions/latest/guides/push-notifications.html
