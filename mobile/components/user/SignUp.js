@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import {
+  StyleSheet,
+  View
+} from 'react-native'
 
 import BasicTextInput from '../ui/BasicTextInput'
 import BasicButton from '../ui/BasicButton'
@@ -10,6 +13,18 @@ import { userActions } from '../../data/users'
 import { signUp } from '../../data/auth'
 
 import EditUserInfo from './EditUserInfo'
+
+// ===============
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  root: {
+    paddingTop: 0,
+    paddingLeft: 50,
+    paddingRight: 50
+  }
+})
 
 // ===============
 //    PRESENTER
@@ -40,7 +55,7 @@ class SignUp extends Component {
     const {email, password, passwordConfirmation, name} = this.state
 
     return (
-      <View style={{paddingTop: 0, paddingLeft: 50, paddingRight: 50}}>
+      <View style={styles.root}>
         <BasicTextInput
           label="email"
           value={email}

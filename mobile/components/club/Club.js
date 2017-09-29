@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {
   Button,
   Text,
+  StyleSheet,
   View
 } from 'react-native'
 
@@ -22,9 +23,23 @@ import {
 
 import Footer from '../ui/Footer'
 
+
 // ===============
 //    CHILDREN
 // ===============
+
+var membershipItemStyles = StyleSheet.create({
+  root: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  info: {},
+  elevationHolder: {},
+  elevationButton: {},
+  kickHolder: {},
+  kickButton:{}
+})
 
 class MembershipItem extends Component {
   get membership () {
@@ -37,13 +52,19 @@ class MembershipItem extends Component {
 
   renderElevation () {
     if (!this.isAdmin && this.props.currentUserIsAdmin) {
+      const onPress = () => confirmMessage(
+        'Make Admin',
+        'Are you sure? This action is permanent.',
+        this.props.elevateMembership
+      )
+
       return (
-        <View key="elevate">
-          <Button title="make admin" onPress={() => confirmMessage(
-            'Make Admin',
-            'Are you sure? This action is permanent.',
-            this.props.elevateMembership
-          )} />
+        <View style={membershipItemStyles.elevationHolder} key="elevate">
+          <Button
+            style={membershipItemStyles.elevationButton}
+            title="make admin"
+            onPress={onPress}
+          />
         </View>
       )
     }
@@ -51,13 +72,20 @@ class MembershipItem extends Component {
 
   renderKickUser () {
     if (!this.isAdmin && this.props.currentUserIsAdmin) {
+
+      const onPress = () => confirmMessage(
+        'Kick User',
+        'Are you sure? This action is permanent.',
+        this.props.kickMember
+      )
+
       return (
-        <View key="kick">
-          <Button title="kick from club" onPress={() => confirmMessage(
-            'Kick User',
-            'Are you sure? This action is permanent.',
-            this.props.kickMember
-          )} />
+        <View style={membershipItemStyles.kickHolder} key="kick">
+          <Button
+            style={membershipItemStyles.kickButton}
+            title="kick from club"
+            onPress={onPress}
+          />
         </View>
       )
     }
@@ -65,14 +93,8 @@ class MembershipItem extends Component {
 
   render() {
     return (
-      <View
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center'
-        }}
-      >
-        <View key="info">
+      <View style={membershipItemStyles.root}>
+        <View style={membershipItemStyles.info} key="info">
           <Text> Membership for: {this.props.user.name} </Text>
         </View>
         {this.renderElevation()}
@@ -86,21 +108,44 @@ class MembershipItem extends Component {
 //    PRESENTER
 // ===============
 
-class Club extends Component {
-  get club() {
-    return this.props.navigation.state.params.club
+var clubStyles = StyleSheet.create({
+  root: {},
+  editClubButton: {},
+  leaveClubButton: {},
+  inviteButton: {},
+  inviteMemberHolder: {},
+  content: {
+    height: '90%'
+  },
+  footerContent: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
+})
 
+class Club extends Component {
   componentDidMount() {
     this.props.getMemberships(this.club.id)
   }
 
-  leaveClub = () => {
-    this.props.leaveClub(this.club.id, this.props.navigation.goBack)
+  get club() {
+    return this.props.navigation.state.params.club
   }
 
   userForMembership (membership) {
     return this.props.users.filter((u) => u.id === membership.user_id)[0] || {email: 'loading...'}
+  }
+
+  leaveClubPress = () => {
+    confirmMessage(
+      'Leave Club',
+      'Are you sure? This action is permanent.',
+      this.props.leaveClub(this.club.id, this.props.navigation.goBack)
+    )
   }
 
   kickMemberCall = (membershipId) => () => {
@@ -134,6 +179,7 @@ class Club extends Component {
     if (this.props.currentUserIsAdmin) {
       return (
         <Button title="Edit Club"
+          style={clubStyles.editClubButton}
           onPress={() => this.props.navigation.navigate('EditClub', {clubInfo: this.club})}
         />
       )
@@ -142,40 +188,29 @@ class Club extends Component {
 
   renderMemberIniviteLink() {
     return (
-      <Button
-        title="+ Invite Member"
-        onPress={() => this.props.navigation.navigate('Invite', {clubId: this.club.id})}
-      />
+      <View style={clubStyles.inviteMemberHolder}>
+        <Button
+          title="+ Invite Member"
+          style={clubStyles.inviteButton}
+          onPress={() => this.props.navigation.navigate('Invite', {clubId: this.club.id})}
+        />
+      </View>
     )
   }
 
   render() {
     return (
-      <View style={{
-        width: '100%',
-        height: '100%'
-      }}>
-        <View style={{height: '90%'}}>
+      <View style={clubStyles.root} >
+        <View style={clubStyles.content}>
           {this.renderMemberships()}
           {this.renderMemberIniviteLink()}
         </View>
         <Footer>
-          <View style={{
-            height: '100%',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center'
-          }}>
-            <Button title="Leave Club"
-              onPress={() => {
-                confirmMessage(
-                  'Leave Club',
-                  'Are you sure? This action is permanent.',
-                  this.leaveClub
-                )
-              }}
+          <View style={clubStyles.footerContent}>
+            <Button
+              style={clubStyles.leaveClubButton}
+              title="Leave Club"
+              onPress={this.leaveClubPress}
             />
             {this.renderEdit()}
           </View>

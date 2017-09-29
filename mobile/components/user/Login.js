@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import {
+  StyleSheet,
+  View
+} from 'react-native'
 
 import BasicTextInput from '../ui/BasicTextInput'
 import BasicButton from '../ui/BasicButton'
@@ -8,6 +11,18 @@ import { connect } from 'react-redux'
 
 import { userActions } from '../../data/users'
 import { signIn } from '../../data/auth'
+
+// ===============
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  root: {
+    paddingTop: 140,
+    paddingLeft: 50,
+    paddingRight: 50
+  }
+})
 
 // ===============
 //    PRESENTER
@@ -34,7 +49,7 @@ class Login extends Component {
     const {email, password} = this.state
 
     return (
-      <View style={{paddingTop: 140, paddingLeft: 50, paddingRight: 50}}>
+      <View style={styles}>
         <BasicTextInput
           placeholder="email"
           value={email}

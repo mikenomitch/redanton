@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 
 import {
-  View,
   Image,
-  Text
+  StyleSheet,
+  Text,
+  View
 } from 'react-native'
 
 import BasicButton from '../ui/BasicButton'
@@ -14,8 +15,35 @@ import { connect } from 'react-redux'
 import { authActions } from '../../data/auth'
 
 // ===============
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  root: {
+    padding: 20
+  },
+  attributeHolder: {
+    paddingTop: 10
+  },
+  attributeLabel: {
+    fontWeight: '600',
+    fontSize: 16
+  },
+  attribute: {
+    fontWeight: '100',
+    fontSize: 16
+  },
+  avatar: {
+    width: 50,
+    height: 50
+  }
+})
+
+// ===============
 //    PRESENTER
 // ===============
+
+const defaultAvatar = 'http://www.archeosub.eu/images/BluLabTeamPeople/empty_user.png'
 
 class Settings extends Component {
   goToEdit = () => {
@@ -24,20 +52,26 @@ class Settings extends Component {
 
   render() {
     return (
-      <View style={{padding: 30}}>
-        <Text> Name: {this.props.currentUser.name} </Text>
-        <Text> Email: {this.props.currentUser.email} </Text>
-        <Text> Avatar: </Text>
-        <Image
-          style={{width: 50, height: 50}}
-          source={{uri: this.props.currentUser.avatar || "http://www.archeosub.eu/images/BluLabTeamPeople/empty_user.png"}}
-        />
+      <View style={styles.root}>
+        <View style={styles.attributeHolder}>
+          <Text style={styles.attributeLabel} > Name: </Text>
+          <Text style={styles.attribute} > {this.props.currentUser.name} </Text>
+        </View>
+
+        <View style={styles.attributeHolder}>
+          <Text style={styles.attributeLabel} > Email: </Text>
+          <Text style={styles.attribute} > {this.props.currentUser.email} </Text>
+        </View>
 
         <BasicButton onPress={this.goToEdit}>
           edit profile
         </BasicButton>
 
-        <ClubList navigation={this.props.navigation} />
+        <View style={styles.attributeHolder}>
+          <Text style={styles.attributeLabel} > Clubs: </Text>
+          <ClubList navigation={this.props.navigation} />
+        </View>
+
 
         <BasicButton onPress={this.props.signOut}>
           sign out

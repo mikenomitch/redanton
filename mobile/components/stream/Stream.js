@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
-import { View, Button, Text, FlatList, StyleSheet } from 'react-native'
+import {
+  View,
+  Button,
+  Text,
+  FlatList,
+  StyleSheet
+} from 'react-native'
 
 // =============
 //    STYLES
 // =============
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   stream: {
     height: '100%'
   },

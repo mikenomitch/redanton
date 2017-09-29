@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {
-  View,
   Button,
+  StyleSheet,
+  View,
   WebView
  } from 'react-native'
 
@@ -12,6 +13,33 @@ import Footer from '../ui/Footer'
 
 import { connect } from 'react-redux'
 
+// ===============
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  root: {
+    width: '100%',
+    height: '100%'
+  },
+  webView: {
+    width: '100%',
+    height: '90%'
+  },
+  footerContent: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  }
+})
+
+// ===============
+//    CHILDREN
+// ===============
+
 const EditPostButton = (props) => (
   <Button title="Edit" onPress={() => props.navigation.navigate('EditPost', {postInfo: props.post})} />
 )
@@ -21,6 +49,10 @@ const DeletePostButton = (props) => (
     confirmMessage('Remove Post', 'Are you sure?', props.removePost)
   }} />
 )
+
+// ===============
+//    PRESENTER
+// ===============
 
 class Post extends Component {
   get post() {
@@ -44,31 +76,21 @@ class Post extends Component {
 
   renderEdit () {
     if ( this.props.userIsOwner ) {
-      return (
-        <EditPostButton navigation={this.props.navigation} post={this.post} />
-      )
+      return <EditPostButton navigation={this.props.navigation} post={this.post} />
     }
   }
 
   renderDelete () {
     if ( this.props.userIsOwner ) {
-      return (
-        <DeletePostButton removePost={this.removePost}/>
-      )
+      return <DeletePostButton removePost={this.removePost}/>
     }
   }
 
   render() {
     return (
-      <View style={{
-        width: '100%',
-        height: '100%'
-      }}>
+      <View style={styles.root}>
         <WebView
-          style={{
-            width: '100%',
-            height: '90%'
-          }}
+          style={styles.webView}
           startInLoadingState
           automaticallyAdjustContentInsets={true}
           javaScriptEnabled={true}
@@ -77,17 +99,13 @@ class Post extends Component {
           source={{uri: this.uri}}
         />
         <Footer>
-          <View style={{
-            height: '100%',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center'
-          }}>
+          <View style={styles.footerContent}>
             {this.renderDelete()}
             {this.renderEdit()}
-            <Button onPress={this.goToChat} title="Chat >" />
+            <Button
+              title="Chat >"
+              onPress={this.goToChat}
+            />
           </View>
         </Footer>
       </View>

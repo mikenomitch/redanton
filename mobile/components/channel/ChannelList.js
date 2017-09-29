@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { View, Button, FlatList, StyleSheet, Text } from 'react-native'
+import {
+  View,
+  Button,
+  FlatList,
+  StyleSheet,
+  Text
+} from 'react-native'
 
 import { connect } from 'react-redux'
 
@@ -10,8 +16,7 @@ import { getClubs } from '../../data/clubs'
 //    STYLES
 // ============
 
-// TODO: DRY up with Club
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   list: {
     height: '100%'
   },

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {
   Button,
+  StyleSheet,
   View
  } from 'react-native'
 
@@ -14,6 +15,28 @@ import { getPostsForChannel } from '../../data/posts'
 import { deleteChannel } from '../../data/channels'
 
 import Footer from '../ui/Footer'
+
+// ===============
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  root: {
+    width: '100%',
+    height: '100%'
+  },
+  content: {
+    height: '90%'
+  },
+  footerContent: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  }
+})
 
 // ===============
 //    PRESENTER
@@ -33,6 +56,18 @@ class Channel extends Component {
     this.props.deleteChannel(this.channel.id, this.props.navigation.goBack)
   }
 
+  removeChannelClick = () => {
+    confirmMessage(
+      'Remove Channel',
+      'Are you sure? This will remove all its posts.',
+      this.removeChannel
+    )
+  }
+
+  editChannelClick = () => {
+    navigation.navigate('EditChannel', {channelInfo: this.channel})
+  }
+
   render() {
     const {
       channels,
@@ -42,11 +77,8 @@ class Channel extends Component {
     } = this.props
 
     return (
-      <View style={{
-        width: '100%',
-        height: '100%'
-      }}>
-        <View style={{height: '90%'}}>
+      <View style={styles.root}>
+        <View style={styles.content}>
           <Stream
             navigation={navigation}
             content={posts}
@@ -55,22 +87,9 @@ class Channel extends Component {
           />
         </View>
         <Footer>
-          <View style={{
-            height: '100%',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center'
-          }}>
-            <Button title="Remove Channel" onPress={() => {
-              confirmMessage(
-                'Remove Channel',
-                'Are you sure? This will remove all its posts.',
-                this.removeChannel
-              )
-            }} />
-            <Button title="Edit Channel" onPress={() => navigation.navigate('EditChannel', {channelInfo: this.channel})} />
+          <View style={styles.footerContent}>
+            <Button title="Remove Channel" onPress={this.removeChannelClick} />
+            <Button title="Edit Channel" onPress={this.editChannelClick} />
           </View>
         </Footer>
       </View>

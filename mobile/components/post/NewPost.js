@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
 import {
-	View,
-  ScrollView
+  ScrollView,
+  StyleSheet,
+  View
 } from 'react-native'
 
 import ModalSelector from 'react-native-modal-selector'
@@ -28,6 +29,19 @@ const defaultState = {
   showErrors: false,
   postInfo: defaultPostInfo
 }
+
+// ===============
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  root: {
+    padding: 50
+  },
+  modalSelector: {
+    borderRadius: 0
+  }
+})
 
 // ===============
 //    PRESENTER
@@ -73,10 +87,10 @@ class NewPost extends Component {
 
   render() {
     return (
-      <View style={{padding: 50}}>
+      <View style={styles.root}>
         <ScrollView>
           <ModalSelector
-            style={{borderRadius: 0}}
+            style={styles.modalSelector}
             data={this.channelData()}
             initValue="select channel"
             onChange={(option)=> this.setPostState({channel: option.key}) } />

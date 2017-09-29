@@ -1,11 +1,28 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View
+} from 'react-native'
 import { connect } from 'react-redux'
 
 import { createMembership } from '../../data/memberships'
 
 import BasicTextInput from '../ui/BasicTextInput'
 import BasicButton from '../ui/BasicButton'
+
+// ===============
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  root: {
+    padding: 50
+  },
+  header: {
+    fontSize: 16
+  }
+})
 
 // ===============
 //    PRESENTER
@@ -41,8 +58,8 @@ class Invite extends Component {
 
   render() {
     return (
-      <View style={{padding: 50}}>
-        <Text style={{fontSize: 16}}> Invite Member: </Text>
+      <View style={styles.root}>
+        <Text style={styles.header}> Invite Member: </Text>
         <BasicTextInput
           label="email"
           value={this.state.email}

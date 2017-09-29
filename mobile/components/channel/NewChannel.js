@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import {
 	View,
   ScrollView,
+  StyleSheet,
   Text
 } from 'react-native'
 
@@ -21,6 +22,30 @@ const defaultState = {
   channelInfo: defaultChannelInfo
 }
 
+// ============
+//    STYLES
+// ============
+
+const styles = StyleSheet.create({
+  root: {
+    padding: '50%'
+  },
+  header: {
+    fontSize: 16
+  },
+  footerContent: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  modalSelector: {
+    borderRadius: 0
+  },
+})
+
 // ===============
 //    PRESENTER
 // ===============
@@ -29,6 +54,12 @@ class NewChannel extends Component {
 	constructor(props){
 		super(props)
 		this.state = defaultState
+  }
+
+  clubData() {
+		return this.props.clubs.map(
+      (club) => ({ key: club.id, label: club.name })
+    )
 	}
 
 	onPost = () => {
@@ -52,22 +83,21 @@ class NewChannel extends Component {
 		this.setState({channelInfo})
   }
 
-  clubData() {
-		return this.props.clubs.map(
-      (club) => ({ key: club.id, label: club.name })
-    )
-	}
+  onModalChange = (option) => {
+    this.setState({clubId: option.key})
+  }
 
   render() {
     return (
-      <View style={{padding: 50}}>
+      <View style={styles.root}>
         <ScrollView>
-          <Text style={{fontSize: 16}}> Create a channel: </Text>
+          <Text style={styles.header}> Create a channel: </Text>
           <ModalSelector
-            style={{borderRadius: 0}}
+            style={styles.modalSelector}
             data={this.clubData()}
             initValue="select club"
-            onChange={(option)=> this.setState({clubId: option.key}) } />
+            onChange={this.onModalChange}
+          />
           <EditChannelInfo
             setChannelState={this.setChannelState}
             channelInfo={this.state.channelInfo}

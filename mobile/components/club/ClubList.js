@@ -1,5 +1,10 @@
 import React, {Component} from 'react'
-import { Button, Text, View } from 'react-native'
+import {
+  Button,
+  Text,
+  StyleSheet,
+  View
+} from 'react-native'
 
 import { connect } from 'react-redux'
 
@@ -8,15 +13,54 @@ import { getClubs } from '../../data/clubs'
 import BasicButton from '../ui/BasicButton'
 
 // ===============
-//    CHILDREN
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  clubList: {
+    paddingTop: 10
+  },
+  clubItem: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#ddd',
+    display: 'flex',
+    alignItems: 'flex-start'
+  },
+  name: {
+    flex: 1
+  },
+  newClubButtonHolder: {},
+  newClubButton: {},
+  listHolder: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    borderTopWidth: 1,
+    borderTopColor: '#ddd',
+  },
+  clubItem: {
+    width: '100%',
+    paddingTop: 10,
+    paddingBottom: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center'
+  }
+})
+
+// ===============
+//     CHILDREN
 // ===============
 
 const ClubItem = (props) => {
   return (
-    <Button
-      onPress={() => props.navigate('Club', {club: props.club, id: props.club.id})}
-      title={props.club.name}
-    />
+    <View style={styles.clubItem}>
+      <Button
+        onPress={() => props.navigate('Club', {club: props.club, id: props.club.id})}
+        title={props.club.name}
+      />
+    </View>
   )
 }
 
@@ -29,6 +73,10 @@ class ClubList extends Component {
     this.props.getClubs()
   }
 
+  newClubPress = () => {
+    this.props.navigation.navigate('NewClub')
+  }
+
   renderClubLink = (club) => {
     const { navigate } = this.props.navigation
     return <ClubItem navigate={navigate} club={club} key={club.id} />
@@ -36,18 +84,14 @@ class ClubList extends Component {
 
   render() {
     return (
-      <View>
-        <View>
-          <Text> Clubs: </Text>
-        </View>
-        <View>
+      <View style={styles.clubList}>
+        <View style={styles.listHolder}>
           {this.props.clubs.map(this.renderClubLink)}
         </View>
-        <View>
-          <Button
-            onPress={() => this.props.navigation.navigate('NewClub')}
-            title="+ New Club"
-          />
+        <View style={styles.newClubButtonHolder}>
+          <BasicButton onPress={this.newClubPress}>
+            + New Club
+          </BasicButton>
         </View>
       </View>
     )

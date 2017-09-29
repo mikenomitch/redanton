@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 
 import {
-  View,
   ScrollView,
-  Text
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native'
 
 import BasicButton from '../ui/BasicButton'
@@ -18,6 +19,19 @@ const defaultState = {
   showErrors: false,
   clubInfo: defaultClubInfo
 }
+
+// ===============
+//     STYLES
+// ===============
+
+const styles = StyleSheet.create({
+  root: {
+    padding: 50
+  },
+  header: {
+    fontSize: 16
+  }
+})
 
 // ===============
 //    PRESENTER
@@ -52,9 +66,9 @@ class NewClub extends Component {
 
   render() {
     return (
-      <View style={{padding: 50}}>
+      <View style={styles.root}>
         <ScrollView>
-          <Text style={{fontSize: 16}}> Create new club: </Text>
+          <Text style={styles.header}> Create New Club: </Text>
           <EditClubInfo
             setClubState={this.setClubState}
             clubInfo={this.state.clubInfo}
