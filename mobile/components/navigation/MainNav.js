@@ -23,6 +23,8 @@ import InviteScreen from '../club/Invite'
 
 import PostChatScreen from '../chat/PostChat'
 
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 // ==============
 //    CHILDREN
 // ==============
@@ -46,8 +48,11 @@ const TabNav = TabNavigator(
       path: '/',
       navigationOptions: ({navigation}) => ({
         title: 'My Stream',
+        headerRight: (<NewPostButton navigation={navigation} />),
         tabBarLabel: 'Stream',
-        headerRight: (<NewPostButton navigation={navigation} />)
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="th-list" size={20} color={tintColor} />
+        ),
       })
     },
     ChannelsTab: {
@@ -56,15 +61,21 @@ const TabNav = TabNavigator(
       navigationOptions:  ({navigation}) => ({
         title: 'My Channels',
         tabBarLabel: 'Channels',
-        headerRight: (<NewChannelButton navigation={navigation} />)
+        headerRight: (<NewChannelButton navigation={navigation} />),
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="filter" size={20} color={tintColor} />
+        ),
       })
     },
     SettingsTab: {
       screen: SettingsScreen,
       path: '/settings',
       navigationOptions: {
-        title: 'Settings'
-      }
+        title: 'Settings',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="gears" size={20} color={tintColor} />
+        ),
+      },
     }
   },
   {
