@@ -43,7 +43,7 @@ const withFetching = store => next => action => {
   const onFetchError = (error) => {
     // TODO: does this know too much about the app now?
     if (error.message === 'bad auth') {
-      store.dispatch(authActions.clearCreds())
+      store.dispatch(authActions.signOut())
     }
 
     const errorAction = callOptions.errorActionCreator && callOptions.errorActionCreator(error)

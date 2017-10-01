@@ -22,7 +22,16 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingLeft: 50,
     paddingRight: 50
-  }
+  },
+  attributeLabel: {
+    marginTop: 10,
+    fontWeight: '600',
+    fontSize: 16
+  },
+  attribute: {
+    fontWeight: '100',
+    fontSize: 16
+  },
 })
 
 // ===============
@@ -55,7 +64,8 @@ class EditUser extends Component {
 
     return (
       <View style={styles.root}>
-        <Text> email: {this.state.userInfo.email} </Text>
+        <Text style={styles.attributeLabel} > Email: </Text>
+        <Text style={styles.attribute} > {this.state.userInfo.email} </Text>
         <EditUserInfo userInfo={this.state.userInfo} changeUserInfo={this.changeUserInfo} />
         <BasicButton onPress={this.saveChanges}>
           save changes

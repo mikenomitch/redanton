@@ -30,15 +30,38 @@ import Footer from '../ui/Footer'
 
 var membershipItemStyles = StyleSheet.create({
   root: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center'
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#ddd',
+    display: 'inline-flex',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    flexDirection: 'row',
+    padding: 8
   },
-  info: {},
-  elevationHolder: {},
-  elevationButton: {},
-  kickHolder: {},
-  kickButton:{}
+  info: {
+    width: '33%'
+  },
+  elevationHolder: {
+    width: '33%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  elevationButton: {
+    fontWeight: '100'
+  },
+  kickHolder: {
+    width: '33%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  kickButton:{
+    fontWeight: '100'
+  },
+  name: {
+    fontSize: 16
+  }
 })
 
 class MembershipItem extends Component {
@@ -83,7 +106,7 @@ class MembershipItem extends Component {
         <View style={membershipItemStyles.kickHolder} key="kick">
           <Button
             style={membershipItemStyles.kickButton}
-            title="kick from club"
+            title="kick"
             onPress={onPress}
           />
         </View>
@@ -91,11 +114,15 @@ class MembershipItem extends Component {
     }
   }
 
+  displayName() {
+    return this.props.user.name || this.props.user.email
+  }
+
   render() {
     return (
       <View style={membershipItemStyles.root}>
         <View style={membershipItemStyles.info} key="info">
-          <Text> Membership for: {this.props.user.name} </Text>
+          <Text style={membershipItemStyles.name}> {this.displayName()} </Text>
         </View>
         {this.renderElevation()}
         {this.renderKickUser()}
@@ -116,6 +143,17 @@ var clubStyles = StyleSheet.create({
   inviteMemberHolder: {},
   content: {
     height: '90%'
+  },
+  headerContent: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 8
+  },
+  membershipsHeader: {
+    fontWeight: '600',
+    fontSize: 18
   },
   footerContent: {
     height: '100%',
@@ -190,7 +228,7 @@ class Club extends Component {
     return (
       <View style={clubStyles.inviteMemberHolder}>
         <Button
-          title="+ Invite Member"
+          title="+ Member"
           style={clubStyles.inviteButton}
           onPress={() => this.props.navigation.navigate('Invite', {clubId: this.club.id})}
         />
@@ -202,8 +240,13 @@ class Club extends Component {
     return (
       <View style={clubStyles.root} >
         <View style={clubStyles.content}>
+          <View style={clubStyles.headerContent}>
+            <Text style={clubStyles.membershipsHeader}>
+              Members:
+            </Text>
+            {this.renderMemberIniviteLink()}
+          </View>
           {this.renderMemberships()}
-          {this.renderMemberIniviteLink()}
         </View>
         <Footer>
           <View style={clubStyles.footerContent}>

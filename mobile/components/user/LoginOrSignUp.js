@@ -19,7 +19,14 @@ const styles = StyleSheet.create({
   root: {
     paddingTop: 160,
     paddingLeft: 50,
-    paddingRight: 50
+    paddingRight: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  welcomeText: {
+    fontSize: 22,
+    paddingTop: 15
   }
 })
 
@@ -35,11 +42,13 @@ class LoginOrSignUp extends Component {
   render() {
     return (
       <View style={styles.root}>
+        <Text style={styles.welcomeText}>
+          Welcome to Danton
+        </Text>
+
         <BasicButton onPress={this.goTo('Login')}>
           login
         </BasicButton>
-
-        <Text> OR: </Text>
 
         <BasicButton onPress={this.goTo('SignUp')}>
           sign up

@@ -9,6 +9,7 @@ import Button from 'apsl-react-native-button'
 const styles = {
   marginTop: 25,
   borderColor: '#007aff',
+  backgroundColor: '#007aff',
   borderRadius: 0,
   borderWidth: 1.5
 }
@@ -16,7 +17,7 @@ const styles = {
 const BasicButton = (props) => (
   <Button
     {...props}
-    textStyle={{color: '#007aff'}}
+    textStyle={{color: 'white'}}
     style={styles}
   />
 )

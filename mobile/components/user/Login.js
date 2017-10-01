@@ -49,7 +49,7 @@ class Login extends Component {
     const {email, password} = this.state
 
     return (
-      <View style={styles}>
+      <View style={styles.root}>
         <BasicTextInput
           placeholder="email"
           value={email}
