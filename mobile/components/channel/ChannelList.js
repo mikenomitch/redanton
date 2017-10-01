@@ -54,7 +54,7 @@ const ChannelItem = (props) => {
       </View>
       <View style={styles.details}>
         <View style={styles.club}>
-          <Text>In Club: {props.club.name}</Text>
+          <Text>club: {props.club.name}</Text>
         </View>
       </View>
     </View>

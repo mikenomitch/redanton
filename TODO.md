@@ -1,14 +1,6 @@
 # Todos
 
-## User Mgmt
-- UI update on
-  - clubs list & mgmt
-  - member list & mgmt
-  - general settings page (10 min)
-
 ## Quick Wins
-- adding a post/channel from a specific
-  club locks in that parent
 - posts without a url just become a discussion post
 - navigation headers reload properly
 

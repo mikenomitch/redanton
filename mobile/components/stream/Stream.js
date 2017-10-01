@@ -73,7 +73,7 @@ const StreamItem = (props) => {
         </View>
         <View style={styles.details}>
           <View style={styles.channel}>
-            <Text>In Channel: {props.chanName}</Text>
+            <Text>channel: {props.chanName}</Text>
           </View>
           <View style={styles.action}>
             <Text>{action}<Text>{props.actionUserName}</Text></Text>
@@ -83,7 +83,7 @@ const StreamItem = (props) => {
       <View style={styles.streamItemRight}>
         <Button
           onPress={() => props.navigate('PostChat', {post: props.post})}
-          title="Chat >"
+          title="chat >"
         />
       </View>
     </View>
