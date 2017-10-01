@@ -65,7 +65,7 @@ class Channel extends Component {
   }
 
   editChannelClick = () => {
-    navigation.navigate('EditChannel', {channelInfo: this.channel})
+    this.props.navigation.navigate('EditChannel', {channelInfo: this.channel})
   }
 
   render() {

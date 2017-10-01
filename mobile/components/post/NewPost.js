@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import merge from 'lodash/fp/merge'
 
 import {
   ScrollView,
@@ -50,7 +51,10 @@ const styles = StyleSheet.create({
 class NewPost extends Component {
 	constructor(props){
 		super(props)
-		this.state = defaultState
+    this.state = merge(
+      defaultState,
+      {postInfo: {channel: this.givenChannel().id}}
+    )
 	}
 
 	componentDidMount () {
@@ -83,7 +87,11 @@ class NewPost extends Component {
 		return this.props.channels.map(
       (chan) => ({ key: chan.id, label: chan.name })
     )
-	}
+  }
+
+  givenChannel () {
+    return this.props.navigation.state.params.channel || {}
+  }
 
   render() {
     return (
@@ -92,7 +100,7 @@ class NewPost extends Component {
           <ModalSelector
             style={styles.modalSelector}
             data={this.channelData()}
-            initValue="select channel"
+            initValue={this.givenChannel().name || "select channel"}
             onChange={(option)=> this.setPostState({channel: option.key}) } />
           <EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
           <BasicTextInput

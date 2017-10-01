@@ -28,18 +28,15 @@ const defaultState = {
 
 const styles = StyleSheet.create({
   root: {
-    padding: '50%'
+    height: '100%',
+    width: '100%',
+    padding: 50,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   header: {
     fontSize: 16
-  },
-  footerContent: {
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
   },
   modalSelector: {
     borderRadius: 0
@@ -91,7 +88,9 @@ class NewChannel extends Component {
     return (
       <View style={styles.root}>
         <ScrollView>
-          <Text style={styles.header}> Create a channel: </Text>
+          <Text style={styles.header}>
+            Create a channel:
+          </Text>
           <ModalSelector
             style={styles.modalSelector}
             data={this.clubData()}

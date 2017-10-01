@@ -29,9 +29,10 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 //    CHILDREN
 // ==============
 
-const NewPostButton = (props) => (
-  <Button title="+ Post" onPress={() => props.navigation.navigate('NewPost')} />
-)
+const NewPostButton = (props) => {
+  const channel = props.navigation.state.params && props.navigation.state.params.channel
+  return <Button title="+ Post" onPress={() => props.navigation.navigate('NewPost', {channel: channel})} />
+}
 
 const NewChannelButton = (props) => (
   <Button title="+ Channel" onPress={() => props.navigation.navigate('NewChannel')} />
