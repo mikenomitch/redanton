@@ -24,7 +24,8 @@
     - add calls reducer
     - able to handle multiple calls of the same type
       out of the gate
-  - async redux actions as promises
+  - async redux actions as promises (establish and
+    follow a solid pattern here)
   - auth logic
     - If jwt will expire soon, reauth it before the next call
 
