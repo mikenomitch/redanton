@@ -74,7 +74,7 @@ const TabNav = TabNavigator(
       navigationOptions: {
         title: 'Settings',
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="gears" size={20} color={tintColor} />
+          <Icon name="gear" size={20} color={tintColor} />
         )
       }
     }

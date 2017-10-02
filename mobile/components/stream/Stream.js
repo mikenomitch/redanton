@@ -17,7 +17,8 @@ import SimpleButton from '../ui/SimpleButton'
 
 const styles = StyleSheet.create({
   stream: {
-    height: '100%'
+    height: '100%',
+    flex: 1
   },
   streamItem: {
     borderBottomWidth: 0.5,
@@ -152,19 +153,19 @@ class Stream extends Component {
     if (this.hasNoConent) return this.renderEmpty()
 
     return (
-      <View style={styles.stream}>
-        <FlatList
-          data={this.props.content}
-          renderItem={this.renderPostLink}
-          keyExtractor={(item) => item.id}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh.bind(this)}
-            />
-          }
-        />
-      </View>
+      <FlatList
+        style={styles.stream}
+        initialNumToRender={5}
+        data={this.props.content}
+        renderItem={this.renderPostLink}
+        keyExtractor={(item) => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+        }
+      />
     )
   }
 }

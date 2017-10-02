@@ -19,7 +19,7 @@ import { getClubs } from '../../data/clubs'
 
 const styles = StyleSheet.create({
   list: {
-    height: '100%'
+    flex: 1
   },
   channelItem: {
     borderBottomWidth: 0.5,
@@ -108,19 +108,19 @@ class ChannelList extends Component {
   render() {
     const channelsList = Object.values(this.props.channels)
     return (
-      <View style={styles.list}>
-        <FlatList
-          data={channelsList}
-          renderItem={this.renderChannelLink}
-          keyExtractor={(item) => item.id}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh.bind(this)}
-            />
-          }
-        />
-      </View>
+      <FlatList
+        style={styles.list}
+        initialNumToRender={5}
+        data={channelsList}
+        renderItem={this.renderChannelLink}
+        keyExtractor={(item) => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+        }
+      />
     )
   }
 }
