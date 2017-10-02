@@ -24,6 +24,8 @@
     - add calls reducer
     - able to handle multiple calls of the same type
       out of the gate
+    - auto-reload if have not refreshed in a while
+      (app closed an reopened much later)
   - async redux actions as promises (establish and
     follow a solid pattern here)
   - auth logic
