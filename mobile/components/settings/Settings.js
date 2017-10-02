@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native'
 
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 import ClubList from '../club/ClubList'
 
 import { connect } from 'react-redux'
@@ -63,9 +63,9 @@ class Settings extends Component {
           <Text style={styles.attribute} > {this.props.currentUser.email} </Text>
         </View>
 
-        <BasicButton onPress={this.goToEdit}>
+        <ActionButton onPress={this.goToEdit}>
           edit profile
-        </BasicButton>
+        </ActionButton>
 
         <View style={styles.attributeHolder}>
           <Text style={styles.attributeLabel} > Clubs: </Text>
@@ -73,9 +73,9 @@ class Settings extends Component {
         </View>
 
 
-        <BasicButton onPress={this.props.signOut}>
+        <ActionButton onPress={this.props.signOut}>
           sign out
-        </BasicButton>
+        </ActionButton>
       </View>
     )
   }

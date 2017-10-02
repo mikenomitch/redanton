@@ -68,6 +68,10 @@ class Channel extends Component {
     this.props.navigation.navigate('EditChannel', {channelInfo: this.channel})
   }
 
+  refresh = (cb) => {
+    this.props.getPostsForChannel(this.channel.id, cb)
+  }
+
   render() {
     const {
       channels,
@@ -80,6 +84,7 @@ class Channel extends Component {
       <View style={styles.root}>
         <View style={styles.content}>
           <Stream
+            refresh={this.refresh}
             navigation={navigation}
             content={posts}
             channels={channels}

@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 
 import BasicTextInput from '../ui/BasicTextInput'
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 
 import { connect } from 'react-redux'
 
@@ -67,9 +67,9 @@ class SignUp extends Component {
 
         <EditUserInfo userInfo={this.state} changeUserInfo={this.setState.bind(this)} />
 
-        <BasicButton onPress={this.getInfo}>
+        <ActionButton onPress={this.getInfo}>
           sign up
-        </BasicButton>
+        </ActionButton>
       </View>
     )
   }

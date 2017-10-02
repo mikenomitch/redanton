@@ -40,13 +40,18 @@ export const channelActions = mergeHashActions(customChannelActions, 'Channel')
 // =================
 // =================
 
-export const getChannels = () => {
+export const getChannels = (onSuccess) => {
   return {
     type: 'GET_CHANNELS',
     call: {
       action: 'GET',
       endpoint: '/channels',
-      successActionCreator: channelActions.onChannelsReturn
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(channelActions.onChannelsReturn(res))
+          onSuccess && onSuccess(res)
+        }
+      }
     }
   }
 }

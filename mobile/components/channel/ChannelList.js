@@ -4,7 +4,8 @@ import {
   Button,
   FlatList,
   StyleSheet,
-  Text
+  Text,
+  RefreshControl
 } from 'react-native'
 
 import { connect } from 'react-redux'
@@ -70,6 +71,21 @@ class ChannelList extends Component {
     title: 'Channels'
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      refreshing: false
+    }
+  }
+
+  _onRefresh() {
+    this.setState({refreshing: true})
+
+    this.props.getChannels(
+      () => {this.setState({refreshing: false})}
+    )
+  }
+
   componentDidMount() {
     this.props.getChannels()
     this.props.getClubs()
@@ -97,6 +113,12 @@ class ChannelList extends Component {
           data={channelsList}
           renderItem={this.renderChannelLink}
           keyExtractor={(item) => item.id}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }
         />
       </View>
     )

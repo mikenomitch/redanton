@@ -50,24 +50,34 @@ export const postActions = mergeHashActions(customPostActions, 'Post')
 // =================
 // =================
 
-export const getFrontPage = () => {
+export const getFrontPage = (onSuccess) => {
   return {
     type: 'GET_FRONT_PAGE_CALL',
     call: {
       action: 'GET',
       endpoint: '/front',
-      successActionCreator: postActions.onPostsReturn
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(postActions.onPostsReturn(res))
+          onSuccess && onSuccess(res)
+        }
+      },
     }
   }
 }
 
-export const getPostsForChannel = (channelId) => {
+export const getPostsForChannel = (channelId, onSuccess) => {
   return {
     type: 'GET_POSTS_FOR_CHANNEL',
     call: {
       action: 'GET',
       endpoint: `/channels/${channelId}/posts`,
-      successActionCreator: postActions.onPostsReturn
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(postActions.onPostsReturn(res))
+          onSuccess && onSuccess(res)
+        }
+      }
     }
   }
 }
@@ -81,7 +91,7 @@ export const createPost = (postInfo, onSuccess) => {
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(postActions.mergePosts([res.data]))
-          onSuccess(res)
+          onSuccess && onSuccess(res)
         }
       },
       errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
@@ -107,7 +117,7 @@ export const updatePost = (postInfo, onSuccess) => {
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(postActions.mergePosts([res.data]))
-          onSuccess(res)
+          onSuccess && onSuccess(res)
         }
       },
       errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
@@ -128,8 +138,8 @@ export const deletePost = (postId, onSuccess) => {
       endpoint: `/posts/${postId}`,
       successActionCreator: () => {
         return (dispatch) => {
-          onSuccess && onSuccess()
           dispatch(postActions.removePost(postId))
+          onSuccess && onSuccess()
         }
       }
     }

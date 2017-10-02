@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { updateChannel } from '../../data/channels'
 
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 import EditChannelInfo from './EditChannelInfo'
 
 // ===============
@@ -36,9 +36,9 @@ class EditChannel extends Component {
     return (
 			<View style={{padding: 50}}>
 				<EditChannelInfo setChannelState={this.setChannelState} channelInfo={this.state.channelInfo} />
-				<BasicButton onPress={this.onSave} >
+				<ActionButton onPress={this.onSave} >
 					save edits
-				</BasicButton>
+				</ActionButton>
 			</View>
 		)
   }

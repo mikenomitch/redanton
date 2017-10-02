@@ -7,19 +7,18 @@ import Button from 'apsl-react-native-button'
 // ===============
 
 const styles = {
-  marginTop: 25,
-  borderColor: '#007aff',
-  backgroundColor: '#007aff',
+  backgroundColor: 'transparent',
+  borderColor: 'transparent',
   borderRadius: 0,
-  borderWidth: 1.5
+  borderWidth: 0
 }
 
-const BasicButton = (props) => (
+const SimpleButton = (props) => (
   <Button
     {...props}
-    textStyle={{color: 'white'}}
+    textStyle={{color: '#007aff'}}
     style={styles}
   />
 )
 
-export default BasicButton
+export default SimpleButton

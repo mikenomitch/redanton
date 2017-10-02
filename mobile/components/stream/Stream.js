@@ -4,8 +4,12 @@ import {
   Button,
   Text,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  RefreshControl
 } from 'react-native'
+
+import Icon from 'react-native-vector-icons/FontAwesome'
+import SimpleButton from '../ui/SimpleButton'
 
 // =============
 //    STYLES
@@ -81,10 +85,9 @@ const StreamItem = (props) => {
         </View>
       </View>
       <View style={styles.streamItemRight}>
-        <Button
-          onPress={() => props.navigate('PostChat', {post: props.post})}
-          title="chat >"
-        />
+        <SimpleButton onPress={() => props.navigate('PostChat', {post: props.post})} >
+          <Icon name="comment" size={20} color="#007aff" />
+        </SimpleButton>
       </View>
     </View>
   )
@@ -95,6 +98,13 @@ const StreamItem = (props) => {
 // =============
 
 class Stream extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      refreshing: false
+    }
+  }
+
   static defaultProps = {
     channels: {},
     users: {}
@@ -102,6 +112,14 @@ class Stream extends Component {
 
   get hasNoConent () {
     return !this.props.content || this.props.content.length === 0
+  }
+
+  _onRefresh() {
+    this.setState({refreshing: true})
+
+    this.props.refresh(
+      () => {this.setState({refreshing: false})}
+    )
   }
 
   renderEmpty () {
@@ -139,6 +157,12 @@ class Stream extends Component {
           data={this.props.content}
           renderItem={this.renderPostLink}
           keyExtractor={(item) => item.id}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }
         />
       </View>
     )

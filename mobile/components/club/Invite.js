@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { createMembership } from '../../data/memberships'
 
 import BasicTextInput from '../ui/BasicTextInput'
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 
 // ===============
 //     STYLES
@@ -68,9 +68,9 @@ class Invite extends Component {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <BasicButton onPress={this.sendInvite} >
+        <ActionButton onPress={this.sendInvite} >
           send invite
-        </BasicButton>
+        </ActionButton>
       </View>
     )
   }

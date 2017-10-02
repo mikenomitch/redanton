@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native'
 
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 
 import { connect } from 'react-redux'
 import { createClub } from '../../data/clubs'
@@ -73,9 +73,9 @@ class NewClub extends Component {
             setClubState={this.setClubState}
             clubInfo={this.state.clubInfo}
           />
-          <BasicButton onPress={this.onPost} >
+          <ActionButton onPress={this.onPost} >
             create club
-          </BasicButton>
+          </ActionButton>
         </ScrollView>
       </View>
     )

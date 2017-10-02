@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { updateClub } from '../../data/clubs'
 
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 import EditClubInfo from './EditClubInfo'
 
 // ===============
@@ -36,9 +36,9 @@ class EditClub extends Component {
     return (
 			<View style={{padding: 50}}>
 				<EditClubInfo setClubState={this.setClubState} clubInfo={this.state.clubInfo} />
-				<BasicButton onPress={this.onSave} >
+				<ActionButton onPress={this.onSave} >
 					save edits
-				</BasicButton>
+				</ActionButton>
 			</View>
 		)
   }

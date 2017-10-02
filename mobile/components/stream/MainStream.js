@@ -22,8 +22,13 @@ class MainStream extends Component {
     this.props.getUsersForMain()
   }
 
+  refresh = (cb) => {
+    this.props.getFrontPage(cb)
+  }
+
   render() {
     return <Stream
+      refresh={this.refresh}
       navigation={this.props.navigation}
       content={this.props.posts}
       channels={this.props.channels}

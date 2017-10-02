@@ -8,7 +8,7 @@ import {
 import Login from './Login'
 import SignUp from './SignUp'
 
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 import { StackNavigator } from 'react-navigation'
 
 // ===============
@@ -46,13 +46,13 @@ class LoginOrSignUp extends Component {
           Welcome to Danton
         </Text>
 
-        <BasicButton onPress={this.goTo('Login')}>
+        <ActionButton onPress={this.goTo('Login')}>
           login
-        </BasicButton>
+        </ActionButton>
 
-        <BasicButton onPress={this.goTo('SignUp')}>
+        <ActionButton onPress={this.goTo('SignUp')}>
           sign up
-        </BasicButton>
+        </ActionButton>
       </View>
     )
   }

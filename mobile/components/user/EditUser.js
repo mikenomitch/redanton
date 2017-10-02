@@ -5,7 +5,7 @@ import {
   View
 } from 'react-native'
 
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 
 import { connect } from 'react-redux'
 
@@ -67,9 +67,9 @@ class EditUser extends Component {
         <Text style={styles.attributeLabel} > Email: </Text>
         <Text style={styles.attribute} > {this.state.userInfo.email} </Text>
         <EditUserInfo userInfo={this.state.userInfo} changeUserInfo={this.changeUserInfo} />
-        <BasicButton onPress={this.saveChanges}>
+        <ActionButton onPress={this.saveChanges}>
           save changes
-        </BasicButton>
+        </ActionButton>
       </View>
     )
   }

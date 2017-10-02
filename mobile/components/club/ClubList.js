@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 
 import { getClubs } from '../../data/clubs'
 
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 
 // ===============
 //     STYLES
@@ -89,9 +89,9 @@ class ClubList extends Component {
           {this.props.clubs.map(this.renderClubLink)}
         </View>
         <View style={styles.newClubButtonHolder}>
-          <BasicButton onPress={this.newClubPress}>
+          <ActionButton onPress={this.newClubPress}>
             + New Club
-          </BasicButton>
+          </ActionButton>
         </View>
       </View>
     )

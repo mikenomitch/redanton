@@ -3,13 +3,17 @@ import {
   Button,
   StyleSheet,
   View,
-  WebView
+  WebView,
+  Linking
  } from 'react-native'
 
-import { confirmMessage } from '../../lib/uiActions'
-import { deletePost } from '../../data/posts'
+ import Icon from 'react-native-vector-icons/FontAwesome'
 
-import Footer from '../ui/Footer'
+ import { confirmMessage } from '../../lib/uiActions'
+ import { deletePost } from '../../data/posts'
+
+ import Footer from '../ui/Footer'
+ import SimpleButton from '../ui/SimpleButton'
 
 import { connect } from 'react-redux'
 
@@ -40,15 +44,27 @@ const styles = StyleSheet.create({
 //    CHILDREN
 // ===============
 
-const EditPostButton = (props) => (
-  <Button title="Edit" onPress={() => props.navigation.navigate('EditPost', {postInfo: props.post})} />
-)
+const EditPostButton = (props) => {
+  const onPress = () => props.navigation.navigate('EditPost', {postInfo: props.post})
 
-const DeletePostButton = (props) => (
-  <Button title="Remove" onPress={() => {
+  return (
+    <SimpleButton onPress={onPress} >
+      <Icon name="pencil" size={20} color="#007aff" />
+    </SimpleButton>
+  )
+}
+
+const DeletePostButton = (props) => {
+  const onPress = () => {
     confirmMessage('Remove Post', 'Are you sure?', props.removePost)
-  }} />
-)
+  }
+
+  return (
+    <SimpleButton onPress={onPress} >
+      <Icon name="trash" size={20} color="#007aff" />
+    </SimpleButton>
+  )
+}
 
 // ===============
 //    PRESENTER
@@ -64,6 +80,13 @@ class Post extends Component {
       return 'http://' + this.post.url
     }
     return this.post.url
+  }
+
+  constructor(props){
+    super(props)
+    this.state = {
+      secondPassed: false
+    }
   }
 
   removePost = () => {
@@ -88,24 +111,37 @@ class Post extends Component {
 
   render() {
     return (
-      <View style={styles.root}>
+      <View style={styles.root} key={this.post.id}>
         <WebView
-          style={styles.webView}
-          startInLoadingState
-          automaticallyAdjustContentInsets={true}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          scalesPageToFit={true}
           source={{uri: this.uri}}
+          ref={(ref) => { this.webview = ref }}
+          style={styles.webView}
+          onNavigationStateChange={(event) => {
+            if (event.url !== this.uri && this.state.secondPassed) {
+              this.webview.stopLoading()
+              Linking.openURL(event.url)
+            }
+          }}
+          onLoadEnd={() => {
+            setTimeout(() => {
+              this.state.secondPassed = true
+            }, 1000)
+          }}
+          allowsInlineMediaPlayback
+          automaticallyAdjustContentInsets
+          domStorageEnabled
+          javaScriptEnabled
+          scalesPageToFit
+          startInLoadingState
+          thirdPartyCookiesEnabled
         />
         <Footer>
           <View style={styles.footerContent}>
             {this.renderDelete()}
             {this.renderEdit()}
-            <Button
-              title="Chat >"
-              onPress={this.goToChat}
-            />
+            <SimpleButton onPress={this.goToChat} >
+              <Icon name="comment" size={20} color="#007aff" />
+            </SimpleButton>
           </View>
         </Footer>
       </View>

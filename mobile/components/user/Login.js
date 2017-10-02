@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 
 import BasicTextInput from '../ui/BasicTextInput'
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 
 import { connect } from 'react-redux'
 
@@ -66,9 +66,9 @@ class Login extends Component {
 					secureTextEntry
         />
 
-        <BasicButton onPress={this.getInfo}>
+        <ActionButton onPress={this.getInfo}>
           login
-        </BasicButton>
+        </ActionButton>
       </View>
     )
   }

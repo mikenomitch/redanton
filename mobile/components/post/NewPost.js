@@ -9,7 +9,7 @@ import {
 
 import ModalSelector from 'react-native-modal-selector'
 import BasicTextInput from '../ui/BasicTextInput'
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 
 import { connect } from 'react-redux'
 
@@ -108,9 +108,9 @@ class NewPost extends Component {
             value={this.state.postInfo.message}
             onChangeText={(message) => this.setPostState({message})}
           />
-          <BasicButton onPress={this.onPost}>
+          <ActionButton onPress={this.onPost}>
             post it
-          </BasicButton>
+          </ActionButton>
         </ScrollView>
 			</View>
 		)

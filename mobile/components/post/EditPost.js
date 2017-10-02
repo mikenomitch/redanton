@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { updatePost } from '../../data/posts'
 
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 import EditPostInfo from './EditPostInfo'
 
 // ===============
@@ -35,9 +35,9 @@ class EditPost extends Component {
     return (
 			<View style={{padding: 50}}>
 				<EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
-				<BasicButton onPress={this.onSave}>
+				<ActionButton onPress={this.onSave}>
 					save edits
-				</BasicButton>
+				</ActionButton>
 			</View>
 		)
   }

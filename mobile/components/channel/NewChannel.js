@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 import ModalSelector from 'react-native-modal-selector'
-import BasicButton from '../ui/BasicButton'
+import ActionButton from '../ui/ActionButton'
 
 import { connect } from 'react-redux'
 import { createChannel } from '../../data/channels'
@@ -101,9 +101,9 @@ class NewChannel extends Component {
             setChannelState={this.setChannelState}
             channelInfo={this.state.channelInfo}
           />
-          <BasicButton onPress={this.onPost} >
+          <ActionButton onPress={this.onPost} >
             make channel
-          </BasicButton>
+          </ActionButton>
         </ScrollView>
 			</View>
 		)
