@@ -34,6 +34,10 @@ defmodule Danton.Message do
     Room.for_and_with_post(post_id) |> Ecto.assoc(:messages)
   end
 
+  def count_distinct(query \\ Post) do
+    from p in query, select: count(p.id, :distinct)
+  end
+
   # ===========================
   # GETTERS
   # ===========================
@@ -46,7 +50,9 @@ defmodule Danton.Message do
   end
 
   def count_for_post(post) do
-    length(post.room.messages)
+    for_post(post.id)
+    |> count_distinct()
+    |> Repo.one()
   end
 
   # ===========================
