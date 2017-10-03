@@ -39,7 +39,7 @@ defmodule Danton.Message do
   # ===========================
 
   def latest_for_post(post) do
-    for_post(post)
+    for_post(post.id)
     |> Repo.all()
     |> Enum.sort(&(&1.inserted_at >= &2.inserted_at))
     |> List.first()
