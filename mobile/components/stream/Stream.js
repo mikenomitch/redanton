@@ -87,7 +87,7 @@ const StreamItem = (props) => {
             <Text>channel: {props.chanName}</Text>
           </View>
           <View style={styles.info}>
-            <Text>posted by:<Text>{props.posterName}</Text></Text>
+            <Text>posted by: <Text>{props.posterName}</Text></Text>
           </View>
           <View style={styles.info}>
             <Text>{actionText}</Text>
