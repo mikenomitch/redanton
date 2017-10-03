@@ -8,6 +8,8 @@ import {
   RefreshControl
 } from 'react-native'
 
+import NewPostButton from '../post/NewPostButton'
+
 import Icon from 'react-native-vector-icons/FontAwesome'
 import SimpleButton from '../ui/SimpleButton'
 
@@ -128,6 +130,7 @@ class Stream extends Component {
       <View style={styles.empty}>
         <Text> There's nothing here </Text>
         <Text> Add a post to get started. </Text>
+        <NewPostButton navigation={this.props.navigation}/>
       </View>
     )
   }
