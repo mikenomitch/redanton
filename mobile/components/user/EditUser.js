@@ -4,12 +4,11 @@ import {
   Text,
   View
 } from 'react-native'
-
-import ActionButton from '../ui/ActionButton'
-
 import { connect } from 'react-redux'
 
 import { updateSelf } from '../../data/users'
+
+import ActionButton from '../ui/ActionButton'
 
 import EditUserInfo from './EditUserInfo'
 

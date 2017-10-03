@@ -1,4 +1,4 @@
 // export const serverUrl = 'https://stormy-reef-53700.herokuapp.com'
-export const serverUrl = 'https://2c034509.ngrok.io'
+export const serverUrl = 'https://cd60d360.ngrok.io'
 
 export default { serverUrl }

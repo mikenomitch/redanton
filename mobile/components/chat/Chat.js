@@ -35,21 +35,17 @@ import { getUsersForPost } from '../../data/users'
 //    PRESENTER
 // ===============
 
-function __postFromProps (props) {
-  return props.navigation.state.params.post
-}
-
 const defaultUser = {
   name: 'unknown',
   avatar: 'https://d30y9cdsu7xlg0.cloudfront.net/png/60319-200.png'
 }
 
-class PostChat extends Component {
+export default class Chat extends Component {
 
   // GENERAL HELPERS
 
   get post() {
-    return __postFromProps(this.props)
+    return this.props.post
   }
 
   formattedUser = (userId) => {
@@ -142,26 +138,3 @@ class PostChat extends Component {
     )
   }
 }
-
-// ===============
-//   CONNECTION
-// ===============
-
-const mapStateToProps = (state, props) => {
-  const post = __postFromProps(props)
-  const currentUserId = state.auth && state.auth.currentUser && state.auth.currentUser.id
-  return {
-    messages: Object.values(state.messages).filter(m => m.room_id === post.room_id),
-    users: state.users,
-    currentUserId
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  {
-    getUsersForPost,
-    getMessagesForPost,
-    updateMessage: messageActions.updateMessage
-  }
-)(PostChat)

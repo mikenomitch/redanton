@@ -24,7 +24,7 @@ defmodule Danton.Post do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title, :description, :type, :url])
-    |> validate_required([:title, :url])
+    |> validate_required([:title])
   end
 
   # ===========================

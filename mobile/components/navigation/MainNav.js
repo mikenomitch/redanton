@@ -21,7 +21,7 @@ import EditClubScreen from '../club/EditClub'
 import NewClubScreen from '../club/NewClub'
 import InviteScreen from '../club/Invite'
 
-import PostChatScreen from '../chat/PostChat'
+import ChatScreen from '../chat/ChatScreen'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -102,7 +102,7 @@ const MainNav = StackNavigator({
     })
   },
   PostChat: {
-    screen: PostChatScreen,
+    screen: ChatScreen,
     path: '/posts/:id/chat',
     navigationOptions: ({navigation}) => ({
       title: 'Chat: ' + navigation.state.params.post.title
