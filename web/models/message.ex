@@ -39,9 +39,10 @@ defmodule Danton.Message do
   # ===========================
 
   def latest_for_post(post) do
-    post.room.messages
-      |> Enum.sort(&(&1.inserted_at >= &2.inserted_at))
-      |> List.first()
+    for_post(post)
+    |> Repo.all()
+    |> Enum.sort(&(&1.inserted_at >= &2.inserted_at))
+    |> List.first()
   end
 
   def count_for_post(post) do
