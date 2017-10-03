@@ -53,6 +53,10 @@ defmodule Danton.User do
     Ecto.assoc(auth, :user)
   end
 
+  def for_message(message) do
+    Ecto.assoc(message, :user)
+  end
+
   # ===========================
   # GETTERS
   # ===========================

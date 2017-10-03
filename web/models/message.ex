@@ -59,7 +59,6 @@ defmodule Danton.Message do
     message
   end
 
-  # TODO: move logic elsewhere?
   def notify_users(message) do
     seconds_to_sleep = 20
     :timer.sleep(seconds_to_sleep * 1000)
@@ -77,6 +76,13 @@ defmodule Danton.Message do
     users_to_ignore = users_checked_in ++ user_who_sent
     users_to_send_to = users_for_room -- users_to_ignore
 
-    Danton.Notification.notify_users(users_to_send_to, :new_chat_message, %{message: message})
+    sender = User.for_message(message) |> Repo.one()
+    post = Post.for_message(message) |> Repo.one()
+
+    Danton.Notification.notify_users(
+      users_to_send_to,
+      :new_chat_message,
+      %{ sender_name: sender.name || sender.email, post_title: post.title }
+    )
   end
 end

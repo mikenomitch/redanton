@@ -44,9 +44,9 @@ defmodule Danton.Post do
 
   def for_front_page(user) do
     Club.ids_for_user(user)
-      |> Channel.ids_for_club_ids()
-      |> Post.for_channel_ids()
-      |> Post.with_messages()
+    |> Channel.ids_for_club_ids()
+    |> Post.for_channel_ids()
+    |> Post.with_messages()
   end
 
   def with_messages(query \\ Post) do
@@ -54,6 +54,14 @@ defmodule Danton.Post do
       |> join(:left, [p], _ in assoc(p, :room))
       |> join(:left, [_, room], _ in assoc(room, :messages))
       |> preload([_, r, m], [room: {r, messages: m}])
+  end
+
+  # does a full room load and does not need to
+  def for_message(message) do
+    message
+    |> Ecto.assoc(:room)
+    |> Repo.one()
+    |> Ecto.assoc(:post)
   end
 
   # ===========================

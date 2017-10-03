@@ -1,12 +1,12 @@
 defmodule Danton.Email do
   use Bamboo.Phoenix, view: Danton.EmailView
 
-  def new_chat_message(user, _params) do
+  def new_chat_message(user, params) do
     base_email()
     |> to("mikenomitch@gmail.com") # really should be `user.email`
     |> subject("New Chat Message")
     |> assign(:person, user)
-    |> render("new_chat_message.html")
+    |> render("new_chat_message.html", sender_name: params.sender_name, post_title: params.post_title)
   end
 
   def new_club_invite(user, _params) do

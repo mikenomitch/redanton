@@ -1,1 +1,6 @@
-<p>There is a new message in Danton. Go read it and add your own ideas!</p>
+<p>
+  <%= @sender_name %> has commented on <%= @post_title %> on MIKES_UNNAMED_APP_SLASH_SITE.
+</p>
+<p>
+  Go add to the discussion!
+</p>
