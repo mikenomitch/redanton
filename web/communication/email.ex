@@ -3,7 +3,7 @@ defmodule Danton.Email do
 
   def new_chat_message(user, params) do
     base_email()
-    |> to("mikenomitch@gmail.com") # really should be `user.email`
+    |> to(email_for_user(user)) # really should be `user.email`
     |> subject("New Chat Message")
     |> assign(:person, user)
     |> render("new_chat_message.html", sender_name: params.sender_name, post_title: params.post_title)
@@ -11,7 +11,7 @@ defmodule Danton.Email do
 
   def new_club_invite(user, _params) do
     base_email()
-    |> to("mikenomitch@gmail.com") # really should be `user.email`
+    |> to(email_for_user(user)) # really should be `user.email`
     |> subject("Invited to Club")
     |> assign(:person, user)
     |> render("new_club_invite.html")
@@ -32,5 +32,20 @@ defmodule Danton.Email do
     # This will use the "email.html.eex" file as a layout when rendering html emails.
     # Plain text emails will not use a layout unless you use `put_text_layout`
     |> put_html_layout({Danton.LayoutView, "email.html"})
+  end
+
+  defp email_for_user(user) do
+    default_email = "mikenomitch+danton@gmail.com"
+    acceptable_user_emails = [
+      "mikenomitch@gmail.com"
+    ]
+
+    email_is_acceptable = Enum.member?(acceptable_user_emails, user.email)
+
+    if (email_is_acceptable) do
+      user.email
+    else
+      default_email
+    end
   end
 end
