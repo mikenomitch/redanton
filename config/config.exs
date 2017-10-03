@@ -7,7 +7,8 @@ use Mix.Config
 
 # General application configuration
 config :danton,
-  ecto_repos: [Danton.Repo]
+  ecto_repos: [Danton.Repo],
+  env: Mix.env
 
 # Configures the endpoint
 config :danton, Danton.Endpoint,
