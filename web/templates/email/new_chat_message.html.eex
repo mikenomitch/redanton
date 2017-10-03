@@ -1,5 +1,5 @@
 <p>
-  <%= @sender_name %> has commented on <%= @post_title %> on MIKES_UNNAMED_APP_SLASH_SITE.
+  <%= @sender_name %> has commented on post "<%= @post_title %>"" on MIKES_UNNAMED_APP_SLASH_SITE.
 </p>
 <p>
   Go add to the discussion!
