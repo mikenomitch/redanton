@@ -4,7 +4,8 @@ import {
   Image,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView
 } from 'react-native'
 
 import ActionButton from '../ui/ActionButton'
@@ -36,6 +37,9 @@ const styles = StyleSheet.create({
   avatar: {
     width: 50,
     height: 50
+  },
+  signOutHolder: {
+    marginBottom: 25
   }
 })
 
@@ -52,7 +56,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <View style={styles.root}>
+      <ScrollView style={styles.root}>
         <View style={styles.attributeHolder}>
           <Text style={styles.attributeLabel} > Name: </Text>
           <Text style={styles.attribute} > {this.props.currentUser.name} </Text>
@@ -72,11 +76,12 @@ class Settings extends Component {
           <ClubList navigation={this.props.navigation} />
         </View>
 
-
-        <ActionButton onPress={this.props.signOut}>
-          sign out
-        </ActionButton>
-      </View>
+        <View style={styles.signOutHolder}>
+          <ActionButton onPress={this.props.signOut}>
+            sign out
+          </ActionButton>
+        </View>
+      </ScrollView>
     )
   }
 }
