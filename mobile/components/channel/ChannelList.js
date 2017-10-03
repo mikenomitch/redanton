@@ -10,6 +10,8 @@ import {
 
 import { connect } from 'react-redux'
 
+import { border, colors, spacing } from '../styleConstants'
+
 import { getChannels } from '../../data/channels'
 import { getClubs } from '../../data/clubs'
 
@@ -22,8 +24,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   channelItem: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#ddd',
+    borderBottomWidth: border.width,
+    borderBottomColor: colors.border,
     display: 'flex',
     alignItems: 'flex-start'
   },
@@ -35,8 +37,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   club: {
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingLeft: spacing.medium,
+    paddingRight: spacing.medium
   },
 })
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+import { colors, misc } from '../styleConstants'
+
 import SimpleButton from '../ui/SimpleButton'
 
 const EditPostButton = (props) => {
@@ -8,7 +10,7 @@ const EditPostButton = (props) => {
 
   return (
     <SimpleButton onPress={onPress} >
-      <Icon name="pencil" size={20} color="#007aff" />
+      <Icon name="pencil" size={misc.iconSize} color={colors.primary} />
     </SimpleButton>
   )
 }

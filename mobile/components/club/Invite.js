@@ -6,6 +6,8 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
+import { font, spacing } from '../styleConstants'
+
 import { createMembership } from '../../data/memberships'
 
 import BasicTextInput from '../ui/BasicTextInput'
@@ -17,10 +19,10 @@ import ActionButton from '../ui/ActionButton'
 
 const styles = StyleSheet.create({
   root: {
-    padding: 50
+    padding: spacing.container
   },
   header: {
-    fontSize: 16
+    fontSize: font.medium
   }
 })
 

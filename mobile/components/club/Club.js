@@ -9,11 +9,10 @@ import {
 
 import { connect } from 'react-redux'
 
-import { confirmMessage } from '../../lib/uiActions'
+import {colors, spacing, font, border} from '../styleConstants'
 
-import {
-  leaveClub
-} from '../../data/clubs'
+import { confirmMessage } from '../../lib/uiActions'
+import { leaveClub } from '../../data/clubs'
 
 import {
   getMemberships,
@@ -30,13 +29,13 @@ import Footer from '../ui/Footer'
 
 var membershipItemStyles = StyleSheet.create({
   root: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#ddd',
+    borderBottomWidth: border.width,
+    borderBottomColor: colors.border,
     display: 'inline-flex',
     flexWrap: 'nowrap',
     alignItems: 'center',
     flexDirection: 'row',
-    padding: 8
+    padding: spacing.medium
   },
   info: {
     width: '33%'
@@ -60,7 +59,7 @@ var membershipItemStyles = StyleSheet.create({
     fontWeight: '100'
   },
   name: {
-    fontSize: 16
+    fontSize: font.medium
   }
 })
 
@@ -149,11 +148,11 @@ var clubStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 8
+    padding: spacing.medium
   },
   membershipsHeader: {
     fontWeight: '600',
-    fontSize: 18
+    fontSize: font.medium
   },
   footerContent: {
     height: '100%',

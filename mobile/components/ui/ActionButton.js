@@ -1,23 +1,24 @@
 import React from 'react'
-
 import Button from 'apsl-react-native-button'
+
+import { border, colors, spacing } from '../styleConstants'
 
 // ===============
 //     STYLES
 // ===============
 
 const styles = {
-  marginTop: 25,
-  borderColor: '#007aff',
-  backgroundColor: '#007aff',
+  marginTop: spacing.extraLarge,
+  borderColor: colors.primary,
+  backgroundColor: colors.primary,
   borderRadius: 0,
-  borderWidth: 1.5
+  borderWidth: border.thickWidth
 }
 
 const ActionButton = (props) => (
   <Button
     {...props}
-    textStyle={{color: 'white'}}
+    textStyle={{color: colors.white}}
     style={styles}
   />
 )

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
+import { spacing } from '../styleConstants'
+
 import { updatePost } from '../../data/posts'
 
 import ActionButton from '../ui/ActionButton'
@@ -33,7 +35,7 @@ class EditPost extends Component {
 
   render() {
     return (
-			<View style={{padding: 50}}>
+			<View style={{padding: spacing.container}}>
 				<EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
 				<ActionButton onPress={this.onSave}>
 					save edits

@@ -3,6 +3,8 @@ import { View } from 'react-native'
 
 import { connect } from 'react-redux'
 
+import { spacing } from '../styleConstants'
+
 import { updateClub } from '../../data/clubs'
 
 import ActionButton from '../ui/ActionButton'
@@ -34,7 +36,7 @@ class EditClub extends Component {
 
   render() {
     return (
-			<View style={{padding: 50}}>
+			<View style={{padding: spacing.container}}>
 				<EditClubInfo setClubState={this.setClubState} clubInfo={this.state.clubInfo} />
 				<ActionButton onPress={this.onSave} >
 					save edits

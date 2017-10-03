@@ -5,8 +5,9 @@ import {
   StyleSheet,
   View
 } from 'react-native'
-
 import { connect } from 'react-redux'
+
+import {colors, spacing, border} from '../styleConstants'
 
 import { getClubs } from '../../data/clubs'
 
@@ -18,11 +19,11 @@ import ActionButton from '../ui/ActionButton'
 
 const styles = StyleSheet.create({
   clubList: {
-    paddingTop: 10
+    paddingTop: spacing.medium
   },
   clubItem: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#ddd',
+    borderBottomWidth: border.width,
+    borderBottomColor: colors.border,
     display: 'flex',
     alignItems: 'flex-start'
   },
@@ -35,14 +36,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'flex-start',
     borderTopWidth: 1,
-    borderTopColor: '#ddd',
+    borderTopColor: colors.border,
   },
   clubItem: {
     width: '100%',
-    paddingTop: 10,
-    paddingBottom: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    paddingTop: spacing.medium,
+    borderBottomWidth: border.width,
+    borderBottomColor: colors.border,
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center'

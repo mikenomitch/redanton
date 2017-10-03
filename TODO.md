@@ -1,7 +1,6 @@
 # Todos
 
 ## Quick Wins
-- posts without a url just become a discussion post
 - navigation headers reload properly
 
 ## Push Notifications
@@ -15,10 +14,7 @@
   - add proper authorization to all create, update, delete calls
 
 ## Frontend
-  - clean up socket logic
-  - make an optimistic update on post edit
-    - make sure failure works well
-    - make sure success works well
+  - constants for styling
   - call tracking
     - add to withFetching middleware
     - add calls reducer
@@ -26,10 +22,15 @@
       out of the gate
     - auto-reload if have not refreshed in a while
       (app closed an reopened much later)
+    - dont show pages until needs are loaded
+  - make an optimistic update on post edit
+    - make sure failure works well
+    - make sure success works well
   - async redux actions as promises (establish and
     follow a solid pattern here)
   - auth logic
     - If jwt will expire soon, reauth it before the next call
+  - clean up socket logic
 
 ## Ops
 - set secrets via kubernetes (show a test secret in the ui)

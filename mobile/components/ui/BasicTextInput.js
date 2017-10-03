@@ -1,13 +1,15 @@
 import React from 'react'
 import { Hoshi } from 'react-native-textinput-effects'
 
+import { font, spacing, colors } from '../styleConstants'
+
 const BasicTextInput = (props) => (
   <Hoshi {...props}
-    style={{marginTop: 15}}
+    style={{marginTop: spacing.large}}
     backgroundColor={'transparent'}
-    labelStyle={{fontSize: 14, color: '#666'}}
-    inputStyle={{fontSize: 14, fontWeight: '100', color: '#333'}}
-    borderColor={'#007aff'}
+    labelStyle={{fontSize: font.medium, color: colors.mediumGray}}
+    inputStyle={{fontSize: font.medium, fontWeight: font.lightWeight, color: colors.darkGray}}
+    borderColor={colors.primary}
   />
 )
 

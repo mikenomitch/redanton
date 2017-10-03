@@ -6,6 +6,8 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
+import { font, spacing } from '../styleConstants'
+
 import { updateSelf } from '../../data/users'
 
 import ActionButton from '../ui/ActionButton'
@@ -19,17 +21,17 @@ import EditUserInfo from './EditUserInfo'
 const styles = StyleSheet.create({
   root: {
     paddingTop: 0,
-    paddingLeft: 50,
-    paddingRight: 50
+    paddingLeft: spacing.container,
+    paddingRight: spacing.container
   },
   attributeLabel: {
-    marginTop: 10,
-    fontWeight: '600',
-    fontSize: 16
+    marginTop: spacing.medium,
+    fontWeight: font.heavyWeight,
+    fontSize: font.medium
   },
   attribute: {
-    fontWeight: '100',
-    fontSize: 16
+    fontWeight: font.lightWeight,
+    fontSize: font.medium
   },
 })
 

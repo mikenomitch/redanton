@@ -3,11 +3,12 @@ import {
   StyleSheet,
   View
 } from 'react-native'
+import { connect } from 'react-redux'
+
+import { border, colors, spacing } from '../styleConstants'
 
 import BasicTextInput from '../ui/BasicTextInput'
 import ActionButton from '../ui/ActionButton'
-
-import { connect } from 'react-redux'
 
 import { userActions } from '../../data/users'
 import { signUp } from '../../data/auth'
@@ -21,8 +22,8 @@ import EditUserInfo from './EditUserInfo'
 const styles = StyleSheet.create({
   root: {
     paddingTop: 0,
-    paddingLeft: 50,
-    paddingRight: 50
+    paddingLeft: spacing.container,
+    paddingRight: spacing.container
   }
 })
 

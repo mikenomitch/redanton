@@ -1,10 +1,15 @@
 import React from 'react'
-
 import { View } from 'react-native'
+
 import BasicTextInput from '../ui/BasicTextInput'
 
 const EditPostInfo = (props) => (
   <View>
+    <BasicTextInput
+      label="title"
+      value={props.postInfo.title}
+      onChangeText={(title) => props.setPostState({title})}
+    />
     <BasicTextInput
       label="url"
       keyboardType="url"
@@ -12,11 +17,6 @@ const EditPostInfo = (props) => (
       onChangeText={(url) => props.setPostState({url})}
       autoCapitalize="none"
       autoCorrect={false}
-    />
-    <BasicTextInput
-      label="title"
-      value={props.postInfo.title}
-      onChangeText={(title) => props.setPostState({title})}
     />
   </View>
 )

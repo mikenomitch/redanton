@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import {
   Image,
   StyleSheet,
@@ -7,11 +6,12 @@ import {
   View,
   ScrollView
 } from 'react-native'
+import { connect } from 'react-redux'
+
+import { colors, spacing, font } from '../styleConstants'
 
 import ActionButton from '../ui/ActionButton'
 import ClubList from '../club/ClubList'
-
-import { connect } from 'react-redux'
 
 import { authActions } from '../../data/auth'
 
@@ -21,25 +21,21 @@ import { authActions } from '../../data/auth'
 
 const styles = StyleSheet.create({
   root: {
-    padding: 20
+    padding: spacing.container
   },
   attributeHolder: {
-    paddingTop: 10
+    paddingTop: spacing.medium
   },
   attributeLabel: {
-    fontWeight: '600',
-    fontSize: 16
+    fontWeight: font.heavyWeight,
+    fontSize: font.medium
   },
   attribute: {
-    fontWeight: '100',
-    fontSize: 16
-  },
-  avatar: {
-    width: 50,
-    height: 50
+    fontWeight: font.lightWeight,
+    fontSize: font.medium
   },
   signOutHolder: {
-    marginBottom: 25
+    marginBottom: spacing.large
   }
 })
 
@@ -47,7 +43,7 @@ const styles = StyleSheet.create({
 //    PRESENTER
 // ===============
 
-const defaultAvatar = 'http://www.archeosub.eu/images/BluLabTeamPeople/empty_user.png'
+// const defaultAvatar = 'http://www.archeosub.eu/images/BluLabTeamPeople/empty_user.png'
 
 class Settings extends Component {
   goToEdit = () => {

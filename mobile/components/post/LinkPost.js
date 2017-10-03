@@ -8,6 +8,8 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+import { colors, misc } from '../styleConstants'
+
 import { confirmMessage } from '../../lib/uiActions'
 import { deletePost } from '../../data/posts'
 
@@ -113,7 +115,7 @@ export default class LinkPost extends Component {
   renderGoToChat () {
     return (
       <SimpleButton onPress={this.goToChat} >
-        <Icon name="comment" size={20} color="#007aff" />
+        <Icon name="comment" size={misc.iconSize} color={colors.primary} />
       </SimpleButton>
     )
   }

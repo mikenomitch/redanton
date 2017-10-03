@@ -2,6 +2,8 @@ import React from 'react'
 
 import Button from 'apsl-react-native-button'
 
+import { colors } from '../styleConstants'
+
 // ===============
 //     STYLES
 // ===============
@@ -16,7 +18,7 @@ const styles = {
 const SimpleButton = (props) => (
   <Button
     {...props}
-    textStyle={{color: '#007aff'}}
+    textStyle={{color: colors.primary}}
     style={styles}
   />
 )

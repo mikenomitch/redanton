@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-
 import {
 	View,
   ScrollView,
   StyleSheet,
   Text
 } from 'react-native'
-
 import ModalSelector from 'react-native-modal-selector'
+
+import { spacing, font } from '../styleConstants'
+
 import ActionButton from '../ui/ActionButton'
 
 import { connect } from 'react-redux'
@@ -30,13 +31,13 @@ const styles = StyleSheet.create({
   root: {
     height: '100%',
     width: '100%',
-    padding: 50,
+    padding: spacing.container,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
   },
   header: {
-    fontSize: 16
+    fontSize: font.medium
   },
   modalSelector: {
     borderRadius: 0
@@ -86,26 +87,24 @@ class NewChannel extends Component {
 
   render() {
     return (
-      <View style={styles.root}>
-        <ScrollView>
-          <Text style={styles.header}>
-            Create a channel:
-          </Text>
-          <ModalSelector
-            style={styles.modalSelector}
-            data={this.clubData()}
-            initValue="select club"
-            onChange={this.onModalChange}
-          />
-          <EditChannelInfo
-            setChannelState={this.setChannelState}
-            channelInfo={this.state.channelInfo}
-          />
-          <ActionButton onPress={this.onPost} >
-            make channel
-          </ActionButton>
-        </ScrollView>
-			</View>
+      <ScrollView style={styles.root}>
+        <Text style={styles.header}>
+          Create a channel:
+        </Text>
+        <ModalSelector
+          style={styles.modalSelector}
+          data={this.clubData()}
+          initValue="select club"
+          onChange={this.onModalChange}
+        />
+        <EditChannelInfo
+          setChannelState={this.setChannelState}
+          channelInfo={this.state.channelInfo}
+        />
+        <ActionButton onPress={this.onPost} >
+          make channel
+        </ActionButton>
+      </ScrollView>
 		)
   }
 }

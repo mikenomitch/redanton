@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import merge from 'lodash/fp/merge'
-
 import {
   ScrollView,
   StyleSheet,
   View
 } from 'react-native'
-
 import ModalSelector from 'react-native-modal-selector'
+import { connect } from 'react-redux'
+import merge from 'lodash/fp/merge'
+
+import { spacing } from '../styleConstants'
+
 import BasicTextInput from '../ui/BasicTextInput'
 import ActionButton from '../ui/ActionButton'
-
-import { connect } from 'react-redux'
 
 import { getChannels } from '../../data/channels'
 import { getClubs } from '../../data/clubs'
@@ -37,7 +37,7 @@ const defaultState = {
 
 const styles = StyleSheet.create({
   root: {
-    padding: 50
+    padding: spacing.container
   },
   modalSelector: {
     borderRadius: 0
@@ -104,7 +104,7 @@ class NewPost extends Component {
             onChange={(option)=> this.setPostState({channel: option.key}) } />
           <EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
           <BasicTextInput
-            label="first message"
+            label="first chat message"
             value={this.state.postInfo.message}
             onChangeText={(message) => this.setPostState({message})}
           />

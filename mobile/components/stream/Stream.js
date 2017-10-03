@@ -8,6 +8,8 @@ import {
   RefreshControl
 } from 'react-native'
 
+import { border, colors, spacing, misc } from '../styleConstants'
+
 import NewPostButton from '../post/NewPostButton'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -23,8 +25,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   streamItem: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#ddd',
+    borderBottomWidth: border.width,
+    borderBottomColor: colors.border,
     display: 'inline-flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -48,16 +50,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   channel: {
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingLeft: spacing.medium,
+    paddingRight: spacing.medium
   },
   action: {
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingLeft: spacing.medium,
+    paddingRight: spacing.medium
   },
   empty: {
     alignItems: 'center',
-    padding: 50
+    padding: spacing.container
   }
 })
 
@@ -89,7 +91,7 @@ const StreamItem = (props) => {
       </View>
       <View style={styles.streamItemRight}>
         <SimpleButton onPress={() => props.navigate('PostChat', {post: props.post})} >
-          <Icon name="comment" size={20} color="#007aff" />
+          <Icon name="comment" size={misc.iconSize} color={colors.primary} />
         </SimpleButton>
       </View>
     </View>

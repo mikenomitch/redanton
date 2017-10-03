@@ -4,12 +4,14 @@ import {
   Text,
   View
 } from 'react-native'
+import { StackNavigator } from 'react-navigation'
+
+import { colors, font, spacing } from '../styleConstants'
 
 import Login from './Login'
 import SignUp from './SignUp'
 
 import ActionButton from '../ui/ActionButton'
-import { StackNavigator } from 'react-navigation'
 
 // ===============
 //     STYLES
@@ -18,15 +20,15 @@ import { StackNavigator } from 'react-navigation'
 const styles = StyleSheet.create({
   root: {
     paddingTop: 160,
-    paddingLeft: 50,
-    paddingRight: 50,
+    paddingLeft: spacing.container,
+    paddingRight: spacing.container,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
   },
   welcomeText: {
-    fontSize: 22,
-    paddingTop: 15
+    fontSize: font.extraLarge,
+    paddingTop: spacing.large
   }
 })
 

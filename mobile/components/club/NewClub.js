@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-
 import {
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native'
+import { connect } from 'react-redux'
+
+import { font, spacing } from '../styleConstants'
 
 import ActionButton from '../ui/ActionButton'
-
-import { connect } from 'react-redux'
 import { createClub } from '../../data/clubs'
 
 import EditClubInfo from './EditClubInfo'
@@ -26,10 +26,10 @@ const defaultState = {
 
 const styles = StyleSheet.create({
   root: {
-    padding: 50
+    padding: spacing.container
   },
   header: {
-    fontSize: 16
+    fontSize: font.medium
   }
 })
 
