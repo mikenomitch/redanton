@@ -6,16 +6,16 @@ import {
   Linking
  } from 'react-native'
 
- import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
- import { confirmMessage } from '../../lib/uiActions'
- import { deletePost } from '../../data/posts'
+import { confirmMessage } from '../../lib/uiActions'
+import { deletePost } from '../../data/posts'
 
- import EditPostButton from './EditPostButton'
- import DeletePostButton from './DeletePostButton'
+import EditPostButton from './EditPostButton'
+import DeletePostButton from './DeletePostButton'
 
- import Footer from '../ui/Footer'
- import SimpleButton from '../ui/SimpleButton'
+import Footer from '../ui/Footer'
+import SimpleButton from '../ui/SimpleButton'
 
 // ===============
 //     STYLES
