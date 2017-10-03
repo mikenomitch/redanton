@@ -175,7 +175,7 @@ class Club extends Component {
   }
 
   userForMembership (membership) {
-    return this.props.users.filter((u) => u.id === membership.user_id)[0] || {email: 'loading...'}
+    return this.props.users.filter((u) => u.id === membership.user_id)[0] || {email: 'unknown user'}
   }
 
   leaveClubPress = () => {
