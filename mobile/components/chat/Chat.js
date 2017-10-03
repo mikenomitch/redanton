@@ -1,26 +1,17 @@
 import React, { Component } from 'react'
-
 import {
   Text,
   View
 } from 'react-native'
-
-import {
-  Socket
-} from "phoenix"
+import { Socket } from "phoenix"
 
 import flow from 'lodash/fp/flow'
 import map from 'lodash/fp/map'
 import reverse from 'lodash/fp/reverse'
 import sortBy from 'lodash/fp/sortBy'
 
-import {
-  connect
-} from 'react-redux'
-
-import {
-  GiftedChat
-} from 'react-native-gifted-chat'
+import { connect } from 'react-redux'
+import { GiftedChat } from 'react-native-gifted-chat'
 
 import { serverUrl } from '../../lib/serverInfo'
 
@@ -28,7 +19,6 @@ import {
   messageActions,
   getMessagesForPost
 } from '../../data/messages'
-
 import { getUsersForPost } from '../../data/users'
 
 // ===============

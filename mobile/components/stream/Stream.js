@@ -7,6 +7,7 @@ import {
   StyleSheet,
   RefreshControl
 } from 'react-native'
+import moment from 'moment'
 
 import { border, colors, spacing, misc } from '../styleConstants'
 
@@ -47,13 +48,12 @@ const styles = StyleSheet.create({
   },
   details: {
     flex: 1,
-    flexDirection: 'row'
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'column'
   },
-  channel: {
-    paddingLeft: spacing.medium,
-    paddingRight: spacing.medium
-  },
-  action: {
+  info: {
+    flex: 1,
     paddingLeft: spacing.medium,
     paddingRight: spacing.medium
   },
@@ -68,9 +68,11 @@ const styles = StyleSheet.create({
 // =============
 
 const StreamItem = (props) => {
-  const action = props.post.message_count == 1
-    ? "posted by "
-    : "message from "
+  const timeAgo = moment(new Date(props.post.last_activity_time)).fromNow()
+  const actionText = props.post.message_count > 1
+    ? `message from ${props.actionUserName} ${timeAgo}`
+    : `posted ${timeAgo}`
+
   return (
     <View style={styles.streamItem}>
       <View style={styles.streamItemLeft}>
@@ -81,11 +83,14 @@ const StreamItem = (props) => {
           />
         </View>
         <View style={styles.details}>
-          <View style={styles.channel}>
+          <View style={styles.info}>
             <Text>channel: {props.chanName}</Text>
           </View>
-          <View style={styles.action}>
-            <Text>{action}<Text>{props.actionUserName}</Text></Text>
+          <View style={styles.info}>
+            <Text>posted by:<Text>{props.posterName}</Text></Text>
+          </View>
+          <View style={styles.info}>
+            <Text>{actionText}</Text>
           </View>
         </View>
       </View>
@@ -144,6 +149,7 @@ class Stream extends Component {
     const chan = channels[datum.item.channel_id] || {}
     const user_id = datum.item.last_message && datum.item.last_message.user_id || datum.item.user_id
     const actionUser = users[user_id] || {}
+
     return (
       <StreamItem
         navigate={navigation.navigate}

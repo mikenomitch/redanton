@@ -1,12 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
   Button,
   StyleSheet,
   View
  } from 'react-native'
-
-import Stream from '../stream/Stream'
-
 import { connect } from 'react-redux'
 
 import { confirmMessage } from '../../lib/uiActions'
@@ -14,6 +11,7 @@ import { getUsersForMain } from '../../data/users'
 import { getPostsForChannel } from '../../data/posts'
 import { deleteChannel } from '../../data/channels'
 
+import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
 
 // ===============

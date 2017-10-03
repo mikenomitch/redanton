@@ -6,15 +6,18 @@ import {
   Text
 } from 'react-native'
 import ModalSelector from 'react-native-modal-selector'
+import { connect } from 'react-redux'
 
 import { spacing, font } from '../styleConstants'
 
-import ActionButton from '../ui/ActionButton'
-
-import { connect } from 'react-redux'
 import { createChannel } from '../../data/channels'
 
+import ActionButton from '../ui/ActionButton'
 import EditChannelInfo from './EditChannelInfo'
+
+// =============
+//   DEFAULTS
+// =============
 
 const defaultChannelInfo = { name: '', description: ''}
 const defaultState = {

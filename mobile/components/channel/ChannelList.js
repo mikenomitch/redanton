@@ -7,7 +7,6 @@ import {
   Text,
   RefreshControl
 } from 'react-native'
-
 import { connect } from 'react-redux'
 
 import { border, colors, spacing } from '../styleConstants'

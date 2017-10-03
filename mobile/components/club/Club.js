@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
-
 import {
   Button,
   Text,
   StyleSheet,
   View
 } from 'react-native'
-
 import { connect } from 'react-redux'
 
 import {colors, spacing, font, border} from '../styleConstants'
@@ -21,7 +19,6 @@ import {
 } from '../../data/memberships'
 
 import Footer from '../ui/Footer'
-
 
 // ===============
 //    CHILDREN
