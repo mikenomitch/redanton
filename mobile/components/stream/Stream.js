@@ -155,7 +155,7 @@ class Stream extends Component {
     return (
       <FlatList
         style={styles.stream}
-        initialNumToRender={5}
+        initialNumToRender={10}
         data={this.props.content}
         renderItem={this.renderPostLink}
         keyExtractor={(item) => item.id}

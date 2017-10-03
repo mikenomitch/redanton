@@ -38,15 +38,23 @@ defmodule Danton.Message do
     from p in query, select: count(p.id, :distinct)
   end
 
+  def ordered_by_latest(query \\ Post) do
+    from q in query, order_by: [desc: :inserted_at]
+  end
+
+  def get_first(query \\ Post) do
+    query |> limit(1)
+  end
+
   # ===========================
   # GETTERS
   # ===========================
 
   def latest_for_post(post) do
     for_post(post.id)
-    |> Repo.all()
-    |> Enum.sort(&(&1.inserted_at >= &2.inserted_at))
-    |> List.first()
+    |> ordered_by_latest()
+    |> get_first()
+    |> Repo.one()
   end
 
   def count_for_post(post) do

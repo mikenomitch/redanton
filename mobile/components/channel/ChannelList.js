@@ -110,7 +110,7 @@ class ChannelList extends Component {
     return (
       <FlatList
         style={styles.list}
-        initialNumToRender={5}
+        initialNumToRender={10}
         data={channelsList}
         renderItem={this.renderChannelLink}
         keyExtractor={(item) => item.id}
