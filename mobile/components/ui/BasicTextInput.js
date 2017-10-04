@@ -16,7 +16,7 @@ const BasicTextInput = (props) => {
         inputStyle={{fontSize: font.medium, fontWeight: font.lightWeight, color: colors.darkGray}}
         borderColor={colors.primary}
       />
-      <ErrorText error="" />
+      <ErrorText error={props.error} />
     </View>
   )
 }
