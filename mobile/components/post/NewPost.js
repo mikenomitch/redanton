@@ -11,6 +11,7 @@ import merge from 'lodash/fp/merge'
 import { spacing } from '../styleConstants'
 
 import { validatePresence } from '../../lib/validations'
+import withValidation from '../helpers/withValidation'
 
 import BasicTextInput from '../ui/BasicTextInput'
 import ActionButton from '../ui/ActionButton'
@@ -49,6 +50,11 @@ const styles = StyleSheet.create({
 // ===============
 //    PRESENTER
 // ===============
+
+const validations = {
+  title: validatePresence('you must have a title'),
+  channel: validatePresence('you must select a channel')
+}
 
 class NewPost extends Component {
 
@@ -121,6 +127,7 @@ class NewPost extends Component {
 	}
 
   clearState = () => {
+    this.props.hideErrors()
     this.setState(defaultState)
   }
 
@@ -136,7 +143,7 @@ class NewPost extends Component {
             initValue={this.givenChannel().name || "select channel"}
             onChange={(option)=> this.setPostState({channel: option.key}) } />
           <EditPostInfo
-            errorFor={this.errorFor}
+            errorFor={this.props.errorFor}
             setPostState={this.setPostState}
             postInfo={this.state.postInfo}
           />
@@ -167,4 +174,4 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   { createPost, getChannels, getClubs }
-)(NewPost)
+)(withValidation(validations)(NewPost))

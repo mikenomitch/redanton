@@ -14,9 +14,9 @@ const isValidEmail = (value) => {
   return !!value
 }
 
-// const isValidUrl = (value) => {
-//   return !!value
-// }
+const isValidUrl = (value) => {
+  return !!value
+}
 
 // === VALIDATION CREATORS===
 

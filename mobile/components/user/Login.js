@@ -13,6 +13,9 @@ import ActionButton from '../ui/ActionButton'
 import { userActions } from '../../data/users'
 import { signIn } from '../../data/auth'
 
+import { validatePresence } from '../../lib/validations'
+import withValidation from '../helpers/withValidation'
+
 // ===============
 //     STYLES
 // ===============
@@ -29,6 +32,11 @@ const styles = StyleSheet.create({
 //    PRESENTER
 // ===============
 
+const validations = {
+  email: validatePresence('you must provide an email'),
+  password: validatePresence('you must provide a password')
+}
+
 class Login extends Component {
   constructor(props){
     super(props)
@@ -44,7 +52,14 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     })
-	}
+  }
+
+  onLoginClick = () => {
+    this.props.unlessErrorsFor(
+      {email: this.state.email, password: this.state.password},
+      this.getInfo
+    )
+  }
 
   render() {
     const {email, password} = this.state
@@ -58,16 +73,18 @@ class Login extends Component {
 					keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
+          error={this.props.errorFor('email', email)}
         />
 
         <BasicTextInput
           placeholder="password"
           value={password}
-					onChangeText={(password) => this.setState({password})}
+          onChangeText={(password) => this.setState({password})}
+          error={this.props.errorFor('password', password)}
 					secureTextEntry
         />
 
-        <ActionButton onPress={this.getInfo}>
+        <ActionButton onPress={this.onLoginClick}>
           login
         </ActionButton>
       </View>
@@ -82,4 +99,4 @@ class Login extends Component {
 export default connect(
   null,
   { signIn }
-)(Login)
+)(withValidation(validations)(Login))
