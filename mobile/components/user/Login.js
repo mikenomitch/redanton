@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View
 } from 'react-native'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 import { spacing } from '../styleConstants'
@@ -96,7 +97,7 @@ class Login extends Component {
 //   CONNECTION
 // ===============
 
-export default connect(
-  null,
-  { signIn }
-)(withValidation(validations)(Login))
+export default compose(
+  withValidation(validations),
+  connect(null, { signIn })
+)(Login)

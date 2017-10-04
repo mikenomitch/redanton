@@ -5,6 +5,7 @@ import {
   View
 } from 'react-native'
 import ModalSelector from 'react-native-modal-selector'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import merge from 'lodash/fp/merge'
 
@@ -171,7 +172,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { createPost, getChannels, getClubs }
-)(withValidation(validations)(NewPost))
+const dispatchableActions = {
+  createPost,
+  getChannels,
+  getClubs
+}
+
+export default compose(
+  withValidation(validations),
+  connect(mapStateToProps, dispatchableActions)
+)(NewPost)
