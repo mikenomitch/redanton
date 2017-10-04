@@ -11,7 +11,6 @@ import ChannelScreen from '../channel/Channel'
 import EditChannelScreen from '../channel/EditChannel'
 import NewChannelScreen from '../channel/NewChannel'
 
-import PostScreen from '../post/Post'
 import EditPostScreen from '../post/EditPost'
 import NewPostScreen from '../post/NewPost'
 
@@ -82,19 +81,24 @@ const MainNav = StackNavigator({
   Root: {
     screen: TabNav,
   },
-  Post: {
-    screen: PostScreen,
-    path: '/posts/:id',
-    navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.post.title || 'Post'
-    })
-  },
   PostChat: {
     screen: ChatScreen,
     path: '/posts/:id/chat',
     navigationOptions: ({navigation}) => ({
-      title: 'Chat: ' + navigation.state.params.post.title
+      title: navigation.state.params.post.title
     })
+  },
+  NewPost: {
+    screen: NewPostScreen,
+    navigationOptions: {
+      title: 'Add Post'
+    }
+  },
+  EditPost: {
+    screen: EditPostScreen,
+    navigationOptions: {
+      title: 'Edit Post'
+    }
   },
   Channel: {
     screen: ChannelScreen,
@@ -137,18 +141,6 @@ const MainNav = StackNavigator({
     screen: InviteScreen,
     navigationOptions: {
       title: 'Invite To Club'
-    }
-  },
-  NewPost: {
-    screen: NewPostScreen,
-    navigationOptions: {
-      title: 'Add Post'
-    }
-  },
-  EditPost: {
-    screen: EditPostScreen,
-    navigationOptions: {
-      title: 'Edit Post'
     }
   },
   EditUser: {

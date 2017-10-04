@@ -82,6 +82,7 @@ class Channel extends Component {
       <View style={styles.root}>
         <View style={styles.content}>
           <Stream
+            currentUserId={this.props.currentUserId}
             refresh={this.refresh}
             navigation={navigation}
             content={posts}
@@ -112,10 +113,13 @@ const mapStateToProps = (state, props) => {
       new Date(b.last_activity_time) - new Date(a.last_activity_time)
     ))
 
+  const currentUserId = state.auth.currentUser.id
+
   return {
     posts: sortedPosts,
     channels: state.channels,
-    users: state.users
+    users: state.users,
+    currentUserId
   }
 }
 

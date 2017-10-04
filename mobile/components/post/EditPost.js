@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 
 import { spacing } from '../styleConstants'
 
-import { updatePost } from '../../data/posts'
+import { deletePost, updatePost } from '../../data/posts'
 
 import ActionButton from '../ui/ActionButton'
 import EditPostInfo from './EditPostInfo'
+import DeletePostButton from './DeletePostButton'
 
 // ===============
 //    PRESENTER
@@ -21,7 +22,11 @@ class EditPost extends Component {
 			showErrors: false,
 			postInfo: this.props.navigation.state.params.postInfo,
 		}
-	}
+  }
+
+  removePost = () => {
+    this.props.deletePost(this.state.postInfo.id, this.props.navigation.goBack)
+  }
 
 	onSave = () => {
 		const {goBack} = this.props.navigation
@@ -39,7 +44,8 @@ class EditPost extends Component {
 				<EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
 				<ActionButton onPress={this.onSave}>
 					save edits
-				</ActionButton>
+        </ActionButton>
+        <DeletePostButton removePost={this.removePost} />
 			</View>
 		)
   }
@@ -51,5 +57,8 @@ class EditPost extends Component {
 
 export default connect(
   null,
-  { updatePost }
+  {
+    deletePost,
+    updatePost
+   }
 )(EditPost)

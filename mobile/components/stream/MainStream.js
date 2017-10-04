@@ -28,6 +28,7 @@ class MainStream extends Component {
 
   render() {
     return <Stream
+      currentUserId={this.props.currentUserId}
       refresh={this.refresh}
       navigation={this.props.navigation}
       content={this.props.posts}
@@ -47,10 +48,13 @@ const mapStateToProps = (state) => {
       new Date(b.last_activity_time) - new Date(a.last_activity_time)
     ))
 
+  const currentUserId = state.auth.currentUser.id
+
   return {
     posts: sortedPosts,
     channels: state.channels,
-    users: state.users
+    users: state.users,
+    currentUserId
   }
 }
 

@@ -8,9 +8,11 @@ import {
   RefreshControl
 } from 'react-native'
 import moment from 'moment'
+import { WebBrowser } from 'expo'
 
 import { border, colors, spacing, misc } from '../styleConstants'
 
+import EditPostButton from '../post/EditPostButton'
 import NewPostButton from '../post/NewPostButton'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -34,14 +36,17 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   },
   streamItemLeft: {
-    width: '80%',
+    width: '75%',
     display: 'flex',
     alignItems: 'flex-start'
   },
   streamItemRight: {
-    width: '20%',
+    height: '100%',
+    width: '25%',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-around',
+    flexWrap: 'nowrap'
   },
   title: {
     flex: 1
@@ -67,40 +72,73 @@ const styles = StyleSheet.create({
 //   CHILDREN
 // =============
 
-const StreamItem = (props) => {
-  const timeAgo = moment(new Date(props.post.last_activity_time)).fromNow()
-  const actionText = props.post.message_count > 1
-    ? `message from ${props.actionUserName} ${timeAgo}`
-    : `posted ${timeAgo}`
+function __uriFromUrl (url) {
+  return (!/^(?:f|ht)tps?\:\/\//.test(url))
+  ? 'http://' + url
+  : url
+}
 
-  return (
-    <View style={styles.streamItem}>
-      <View style={styles.streamItemLeft}>
-        <View style={styles.title}>
-          <Button
-            onPress={() => props.navigate('Post', {post: props.post})}
-            title={props.post.title}
-          />
+class StreamItem extends Component {
+  get userIsOwner() {
+    return this.props.post.user_id === this.props.currentUserId
+  }
+
+  onLinkPress = () => {
+    if (this.props.post.url) {
+      WebBrowser.openBrowserAsync(__uriFromUrl(this.props.post.url))
+    } else {
+      this.props.navigate('PostChat', {post: this.props.post})
+    }
+  }
+
+  renderEdit () {
+    if ( this.userIsOwner ) {
+      return (
+        <View>
+          <EditPostButton navigate={this.props.navigate} post={this.props.post} />
         </View>
-        <View style={styles.details}>
-          <View style={styles.info}>
-            <Text>channel: {props.chanName}</Text>
+      )
+    }
+  }
+
+  render () {
+    const timeAgo = moment(new Date(this.props.post.last_activity_time)).fromNow()
+    const actionText = this.props.post.message_count > 1
+      ? `message from ${this.props.actionUserName} ${timeAgo}`
+      : `posted ${timeAgo}`
+
+    return (
+      <View style={styles.streamItem}>
+        <View style={styles.streamItemLeft}>
+          <View style={styles.title}>
+            <Button
+              onPress={this.onLinkPress}
+              title={this.props.post.title}
+            />
           </View>
-          <View style={styles.info}>
-            <Text>posted by: <Text>{props.posterName}</Text></Text>
+          <View style={styles.details}>
+            <View style={styles.info}>
+              <Text>channel: {this.props.chanName}</Text>
+            </View>
+            <View style={styles.info}>
+              <Text>posted by: <Text>{this.props.posterName}</Text></Text>
+            </View>
+            <View style={styles.info}>
+              <Text>{actionText}</Text>
+            </View>
           </View>
-          <View style={styles.info}>
-            <Text>{actionText}</Text>
+        </View>
+        <View style={styles.streamItemRight}>
+          {this.renderEdit()}
+          <View>
+            <SimpleButton onPress={() => this.props.navigate('PostChat', {post: this.props.post})} >
+              <Icon name="comment" size={misc.iconSize} color={colors.primary} />
+            </SimpleButton>
           </View>
         </View>
       </View>
-      <View style={styles.streamItemRight}>
-        <SimpleButton onPress={() => props.navigate('PostChat', {post: props.post})} >
-          <Icon name="comment" size={misc.iconSize} color={colors.primary} />
-        </SimpleButton>
-      </View>
-    </View>
-  )
+    )
+  }
 }
 
 // =============
@@ -152,6 +190,7 @@ class Stream extends Component {
 
     return (
       <StreamItem
+        currentUserId={this.props.currentUserId}
         navigate={navigation.navigate}
         post={datum.item}
         actionUserName={actionUser.name}

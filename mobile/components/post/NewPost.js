@@ -68,7 +68,6 @@ class NewPost extends Component {
     const onPostSuccess = (res) => {
       this.clearState()
 			goBack()
-			navigate('Post', {post: res.data})
     }
 
     this.props.createPost(this.state.postInfo, onPostSuccess)

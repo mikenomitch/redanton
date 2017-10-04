@@ -90,24 +90,26 @@ class NewChannel extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.root}>
-        <Text style={styles.header}>
-          Create a channel:
-        </Text>
-        <ModalSelector
-          style={styles.modalSelector}
-          data={this.clubData()}
-          initValue="select club"
-          onChange={this.onModalChange}
-        />
-        <EditChannelInfo
-          setChannelState={this.setChannelState}
-          channelInfo={this.state.channelInfo}
-        />
-        <ActionButton onPress={this.onPost} >
-          make channel
-        </ActionButton>
-      </ScrollView>
+    <View style={styles.root}>
+      <ScrollView>
+          <Text style={styles.header}>
+            Create a channel:
+          </Text>
+          <ModalSelector
+            style={styles.modalSelector}
+            data={this.clubData()}
+            initValue="select club"
+            onChange={this.onModalChange}
+          />
+          <EditChannelInfo
+            setChannelState={this.setChannelState}
+            channelInfo={this.state.channelInfo}
+          />
+          <ActionButton onPress={this.onPost} >
+            make channel
+          </ActionButton>
+        </ScrollView>
+      </View>
 		)
   }
 }
