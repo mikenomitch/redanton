@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import { font, spacing } from '../styleConstants'
 
@@ -14,10 +15,16 @@ import { createClub } from '../../data/clubs'
 
 import EditClubInfo from './EditClubInfo'
 
-const defaultClubInfo = { name: '', description: ''}
-const defaultState = {
-  showErrors: false,
-  clubInfo: defaultClubInfo
+import { validatePresence } from '../../lib/validations'
+import withValidation from '../helpers/withValidation'
+
+// ===============
+//   VALIDATIONS
+// ===============
+
+const validations = {
+  description: validatePresence('you must have a description'),
+  name: validatePresence('you must have a name')
 }
 
 // ===============
@@ -37,13 +44,19 @@ const styles = StyleSheet.create({
 //    PRESENTER
 // ===============
 
+const defaultClubInfo = { name: '', description: ''}
+const defaultState = {
+  clubInfo: defaultClubInfo
+}
+
+
 class NewClub extends Component {
   constructor(props){
     super(props)
     this.state = defaultState
   }
 
-  onPost = () => {
+  createClub = () => {
     const {navigate, goBack} = this.props.navigation
 
     const onPostSuccess = (res) => {
@@ -53,6 +66,13 @@ class NewClub extends Component {
     }
 
     this.props.createClub(this.state.clubInfo, onPostSuccess)
+  }
+
+  onCreateClubClick = () => {
+    this.props.unlessErrors(
+      {name: this.state.clubInfo.name, description: this.state.clubInfo.description},
+      this.createClub
+    )
   }
 
   clearState = () => {
@@ -72,8 +92,9 @@ class NewClub extends Component {
           <EditClubInfo
             setClubState={this.setClubState}
             clubInfo={this.state.clubInfo}
+            errorFor={this.props.errorFor}
           />
-          <ActionButton onPress={this.onPost} >
+          <ActionButton onPress={this.onCreateClubClick} >
             create club
           </ActionButton>
         </ScrollView>
@@ -86,7 +107,7 @@ class NewClub extends Component {
 //   CONNECTION
 // ===============
 
-export default connect(
-  null, 
-  { createClub }
+export default compose(
+  withValidation(validations),
+  connect(null, { createClub })
 )(NewClub)
