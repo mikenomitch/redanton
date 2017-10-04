@@ -94,7 +94,9 @@ export const createPost = (postInfo, onSuccess) => {
           onSuccess && onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
+      errorActionCreator: () => {
+        alert('Could not submit. Please try again.')
+      },
       params: {
         post: {
           title: postInfo.title,
@@ -120,7 +122,9 @@ export const updatePost = (postInfo, onSuccess) => {
           onSuccess && onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
+      errorActionCreator: () => {
+        alert('Could not update. Please try again.')
+      },
       params: {
         title: postInfo.title,
         description: postInfo.description,
@@ -141,6 +145,9 @@ export const deletePost = (postId, onSuccess) => {
           dispatch(postActions.removePost(postId))
           onSuccess && onSuccess()
         }
+      },
+      errorActionCreator: () => {
+        alert('Could not delete post. Please try again.')
       }
     }
   }

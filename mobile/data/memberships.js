@@ -60,6 +60,9 @@ export const kickMember = (membershipId, onSuccess) => {
           onSuccess && onSuccess()
           dispatch(membershipActions.removeMembership(membershipId))
         }
+      },
+      errorActionCreator: () => {
+        alert('Could not kick user from group. Please try again.')
       }
     }
   }
@@ -77,6 +80,9 @@ export const createMembership = (clubId, email, onSuccess) => {
           onSuccess && onSuccess()
           dispatch(membershipActions.mergeMemberships([res.data]))
         }
+      },
+      errorActionCreator: () => {
+        alert('Could not add user to group. Please try again.')
       }
     }
   }
@@ -94,12 +100,14 @@ export const elevateMembership = (membershipId, onSuccess) => {
           type: 'admin'
         }
       },
-      errorActionCreator: () => { alert('error elevating memership to admin. try again.') },
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(membershipActions.mergeMemberships([res.data]))
           onSuccess && onSuccess(res)
         }
+      },
+      errorActionCreator: () => {
+        alert('Could not make user admin. Please try again.')
       }
     }
   }

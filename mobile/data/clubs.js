@@ -56,18 +56,20 @@ export const createClub = (clubInfo, onSuccess) => {
     call: {
       action: 'POST',
       endpoint: '/clubs',
+      params: {
+        club: {
+          name: clubInfo.name,
+          description: clubInfo.description
+        }
+      },
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(clubActions.mergeClubs([res.data]))
           onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
-      params: {
-        club: {
-          name: clubInfo.name,
-          description: clubInfo.description
-        }
+      errorActionCreator: () => {
+        alert('Could not create club. Please try again.')
       }
     }
   }
@@ -79,18 +81,20 @@ export const updateClub = (clubInfo, onSuccess) => {
     call: {
       action: 'PATCH',
       endpoint: `/clubs/${clubInfo.id}`,
+      params: {
+        club: {
+          name: clubInfo.name,
+          description: clubInfo.description
+        }
+      },
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(clubActions.mergeClubs([res.data]))
           onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
-      params: {
-        club: {
-          name: clubInfo.name,
-          description: clubInfo.description
-        }
+      errorActionCreator: () => {
+        alert('Could not update. Please try again.')
       }
     }
   }
@@ -107,6 +111,9 @@ export const leaveClub = (clubId, onSuccess) => {
           onSuccess && onSuccess()
           dispatch(clubActions.removeClub(clubId))
         }
+      },
+      errorActionCreator: () => {
+        alert('Could not delete club. Please try again.')
       }
     }
   }

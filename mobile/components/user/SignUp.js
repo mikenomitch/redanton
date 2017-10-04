@@ -42,7 +42,7 @@ const validations = {
   email: validateEmail('email not valid'),
   name: validatePresence('must provide a name'),
   password: validatePassword('must be 6 characters or more'),
-  passwordConfirmation: validatePassword('must be 6 characters or more')
+  passwordConfirmation: validatePassword('must be 6 or more characters')
 }
 
 // ===============

@@ -78,7 +78,9 @@ export const updateSelf = (params, onSuccess) => {
           onSuccess && onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
+      errorActionCreator: () => {
+        alert('Could not update. Re-enter changes an try again.')
+      },
       params: {
         user: {
           avatar: params.avatar,

@@ -62,18 +62,20 @@ export const createChannel = (clubId, channelInfo, onSuccess) => {
     call: {
       action: 'POST',
       endpoint: `/clubs/${clubId}/channels`,
+      params: {
+        channel: {
+          name: channelInfo.name,
+          description: channelInfo.description
+        }
+      },
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(channelActions.mergeChannels([res.data]))
           onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
-      params: {
-        channel: {
-          name: channelInfo.name,
-          description: channelInfo.description
-        }
+      errorActionCreator: () => {
+        alert('Could not create channel. Please try again.')
       }
     }
   }
@@ -85,18 +87,20 @@ export const updateChannel = (channelInfo, onSuccess) => {
     call: {
       action: 'PATCH',
       endpoint: `/channels/${channelInfo.id}`,
+      params: {
+        channel: {
+          name: channelInfo.name,
+          description: channelInfo.description
+        }
+      },
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(channelActions.mergeChannels([res.data]))
           onSuccess(res)
         }
       },
-      errorActionCreator: () => { alert('there was an issue - you are likely missing an important field') },
-      params: {
-        channel: {
-          name: channelInfo.name,
-          description: channelInfo.description
-        }
+      errorActionCreator: () => {
+        alert('Could not update channel. Please try again.')
       }
     }
   }
@@ -113,6 +117,9 @@ export const deleteChannel = (channelId, onSuccess) => {
           onSuccess && onSuccess()
           dispatch(channelActions.removeChannel(channelId))
         }
+      },
+      errorActionCreator: () => {
+        alert('Could not delete channel. Please try again.')
       }
     }
   }

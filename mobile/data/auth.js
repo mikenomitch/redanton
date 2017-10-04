@@ -87,11 +87,11 @@ export const authActions = {
   }),
 
   onSignInFailure: () => {
-    alert('there was an issue signing in. try again.')
+    alert('Could not sign in. Check email and password.')
   },
 
   onSignUpFailure: () => {
-    alert('there was an issue signing up. try again.')
+    alert('Could not sign up. Email may be taken or password and confirmation may not match.')
   }
 }
 
