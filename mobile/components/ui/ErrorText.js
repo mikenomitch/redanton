@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 })
 
 const ErrorText = (props) => {
-  if (!props.error) return
+  if (!props.error) return null
 
   return <Text style={styles.root}> {props.error} </Text>
 }

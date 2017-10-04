@@ -9,6 +9,7 @@ const EditPostInfo = (props) => (
       label="title"
       value={props.postInfo.title}
       onChangeText={(title) => props.setPostState({title})}
+      error={props.errorFor('title', props.postInfo.title)}
     />
     <BasicTextInput
       label="url"

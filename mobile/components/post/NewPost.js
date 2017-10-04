@@ -10,6 +10,8 @@ import merge from 'lodash/fp/merge'
 
 import { spacing } from '../styleConstants'
 
+import { validatePresence } from '../../lib/validations'
+
 import BasicTextInput from '../ui/BasicTextInput'
 import ActionButton from '../ui/ActionButton'
 
@@ -49,6 +51,9 @@ const styles = StyleSheet.create({
 // ===============
 
 class NewPost extends Component {
+
+  // lifecycle
+
 	constructor(props){
 		super(props)
     this.state = merge(
@@ -60,7 +65,44 @@ class NewPost extends Component {
 	componentDidMount () {
     this.props.getChannels()
     this.props.getClubs()
-	}
+  }
+
+  // helpers
+
+	channelData() {
+		return this.props.channels.map(
+      (chan) => ({ key: chan.id, label: chan.name })
+    )
+  }
+
+  givenChannel () {
+    return this.props.navigation.state.params.channel || {}
+  }
+
+  // errors
+
+  errorFor = (field, value) => {
+    return this.state.showErrors && this.checkError(field, value)
+  }
+
+  showErrors = () => {
+    this.setState({showErrors: true})
+  }
+
+  hideErrors = () => {
+    this.setState({showErrors: false})
+  }
+
+  checkError(field, value) {
+    const validationForField = {
+      title: validatePresence('you must have a title'),
+      channel: validatePresence('you must have a channel')
+    }[field]
+
+    return validationForField && validationForField(value)
+  }
+
+  // actions
 
 	onPost = () => {
     const {navigate, goBack} = this.props.navigation
@@ -73,24 +115,16 @@ class NewPost extends Component {
     this.props.createPost(this.state.postInfo, onPostSuccess)
 	}
 
-	clearState = () => {
-		this.setState(defaultState)
-	}
-
 	setPostState = (newKV) => {
-		const postInfo = Object.assign({}, this.state.postInfo, newKV)
+    const postInfo = Object.assign({}, this.state.postInfo, newKV)
 		this.setState({postInfo})
 	}
 
-	channelData() {
-		return this.props.channels.map(
-      (chan) => ({ key: chan.id, label: chan.name })
-    )
+  clearState = () => {
+    this.setState(defaultState)
   }
 
-  givenChannel () {
-    return this.props.navigation.state.params.channel || {}
-  }
+  // rendering
 
   render() {
     return (
@@ -101,7 +135,11 @@ class NewPost extends Component {
             data={this.channelData()}
             initValue={this.givenChannel().name || "select channel"}
             onChange={(option)=> this.setPostState({channel: option.key}) } />
-          <EditPostInfo setPostState={this.setPostState} postInfo={this.state.postInfo} />
+          <EditPostInfo
+            errorFor={this.errorFor}
+            setPostState={this.setPostState}
+            postInfo={this.state.postInfo}
+          />
           <BasicTextInput
             label="first chat message"
             value={this.state.postInfo.message}
