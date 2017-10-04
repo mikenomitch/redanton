@@ -1,6 +1,8 @@
 # Todos
 
 ## Quick Wins
+- front page does not clear itself
+  from time to time
 - navigation headers reload properly
 - add debounce to navigation
   - new post
@@ -9,6 +11,7 @@
   - main links
   - new member
   - new club
+- alerts on post failure look nicer
 
 ## Push Notifications
 - https://docs.expo.io/versions/latest/guides/push-notifications.html
@@ -21,7 +24,6 @@
   - add proper authorization to all create, update, delete calls
 
 ## Frontend
-  - constants for styling
   - call tracking
     - add to withFetching middleware
     - add calls reducer
