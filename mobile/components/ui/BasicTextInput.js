@@ -9,7 +9,8 @@ import ErrorText from './ErrorText'
 const BasicTextInput = (props) => {
   return (
     <View>
-      <Hoshi {...props}
+      <Hoshi
+        {...props}
         style={{marginTop: spacing.large}}
         backgroundColor={'transparent'}
         labelStyle={{fontSize: font.medium, color: colors.mediumGray}}

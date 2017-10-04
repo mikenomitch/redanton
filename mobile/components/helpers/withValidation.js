@@ -33,7 +33,7 @@ const withValidations = (validations) => (WrappedComponent) => {
       return validator && validator(val)
     }
 
-    unlessErrorsFor = (kvPairs, onNoErrors) => {
+    unlessErrors = (kvPairs, onNoErrors) => {
       // TODO: clean this up
       const keys = Object.keys(kvPairs)
       const toCheck = keys.map((k) => [kvPairs[k], k])
@@ -55,7 +55,7 @@ const withValidations = (validations) => (WrappedComponent) => {
           toggleErrors={this.toggleErrors}
           errorsShowing={this.state.errorsShowing}
           errorFor={this.errorFor}
-          unlessErrorsFor={this.unlessErrorsFor}
+          unlessErrors={this.unlessErrors}
           {...this.props}
         />
       )

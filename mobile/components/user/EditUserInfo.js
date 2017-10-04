@@ -10,6 +10,7 @@ const EditUserInfo = (props) => (
       value={props.userInfo.name}
       onChangeText={(name) => props.changeUserInfo({name})}
       autoCorrect={false}
+      error={props.errorFor('name', props.userInfo.name)}
     />
 
     <BasicTextInput
@@ -17,6 +18,7 @@ const EditUserInfo = (props) => (
       value={props.userInfo.password}
       onChangeText={(password) => props.changeUserInfo({password})}
       secureTextEntry
+      error={props.errorFor('password', props.userInfo.password)}
     />
 
     <BasicTextInput
@@ -24,6 +26,7 @@ const EditUserInfo = (props) => (
       value={props.userInfo.passwordConfirmation}
       onChangeText={(passwordConfirmation) => props.changeUserInfo({passwordConfirmation})}
       secureTextEntry
+      error={props.errorFor('passwordConfirmation', props.userInfo.passwordConfirmation)}
     />
   </View>
 )

@@ -49,13 +49,17 @@ const styles = StyleSheet.create({
 })
 
 // ===============
-//    PRESENTER
+//   VALIDATIONS
 // ===============
 
 const validations = {
   title: validatePresence('you must have a title'),
   channel: validatePresence('you must select a channel')
 }
+
+// ===============
+//    PRESENTER
+// ===============
 
 class NewPost extends Component {
 
@@ -86,32 +90,16 @@ class NewPost extends Component {
     return this.props.navigation.state.params.channel || {}
   }
 
-  // errors
-
-  errorFor = (field, value) => {
-    return this.state.showErrors && this.checkError(field, value)
-  }
-
-  showErrors = () => {
-    this.setState({showErrors: true})
-  }
-
-  hideErrors = () => {
-    this.setState({showErrors: false})
-  }
-
-  checkError(field, value) {
-    const validationForField = {
-      title: validatePresence('you must have a title'),
-      channel: validatePresence('you must have a channel')
-    }[field]
-
-    return validationForField && validationForField(value)
-  }
-
   // actions
 
-	onPost = () => {
+  onPostClick = () => {
+    this.props.unlessErrors(
+      {channel: this.state.postInfo.channel, title: this.state.postInfo.title},
+      this.createNewPost
+    )
+  }
+
+	createNewPost = () => {
     const {navigate, goBack} = this.props.navigation
 
     const onPostSuccess = (res) => {
@@ -153,7 +141,7 @@ class NewPost extends Component {
             value={this.state.postInfo.message}
             onChangeText={(message) => this.setPostState({message})}
           />
-          <ActionButton onPress={this.onPost}>
+          <ActionButton onPress={this.onPostClick}>
             post it
           </ActionButton>
         </ScrollView>

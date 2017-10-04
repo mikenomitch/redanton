@@ -30,13 +30,17 @@ const styles = StyleSheet.create({
 })
 
 // ===============
-//    PRESENTER
+//   VALIDATIONS
 // ===============
 
 const validations = {
   email: validatePresence('you must provide an email'),
   password: validatePresence('you must provide a password')
 }
+
+// ===============
+//    PRESENTER
+// ===============
 
 class Login extends Component {
   constructor(props){
@@ -56,7 +60,7 @@ class Login extends Component {
   }
 
   onLoginClick = () => {
-    this.props.unlessErrorsFor(
+    this.props.unlessErrors(
       {email: this.state.email, password: this.state.password},
       this.getInfo
     )

@@ -4,6 +4,7 @@ import {
   View
 } from 'react-native'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import { border, colors, spacing } from '../styleConstants'
 
@@ -12,6 +13,13 @@ import ActionButton from '../ui/ActionButton'
 
 import { userActions } from '../../data/users'
 import { signUp } from '../../data/auth'
+
+import {
+  validateEmail,
+  validatePassword,
+  validatePresence
+} from '../../lib/validations'
+import withValidation from '../helpers/withValidation'
 
 import EditUserInfo from './EditUserInfo'
 
@@ -26,6 +34,16 @@ const styles = StyleSheet.create({
     paddingRight: spacing.container
   }
 })
+
+// ===============
+//   VALIDATIONS
+// ===============
+const validations = {
+  email: validateEmail('email not valid'),
+  name: validatePresence('must provide a name'),
+  password: validatePassword('must be 6 characters or more'),
+  passwordConfirmation: validatePassword('must be 6 characters or more')
+}
 
 // ===============
 //    PRESENTER
@@ -43,14 +61,27 @@ class SignUp extends Component {
     }
 	}
 
-	getInfo = () => {
+	signUp = () => {
     this.props.signUp({
       email: this.state.email,
       name: this.state.name,
       password: this.state.password,
       passwordConfirmation: this.state.passwordConfirmation
     })
-	}
+  }
+
+  // TODO: DRY THIS UP
+  signUpClick = () => {
+    this.props.unlessErrors(
+      {
+        email: this.state.email,
+        name: this.state.name,
+        password: this.state.password,
+        passwordConfirmation: this.state.passwordConfirmation
+      },
+      this.signUp
+    )
+  }
 
   render() {
     const {email, password, passwordConfirmation, name} = this.state
@@ -64,11 +95,16 @@ class SignUp extends Component {
 					keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
+          error={this.props.errorFor('email', email)}
         />
 
-        <EditUserInfo userInfo={this.state} changeUserInfo={this.setState.bind(this)} />
+        <EditUserInfo
+          errorFor={this.props.errorFor}
+          userInfo={this.state}
+          changeUserInfo={this.setState.bind(this)}
+        />
 
-        <ActionButton onPress={this.getInfo}>
+        <ActionButton onPress={this.signUpClick}>
           sign up
         </ActionButton>
       </View>
@@ -80,7 +116,7 @@ class SignUp extends Component {
 //   CONNECTION
 // ===============
 
-export default connect(
-  null,
-  { signUp }
+export default compose(
+  withValidation(validations),
+  connect(null, { signUp })
 )(SignUp)

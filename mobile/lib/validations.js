@@ -11,12 +11,13 @@ const isOfLength = (minLength, value) => {
 }
 
 const isValidEmail = (value) => {
-  return !!value
+  const emailRegex = /\S+@\S+\.\S+/
+  return emailRegex.test(value)
 }
 
-const isValidUrl = (value) => {
-  return !!value
-}
+// const isValidUrl = (value) => {
+//   return !!value
+// }
 
 // === VALIDATION CREATORS===
 
@@ -28,14 +29,14 @@ export const validateEmail = (errorMessage) => (value) => {
   return isValidEmail(value) ? null : errorMessage
 }
 
-export const validatePassord = (errorMessage) => (value) => {
+export const validatePassword = (errorMessage) => (value) => {
   const minPasswordLength = 6
   return isOfLength(minPasswordLength, value) ? null : errorMessage
 }
 
-export const validateUrl = (errorMessage) => (value) => {
-  return isValidUrl(value) ? null : errorMessage
-}
+// export const validateUrl = (errorMessage) => (value) => {
+//   return isValidUrl(value) ? null : errorMessage
+// }
 
 // === HELPERS ===
 
