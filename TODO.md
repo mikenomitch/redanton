@@ -2,6 +2,13 @@
 
 ## Quick Wins
 - navigation headers reload properly
+- add debounce to navigation
+  - new post
+  - new channel
+  - to comments
+  - main links
+  - new member
+  - new club
 
 ## Push Notifications
 - https://docs.expo.io/versions/latest/guides/push-notifications.html
