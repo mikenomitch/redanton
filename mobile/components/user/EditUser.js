@@ -5,12 +5,16 @@ import {
   View
 } from 'react-native'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import { font, spacing } from '../styleConstants'
 
 import { updateSelf } from '../../data/users'
 
 import ActionButton from '../ui/ActionButton'
+
+import { validatePresence } from '../../lib/validations'
+import withValidation from '../helpers/withValidation'
 
 import EditUserInfo from './EditUserInfo'
 
@@ -34,6 +38,13 @@ const styles = StyleSheet.create({
     fontSize: font.medium
   },
 })
+
+// ===============
+//   VALIDATIONS
+// ===============
+const validations = {
+  name: validatePresence('must provide a name')
+}
 
 // ===============
 //    PRESENTER
@@ -60,6 +71,13 @@ class EditUser extends Component {
     )
   }
 
+  onSaveClick = () => {
+    this.props.unlessErrors(
+      { name: this.state.userInfo.name },
+      this.saveChanges
+    )
+  }
+
   render() {
     const {email, password, passwordConfirmation, name} = this.state
 
@@ -67,8 +85,12 @@ class EditUser extends Component {
       <View style={styles.root}>
         <Text style={styles.attributeLabel} > Email: </Text>
         <Text style={styles.attribute} > {this.state.userInfo.email} </Text>
-        <EditUserInfo userInfo={this.state.userInfo} changeUserInfo={this.changeUserInfo} />
-        <ActionButton onPress={this.saveChanges}>
+        <EditUserInfo
+          errorFor={this.props.errorFor}
+          userInfo={this.state.userInfo}
+          changeUserInfo={this.changeUserInfo}
+        />
+        <ActionButton onPress={this.onSaveClick}>
           save changes
         </ActionButton>
       </View>
@@ -80,7 +102,7 @@ class EditUser extends Component {
 //   CONNECTION
 // ===============
 
-export default connect(
-  null,
-  { updateSelf }
+export default compose(
+  withValidation(validations),
+  connect(null, { updateSelf })
 )(EditUser)

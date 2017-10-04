@@ -5,8 +5,8 @@ import {
   StyleSheet,
   Text
 } from 'react-native'
-import ModalSelector from 'react-native-modal-selector'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import { spacing, font } from '../styleConstants'
 
@@ -14,6 +14,20 @@ import { createChannel } from '../../data/channels'
 
 import ActionButton from '../ui/ActionButton'
 import EditChannelInfo from './EditChannelInfo'
+import ModalSelector from '../ui/ModalSelector'
+
+import { validatePresence } from '../../lib/validations'
+import withValidation from '../helpers/withValidation'
+
+// ===============
+//   VALIDATIONS
+// ===============
+
+const validations = {
+  description: validatePresence('you must have a description'),
+  name: validatePresence('you must have a name'),
+  club: validatePresence('you must select a club')
+}
 
 // =============
 //   DEFAULTS
@@ -63,7 +77,7 @@ class NewChannel extends Component {
     )
 	}
 
-	onPost = () => {
+	createNewChannel = () => {
     const {navigate, goBack} = this.props.navigation
 
     const onPostSuccess = (res) => {
@@ -72,8 +86,23 @@ class NewChannel extends Component {
 			navigate('Channel', {channel: res.data})
     }
 
-    this.props.createChannel(this.state.clubId, this.state.channelInfo, onPostSuccess)
-	}
+    this.props.createChannel(
+      this.state.clubId,
+      this.state.channelInfo,
+      onPostSuccess
+    )
+  }
+
+  onMakeChannelClick = () => {
+    this.props.unlessErrors(
+      {
+        club: this.state.clubId,
+        description: this.state.channelInfo.description,
+        name: this.state.channelInfo.name
+      },
+      this.createNewChannel
+    )
+  }
 
 	clearState = () => {
 		this.setState(defaultState)
@@ -100,12 +129,14 @@ class NewChannel extends Component {
             data={this.clubData()}
             initValue="select club"
             onChange={this.onModalChange}
+            error={this.props.errorFor('club', this.state.clubId)}
           />
           <EditChannelInfo
+            errorFor={this.props.errorFor}
             setChannelState={this.setChannelState}
             channelInfo={this.state.channelInfo}
           />
-          <ActionButton onPress={this.onPost} >
+          <ActionButton onPress={this.onMakeChannelClick} >
             make channel
           </ActionButton>
         </ScrollView>
@@ -123,7 +154,7 @@ const mapStateToProps = (state) => {
   return {clubs}
 }
 
-export default connect(
-  mapStateToProps,
-  { createChannel }
+export default compose(
+  withValidation(validations),
+  connect(mapStateToProps, { createChannel })
 )(NewChannel)

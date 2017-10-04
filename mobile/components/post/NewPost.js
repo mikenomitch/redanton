@@ -4,7 +4,6 @@ import {
   StyleSheet,
   View
 } from 'react-native'
-import ModalSelector from 'react-native-modal-selector'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import merge from 'lodash/fp/merge'
@@ -14,8 +13,9 @@ import { spacing } from '../styleConstants'
 import { validatePresence } from '../../lib/validations'
 import withValidation from '../helpers/withValidation'
 
-import BasicTextInput from '../ui/BasicTextInput'
 import ActionButton from '../ui/ActionButton'
+import BasicTextInput from '../ui/BasicTextInput'
+import ModalSelector from '../ui/ModalSelector'
 
 import { getChannels } from '../../data/channels'
 import { getClubs } from '../../data/clubs'
@@ -130,7 +130,9 @@ class NewPost extends Component {
             style={styles.modalSelector}
             data={this.channelData()}
             initValue={this.givenChannel().name || "select channel"}
-            onChange={(option)=> this.setPostState({channel: option.key}) } />
+            onChange={(option)=> this.setPostState({channel: option.key})}
+            error={this.props.errorFor('channel', this.state.postInfo.channel)}
+          />
           <EditPostInfo
             errorFor={this.props.errorFor}
             setPostState={this.setPostState}

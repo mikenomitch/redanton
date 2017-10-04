@@ -13,12 +13,14 @@ const EditChannelInfo = (props) => (
       value={props.channelInfo.name}
       returnKeyType="next"
       onChangeText={(name) => props.setChannelState({name})}
+      error={props.errorFor('name', props.channelInfo.name)}
     />
     <BasicTextInput
       label="description"
       value={props.channelInfo.description}
       returnKeyType="next"
       onChangeText={(description) => props.setChannelState({description})}
+      error={props.errorFor('description', props.channelInfo.description)}
     />
   </View>
 )
