@@ -6,4 +6,4 @@
     <%= link "Back", to: channel_path(@conn, :show, @post.channel_id) %>
   </div>
 </div>
-<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post) %>
+<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post), channel_id: @post.channel_id %>

@@ -8,15 +8,12 @@
       -
       <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %>
       -
-      <%= link "Chat", to: post_post_path(@conn, :chat, post), class: " " %>
+      <%= link "Discuss", to: post_post_path(@conn, :chat, post), class: " " %>
     </div>
 
     <div class="col-xs-12 col-md-12 small row">
       <div class="col-xs-6 col-md-3">
-        Channel: <%= post.channel.name %>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        Posted By: <%= post.user && post.user.name %>
+        <%= post.user && post.user.name %> posted to <%= link post.channel.name, to: channel_path(@conn, :show, post.channel.id), class: "" %>
       </div>
       <div class="col-xs-12 col-md-6">
         Last Activity: posted 15 minutes ago

@@ -1,10 +1,21 @@
 <div class="form-header">
   <div class="form-header-text">
-    New Club
+    New Channel
   </div>
   <div class="form-header-nav">
-    <%= link "Back", to: club_channel_path(@conn, :index, @club_id) %>
+    <%= link "Back", to: if (@club_id == :none), do: channel_path(@conn, :index), else: club_path(@conn, :show, @club_id) %>
   </div>
 </div>
 
-<%= render "form.html", changeset: @changeset, action: club_channel_path(@conn, :create, @club_id) %>
+<%=
+action = if @club_id == :none do
+  channel_path(@conn, :create)
+else
+  club_channel_path(@conn, :create, @club_id)
+end
+
+render "form.html", changeset: @changeset,
+  action: action,
+  club_id: @club_id,
+  clubs: @clubs
+%>

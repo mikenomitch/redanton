@@ -3,8 +3,19 @@
     New Post
   </div>
   <div class="form-header-nav">
-    <%= link "Back", to: channel_path(@conn, :show, @channel_id) %>
+    <%= link "Back", to: if (@channel_id == :none), do: post_path(@conn, :front_page), else: channel_path(@conn, :show, @channel_id) %>
   </div>
 </div>
 
-<%= render "form.html", changeset: @changeset, action: channel_post_path(@conn, :create, @channel_id) %>
+<%=
+action = if @channel_id == :none do
+  post_path(@conn, :create)
+  else
+  channel_post_path(@conn, :create, @channel_id)
+end
+
+render "form.html", changeset: @changeset,
+  action: action,
+  channel_id: @channel_id,
+  channels: @channels
+%>

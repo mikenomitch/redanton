@@ -5,6 +5,19 @@
     </div>
   <% end %>
 
+  <%= if @channel_id == :none do %>
+    <div class="form-group">
+      <%= label f, :channel_id, class: "control-label" %>
+      <%= select(f,
+        :channel_id,
+        Enum.map(@channels, &({[&1.name], &1.id})),
+        prompt: "Select Channel",
+        class: "form-control"
+      ) %>
+      <%= error_tag f, :channel_id %>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= label f, :title, class: "control-label" %>
     <%= text_input f, :title, class: "form-control" %>

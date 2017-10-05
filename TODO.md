@@ -1,21 +1,18 @@
 # Todos
 
 ## Web UI
-- make general responsive show page
-  - implement on channel
-  - implement on club
-- new post and channel pages without
-  a parent provided
 - add link to chat from post stream
 - add chat JS channel/socket logic
 
 - add sign out link to the layout
 
+- deletion of clubs & channels & posts
+- hide editing and deleting if you are
+  not the ownder of a post/chan/club
+
 - style the login page for mobile first
 - style the sign up page for mobile first
 
-- hide editing and deleting if you are
-  not the ownder of a post/chan/club
 - add a link helper so url's can take
   multiple formats
 - make "flash" notifications look nicer

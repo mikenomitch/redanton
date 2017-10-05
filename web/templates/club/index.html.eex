@@ -1,8 +1,13 @@
+<div class="new_item_link">
+  <%= link "+ Add Club", to: club_path(@conn, :new) %>
+</div>
 <div class="container-fluid">
 <%= for club <- @clubs do %>
     <div class="row list-entry">
       <div class="col-xs-12 col-md-12">
-        <%= link  club.name, to: club_path(@conn, :show, club), class: "" %>
+        <strong>
+          <%= link  club.name, to: club_path(@conn, :show, club), class: "" %>
+        </strong>
         - <%= link "Edit", to: club_path(@conn, :edit, club), class: "" %>
         - <%= link "Delete", to: club_path(@conn, :delete, club), method: :delete, data: [confirm: "Are you sure?"], class: "" %>
       </div>
@@ -12,4 +17,4 @@
     </div>
 <% end %>
 </div>
-<%= link "New club", to: club_path(@conn, :new) %>
+

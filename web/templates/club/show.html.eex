@@ -1,25 +1,20 @@
-<h2>Show club</h2>
-
-<ul>
-
-  <li>
-    <strong>Name:</strong>
+<div class="form-header">
+  <div class="form-header-text">
     <%= @club.name %>
-  </li>
+  </div>
+  <div class="form-header-nav">
+    <%= link "Edit", to: club_path(@conn, :edit, @club) %>
+    <%= link "Back", to: club_path(@conn, :index) %>
+  </div>
+  <div class="form-header-info">
+    <div class="form-header-info-unit"> <%= @club.description %> </div>
+  </div>
+</div>
 
-  <li>
-    <strong>Description:</strong>
-    <%= @club.description %>
-  </li>
-
-  <li>
-    <strong>Channels:</strong>
-    <%= Enum.map(@club.channels, &(&1.name)) %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: club_path(@conn, :edit, @club) %>
-<%= link "Back", to: club_path(@conn, :index) %>
-
-<%= render Danton.ChannelView, "channel_list.html", channels: @channels, conn: @conn %>
+<div class="associations">
+  <div class="association-header">Channels:</div>
+  <div class="new_item_link">
+    <%= link "+ Add Channel", to: club_channel_path(@conn, :new, @club.id) %>
+  </div>
+  <%= render Danton.ChannelView, "channel_list.html", channels: @channels, conn: @conn %>
+</div>
