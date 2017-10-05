@@ -15,7 +15,7 @@ defmodule Danton.Api.V1.ClubController do
 
     case Repo.insert(changeset) do
       {:ok, club} ->
-        # TODO: pull this out somewhere?
+        # TODO: pull this out somewhere
         Club.make_admin(club, current_user)
 
         conn

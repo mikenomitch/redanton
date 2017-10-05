@@ -1,6 +1,9 @@
-<h2>Edit post</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: post_path(@conn, :update, @post) %>
-
-<%= link "Back", to: channel_post_path(@conn, :index, @post.channel_id) %>
+<div class="form-header">
+  <div class="form-header-text">
+    Edit Post
+  </div>
+  <div class="form-header-nav">
+    <%= link "Back", to: channel_path(@conn, :show, @post.channel_id) %>
+  </div>
+</div>
+<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post) %>
