@@ -30,18 +30,22 @@ defmodule Danton.PostController do
     render(conn, "new.html", changeset: changeset, channel_id: channel_id)
   end
 
-  def create(conn, %{"post" => post_params, "channel_id" => channel_id}, _current_user, _claims) do
-    channel = Repo.get(Danton.Channel, channel_id)
+  def create(conn, %{"post" => post_params, "channel_id" => channel_id}, current_user, _claims) do
+    channel = Repo.get(Channel, channel_id)
 
-    %Danton.Post{}
-      |> Post.changeset(post_params)
-      |> Ecto.Changeset.put_assoc(:channel, channel)
-      |> Repo.insert()
-      |> case do
+    # TODO: There must be a nicer way to do this
+    post_struct = %Post{
+      title: post_params["title"],
+      description: post_params["description"],
+      type: post_params["type"],
+      url: post_params["url"],
+    }
+
+    case Channel.make_post_for_user(channel, current_user, post_struct) do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: channel_post_path(conn, :index, channel_id))
+        |> redirect(to: channel_path(conn, :show, channel_id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset, channel_id: channel_id)
     end

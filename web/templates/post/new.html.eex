@@ -1,6 +1,5 @@
 <h2>New post</h2>
 
-<%= render "form.html", changeset: @changeset,
-                        action: channel_post_path(@conn, :create, @channel_id) %>
+<%= render "form.html", changeset: @changeset, action: channel_post_path(@conn, :create, @channel_id) %>
 
-<%= link "Back", to: channel_post_path(@conn, :index, @channel_id) %>
+<%= link "Back", to: channel_path(@conn, :show, @channel_id) %>

@@ -14,6 +14,13 @@ defmodule Danton.ChannelController do
     render(conn, "index.html", channels: channels, club_id: club_id)
   end
 
+  def index(conn, _params, current_user, _claims) do
+    channels = channels = Channel.for_user(current_user)
+      |> Repo.all
+      |> Repo.preload(:club)
+    render(conn, "index.html", channels: channels, club_id: nil)
+  end
+
   def new(conn, %{"club_id" => club_id}, _current_user, _claims) do
     changeset = Channel.changeset(%Channel{})
     render(conn, "new.html", changeset: changeset, club_id: club_id)
@@ -41,7 +48,8 @@ defmodule Danton.ChannelController do
     channel = Repo.get!(Channel, id)
       |> Repo.preload(:posts)
       |> Repo.preload(:club)
-    posts =  channel.posts
+
+    posts = channel.posts
       |> Danton.Repo.preload(:channel)
       |> Danton.Repo.preload(:user)
 

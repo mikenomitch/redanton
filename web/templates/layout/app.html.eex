@@ -17,7 +17,7 @@
         <nav role="navigation">
           <ul class="nav nav-pills">
             <li><a href="/front">My Stream</a></li>
-            <li><a href="/clubs/1/channels">Channels</a></li>
+            <li><a href="/channels">Channels</a></li>
             <li><a href="/clubs">Clubs</a></li>
           </ul>
         </nav>
