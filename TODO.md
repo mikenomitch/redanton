@@ -1,17 +1,15 @@
 # Todos
 
 ## Web UI
-- make general responsive new page
-  - implement on post
-  - implement on channel
-  - implement on club
 - make general responsive show page
   - implement on channel
   - implement on club
+- new post and channel pages without
+  a parent provided
 - add link to chat from post stream
 - add chat JS channel/socket logic
 
-- add sign out link to the layout´
+- add sign out link to the layout
 
 - style the login page for mobile first
 - style the sign up page for mobile first

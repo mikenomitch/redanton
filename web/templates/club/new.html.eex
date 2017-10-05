@@ -1,6 +1,10 @@
-<h2>New club</h2>
+<div class="form-header">
+  <div class="form-header-text">
+    New Club
+  </div>
+  <div class="form-header-nav">
+    <%= link "Back", to: club_path(@conn, :index) %>
+  </div>
+</div>
 
-<%= render "form.html", changeset: @changeset,
-                        action: club_path(@conn, :create) %>
-
-<%= link "Back", to: club_path(@conn, :index) %>
+<%= render "form.html", changeset: @changeset, action: club_path(@conn, :create) %>
