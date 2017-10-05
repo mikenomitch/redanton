@@ -1,2 +1,1 @@
-<h4>Front Page</h4>
 <%= render Danton.PostView, "stream.html", posts: @posts, conn: @conn %>

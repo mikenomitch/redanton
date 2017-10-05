@@ -1,18 +1,28 @@
-<div>
+<div class="container-fluid">
 <%= for post <- @posts do %>
-  <div>
-    <div>
+  <div class="row list-entry">
+    <div class="col-xs-12 col-md-12">
+      <strong>
       <%= link post.title, to: post.url || "http://www.google.com", class: "" %>
-    </div>
-    <div>Channel: <%= post.channel.name %></div>
-    <div>Posted By: <%= post.user && post.user.name %></div>
-    <div>Last Activity: posted 15 minutes ago</div>
-    <div>
+      </strong>
+      -
       <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %>
-    </div>
-    <div>
+      -
       <%= link "Chat", to: post_post_path(@conn, :chat, post), class: " " %>
     </div>
+
+    <div class="col-xs-12 col-md-12 small row">
+      <div class="col-xs-6 col-md-3">
+        Channel: <%= post.channel.name %>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        Posted By: <%= post.user && post.user.name %>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        Last Activity: posted 15 minutes ago
+      </div>
+    </div>
+
   </div>
 <% end %>
 </div>

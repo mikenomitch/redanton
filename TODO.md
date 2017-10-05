@@ -19,7 +19,7 @@
 - add link to chat from post stream
 - add chat JS channel/socket logic
 
-- add sign out link to the layout
+- add sign out link to the layout´
 
 - style the login page for mobile first
 - style the sign up page for mobile first
