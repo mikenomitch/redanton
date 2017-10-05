@@ -8,12 +8,20 @@ defmodule Danton.PostController do
   # ===========================
 
   def index(conn,  %{"channel_id" => channel_id}, _current_user, _claims) do
-    posts = Post.for_channel_stream(channel_id) |> Repo.all
+    posts = Post.for_channel_stream(channel_id)
+      |> Repo.all()
+      |> Repo.preload(:user)
+      |> Repo.preload(:channel)
+
     render(conn, "index.html", posts: posts, channel_id: channel_id)
   end
 
   def front_page(conn, _params, current_user, _claims) do
-		posts = Post.for_front_page(current_user) |> Repo.all()
+    posts = Post.for_front_page(current_user)
+      |> Repo.all()
+      |> Repo.preload(:user)
+      |> Repo.preload(:channel)
+
     render(conn, "front_page.html", posts: posts)
   end
 
@@ -42,6 +50,11 @@ defmodule Danton.PostController do
   def show(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id)
     render(conn, "show.html", post: post)
+  end
+
+  def chat(conn, %{"post_id" => post_id}, _current_user, _claims) do
+    post = Repo.get!(Post, post_id)
+    render(conn, "chat.html", post: post)
   end
 
   def edit(conn, %{"id" => id}, _current_user, _claims) do

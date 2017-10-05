@@ -1,5 +1,40 @@
 # Todos
 
+## Web UI
+- make a general channels index (linked to via the header)
+- move the channel index (scoped by club) into the club show page
+- make general responsive index
+  - implement on post stream
+  - implement on channel list
+  - implement on club list
+- make general responsive edit page
+  - implement on post
+  - implement on chan
+  - implement on club
+- make general responsive new page
+  - implement on post
+  - implement on channel
+  - implement on club
+- make general responsive show page
+  - implement on channel
+  - implement on club
+- add link to chat from post stream
+- add chat JS channel/socket logic
+
+- add sign out link to the layout
+
+- style the login page for mobile first
+- style the sign up page for mobile first
+
+- hide editing and deleting if you are
+  not the ownder of a post/chan/club
+- add a link helper so url's can take
+  multiple formats
+- make "flash" notifications look nicer
+  and be clearable (maybe this has been
+  done in elixir before)
+
+
 ## Quick Wins
 - front page does not clear itself
   from time to time

@@ -1,0 +1,18 @@
+<div>
+<%= for post <- @posts do %>
+  <div>
+    <div>
+      <%= link post.title, to: post.url || "http://www.google.com", class: "" %>
+    </div>
+    <div>Channel: <%= post.channel.name %></div>
+    <div>Posted By: <%= post.user.name %></div>
+    <div>Last Activity: posted 15 minutes ago</div>
+    <div>
+      <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %>
+    </div>
+    <div>
+      <%= link "Chat", to: post_post_path(@conn, :chat, post), class: " " %>
+    </div>
+  </div>
+<% end %>
+</div>

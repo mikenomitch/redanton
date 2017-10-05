@@ -1,4 +1,4 @@
-<h2>Listing channels</h2>
+<h4>channels:</h4>
 
 <table class="table">
   <thead>
@@ -13,13 +13,14 @@
   <tbody>
 <%= for channel <- @channels do %>
     <tr>
-      <td><%= channel.name %></td>
+      <td>
+        <%= link channel.name, to: channel_path(@conn, :show, channel), class: "" %>
+      </td>
       <td><%= channel.description %></td>
-      <td><%= channel.club_id %></td>
+      <td><%= channel.club.name %></td>
 
       <td class="text-right">
-        <%= link "Show", to: channel_path(@conn, :show, channel), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: channel_path(@conn, :edit, channel), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: channel_path(@conn, :edit, channel), class: "" %>
         <%= link "Delete", to: channel_path(@conn, :delete, channel), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>

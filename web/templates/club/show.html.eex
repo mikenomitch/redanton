@@ -14,7 +14,7 @@
 
   <li>
     <strong>Channels:</strong>
-    <%= Enum.map(@club.channels, &(&1.name || "wat")) %>
+    <%= Enum.map(@club.channels, &(&1.name)) %>
   </li>
 
 </ul>

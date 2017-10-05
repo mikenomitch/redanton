@@ -16,9 +16,9 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills">
-            <li><a href="/">Home</a></li>
+            <li><a href="/front">My Stream</a></li>
+            <li><a href="/clubs/1/channels">Channels</a></li>
             <li><a href="/clubs">Clubs</a></li>
-            <li><a href="/memberships">Memberships</a></li>
           </ul>
         </nav>
       </header>
@@ -27,7 +27,6 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
-        <div> <%= current_user(@conn) && current_user(@conn).name %> </div>
         <%= render @view_module, @view_template, assigns %>
       </main>
 

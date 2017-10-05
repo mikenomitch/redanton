@@ -1,12 +1,5 @@
-<h2>Show channel</h2>
-
+<h3><%= @channel.name %></h3>
 <ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @channel.name %>
-  </li>
-
   <li>
     <strong>Description:</strong>
     <%= @channel.description %>
@@ -14,16 +7,14 @@
 
   <li>
     <strong>Club:</strong>
-    <%= @channel.club_id %>
+    <%= @club.name %>
   </li>
-
-  <li>
-    <strong>Posts:</strong>
-    <%= Enum.map(@channel.posts, &(&1.title)) %>
-  </li>
-
 </ul>
 
-<%= link "Posts", to: channel_post_path(@conn, :index, @channel) %>
 <%= link "Edit", to: channel_path(@conn, :edit, @channel) %>
 <%= link "Back", to: club_channel_path(@conn, :index, @channel.club_id) %>
+
+<div>
+  <h3>Posts:</h3>
+  <%= render Danton.PostView, "stream.html", posts: @posts, conn: @conn %>
+</div>

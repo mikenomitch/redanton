@@ -49,13 +49,13 @@ defmodule Danton.Router do
   # PRIVATE ROUTES
   scope "/", Danton do
     pipe_through :browser
-    get "/", PageController, :index
   end
 
   # PROTECTED ROUTES
   scope "/", Danton do
     pipe_through [:browser, :browser_auth, :impersonation_browser_auth]
 
+    get "/", PostController, :front_page
     get "/front", PostController, :front_page
 
     # Add public routes below
@@ -66,11 +66,12 @@ defmodule Danton.Router do
     end
 
     resources "/channels", ChannelController do
-      resources "/posts", PostController, only: [:index, :new, :create]
+      resources "/posts", PostController, only: [:new, :create]
     end
 
     resources "/posts", PostController do
       resources "/messages", MessageController, only: [:index, :new, :create]
+      get "/chat", PostController, :chat
     end
 
     resources "/messages", MessageController
