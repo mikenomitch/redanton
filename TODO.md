@@ -1,10 +1,6 @@
 # Todos
 
 ## Web UI
-- make general responsive edit page
-  - implement on post
-  - implement on chan
-  - implement on club
 - make general responsive new page
   - implement on post
   - implement on channel
