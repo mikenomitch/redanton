@@ -19,6 +19,7 @@
 
 </ul>
 
-<%= link "Channels", to: club_channel_path(@conn, :index, @club) %>
 <%= link "Edit", to: club_path(@conn, :edit, @club) %>
 <%= link "Back", to: club_path(@conn, :index) %>
+
+<%= render Danton.ChannelView, "channel_list.html", channels: @channels, conn: @conn %>

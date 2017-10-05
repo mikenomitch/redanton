@@ -1,0 +1,17 @@
+<div>
+<%= for channel <- @channels do %>
+  <div>
+    <div>
+      <%= link channel.name, to: channel_path(@conn, :show, channel), class: "" %>
+    </div>
+    <td><%= channel.description %></td>
+    <div>
+      Club: <%= link channel.club.name, to: club_path(@conn, :show, channel.club), class: "" %>
+    </div>
+    <div>Last Activity: posted 15 minutes ago</div>
+    <div>
+      <%= link "Edit", to: channel_path(@conn, :edit, channel), class: "" %>
+    </div>
+  </div>
+<% end %>
+</div>

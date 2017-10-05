@@ -1,8 +1,6 @@
 # Todos
 
 ## Web UI
-- make a general channels index (linked to via the header)
-- move the channel index (scoped by club) into the club show page
 - make general responsive index
   - implement on post stream
   - implement on channel list

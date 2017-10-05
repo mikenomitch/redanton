@@ -35,7 +35,8 @@ defmodule Danton.ClubController do
 
   def show(conn, %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id) |> Repo.preload(:channels)
-    render(conn, "show.html", club: club)
+    channels = club.channels |> Repo.preload(:club)
+    render(conn, "show.html", club: club, channels: channels)
   end
 
   def edit(conn, %{"id" => id}, _current_user, _claims) do
