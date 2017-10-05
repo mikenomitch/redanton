@@ -1,2 +1,1 @@
-<h4>channels:</h4>
 <%= render Danton.ChannelView, "channel_list.html", channels: @channels, conn: @conn %>
