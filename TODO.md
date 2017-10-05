@@ -1,10 +1,6 @@
 # Todos
 
 ## Web UI
-- make general responsive index
-  - implement on post stream
-  - implement on channel list
-  - implement on club list
 - make general responsive edit page
   - implement on post
   - implement on chan
