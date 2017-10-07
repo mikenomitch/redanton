@@ -90,6 +90,8 @@ defmodule Danton.PostController do
     post = Repo.get!(Post, id)
       |> Repo.preload(:room)
       |> Post.load_messages()
+      |> Repo.preload(:user)
+      |> Repo.preload(:channel)
 
     # TODO: get the actual messages for the room
     messages = Message.for_post(post.id)

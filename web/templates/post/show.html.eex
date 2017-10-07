@@ -2,8 +2,15 @@
   <div class="form-header-text">
     <%= link @post.title, to: @post.url || "http://www.google.com", class: "" %>
   </div>
+  <div class="form-header-info">
+    <div class="form-header-info-unit"> Posted By: <%= @post.user.name %> </div>
+    <div class="form-header-info-unit">
+      In Channel: <%= link @post.channel.name, to: channel_path(@conn, :show, @post.channel.id) %>
+    </div>
+  </div>
 </div>
 
+<div class="association-header text-right"> Discussion: </div>
 <div class="chat">
   <div id="messages" class="message-list">
     <%= for message <- @messages do %>
