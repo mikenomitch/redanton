@@ -35,7 +35,8 @@ defmodule Danton.Api.V1.PostController do
       {:ok, post} ->
         # TODO: find a better spot for this
         message = %{user_id: current_user.id, body: message_params["body"]}
-        Danton.Post.make_room(post, message)
+        Post.make_room(post, message)
+
         conn
         |> put_status(:created)
         |> put_resp_header("location", post_path(conn, :show, post))

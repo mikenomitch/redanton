@@ -48,7 +48,10 @@ defmodule Danton.PostController do
     }
 
     case Channel.make_post_for_user(channel, current_user, post_struct) do
-      {:ok, _post} ->
+      {:ok, post} ->
+        # TODO: find a better spot for this
+        Post.make_room(post)
+
         conn
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: channel_path(conn, :show, channel_id))
@@ -70,7 +73,10 @@ defmodule Danton.PostController do
     }
 
     case Channel.make_post_for_user(channel, current_user, post_struct) do
-      {:ok, _post} ->
+      {:ok, post} ->
+        # TODO: find a better spot for this
+        Post.make_room(post)
+
         conn
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: channel_path(conn, :show, channel_id))

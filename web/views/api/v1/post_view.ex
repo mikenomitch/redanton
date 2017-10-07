@@ -14,9 +14,6 @@ defmodule Danton.Api.V1.PostView do
     message = Message.latest_for_post(post)
     message_count = Message.count_for_post(post)
 
-    IO.puts "message:"
-    IO.puts inspect(message.inserted_at)
-
     %{
       id: post.id,
       title: post.title,

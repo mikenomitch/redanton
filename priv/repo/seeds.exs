@@ -22,9 +22,6 @@ Repo.delete_all Danton.Club
 users = [
   %Danton.User{name: "Mike", status: "active", email: "mikenomitch@gmail.com", avatar: "https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-1/p240x240/13934743_4154683422348_4358878110125305408_n.jpg?oh=b9479a030c0b081197e9b4a2e91181f7&oe=5A0CC1DB"},
   %Danton.User{name: "Dan", status: "active", email: "danmihalov@gmail.com", avatar: "https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-9/1393772_2712932459475_332693732_n.jpg?oh=c8880860965ae1e28637201cd57cdff2&oe=59FA61FB"}
-  # %Danton.User{name: "Steven", status: "active", email: "stevenan7@gmail.com", avatar: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/4/005/0b5/026/15086de.jpg"},
-  # %Danton.User{name: "Zach", status: "active", email: "zfertig@gmail.com", avatar: "https://pbs.twimg.com/profile_images/556526218989027328/ERy-0VYQ.jpeg"},
-  # %Danton.User{name: "Kevin", status: "active", email: "kevinzussman@gmail.com", avatar: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAfOAAAAJDJiYTQwM2NhLWZlNjgtNDI2NS1hYTRjLTBkMzBmNjA3MTQxNg.jpg"},
 ]
 
 users |> Enum.each(&Repo.insert!/1)
@@ -71,11 +68,11 @@ Enum.each(made_clubs, make_memberships)
 channels = [
 	%Danton.Channel{name: "Articles", description: "Good articles, opinion pieces, blog posts, etc"},
 	%Danton.Channel{name: "Sites", description:  "Interesting/cool sites"},
-	%Danton.Channel{name: "Gear", description:  "Gear - clothing, gadgets, etc"},
-  %Danton.Channel{name: "Videos", description:  "Videos or Gifs of any sort"},
-	%Danton.Channel{name: "Books", description: "Book recs"},
-	%Danton.Channel{name: "Music & Movies", description:  "Good albums, singles, bands, movies, etc"},
-  %Danton.Channel{name: "Misc", description:  "Things that don't fall into another category but are worth sharing."}
+	%Danton.Channel{name: "Gear", description:  "Clothing, gadgets, etc"},
+  %Danton.Channel{name: "Videos", description:  "Videos or gifs"},
+	%Danton.Channel{name: "Books", description: "Book recs of any sort"},
+	%Danton.Channel{name: "Music & Movies", description:  "Good songs, movies, bands, etc"},
+  %Danton.Channel{name: "Miscellanea", description:  "Things that don't fall into another category but are worth sharing."}
 ]
 
 make_channels = fn (chan) ->
