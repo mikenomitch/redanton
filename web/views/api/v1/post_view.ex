@@ -31,4 +31,13 @@ defmodule Danton.Api.V1.PostView do
       }
     }
   end
+
+  # helpers for show
+  def msg_class(message, current_user_id) do
+    if (message.user_id == current_user_id) do
+      "text-right"
+    else
+      ""
+    end
+  end
 end

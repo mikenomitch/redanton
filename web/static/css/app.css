@@ -1,1 +1,62 @@
 /* This file is for your main application css. */
+
+/* BOOTSTRAP OVERRIDES */
+
+.control-label {
+  font-weight: 400;
+}
+
+.form-control {
+  font-weight: 200;
+}
+
+/* ADDED CLASSES */
+
+.list-entry {
+  border-left: solid 1px #ddd;
+  margin-bottom: 2rem;
+}
+
+.form-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+}
+
+.form-header-text {
+  flex: 0 1 auto;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 10px 0px;
+}
+
+.form-header-nav {
+  flex: 0 1 auto;
+  padding-left: 10px;
+}
+
+.form-header-info {
+  flex: 1 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-header-info-unit {
+  flex: 1 0 100%;
+}
+
+.associations {
+  margin-top: 20px;
+}
+
+.association-header {
+  margin: 10px 0px;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.new_item_link {
+  margin: 20px 0px;
+}

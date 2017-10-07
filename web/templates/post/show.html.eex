@@ -10,7 +10,7 @@
   </div>
   <div id="messages">
     <%= for message <- @messages do %>
-    <div>
+    <div class="<%=msg_class(message, @user_id)%>">
       <%= message.body %> - <%= message.user.name %>
     </div>
     <% end %>
