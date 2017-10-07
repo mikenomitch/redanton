@@ -8,7 +8,7 @@
       -
       <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %>
       -
-      <%= link "Discuss", to: post_post_path(@conn, :chat, post), class: " " %>
+      <%= link "Discuss", to: post_path(@conn, :show, post), class: " " %>
     </div>
 
     <div class="col-xs-12 col-md-12 small row">

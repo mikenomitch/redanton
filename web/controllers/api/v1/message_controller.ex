@@ -8,7 +8,9 @@ defmodule Danton.Api.V1.MessageController do
   def index(conn, %{"post_id" => post_id}, current_user, _claims) do
     room = Room.for_and_with_post(post_id)
     CheckIn.check_in_room(room, current_user)
-    messages = Message.for_post(post_id) |> Repo.all()
+    messages = Message.for_post(post_id)
+      |> Repo.all()
+      |> Repo.preload(:user)
     render(conn, "index.json", messages: messages)
   end
 
@@ -22,7 +24,7 @@ defmodule Danton.Api.V1.MessageController do
     message = Message.create_message_for_room(
       room,
       Map.merge(message_params, %{user_id: current_user.id})
-    )
+    ) |> Repo.preload(:user)
 
     # TODO: add error handling
     conn
@@ -32,12 +34,12 @@ defmodule Danton.Api.V1.MessageController do
   end
 
   def show(conn, %{"id" => id}, _current_user, _claims) do
-    message = Repo.get!(Message, id)
+    message = Repo.get!(Message, id) |> Repo.preload(:user)
     render(conn, "show.html", message: message)
   end
 
   def update(conn, %{"id" => id, "message" => message_params}, _current_user, _claims) do
-    message = Repo.get!(Message, id)
+    message = Repo.get!(Message, id) |> Repo.preload(:user)
     changeset = Message.changeset(message, message_params)
 
     case Repo.update(changeset) do

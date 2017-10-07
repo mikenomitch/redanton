@@ -3,6 +3,10 @@
 ## Web UI
 - add link to chat from post stream
 - add chat JS channel/socket logic
+- clean up duplicate create routes
+  (channels and posts)
+- posts always have rooms (created via
+  and of the routes)
 
 - add sign out link to the layout
 

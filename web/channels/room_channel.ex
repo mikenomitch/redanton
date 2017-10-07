@@ -10,8 +10,17 @@ defmodule Danton.RoomChannel do
 
   def handle_in("new_msg", %{"body" => body, "post_id" => post_id, "user_id" => user_id}, socket) do
     room = Room.for_post(Room, post_id) |> Repo.one
-    message = Room.make_message(room, %{body: body, user_id: user_id})
-    message_json = Danton.Api.V1.MessageView.render("message.json", %{message: message})
+
+    # room = Repo.get(Room, 1)
+    # IO.puts "ROOM"
+    # IO.puts room.id
+
+    message = Room.make_message(room, %{body: body, user_id: user_id}) 
+      |> Repo.preload(:user)
+    message_json = Danton.Api.V1.MessageView.render(
+      "message.json",
+      %{message: message}
+    )
 
     broadcast! socket, "new_msg", message_json
 

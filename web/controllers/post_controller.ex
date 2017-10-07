@@ -80,8 +80,17 @@ defmodule Danton.PostController do
   end
 
   def show(conn, %{"id" => id}, _current_user, _claims) do
+    # TODO: make sure posts have rooms
     post = Repo.get!(Post, id)
-    render(conn, "show.html", post: post)
+      |> Repo.preload(:room)
+      |> Post.load_messages()
+
+    # TODO: get the actual messages for the room
+    messages = Message 
+      |> Repo.all()
+      |> Repo.preload(:user)
+
+    render(conn, "show.html", post: post, room_id: post.room && post.room.id || "1", messages: messages)
   end
 
   def chat(conn, %{"post_id" => post_id}, _current_user, _claims) do

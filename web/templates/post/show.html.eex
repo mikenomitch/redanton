@@ -1,37 +1,26 @@
-<h2>Show post</h2>
+<div class="form-header">
+  <div class="form-header-text">
+    <%= link @post.title, to: @post.url || "http://www.google.com", class: "" %>
+  </div>
+</div>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @post.description %>
-  </li>
-
-  <li>
-    <strong>Type:</strong>
-    <%= @post.type %>
-  </li>
-
-  <li>
-    <strong>Url:</strong>
-    <%= @post.url %>
-  </li>
-
-  <li>
-    <strong>Channel:</strong>
-    <%= @post.channel_id %>
-  </li>
-
-  <li>
-    <strong>User:</strong>
-    <%= @post.user_id %>
-  </li>
-</ul>
-
-<%= link "Edit", to: post_path(@conn, :edit, @post) %>
-<%= link "Back", to: channel_post_path(@conn, :index, @post.channel_id) %>
+<div>
+  <div>
+    Discussion
+  </div>
+  <div id="messages">
+    <%= for message <- @messages do %>
+    <div>
+      <%= message.body %> - <%= message.user.name %>
+    </div>
+    <% end %>
+  </div>
+  <div>
+    <input
+      id="chat-input"
+      class="form-control"
+      data-roomid="<%=@room_id%>"
+      type="text"
+    />
+  </div>
+</div>

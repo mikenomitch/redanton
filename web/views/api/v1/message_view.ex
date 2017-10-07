@@ -15,7 +15,8 @@ defmodule Danton.Api.V1.MessageView do
       body: message.body,
       inserted_at: message.inserted_at,
       room_id: message.room_id,
-      user_id: message.user_id
+      user_id: message.user_id,
+      user_name: message.user.name
     }
   end
 end

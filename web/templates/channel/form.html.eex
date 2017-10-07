@@ -7,7 +7,7 @@
 
   <%= if @club_id == :none do %>
     <div class="form-group">
-      <%= label f, :channel_id, class: "control-label" %>
+      <%= label f, :club_id, class: "control-label" %>
       <%= select(f,
         :club_id,
         Enum.map(@clubs, &({[&1.name], &1.id})),
