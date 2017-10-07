@@ -3,7 +3,7 @@
   <div class="row list-entry">
     <div class="col-xs-12 col-md-12">
       <strong>
-      <%= link post.title, to: post.url || "http://www.google.com", class: "" %>
+      <%= link post.title, to: parse_link(post), class: "" %>
       </strong>
       -
       <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %>
