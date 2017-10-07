@@ -15,9 +15,6 @@
       <div class="col-xs-6 col-md-3">
         <%= post.user && post.user.name %> posted to <%= link post.channel.name, to: channel_path(@conn, :show, post.channel.id), class: "" %>
       </div>
-      <div class="col-xs-12 col-md-6">
-        Last Activity: posted 15 minutes ago
-      </div>
     </div>
   </div>
 <% end %>

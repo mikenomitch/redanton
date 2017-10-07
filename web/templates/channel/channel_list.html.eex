@@ -16,9 +16,6 @@
       <div class="col-xs-6 col-md-3">
         Club: <%= link channel.club.name, to: club_path(@conn, :show, channel.club), class: "" %>
       </div>
-      <div class="col-xs-6 col-md-3">
-        Last Activity: posted 15 minutes ago
-      </div>
     </div>
   </div>
 <% end %>
