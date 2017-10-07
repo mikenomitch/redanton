@@ -58,31 +58,56 @@ socket.connect()
 // channel.join()
 //   .receive("ok", resp => { console.log("Joined successfully", resp) })
 //   .receive("error", resp => { console.log("Unable to join", resp) })
-let channel           = socket.channel("room:lobby", {})
-let chatInput         = document.querySelector("#chat-input")
-let messagesContainer = document.querySelector("#messages")
+let chatInput = document.querySelector('#chat-input')
 
-chatInput.addEventListener("keypress", event => {
-  if(event.keyCode === 13){
 
-    channel.push("new_msg", {
-      body: chatInput.value,
-      post_id: chatInput.dataset.postid,
-      user_id: parseInt(chatInput.dataset.currentuserid)
-    })
+function newMessageInnerHTML(payload) {
+  return `
+  <div class="message-user">
+    ${payload.user_name}
+  </div>
+  <div class="message-body">
+    ${payload.body}
+  </div>
+  `
+}
 
-    chatInput.value = ""
-  }
-})
+function newMessageClassList(payload, currentUserId) {
+  return parseInt(currentUserId) === parseInt(payload.user_id) ? 'message message-current-user' : 'message message-other-user'
+}
 
-channel.on("new_msg", payload => {
-  let messageItem = document.createElement("li");
-  messageItem.innerText = `[${Date()}] ${payload.body}`
-  messagesContainer.appendChild(messageItem)
-})
+function setUpChat() {
+  let channel           = socket.channel('room:' + chatInput.dataset.roomid, {})
+  let messagesContainer = document.querySelector('#messages')
 
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  chatInput.addEventListener('keypress', event => {
+    if(event.keyCode === 13){
+
+      channel.push('new_msg', {
+        body: chatInput.value,
+        post_id: chatInput.dataset.postid,
+        user_id: parseInt(chatInput.dataset.currentuserid)
+      })
+
+      chatInput.value = ''
+    }
+  })
+
+  channel.on('new_msg', payload => {
+    let messageItem = document.createElement('div')
+    messageItem.classList = newMessageClassList(payload, chatInput.dataset.currentuserid)
+    messageItem.innerHTML = newMessageInnerHTML(payload)
+
+    messagesContainer.appendChild(messageItem)
+  })
+
+  channel.join()
+    .receive('ok', resp => { console.log('Joined successfully', resp) })
+    .receive('error', resp => { console.log('Unable to join', resp) })
+}
+
+if (chatInput) {
+  setUpChat()
+}
 
 export default socket

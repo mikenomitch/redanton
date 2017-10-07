@@ -8,9 +8,9 @@ defmodule Danton.PostView do
   # helpers for show
   def msg_class(message, current_user_id) do
     if (message.user_id == current_user_id) do
-      "text-right"
+      "message-current-user"
     else
-      ""
+      "message-other-user"
     end
   end
 end

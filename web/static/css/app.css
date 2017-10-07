@@ -60,3 +60,39 @@
 .new_item_link {
   margin: 20px 0px;
 }
+
+/* CHAT */
+
+.chat {
+  border-top: solid 1px #ddd;
+}
+
+.message {
+  margin-top: 10px;
+  padding: 5px;
+  text-align: right;
+  border-radius: 3px;
+}
+
+.message-current-user {
+  background-color: #d4e7f7;
+}
+
+.message-other-user {
+  background-color: #efefef;
+}
+
+.message-user {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.message-body {
+
+}
+
+.chat-input-holder {
+  border-top: solid 1px #aaa999;
+  margin-top: 10px;
+  padding : 10px 0px;
+}

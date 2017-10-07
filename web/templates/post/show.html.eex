@@ -4,25 +4,27 @@
   </div>
 </div>
 
-<div>
-  <div>
-    Discussion
-  </div>
-  <div id="messages">
+<div class="chat">
+  <div id="messages" class="message-list">
     <%= for message <- @messages do %>
-    <div class="<%=msg_class(message, @user_id)%>">
-      <%= message.body %> - <%= message.user.name %>
+    <div class="message <%=msg_class(message, @user_id)%>">
+      <div class="message-user">
+        <%= message.user.name || message.user.email %>
+      </div>
+      <div class="message-body">
+        <%= message.body %>
+      </div>
     </div>
     <% end %>
   </div>
-  <div>
+  <div class="chat-input-holder">
     <input
       id="chat-input"
       class="form-control"
       data-postid="<%=@post.id%>"
       data-roomid="<%=@room_id%>"
       data-currentuserid="<%=@user_id%>"
-      type="text"
+      placeholder="enter message"
     />
   </div>
 </div>
