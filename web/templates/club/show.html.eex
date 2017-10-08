@@ -3,7 +3,6 @@
     <%= @club.name %>
   </div>
   <div class="form-header-nav">
-    <%= link "Edit", to: club_path(@conn, :edit, @club) %>
     <%= link "Back", to: club_path(@conn, :index) %>
   </div>
   <div class="form-header-info">

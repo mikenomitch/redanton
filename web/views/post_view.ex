@@ -27,4 +27,15 @@ defmodule Danton.PostView do
       "message-other-user"
     end
   end
+
+  def latest_activity_text(post) do
+    time = Post.latest_activity_time(post)
+    activity_type = Post.latest_activity_type(post)
+    if activity_type == :post do
+      "Posted " <> Timex.from_now(time)
+    else
+      msg = Message.latest_for_post(post) |> Danton.Repo.preload(:user)
+      "Message from " <> msg.user.name <> " " <> Timex.from_now(time)
+    end
+  end
 end

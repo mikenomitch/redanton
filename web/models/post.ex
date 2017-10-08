@@ -112,4 +112,27 @@ defmodule Danton.Post do
   def load_messages(post) do
     post |> Repo.preload([room: :messages])
   end
+
+  # ===========================
+  # OTHER
+  # ===========================
+
+  def sort_by_latest_activity(post_list) do
+    post_list
+      |> Enum.sort_by(&latest_activity_time/1)
+      |> Enum.reverse()
+  end
+
+  def latest_activity_time(post) do
+    message = Message.latest_for_post(post)
+    message && message.inserted_at || post.inserted_at
+  end
+
+  def latest_activity_type(post) do
+    if (Message.latest_for_post(post)) do
+      :messages
+    else
+      :post
+    end
+  end
 end

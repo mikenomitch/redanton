@@ -3,7 +3,6 @@
     <%= @channel.name %>
   </div>
   <div class="form-header-nav">
-    <%= link "Edit", to: channel_path(@conn, :edit, @channel) %>
     <%= link "Back", to: channel_path(@conn, :index) %>
   </div>
   <div class="form-header-info">
