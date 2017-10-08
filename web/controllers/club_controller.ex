@@ -73,4 +73,16 @@ defmodule Danton.ClubController do
     |> put_flash(:info, "Club deleted successfully.")
     |> redirect(to: club_path(conn, :index))
   end
+
+  def leave(conn, %{"id" => id}, current_user, _claims) do
+    membership = Membership.for_user(current_user) |> Repo.get_by(club_id: id)
+    if membership do
+      # Here we use delete! (with a bang) because we expect
+      # it to always work (and if it does not, it will raise).
+      Repo.delete!(membership)
+      conn
+      |> put_flash(:info, "You have left the club.")
+      |> redirect(to: club_path(conn, :index))
+    end
+  end
 end

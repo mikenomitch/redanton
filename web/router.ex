@@ -62,6 +62,7 @@ defmodule Danton.Router do
     resources "/memberships", MembershipController
 
     resources "/clubs", ClubController do
+      delete "/leave", ClubController, :leave
       resources "/channels", ChannelController, only: [:new, :create]
     end
 

@@ -9,7 +9,6 @@
           <%= link  club.name, to: club_path(@conn, :show, club), class: "" %>
         </strong>
         - <%= link "Edit", to: club_path(@conn, :edit, club), class: "" %>
-        - <%= link "Delete", to: club_path(@conn, :delete, club), method: :delete, data: [confirm: "Are you sure?"], class: "" %>
       </div>
       <div class="col-xs-12 col-md-12 small">
         <%= club.description %>
@@ -17,4 +16,3 @@
     </div>
 <% end %>
 </div>
-
