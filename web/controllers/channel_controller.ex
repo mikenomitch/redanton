@@ -34,25 +34,15 @@ defmodule Danton.ChannelController do
   end
 
   def create(conn, %{"channel" => channel_params, "club_id" => club_id}, _current_user, _claims) do
-    club = Repo.get(Club, club_id)
-
-    # TODO: extract somehow
-    %Danton.Channel{}
-      |> Channel.changeset(channel_params)
-      |> Ecto.Changeset.put_assoc(:club, club)
-      |> Repo.insert()
-      |> case do
-      {:ok, _channel} ->
-        conn
-        |> put_flash(:info, "Channel created successfully.")
-        |> redirect(to: club_path(conn, :show, club_id))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
+    create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id})
   end
 
   def create(conn, %{"channel" => channel_params}, _current_user, _claims) do
     club_id = channel_params["club_id"]
+    create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id})
+  end
+
+  defp create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id}) do
     club = Repo.get(Club, club_id)
 
     # TODO: extract somehow
