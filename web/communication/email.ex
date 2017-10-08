@@ -17,14 +17,6 @@ defmodule Danton.Email do
     |> render("new_club_invite.html")
   end
 
-  def test_message(person) do
-    base_email()
-    |> to(person)
-    |> subject("This is a Test")
-    |> assign(:person, person)
-    |> render("test_message.html")
-  end
-
   defp base_email do
     new_email()
     |> from("Mike Nomitch<mikenomitch@gmail.com>")
