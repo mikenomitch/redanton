@@ -1,7 +1,6 @@
 # Todos
 
 ## Web UI
-- deletion of clubs & channels & posts
 - hide editing and deleting if you are
   not the ownder of a post/chan/club
 
@@ -13,7 +12,6 @@
 - make "flash" notifications look nicer
   and be clearable (maybe this has been
   done in elixir before)
-
 
 ## Quick Wins
 - front page does not clear itself
