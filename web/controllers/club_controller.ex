@@ -74,8 +74,8 @@ defmodule Danton.ClubController do
     |> redirect(to: club_path(conn, :index))
   end
 
-  def leave(conn, %{"id" => id}, current_user, _claims) do
-    membership = Membership.for_user(current_user) |> Repo.get_by(club_id: id)
+  def leave(conn, %{"club_id" => club_id}, current_user, _claims) do
+    membership = Membership.for_user(current_user) |> Repo.get_by(club_id: club_id)
     if membership do
       # Here we use delete! (with a bang) because we expect
       # it to always work (and if it does not, it will raise).

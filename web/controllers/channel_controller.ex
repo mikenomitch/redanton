@@ -102,6 +102,6 @@ defmodule Danton.ChannelController do
 
     conn
     |> put_flash(:info, "Channel deleted successfully.")
-    |> redirect(to: club_channel_path(conn, :index, club_id))
+    |> redirect(to: channel_path(conn, :index))
   end
 end

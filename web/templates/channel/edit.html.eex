@@ -8,3 +8,5 @@
 </div>
 
 <%= render "form.html", changeset: @changeset, action: channel_path(@conn, :update, @channel), club_id: @channel.club_id, clubs: :empty %>
+
+<%= link "Delete Channel", to: channel_path(@conn, :delete, @channel), method: :delete, data: [confirm: "Are you sure you want to remove this channel and its posts?"], class: "pull-right" %>

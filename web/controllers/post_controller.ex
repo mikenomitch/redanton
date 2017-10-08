@@ -119,15 +119,9 @@ defmodule Danton.PostController do
   end
 
   def delete(conn, %{"id" => id}, _current_user, _claims) do
-    post = Repo.get!(Post, id)
-    channel_id = post.channel_id
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(post)
-
+    Post.destroy(id)
     conn
     |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: channel_post_path(conn, :index, channel_id))
+    |> redirect(to: post_path(conn, :front_page))
   end
 end
