@@ -24,7 +24,7 @@ defmodule Danton.Api.V1.PostView do
       channel_id: post.channel_id,
       room_id: room_id,
       message_count: message_count,
-      last_activity_time: message && message.inserted_at || post.updated_at,
+      last_activity_time: Post.latest_activity_time(post),
       last_message: message && %{
         body: message.body,
         user_id: message.user_id
