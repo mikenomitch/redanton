@@ -6,15 +6,24 @@ defmodule Danton.Email do
     |> to(email_for_user(user)) # really should be `user.email`
     |> subject("New Chat Message")
     |> assign(:person, user)
-    |> render("new_chat_message.html", sender_name: params.sender_name, post_title: params.post_title)
+    |> render(
+      "new_chat_message.html",
+      sender_name: params.sender_name,
+      post_title: params.post_title,
+      post_path: params.post_path
+    )
   end
 
-  def new_club_invite(user, _params) do
+  def new_club_invite(user, params) do
     base_email()
     |> to(email_for_user(user)) # really should be `user.email`
     |> subject("Invited to Club")
     |> assign(:person, user)
-    |> render("new_club_invite.html")
+    |> render(
+      "new_club_invite.html",
+      club_name: params.club_name,
+      site_url: params.site_url
+    )
   end
 
   defp base_email do

@@ -60,7 +60,10 @@ defmodule Danton.Membership do
     Danton.Notification.notify_user(
       membership.user_id,
       :new_club_invite,
-      %{club: club}
+      %{
+        club_name: club.name,
+        site_url: "https://stormy-reef-53700.herokuapp.com"
+      }
     )
   end
 end

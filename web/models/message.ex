@@ -97,7 +97,11 @@ defmodule Danton.Message do
     Danton.Notification.notify_users(
       users_to_send_to,
       :new_chat_message,
-      %{ sender_name: sender.name || sender.email, post_title: post.title }
+      %{
+        sender_name: sender.name || sender.email,
+        post_title: post.title,
+        post_path: "https://stormy-reef-53700.herokuapp.com/posts/#{post.id}"
+      }
     )
   end
 end

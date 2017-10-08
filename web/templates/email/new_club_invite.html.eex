@@ -1,6 +1,6 @@
 <p>
-  You've been invited to a new club on MIKES_UNNAMED_APP_SLASH_SITE.
+  You've been invited to join <%= @club_name%> on MIKES_UNNAMED_APP_SLASH_SITE.
 </p>
 <p>
-  If you haven't signed up. Ask Mike. If you have signed up, go check out your new invite.
+  Go <%= link "here", to: @site_url %> to log in or sign up. Use this email.
 </p>
