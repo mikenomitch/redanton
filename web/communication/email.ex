@@ -36,18 +36,13 @@ defmodule Danton.Email do
   end
 
   defp email_for_user(user) do
-    default_email = "mikenomitch+danton@gmail.com"
-    acceptable_user_emails = [
-      "mikenomitch@gmail.com"
-    ]
-
+    dev_email = "mikenomitch+danton@gmail.com"
     on_prod = Application.get_env(:danton, :env) == :prod
-    email_is_acceptable = Enum.member?(acceptable_user_emails, user.email)
 
-    if (email_is_acceptable && on_prod) do
+    if (on_prod) do
       user.email
     else
-      default_email
+      dev_email
     end
   end
 end
