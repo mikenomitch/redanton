@@ -96,3 +96,26 @@
   margin-top: 10px;
   padding : 10px 0px;
 }
+
+/* LOGIN AND SIGN UP */
+
+.login-header {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.login-input {
+  margin: 15px 0px;
+}
+
+.login-button {
+  margin: 20px 0px;
+}
+
+.login-or {
+  margin: 0px 5px;
+}
+
+.login-sign-up {
+  margin: 0px 5px;
+}
