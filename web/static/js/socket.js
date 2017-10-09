@@ -79,6 +79,7 @@ function newMessageClassList(payload, currentUserId) {
 function setUpChat() {
   let channel           = socket.channel('room:' + chatInput.dataset.roomid, {})
   let messagesContainer = document.querySelector('#messages')
+  messagesContainer.scrollTop = messagesContainer.scrollHeight
 
   chatInput.addEventListener('keypress', event => {
     if(event.keyCode === 13){
@@ -99,6 +100,7 @@ function setUpChat() {
     messageItem.innerHTML = newMessageInnerHTML(payload)
 
     messagesContainer.appendChild(messageItem)
+    messagesContainer.scrollTop = messagesContainer.scrollHeight
   })
 
   channel.join()

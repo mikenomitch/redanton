@@ -30,7 +30,7 @@ defmodule Danton.AuthController do
         conn
         |> put_flash(:info, "Signed in as #{user.name}")
         |> Guardian.Plug.sign_in(user, :access, perms: %{default: Guardian.Permissions.max})
-        |> redirect(to: club_path(conn, :index))
+        |> redirect(to: post_path(conn, :front_page))
       {:error, error} ->
         conn
         |> put_flash(:error, "Could not authenticate. Error: #{error}")
