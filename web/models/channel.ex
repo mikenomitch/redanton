@@ -20,7 +20,7 @@ defmodule Danton.Channel do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :description])
-    |> validate_required([:name, :description])
+    |> validate_required([:name])
   end
 
   # ===========================
