@@ -81,6 +81,10 @@ defmodule Danton.User do
     Repo.get_by(User, email: params.email) || Repo.insert!(%User{ params | status: "pending"})
   end
 
+  def is_admin(user) do
+    user.email == "mikenomitch@gmail.com"
+  end
+
   # =====================================
   # TODO: EXTRACT USER UPDATES INTO OWN MODULE
   # =====================================
