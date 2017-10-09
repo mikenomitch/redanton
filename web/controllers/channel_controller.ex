@@ -1,5 +1,8 @@
 defmodule Danton.ChannelController do
   use Danton.Web, :controller
+  use Danton.CheckIn, :controller
+
+  plug :check_in, :channel when action in [:show]
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 

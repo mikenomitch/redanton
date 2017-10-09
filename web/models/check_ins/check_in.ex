@@ -61,7 +61,7 @@ defmodule Danton.CheckIn do
 
       def check_in(conn, :channel) do
         user_id = get_user_id(conn)
-        channel_id = conn.params["channel_id"]
+        channel_id = conn.params["channel_id"] ||conn.params["id"]
 
         if (user_id && channel_id) do
           ChannelCheckIn.changeset(

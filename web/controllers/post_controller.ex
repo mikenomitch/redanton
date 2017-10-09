@@ -1,20 +1,15 @@
 defmodule Danton.PostController do
   use Danton.Web, :controller
+  use Danton.CheckIn, :controller
+
+  plug :check_in, :front_page when action in [:front_page]
+  plug :check_in, :post when action in [:show]
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
   # ===========================
   # ACTIONS
   # ===========================
-
-  def index(conn,  %{"channel_id" => channel_id}, _current_user, _claims) do
-    posts = Post.for_channel_stream(channel_id)
-      |> Repo.all()
-      |> Repo.preload(:user)
-      |> Repo.preload(:channel)
-
-    render(conn, "index.html", posts: posts, channel_id: channel_id)
-  end
 
   def front_page(conn, _params, current_user, _claims) do
     posts = Post.for_front_page(current_user)

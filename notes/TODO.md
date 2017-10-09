@@ -1,9 +1,7 @@
 # Todos
 
 ## Today
-- Email throttling
 - Emails sent on post, but not 1st message
-- Check ins exist on the web side
 - Auth start
   - admin
   - web show pages
