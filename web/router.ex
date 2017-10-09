@@ -55,7 +55,7 @@ defmodule Danton.Router do
   scope "/", Danton do
     pipe_through [:browser, :browser_auth, :impersonation_browser_auth]
 
-    get "/", PostController, :front_page
+    get "/", PageController, :index
     get "/front", PostController, :front_page
 
     # Add public routes below

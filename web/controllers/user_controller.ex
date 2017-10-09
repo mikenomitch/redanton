@@ -1,6 +1,8 @@
 defmodule Danton.UserController do
   use Danton.Web, :controller
 
+  plug :put_layout, "auth.html" when action in [:new]
+
   # ===========================
   # ACTIONS
   # ===========================

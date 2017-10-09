@@ -9,7 +9,8 @@ defmodule Danton.PageController do
     if current_user do
       redirect conn, to: "/front"
     else
-      render conn, "index.html"
+      # render conn, "index.html"
+      redirect conn, to: "/login"
     end
   end
 end

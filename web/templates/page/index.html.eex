@@ -1,2 +1,3 @@
-<div id="messages"></div>
-<input id="chat-input" type="text"></input>
+<div>
+  <h1> Welcome to Danton </h1>
+</div>

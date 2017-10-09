@@ -10,6 +10,8 @@ defmodule Danton.AuthController do
 
   plug Ueberauth
 
+  plug :put_layout, "auth.html"
+
   # ===========================
   # ACTIONS
   # ===========================
