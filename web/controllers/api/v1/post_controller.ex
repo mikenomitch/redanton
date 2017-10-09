@@ -20,28 +20,15 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
-  def create(conn, %{"channel_id" => channel_id, "post" => post_params, "message" => message_params}, current_user, _claims) do
+  def create(conn, %{"channel_id" => channel_id, "post" => post_params, "message" => msg_params}, current_user, _claims) do
     channel = Repo.get(Channel, channel_id)
-
-    # TODO: There must be a nicer way to do this
-    post_struct = %Post{
-      title: post_params["title"],
-      description: post_params["description"],
-      type: post_params["type"],
-      url: post_params["url"],
-    }
-
-    case Channel.make_post_for_user(channel, current_user, post_struct) do
-      {:ok, post} ->
-        # TODO: find a better spot for this
-        message = %{user_id: current_user.id, body: message_params["body"]}
-        Post.make_room(post, message)
-
+    case Post.create_for_channel_and_user(channel, current_user, post_params, msg_params) do
+      {:ok, %{post: post}} ->
         conn
         |> put_status(:created)
         |> put_resp_header("location", post_path(conn, :show, post))
         |> render("show.json", post: Post.load_messages(post))
-      {:error, changeset} ->
+      {:error, _, changeset, _} ->
         conn
         |> put_status(:unprocessable_entity)
         |> render(Danton.ChangesetView, "error.json", changeset: changeset)

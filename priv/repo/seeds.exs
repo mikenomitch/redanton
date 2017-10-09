@@ -98,14 +98,14 @@ first_chan = hd made_chans
 # Make Rooms
 # ==============
 
-# Enum.each(made_posts, &Danton.Post.make_room/1)
+# Enum.each(made_posts, &Danton.Post.make_ro_om/1)
 # first_room = Repo.get(Danton.Room, 1)
 
 # ==============
 # Make Message
 # ==============
 
-# Danton.Room.make_message(first_room, %{body: "Thought this was pretty interesting", user_id: first_user.id})
+# Danton.Room.make_me_ssage(first_room, %{body: "Thought this was pretty interesting", user_id: first_user.id})
 
 # ==============
 

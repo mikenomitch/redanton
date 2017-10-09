@@ -43,20 +43,8 @@ defmodule Danton.PostController do
 
   defp create_and_respond(conn, %{"post" => post_params, "channel_id" => channel_id}, current_user) do
     channel = Repo.get(Channel, channel_id)
-
-    # TODO: There must be a nicer way to do this
-    post_struct = %Post{
-      title: post_params["title"],
-      description: post_params["description"],
-      type: post_params["type"],
-      url: post_params["url"],
-    }
-
-    case Channel.make_post_for_user(channel, current_user, post_struct) do
-      {:ok, post} ->
-        # TODO: find a better spot for this
-        Post.make_room(post)
-
+    case Post.create_for_channel_and_user(channel, current_user, post_params) do
+      {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: channel_path(conn, :show, channel_id))

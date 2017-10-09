@@ -63,15 +63,16 @@ defmodule Danton.Room do
     Repo.get(Room, room_id).post_id
   end
 
-  # ===========================
-  # CREATE
-  # ===========================
+  # ids for room
 
-  @doc """
-  Makes and inserts a message for a room
-  """
-  def make_message(room, message_params) do
-    Message.create_message_for_room(room, message_params)
+  def user_ids_for_room(room = %Danton.Room{}) do
+    user_ids_for_room(room.id)
+  end
+
+  def user_ids_for_room(room_id) do
+    User.for_room(room_id)
+    |> Repo.all()
+    |> Enum.map(& &1.id)
   end
 
   # ===========================

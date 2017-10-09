@@ -68,20 +68,53 @@ defmodule Danton.Post do
   # CREATE
   # ===========================
 
-  @doc """
-  Makes an associated room for a post
-  """
-  def make_room(post) do
-    cs = Ecto.build_assoc(post, :room, %{})
-    Repo.insert!(cs)
+  def create_for_channel_and_user(chan, user, post_params, msg_params \\ false) do
+    post_struct = %Post{
+      title: post_params["title"],
+      description: post_params["description"],
+      type: post_params["type"],
+      url: post_params["url"],
+      user_id: user.id
+    }
+    post_cs = Ecto.build_assoc(chan, :posts, post_struct)
+
+    multi = Multi.new
+      |> Multi.insert(:post, post_cs)
+      |> Multi.run(:room, fn %{post: post} ->
+        room_cs = Ecto.build_assoc(post, :room, %{})
+        Repo.insert(room_cs)
+      end)
+      |> Multi.run(:message, fn %{room: room} ->
+        if (msg_params) do
+          msg_cs = Ecto.build_assoc(room, :messages, msg_params)
+          Repo.insert(msg_cs)
+        else
+          {:ok, :no_message}
+        end
+      end)
+
+    case Repo.transaction(multi) do
+      {:ok, %{post: post, room: room} = res} ->
+        Task.start(__MODULE__, :notify_new_post, [post, room, user])
+        {:ok, res}
+      other ->
+        other
+    end
   end
 
-  @doc """
-  Makes an associated room for a post, and adds a message
-  """
-  def make_room(post, message_params) do
-    room = Danton.Post.make_room(post)
-    Room.make_message(room, message_params)
+  def notify_new_post(post, room, user) do
+    users_for_room = Room.user_ids_for_room(room)
+    users_to_send_to = users_for_room -- [user.id]
+
+    Danton.Notification.notify_users(
+      users_to_send_to,
+      :new_post,
+      %{
+        poster_name: user.name || user.email,
+        post_title: post.title,
+        post_path: "https://stormy-reef-53700.herokuapp.com/posts/#{post.id}"
+      }
+    )
   end
 
   # ===========================

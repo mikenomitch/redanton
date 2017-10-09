@@ -26,6 +26,19 @@ defmodule Danton.Email do
     )
   end
 
+  def new_post(user, params) do
+    base_email()
+    |> to(email_for_user(user)) # really should be `user.email`
+    |> subject("New Post")
+    |> assign(:person, user)
+    |> render(
+      "new_post.html",
+      poster_name: params.poster_name,
+      post_title: params.post_title,
+      post_path: params.post_path
+    )
+  end
+
   defp base_email do
     new_email()
     |> from("Mike Nomitch<mikenomitch@gmail.com>")

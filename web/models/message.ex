@@ -67,10 +67,14 @@ defmodule Danton.Message do
   # OTHER
   # ===========================
 
-  def create_message_for_room(room, message_params) do
+  def create_message_for_room(room, message_params, skip_notification \\ false) do
     cs = Ecto.build_assoc(room, :messages, message_params)
     message = Repo.insert!(cs)
-    Task.start( __MODULE__, :notify_users, [message] )
+
+    unless skip_notification do
+      Task.start( __MODULE__, :notify_users, [message])
+    end
+
     message
   end
 
@@ -78,13 +82,11 @@ defmodule Danton.Message do
     seconds_to_sleep = 20
     :timer.sleep(seconds_to_sleep * 1000)
 
-    users_for_room = Enum.map(
-      Repo.all(User.for_room(message.room_id)),
-      &(&1.id)
-    )
+    users_for_room = Room.user_ids_for_room(message.room_id)
 
     users_checked_in = CheckIn.users_checked_in_since(
-      message.inserted_at, %{id: message.room_id, type: :room}
+      message.inserted_at,
+      %{id: message.room_id, type: :room}
     )
 
     user_who_sent = [message.user_id]

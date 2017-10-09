@@ -23,6 +23,8 @@ defmodule Danton.Notification do
     notify_users([user_id], type, params)
   end
 
+  # Presumably this picks the message medium
+  # but is hardcoding to email right now
   def notify(user, type, params) do
     apply(Email, type, [user, params]) |> Mailer.deliver_later
   end

@@ -44,6 +44,7 @@ defmodule Danton.Web do
       import Ecto.Query
 
       alias Danton.Repo
+      alias Ecto.Multi
 
       use Danton.Web, :alias_models
     end
@@ -100,6 +101,8 @@ defmodule Danton.Web do
       use Phoenix.Channel
 
       alias Danton.Repo
+      alias Ecto.Multi
+
       import Ecto
       import Ecto.Query
       import Danton.Gettext
