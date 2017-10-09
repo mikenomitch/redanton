@@ -3,12 +3,14 @@
   <div class="row list-entry">
     <div class="col-xs-12 col-md-12">
       <strong>
-      <%= link post.title, to: parse_link(post), class: "" %>
+        <%= link post.title, to: parse_link(post), class: "" %>
       </strong>
-      -
-      <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %>
-      -
-      <%= link "Discuss", to: post_path(@conn, :show, post), class: " " %>
+
+      <%= if user_can_edit(post, @conn.private.guardian_default_resource) do %>
+      - <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %>
+
+      <% end %>
+      - <%= link "Discuss", to: post_path(@conn, :show, post), class: " " %>
     </div>
 
     <div class="col-xs-12 col-md-12 small row">

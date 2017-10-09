@@ -42,8 +42,8 @@ defmodule Danton.Club do
 
   def ids_for_user(user) do
     Club.for_user(user)
-      |> select_id()
-      |> Repo.all()
+    |> select_id()
+    |> Repo.all()
   end
 
   # ===========================

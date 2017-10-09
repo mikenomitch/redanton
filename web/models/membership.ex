@@ -42,17 +42,32 @@ defmodule Danton.Membership do
   # QUERIES
   # ===========================
 
-  def for_user(user) do
-    user |> Ecto.assoc(:memberships)
+  def of_type(query \\ Membership, type) do
+    from(m in query, where: m.type == ^type)
   end
 
-  def for_club(club) do
+  def for_club(%Danton.Club{} = club) do
     club |> Ecto.assoc(:memberships)
+  end
+
+  def for_club(query \\ Membership, club_id) when is_integer(club_id) do
+    from(m in query, where: m.club_id == ^club_id)
+  end
+
+  def for_user(user) do
+    user |> Ecto.assoc(:memberships)
   end
 
   # ===========================
   # OTHER
   # ===========================
+
+  def user_is_admin(club, user) do
+    for_user(user)
+    |> for_club(club.id)
+    |> of_type("admin")
+    |> Repo.one()
+  end
 
   def notify_new_club_invite(membership) do
     club = Repo.get(Club, membership.club_id)

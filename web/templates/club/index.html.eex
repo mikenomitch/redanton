@@ -8,7 +8,9 @@
         <strong>
           <%= link  club.name, to: club_path(@conn, :show, club), class: "" %>
         </strong>
-        - <%= link "Edit", to: club_path(@conn, :edit, club), class: "" %>
+        <%= if user_is_admin(club, @conn.private.guardian_default_resource) do %>
+          - <%= link "Edit", to: club_path(@conn, :edit, club), class: "" %>
+        <% end %>
       </div>
       <div class="col-xs-12 col-md-12 small">
         <%= club.description %>

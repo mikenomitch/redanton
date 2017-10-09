@@ -5,6 +5,10 @@ defmodule Danton.PostView do
   #   render(Danton.PostView, "stream.html", posts: posts)
   # end
 
+  def user_can_edit(post, current_user) do
+    post.user_id == current_user.id
+  end
+
   # helpers for stream
   def parse_link(post) do
     if (post.url && String.length(post.url) > 0) do
