@@ -15,7 +15,7 @@ defmodule Danton.ChannelController do
   end
 
   def index(conn, _params, current_user, _claims) do
-    channels = channels = Channel.for_user(current_user)
+    channels = Channel.for_user(current_user)
       |> Repo.all
       |> Repo.preload(:club)
     render(conn, "index.html", channels: channels, club_id: nil)
@@ -28,7 +28,6 @@ defmodule Danton.ChannelController do
 
   def new(conn, _params, current_user, _claims) do
     changeset = Channel.changeset(%Channel{})
-    channels = Channel.for_user(current_user) |> Repo.all
     clubs = Club.for_user(current_user) |> Repo.all
     render(conn, "new.html", changeset: changeset, club_id: :none, clubs: clubs)
   end
@@ -94,7 +93,6 @@ defmodule Danton.ChannelController do
 
   def delete(conn, %{"id" => id}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
-    club_id = channel.club_id
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).

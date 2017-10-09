@@ -1,21 +1,14 @@
 # Todos
 
 ## Web UI
-- hide editing and deleting if you are
-  not the ownder of a post/chan/club
-
-- style the login page for mobile first
-- style the sign up page for mobile first
-
-- add a link helper so url's can take
-  multiple formats
 - make "flash" notifications look nicer
   and be clearable (maybe this has been
   done in elixir before)
+- header on mobile
+- stream items on mobile
 
 ## Quick Wins
-- front page does not clear itself
-  from time to time
+- fix front page clearing itself
 - navigation headers reload properly
 - add debounce to navigation
   - new post
@@ -24,7 +17,6 @@
   - main links
   - new member
   - new club
-- alerts on post failure look nicer
 
 ## Push Notifications
 - https://docs.expo.io/versions/latest/guides/push-notifications.html
@@ -34,7 +26,9 @@
 - Change to a real push notification
 
 ## Backend
-  - add proper authorization to all create, update, delete calls
+  - add proper authorization
+    - api - all create, update, delete calls
+    - web - posts, channels, clubs, users - all actions & admin
 
 ## Frontend
   - call tracking
