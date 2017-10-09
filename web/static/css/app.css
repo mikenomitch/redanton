@@ -86,7 +86,7 @@
 
 .message-list {
   max-height: 35rem;
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .message-current-user {
