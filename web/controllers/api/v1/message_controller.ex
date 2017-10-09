@@ -15,10 +15,6 @@ defmodule Danton.Api.V1.MessageController do
   end
 
   def create(conn, %{"message" => message_params, "post_id" => post_id}, current_user, _claims) do
-    # changeset = Message.changeset(
-    #   %Message{user_id: current_user.id, room_id: room_id},
-    #   message_params
-    # )
     room = Room.for_post(post_id) |> Repo.one
 
     message = Message.create_message_for_room(

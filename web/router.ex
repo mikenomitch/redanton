@@ -71,7 +71,6 @@ defmodule Danton.Router do
     end
 
     resources "/posts", PostController do
-      resources "/messages", MessageController, only: [:index, :new, :create]
       get "/chat", PostController, :chat
     end
 
