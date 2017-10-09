@@ -1,7 +1,6 @@
 # Todos
 
 ## Today
-- Emails sent on post, but not 1st message
 - Auth start
   - admin
   - web show pages

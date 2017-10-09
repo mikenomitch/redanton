@@ -27,6 +27,7 @@ defmodule Danton.Router do
   pipeline :admin_browser_auth do
     plug Guardian.Plug.VerifySession, key: :admin
     plug Guardian.Plug.LoadResource, key: :admin
+    plug Danton.AdminAuthorization
   end
 
   # We need this pipeline to load the token when we're impersonating.
@@ -42,7 +43,7 @@ defmodule Danton.Router do
   use ExAdmin.Router
   # your app's routes
   scope "/admin", ExAdmin do
-    pipe_through :browser
+    pipe_through [:browser, :browser_auth, :admin_browser_auth]
     admin_routes()
   end
 
