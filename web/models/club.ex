@@ -40,6 +40,12 @@ defmodule Danton.Club do
   # GETTERS
   # ===========================
 
+  def user_club_by_id(user, club_id) do
+    user
+    |> for_user()
+    |> Repo.get(club_id)
+  end
+
   def ids_for_user(user) do
     Club.for_user(user)
     |> select_id()

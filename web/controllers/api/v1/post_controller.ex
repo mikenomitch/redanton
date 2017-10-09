@@ -1,6 +1,10 @@
 defmodule Danton.Api.V1.PostController do
   use Danton.Web, :controller
   use Danton.CheckIn, :controller
+  use Danton.ResourceAuthorization, :controller
+
+  plug :authorize_api_resource, [:post, :view] when action in [:show, :index]
+  plug :authorize_api_resource, [:post, :edit] when action in [:create, :update, :delete]
 
   plug :check_in, :front_page when action in [:front_page]
   plug :check_in, :channel when action in [:index]
