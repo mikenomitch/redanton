@@ -85,7 +85,7 @@ defmodule Danton.Post do
         Repo.insert(room_cs)
       end)
       |> Multi.run(:message, fn %{room: room} ->
-        if (msg_params) do
+        if (msg_params && msg_params.body) do
           msg_cs = Ecto.build_assoc(room, :messages, msg_params)
           Repo.insert(msg_cs)
         else

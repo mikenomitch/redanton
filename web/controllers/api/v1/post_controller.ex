@@ -20,9 +20,11 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
-  def create(conn, %{"channel_id" => channel_id, "post" => post_params, "message" => msg_params}, current_user, _claims) do
+  def create(conn, %{"channel_id" => channel_id, "post" => post, "message" => message}, current_user, _claims) do
+    msg_params = %{user_id: current_user.id, body: message["body"]}
     channel = Repo.get(Channel, channel_id)
-    case Post.create_for_channel_and_user(channel, current_user, post_params, msg_params) do
+
+    case Post.create_for_channel_and_user(channel, current_user, post, msg_params) do
       {:ok, %{post: post}} ->
         conn
         |> put_status(:created)
