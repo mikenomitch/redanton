@@ -8,6 +8,8 @@
 - private
 - knowledge
 - stream of info
+- cool historical figure
+- good sounding gibberish
 
 ## Ideas
 

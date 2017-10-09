@@ -32,6 +32,10 @@ defmodule Danton.PostView do
     end
   end
 
+  def posted_text(post) do
+    post.user && post.user.name <> " posted to "
+  end
+
   def latest_activity_text(post) do
     time = Post.latest_activity_time(post)
     activity_type = Post.latest_activity_type(post)

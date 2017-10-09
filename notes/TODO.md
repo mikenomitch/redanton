@@ -1,5 +1,14 @@
 # Todos
 
+## Today
+- UI tweaks on web
+- Email throttling
+- Emails sent on post, but not 1st message
+- Check ins exist on the web side
+- Auth start
+  - admin
+  - web show pages
+
 ## Web UI
 - make "flash" notifications look nicer
   and be clearable (maybe this has been

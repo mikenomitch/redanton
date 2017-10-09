@@ -12,6 +12,16 @@
 
 /* ADDED CLASSES */
 
+.stream-item-title {
+  font-weight: 800;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.stream-item-links {
+  display: inline-block;
+}
+
 .list-entry {
   border-left: solid 1px #ddd;
   margin-bottom: 2rem;
