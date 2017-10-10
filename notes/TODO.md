@@ -1,7 +1,6 @@
 # Todos
 
 ## Today
-- add the expo url to the emails
 - mobile paper cuts
   - debouncing nav
   - header reloading
