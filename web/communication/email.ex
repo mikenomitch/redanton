@@ -1,5 +1,6 @@
 defmodule Danton.Email do
   use Bamboo.Phoenix, view: Danton.EmailView
+  @app_path "exp://exp.host/@mikenomitch/danton"
 
   def new_chat_message(user, params) do
     base_email()
@@ -10,7 +11,8 @@ defmodule Danton.Email do
       "new_chat_message.html",
       sender_name: params.sender_name,
       post_title: params.post_title,
-      post_path: params.post_path
+      post_path: params.post_path,
+      app_path: @app_path
     )
   end
 
@@ -22,7 +24,8 @@ defmodule Danton.Email do
     |> render(
       "new_club_invite.html",
       club_name: params.club_name,
-      site_url: params.site_url
+      site_url: params.site_url,
+      app_path: @app_path
     )
   end
 
@@ -35,7 +38,8 @@ defmodule Danton.Email do
       "new_post.html",
       poster_name: params.poster_name,
       post_title: params.post_title,
-      post_path: params.post_path
+      post_path: params.post_path,
+      app_path: @app_path
     )
   end
 
