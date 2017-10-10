@@ -42,6 +42,12 @@ defmodule Danton.Post do
     for_channel_ids([channel_id]) |> with_messages()
   end
 
+  def user_posts(user) do
+    Club.ids_for_user(user)
+    |> Channel.ids_for_club_ids()
+    |> Post.for_channel_ids()
+  end
+
   def for_front_page(user) do
     Club.ids_for_user(user)
     |> Channel.ids_for_club_ids()

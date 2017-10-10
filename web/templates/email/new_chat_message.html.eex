@@ -2,5 +2,5 @@
   <%= @sender_name %> has commented on post '<%= @post_title %>' on MIKES_UNNAMED_APP_SLASH_SITE.
 </p>
 <p>
-  <%= link "Go to chat", to: @post_path %>
+  Go to chat <%= link "on the web", to: @post_path %> or <%= link "open the app", to: @app_path %>
 </p>

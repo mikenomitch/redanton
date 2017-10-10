@@ -3,7 +3,7 @@ defmodule Danton.PostController do
   use Danton.CheckIn, :controller
   use Danton.ResourceAuthorization, :controller
 
-  plug :authorize_web_resource, [:post, :view] when action in [:show, :index]
+  plug :authorize_web_resource, [:post, :view] when action in [:show]
   plug :authorize_web_resource, [:post, :edit] when action in [:new, :create, :edit, :update, :delete]
 
   plug :check_in, :front_page when action in [:front_page]

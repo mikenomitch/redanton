@@ -36,6 +36,10 @@ defmodule Danton.Club do
     from c in query, select: c.id
   end
 
+  def user_club_ids(user) do
+    for_user(user) |> select_id
+  end
+
   # ===========================
   # GETTERS
   # ===========================
@@ -47,9 +51,12 @@ defmodule Danton.Club do
   end
 
   def ids_for_user(user) do
-    Club.for_user(user)
-    |> select_id()
+    user_club_ids(user)
     |> Repo.all()
+  end
+
+  def get_user_club(user, club_id) do
+    for_user(user) |> Repo.get(club_id)
   end
 
   # ===========================

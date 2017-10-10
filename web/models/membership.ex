@@ -50,7 +50,7 @@ defmodule Danton.Membership do
     club |> Ecto.assoc(:memberships)
   end
 
-  def for_club(query \\ Membership, club_id) when is_integer(club_id) do
+  def for_club(query \\ Membership, club_id) do
     from(m in query, where: m.club_id == ^club_id)
   end
 
@@ -62,9 +62,9 @@ defmodule Danton.Membership do
   # OTHER
   # ===========================
 
-  def user_is_admin(club, user) do
+  def user_is_admin(user, club_id) do
     for_user(user)
-    |> for_club(club.id)
+    |> for_club(club_id)
     |> of_type("admin")
     |> Repo.one()
   end
