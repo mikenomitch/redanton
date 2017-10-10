@@ -1,8 +1,8 @@
-defmodule Danton.ExponentNotification do
+defmodule Danton.NotificationPusher do
   @push_url "https://exp.host/--/api/v2/push/send"
 
   def publish(messages) do
-    params = jsonify messages
+    params = Poison.encode!(messages)
     headers = [{"Content-Type", "application/json"}, {"Accept", "application/json"}, {"Accept-Encofing", "gzip, deflate"}]
 
     case HTTPoison.post(@push_url, params, headers) do
@@ -17,13 +17,13 @@ defmodule Danton.ExponentNotification do
     end
   end
 
+  def publish_message(message) do
+    publish [message]
+  end
+
   def is_push_token?(token) do
     String.starts_with?(token, "ExponentPushToken")
   end
-
-  defp jsonify(v), do: Poison.encode!(v)
-
-  # TODO: REMOVE THIS SOON
 
   def test() do
     [

@@ -1,7 +1,9 @@
 alias Danton.Email
+alias Danton.Push
 alias Danton.Mailer
 alias Danton.Repo
 alias Danton.User
+alias Danton.UserToken
 
 # TODO: think about how to split this up sanely
 # this is definitely not the right set up
@@ -26,6 +28,12 @@ defmodule Danton.Notification do
   # Presumably this picks the message medium
   # but is hardcoding to email right now
   def notify(user, type, params) do
-    apply(Email, type, [user, params]) |> Mailer.deliver_later
+    push_token = UserToken.first_for_user(user.id)
+
+    if push_token do
+      apply(Push, type, [push_token.value, params])
+    else
+      apply(Email, type, [user, params]) |> Mailer.deliver_later
+    end
   end
 end

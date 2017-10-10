@@ -6,7 +6,7 @@ defmodule Danton.ChannelController do
   plug :check_in, :channel when action in [:show]
 
   plug :authorize_web_resource, [:channel, :view] when action in [:show]
-  plug :authorize_web_resource, [:channel, :edit] when action in [:new, :create, :edit, :update, :delete]
+  plug :authorize_web_resource, [:channel, :edit] when action in [:edit, :update, :delete]
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 

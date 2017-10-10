@@ -4,7 +4,7 @@ defmodule Danton.PostController do
   use Danton.ResourceAuthorization, :controller
 
   plug :authorize_web_resource, [:post, :view] when action in [:show]
-  plug :authorize_web_resource, [:post, :edit] when action in [:new, :create, :edit, :update, :delete]
+  plug :authorize_web_resource, [:post, :edit] when action in [:edit, :update, :delete]
 
   plug :check_in, :front_page when action in [:front_page]
   plug :check_in, :post when action in [:show]

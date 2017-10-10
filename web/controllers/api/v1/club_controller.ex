@@ -3,7 +3,7 @@ defmodule Danton.Api.V1.ClubController do
   use Danton.ResourceAuthorization, :controller
 
   plug :authorize_api_resource, [:club, :view] when action in [:show, :leave]
-  plug :authorize_api_resource, [:club, :edit] when action in [:create, :update]
+  plug :authorize_api_resource, [:club, :edit] when action in [:update]
 
   # ===========================
   # ACTIONS
