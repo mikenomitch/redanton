@@ -3,6 +3,12 @@
 ## Today
 - mobile paper cuts
   - debouncing nav
+    - new post
+    - new channel
+    - to comments
+    - main links
+    - new member
+    - new club
   - header reloading
   - blur on inputs
 - auth clean up
@@ -13,29 +19,18 @@
 - text steven, kevin and zach
   - warn about email notifications
 
-## Web UI
-- make "flash" notifications look nicer
-  and be clearable (maybe this has been
-  done in elixir before)
-- real responsive header on mobile
-
-## Quick Wins
-- fix front page clearing itself
-- navigation headers reload properly
-- add debounce to navigation
-  - new post
-  - new channel
-  - to comments
-  - main links
-  - new member
-  - new club
-
 ## Push Notifications
 - https://docs.expo.io/versions/latest/guides/push-notifications.html
 - Make presence on chat create a new check in
   every N minutes
 - Make the check in creation async
 - Change to a real push notification
+
+## Web UI
+- make "flash" notifications look nicer
+  and be clearable (maybe this has been
+  done in elixir before)
+- real responsive header on mobile
 
 ## Mobile Frontend
   - call tracking
