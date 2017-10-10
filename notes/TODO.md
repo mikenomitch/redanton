@@ -20,11 +20,22 @@
   - warn about email notifications
 
 ## Push Notifications
-- https://docs.expo.io/versions/latest/guides/push-notifications.html
+- Create token endpoint makes one
+  for a user if it does not already exist
+- Create token endpoint responds happily
+  if one already exists
+- When action is taken, it checks for a
+  token and if one exists it pushes rather
+  than emails
+- Write short push notifications for both
+  types
+- Frontend cleanup
+- Push Notification Service Cleanup
+
+## Check ins
 - Make presence on chat create a new check in
   every N minutes
 - Make the check in creation async
-- Change to a real push notification
 
 ## Web UI
 - make "flash" notifications look nicer
