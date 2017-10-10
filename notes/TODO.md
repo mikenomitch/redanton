@@ -1,16 +1,22 @@
 # Todos
 
 ## Today
-- Auth start
-  - admin
+- auth start
   - web show pages
+- mobile paper cuts
+  - debouncing nav
+  - header reloading
+  - blur on inputs
+- push to heroku
+- add the expo url to the emails
+- text steven, kevin and zach
+  - warn about email notifications
 
 ## Web UI
 - make "flash" notifications look nicer
   and be clearable (maybe this has been
   done in elixir before)
-- header on mobile
-- stream items on mobile
+- real responsive header on mobile
 
 ## Quick Wins
 - fix front page clearing itself
@@ -30,12 +36,7 @@
 - Make the check in creation async
 - Change to a real push notification
 
-## Backend
-  - add proper authorization
-    - api - all create, update, delete calls
-    - web - posts, channels, clubs, users - all actions & admin
-
-## Frontend
+## Mobile Frontend
   - call tracking
     - add to withFetching middleware
     - add calls reducer
@@ -51,7 +52,12 @@
     follow a solid pattern here)
   - auth logic
     - If jwt will expire soon, reauth it before the next call
+    - unauthorized logic handling works nicely
   - clean up socket logic
+
+## Web Frontend
+  - css cleanup & DRYness
+  - js and css separation
 
 ## Ops
 - set secrets via kubernetes (show a test secret in the ui)
