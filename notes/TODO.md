@@ -3,6 +3,7 @@
 ## Today
 - auth start
   - web show pages
+  - confirm check ins happenining post auth
 - mobile paper cuts
   - debouncing nav
   - header reloading
