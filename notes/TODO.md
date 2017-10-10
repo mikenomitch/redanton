@@ -1,15 +1,16 @@
 # Todos
 
 ## Today
-- auth start
-  - web show pages
-  - confirm check ins happenining post auth
+- add the expo url to the emails
 - mobile paper cuts
   - debouncing nav
   - header reloading
   - blur on inputs
+- auth clean up
+  - admin via main auth
+  - split files
+  - remove macro
 - push to heroku
-- add the expo url to the emails
 - text steven, kevin and zach
   - warn about email notifications
 
