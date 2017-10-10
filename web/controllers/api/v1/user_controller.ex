@@ -32,4 +32,12 @@ defmodule Danton.Api.V1.UserController do
         |> render(Danton.ChangesetView, "error.json", changeset: changeset)
     end
   end
+
+  def create_token(conn, %{"token" => token}, _current_user, _claims) do
+    IO.puts "=================="
+    IO.puts "THIS IS THE TOKEN"
+    IO.puts inspect(token)
+    IO.puts "THAT WAS THE TOKEN"
+    IO.puts "=================="
+  end
 end

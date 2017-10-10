@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux'
 
 import { loadInitialAuth } from '../data/auth'
+import { registerPushNotifications } from '../data/users'
 
 import LoginOrSignUp from './user/LoginOrSignUp'
 import MainNav from './navigation/MainNav'
@@ -19,6 +20,7 @@ import MainNav from './navigation/MainNav'
 class Main extends Component {
   componentDidMount(){
     this.props.loadInitialAuth()
+    this.props.registerPushNotifications()
   }
 
   renderLoading () {
@@ -64,6 +66,7 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {
-    loadInitialAuth
+    loadInitialAuth,
+    registerPushNotifications
   }
 )(Main)

@@ -135,6 +135,7 @@ defmodule Danton.Router do
       end
 
       get "/users", Api.V1.UserController, :index
+      post "/users/create_token", Api.V1.UserController, :create_token
       patch "/users/self", Api.V1.UserController, :update_self
       resources "/messages", Api.V1.MessageController
     end
