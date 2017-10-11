@@ -1,9 +1,6 @@
 # Todos
 
 ## Today
-- fix post edit
-- audit of all functionality
-- push to heroku
 - update friends
 
 - mobile paper cuts
