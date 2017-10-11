@@ -8,8 +8,7 @@ alias Danton.UserToken
 # TODO: think about how to split this up sanely
 # this is definitely not the right set up
 
-# the message construction should exist on its own
-# the delivery should exist on its own
+# each user should get their own process
 
 defmodule Danton.Notification do
   def notify_users(user_ids, type, params) do
@@ -25,8 +24,6 @@ defmodule Danton.Notification do
     notify_users([user_id], type, params)
   end
 
-  # Presumably this picks the message medium
-  # but is hardcoding to email right now
   def notify(user, type, params) do
     push_token = UserToken.first_for_user(user.id)
 

@@ -1,9 +1,8 @@
 defmodule Danton.ClubController do
   use Danton.Web, :controller
-  use Danton.ResourceAuthorization, :controller
 
-  plug :authorize_web_resource, [:club, :view] when action in [:show, :leave]
-  plug :authorize_web_resource, [:club, :edit] when action in [:edit, :update, :delete]
+  plug Danton.WebAuthorization, [:club, :view] when action in [:show, :leave]
+  plug Danton.WebAuthorization, [:club, :edit] when action in [:edit, :update, :delete]
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 

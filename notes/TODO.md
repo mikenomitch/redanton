@@ -1,6 +1,11 @@
 # Todos
 
 ## Today
+- fix post edit
+- audit of all functionality
+- push to heroku
+- update friends
+
 - mobile paper cuts
   - debouncing nav
     - new post
@@ -11,16 +16,8 @@
     - new club
   - header reloading
   - blur on inputs
-- auth clean up
-  - admin via main auth
-  - split files
-  - remove macro
-- push to heroku
-- text steven, kevin and zach
-  - warn about email notifications
 
 ## Push Notifications
-- Frontend cleanup
 - Push Notification Service Cleanup
 
 ## Check ins

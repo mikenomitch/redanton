@@ -27,7 +27,7 @@ defmodule Danton.Router do
   pipeline :admin_browser_auth do
     plug Guardian.Plug.VerifySession, key: :admin
     plug Guardian.Plug.LoadResource, key: :admin
-    plug Danton.AdminAuthorization
+    plug Danton.WebAuthorization, [:admin, :admin]
   end
 
   # We need this pipeline to load the token when we're impersonating.

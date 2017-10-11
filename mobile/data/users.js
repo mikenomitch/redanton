@@ -112,12 +112,11 @@ export function registerPushNotifications() {
       let finalStatus = existingStatus
       // only ask if permissions have not already been determined, because
       // iOS won't necessarily prompt the user a second time.
-      if (existingStatus !== 'granted' || true) {
+      if (existingStatus !== 'granted') {
         // Android remote notification permissions are granted during the app
         // install, so this will only ask on iOS
 
         Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS).then(({status}) => {
-          alert(status)
           finalStatus = status
 
           // Stop here if the user did not grant permissions
@@ -135,9 +134,7 @@ export function registerPushNotifications() {
                 params: {
                   token: token
                 },
-                successActionCreator: () => {
-                  alert('sent check logs')
-                }
+                successActionCreator: () => {}
               }
             })
           })
