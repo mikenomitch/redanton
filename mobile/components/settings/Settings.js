@@ -21,7 +21,8 @@ import { authActions } from '../../data/auth'
 
 const styles = StyleSheet.create({
   root: {
-    padding: spacing.container
+    padding: spacing.container,
+    paddingTop: spacing.large
   },
   attributeHolder: {
     paddingTop: spacing.medium
