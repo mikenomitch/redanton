@@ -79,7 +79,7 @@ defmodule Danton.Message do
   end
 
   def notify_users(message) do
-    seconds_to_sleep = 20
+    seconds_to_sleep = 5
     :timer.sleep(seconds_to_sleep * 1000)
 
     users_for_room = Room.user_ids_for_room(message.room_id)
