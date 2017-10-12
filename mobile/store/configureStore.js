@@ -9,11 +9,11 @@ import {
 // ===============
 
 import thunk from 'redux-thunk'
-import { createLogger } from 'redux-logger'
+// import { createLogger } from 'redux-logger'
 import withAsyncStorage from './middleware/withAsyncStorage'
 import withFetching from './middleware/withFetching'
 
-const logger = createLogger({collapsed: true, diff: true})
+// const logger = createLogger({collapsed: true, diff: true})
 
 // ===============
 //    REDUCERS
@@ -49,8 +49,8 @@ const configureStore = () => {
     applyMiddleware(
       thunk,
       withAsyncStorage,
-      withFetching,
-      logger
+      withFetching
+      // logger
     )
   )
 }
