@@ -64,13 +64,12 @@ export const callSuccessfull = (call) => {
   return callStatus(call) === 'success'
 }
 
-export const everHadSuccess = (state, callKey) => {
-  const call = state.calls[callKey]
-  return call && (callSuccessfull(call) || callSuccessfull(call.previousCall))
+export const everHadSuccess = (call) => {
+  return call && (callSuccessfull(call) || everHadSuccess(call.previousCall))
 }
 
 export const callsDone = (state, callKeys) => {
   return callKeys.every((callKey) => (
-    everHadSuccess(state, callKey)
+    everHadSuccess(state.calls[callKey], callKey)
   ))
 }

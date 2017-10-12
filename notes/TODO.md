@@ -22,14 +22,6 @@
 - real responsive header on mobile
 
 ## Mobile Frontend
-  - call tracking
-    - add to withFetching middleware
-    - add calls reducer
-    - able to handle multiple calls of the same type
-      out of the gate
-    - auto-reload if have not refreshed in a while
-      (app closed an reopened much later)
-    - dont show pages until needs are loaded
   - make an optimistic update on post edit
     - make sure failure works well
     - make sure success works well

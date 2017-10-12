@@ -93,7 +93,7 @@ class Channel extends PureComponent {
             currentUserId={this.props.currentUserId}
             refresh={this.refresh}
             navigation={navigation}
-            content={posts}
+            content={this.sortedPosts}
             channels={channels}
             users={users}
           />

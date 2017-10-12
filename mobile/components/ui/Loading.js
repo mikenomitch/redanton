@@ -1,6 +1,16 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { ActivityIndicator, View, StyleSheet } from 'react-native'
+
+import { spacing } from '../styleConstants'
+
+const styles = StyleSheet.create({
+  root: {
+    margin: spacing.container
+  }
+})
 
 export default () => (
-  <Text> Loading... </Text>
+  <View style={styles.root}>
+    <ActivityIndicator size="large" />
+  </View>
 )
