@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { PureComponent } from 'react'
 import {
   Button,
   Text,
@@ -60,7 +60,7 @@ var membershipItemStyles = StyleSheet.create({
   }
 })
 
-class MembershipItem extends Component {
+class MembershipItem extends PureComponent {
   get membership () {
     return this.props.membership
   }
@@ -161,8 +161,8 @@ var clubStyles = StyleSheet.create({
   }
 })
 
-class Club extends Component {
-  componentDidMount() {
+class Club extends PureComponent {
+  PureComponentDidMount() {
     this.props.getMemberships(this.club.id)
   }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   Image,
   StyleSheet,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
 // const defaultAvatar = 'http://www.archeosub.eu/images/BluLabTeamPeople/empty_user.png'
 
-class Settings extends Component {
+class Settings extends PureComponent {
   goToEdit = () => {
     this.props.navigation.navigate('EditUser', {userInfo: this.props.currentUser})
   }

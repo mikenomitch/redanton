@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { PureComponent } from 'react'
 import {
   Button,
   Text,
@@ -68,7 +68,7 @@ const ClubItem = (props) => {
 //    PRESENTER
 // ===============
 
-class ClubList extends Component {
+class ClubList extends PureComponent {
   componentDidMount() {
     this.props.getClubs()
   }

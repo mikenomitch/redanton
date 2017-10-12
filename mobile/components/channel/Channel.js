@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   Button,
   StyleSheet,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 //    PRESENTER
 // ===============
 
-class Channel extends Component {
+class Channel extends PureComponent {
   get channel() {
     return this.props.navigation.state.params.channel
   }

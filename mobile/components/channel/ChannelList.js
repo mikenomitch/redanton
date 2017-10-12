@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   View,
   Button,
@@ -67,7 +67,7 @@ const ChannelItem = (props) => {
 //    PRESENTER
 // ===============
 
-class ChannelList extends Component {
+class ChannelList extends PureComponent {
   static navigationOptions = {
     title: 'Channels'
   }

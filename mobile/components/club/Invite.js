@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   StyleSheet,
   Text,
@@ -43,7 +43,7 @@ const validations = {
 // ===============
 
 const defaultState = {email: "" }
-class Invite extends Component {
+class Invite extends PureComponent {
   constructor(props){
     super(props)
     this.state = defaultState
