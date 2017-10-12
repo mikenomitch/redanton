@@ -103,7 +103,7 @@ const MainNav = StackNavigator({
   Channel: {
     screen: ChannelScreen,
     navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.channel.name || 'Channel',
+      title: (<ChannelTitle navigation={navigation} />),
       headerRight: (<NewPostButton navigation={navigation} />)
     })
   },
