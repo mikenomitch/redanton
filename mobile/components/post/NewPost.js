@@ -73,11 +73,6 @@ class NewPost extends PureComponent {
     )
   }
 
-	componentDidMount () {
-    this.props.getChannels()
-    this.props.getClubs()
-  }
-
   // helpers
 
   get channels () {
