@@ -81,7 +81,13 @@ class NewPost extends PureComponent {
 
 	channelData() {
 		return this.channels.map(
-      (chan) => ({ key: chan.id, label: chan.name })
+      (chan) => {
+        const club = this.props.clubs[chan.club_id]
+        const label = (!club || Object.keys(this.props.clubs).length === 1)
+          ? chan.name
+          : `${chan.name} (${club.name})`
+        return { key: chan.id, label }
+      }
     )
   }
 
@@ -157,7 +163,8 @@ class NewPost extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    channels: state.channels
+    channels: state.channels,
+    clubs: state.clubs
   }
 }
 
