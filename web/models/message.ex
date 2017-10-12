@@ -42,6 +42,10 @@ defmodule Danton.Message do
     from q in query, order_by: [desc: :inserted_at]
   end
 
+  def ordered_by_earliest(query \\ Post) do
+    from q in query, order_by: [asc: :inserted_at]
+  end
+
   def get_first(query \\ Post) do
     query |> limit(1)
   end

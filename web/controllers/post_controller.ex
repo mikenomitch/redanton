@@ -66,6 +66,7 @@ defmodule Danton.PostController do
 
     # TODO: get the actual messages for the room
     messages = Message.for_post(post.id)
+      |> Message.ordered_by_earliest()
       |> Repo.all()
       |> Repo.preload(:user)
 
