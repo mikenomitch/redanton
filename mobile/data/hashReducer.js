@@ -11,6 +11,7 @@ function __updateRecord (state, record) {
   const listOfOne = [record]
   return __mergeRecords(state, listOfOne)
 }
+
 function __removeRecord (state, id) {
   return omit(id)(state)
 }

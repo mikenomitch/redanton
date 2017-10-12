@@ -5,6 +5,7 @@ import {
   post
 } from '../../lib/fetcher'
 
+import { callActions } from '../../data/calls'
 import { authActions } from '../../data/auth'
 
 function __fetchPromise(callOptions) {
@@ -37,6 +38,11 @@ const withFetching = store => next => action => {
 
   const onFetchSuccess = (data) => {
     const successAction = callOptions.successActionCreator && callOptions.successActionCreator(data)
+
+    if (callOptions.callKey) {
+      store.dispatch(callActions.callSuccess(callOptions.callKey))
+    }
+
     return successAction && store.dispatch(successAction)
   }
 
@@ -46,8 +52,16 @@ const withFetching = store => next => action => {
       store.dispatch(authActions.signOut())
     }
 
+    if (callOptions.callKey) {
+      store.dispatch(callActions.callError(callOptions.callKey))
+    }
+
     const errorAction = callOptions.errorActionCreator && callOptions.errorActionCreator(error)
     errorAction && store.dispatch(errorAction)
+  }
+
+  if (callOptions.callKey) {
+    store.dispatch(callActions.callStart(callOptions.callKey))
   }
 
   __fetchPromise(callOptions).then(onFetchSuccess, onFetchError)

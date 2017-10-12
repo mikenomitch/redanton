@@ -4,14 +4,7 @@
 - update friends
 
 - mobile paper cuts
-  - debouncing nav
-    - new post
-    - new channel
-    - to comments
-    - main links
-    - new member
-    - new club
-  - header reloading
+  - quick loading and/or nav debounce?
   - blur on inputs
 
 ## Push Notifications

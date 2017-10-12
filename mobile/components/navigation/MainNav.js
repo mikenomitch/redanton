@@ -21,6 +21,8 @@ import InviteScreen from '../club/Invite'
 
 import ChatScreen from '../chat/ChatScreen'
 
+import ConnectedHeader from '../ui/ConnectedHeader'
+
 import withOSPermissions from '../helpers/withOSPermissions'
 
 import NewChannelButton from '../channel/NewChannelButton'
@@ -71,7 +73,7 @@ const TabNav = TabNavigator(
   {
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: false
   }
 )
 
@@ -87,7 +89,7 @@ const MainNav = StackNavigator({
     screen: ChatScreen,
     path: '/posts/:id/chat',
     navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.post.title
+      title: (<ConnectedHeader resourceId={navigation.state.params.post.id} stateKey="posts" defaultTitle="post chat" />)
     })
   },
   NewPost: {
@@ -105,7 +107,7 @@ const MainNav = StackNavigator({
   Channel: {
     screen: ChannelScreen,
     navigationOptions: ({navigation}) => ({
-      title: (<ChannelTitle navigation={navigation} />),
+      title: (<ConnectedHeader resourceId={navigation.state.params.channel.id} stateKey="channels" defaultTitle="channel" />),
       headerRight: (<NewPostButton navigation={navigation} />)
     })
   },
@@ -124,7 +126,7 @@ const MainNav = StackNavigator({
   Club: {
     screen: ClubScreen,
     navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.club.name || 'Club'
+      title: (<ConnectedHeader resourceId={navigation.state.params.club.id} stateKey="clubs" defaultTitle="club" />)
     })
   },
   NewClub: {

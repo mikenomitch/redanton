@@ -46,6 +46,7 @@ export const getChannels = (onSuccess) => {
     call: {
       action: 'GET',
       endpoint: '/channels',
+      callKey: 'channels',
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(channelActions.onChannelsReturn(res))

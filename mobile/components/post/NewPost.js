@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   ScrollView,
   StyleSheet,
@@ -61,7 +61,7 @@ const validations = {
 //    PRESENTER
 // ===============
 
-class NewPost extends Component {
+class NewPost extends PureComponent {
 
   // lifecycle
 

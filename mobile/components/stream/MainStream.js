@@ -1,32 +1,40 @@
-import React, { Component} from 'react'
-import Stream from './Stream'
-
+import React, { PureComponent} from 'react'
+import { Text } from 'react-native'
 import { connect } from 'react-redux'
 
+import Stream from './Stream'
+
 import { getUsersForMain } from '../../data/users'
-import { getFrontPage } from '../../data/posts'
+import { getFrontPagePosts } from '../../data/posts'
 import { getClubs } from '../../data/clubs'
+import { getChannels } from '../../data/channels'
+import { callsDone } from '../../data/calls'
 
 // ===============
 //    PRESENTER
 // ===============
 
-class MainStream extends Component {
+class MainStream extends PureComponent {
   static navigationOptions = {
   	title: 'Your Stream'
   }
 
   componentDidMount() {
-    this.props.getFrontPage()
+    this.props.getFrontPagePosts()
+    this.props.getChannels()
     this.props.getClubs()
     this.props.getUsersForMain()
   }
 
   refresh = (cb) => {
-    this.props.getFrontPage(cb)
+    this.props.getFrontPagePosts(cb)
   }
 
   render() {
+    if (!this.props.loaded) {
+      return <Text> loading... </Text>
+    }
+
     return <Stream
       currentUserId={this.props.currentUserId}
       refresh={this.refresh}
@@ -54,6 +62,10 @@ const mapStateToProps = (state) => {
     posts: sortedPosts,
     channels: state.channels,
     users: state.users,
+    loaded: callsDone(
+      state,
+      ['frontPagePosts', 'mainUsers', 'clubs', 'channels']
+    ),
     currentUserId
   }
 }
@@ -62,7 +74,8 @@ export default connect(
   mapStateToProps,
   {
     getClubs,
-    getFrontPage,
+    getChannels,
+    getFrontPagePosts,
     getUsersForMain
   }
 )(MainStream)
