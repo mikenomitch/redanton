@@ -23,7 +23,6 @@ import withValidation from '../helpers/withValidation'
 // ===============
 
 const validations = {
-  description: validatePresence('you must have a description'),
   name: validatePresence('you must have a name')
 }
 

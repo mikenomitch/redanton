@@ -32,6 +32,7 @@ defmodule Danton.Web do
       alias Danton.Room
       alias Danton.RoomCheckIn
       alias Danton.User
+      alias Danton.UserToken
     end
   end
 

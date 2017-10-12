@@ -1,3 +1,4 @@
+import { Permissions, Notifications } from 'expo'
 import makeHashReducer, {mergeHashActions} from './hashReducer'
 import withResetState from './withResetState'
 import { authActions } from './auth'
@@ -102,5 +103,43 @@ export const signUp = () => {
       endpoint: '/users',
       successActionCreator: userActions.onUserSignUp
     }
+  }
+}
+
+export function registerPushNotifications() {
+  return (dispatch) => {
+    Permissions.getAsync(Permissions.REMOTE_NOTIFICATIONS).then(({existingStatus}) => {
+      let finalStatus = existingStatus
+      // only ask if permissions have not already been determined, because
+      // iOS won't necessarily prompt the user a second time.
+      if (existingStatus !== 'granted') {
+        // Android remote notification permissions are granted during the app
+        // install, so this will only ask on iOS
+
+        Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS).then(({status}) => {
+          finalStatus = status
+
+          // Stop here if the user did not grant permissions
+          if (finalStatus !== 'granted') {
+            dispatch({type: 'DO_NOTHING'})
+          }
+
+          // Get the token that uniquely identifies this device
+          Notifications.getExponentPushTokenAsync().then((token) => {
+            dispatch({
+              type: 'REGISTER_PUSH_NOTIFICATION',
+              call: {
+                action: 'POST',
+                endpoint: '/users/create_token',
+                params: {
+                  token: token
+                },
+                successActionCreator: () => {}
+              }
+            })
+          })
+        })
+      }
+    })
   }
 }

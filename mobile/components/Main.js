@@ -63,7 +63,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  {
-    loadInitialAuth
-  }
+  { loadInitialAuth }
 )(Main)

@@ -32,4 +32,17 @@ defmodule Danton.Api.V1.UserController do
         |> render(Danton.ChangesetView, "error.json", changeset: changeset)
     end
   end
+
+  def create_token(conn, %{"token" => token_value}, current_user, _claims) do
+    case UserToken.find_or_create_for_user(token_value, current_user) do
+      {:ok, _token} ->
+        conn
+        |> put_status(200)
+        |> json(%{error: "Success"})
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Danton.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
 end

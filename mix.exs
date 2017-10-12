@@ -45,7 +45,9 @@ defmodule Danton.Mixfile do
      {:comeonin, "~> 4.0-rc"},
      {:bcrypt_elixir, "~> 0.11"},
      {:bamboo, "~> 0.8"},
-     {:timex, "~> 3.1"}]
+     {:timex, "~> 3.1"},
+     {:poison, "~> 2.2.0"},
+     {:httpoison, "~> 0.13"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

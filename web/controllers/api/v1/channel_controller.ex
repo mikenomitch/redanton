@@ -1,9 +1,8 @@
 defmodule Danton.Api.V1.ChannelController do
   use Danton.Web, :controller
-  use Danton.ResourceAuthorization, :controller
 
-    plug :authorize_api_resource, [:channel, :view] when action in [:show]
-    plug :authorize_api_resource, [:channel, :edit] when action in [:create, :update, :delete]
+  plug Danton.ApiAuthorization, [:channel, :view] when action in [:show]
+  plug Danton.ApiAuthorization, [:channel, :edit] when action in [:update, :delete]
 
   # ===========================
   # ACTIONS

@@ -1,6 +1,8 @@
 # Todos
 
 ## Today
+- update friends
+
 - mobile paper cuts
   - debouncing nav
     - new post
@@ -11,20 +13,14 @@
     - new club
   - header reloading
   - blur on inputs
-- auth clean up
-  - admin via main auth
-  - split files
-  - remove macro
-- push to heroku
-- text steven, kevin and zach
-  - warn about email notifications
 
 ## Push Notifications
-- https://docs.expo.io/versions/latest/guides/push-notifications.html
+- Push Notification Service Cleanup
+
+## Check ins
 - Make presence on chat create a new check in
   every N minutes
 - Make the check in creation async
-- Change to a real push notification
 
 ## Web UI
 - make "flash" notifications look nicer

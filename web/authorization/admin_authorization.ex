@@ -1,18 +1,13 @@
 defmodule Danton.AdminAuthorization do
-  import Phoenix.Controller
-  import Plug.Conn
+  alias Danton.User
 
-  def init(opts), do: opts
-
-  def call(conn, _opts) do
+  def authorization_status(conn, user, permission_type) do
     current_user = Guardian.Plug.current_resource(conn)
-    if Danton.User.is_admin(current_user) do
-      conn
+
+    if User.is_admin(current_user) do
+      :visible
     else
-      conn
-      |> put_status(:not_found)
-      |> render(Danton.PageView, "not_found.html")
-      |> halt
+      :not_found
     end
   end
 end

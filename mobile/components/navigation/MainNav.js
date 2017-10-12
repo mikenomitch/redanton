@@ -21,6 +21,8 @@ import InviteScreen from '../club/Invite'
 
 import ChatScreen from '../chat/ChatScreen'
 
+import withOSPermissions from '../helpers/withOSPermissions'
+
 import NewChannelButton from '../channel/NewChannelButton'
 import NewPostButton from '../post/NewPostButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -151,4 +153,4 @@ const MainNav = StackNavigator({
   }
 })
 
-export default MainNav
+export default withOSPermissions(MainNav)
