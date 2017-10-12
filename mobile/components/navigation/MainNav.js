@@ -51,7 +51,7 @@ const TabNav = TabNavigator(
       screen: ChannelListScreen,
       path: '/channels',
       navigationOptions:  ({navigation}) => ({
-        title: 'My Channels',
+        title: 'Channels',
         tabBarLabel: 'Channels',
         headerRight: (<NewChannelButton navigation={navigation} />),
         tabBarIcon: ({ tintColor }) => (
@@ -89,7 +89,7 @@ const MainNav = StackNavigator({
     screen: ChatScreen,
     path: '/posts/:id/chat',
     navigationOptions: ({navigation}) => ({
-      title: (<ConnectedHeader resourceKey={navigation.state.params.post.id} stateKey="posts" defaultTitle="post chat" />)
+      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.post.id} stateKey="posts" defaultTitle="post chat" />)
     })
   },
   NewPost: {
@@ -107,7 +107,7 @@ const MainNav = StackNavigator({
   Channel: {
     screen: ChannelScreen,
     navigationOptions: ({navigation}) => ({
-      title: (<ConnectedHeader resourceKey={navigation.state.params.channel.id} stateKey="channels" defaultTitle="channel" />),
+      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.channel.id} stateKey="channels" defaultTitle="channel" />),
       headerRight: (<NewPostButton navigation={navigation} />)
     })
   },
@@ -126,7 +126,7 @@ const MainNav = StackNavigator({
   Club: {
     screen: ClubScreen,
     navigationOptions: ({navigation}) => ({
-      title: (<ConnectedHeader resourceKey={navigation.state.params.club.id} stateKey="clubs" defaultTitle="club" />)
+      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.club.id} stateKey="clubs" defaultTitle="club" />)
     })
   },
   NewClub: {

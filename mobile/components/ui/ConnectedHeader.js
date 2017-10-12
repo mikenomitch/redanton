@@ -1,9 +1,18 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
 
+import { font } from '../styleConstants'
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: font.large,
+    fontWeight: font.heavyWeight
+  }
+})
+
 const HeaderTitle = (props) => (
-  <Text> {props.name} </Text>
+  <Text style={styles.text}> {props.name} </Text>
 )
 
 const mapStateToProps = (state, props) => {
