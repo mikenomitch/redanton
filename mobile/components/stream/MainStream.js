@@ -3,6 +3,7 @@ import { Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import Stream from './Stream'
+import Loading from '../ui/Loading'
 
 import { getUsersForMain } from '../../data/users'
 import { getFrontPagePosts } from '../../data/posts'
@@ -26,20 +27,26 @@ class MainStream extends PureComponent {
     this.props.getUsersForMain()
   }
 
+  get sortedPosts() {
+    return Object.values(this.props.posts).sort((a, b) => (
+      new Date(b.last_activity_time) - new Date(a.last_activity_time)
+    ))
+  }
+
   refresh = (cb) => {
     this.props.getFrontPagePosts(cb)
   }
 
   render() {
-    if (!this.props.loaded) {
-      return <Text> loading... </Text>
+    if (!this.props.firstLoadComplete) {
+      return <Loading />
     }
 
     return <Stream
       currentUserId={this.props.currentUserId}
       refresh={this.refresh}
       navigation={this.props.navigation}
-      content={this.props.posts}
+      content={this.sortedPosts}
       channels={this.props.channels}
       users={this.props.users}
     />
@@ -51,22 +58,15 @@ class MainStream extends PureComponent {
 // ===============
 
 const mapStateToProps = (state) => {
-  const sortedPosts = Object.values(state.posts)
-    .sort((a, b) => (
-      new Date(b.last_activity_time) - new Date(a.last_activity_time)
-    ))
-
-  const currentUserId = state.auth.currentUser.id
-
   return {
-    posts: sortedPosts,
+    posts: state.posts,
     channels: state.channels,
     users: state.users,
-    loaded: callsDone(
+    firstLoadComplete: callsDone(
       state,
       ['frontPagePosts', 'mainUsers', 'clubs', 'channels']
     ),
-    currentUserId
+    currentUserId: state.auth.currentUser.id
   }
 }
 

@@ -9,10 +9,13 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
+import Loading from '../ui/Loading'
+
 import { border, colors, spacing } from '../styleConstants'
 
 import { getChannels } from '../../data/channels'
 import { getClubs } from '../../data/clubs'
+import { callsDone } from '../../data/calls'
 
 // ============
 //    STYLES
@@ -108,6 +111,11 @@ class ChannelList extends PureComponent {
 
   render() {
     const channelsList = Object.values(this.props.channels)
+
+    if (!this.props.firstLoadComplete) {
+      <Loading />
+    }
+
     return (
       <FlatList
         style={styles.list}
@@ -133,7 +141,11 @@ class ChannelList extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     channels: Object.values(state.channels),
-    clubs: state.clubs
+    clubs: state.clubs,
+    firstLoadComplete: callsDone(
+      state,
+      ['clubs', 'channels']
+    )
   }
 }
 

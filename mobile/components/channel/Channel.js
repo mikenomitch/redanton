@@ -45,6 +45,14 @@ class Channel extends PureComponent {
     return this.props.navigation.state.params.channel
   }
 
+  get sortedPosts() {
+    return Object.values(this.props.posts)
+      .filter((p) => p.channel_id == this.props.channelId)
+      .sort((a, b) => (
+        new Date(b.last_activity_time) - new Date(a.last_activity_time)
+      ))
+  }
+
   componentDidMount() {
     this.props.getPostsForChannel(this.channel.id)
     this.props.getUsersForMain()
@@ -107,18 +115,13 @@ class Channel extends PureComponent {
 
 const mapStateToProps = (state, props) => {
   const channelId = props.navigation.state.params.channel.id
-  const sortedPosts = Object.values(state.posts)
-    .filter((p) => p.channel_id == channelId)
-    .sort((a, b) => (
-      new Date(b.last_activity_time) - new Date(a.last_activity_time)
-    ))
-
   const currentUserId = state.auth.currentUser.id
 
   return {
-    posts: sortedPosts,
+    posts: state.posts,
     channels: state.channels,
     users: state.users,
+    channelId,
     currentUserId
   }
 }

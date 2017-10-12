@@ -73,6 +73,10 @@ class ClubList extends PureComponent {
     this.props.getClubs()
   }
 
+  get clubs () {
+    return Object.values(this.props.clubs)
+  }
+
   newClubPress = () => {
     this.props.navigation.navigate('NewClub')
   }
@@ -86,7 +90,7 @@ class ClubList extends PureComponent {
     return (
       <View style={styles.clubList}>
         <View style={styles.listHolder}>
-          {this.props.clubs.map(this.renderClubLink)}
+          {this.clubs.map(this.renderClubLink)}
         </View>
         <View style={styles.newClubButtonHolder}>
           <ActionButton onPress={this.newClubPress}>
@@ -104,7 +108,7 @@ class ClubList extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    clubs: Object.values(state.clubs)
+    clubs: state.clubs
   }
 }
 

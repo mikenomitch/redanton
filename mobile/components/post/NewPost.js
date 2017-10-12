@@ -71,7 +71,7 @@ class NewPost extends PureComponent {
       defaultState,
       {postInfo: {channel: this.givenChannel().id}}
     )
-	}
+  }
 
 	componentDidMount () {
     this.props.getChannels()
@@ -80,8 +80,12 @@ class NewPost extends PureComponent {
 
   // helpers
 
+  get channels () {
+    return Object.values(this.props.channels)
+  }
+
 	channelData() {
-		return this.props.channels.map(
+		return this.channels.map(
       (chan) => ({ key: chan.id, label: chan.name })
     )
   }
@@ -158,7 +162,7 @@ class NewPost extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    channels: Object.values(state.channels)
+    channels: state.channels
   }
 }
 

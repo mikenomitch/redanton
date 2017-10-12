@@ -71,7 +71,7 @@ class NewChannel extends PureComponent {
   }
 
   clubData() {
-		return this.props.clubs.map(
+		return Object.values(this.props.clubs).map(
       (club) => ({ key: club.id, label: club.name })
     )
 	}
@@ -149,8 +149,7 @@ class NewChannel extends PureComponent {
 // ===============
 
 const mapStateToProps = (state) => {
-  const clubs = Object.values(state.clubs)
-  return {clubs}
+  return {clubs: state.clubs}
 }
 
 export default compose(

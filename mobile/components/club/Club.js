@@ -171,7 +171,7 @@ class Club extends PureComponent {
   }
 
   userForMembership (membership) {
-    return this.props.users.filter((u) => u.id === membership.user_id)[0] || {email: 'unknown user'}
+    return Object.values(this.props.users).filter((u) => u.id === membership.user_id)[0] || {email: 'unknown user'}
   }
 
   leaveClubPress = () => {
@@ -264,7 +264,7 @@ class Club extends PureComponent {
 // ===============
 
 const mapStateToProps = (state, props) => {
-  const users = Object.values(state.users)
+  const users = state.users
   const clubId = props.navigation.state.params.club.id
   const memberships = Object.values(state.memberships).filter(
     (m) => m.club_id === clubId
