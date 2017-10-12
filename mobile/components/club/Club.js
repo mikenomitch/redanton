@@ -162,7 +162,7 @@ var clubStyles = StyleSheet.create({
 })
 
 class Club extends PureComponent {
-  PureComponentDidMount() {
+  componentDidMount() {
     this.props.getMemberships(this.club.id)
   }
 

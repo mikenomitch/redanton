@@ -89,7 +89,7 @@ const MainNav = StackNavigator({
     screen: ChatScreen,
     path: '/posts/:id/chat',
     navigationOptions: ({navigation}) => ({
-      title: (<ConnectedHeader resourceId={navigation.state.params.post.id} stateKey="posts" defaultTitle="post chat" />)
+      title: (<ConnectedHeader resourceKey={navigation.state.params.post.id} stateKey="posts" defaultTitle="post chat" />)
     })
   },
   NewPost: {
@@ -107,7 +107,7 @@ const MainNav = StackNavigator({
   Channel: {
     screen: ChannelScreen,
     navigationOptions: ({navigation}) => ({
-      title: (<ConnectedHeader resourceId={navigation.state.params.channel.id} stateKey="channels" defaultTitle="channel" />),
+      title: (<ConnectedHeader resourceKey={navigation.state.params.channel.id} stateKey="channels" defaultTitle="channel" />),
       headerRight: (<NewPostButton navigation={navigation} />)
     })
   },
@@ -126,7 +126,7 @@ const MainNav = StackNavigator({
   Club: {
     screen: ClubScreen,
     navigationOptions: ({navigation}) => ({
-      title: (<ConnectedHeader resourceId={navigation.state.params.club.id} stateKey="clubs" defaultTitle="club" />)
+      title: (<ConnectedHeader resourceKey={navigation.state.params.club.id} stateKey="clubs" defaultTitle="club" />)
     })
   },
   NewClub: {
