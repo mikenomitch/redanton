@@ -7,12 +7,13 @@ import { font } from '../styleConstants'
 const styles = StyleSheet.create({
   text: {
     fontSize: font.large,
-    fontWeight: font.heavyWeight
+    fontWeight: font.heavyWeight,
+    overflow: 'hidden'
   }
 })
 
 const HeaderTitle = (props) => (
-  <Text style={styles.text}> {props.name} </Text>
+  <Text numberOfLines={1} style={styles.text}> {props.name} </Text>
 )
 
 const mapStateToProps = (state, props) => {

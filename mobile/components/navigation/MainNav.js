@@ -41,6 +41,7 @@ const TabNav = TabNavigator(
       navigationOptions: ({navigation}) => ({
         title: 'My Stream',
         headerRight: (<NewPostButton navigation={navigation} />),
+        headerBackTitle: null,
         tabBarLabel: 'Stream',
         tabBarIcon: ({ tintColor }) => (
           <Icon name="th-list" size={20} color={tintColor} />
@@ -53,6 +54,7 @@ const TabNav = TabNavigator(
       navigationOptions:  ({navigation}) => ({
         title: 'Channels',
         tabBarLabel: 'Channels',
+        headerBackTitle: null,
         headerRight: (<NewChannelButton navigation={navigation} />),
         tabBarIcon: ({ tintColor }) => (
           <Icon name="filter" size={20} color={tintColor} />
@@ -64,6 +66,7 @@ const TabNav = TabNavigator(
       path: '/settings',
       navigationOptions: {
         title: 'Settings',
+        headerBackTitle: null,
         tabBarIcon: ({ tintColor }) => (
           <Icon name="gear" size={20} color={tintColor} />
         )
@@ -89,7 +92,8 @@ const MainNav = StackNavigator({
     screen: ChatScreen,
     path: '/posts/:id/chat',
     navigationOptions: ({navigation}) => ({
-      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.post.id} stateKey="posts" defaultTitle="post chat" />)
+      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.post.id} stateKey="posts" defaultTitle="post chat" />),
+      headerBackTitle: null
     })
   },
   NewPost: {
