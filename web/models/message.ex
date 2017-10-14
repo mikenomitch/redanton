@@ -106,7 +106,7 @@ defmodule Danton.Message do
       %{
         sender_name: sender.name || sender.email,
         post_title: post.title,
-        post_path: "https://stormy-reef-53700.herokuapp.com/posts/#{post.id}"
+        post_path: "https://danton.herokuapp.com/posts/#{post.id}"
       }
     )
   end
