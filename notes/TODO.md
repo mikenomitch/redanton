@@ -1,40 +1,29 @@
 # Todos
 
-## Today
-- update friends
-
-- mobile paper cuts
-  - quick loading and/or nav debounce?
-  - blur on inputs
-
-## Push Notifications
-- Push Notification Service Cleanup
+## Top Todos
+- Notifications
+  - Settings per user
+    - Batched at some time?
+      - plus conversations youre active in
+    - See Everything
+- Web UI can do club and user mgmt
+- Real responsive header on mobile
+- Web JS and CSS DRY and separated
+- Check ins maek mobile vs web
+- Chat polls for updates in addition to
+  the channel
+  - as part of this polling it checks you in
 
 ## Check ins
 - Make presence on chat create a new check in
   every N minutes
 - Make the check in creation async
 
-## Web UI
-- make "flash" notifications look nicer
-  and be clearable (maybe this has been
-  done in elixir before)
-- real responsive header on mobile
-
 ## Mobile Frontend
-  - make an optimistic update on post edit
-    - make sure failure works well
-    - make sure success works well
-  - async redux actions as promises (establish and
-    follow a solid pattern here)
-  - auth logic
+  - auth
     - If jwt will expire soon, reauth it before the next call
     - unauthorized logic handling works nicely
   - clean up socket logic
-
-## Web Frontend
-  - css cleanup & DRYness
-  - js and css separation
 
 ## Ops
 - set secrets via kubernetes (show a test secret in the ui)
