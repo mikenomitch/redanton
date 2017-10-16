@@ -1,6 +1,6 @@
 # Todos
 
-## Top Todos
+## Top
 - Notifications
   - Settings per user
     - Batched at some time?
