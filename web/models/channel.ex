@@ -70,9 +70,9 @@ defmodule Danton.Channel do
 		Repo.delete!(channel)
   end
 
-  @doc """
-  Makes a channel associated to a given club
-  """
+  # @doc """
+  # Makes a channel associated to a given club
+  # """
   # def make_post_for_user(chan, user, post_params) do
   #   cs = Ecto.build_assoc(chan, :posts, %{post_params | user_id: user.id})
   #   Repo.insert(cs)
