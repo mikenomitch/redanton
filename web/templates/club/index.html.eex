@@ -8,7 +8,7 @@
         <strong>
           <%= link  club.name, to: club_path(@conn, :show, club), class: "" %>
         </strong>
-        <%= if user_is_admin(@conn.private.guardian_default_resource, club.id) do %>
+        <%= if user_is_admin(@user, club.id) do %>
           - <%= link "Edit", to: club_path(@conn, :edit, club), class: "" %>
         <% end %>
       </div>
