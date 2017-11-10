@@ -1,32 +1,50 @@
 # Todos
 
 ## Today
-- update friends
+- paper cuts
+  - mobile
+    - debouncing nav
+      - new post
+      - new channel
+      - to comments
+      - main links
+      - new member
+      - new club
+    - header reloading
+    - blur on inputs
+    - reloading chat properly
+    - is no first message, the message
+      does not work
+    - show all club posts
+    - sorting within channel
+    - clubs list in bottom bar
+  - desktop
+    - show club name w channels
+    - sorting
+    - removable flash messages
+    - responsive header
+    - show all club posts
+  - backend
+    - async check in creation
 
-- mobile paper cuts
-  - debouncing nav
-    - new post
-    - new channel
-    - to comments
-    - main links
-    - new member
-    - new club
-  - header reloading
-  - blur on inputs
-
-## Push Notifications
-- Push Notification Service Cleanup
-
-## Check ins
-- Make presence on chat create a new check in
-  every N minutes
-- Make the check in creation async
-
-## Web UI
-- make "flash" notifications look nicer
-  and be clearable (maybe this has been
-  done in elixir before)
-- real responsive header on mobile
+- features
+  - pagination
+    - mobile
+    - desktop
+  - notification options
+    - all, default, mute
+      or just default and mute?
+  - chat check in every N minutes
+    - mobile
+    - desktop
+  - homepage
+    - something like this https://template56.carrd.co/
+      but spun up by me and w out paralax
+  - sign up and new user walk thru
+  - empty pages work
+  - design work!
+    - get erik's help (eihaai)
+  - one post => many channels
 
 ## Mobile Frontend
   - call tracking
@@ -46,10 +64,6 @@
     - If jwt will expire soon, reauth it before the next call
     - unauthorized logic handling works nicely
   - clean up socket logic
-
-## Web Frontend
-  - css cleanup & DRYness
-  - js and css separation
 
 ## Ops
 - set secrets via kubernetes (show a test secret in the ui)
