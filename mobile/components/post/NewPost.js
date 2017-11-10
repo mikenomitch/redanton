@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   ScrollView,
   StyleSheet,
@@ -61,7 +61,7 @@ const validations = {
 //    PRESENTER
 // ===============
 
-class NewPost extends Component {
+class NewPost extends PureComponent {
 
   // lifecycle
 
@@ -71,18 +71,23 @@ class NewPost extends Component {
       defaultState,
       {postInfo: {channel: this.givenChannel().id}}
     )
-	}
-
-	componentDidMount () {
-    this.props.getChannels()
-    this.props.getClubs()
   }
 
   // helpers
 
+  get channels () {
+    return Object.values(this.props.channels)
+  }
+
 	channelData() {
-		return this.props.channels.map(
-      (chan) => ({ key: chan.id, label: chan.name })
+		return this.channels.map(
+      (chan) => {
+        const club = this.props.clubs[chan.club_id]
+        const label = (!club || Object.keys(this.props.clubs).length === 1)
+          ? chan.name
+          : `${chan.name} (${club.name})`
+        return { key: chan.id, label }
+      }
     )
   }
 
@@ -158,7 +163,8 @@ class NewPost extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    channels: Object.values(state.channels)
+    channels: state.channels,
+    clubs: state.clubs
   }
 }
 

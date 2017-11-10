@@ -50,12 +50,13 @@ export const postActions = mergeHashActions(customPostActions, 'Post')
 // =================
 // =================
 
-export const getFrontPage = (onSuccess) => {
+export const getFrontPagePosts = (onSuccess) => {
   return {
     type: 'GET_FRONT_PAGE_CALL',
     call: {
       action: 'GET',
       endpoint: '/front',
+      callKey: 'frontPagePosts',
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(postActions.onPostsReturn(res))

@@ -25,6 +25,7 @@ export const font = {
   heavyWeight: '600',
   small: 12,
   medium: 14,
+  large: 16,
   extraLarge: 22
 }
 

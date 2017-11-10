@@ -1,6 +1,6 @@
 # Todos
 
-## Today
+## Top
 - paper cuts
   - mobile
     - debouncing nav
@@ -24,10 +24,12 @@
     - removable flash messages
     - responsive header
     - show all club posts
+    - Web JS and CSS DRY and separated
   - backend
     - async check in creation
 
 - features
+  - desktop club and user mgmt
   - pagination
     - mobile
     - desktop
@@ -37,6 +39,9 @@
   - chat check in every N minutes
     - mobile
     - desktop
+    - Chat polls for updates in addition to
+      the channel
+      - as part of this polling it checks you in
   - homepage
     - something like this https://template56.carrd.co/
       but spun up by me and w out paralax
@@ -47,20 +52,7 @@
   - one post => many channels
 
 ## Mobile Frontend
-  - call tracking
-    - add to withFetching middleware
-    - add calls reducer
-    - able to handle multiple calls of the same type
-      out of the gate
-    - auto-reload if have not refreshed in a while
-      (app closed an reopened much later)
-    - dont show pages until needs are loaded
-  - make an optimistic update on post edit
-    - make sure failure works well
-    - make sure success works well
-  - async redux actions as promises (establish and
-    follow a solid pattern here)
-  - auth logic
+  - auth
     - If jwt will expire soon, reauth it before the next call
     - unauthorized logic handling works nicely
   - clean up socket logic

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -25,7 +25,7 @@ const validations = {
 //    PRESENTER
 // ===============
 
-class EditClub extends Component {
+class EditClub extends PureComponent {
 	constructor(props){
 		super(props)
 

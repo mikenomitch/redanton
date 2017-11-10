@@ -61,6 +61,7 @@ export const getUsersForMain = () => {
     call: {
       action: 'GET',
       endpoint: '/users',
+      callKey: 'mainUsers',
       successActionCreator: userActions.onUsersReturn
     }
   }

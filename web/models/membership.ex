@@ -77,7 +77,7 @@ defmodule Danton.Membership do
       :new_club_invite,
       %{
         club_name: club.name,
-        site_url: "https://stormy-reef-53700.herokuapp.com"
+        site_url: "https://danton.herokuapp.com"
       }
     )
   end

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { PureComponent } from 'react'
 import {
   Button,
   Text,
@@ -60,7 +60,7 @@ var membershipItemStyles = StyleSheet.create({
   }
 })
 
-class MembershipItem extends Component {
+class MembershipItem extends PureComponent {
   get membership () {
     return this.props.membership
   }
@@ -161,7 +161,7 @@ var clubStyles = StyleSheet.create({
   }
 })
 
-class Club extends Component {
+class Club extends PureComponent {
   componentDidMount() {
     this.props.getMemberships(this.club.id)
   }
@@ -171,7 +171,7 @@ class Club extends Component {
   }
 
   userForMembership (membership) {
-    return this.props.users.filter((u) => u.id === membership.user_id)[0] || {email: 'unknown user'}
+    return Object.values(this.props.users).filter((u) => u.id === membership.user_id)[0] || {email: 'unknown user'}
   }
 
   leaveClubPress = () => {
@@ -264,7 +264,7 @@ class Club extends Component {
 // ===============
 
 const mapStateToProps = (state, props) => {
-  const users = Object.values(state.users)
+  const users = state.users
   const clubId = props.navigation.state.params.club.id
   const memberships = Object.values(state.memberships).filter(
     (m) => m.club_id === clubId

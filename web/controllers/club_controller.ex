@@ -15,7 +15,7 @@ defmodule Danton.ClubController do
       |> Ecto.assoc(:clubs)
       |> Repo.all
 
-    render(conn, "index.html", clubs: clubs)
+    render(conn, "index.html", clubs: clubs, user: current_user)
   end
 
   def new(conn, _params, _current_user, _claims) do

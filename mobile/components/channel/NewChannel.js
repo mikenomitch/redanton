@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
 	View,
   ScrollView,
@@ -64,14 +64,14 @@ const styles = StyleSheet.create({
 //    PRESENTER
 // ===============
 
-class NewChannel extends Component {
+class NewChannel extends PureComponent {
 	constructor(props){
 		super(props)
 		this.state = defaultState
   }
 
   clubData() {
-		return this.props.clubs.map(
+		return Object.values(this.props.clubs).map(
       (club) => ({ key: club.id, label: club.name })
     )
 	}
@@ -149,8 +149,7 @@ class NewChannel extends Component {
 // ===============
 
 const mapStateToProps = (state) => {
-  const clubs = Object.values(state.clubs)
-  return {clubs}
+  return {clubs: state.clubs}
 }
 
 export default compose(

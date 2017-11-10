@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { PureComponent } from 'react'
 import {
   Button,
   Text,
@@ -68,9 +68,13 @@ const ClubItem = (props) => {
 //    PRESENTER
 // ===============
 
-class ClubList extends Component {
+class ClubList extends PureComponent {
   componentDidMount() {
     this.props.getClubs()
+  }
+
+  get clubs () {
+    return Object.values(this.props.clubs)
   }
 
   newClubPress = () => {
@@ -86,7 +90,7 @@ class ClubList extends Component {
     return (
       <View style={styles.clubList}>
         <View style={styles.listHolder}>
-          {this.props.clubs.map(this.renderClubLink)}
+          {this.clubs.map(this.renderClubLink)}
         </View>
         <View style={styles.newClubButtonHolder}>
           <ActionButton onPress={this.newClubPress}>
@@ -104,7 +108,7 @@ class ClubList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    clubs: Object.values(state.clubs)
+    clubs: state.clubs
   }
 }
 

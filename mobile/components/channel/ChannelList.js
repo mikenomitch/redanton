@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   View,
   Button,
@@ -9,10 +9,13 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
+import Loading from '../ui/Loading'
+
 import { border, colors, spacing } from '../styleConstants'
 
 import { getChannels } from '../../data/channels'
 import { getClubs } from '../../data/clubs'
+import { callsDone } from '../../data/calls'
 
 // ============
 //    STYLES
@@ -67,7 +70,7 @@ const ChannelItem = (props) => {
 //    PRESENTER
 // ===============
 
-class ChannelList extends Component {
+class ChannelList extends PureComponent {
   static navigationOptions = {
     title: 'Channels'
   }
@@ -108,6 +111,11 @@ class ChannelList extends Component {
 
   render() {
     const channelsList = Object.values(this.props.channels)
+
+    if (!this.props.firstLoadComplete) {
+      <Loading />
+    }
+
     return (
       <FlatList
         style={styles.list}
@@ -133,7 +141,11 @@ class ChannelList extends Component {
 const mapStateToProps = (state) => {
   return {
     channels: Object.values(state.channels),
-    clubs: state.clubs
+    clubs: state.clubs,
+    firstLoadComplete: callsDone(
+      state,
+      ['clubs', 'channels']
+    )
   }
 }
 

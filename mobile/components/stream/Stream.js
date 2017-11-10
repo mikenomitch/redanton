@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   View,
   Button,
@@ -78,7 +78,7 @@ function __uriFromUrl (url) {
   : url
 }
 
-class StreamItem extends Component {
+class StreamItem extends PureComponent {
   get userIsOwner() {
     return this.props.post.user_id === this.props.currentUserId
   }
@@ -145,7 +145,7 @@ class StreamItem extends Component {
 //     MAIN
 // =============
 
-class Stream extends Component {
+class Stream extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {

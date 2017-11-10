@@ -42,6 +42,10 @@ defmodule Danton.Message do
     from q in query, order_by: [desc: :inserted_at]
   end
 
+  def ordered_by_earliest(query \\ Post) do
+    from q in query, order_by: [asc: :inserted_at]
+  end
+
   def get_first(query \\ Post) do
     query |> limit(1)
   end
@@ -102,7 +106,7 @@ defmodule Danton.Message do
       %{
         sender_name: sender.name || sender.email,
         post_title: post.title,
-        post_path: "https://stormy-reef-53700.herokuapp.com/posts/#{post.id}"
+        post_path: "https://danton.herokuapp.com/posts/#{post.id}"
       }
     )
   end

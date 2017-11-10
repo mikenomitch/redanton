@@ -9,17 +9,18 @@ import {
 // ===============
 
 import thunk from 'redux-thunk'
-import { createLogger } from 'redux-logger'
+// import { createLogger } from 'redux-logger'
 import withAsyncStorage from './middleware/withAsyncStorage'
 import withFetching from './middleware/withFetching'
 
-const logger = createLogger({collapsed: true, diff: true})
+// const logger = createLogger({collapsed: true, diff: true})
 
 // ===============
 //    REDUCERS
 // ===============
 
 import auth from '../data/auth'
+import calls from '../data/calls'
 import channels from '../data/channels'
 import clubs from '../data/clubs'
 import memberships from '../data/memberships'
@@ -29,6 +30,7 @@ import users from '../data/users'
 
 const rootReducer = combineReducers({
   auth,
+  calls,
   channels,
   clubs,
   memberships,
@@ -47,8 +49,8 @@ const configureStore = () => {
     applyMiddleware(
       thunk,
       withAsyncStorage,
-      withFetching,
-      logger
+      withFetching
+      // logger
     )
   )
 }

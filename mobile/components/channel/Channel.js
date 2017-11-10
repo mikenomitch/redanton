@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   Button,
   StyleSheet,
@@ -40,9 +40,17 @@ const styles = StyleSheet.create({
 //    PRESENTER
 // ===============
 
-class Channel extends Component {
+class Channel extends PureComponent {
   get channel() {
     return this.props.navigation.state.params.channel
+  }
+
+  get sortedPosts() {
+    return Object.values(this.props.posts)
+      .filter((p) => p.channel_id == this.props.channelId)
+      .sort((a, b) => (
+        new Date(b.last_activity_time) - new Date(a.last_activity_time)
+      ))
   }
 
   componentDidMount() {
@@ -85,7 +93,7 @@ class Channel extends Component {
             currentUserId={this.props.currentUserId}
             refresh={this.refresh}
             navigation={navigation}
-            content={posts}
+            content={this.sortedPosts}
             channels={channels}
             users={users}
           />
@@ -107,18 +115,13 @@ class Channel extends Component {
 
 const mapStateToProps = (state, props) => {
   const channelId = props.navigation.state.params.channel.id
-  const sortedPosts = Object.values(state.posts)
-    .filter((p) => p.channel_id == channelId)
-    .sort((a, b) => (
-      new Date(b.last_activity_time) - new Date(a.last_activity_time)
-    ))
-
   const currentUserId = state.auth.currentUser.id
 
   return {
-    posts: sortedPosts,
+    posts: state.posts,
     channels: state.channels,
     users: state.users,
+    channelId,
     currentUserId
   }
 }

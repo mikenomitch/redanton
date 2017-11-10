@@ -44,7 +44,7 @@ end
 # ==== ALWAYS SHOW ====
 
 defmodule Danton.AlwaysSuccessfulAuthorization do
-  def authorization_status(conn, user, permission_type) do
+  def authorization_status(_conn, _user, _permission_type) do
     :visible
   end
 end

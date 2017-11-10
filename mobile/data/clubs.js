@@ -45,6 +45,7 @@ export const getClubs = () => {
     call: {
       action: 'GET',
       endpoint: '/clubs',
+      callKey: 'clubs',
       successActionCreator: clubActions.onClubsReturn
     }
   }

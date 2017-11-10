@@ -36,7 +36,7 @@ defmodule Danton.UserToken do
   end
 
   def first_for_user(query \\ UserToken, user_id) do
-    for_user(user_id) |> first |> Repo.one
+    for_user(query, user_id) |> first |> Repo.one
   end
 
   def find_or_create_for_user(token_value, user) do
