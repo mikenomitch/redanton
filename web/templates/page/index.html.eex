@@ -1,3 +1,44 @@
-<div>
-  <h1> Welcome to Danton </h1>
+<div class="index-body">
+  <div class="index-head">
+    <div class="index-center">
+      <h1 class="index-title">
+        relayd.io
+      </h1>
+
+      <div class="index-title-separator">
+      </div>
+
+      <p class="index-subtitle">
+        link aggregator for private groups
+      </p>
+
+      <div class="index-title-cta">
+        <button class="index-sign-up">
+          Sign Up
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="index-features">
+    <div class="index-center">
+      <div class="index-feature-title">
+        Share and discuss links with people you care about.
+      </div>
+      <div class="index-feature-list">
+        <div class="index-feature">
+          Form a group of trusted friends
+        </div>
+        <div class="index-feature">
+          Create channels for different topics
+        </div>
+        <div class="index-feature">
+          Learn new things each day
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="index-recap">
+    <div class="index-center">
+    </div>
+  </div>
 </div>

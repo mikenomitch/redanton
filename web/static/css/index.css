@@ -1,0 +1,90 @@
+/* This file is for your main application css. */
+
+/* DUPED BOOTSTRAP OVERRIDES */
+
+.control-label {
+  font-weight: 400;
+}
+
+.form-control {
+  font-weight: 200;
+}
+
+/* INDEX SPECIFIC */
+
+.index-body {
+  width: 100%;
+}
+
+.index-head {
+  height: 50rem;
+  width: 100%;
+  background-image: linear-gradient(20deg, #D69356 0%, #6495ED 100%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.index-center {
+  width: 100%;
+
+  padding: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  max-width: 65rem;
+}
+
+.index-title {
+  color: #fff;
+  font-size: 6rem;
+}
+
+.index-title-separator {
+  height: 1px;
+  width: 17rem;
+  border-top: solid 1px #fff;
+  margin: 1rem;
+}
+
+.index-subtitle {
+  color: #fff;
+  font-size: 1.8rem;
+  margin: 1rem;
+}
+
+.index-features{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.index-sign-up {
+  border: none;
+  border-radius: 20px;
+  font-size: 2rem;
+  background-color: #fff;
+  color: #6495ED;
+  width: 20rem;
+  font-size: 1.8rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.index-feature {
+  flex: 1 1 auto;
+}
+
+.index-feature-title {
+  text-align: left;
+  font-size: 2.5rem;
+  color: #333;
+}
