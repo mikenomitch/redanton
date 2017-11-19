@@ -10,7 +10,10 @@
       <%= label f, :channel_id, class: "control-label" %>
       <%= select(f,
         :channel_id,
-        Enum.map(@channels, &({[&1.name], &1.id})),
+        Enum.map(
+          @channels,
+          &({[dropdown_text(&1, @clubs)], &1.id})
+        ),
         prompt: "Select Channel",
         class: "form-control"
       ) %>

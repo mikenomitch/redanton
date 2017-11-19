@@ -19,12 +19,12 @@
     - sorting within channel
     - clubs list in bottom bar
   - desktop
-    - sign up/user creation
     - show club name w channels
     - sorting
     - removable flash messages (that look good on homepage)
     - responsive header
     - show all club posts
+    - sign up/user creation
     - Web JS and CSS DRY and separated
   - backend
     - async check in creation

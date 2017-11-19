@@ -17,5 +17,6 @@ end
 render "form.html", changeset: @changeset,
   action: action,
   channel_id: @channel_id,
-  channels: @channels
+  channels: @channels,
+  clubs: @clubs
 %>

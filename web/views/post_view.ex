@@ -46,4 +46,10 @@ defmodule Danton.PostView do
       "Message from " <> msg.user.name <> " " <> Timex.from_now(time)
     end
   end
+
+  # helpers for form
+  def dropdown_text(channel, clubs) do
+    club = Enum.find(clubs, &(&1.id == channel.club_id))
+    channel.name <> " (" <> club.name <> ")"
+  end
 end

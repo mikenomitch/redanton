@@ -32,7 +32,8 @@ defmodule Danton.PostController do
   def new(conn, _params, current_user, _claims) do
     changeset = Post.changeset(%Post{})
     channels = Channel.for_user(current_user) |> Repo.all()
-    render(conn, "new.html", changeset: changeset, channel_id: :none, channels: channels)
+    clubs = Club.for_user(current_user) |> Repo.all()
+    render(conn, "new.html", changeset: changeset, channel_id: :none, channels: channels, clubs: clubs)
   end
 
   def create(conn, %{"post" => post_params, "channel_id" => channel_id}, current_user, _claims) do
