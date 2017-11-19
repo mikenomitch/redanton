@@ -19,6 +19,7 @@
     - sorting within channel
     - clubs list in bottom bar
   - desktop
+    - sign up/user creation
     - show club name w channels
     - sorting
     - removable flash messages (that look good on homepage)

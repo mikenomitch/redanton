@@ -1,4 +1,7 @@
 <div class="index-body">
+  <div class="index-head-links">
+    <a id="index-head-sign-in-link" href="/login"> Sign In </a>
+  </div>
   <div class="index-head">
     <div class="index-center">
       <h1 class="index-title">
@@ -13,7 +16,7 @@
       </p>
 
       <div class="index-title-cta">
-        <button class="index-sign-up">
+        <button id="index-sign-up" tabindex="0">
           Sign Up
         </button>
       </div>
@@ -24,16 +27,21 @@
       <div class="index-feature-title">
         Share and discuss links with people you care about.
       </div>
+
       <div class="index-feature-list">
         <div class="index-feature">
-          Form a group of trusted friends
+          Form a group with trusted friends
+          <img src="<%= static_path(@conn, "/images/group.png") %>">
         </div>
         <div class="index-feature">
-          Create channels for different topics
+          Broadcast links to different channels
+          <img src="<%= static_path(@conn, "/images/signal.png") %>">
         </div>
         <div class="index-feature">
-          Learn new things each day
+          Read a feed currated by friends
+          <img src="<%= static_path(@conn, "/images/feed.png") %>">
         </div>
+
       </div>
     </div>
   </div>

@@ -14,6 +14,7 @@
 
 .index-body {
   width: 100%;
+  position: static;
 }
 
 .index-head {
@@ -22,6 +23,7 @@
   background-image: linear-gradient(20deg, #D69356 0%, #6495ED 100%);
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -67,7 +69,7 @@
   text-align: center;
 }
 
-.index-sign-up {
+#index-sign-up {
   border: none;
   border-radius: 20px;
   font-size: 2rem;
@@ -79,6 +81,10 @@
   margin: 1rem;
 }
 
+#index-sign-up:focus {
+  background-color: #ddd;
+}
+
 .index-feature {
   flex: 1 1 auto;
 }
@@ -87,4 +93,17 @@
   text-align: left;
   font-size: 2.5rem;
   color: #333;
+}
+
+.index-head-links {
+  width: 98%;
+  text-align: right;
+  position: absolute;
+  margin: 1rem;
+}
+
+#index-head-sign-in-link {
+  color: white;
+  padding: 1rem;
+  font-size: 1.6rem;
 }
