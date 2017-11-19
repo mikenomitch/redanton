@@ -21,7 +21,7 @@
   - desktop
     - show club name w channels
     - sorting
-    - removable flash messages
+    - removable flash messages (that look good on homepage)
     - responsive header
     - show all club posts
     - Web JS and CSS DRY and separated
