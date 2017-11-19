@@ -13,6 +13,22 @@
 
   <body>
     <div class="container">
+      <header class="header">
+        <nav role="navigation">
+          <ul class="nav nav-pills">
+            <li><a href="/front">Stream</a></li>
+            <li><a href="/channels">Channels</a></li>
+            <li><a href="/clubs">Clubs</a></li>
+            <li class="pull-right hidden-xs">
+              <%= if @conn.private.guardian_default_resource do %>
+                <a href="/logout">
+                  Sign Out
+                </a>
+              <% end %>
+            </li>
+          </ul>
+        </nav>
+      </header>
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <main role="main">

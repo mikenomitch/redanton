@@ -1,8 +1,6 @@
 defmodule Danton.PageController do
   use Danton.Web, :controller
 
-  plug :put_layout, "index.html"
-
   # ===========================
   # ACTIONS
   # ===========================
@@ -11,7 +9,7 @@ defmodule Danton.PageController do
     if current_user do
       redirect conn, to: "/front"
     else
-      render conn, "index.html"
+      render put_layout(conn, "index.html"), "index.html"
     end
   end
 end
