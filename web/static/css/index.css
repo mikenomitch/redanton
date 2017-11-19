@@ -17,6 +17,15 @@
   position: static;
 }
 
+.index-recap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .index-head {
   height: 50rem;
   width: 100%;
@@ -32,7 +41,7 @@
 .index-center {
   width: 100%;
 
-  padding: 3rem;
+  padding: 2rem;
 
   display: flex;
   flex-direction: column;
@@ -45,7 +54,8 @@
 
 .index-title {
   color: #fff;
-  font-size: 6rem;
+  font-size: 7rem;
+  font-weight: 800;
 }
 
 .index-title-separator {
@@ -69,29 +79,35 @@
   text-align: center;
 }
 
-#index-sign-up {
+.index-sign-up {
   border: none;
   border-radius: 20px;
   font-size: 2rem;
-  background-color: #fff;
-  color: #6495ED;
   width: 20rem;
-  font-size: 1.8rem;
+  font-size: 2rem;
   padding: 1rem;
   margin: 1rem;
 }
 
-#index-sign-up:focus {
+#index-sign-up-top {
+  background-color: #fff;
+  color: #6495ED;
+}
+
+#index-sign-up-top:focus {
   background-color: #ddd;
 }
 
-.index-feature {
-  flex: 1 1 auto;
+#index-sign-up-bottom {
+  background-image: linear-gradient(20deg, #D69356 0%, #6495ED 100%);
+  color: #fff;
 }
 
+#index-sign-up-bottom:focus {}
+
 .index-feature-title {
-  text-align: left;
-  font-size: 2.5rem;
+  text-align: center;
+  font-size: 2.7rem;
   color: #333;
 }
 
@@ -106,4 +122,27 @@
   color: white;
   padding: 1rem;
   font-size: 1.6rem;
+}
+
+.index-feature {
+  flex: 1 1 auto;
+  font-size: 2rem;
+  margin: 3rem 0rem;
+}
+
+.index-feature-image {
+  margin-bottom: 1.5rem;
+}
+
+#index-group-image {
+  width: 17rem;
+}
+
+#index-signal-image {
+  height: 17rem;
+  width: 17rem;
+}
+
+#index-feed-image {
+  height: 15rem;
 }

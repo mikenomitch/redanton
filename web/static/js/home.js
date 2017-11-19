@@ -1,8 +1,10 @@
-const signUpButton = document.getElementById('index-sign-up')
+const signUpTopButton = document.getElementById('index-sign-up-top')
+const signUpBottomButton = document.getElementById('index-sign-up-bottom')
 
-const redirectTo = (destination) => () => {
+const redirectTo = () => () => {
   // window.location.href = destination
   alert('coming soon!')
 }
 
-signUpButton.addEventListener('click', redirectTo('/sign_up'))
+signUpTopButton.addEventListener('click', redirectTo('/sign_up'))
+signUpBottomButton.addEventListener('click', redirectTo('/sign_up'))

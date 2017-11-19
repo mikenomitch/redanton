@@ -16,7 +16,7 @@
       </p>
 
       <div class="index-title-cta">
-        <button id="index-sign-up" tabindex="0">
+        <button class="index-sign-up" id="index-sign-up-top" tabindex="0">
           Sign Up
         </button>
       </div>
@@ -30,23 +30,27 @@
 
       <div class="index-feature-list">
         <div class="index-feature">
-          Form a group with trusted friends
-          <img src="<%= static_path(@conn, "/images/group.png") %>">
+          <img class="index-feature-image" id="index-group-image" src="<%= static_path(@conn, "/images/group.png") %>">
+          <p> Make groups with your favorite people </p>
         </div>
         <div class="index-feature">
-          Broadcast links to different channels
-          <img src="<%= static_path(@conn, "/images/signal.png") %>">
+          <img class="index-feature-image" id="index-signal-image" src="<%= static_path(@conn, "/images/signal.png") %>">
+          <p> Share links via custom channels </p>
         </div>
         <div class="index-feature">
-          Read a feed currated by friends
-          <img src="<%= static_path(@conn, "/images/feed.png") %>">
+          <img class="index-feature-image" id="index-feed-image" src="<%= static_path(@conn, "/images/feed.png") %>">
+          <p> Read and discuss links curated by friends </p>
         </div>
 
       </div>
     </div>
   </div>
+
   <div class="index-recap">
     <div class="index-center">
+      <button class="index-sign-up" id="index-sign-up-bottom" tabindex="0">
+        Try it out
+      </button>
     </div>
   </div>
 </div>
