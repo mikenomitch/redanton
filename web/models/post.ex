@@ -44,15 +44,30 @@ defmodule Danton.Post do
 
   def user_posts(user) do
     Club.ids_for_user(user)
+    |> for_club_ids()
+  end
+
+  def for_clubs(clubs) do
+    Enum.map(clubs, &(&1.id))
+    |> for_club_ids()
+  end
+
+  def for_club(club) do
+    [club.id]
+    |> for_club_ids()
+  end
+
+  def for_club_ids(club_ids) do
+    club_ids
     |> Channel.ids_for_club_ids()
-    |> Post.for_channel_ids()
+    |> for_channel_ids()
   end
 
   def for_front_page(user) do
     Club.ids_for_user(user)
     |> Channel.ids_for_club_ids()
-    |> Post.for_channel_ids()
-    |> Post.with_messages()
+    |> for_channel_ids()
+    |> with_messages()
   end
 
   def with_messages(query \\ Post) do

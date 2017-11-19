@@ -71,8 +71,9 @@ defmodule Danton.ChannelController do
       |> Repo.preload(:club)
 
     posts = channel.posts
-      |> Danton.Repo.preload(:channel)
       |> Danton.Repo.preload(:user)
+      |> Danton.Repo.preload(:channel)
+      |> Post.sort_by_latest_activity()
 
     render(conn, "show.html", channel: channel, posts: posts, club: channel.club)
   end

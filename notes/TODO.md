@@ -19,11 +19,9 @@
     - sorting within channel
     - clubs list in bottom bar
   - desktop
-    - show club name w channels
-    - sorting
+    - show all club posts
     - removable flash messages (that look good on homepage)
     - responsive header
-    - show all club posts
     - sign up/user creation
     - Web JS and CSS DRY and separated
   - backend
