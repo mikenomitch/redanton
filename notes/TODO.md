@@ -19,7 +19,6 @@
     - sorting within channel
     - clubs list in bottom bar
   - desktop
-    - show all club posts
     - removable flash messages (that look good on homepage)
     - responsive header
     - sign up/user creation
