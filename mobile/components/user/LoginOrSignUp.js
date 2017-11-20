@@ -45,7 +45,7 @@ class LoginOrSignUp extends Component {
     return (
       <View style={styles.root}>
         <Text style={styles.welcomeText}>
-          Welcome to Danton
+          Welcome to Relayd
         </Text>
 
         <ActionButton onPress={this.goTo('Login')}>

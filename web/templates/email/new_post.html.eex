@@ -1,5 +1,5 @@
 <p>
-  <%= @poster_name %> has posted '<%= @post_title %>' on MIKES_UNNAMED_APP_SLASH_SITE.
+  <%= @poster_name %> has posted '<%= @post_title %>' on Relayd.
 </p>
 <p>
   View it <%= link "on the web", to: @post_path %> or <%= link "open the app", to: @app_path %>

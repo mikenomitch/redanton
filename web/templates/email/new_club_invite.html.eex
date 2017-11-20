@@ -1,5 +1,5 @@
 <p>
-  You've been invited to join <%= @club_name%> on MIKES_UNNAMED_APP_SLASH_SITE.
+  You've been invited to join <%= @club_name%> on Relayd.
 </p>
 <p>
   Go <%= link "here", to: @post_path %> to log in or sign up on the web <br/> or open the app <%= link "here", to: @app_path %>
