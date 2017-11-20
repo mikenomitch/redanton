@@ -2,6 +2,9 @@
 
 ## Top
 - paper cuts
+  - desktop
+    - club user mgmt
+    - Web JS and CSS DRY and separated
   - mobile
     - debouncing nav
       - new post
@@ -18,11 +21,6 @@
     - show all club posts
     - sorting within channel
     - clubs list in bottom bar
-  - desktop
-    - user creation
-    - Web JS and CSS DRY and separated
-  - backend
-    - async check in creation
 
 - features
   - desktop club and user mgmt
@@ -38,9 +36,7 @@
     - Chat polls for updates in addition to
       the channel
       - as part of this polling it checks you in
-  - homepage
-    - something like this https://template56.carrd.co/
-      but spun up by me and w out paralax
+  - homepage work
   - sign up and new user walk thru
   - empty pages work
   - design work!
