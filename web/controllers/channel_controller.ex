@@ -13,18 +13,32 @@ defmodule Danton.ChannelController do
   # ACTIONS
   # ===========================
 
-  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
-    channels = Channel.for_club(club_id)
-      |> Repo.all
-      |> Repo.preload(:club)
-    render(conn, "index.html", channels: channels, club_id: club_id)
+  def index(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
+    page = Channel.for_club(club_id) |> Repo.paginate(params)
+    channels = page.entries |> Repo.preload(:club)
+
+    render(conn, "index.html",
+      channels: channels,
+      club_id: club_id,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
-  def index(conn, _params, current_user, _claims) do
-    channels = Channel.for_user(current_user)
-      |> Repo.all
-      |> Repo.preload(:club)
-    render(conn, "index.html", channels: channels, club_id: nil)
+  def index(conn, params, current_user, _claims) do
+    page = Channel.for_user(current_user) |> Repo.paginate(params)
+    channels = page.entries |> Repo.preload(:club)
+
+    render(conn, "index.html",
+      channels: channels,
+      club_id: nil,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def new(conn, %{"club_id" => club_id}, _current_user, _claims) do

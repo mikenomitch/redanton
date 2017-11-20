@@ -26,7 +26,7 @@ defmodule Danton.PostController do
 
   def new(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
     changeset = Post.changeset(%Post{})
-    render(conn, "new.html", changeset: changeset, channel_id: channel_id, channels: :none)
+    render(conn, "new.html", changeset: changeset, channel_id: channel_id, channels: :none, clubs: :none)
   end
 
   def new(conn, _params, current_user, _claims) do

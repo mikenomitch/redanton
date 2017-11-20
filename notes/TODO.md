@@ -19,7 +19,6 @@
     - sorting within channel
     - clubs list in bottom bar
   - desktop
-    - removable flash messages (that look good on homepage)
     - responsive header
     - sign up/user creation
     - Web JS and CSS DRY and separated
