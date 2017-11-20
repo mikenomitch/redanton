@@ -6,5 +6,12 @@ const redirectTo = () => () => {
   alert('coming soon!')
 }
 
-signUpTopButton.addEventListener('click', redirectTo('/sign_up'))
-signUpBottomButton.addEventListener('click', redirectTo('/sign_up'))
+signUpTopButton && signUpTopButton.addEventListener(
+  'click',
+  redirectTo('/sign_up')
+)
+
+signUpBottomButton && signUpBottomButton.addEventListener(
+  'click',
+  redirectTo('/sign_up')
+)

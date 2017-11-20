@@ -16,6 +16,17 @@ body {
   font-weight: 200;
 }
 
+/* FLASH MESSAGES */
+
+#flash-holder {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
 /* ADDED CLASSES */
 
 .stream-item-title {

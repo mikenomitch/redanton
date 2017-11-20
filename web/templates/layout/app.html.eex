@@ -12,6 +12,10 @@
   </head>
 
   <body>
+    <div id="flash-holder">
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    </div>
     <div class="container">
       <header class="header">
         <nav role="navigation">
@@ -29,8 +33,8 @@
           </ul>
         </nav>
       </header>
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
