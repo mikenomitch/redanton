@@ -1,32 +1,29 @@
-<h2>Listing memberships</h2>
+<h1 class="header-text">
+  <%= @club.name %> members
+</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Type</th>
-      <th>User</th>
-      <th>Club</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="container-fluid">
 <%= for membership <- @memberships do %>
-    <tr>
-      <td><%= membership.status %></td>
-      <td><%= membership.type %></td>
-      <td><%= membership.user_id %></td>
-      <td><%= membership.club_id %></td>
+  <div class="row list-entry">
+    <div class="col-xs-12 col-md-12">
+      <strong>
+        <%= membership.user && membership.user.name || "unknown user" %>
+      </strong>
+    </div>
 
-      <td class="text-right">
-        <%= link "Show", to: membership_path(@conn, :show, membership), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: membership_path(@conn, :edit, membership), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: membership_path(@conn, :delete, membership), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
+    <div class="col-xs-12 col-md-12 small row">
+      <div class="col-xs-12 col-md-12">
+        Email: <%= membership.user && membership.user.email %>
+      </div>
+      <div class="col-xs-6 col-md-12">
+        Status: <%= membership.status %>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        Type: <%= membership.type %>
+      </div>
+    </div>
+  </div>
 <% end %>
-  </tbody>
-</table>
+</div>
 
-<%= link "New membership", to: membership_path(@conn, :new) %>
+<%= link "+ Add Member", to: club_membership_path(@conn, :new, @club.id) %>

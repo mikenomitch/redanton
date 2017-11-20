@@ -7,27 +7,34 @@ defmodule Danton.MembershipController do
   # ACTIONS
   # ===========================
 
-  def index(conn, _params, current_user, _claims) do
-    memberships = current_user
-      |> Ecto.assoc(:memberships)
-      |> Repo.all
+  def index(conn, params = %{"club_id" => club_id}, current_user, _claims) do
+    club = Repo.get(Club, club_id)
+    memberships = Membership.for_club(club_id)
+      |> Repo.all()
+      |> Repo.preload(:user)
 
-    render(conn, "index.html", memberships: memberships)
+    render(conn, "index.html", memberships: memberships, club: club)
   end
 
-  def new(conn, _params, _current_user, _claims) do
+  def new(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
+    club = Repo.get(Club, club_id)
     changeset = Membership.changeset(%Danton.Membership{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, club: club)
   end
 
-  def create(conn, %{"membership" => membership_params}, _current_user, _claims) do
-    changeset = Membership.changeset(%Danton.Membership{}, membership_params)
+  def create(conn, %{"membership" => membership_params, "club_id" => club_id}, _current_user, _claims) do
+    club = Repo.get(Club, club_id)
 
-    case Repo.insert(changeset) do
+    cs = Membership.changeset(
+      %Danton.Membership{status: "pending"},
+      membership_params
+    ) |> Ecto.Changeset.put_assoc(:club, club)
+
+    case Membership.invite_and_notify(cs) do
       {:ok, _membership} ->
         conn
-        |> put_flash(:info, "Membership created successfully.")
-        |> redirect(to: membership_path(conn, :index))
+        |> put_flash(:info, "User Invited.")
+        |> redirect(to: club_membership_path(conn, :index, club_id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

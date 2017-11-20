@@ -4,4 +4,5 @@
 <div class="new_item_link">
   <%= link "+ Add Channel", to: channel_path(@conn, :new) %>
 </div>
+
 <%= render Danton.ChannelView, "channel_list.html", channels: @channels, conn: @conn %>
