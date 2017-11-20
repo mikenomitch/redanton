@@ -19,7 +19,7 @@
     - sorting within channel
     - clubs list in bottom bar
   - desktop
-    - sign up/user creation
+    - user creation
     - Web JS and CSS DRY and separated
   - backend
     - async check in creation

@@ -1,5 +1,5 @@
 <h1 class='header-text'>
-  Register
+  Sign Up For Relayd
 </h1>
 
 <%= form_tag auth_path(@conn, :callback, "identity"), [method: "POST", novalidate: true] do %>
