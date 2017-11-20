@@ -1,3 +1,6 @@
+<h1 class="header-text">
+  Clubs
+</h1>
 <div class="new_item_link">
   <%= link "+ Add Club", to: club_path(@conn, :new) %>
 </div>

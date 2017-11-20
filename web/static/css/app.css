@@ -16,6 +16,11 @@ body {
   font-weight: 200;
 }
 
+.header {
+  border-bottom: none;
+  padding: 0px;
+}
+
 /* FLASH MESSAGES */
 
 #flash-holder {
@@ -25,6 +30,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  z-index: 500;
 }
 
 /* ADDED CLASSES */
@@ -52,7 +58,7 @@ body {
   font-weight: 400;
 }
 
-.form-header-text {
+.header-text {
   flex: 0 1 auto;
   font-size: 1.8rem;
   font-weight: 400;

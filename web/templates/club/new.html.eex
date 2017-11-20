@@ -1,7 +1,7 @@
 <div class="form-header">
-  <div class="form-header-text">
+  <h1 class="header-text">
     New Club
-  </div>
+  </h1>
   <div class="form-header-nav">
     <%= link "Back", to: club_path(@conn, :index) %>
   </div>

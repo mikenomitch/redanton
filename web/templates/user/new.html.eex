@@ -1,6 +1,6 @@
-<div class='form-header-text'>
+<h1 class='header-text'>
   Register
-</div>
+</h1>
 
 <%= form_tag auth_path(@conn, :callback, "identity"), [method: "POST", novalidate: true] do %>
   <div class='control-group login-input'>

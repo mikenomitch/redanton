@@ -1,7 +1,7 @@
 <div class="form-header">
-  <div class="form-header-text">
+  <h1 class="header-text">
     Edit Post
-  </div>
+  </h1>
   <div class="form-header-nav">
     <%= link "Back", to: channel_path(@conn, :show, @post.channel_id) %>
   </div>

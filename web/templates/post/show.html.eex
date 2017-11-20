@@ -1,7 +1,7 @@
 <div class="form-header">
-  <div class="form-header-text">
+  <h1 class="header-text">
     <%= link @post.title, to: @post.url || "http://www.google.com", class: "" %>
-  </div>
+  </h1>
   <div class="form-header-info">
     <div class="form-header-info-unit"> Posted By: <%= @post.user.name %> </div>
     <div class="form-header-info-unit">

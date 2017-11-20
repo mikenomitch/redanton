@@ -1,3 +1,6 @@
+<h1 class="header-text">
+  Channels
+</h1>
 <div class="new_item_link">
   <%= link "+ Add Channel", to: channel_path(@conn, :new) %>
 </div>
