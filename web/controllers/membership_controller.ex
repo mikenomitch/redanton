@@ -79,7 +79,7 @@ defmodule Danton.MembershipController do
       {:error, changeset} ->
         conn
         |> put_flash(:error, "There was an issue!")
-        redirect(to: club_membership_path(conn, :index, club_id))
+        |> redirect(to: club_membership_path(conn, :index, club_id))
     end
 
   end
