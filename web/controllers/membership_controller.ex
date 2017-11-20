@@ -65,15 +65,35 @@ defmodule Danton.MembershipController do
     end
   end
 
+  def elevate(conn, %{"id" => id}, _current_user, _claims) do
+    membership = Repo.get!(Membership, id)
+    club_id = membership.club_id
+
+    changeset = Membership.changeset(membership, %{type: "admin"})
+
+    case Repo.update(changeset) do
+      {:ok, membership} ->
+        conn
+        |> put_flash(:info, "Member Now Admin!")
+        |> redirect(to: club_membership_path(conn, :index, club_id))
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "There was an issue!")
+        redirect(to: club_membership_path(conn, :index, club_id))
+    end
+
+  end
+
   def delete(conn, %{"id" => id}, _current_user, _claims) do
     membership = Repo.get!(Membership, id)
+    club_id = membership.club_id
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(membership)
 
     conn
-    |> put_flash(:info, "Membership deleted successfully.")
-    |> redirect(to: membership_path(conn, :index))
+    |> put_flash(:info, "Member kicked!")
+    |> redirect(to: club_membership_path(conn, :index, club_id))
   end
 end

@@ -67,7 +67,7 @@ defmodule Danton.Api.V1.MembershipController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _current_user, _claims) do
+  def delete(conn, %{"id" => id}, current_user, _claims) do
     membership = Repo.get!(Membership, id)
 
     # Here we use delete! (with a bang) because we expect
