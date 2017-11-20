@@ -3,7 +3,8 @@
 ## Top
 - paper cuts
   - desktop
-    - club user mgmt
+    - chat count
+    - confirm buttons working
     - Web JS and CSS DRY and separated
   - mobile
     - debouncing nav
@@ -23,20 +24,20 @@
     - clubs list in bottom bar
 
 - features
-  - desktop club and user mgmt
-  - pagination
-    - mobile
-    - desktop
+  - new messages and total message on stream
   - notification options
     - all, default, mute
       or just default and mute?
+  - pagination
+    - mobile
+    - desktop
   - chat check in every N minutes
     - mobile
     - desktop
     - Chat polls for updates in addition to
       the channel
       - as part of this polling it checks you in
-  - homepage work
+  - landing page work
   - sign up and new user walk thru
   - empty pages work
   - design work!

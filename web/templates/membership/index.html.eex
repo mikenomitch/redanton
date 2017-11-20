@@ -1,37 +1,41 @@
-<h1 class="header-text">
-  <%= @club.name %> members
-</h1>
-
-<div class="container-fluid">
-<%= for membership <- @memberships do %>
-  <div class="row list-entry">
-    <div class="col-xs-12 col-md-12">
-      <strong>
-        <%= membership.user && membership.user.name || "pending invite" %>
-      </strong>
-    </div>
-
-    <div class="col-xs-12 col-md-12 small row">
-      <div class="col-xs-12 col-md-12">
-        Email: <%= membership.user && membership.user.email %>
-      </div>
-      <div class="col-xs-6 col-md-12">
-        Status: <%= membership.status %>
-      </div>
-      <div class="col-xs-6 col-md-12">
-        Type: <%= membership.type %>
-      </div>
-      <div class="col-xs-6 col-md-12">
-        <%= link "Make Admin", to: membership_path(@conn, :elevate, membership.id), method: :post, data: [confirm: "Make this user an admin?"], class: "" %>
-      </div>
-      <div class="col-xs-6 col-md-12">
-        <%= link "Kick From Group", to: membership_path(@conn, :delete, membership.id), method: :delete, data: [confirm: "Remove this user?"]%>
-      </div>
-    </div>
+<div class="flex-wrapper">
+  <h1 class="header-text">
+    <%= @club.name %> members
+  </h1>
+  <div class="form-header-nav">
+    <%= link "Back", to: club_path(@conn, :show, @club.id) %>
   </div>
-<% end %>
+
+  <div class="container-fluid">
+  <%= for membership <- @memberships do %>
+    <div class="row list-entry">
+      <div class="col-xs-12 col-md-12">
+        <strong>
+          <%= membership.user && membership.user.name || "pending invite" %>
+        </strong>
+      </div>
+
+      <div class="col-xs-12 col-md-12 small row">
+        <div class="col-xs-12 col-md-12">
+          Email: <%= membership.user && membership.user.email %>
+        </div>
+        <div class="col-xs-6 col-md-12">
+          Status: <%= membership.status %>
+        </div>
+        <div class="col-xs-6 col-md-12">
+          Type: <%= membership.type %>
+        </div>
+        <div class="col-xs-6 col-md-12">
+          <%= link "Make Admin", to: membership_path(@conn, :elevate, membership.id), method: :post, data: [confirm: "Make this user an admin?"], class: "" %>
+        </div>
+        <div class="col-xs-6 col-md-12">
+          <%= link "Kick From Group", to: membership_path(@conn, :delete, membership.id), method: :delete, data: [confirm: "Remove this user?"]%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
 </div>
 
 <%= link "+ Add Member", to: club_membership_path(@conn, :new, @club.id) %>
 <br /> <br />
-<%= link "Back", to: club_path(@conn, :show, @club.id) %>
