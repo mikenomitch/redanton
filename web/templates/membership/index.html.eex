@@ -33,3 +33,5 @@
 </div>
 
 <%= link "+ Add Member", to: club_membership_path(@conn, :new, @club.id) %>
+<br /> <br />
+<%= link "Back", to: club_path(@conn, :show, @club.id) %>
