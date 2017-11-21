@@ -12,35 +12,27 @@
       - new channel
       - to comments
       - main links
-      - new member
+      - new invite
       - new club
-    - reloading chat properly
-    - is no first message, the message
-      does not work
-  - cache email on member invite and show
-    when no user data is there
+      - club mgmt
+    - is no first message, the message does not work
+  - cache email on member invite and show when no user data is there
 
 - features
-  - new messages and total message on stream
+  - more info on stream (chat count/unreads)
   - notification options
     - all, default, mute
       or just default and mute?
   - pagination
     - mobile
     - desktop
-  - chat check in every N minutes
-    - mobile
-    - desktop
-    - Chat polls for updates in addition to
-      the channel
-      - as part of this polling it checks you in
   - landing page work
-  - more info on stream (chat count/unreads)
   - sign up and new user walk thru
-  - empty pages work
-  - design work!
+  - empty pages and list values/prompts
+  - general design work!
     - get erik's help
-  - one post => many channels
+    - get carlyns help
+  - one post => many channels?
 
 ## Mobile Frontend
   - auth
