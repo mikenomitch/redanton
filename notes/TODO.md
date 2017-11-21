@@ -24,6 +24,8 @@
       does not work
     - show all club posts
     - sorting within channel
+  - cache email on member invite and show
+    when no user data is there
 
 - features
   - new messages and total message on stream

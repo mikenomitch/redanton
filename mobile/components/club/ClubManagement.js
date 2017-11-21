@@ -200,7 +200,7 @@ class ClubManagement extends PureComponent {
     return this.props.memberships.map((membership) => (
       <MembershipItem
         currentUserIsAdmin={this.props.currentUserIsAdmin}
-        key={membership.user_id}
+        key={membership.id}
         membership={membership}
         elevateMembership={this.elevateMembershipCall(membership.id)}
         kickMember={this.kickMemberCall(membership.id)}
