@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
-import { Hoshi } from 'react-native-textinput-effects'
 import TextField from 'react-native-md-textinput'
 
 import { font, spacing, colors } from '../styleConstants'

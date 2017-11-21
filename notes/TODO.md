@@ -7,9 +7,6 @@
     - confirm buttons working
     - Web JS and CSS DRY and separated
   - mobile
-    - club restructure
-      - each club shows list of psots
-      - club has mgmt page
     - debouncing nav
       - new post
       - new channel
@@ -18,12 +15,9 @@
       - new member
       - new club
     - header reloading
-    - blur on inputs
     - reloading chat properly
     - is no first message, the message
       does not work
-    - show all club posts
-    - sorting within channel
   - cache email on member invite and show
     when no user data is there
 
