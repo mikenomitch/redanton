@@ -74,7 +74,11 @@ class NewChannel extends PureComponent {
 		return Object.values(this.props.clubs).map(
       (club) => ({ key: club.id, label: club.name })
     )
-	}
+  }
+
+  givenClub () {
+    return this.props.clubs[this.props.navigation.state.params.clubId] || {}
+  }
 
 	createNewChannel = () => {
     const {navigate, goBack} = this.props.navigation
@@ -126,7 +130,7 @@ class NewChannel extends PureComponent {
           <ModalSelector
             style={styles.modalSelector}
             data={this.clubData()}
-            initValue="select club"
+            initValue={this.givenClub().name || "select club"}
             onChange={this.onModalChange}
             error={this.props.errorFor('club', this.state.clubId)}
           />

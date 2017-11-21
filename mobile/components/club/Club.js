@@ -83,9 +83,9 @@ class Club extends PureComponent {
   renderNoChannels () {
     return (
       <View style={styles.empty}>
-        <Text> This club has no channels </Text>
+        <Text> This club has no channels. </Text>
         <Text> Add a category to get started. </Text>
-        <NewChannelButton navigation={this.props.navigation}/>
+        <NewChannelButton clubId={this.club.id} navigation={this.props.navigation}/>
       </View>
     )
   }
