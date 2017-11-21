@@ -13,6 +13,7 @@ const EditChannelInfo = (props) => (
       error={props.errorFor('name', props.channelInfo.name)}
     />
     <BasicTextInput
+      multiline
       label="description"
       value={props.channelInfo.description}
       returnKeyType="next"

@@ -144,6 +144,7 @@ class NewPost extends PureComponent {
             postInfo={this.state.postInfo}
           />
           <BasicTextInput
+            multiline
             label="first chat message"
             value={this.state.postInfo.message}
             onChangeText={(message) => this.setPostState({message})}

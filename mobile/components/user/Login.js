@@ -72,7 +72,7 @@ class Login extends Component {
     return (
       <View style={styles.root}>
         <BasicTextInput
-          placeholder="email"
+          label="email"
           value={email}
 					onChangeText={(email) => this.setState({email})}
 					keyboardType="email-address"
@@ -82,7 +82,7 @@ class Login extends Component {
         />
 
         <BasicTextInput
-          placeholder="password"
+          label="password"
           value={password}
           onChangeText={(password) => this.setState({password})}
           error={this.props.errorFor('password', password)}

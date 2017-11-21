@@ -14,6 +14,7 @@ const EditClubInfo = (props) => (
     />
     <BasicTextInput
       label="description"
+      multiline
       value={props.clubInfo.description}
       returnKeyType="next"
       onChangeText={(description) => props.setClubState({description})}

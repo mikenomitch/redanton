@@ -1,6 +1,7 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { Hoshi } from 'react-native-textinput-effects'
+import TextField from 'react-native-md-textinput'
 
 import { font, spacing, colors } from '../styleConstants'
 
@@ -8,17 +9,10 @@ import ErrorText from './ErrorText'
 
 const BasicTextInput = (props) => {
   return (
-    <View>
-      <Hoshi
-        {...props}
-        style={{marginTop: spacing.large}}
-        backgroundColor={'transparent'}
-        labelStyle={{fontSize: font.medium, color: colors.mediumGray}}
-        inputStyle={{fontSize: font.medium, fontWeight: font.lightWeight, color: colors.darkGray}}
-        borderColor={colors.primary}
-      />
+    <ScrollView>
+      <TextField {...props} value={props.value || ''} />
       <ErrorText error={props.error} />
-    </View>
+    </ScrollView>
   )
 }
 
