@@ -224,7 +224,7 @@ class ClubManagement extends PureComponent {
     return (
       <View style={clubStyles.inviteMemberHolder}>
         <Button
-          title="+ Member"
+          title="+ Invite"
           style={clubStyles.inviteButton}
           onPress={() => this.props.navigation.navigate('Invite', {clubId: this.club.id})}
         />

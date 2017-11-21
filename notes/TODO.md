@@ -14,7 +14,6 @@
       - main links
       - new member
       - new club
-    - header reloading
     - reloading chat properly
     - is no first message, the message
       does not work
