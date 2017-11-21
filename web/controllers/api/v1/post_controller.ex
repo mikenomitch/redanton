@@ -18,6 +18,11 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
+  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
+    posts = Post.for_club_ids([club_id]) |> Repo.all
+    render(conn, "index.json", posts: posts)
+  end
+
   def front_page(conn, _params, current_user, _claims) do
     posts = Post.for_front_page(current_user) |> Repo.all()
     render(conn, "index.json", posts: posts)
