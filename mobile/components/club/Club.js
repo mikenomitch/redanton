@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import {
   Button,
   StyleSheet,
+  Text,
   View
  } from 'react-native'
 import { connect } from 'react-redux'
@@ -9,6 +10,9 @@ import { connect } from 'react-redux'
 import { getUsersForMain } from '../../data/users'
 import { getPostsForClub } from '../../data/posts'
 
+import { spacing } from '../styleConstants'
+
+import NewChannelButton from '../channel/NewChannelButton'
 import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
 
@@ -31,6 +35,10 @@ const styles = StyleSheet.create({
   },
   content: {
     height: '90%'
+  },
+  empty: {
+    alignItems: 'center',
+    padding: spacing.container
   },
   footerContent: {
     height: '100%',
@@ -69,7 +77,17 @@ class Club extends PureComponent {
   }
 
   refresh = (cb) => {
-    this.props.getPostsForClub(this.channel.id, cb)
+    this.props.getPostsForClub(this.club.id, cb)
+  }
+
+  renderNoChannels () {
+    return (
+      <View style={styles.empty}>
+        <Text> This club has no channels </Text>
+        <Text> Add a category to get started. </Text>
+        <NewChannelButton navigation={this.props.navigation}/>
+      </View>
+    )
   }
 
   render() {
@@ -79,6 +97,8 @@ class Club extends PureComponent {
       posts,
       users
     } = this.props
+
+    if (!channels[0]) return this.renderNoChannels()
 
     return (
       <View style={styles.root}>

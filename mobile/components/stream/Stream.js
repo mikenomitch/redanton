@@ -170,7 +170,7 @@ class Stream extends PureComponent {
     )
   }
 
-  renderEmpty () {
+  renderNoPosts () {
     return (
       <View style={styles.empty}>
         <Text> There's nothing here </Text>
@@ -200,7 +200,7 @@ class Stream extends PureComponent {
   }
 
   render() {
-    if (this.hasNoConent) return this.renderEmpty()
+    if (this.hasNoConent) return this.renderNoPosts()
 
     return (
       <FlatList
