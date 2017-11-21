@@ -55,7 +55,6 @@ class Club extends PureComponent {
     return this.props.channels.map((ch) => ch.id)
   }
 
-  // IMPLEMENT THIS FILTER FRD
   get sortedPosts() {
     return Object.values(this.props.posts)
       .filter(inChannels(this.channelIds))
