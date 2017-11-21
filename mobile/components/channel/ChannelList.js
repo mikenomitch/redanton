@@ -9,9 +9,9 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
-import Loading from '../ui/Loading'
-
 import { border, colors, spacing } from '../styleConstants'
+
+import Loading from '../ui/Loading'
 
 import { getChannels } from '../../data/channels'
 import { getClubs } from '../../data/clubs'

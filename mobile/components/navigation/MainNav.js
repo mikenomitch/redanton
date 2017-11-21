@@ -14,6 +14,7 @@ import NewChannelScreen from '../channel/NewChannel'
 import EditPostScreen from '../post/EditPost'
 import NewPostScreen from '../post/NewPost'
 
+import ClubListScreen from '../club/ClubList'
 import ClubScreen from '../club/Club'
 import EditClubScreen from '../club/EditClub'
 import NewClubScreen from '../club/NewClub'
@@ -25,6 +26,7 @@ import ConnectedHeader from '../ui/ConnectedHeader'
 
 import withOSPermissions from '../helpers/withOSPermissions'
 
+import NewClubButton from '../club/NewClubButton'
 import NewChannelButton from '../channel/NewChannelButton'
 import NewPostButton from '../post/NewPostButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -58,6 +60,19 @@ const TabNav = TabNavigator(
         headerRight: (<NewChannelButton navigation={navigation} />),
         tabBarIcon: ({ tintColor }) => (
           <Icon name="filter" size={20} color={tintColor} />
+        ),
+      })
+    },
+    ClubsTab: {
+      screen: ClubListScreen,
+      path: '/clubs',
+      navigationOptions:  ({navigation}) => ({
+        title: 'Clubs',
+        tabBarLabel: 'Clubs',
+        headerBackTitle: null,
+        headerRight: (<NewClubButton navigation={navigation} />),
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="group" size={20} color={tintColor} />
         ),
       })
     },

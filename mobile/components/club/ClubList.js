@@ -1,17 +1,19 @@
 import React, { PureComponent } from 'react'
 import {
   Button,
-  Text,
   StyleSheet,
-  View
+  View,
+  FlatList,
+  RefreshControl
 } from 'react-native'
 import { connect } from 'react-redux'
 
 import {colors, spacing, border} from '../styleConstants'
 
-import { getClubs } from '../../data/clubs'
+import Loading from '../ui/Loading'
 
-import ActionButton from '../ui/ActionButton'
+import { getClubs } from '../../data/clubs'
+import { callsDone } from '../../data/calls'
 
 // ===============
 //     STYLES
@@ -21,31 +23,21 @@ const styles = StyleSheet.create({
   clubList: {
     paddingTop: spacing.medium
   },
+  name: {
+    flex: 1
+  },
+  list: {
+    flex: 1
+  },
+  details: {
+    flex: 1,
+    flexDirection: 'row'
+  },
   clubItem: {
     borderBottomWidth: border.width,
     borderBottomColor: colors.border,
     display: 'flex',
     alignItems: 'flex-start'
-  },
-  name: {
-    flex: 1
-  },
-  newClubButtonHolder: {},
-  newClubButton: {},
-  listHolder: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
-  },
-  clubItem: {
-    width: '100%',
-    paddingTop: spacing.medium,
-    borderBottomWidth: border.width,
-    borderBottomColor: colors.border,
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'center'
   }
 })
 
@@ -73,31 +65,51 @@ class ClubList extends PureComponent {
     this.props.getClubs()
   }
 
-  get clubs () {
-    return Object.values(this.props.clubs)
+  constructor(props) {
+    super(props)
+    this.state = {
+      refreshing: false
+    }
   }
 
   newClubPress = () => {
     this.props.navigation.navigate('NewClub')
   }
 
-  renderClubLink = (club) => {
+  renderClubLink = (datum) => {
     const { navigate } = this.props.navigation
+    const club = datum.item
+
     return <ClubItem navigate={navigate} club={club} key={club.id} />
   }
 
+  _onRefresh() {
+    this.setState({refreshing: true})
+
+    this.props.getClubs(
+      () => {this.setState({refreshing: false})}
+    )
+  }
+
   render() {
+    if (!this.props.firstLoadComplete) {
+      <Loading />
+    }
+
     return (
-      <View style={styles.clubList}>
-        <View style={styles.listHolder}>
-          {this.clubs.map(this.renderClubLink)}
-        </View>
-        <View style={styles.newClubButtonHolder}>
-          <ActionButton onPress={this.newClubPress}>
-            + New Club
-          </ActionButton>
-        </View>
-      </View>
+      <FlatList
+        style={styles.list}
+        initialNumToRender={10}
+        data={this.props.clubs}
+        renderItem={this.renderClubLink}
+        keyExtractor={(item) => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+        }
+      />
     )
   }
 }
@@ -108,7 +120,11 @@ class ClubList extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    clubs: state.clubs
+    clubs: Object.values(state.clubs),
+    firstLoadComplete: callsDone(
+      state,
+      ['clubs']
+    )
   }
 }
 

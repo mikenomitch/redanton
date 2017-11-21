@@ -7,6 +7,7 @@
     - confirm buttons working
     - Web JS and CSS DRY and separated
   - mobile
+    - clubs list in bottom bar
     - debouncing nav
       - new post
       - new channel
@@ -21,7 +22,6 @@
       does not work
     - show all club posts
     - sorting within channel
-    - clubs list in bottom bar
 
 - features
   - new messages and total message on stream
@@ -38,10 +38,11 @@
       the channel
       - as part of this polling it checks you in
   - landing page work
+  - more info on stream (chat count/unreads)
   - sign up and new user walk thru
   - empty pages work
   - design work!
-    - get erik's help (eihaai)
+    - get erik's help
   - one post => many channels
 
 ## Mobile Frontend

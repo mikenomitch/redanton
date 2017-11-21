@@ -39,14 +39,19 @@ export const clubActions = mergeHashActions(customClubActions, 'Club')
 // =================
 // =================
 
-export const getClubs = () => {
+export const getClubs = (onSuccess) => {
   return {
     type: 'GET_CLUBS',
     call: {
       action: 'GET',
       endpoint: '/clubs',
       callKey: 'clubs',
-      successActionCreator: clubActions.onClubsReturn
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(clubActions.onClubsReturn(res))
+          onSuccess && onSuccess(res)
+        }
+      }
     }
   }
 }

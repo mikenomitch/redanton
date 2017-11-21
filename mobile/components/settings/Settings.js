@@ -11,7 +11,6 @@ import { connect } from 'react-redux'
 import { colors, spacing, font } from '../styleConstants'
 
 import ActionButton from '../ui/ActionButton'
-import ClubList from '../club/ClubList'
 
 import { authActions } from '../../data/auth'
 
@@ -67,11 +66,6 @@ class Settings extends Component {
         <ActionButton onPress={this.goToEdit}>
           edit profile
         </ActionButton>
-
-        <View style={styles.attributeHolder}>
-          <Text style={styles.attributeLabel} > Clubs: </Text>
-          <ClubList navigation={this.props.navigation} />
-        </View>
 
         <View style={styles.signOutHolder}>
           <ActionButton onPress={this.props.signOut}>
