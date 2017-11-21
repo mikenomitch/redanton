@@ -1,155 +1,28 @@
 import React, { PureComponent } from 'react'
 import {
   Button,
-  Text,
   StyleSheet,
   View
-} from 'react-native'
+ } from 'react-native'
 import { connect } from 'react-redux'
 
-import {colors, spacing, font, border} from '../styleConstants'
+import { getUsersForMain } from '../../data/users'
+import { getPostsForClub } from '../../data/posts'
 
-import { confirmMessage } from '../../lib/uiActions'
-import { leaveClub } from '../../data/clubs'
-
-import {
-  getMemberships,
-  elevateMembership,
-  kickMember
-} from '../../data/memberships'
-
+import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
 
 // ===============
-//    CHILDREN
+//     STYLES
 // ===============
 
-var membershipItemStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   root: {
-    borderBottomWidth: border.width,
-    borderBottomColor: colors.border,
-    display: 'inline-flex',
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-    flexDirection: 'row',
-    padding: spacing.medium
+    width: '100%',
+    height: '100%'
   },
-  info: {
-    width: '33%'
-  },
-  elevationHolder: {
-    width: '33%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center'
-  },
-  elevationButton: {
-    fontWeight: '100'
-  },
-  kickHolder: {
-    width: '33%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center'
-  },
-  kickButton:{
-    fontWeight: '100'
-  },
-  name: {
-    fontSize: font.medium
-  }
-})
-
-class MembershipItem extends PureComponent {
-  get membership () {
-    return this.props.membership
-  }
-
-  get isAdmin () {
-    return this.membership.type === "admin"
-  }
-
-  renderElevation () {
-    if (!this.isAdmin && this.props.currentUserIsAdmin) {
-      const onPress = () => confirmMessage(
-        'Make Admin',
-        'Are you sure? This action is permanent.',
-        this.props.elevateMembership
-      )
-
-      return (
-        <View style={membershipItemStyles.elevationHolder} key="elevate">
-          <Button
-            style={membershipItemStyles.elevationButton}
-            title="make admin"
-            onPress={onPress}
-          />
-        </View>
-      )
-    }
-  }
-
-  renderKickUser () {
-    if (!this.isAdmin && this.props.currentUserIsAdmin) {
-
-      const onPress = () => confirmMessage(
-        'Kick User',
-        'Are you sure? This action is permanent.',
-        this.props.kickMember
-      )
-
-      return (
-        <View style={membershipItemStyles.kickHolder} key="kick">
-          <Button
-            style={membershipItemStyles.kickButton}
-            title="kick"
-            onPress={onPress}
-          />
-        </View>
-      )
-    }
-  }
-
-  displayName() {
-    return this.props.user.name || this.props.user.email
-  }
-
-  render() {
-    return (
-      <View style={membershipItemStyles.root}>
-        <View style={membershipItemStyles.info} key="info">
-          <Text style={membershipItemStyles.name}> {this.displayName()} </Text>
-        </View>
-        {this.renderElevation()}
-        {this.renderKickUser()}
-      </View>
-    )
-  }
-}
-
-// ===============
-//    PRESENTER
-// ===============
-
-var clubStyles = StyleSheet.create({
-  root: {},
-  editClubButton: {},
-  leaveClubButton: {},
-  inviteButton: {},
-  inviteMemberHolder: {},
   content: {
     height: '90%'
-  },
-  headerContent: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: spacing.medium
-  },
-  membershipsHeader: {
-    fontWeight: '600',
-    fontSize: font.medium
   },
   footerContent: {
     height: '100%',
@@ -161,99 +34,50 @@ var clubStyles = StyleSheet.create({
   }
 })
 
-class Club extends PureComponent {
-  componentDidMount() {
-    this.props.getMemberships(this.club.id)
-  }
+// ===============
+//    PRESENTER
+// ===============
 
+class Club extends PureComponent {
   get club() {
     return this.props.navigation.state.params.club
   }
 
-  userForMembership (membership) {
-    return Object.values(this.props.users).filter((u) => u.id === membership.user_id)[0] || {email: 'unknown user'}
+  // IMPLEMENT THIS FILTER FRD
+  get sortedPosts() {
+    return Object.values(this.props.posts)
+      .sort((a, b) => (
+        new Date(b.last_activity_time) - new Date(a.last_activity_time)
+      ))
   }
 
-  leaveClubPress = () => {
-    confirmMessage(
-      'Leave Club',
-      'Are you sure? This action is permanent.',
-      () => {this.props.leaveClub(this.club.id, this.props.navigation.goBack)}
-    )
+  componentDidMount() {
+    this.props.getPostsForClub(this.club.id)
+    this.props.getUsersForMain()
   }
 
-  kickMemberCall = (membershipId) => () => {
-    this.props.kickMember(
-      membershipId,
-      alert('member kicked')
-    )
-  }
-
-  elevateMembershipCall = (membershipId) => () => {
-    this.props.elevateMembership(
-      membershipId,
-      alert('member made admin')
-    )
-  }
-
-  renderMemberships () {
-    return this.props.memberships.map((membership) => (
-      <MembershipItem
-        currentUserIsAdmin={this.props.currentUserIsAdmin}
-        key={membership.user_id}
-        membership={membership}
-        elevateMembership={this.elevateMembershipCall(membership.id)}
-        kickMember={this.kickMemberCall(membership.id)}
-        user={this.userForMembership(membership)}
-      />
-    ))
-  }
-
-  renderEdit() {
-    if (this.props.currentUserIsAdmin) {
-      return (
-        <Button title="Edit Club"
-          style={clubStyles.editClubButton}
-          onPress={() => this.props.navigation.navigate('EditClub', {clubInfo: this.club})}
-        />
-      )
-    }
-  }
-
-  renderMemberIniviteLink() {
-    return (
-      <View style={clubStyles.inviteMemberHolder}>
-        <Button
-          title="+ Member"
-          style={clubStyles.inviteButton}
-          onPress={() => this.props.navigation.navigate('Invite', {clubId: this.club.id})}
-        />
-      </View>
-    )
+  refresh = (cb) => {
+    this.props.getPostsForClub(this.channel.id, cb)
   }
 
   render() {
+    const {
+      channels,
+      navigation,
+      posts,
+      users
+    } = this.props
+
     return (
-      <View style={clubStyles.root} >
-        <View style={clubStyles.content}>
-          <View style={clubStyles.headerContent}>
-            <Text style={clubStyles.membershipsHeader}>
-              Members:
-            </Text>
-            {this.renderMemberIniviteLink()}
-          </View>
-          {this.renderMemberships()}
-        </View>
-        <Footer>
-          <View style={clubStyles.footerContent}>
-            <Button
-              style={clubStyles.leaveClubButton}
-              title="Leave Club"
-              onPress={this.leaveClubPress}
-            />
-            {this.renderEdit()}
-          </View>
-        </Footer>
+      <View style={styles.root}>
+        <Stream
+          currentUserId={this.props.currentUserId}
+          refresh={this.refresh}
+          navigation={navigation}
+          content={this.sortedPosts}
+          channels={channels}
+          users={users}
+        />
       </View>
     )
   }
@@ -264,30 +88,22 @@ class Club extends PureComponent {
 // ===============
 
 const mapStateToProps = (state, props) => {
-  const users = state.users
   const clubId = props.navigation.state.params.club.id
-  const memberships = Object.values(state.memberships).filter(
-    (m) => m.club_id === clubId
-  )
-
-  const membershipForCurrentUser = memberships.filter(
-    (m) => m.user_id === state.auth.currentUser.id
-  )[0] || {}
-
-  const currentUserIsAdmin = membershipForCurrentUser.type === "admin"
+  const currentUserId = state.auth.currentUser.id
 
   return {
-    memberships,
-    users,
-    currentUserIsAdmin
+    posts: state.posts,
+    channels: state.channels,
+    users: state.users,
+    clubId,
+    currentUserId
   }
 }
 
 export default connect(
-  mapStateToProps, {
-    getMemberships,
-    leaveClub,
-    elevateMembership,
-    kickMember
+  mapStateToProps,
+  {
+    getPostsForClub,
+    getUsersForMain
   }
 )(Club)

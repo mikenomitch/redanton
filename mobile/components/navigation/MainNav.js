@@ -16,6 +16,7 @@ import NewPostScreen from '../post/NewPost'
 
 import ClubListScreen from '../club/ClubList'
 import ClubScreen from '../club/Club'
+import ClubManagementScreen from '../club/ClubManagement'
 import EditClubScreen from '../club/EditClub'
 import NewClubScreen from '../club/NewClub'
 import InviteScreen from '../club/Invite'
@@ -27,6 +28,7 @@ import ConnectedHeader from '../ui/ConnectedHeader'
 import withOSPermissions from '../helpers/withOSPermissions'
 
 import NewClubButton from '../club/NewClubButton'
+import ManageClubButton from '../club/ManageClubButton'
 import NewChannelButton from '../channel/NewChannelButton'
 import NewPostButton from '../post/NewPostButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -144,6 +146,13 @@ const MainNav = StackNavigator({
   },
   Club: {
     screen: ClubScreen,
+    navigationOptions: ({navigation}) => ({
+      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.club.id} stateKey="clubs" defaultTitle="club" />),
+      headerRight: (<ManageClubButton club={navigation.state.params.club} navigation={navigation} />)
+    })
+  },
+  ClubManagement: {
+    screen: ClubManagementScreen,
     navigationOptions: ({navigation}) => ({
       headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.club.id} stateKey="clubs" defaultTitle="club" />)
     })

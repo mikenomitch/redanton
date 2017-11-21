@@ -83,6 +83,24 @@ export const getPostsForChannel = (channelId, onSuccess) => {
   }
 }
 
+// implement this frd!
+export const getPostsForClub = (clubId, onSuccess) => {
+  return {
+    type: 'GET_POSTS_FOR_CLUB',
+    call: {
+      action: 'GET',
+      // change to be club!
+      endpoint: `/channels/${clubId}/posts`,
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(postActions.onPostsReturn(res))
+          onSuccess && onSuccess(res)
+        }
+      }
+    }
+  }
+}
+
 export const createPost = (postInfo, onSuccess) => {
   return {
     type: 'CREATE_POST_CALL',

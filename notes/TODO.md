@@ -7,7 +7,9 @@
     - confirm buttons working
     - Web JS and CSS DRY and separated
   - mobile
-    - clubs list in bottom bar
+    - club restructure
+      - each club shows list of psots
+      - club has mgmt page
     - debouncing nav
       - new post
       - new channel
