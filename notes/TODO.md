@@ -20,12 +20,12 @@
 
 - features
   - more info on stream (chat count/unreads)
-  - notification options
-    - all, default, mute
-      or just default and mute?
   - pagination
     - mobile
     - desktop
+  - notification options
+    - all, default, mute
+      or just default and mute?
   - landing page work
   - sign up and new user walk thru
   - empty pages and list values/prompts
