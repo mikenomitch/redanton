@@ -10,10 +10,18 @@
       <%= @club.description %>
     </div>
     <div class="form-header-info-unit">
-      <%= link "+ Add Channel", to: club_channel_path(@conn, :new, @club) %> <br />
-      <%= link "Edit Club", to: club_path(@conn, :edit, @club) %> <br />
-      <%= link "Club Members", to: club_membership_path(@conn, :index, @club), method: :get, data: [confirm: "Are you sure you want to leave the club?"], class: "" %> <br />
-      <%= link "Leave Club", to: club_club_path(@conn, :leave, @club), method: :delete, data: [confirm: "Are you sure you want to leave the club?"], class: "" %>
+      <div class="col-xs-12 col-sm-5 col-md-5">
+        <%= link "+ Add Channel", to: club_channel_path(@conn, :new, @club) %>
+      </div>
+      <div class="col-xs-12 col-sm-5 col-md-5">
+        <%= link "Club Members", to: club_membership_path(@conn, :index, @club), method: :get, data: [confirm: "Are you sure you want to leave the club?"], class: "" %> <br />
+      </div>
+      <div class="col-xs-12 col-sm-5 col-md-5">
+        <%= link "Edit Club", to: club_path(@conn, :edit, @club) %> <br />
+      </div>
+      <div class="col-xs-12 col-sm-5 col-md-5">
+        <%= link "Leave Club", to: club_club_path(@conn, :leave, @club), method: :delete, data: [confirm: "Are you sure you want to leave the club?"], class: "" %>
+      </div>
     </div>
   </div>
 </div>

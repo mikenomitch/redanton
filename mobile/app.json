@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "relayd",
+    "name": "danton",
     "description": "Private clubs for sharing links and discussions.",
-    "slug": "relayd",
+    "slug": "danton",
     "privacy": "public",
     "sdkVersion": "18.0.0",
     "version": "1.0.0",
