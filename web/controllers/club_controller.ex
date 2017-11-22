@@ -43,10 +43,9 @@ defmodule Danton.ClubController do
     club = Repo.get!(Club, id) |> Repo.preload(:channels)
     channels = club.channels |> Repo.preload(:club)
     posts = Post.for_club(club)
+      |> Post.by_activity()
       |> Repo.all()
-      |> Repo.preload(:user)
-      |> Repo.preload(:channel)
-      |> Post.sort_by_latest_activity()
+      |> Post.with_stream_preloads()
 
     render(conn, "show.html", club: club, channels: channels, posts: posts)
   end

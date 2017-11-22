@@ -84,10 +84,11 @@ defmodule Danton.ChannelController do
       |> Repo.preload(:posts)
       |> Repo.preload(:club)
 
-    posts = channel.posts
+    posts = Post.for_channel_ids([channel.id])
+      |> Post.by_activity()
+      |> Repo.all()
       |> Danton.Repo.preload(:user)
       |> Danton.Repo.preload(:channel)
-      |> Post.sort_by_latest_activity()
 
     render(conn, "show.html", channel: channel, posts: posts, club: channel.club)
   end

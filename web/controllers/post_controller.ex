@@ -14,13 +14,18 @@ defmodule Danton.PostController do
   # ACTIONS
   # ===========================
 
-  def front_page(conn, _params, current_user, _claims) do
-    posts = Post.for_front_page(current_user)
-      |> Repo.all()
-      |> Repo.preload(:user)
-      |> Repo.preload(:channel)
+  def front_page(conn, params, current_user, _claims) do
+    page = Post.for_front_page(current_user) |> Repo.paginate(params)
+    posts = page.entries |> Post.with_stream_preloads()
 
-    render(conn, "front_page.html", posts: posts)
+    render(conn,
+      "front_page.html",
+      posts: posts,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def new(conn, %{"channel_id" => channel_id}, _current_user, _claims) do

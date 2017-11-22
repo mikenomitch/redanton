@@ -40,7 +40,7 @@ defmodule Danton.Post do
   end
 
   def for_channel_stream(channel_id) do
-    for_channel_ids([channel_id]) |> with_messages()
+    for_channel_ids([channel_id]) |> with_stream_preloads()
   end
 
   def user_posts(user) do
@@ -69,18 +69,10 @@ defmodule Danton.Post do
     |> Channel.ids_for_club_ids()
     |> for_channel_ids()
     |> by_activity()
-    |> with_messages()
   end
 
   def by_activity(query \\ Post) do
     query |> order_by(desc: :activity_at)
-  end
-
-  def with_messages(query \\ Post) do
-    query
-      |> join(:left, [p], _ in assoc(p, :room))
-      |> join(:left, [_, room], _ in assoc(room, :messages))
-      |> preload([_, r, m], [room: {r, messages: m}])
   end
 
   # does a full room load and does not need to
@@ -89,6 +81,13 @@ defmodule Danton.Post do
     |> Ecto.assoc(:room)
     |> Repo.one()
     |> Ecto.assoc(:post)
+  end
+
+  def with_stream_preloads(list) do
+    list
+    |> Repo.preload(room: :messages)
+    |> Repo.preload(:user)
+    |> Repo.preload(:channel)
   end
 
   # ===========================
