@@ -10,6 +10,7 @@ defmodule Danton.Post do
     field :description, :string
     field :type, :string
     field :url, :string
+    field :activity_at, Ecto.DateTime
     belongs_to :channel, Channel
     belongs_to :user, User
     has_one :room, Room
@@ -23,7 +24,7 @@ defmodule Danton.Post do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :description, :type, :url])
+    |> cast(params, [:title, :description, :type, :url, :activity_at])
     |> validate_required([:title])
   end
 
@@ -67,7 +68,12 @@ defmodule Danton.Post do
     Club.ids_for_user(user)
     |> Channel.ids_for_club_ids()
     |> for_channel_ids()
+    |> by_activity()
     |> with_messages()
+  end
+
+  def by_activity(query \\ Post) do
+    query |> order_by(desc: :activity_at)
   end
 
   def with_messages(query \\ Post) do
@@ -171,10 +177,9 @@ defmodule Danton.Post do
   # OTHER
   # ===========================
 
-  def sort_by_latest_activity(post_list) do
-    post_list
-      |> Enum.sort_by(&latest_activity_time/1)
-      |> Enum.reverse()
+  def update_activity_for_message!(message) do
+    post = Post.for_message(message) |> Repo.one()
+    Post.changeset(post, %{activity_at: message.inserted_at}) |> Repo.update
   end
 
   def latest_activity_time(post) do

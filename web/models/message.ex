@@ -74,6 +74,7 @@ defmodule Danton.Message do
   def create_message_for_room(room, message_params, skip_notification \\ false) do
     cs = Ecto.build_assoc(room, :messages, message_params)
     message = Repo.insert!(cs)
+    Post.update_activity_for_message!(message)
 
     unless skip_notification do
       Task.start( __MODULE__, :notify_users, [message])

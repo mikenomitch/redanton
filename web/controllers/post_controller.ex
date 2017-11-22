@@ -19,7 +19,6 @@ defmodule Danton.PostController do
       |> Repo.all()
       |> Repo.preload(:user)
       |> Repo.preload(:channel)
-      |> Post.sort_by_latest_activity()
 
     render(conn, "front_page.html", posts: posts)
   end
