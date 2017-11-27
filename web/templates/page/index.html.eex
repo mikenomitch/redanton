@@ -30,16 +30,28 @@
 
       <div class="index-feature-list">
         <div class="index-feature">
-          <img class="index-feature-image" id="index-group-image" src="<%= static_path(@conn, "/images/group.png") %>">
-          <p> Make groups with your favorite people </p>
+          <div class="index-feature-image-holder">
+            <img class="index-feature-image" id="index-group-image" src="<%= static_path(@conn, "/images/group.png") %>">
+          </div>
+          <div class="index-feature-text-holder">
+            <p> Make groups with your favorite people </p>
+          </div>
         </div>
         <div class="index-feature">
-          <img class="index-feature-image" id="index-signal-image" src="<%= static_path(@conn, "/images/signal.png") %>">
-          <p> Share links via custom channels </p>
+          <div class="index-feature-image-holder">
+            <img class="index-feature-image" id="index-signal-image" src="<%= static_path(@conn, "/images/signal.png") %>">
+          </div>
+          <div class="index-feature-text-holder">
+            <p> Share links via custom channels </p>
+          </div>
         </div>
         <div class="index-feature">
-          <img class="index-feature-image" id="index-feed-image" src="<%= static_path(@conn, "/images/feed.png") %>">
-          <p> Read and discuss links curated by friends </p>
+          <div class="index-feature-image-holder">
+            <img class="index-feature-image" id="index-feed-image" src="<%= static_path(@conn, "/images/feed.png") %>">
+          </div>
+          <div class="index-feature-text-holder">
+            <p> Read and discuss links curated by friends </p>
+          </div>
         </div>
 
       </div>

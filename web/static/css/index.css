@@ -49,7 +49,7 @@
   align-items: center;
   text-align: center;
 
-  max-width: 65rem;
+  max-width: 80rem;
 }
 
 .index-title {
@@ -82,9 +82,9 @@
 .index-sign-up {
   border: none;
   border-radius: 20px;
-  font-size: 2rem;
+  font-size: 2.1rem;
+  font-weight: 700;
   width: 20rem;
-  font-size: 2rem;
   padding: 1rem;
   margin: 1rem;
 }
@@ -122,12 +122,33 @@
   color: white;
   padding: 1rem;
   font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.index-feature-list {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .index-feature {
-  flex: 1 1 auto;
+  flex: 1 0 20rem;
   font-size: 2rem;
-  margin: 3rem 0rem;
+  margin: 3rem 2rem;
+
+  display: flex;
+  flex-direction: column;
+  height: 30rem;
+}
+
+.index-feature-image-holder {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.index-feature-text-holder {
+  flex: 0 0 2rem;
 }
 
 .index-feature-image {
@@ -135,7 +156,7 @@
 }
 
 #index-group-image {
-  width: 17rem;
+  height: 12rem;
 }
 
 #index-signal-image {
@@ -144,5 +165,5 @@
 }
 
 #index-feed-image {
-  height: 15rem;
+  height: 17rem;
 }
