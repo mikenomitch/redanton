@@ -10,12 +10,22 @@ defmodule Danton.ClubController do
   # ACTIONS
   # ===========================
 
-  def index(conn, _params, current_user, _claims) do
-    clubs = current_user
+  def index(conn, params, current_user, _claims) do
+    page = current_user
       |> Ecto.assoc(:clubs)
-      |> Repo.all
+      |> Repo.paginate(params)
 
-    render(conn, "index.html", clubs: clubs, user: current_user)
+    clubs = page.entries
+
+    render(conn,
+    "index.html",
+    clubs: clubs,
+    user: current_user,
+    page_number: page.page_number,
+    page_size: page.page_size,
+    total_pages: page.total_pages,
+    total_entries: page.total_entries
+  )
   end
 
   def new(conn, _params, _current_user, _claims) do
