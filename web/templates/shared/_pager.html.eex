@@ -1,0 +1,12 @@
+<%= if (show_pager(@total_pages)) do %>
+  <nav aria-label="...">
+    <ul class="pager">
+      <%= if (show_prev(@page_number)) do %>
+        <li class="previous"><a href="<%= prev_link(@base_url, @page_number) %>"><span aria-hidden="true">&larr;</span> Previous </a></li>
+      <% end %>
+      <%= if (show_next(@page_number, @total_pages)) do %>
+        <li class="next"><a href="<%= next_link(@base_url, @page_number) %>"> Next <span aria-hidden="true">&rarr;</span></a></li>
+      <% end %>
+    </ul>
+  </nav>
+<% end %>

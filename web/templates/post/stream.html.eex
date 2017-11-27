@@ -28,20 +28,8 @@
       </div>
     </div>
   </div>
-
 <% end %>
 
-<%= if (show_pager(@total_pages)) do %>
-  <nav aria-label="...">
-    <ul class="pager">
-      <%= if (show_prev(@page_number)) do %>
-        <li class="previous"><a href="<%= prev_link(@page_number) %>"><span aria-hidden="true">&larr;</span> Previous </a></li>
-      <% end %>
-      <%= if (show_next(@page_number, @total_pages)) do %>
-        <li class="next"><a href="<%= next_link(@page_number) %>"> Next <span aria-hidden="true">&rarr;</span></a></li>
-      <% end %>
-    </ul>
-  </nav>
-<% end %>
+<%= render Danton.SharedView, "_pager.html", total_pages: @total_pages, page_number: @page_number, base_url: "/front" %>
 
 </div>
