@@ -18,8 +18,6 @@
   - cache email on member invite and show when no user data is there
 
 - features
-  - pagination
-    - mobile
   - notification options
     - all, default, mute
       or just default and mute?
