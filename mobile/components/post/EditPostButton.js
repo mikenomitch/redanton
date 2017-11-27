@@ -3,10 +3,11 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { colors, misc } from '../styleConstants'
 
+import withDebouncedNav from '../helpers/withDebouncedNav'
 import SimpleButton from '../ui/SimpleButton'
 
 const EditPostButton = (props) => {
-  const onPress = () => props.navigate('EditPost', {postInfo: props.post})
+  const onPress = () => props.debouncedNav('EditPost', {postInfo: props.post})
 
   return (
     <SimpleButton onPress={onPress} >
@@ -15,4 +16,4 @@ const EditPostButton = (props) => {
   )
 }
 
-export default EditPostButton
+export default withDebouncedNav(EditPostButton)

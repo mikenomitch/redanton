@@ -11,6 +11,7 @@ import {colors, spacing, font, border} from '../styleConstants'
 
 import { confirmMessage } from '../../lib/uiActions'
 import { leaveClub } from '../../data/clubs'
+import withDebouncedNav from '../helpers/withDebouncedNav'
 
 import {
   getMemberships,
@@ -214,7 +215,7 @@ class ClubManagement extends PureComponent {
       return (
         <Button title="Edit Club"
           style={clubStyles.editClubButton}
-          onPress={() => this.props.navigation.navigate('EditClub', {clubInfo: this.club})}
+          onPress={() => this.props.debouncedNav('EditClub', {clubInfo: this.club})}
         />
       )
     }
@@ -226,7 +227,7 @@ class ClubManagement extends PureComponent {
         <Button
           title="+ Invite"
           style={clubStyles.inviteButton}
-          onPress={() => this.props.navigation.navigate('Invite', {clubId: this.club.id})}
+          onPress={() => this.props.debouncedNav('Invite', {clubId: this.club.id})}
         />
       </View>
     )
@@ -290,4 +291,4 @@ export default connect(
     elevateMembership,
     kickMember
   }
-)(ClubManagement)
+)(withDebouncedNav(ClubManagement))

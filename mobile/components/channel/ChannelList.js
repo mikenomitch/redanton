@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 
 import { border, colors, spacing } from '../styleConstants'
 
+import withDebouncedNav from '../helpers/withDebouncedNav'
 import Loading from '../ui/Loading'
 
 import { getChannels } from '../../data/channels'
@@ -48,12 +49,12 @@ const styles = StyleSheet.create({
 //    CHILDREN
 // ===============
 
-const ChannelItem = (props) => {
+const ChannelItemBase = (props) => {
   return (
     <View style={styles.channelItem}>
       <View style={styles.name}>
         <Button
-          onPress={() => props.navigate('Channel', {channel: props.channel, id: props.channel.id})}
+          onPress={() => props.debouncedNav('Channel', {channel: props.channel, id: props.channel.id})}
           title={props.channel.name}
         />
       </View>
@@ -65,6 +66,8 @@ const ChannelItem = (props) => {
     </View>
   )
 }
+
+const ChannelItem = withDebouncedNav(ChannelItemBase)
 
 // ===============
 //    PRESENTER
@@ -102,7 +105,7 @@ class ChannelList extends PureComponent {
 
     return (
       <ChannelItem
-        navigate={navigation.navigate}
+        navigation={navigation}
         channel={channel}
         club={club}
       />

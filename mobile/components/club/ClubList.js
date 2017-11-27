@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import {colors, spacing, border} from '../styleConstants'
 
 import Loading from '../ui/Loading'
+import withDebouncedNav from '../helpers/withDebouncedNav'
 
 import { getClubs } from '../../data/clubs'
 import { callsDone } from '../../data/calls'
@@ -47,16 +48,18 @@ const styles = StyleSheet.create({
 //     CHILDREN
 // ===============
 
-const ClubItem = (props) => {
+const BaseClubItem = (props) => {
   return (
     <View style={styles.clubItem}>
       <Button
-        onPress={() => props.navigate('Club', {club: props.club, id: props.club.id})}
+        onPress={() => props.debouncedNav('Club', {club: props.club, id: props.club.id})}
         title={props.club.name}
       />
     </View>
   )
 }
+
+const ClubItem = withDebouncedNav(BaseClubItem)
 
 // ===============
 //    PRESENTER
@@ -79,10 +82,9 @@ class ClubList extends PureComponent {
   }
 
   renderClubLink = (datum) => {
-    const { navigate } = this.props.navigation
     const club = datum.item
 
-    return <ClubItem navigate={navigate} club={club} key={club.id} />
+    return <ClubItem navigation={this.props.navigation} club={club} key={club.id} />
   }
 
   _onRefresh() {

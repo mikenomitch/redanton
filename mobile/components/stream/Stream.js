@@ -9,9 +9,12 @@ import {
   ActivityIndicator
 } from 'react-native'
 import moment from 'moment'
+import debounce from 'lodash/debounce'
 import { WebBrowser } from 'expo'
 
 import { border, colors, spacing, misc } from '../styleConstants'
+
+import withDebouncedNav from '../helpers/withDebouncedNav'
 
 import EditPostButton from '../post/EditPostButton'
 import NewPostButton from '../post/NewPostButton'
@@ -83,7 +86,7 @@ function __uriFromUrl (url) {
   : url
 }
 
-class StreamItem extends PureComponent {
+class BaseStreamItem extends PureComponent {
   get userIsOwner() {
     return this.props.post.user_id === this.props.currentUserId
   }
@@ -92,7 +95,7 @@ class StreamItem extends PureComponent {
     if (this.props.post.url) {
       WebBrowser.openBrowserAsync(__uriFromUrl(this.props.post.url))
     } else {
-      this.props.navigate('PostChat', {post: this.props.post})
+      this.navigateToChat()
     }
   }
 
@@ -100,10 +103,14 @@ class StreamItem extends PureComponent {
     if ( this.userIsOwner ) {
       return (
         <View>
-          <EditPostButton navigate={this.props.navigate} post={this.props.post} />
+          <EditPostButton navigation={this.props.navigation} post={this.props.post} />
         </View>
       )
     }
+  }
+
+  navigateToChat = () => {
+    this.props.debouncedNav('PostChat', {post: this.props.post})
   }
 
   render () {
@@ -136,7 +143,7 @@ class StreamItem extends PureComponent {
         <View style={styles.streamItemRight}>
           {this.renderEdit()}
           <View>
-            <SimpleButton onPress={() => this.props.navigate('PostChat', {post: this.props.post})} >
+            <SimpleButton onPress={this.navigateToChat} >
               <Icon name="comment" size={misc.iconSize} color={colors.primary} />
             </SimpleButton>
           </View>
@@ -145,6 +152,8 @@ class StreamItem extends PureComponent {
     )
   }
 }
+
+const StreamItem = withDebouncedNav(BaseStreamItem)
 
 // =============
 //     MAIN
@@ -196,7 +205,7 @@ class Stream extends PureComponent {
     return (
       <StreamItem
         currentUserId={this.props.currentUserId}
-        navigate={navigation.navigate}
+        navigation={navigation}
         post={datum.item}
         actionUserName={actionUser.name}
         posterName={poster.name}

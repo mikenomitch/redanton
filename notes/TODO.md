@@ -3,17 +3,10 @@
 ## Top
 - paper cuts
   - desktop
+    - activity at might not be getting assigned to new posts
     - confirm buttons working
     - Web JS and CSS DRY and separated
   - mobile
-    - debouncing nav
-      - new post
-      - new channel
-      - to comments
-      - main links
-      - new invite
-      - new club
-      - club mgmt
     - is no first message, the message does not work
   - cache email on member invite and show when no user data is there
 

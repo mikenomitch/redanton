@@ -12,6 +12,8 @@ import { getPostsForChannel } from '../../data/posts'
 import { deleteChannel } from '../../data/channels'
 
 import withPagination from '../helpers/withPagination'
+import withDebouncedNav from '../helpers/withDebouncedNav'
+
 import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
 
@@ -72,7 +74,7 @@ class Channel extends PureComponent {
   }
 
   editChannelClick = () => {
-    this.props.navigation.navigate('EditChannel', {channelInfo: this.channel})
+    this.props.debouncedNav('EditChannel', {channelInfo: this.channel})
   }
 
   refresh = (cb) => {
@@ -142,4 +144,4 @@ export default connect(
     getPostsForChannel,
     getUsersForMain
   }
-)(withPagination(Channel))
+)(withPagination(withDebouncedNav(Channel)))

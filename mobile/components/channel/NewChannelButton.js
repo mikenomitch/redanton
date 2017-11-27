@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button } from 'react-native'
+import withDebouncedNav from '../helpers/withDebouncedNav'
 
-const NewChannelButton = (props) => (
-  <Button title="+ Channel" onPress={() => props.navigation.navigate('NewChannel', {clubId: props.clubId})} />
-)
+const NewChannelButton = (props) => {
+  const onPress = () => props.debouncedNav('NewChannel', {clubId: props.clubId})
+  return <Button title="+ Channel" onPress={onPress} />
+}
 
-export default NewChannelButton
+export default withDebouncedNav(NewChannelButton)
