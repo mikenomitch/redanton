@@ -12,7 +12,6 @@ const withPagination = (WrappedComponent) => {
     }
 
     isAtEndOfData = ({data}) => {
-      console.warn(JSON.stringify(data))
       return data.length === 0
     }
 
