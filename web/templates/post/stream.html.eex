@@ -15,7 +15,7 @@
           <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %> -
         <% end %>
 
-        <%= link "Discuss", to: post_path(@conn, :show, post), class: " " %>
+        <%= link discussion_link_text(post), to: post_path(@conn, :show, post), class: " " %>
       </div>
     </div>
 

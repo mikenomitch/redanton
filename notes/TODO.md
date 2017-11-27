@@ -3,7 +3,6 @@
 ## Top
 - paper cuts
   - desktop
-    - chat count
     - confirm buttons working
     - Web JS and CSS DRY and separated
   - mobile
@@ -19,7 +18,6 @@
   - cache email on member invite and show when no user data is there
 
 - features
-  - more info on stream (chat count/unreads)
   - pagination
     - mobile
   - notification options

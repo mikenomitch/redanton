@@ -36,6 +36,15 @@ defmodule Danton.PostView do
     post.user && post.user.name <> " posted to "
   end
 
+  def discussion_link_text(post) do
+    count = Message.count_for_post(post)
+    if (count == 0 ) do
+      "Discuss"
+    else
+      "Discuss ("<> Integer.to_string(count) <>" comments)"
+    end
+  end
+
   def latest_activity_text(post) do
     time = Post.latest_activity_time(post)
     activity_type = Post.latest_activity_type(post)
