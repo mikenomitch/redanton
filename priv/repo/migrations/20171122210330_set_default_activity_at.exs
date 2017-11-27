@@ -3,7 +3,7 @@ defmodule Danton.Repo.Migrations.SetDefaultActivityAt do
 
   # very inefficient, but fine at our scale
   def up do
-    all_posts_with_messages = Danton.Post.with_messages() |> Danton.Repo.all()
+    all_posts_with_messages = Danton.Post |> Danton.Repo.preload(:messages) |> Danton.Repo.all()
 
     Enum.each(
       all_posts_with_messages,

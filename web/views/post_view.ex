@@ -37,15 +37,10 @@ defmodule Danton.PostView do
   end
 
   def discussion_link_text(post) do
-    count = Message.count_for_post(post)
-    if (count == 0 ) do
-      "Discuss"
-    else
-      if (count == 1 ) do
-        "Discuss (1 comment)"
-      else
-        "Discuss ("<> Integer.to_string(count) <>" comments)"
-      end
+    case count = Message.count_for_post(post) do
+      0 -> "Discuss"
+      1 -> "Discuss (1 comment)"
+      _ -> "Discuss ("<> Integer.to_string(count) <>" comments)"
     end
   end
 
