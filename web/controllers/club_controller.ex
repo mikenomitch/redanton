@@ -39,15 +39,26 @@ defmodule Danton.ClubController do
     end
   end
 
-  def show(conn, %{"id" => id}, _current_user, _claims) do
+  def show(conn, params = %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id) |> Repo.preload(:channels)
     channels = club.channels |> Repo.preload(:club)
-    posts = Post.for_club(club)
-      |> Post.by_activity()
-      |> Repo.all()
-      |> Post.with_stream_preloads()
 
-    render(conn, "show.html", club: club, channels: channels, posts: posts)
+    page = Post.for_club(club)
+      |> Post.by_activity()
+      |> Repo.paginate(params)
+
+    posts = page.entries |> Post.with_stream_preloads()
+
+    render(conn,
+      "show.html",
+      club: club,
+      channels: channels,
+      posts: posts,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def edit(conn, %{"id" => id}, _current_user, _claims) do

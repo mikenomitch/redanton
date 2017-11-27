@@ -28,5 +28,15 @@
 
 <div class="associations">
   <div class="association-header">Posts:</div>
-  <%= render Danton.PostView, "stream.html", posts: @posts, conn: @conn %>
+
+  <%= render(
+    Danton.PostView,
+    "stream.html",
+    posts: @posts,
+    conn: @conn,
+    total_pages: @total_pages,
+    page_number: @page_number,
+    base_url: "/clubs/" <> Integer.to_string(@club.id)
+  ) %>
+
 </div>

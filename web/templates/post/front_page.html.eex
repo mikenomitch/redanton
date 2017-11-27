@@ -6,4 +6,12 @@
   <%= link "+ Add Post", to: post_path(@conn, :new) %>
 </div>
 
-<%= render Danton.PostView, "stream.html", posts: @posts, conn: @conn, total_pages: @total_pages, page_number: @page_number%>
+<%= render(
+  Danton.PostView,
+  "stream.html",
+  posts: @posts,
+  conn: @conn,
+  total_pages: @total_pages,
+  page_number: @page_number,
+  base_url: "/front"
+) %>

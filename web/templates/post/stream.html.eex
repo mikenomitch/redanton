@@ -30,6 +30,6 @@
   </div>
 <% end %>
 
-<%= render Danton.SharedView, "_pager.html", total_pages: @total_pages, page_number: @page_number, base_url: "/front" %>
+<%= render Danton.SharedView, "_pager.html", total_pages: @total_pages, page_number: @page_number, base_url: @base_url %>
 
 </div>

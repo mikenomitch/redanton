@@ -79,18 +79,27 @@ defmodule Danton.ChannelController do
     end
   end
 
-  def show(conn, %{"id" => id}, _current_user, _claims) do
+  def show(conn, params = %{"id" => id}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
       |> Repo.preload(:posts)
       |> Repo.preload(:club)
 
-    posts = Post.for_channel_ids([channel.id])
+    page = Post.for_channel_ids([channel.id])
       |> Post.by_activity()
-      |> Repo.all()
-      |> Danton.Repo.preload(:user)
-      |> Danton.Repo.preload(:channel)
+      |> Repo.paginate(params)
 
-    render(conn, "show.html", channel: channel, posts: posts, club: channel.club)
+    posts = page.entries |> Post.with_stream_preloads()
+
+    render(conn,
+      "show.html",
+      channel: channel,
+      club: channel.club,
+      posts: posts,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def edit(conn, %{"id" => id}, _current_user, _claims) do

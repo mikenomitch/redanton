@@ -16,5 +16,14 @@
   <div class="new_item_link">
     <%= link "+ Add Post", to: channel_post_path(@conn, :new, @channel.id) %>
   </div>
-  <%= render Danton.PostView, "stream.html", posts: @posts, conn: @conn %>
+
+  <%= render(
+    Danton.PostView,
+    "stream.html",
+    posts: @posts,
+    conn: @conn,
+    total_pages: @total_pages,
+    page_number: @page_number,
+    base_url: "/channels/" <> Integer.to_string(@channel.id)
+  ) %>
 </div>
