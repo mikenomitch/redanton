@@ -1,4 +1,4 @@
-import React, { PureComponent} from 'react'
+import React, { Component } from 'react'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -9,15 +9,23 @@ import { getUsersForMain } from '../../data/users'
 import { getFrontPagePosts } from '../../data/posts'
 import { getClubs } from '../../data/clubs'
 import { getChannels } from '../../data/channels'
-import { callsDone } from '../../data/calls'
+import { callsDone, callSuccessfull } from '../../data/calls'
 
 // ===============
 //    PRESENTER
 // ===============
 
-class MainStream extends PureComponent {
+class MainStream extends Component {
   static navigationOptions = {
-  	title: 'Your Stream'
+    title: 'Your Stream'
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      requestPage: 1,
+      lastRequestTime: null
+    }
   }
 
   componentDidMount() {
@@ -37,6 +45,21 @@ class MainStream extends PureComponent {
     this.props.getFrontPagePosts(cb)
   }
 
+  onEndHit = (page) => {
+    const nextPage = this.state.requestPage + 1
+
+    this.props.getFrontPagePosts(
+      this.setNextRequestPageCb(nextPage),
+      nextPage
+    )
+  }
+
+  setNextRequestPageCb = (page) => () => {
+    this.setState({
+      requestPage: page
+    })
+  }
+
   render() {
     if (!this.props.firstLoadComplete) {
       return <Loading />
@@ -45,10 +68,12 @@ class MainStream extends PureComponent {
     return <Stream
       currentUserId={this.props.currentUserId}
       refresh={this.refresh}
+      onEndHit={this.onEndHit}
       navigation={this.props.navigation}
       content={this.sortedPosts}
       channels={this.props.channels}
       users={this.props.users}
+      currentlyLoading={this.props.currentlyLoading}
     />
 	}
 }
@@ -66,6 +91,7 @@ const mapStateToProps = (state) => {
       state,
       ['frontPagePosts', 'mainUsers', 'clubs', 'channels']
     ),
+    currentlyLoading: !callSuccessfull(state, ['frontPagePosts']),
     currentUserId: state.auth.currentUser.id
   }
 }

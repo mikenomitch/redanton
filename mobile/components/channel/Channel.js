@@ -53,6 +53,14 @@ class Channel extends PureComponent {
       ))
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      requestPage: 1,
+      lastRequestTime: null
+    }
+  }
+
   componentDidMount() {
     this.props.getPostsForChannel(this.channel.id)
     this.props.getUsersForMain()
@@ -72,6 +80,22 @@ class Channel extends PureComponent {
 
   editChannelClick = () => {
     this.props.navigation.navigate('EditChannel', {channelInfo: this.channel})
+  }
+
+  onEndHit = (page) => {
+    const nextPage = this.state.requestPage + 1
+
+    this.props.getPostsForChannel(
+      this.channel.id,
+      this.setNextRequestPageCb(nextPage),
+      nextPage
+    )
+  }
+
+  setNextRequestPageCb = (page) => () => {
+    this.setState({
+      requestPage: page
+    })
   }
 
   refresh = (cb) => {

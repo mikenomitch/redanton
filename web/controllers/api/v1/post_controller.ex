@@ -13,18 +13,30 @@ defmodule Danton.Api.V1.PostController do
   # ACTIONS
   # ===========================
 
-  def index(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
-    posts = Post.for_channel_stream(channel_id) |> Repo.all
+  def index(conn, params = %{"channel_id" => channel_id}, _current_user, _claims) do
+    page = Post.for_channel_ids([channel_id])
+      |> Post.by_activity()
+      |> Repo.paginate(params)
+
+    posts = page.entries |> Post.with_stream_preloads()
+
     render(conn, "index.json", posts: posts)
   end
 
-  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
-    posts = Post.for_club_ids([club_id]) |> Repo.all
+  def index(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
+    page = Post.for_club_ids([club_id])
+      |> Post.by_activity()
+      |> Repo.paginate(params)
+
+    posts = page.entries |> Post.with_stream_preloads()
+
     render(conn, "index.json", posts: posts)
   end
 
-  def front_page(conn, _params, current_user, _claims) do
-    posts = Post.for_front_page(current_user) |> Repo.all()
+  def front_page(conn, params, current_user, _claims) do
+    page = Post.for_front_page(current_user) |> Repo.paginate(params)
+    posts = page.entries |> Post.with_stream_preloads()
+
     render(conn, "index.json", posts: posts)
   end
 

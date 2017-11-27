@@ -71,9 +71,33 @@ class Club extends PureComponent {
       ))
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      requestPage: 1,
+      lastRequestTime: null
+    }
+  }
+
   componentDidMount() {
     this.props.getPostsForClub(this.club.id)
     this.props.getUsersForMain()
+  }
+
+  onEndHit = (page) => {
+    const nextPage = this.state.requestPage + 1
+
+    this.props.getPostsForClub(
+      this.club.id,
+      this.setNextRequestPageCb(nextPage),
+      nextPage
+    )
+  }
+
+  setNextRequestPageCb = (page) => () => {
+    this.setState({
+      requestPage: page
+    })
   }
 
   refresh = (cb) => {

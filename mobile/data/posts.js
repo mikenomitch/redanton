@@ -50,12 +50,12 @@ export const postActions = mergeHashActions(customPostActions, 'Post')
 // =================
 // =================
 
-export const getFrontPagePosts = (onSuccess) => {
+export const getFrontPagePosts = (onSuccess, pageNumber = 1) => {
   return {
     type: 'GET_FRONT_PAGE_CALL',
     call: {
       action: 'GET',
-      endpoint: '/front',
+      endpoint: `/front?page=${pageNumber}`,
       callKey: 'frontPagePosts',
       successActionCreator: (res) => {
         return (dispatch) => {
@@ -67,12 +67,12 @@ export const getFrontPagePosts = (onSuccess) => {
   }
 }
 
-export const getPostsForChannel = (channelId, onSuccess) => {
+export const getPostsForChannel = (channelId, onSuccess, pageNumber = 1) => {
   return {
     type: 'GET_POSTS_FOR_CHANNEL',
     call: {
       action: 'GET',
-      endpoint: `/channels/${channelId}/posts`,
+      endpoint: `/channels/${channelId}/posts?page=${pageNumber}`,
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(postActions.onPostsReturn(res))
@@ -83,12 +83,12 @@ export const getPostsForChannel = (channelId, onSuccess) => {
   }
 }
 
-export const getPostsForClub = (clubId, onSuccess) => {
+export const getPostsForClub = (clubId, onSuccess, pageNumber = 1) => {
   return {
     type: 'GET_POSTS_FOR_CLUB',
     call: {
       action: 'GET',
-      endpoint: `/clubs/${clubId}/posts`,
+      endpoint: `/clubs/${clubId}/posts?page=${pageNumber}`,
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(postActions.onPostsReturn(res))

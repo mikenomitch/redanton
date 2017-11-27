@@ -5,7 +5,8 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  RefreshControl
+  RefreshControl,
+  ActivityIndicator
 } from 'react-native'
 import moment from 'moment'
 import { WebBrowser } from 'expo'
@@ -65,6 +66,10 @@ const styles = StyleSheet.create({
   empty: {
     alignItems: 'center',
     padding: spacing.container
+  },
+  loadingThrobber: {
+    flex: 1,
+    padding: 15
   }
 })
 
@@ -199,6 +204,10 @@ class Stream extends PureComponent {
     )
   }
 
+  onEndReached = () => {
+    this.props.onEndHit && this.props.onEndHit()
+  }
+
   render() {
     if (this.hasNoConent) return this.renderNoPosts()
 
@@ -208,7 +217,18 @@ class Stream extends PureComponent {
         initialNumToRender={10}
         data={this.props.content}
         renderItem={this.renderPostLink}
+        onEndReached={this.onEndReached}
+        onEndReachedThreshold={0.2}
         keyExtractor={(item) => item.id}
+        ListFooterComponent={() => {
+          return (
+            this.props.currentlyLoading && (
+            <View style={styles.loadingThrobber}>
+              <ActivityIndicator size="small" />
+            </View>
+            ) || null
+          );
+        }}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
