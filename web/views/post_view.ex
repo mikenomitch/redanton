@@ -41,7 +41,11 @@ defmodule Danton.PostView do
     if (count == 0 ) do
       "Discuss"
     else
-      "Discuss ("<> Integer.to_string(count) <>" comments)"
+      if (count == 1 ) do
+        "Discuss (1 comment)"
+      else
+        "Discuss ("<> Integer.to_string(count) <>" comments)"
+      end
     end
   end
 
