@@ -90,6 +90,13 @@ defmodule Danton.Post do
     |> Repo.preload(:channel)
   end
 
+  def with_messages(query \\ Post) do
+    query
+      |> join(:left, [p], _ in assoc(p, :room))
+      |> join(:left, [_, room], _ in assoc(room, :messages))
+      |> preload([_, r, m], [room: {r, messages: m}])
+  end
+
   # ===========================
   # CREATE
   # ===========================
