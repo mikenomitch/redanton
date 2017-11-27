@@ -11,6 +11,7 @@ import { getUsersForMain } from '../../data/users'
 import { getPostsForChannel } from '../../data/posts'
 import { deleteChannel } from '../../data/channels'
 
+import withPagination from '../helpers/withPagination'
 import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
 
@@ -53,15 +54,6 @@ class Channel extends PureComponent {
       ))
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      requestPage: 1,
-      lastRequestTime: null,
-      endOfList: false
-    }
-  }
-
   componentDidMount() {
     this.props.getPostsForChannel(this.channel.id)
     this.props.getUsersForMain()
@@ -83,29 +75,14 @@ class Channel extends PureComponent {
     this.props.navigation.navigate('EditChannel', {channelInfo: this.channel})
   }
 
-  onEndHit = () => {
-    if (this.state.endOfList) { return }
-
-    const nextPage = this.state.requestPage + 1
-
-    this.props.getPostsForChannel(
-      this.channel.id,
-      this.setNextRequestPageCb(nextPage),
-      nextPage
-    )
-  }
-
-  setNextRequestPageCb = (page) => ({data}) => {
-    const endOfList = data.length === 0
-
-    this.setState({
-      requestPage: page,
-      endOfList
-    })
-  }
-
   refresh = (cb) => {
     this.props.getPostsForChannel(this.channel.id, cb)
+  }
+
+  onEndHitCb = () => {
+    return this.props.onEndHitCb( (onSuccess, nextPage) => {
+      this.props.getPostsForChannel(this.channel.id, onSuccess, nextPage)
+    })
   }
 
   render() {
@@ -126,8 +103,8 @@ class Channel extends PureComponent {
             content={this.sortedPosts}
             channels={channels}
             users={users}
-            onEndHit={this.onEndHit}
-            currentlyLoading={!this.state.endOfList}
+            onEndHit={this.onEndHitCb()}
+            currentlyLoading={!this.props.atFinalPage}
           />
         </View>
         <Footer>
@@ -165,4 +142,4 @@ export default connect(
     getPostsForChannel,
     getUsersForMain
   }
-)(Channel)
+)(withPagination(Channel))

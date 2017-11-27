@@ -12,6 +12,7 @@ import { getPostsForClub } from '../../data/posts'
 
 import { spacing } from '../styleConstants'
 
+import withPagination from '../helpers/withPagination'
 import NewChannelButton from '../channel/NewChannelButton'
 import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
@@ -71,43 +72,19 @@ class Club extends PureComponent {
       ))
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      requestPage: 1,
-      lastRequestTime: null,
-      endOfList: false
-    }
-  }
-
   componentDidMount() {
     this.props.getPostsForClub(this.club.id)
     this.props.getUsersForMain()
   }
 
-  onEndHit = () => {
-    if (this.state.endOfList) { return }
-
-    const nextPage = this.state.requestPage + 1
-
-    this.props.getPostsForClub(
-      this.club.id,
-      this.setNextRequestPageCb(nextPage),
-      nextPage
-    )
-  }
-
-  setNextRequestPageCb = (page) => ({data}) => {
-    const endOfList = data.length === 0
-
-    this.setState({
-      requestPage: page,
-      endOfList
-    })
-  }
-
   refresh = (cb) => {
     this.props.getPostsForClub(this.club.id, cb)
+  }
+
+  onEndHitCb = () => {
+    return this.props.onEndHitCb( (onSuccess, nextPage) => {
+      this.props.getPostsForClub(this.club.id, onSuccess, nextPage)
+    })
   }
 
   renderNoChannels () {
@@ -139,8 +116,8 @@ class Club extends PureComponent {
           content={this.sortedPosts}
           channels={channels}
           users={users}
-          currentlyLoading={!this.state.endOfList}
-          onEndHit={this.onEndHit}
+          currentlyLoading={!this.props.atFinalPage}
+          onEndHit={this.onEndHitCb()}
         />
       </View>
     )
@@ -171,4 +148,4 @@ export default connect(
     getPostsForClub,
     getUsersForMain
   }
-)(Club)
+)(withPagination(Club))

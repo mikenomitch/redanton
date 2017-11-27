@@ -39,6 +39,10 @@ class MainStream extends PureComponent {
     this.props.getFrontPagePosts(cb)
   }
 
+  onEndHitCb = () => {
+    return this.props.onEndHitCb(this.props.getFrontPagePosts)
+  }
+
   render() {
     if (!this.props.firstLoadComplete) {
       return <Loading />
@@ -48,7 +52,7 @@ class MainStream extends PureComponent {
       <Stream
         currentUserId={this.props.currentUserId}
         refresh={this.refresh}
-        onEndHit={this.props.onEndHitCb(this.props.getFrontPagePosts)}
+        onEndHit={this.onEndHitCb()}
         navigation={this.props.navigation}
         content={this.sortedPosts}
         channels={this.props.channels}
