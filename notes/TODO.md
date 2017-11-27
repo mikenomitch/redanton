@@ -22,7 +22,6 @@
   - more info on stream (chat count/unreads)
   - pagination
     - mobile
-    - desktop
   - notification options
     - all, default, mute
       or just default and mute?
