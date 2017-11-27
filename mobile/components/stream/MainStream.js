@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import Stream from './Stream'
 import Loading from '../ui/Loading'
+import withPagination from '../helpers/withPagination'
 
 import { getUsersForMain } from '../../data/users'
 import { getFrontPagePosts } from '../../data/posts'
@@ -15,18 +16,9 @@ import { callsDone, callSuccessfull } from '../../data/calls'
 //    PRESENTER
 // ===============
 
-class MainStream extends Component {
+class MainStream extends PureComponent {
   static navigationOptions = {
     title: 'Your Stream'
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      requestPage: 1,
-      lastRequestTime: null,
-      endOfList: false
-    }
   }
 
   componentDidMount() {
@@ -43,27 +35,8 @@ class MainStream extends Component {
   }
 
   refresh = (cb) => {
+    this.props.onRefresh()
     this.props.getFrontPagePosts(cb)
-  }
-
-  onEndHit = () => {
-    if (this.state.endOfList) { return }
-
-    const nextPage = this.state.requestPage + 1
-
-    this.props.getFrontPagePosts(
-      this.setNextRequestPageCb(nextPage),
-      nextPage
-    )
-  }
-
-  setNextRequestPageCb = (page) => ({data}) => {
-    const endOfList = data.length === 0
-
-    this.setState({
-      requestPage: page,
-      endOfList
-    })
   }
 
   render() {
@@ -71,16 +44,18 @@ class MainStream extends Component {
       return <Loading />
     }
 
-    return <Stream
-      currentUserId={this.props.currentUserId}
-      refresh={this.refresh}
-      onEndHit={this.onEndHit}
-      navigation={this.props.navigation}
-      content={this.sortedPosts}
-      channels={this.props.channels}
-      users={this.props.users}
-      currentlyLoading={this.props.currentlyLoading && !this.state.endOfList}
-    />
+    return (
+      <Stream
+        currentUserId={this.props.currentUserId}
+        refresh={this.refresh}
+        onEndHit={this.props.onEndHitCb(this.props.getFrontPagePosts)}
+        navigation={this.props.navigation}
+        content={this.sortedPosts}
+        channels={this.props.channels}
+        users={this.props.users}
+        currentlyLoading={this.props.currentlyLoading && !this.props.atFinalPage}
+      />
+    )
 	}
 }
 
@@ -110,4 +85,4 @@ export default connect(
     getFrontPagePosts,
     getUsersForMain
   }
-)(MainStream)
+)(withPagination(MainStream))
