@@ -72,7 +72,7 @@ defmodule Danton.Post do
   end
 
   def by_activity(query \\ Post) do
-    query |> order_by(asc: :activity_at)
+    query |> order_by(desc: :activity_at)
   end
 
   # does a full room load and does not need to
