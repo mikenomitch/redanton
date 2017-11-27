@@ -15,12 +15,12 @@
     - all, default, mute
       or just default and mute?
   - landing page work
+  - one post => many channels?
   - sign up and new user walk thru
   - empty pages and list values/prompts
   - general design work!
     - get erik's help
     - get carlyns help
-  - one post => many channels?
 
 ## Mobile Frontend
   - auth
