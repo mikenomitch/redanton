@@ -2,13 +2,12 @@
 
 ## Top
 - paper cuts
-  - desktop
+  - web
     - activity at might not be getting assigned to new posts
     - confirm buttons working
     - Web JS and CSS DRY and separated
-  - mobile
-    - is no first message, the message does not work
-  - cache email on member invite and show when no user data is there
+    - cache email on member invite and show when no user data is there
+      - update mobile to handle this
 
 - features
   - notification options
@@ -16,6 +15,8 @@
       or just default and mute?
   - landing page work
   - one post => many channels?
+    - refine concept of channels in general?
+      - ask erik & victoria
   - sign up and new user walk thru
   - empty pages and list values/prompts
   - general design work!

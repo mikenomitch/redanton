@@ -8,6 +8,20 @@ body {
   margin-bottom: 0;
 }
 
+.navbar-inverse {
+  background-color: #6495ED;
+  border: none;
+  border-radius: 0px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+}
+
+navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
+  color: white;
+}
+
 .control-label {
   font-weight: 400;
 }
@@ -46,7 +60,7 @@ body {
 }
 
 .list-entry {
-  border-left: solid 1px #ddd;
+  border-left: solid 1px #ccc;
   margin-bottom: 2rem;
 }
 

@@ -29,7 +29,7 @@
 .index-head {
   height: 50rem;
   width: 100%;
-  background-image: linear-gradient(20deg, #D69356 0%, #6495ED 100%);
+  background-image: linear-gradient(20deg, #9BFCDB 0%, #6495ED 100%);
 
   display: flex;
   flex-direction: column;
@@ -91,7 +91,7 @@
 
 #index-sign-up-top {
   background-color: #fff;
-  color: #6495ED;
+  color: #6495ED
 }
 
 #index-sign-up-top:focus {
@@ -99,7 +99,7 @@
 }
 
 #index-sign-up-bottom {
-  background-image: linear-gradient(20deg, #D69356 0%, #6495ED 100%);
+  background-image: linear-gradient(20deg, #9BFCDB 0%, #6495ED 100%);
   color: #fff;
 }
 
