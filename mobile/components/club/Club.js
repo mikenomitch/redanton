@@ -75,7 +75,8 @@ class Club extends PureComponent {
     super(props)
     this.state = {
       requestPage: 1,
-      lastRequestTime: null
+      lastRequestTime: null,
+      endOfList: false
     }
   }
 
@@ -84,7 +85,9 @@ class Club extends PureComponent {
     this.props.getUsersForMain()
   }
 
-  onEndHit = (page) => {
+  onEndHit = () => {
+    if (this.state.endOfList) { return }
+
     const nextPage = this.state.requestPage + 1
 
     this.props.getPostsForClub(
@@ -94,9 +97,12 @@ class Club extends PureComponent {
     )
   }
 
-  setNextRequestPageCb = (page) => () => {
+  setNextRequestPageCb = (page) => ({data}) => {
+    const endOfList = data.length === 0
+
     this.setState({
-      requestPage: page
+      requestPage: page,
+      endOfList
     })
   }
 
@@ -133,6 +139,8 @@ class Club extends PureComponent {
           content={this.sortedPosts}
           channels={channels}
           users={users}
+          currentlyLoading={!this.state.endOfList}
+          onEndHit={this.onEndHit}
         />
       </View>
     )

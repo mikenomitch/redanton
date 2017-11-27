@@ -57,7 +57,8 @@ class Channel extends PureComponent {
     super(props)
     this.state = {
       requestPage: 1,
-      lastRequestTime: null
+      lastRequestTime: null,
+      endOfList: false
     }
   }
 
@@ -82,7 +83,9 @@ class Channel extends PureComponent {
     this.props.navigation.navigate('EditChannel', {channelInfo: this.channel})
   }
 
-  onEndHit = (page) => {
+  onEndHit = () => {
+    if (this.state.endOfList) { return }
+
     const nextPage = this.state.requestPage + 1
 
     this.props.getPostsForChannel(
@@ -92,9 +95,12 @@ class Channel extends PureComponent {
     )
   }
 
-  setNextRequestPageCb = (page) => () => {
+  setNextRequestPageCb = (page) => ({data}) => {
+    const endOfList = data.length === 0
+
     this.setState({
-      requestPage: page
+      requestPage: page,
+      endOfList
     })
   }
 
@@ -120,6 +126,8 @@ class Channel extends PureComponent {
             content={this.sortedPosts}
             channels={channels}
             users={users}
+            onEndHit={this.onEndHit}
+            currentlyLoading={!this.state.endOfList}
           />
         </View>
         <Footer>

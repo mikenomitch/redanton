@@ -24,7 +24,8 @@ class MainStream extends Component {
     super(props)
     this.state = {
       requestPage: 1,
-      lastRequestTime: null
+      lastRequestTime: null,
+      endOfList: false
     }
   }
 
@@ -45,7 +46,9 @@ class MainStream extends Component {
     this.props.getFrontPagePosts(cb)
   }
 
-  onEndHit = (page) => {
+  onEndHit = () => {
+    if (this.state.endOfList) { return }
+
     const nextPage = this.state.requestPage + 1
 
     this.props.getFrontPagePosts(
@@ -54,9 +57,12 @@ class MainStream extends Component {
     )
   }
 
-  setNextRequestPageCb = (page) => () => {
+  setNextRequestPageCb = (page) => ({data}) => {
+    const endOfList = data.length === 0
+
     this.setState({
-      requestPage: page
+      requestPage: page,
+      endOfList
     })
   }
 
@@ -73,7 +79,7 @@ class MainStream extends Component {
       content={this.sortedPosts}
       channels={this.props.channels}
       users={this.props.users}
-      currentlyLoading={this.props.currentlyLoading}
+      currentlyLoading={this.props.currentlyLoading && !this.state.endOfList}
     />
 	}
 }
