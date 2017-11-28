@@ -5,8 +5,9 @@
   - web
     - confirm buttons working
     - Web JS and CSS DRY and separated
-    - cache email on member invite and show when no user data is there
-      - update mobile to handle this
+    - breadcrumbs
+  - sort channels and clubs
+  - add more info to channel and club indeces
 
 - features
   - notification options
