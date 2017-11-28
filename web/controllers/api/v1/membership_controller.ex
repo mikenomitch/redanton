@@ -20,11 +20,9 @@ defmodule Danton.Api.V1.MembershipController do
   def create(conn, %{"email" => email, "type"=>type, "club_id" => club_id}, _current_user, _claims) do
     user = User.get_or_create(%User{email: email})
     club = Repo.get(Club, club_id)
-    membership_params = %{club: club, type: type, status: "pending"}
+    membership_params = %{club: club, type: type, status: "pending", email: email}
 
     cs = Ecto.build_assoc(user, :memberships, membership_params)
-
-    # changeset = Membership.changeset(%Danton.Membership{status: "pending"}, membership_params)
 
     create_and_respond(conn, cs)
   end

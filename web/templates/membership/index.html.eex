@@ -11,13 +11,13 @@
     <div class="row list-entry">
       <div class="col-xs-12 col-md-12">
         <strong>
-          <%= membership.user && membership.user.name || "pending invite" %>
+          <%= membership.user && membership.user.name || membership.email || "pending invite" %>
         </strong>
       </div>
 
       <div class="col-xs-12 col-md-12 small row">
         <div class="col-xs-12 col-md-12">
-          Email: <%= membership.user && membership.user.email %>
+          Email: <%= membership.user && membership.user.email || membership.email %>
         </div>
         <div class="col-xs-6 col-md-12">
           Status: <%= membership.status %>

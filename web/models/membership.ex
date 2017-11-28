@@ -8,6 +8,7 @@ defmodule Danton.Membership do
   schema "memberships" do
     field :status, :string
     field :type, :string
+    field :email, :string
     belongs_to :user, User
     belongs_to :club, Club
 
@@ -19,8 +20,8 @@ defmodule Danton.Membership do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:status, :type])
-    |> validate_required([:status, :type])
+    |> cast(params, [:status, :type, :email])
+    |> validate_required([:status, :type, :email])
   end
 
   # ===========================
