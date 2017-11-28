@@ -56,6 +56,7 @@ defmodule Danton.Web do
       use Phoenix.Controller
       use Guardian.Phoenix.Controller
       use Danton.Controller.Helpers, :auth
+      use Breadcrumble
 
       alias Danton.Repo
       alias Danton.Plug.EnsureAuthenticated

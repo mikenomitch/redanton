@@ -6,6 +6,8 @@ defmodule Danton.ClubController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
+  plug :add_breadcrumb, name: 'clubs', url: '/clubs'
+
   # ===========================
   # ACTIONS
   # ===========================

@@ -48,7 +48,8 @@ defmodule Danton.Mixfile do
      {:timex, "~> 3.1"},
      {:poison, "~> 2.2.0"},
      {:httpoison, "~> 0.13"},
-     {:scrivener_ecto, "~> 1.0"}]
+     {:scrivener_ecto, "~> 1.0"},
+     {:breadcrumble, "~> 1.0.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -10,9 +10,15 @@ defmodule Danton.PostController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
+  plug :add_breadcrumb, name: 'posts', url: '/posts'
+
   # ===========================
   # ACTIONS
   # ===========================
+
+  def index(conn, _params, _current_user, _claims) do
+    redirect(conn, to: post_path(conn, :front_page))
+  end
 
   def front_page(conn, params, current_user, _claims) do
     page = Post.for_front_page(current_user) |> Repo.paginate(params)
