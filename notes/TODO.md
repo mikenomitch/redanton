@@ -3,7 +3,6 @@
 ## Top
 - paper cuts
   - web
-    - activity at might not be getting assigned to new posts
     - confirm buttons working
     - Web JS and CSS DRY and separated
     - cache email on member invite and show when no user data is there
