@@ -107,7 +107,8 @@ defmodule Danton.Post do
       description: post_params["description"],
       type: post_params["type"],
       url: post_params["url"],
-      user_id: user.id
+      user_id: user.id,
+      activity_at: Ecto.DateTime.utc
     }
     post_cs = Ecto.build_assoc(chan, :posts, post_struct)
 
