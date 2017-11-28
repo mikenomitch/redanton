@@ -112,7 +112,7 @@ class MembershipItem extends PureComponent {
   }
 
   displayName() {
-    return this.props.user.name || this.props.user.email
+    return this.props.user.name || this.props.user.email || this.membership.email || "unknown user"
   }
 
   render() {
