@@ -14,6 +14,7 @@ defmodule Danton.Api.V1.MembershipView do
       id: membership.id,
       type: membership.type,
       status: membership.status,
+      email: membership.email,
       user_id: membership.user_id,
       club_id: membership.club_id
     }
