@@ -122,15 +122,15 @@
 }
 
 .head-links {
-  width: 98%;
+  width: 100%;
   text-align: right;
   position: absolute;
-  margin: 1rem;
+  margin: 1rem 0rem;
 }
 
 #head-link {
   color: white;
-  padding: 1rem;
+  padding: 2rem;
   font-size: 1.6rem;
   font-weight: 700;
 }

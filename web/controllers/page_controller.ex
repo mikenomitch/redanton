@@ -14,6 +14,6 @@ defmodule Danton.PageController do
   end
 
   def about(conn, _params, _current_user, _claims) do
-    render put_layout(conn, "index.html"), "about.html"
+    render put_layout(conn, "auth.html"), "about.html"
   end
 end

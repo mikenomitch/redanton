@@ -3,10 +3,10 @@
 ## Top
   - landing and auth pages work
     - about page (w back and footer and sign up)
+  - user settings & info on desktop
   - notification options
     - all, default, mute
       or just default and mute?
-  - user info stuff when logged in
   - one post => many channels?
     - refine concept of channels in general?
       - ask erik & victoria
