@@ -1,8 +1,6 @@
 # Todos
 
 ## Top
-  - landing and auth pages work
-    - about page (w back and footer and sign up)
   - user settings & info on desktop
   - notification options
     - all, default, mute
@@ -10,11 +8,10 @@
   - one post => many channels?
     - refine concept of channels in general?
       - ask erik & victoria
+  - new posts/activity info?
   - sign up and new user walk thru
   - empty pages and list values/prompts
-  - general design work!
-    - get erik's help
-    - get carlyns help
+  - general design/UI/UX work
 
 ## Mobile Frontend
   - auth
