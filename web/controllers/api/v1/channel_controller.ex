@@ -9,12 +9,19 @@ defmodule Danton.Api.V1.ChannelController do
   # ===========================
 
   def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
-    channels = Channel.for_club(club_id) |> Repo.all
+    channels = Channel.for_club(club_id)
+      |> Repo.all()
+      |> Channel.preload_post_counts()
+      |> Channel.preload_most_recent_activity()
     render_index(conn, channels)
   end
 
   def index(conn, _params, current_user, _claims) do
-    channels = Channel.for_user(current_user) |> Repo.all
+    channels = Channel.for_user(current_user)
+      |> Repo.all()
+      |> Channel.preload_post_counts()
+      |> Channel.preload_most_recent_activity()
+
     render_index(conn, channels)
   end
 

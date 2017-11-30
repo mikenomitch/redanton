@@ -8,6 +8,7 @@ import {
   RefreshControl
 } from 'react-native'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import { border, colors, spacing } from '../styleConstants'
 
@@ -50,6 +51,8 @@ const styles = StyleSheet.create({
 // ===============
 
 const ChannelItemBase = (props) => {
+  const activityAgo = moment(new Date(props.channel.activity_at)).fromNow()
+
   return (
     <View style={styles.channelItem}>
       <View style={styles.name}>
@@ -60,7 +63,9 @@ const ChannelItemBase = (props) => {
       </View>
       <View style={styles.details}>
         <View style={styles.club}>
+          <Text>latest activity: {activityAgo}</Text>
           <Text>club: {props.club.name}</Text>
+          <Text>posts: {props.channel.post_count}</Text>
         </View>
       </View>
     </View>

@@ -14,7 +14,9 @@ defmodule Danton.Api.V1.ChannelView do
       id: channel.id,
       name: channel.name,
       description: channel.description,
-      club_id: channel.club_id
+      club_id: channel.club_id,
+      post_count: channel.post_count,
+      activity_at: channel.activity_at
     }
   end
 end
