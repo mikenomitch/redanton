@@ -2,10 +2,7 @@
 
 ## Top
   - landing and auth pages work
-    - mobile tweaks for login/signup
-    - login page handles when logged in already
     - about page (w back and footer and sign up)
-    - error displays on landing & auth pages!!
   - notification options
     - all, default, mute
       or just default and mute?

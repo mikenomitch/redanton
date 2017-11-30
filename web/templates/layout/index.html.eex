@@ -12,18 +12,16 @@
   </head>
 
   <body>
-    <div id="flash-holder">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-    </div>
+    <%= render Danton.SharedView, "_flash_holder.html", conn: @conn %>
+
     <div class="index-container">
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
     </div>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
     <%= render Danton.SharedView, "_footer.html", style: :light %>
 
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

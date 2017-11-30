@@ -10,6 +10,16 @@
   font-weight: 200;
 }
 
+#flash-holder {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 500;
+}
+
 /* INDEX SPECIFIC */
 
 .index-body {

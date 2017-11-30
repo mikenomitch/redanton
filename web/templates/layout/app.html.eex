@@ -14,10 +14,8 @@
   </head>
 
   <body>
-    <div id="flash-holder">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-    </div>
+    <%= render Danton.SharedView, "_flash_holder.html", conn: @conn %>
+
     <header class="header">
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
