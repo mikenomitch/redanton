@@ -8,4 +8,8 @@ defmodule Danton.ChannelView do
       _ -> Integer.to_string(channel.post_count) <> " posts"
     end
   end
+
+  def relative_time(time) do
+    Timex.from_now time
+  end
 end

@@ -11,6 +11,7 @@ defmodule Danton.Channel do
     belongs_to :club, Club
     has_many :posts, Post
 
+    field :activity_at, :integer, virtual: true
     field :post_count, :integer, virtual: true
 
     timestamps()
@@ -70,6 +71,17 @@ defmodule Danton.Channel do
 
 		channel = Repo.get(Channel, chan_id)
 		Repo.delete!(channel)
+  end
+
+  # N + 1 ! (fix later)
+  def with_activity_at(channel) do
+    most_recent_post = Post.most_recent_for_channel(channel) |> Repo.one
+    activity_at_time = most_recent_post && most_recent_post.activity_at || channel.inserted_at
+    %{channel | activity_at: activity_at_time}
+  end
+
+  def preload_most_recent_activity(channels) do
+    Enum.map(channels, &Channel.with_activity_at/1)
   end
 
   # N + 1 ! (fix later)

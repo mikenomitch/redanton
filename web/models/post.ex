@@ -75,6 +75,14 @@ defmodule Danton.Post do
     query |> order_by(desc: :activity_at)
   end
 
+  def most_recent(query \\ Post) do
+    query |> by_activity() |> first()
+  end
+
+  def most_recent_for_channel(channel) do
+    Ecto.assoc(channel, :posts) |> most_recent()
+  end
+
   # does a full room load and does not need to
   def for_message(message) do
     message

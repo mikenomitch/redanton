@@ -2,6 +2,8 @@ defmodule Danton.ChannelController do
   use Danton.Web, :controller
   use Danton.CheckIn, :controller
 
+  @page_size 20
+
   plug :check_in, :channel when action in [:show]
 
   plug Danton.WebAuthorization, [:channel, :view] when action in [:show]
@@ -16,10 +18,13 @@ defmodule Danton.ChannelController do
   # ===========================
 
   def index(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
-    page = Channel.for_club(club_id) |> Repo.paginate(params)
+    pagination_params = Map.merge(params, %{page_size: @page_size})
+    page = Channel.for_club(club_id) |> Repo.paginate(pagination_params)
+
     channels = page.entries
       |> Repo.preload(:club)
       |> Channel.preload_post_counts()
+      |> Channel.preload_most_recent_activity()
 
     render(conn, "index.html",
       channels: channels,
@@ -32,10 +37,13 @@ defmodule Danton.ChannelController do
   end
 
   def index(conn, params, current_user, _claims) do
-    page = Channel.for_user(current_user) |> Repo.paginate(params)
+    pagination_params = Map.merge(params, %{page_size: @page_size})
+    page = Channel.for_user(current_user) |> Repo.paginate(pagination_params)
+
     channels = page.entries
       |> Repo.preload(:club)
       |> Channel.preload_post_counts()
+      |> Channel.preload_most_recent_activity()
 
     render(conn, "index.html",
       channels: channels,

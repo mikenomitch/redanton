@@ -11,11 +11,16 @@
     </div>
 
     <div class="col-xs-12 col-md-12 small row">
-      <div class="col-xs-12 col-md-12">
-        <%= channel.description %>
-      </div>
       <div class="col-xs-6 col-md-3">
         Club: <%= link channel.club.name, to: club_path(@conn, :show, channel.club), class: "" %>
+      </div>
+
+      <div class="col-xs-6 col-md-6">
+        Last Activity: <%= relative_time(channel.activity_at) %>
+      </div>
+
+      <div class="col-xs-12 col-md-12">
+        <%= channel.description %>
       </div>
     </div>
   </div>
