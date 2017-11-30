@@ -1,7 +1,7 @@
 # Todos
 
 ## Top
-  - user settings & info on desktop
+  - user settings on desktop
   - notification options
     - all, default, mute
       or just default and mute?
