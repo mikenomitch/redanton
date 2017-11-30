@@ -2,9 +2,6 @@
 
 ## Top
   - landing and auth pages work
-    - back to home btn
-    - footer on login
-    - footer on main site
     - mobile tweaks for login/signup
     - login page handles when logged in already
     - about page (w back and footer and sign up)
