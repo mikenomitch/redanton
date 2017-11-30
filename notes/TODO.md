@@ -5,7 +5,6 @@
   - web
     - confirm buttons working
     - Web JS and CSS DRY and separated
-    - breadcrumbs
   - sort channels and clubs
   - add more info to channel and club indeces
 
