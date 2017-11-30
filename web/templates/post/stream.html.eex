@@ -3,7 +3,7 @@
   <div class="row list-entry">
     <div class="col-xs-12 col-md-12">
       <div class="stream-item-title">
-        <%= link post.title, to: parse_link(post), class: "" %>
+        <%= link post.title, to: parse_link(post, @parent_type, @parent), class: "" %>
       </div>
 
       <div class="visible-xs">
@@ -15,7 +15,7 @@
           <%= link "Edit", to: post_path(@conn, :edit, post), class: "" %> -
         <% end %>
 
-        <%= link discussion_link_text(post), to: post_path(@conn, :show, post), class: " " %>
+        <%= link discussion_link_text(post), to: parent_post_path(post, @parent_type, @parent), class: " " %>
       </div>
     </div>
 

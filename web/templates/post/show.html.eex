@@ -2,7 +2,7 @@
 
 <div class="form-header">
   <h1 class="header-text">
-    <%= link @post.title, to: parse_link(@post), class: "" %>
+    <%= link @post.title, to: parse_link(@post, :none, :none), class: "" %>
   </h1>
   <div class="form-header-info">
     <div class="form-header-info-unit"> Posted By: <%= @post.user.name %> </div>

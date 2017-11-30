@@ -10,7 +10,7 @@ defmodule Danton.PostView do
   end
 
   # helpers for stream
-  def parse_link(post) do
+  def parse_link(post, parent_type, parent) do
     if (post.url && String.length(post.url) > 0) do
       has_scheme = String.contains? post.url, "http"
       if (has_scheme) do
@@ -19,7 +19,16 @@ defmodule Danton.PostView do
         "http://#{post.url}"
       end
     else
-      "/posts/#{post.id}"
+
+      parent_post_path(post, parent_type, parent)
+    end
+  end
+
+  def parent_post_path(post, parent_type, parent) do
+    case (parent_type) do
+      :club -> "/clubs/" <> Integer.to_string(parent.id) <> "/posts/" <> Integer.to_string(post.id)
+      :channel -> "/channels/" <> Integer.to_string(parent.id) <> "/posts/" <> Integer.to_string(post.id)
+      :none -> "posts/" <> Integer.to_string(post.id)
     end
   end
 

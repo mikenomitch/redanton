@@ -36,6 +36,8 @@
     conn: @conn,
     total_pages: @total_pages,
     page_number: @page_number,
+    parent_type: :club,
+    parent: @club,
     base_url: "/clubs/" <> Integer.to_string(@club.id)
   ) %>
 

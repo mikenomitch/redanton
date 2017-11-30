@@ -9,6 +9,8 @@ defmodule Danton.ChannelController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
+  plug :add_breadcrumb, name: 'channels', url: '/channels'
+
   # ===========================
   # ACTIONS
   # ===========================

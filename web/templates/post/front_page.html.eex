@@ -13,5 +13,7 @@
   conn: @conn,
   total_pages: @total_pages,
   page_number: @page_number,
+  parent_type: :none,
+  parent: :none,
   base_url: "/front"
 ) %>

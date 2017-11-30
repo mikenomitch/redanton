@@ -10,8 +10,6 @@ defmodule Danton.PostController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
-  plug :add_breadcrumb, name: 'posts', url: '/posts'
-
   # ===========================
   # ACTIONS
   # ===========================
@@ -67,7 +65,7 @@ defmodule Danton.PostController do
     end
   end
 
-  def show(conn, %{"id" => id}, current_user, _claims) do
+  def show(conn, %{"id" => id} = params, current_user, _claims) do
     # TODO: make sure posts have rooms
     post = Repo.get!(Post, id)
       |> Repo.preload(:room)
@@ -81,14 +79,44 @@ defmodule Danton.PostController do
       |> Repo.all()
       |> Repo.preload(:user)
 
-    render(
-      conn,
+    conn
+    |> add_parent_crumbs(params)
+    |> add_post_crumb(post)
+    |> render(
       "show.html",
       post: post,
       room_id: post.room && post.room.id,
       messages: messages,
       user_id: current_user.id
     )
+  end
+
+  defp add_parent_crumbs(conn, params) do
+    case params do
+      %{"club_id" => club_id, "channel_id" => channel_id} -> conn |> add_club_crumb(club_id) |> add_channel_crumb(channel_id)
+      %{"club_id" => club_id} -> add_club_crumb(conn, club_id)
+      %{"channel_id" => channel_id} -> add_channel_crumb(conn, channel_id)
+      _ -> conn
+    end
+  end
+
+  defp add_club_crumb(conn, club_id) do
+    club = Repo.get(Club, club_id)
+    conn
+    |> add_breadcrumb(name: "Clubs", url: "/clubs")
+    |> add_breadcrumb(name: club.name, url: "/clubs/" <> club_id)
+  end
+
+  defp add_channel_crumb(conn, channel_id) do
+    channel = Repo.get(Channel, channel_id)
+
+    conn
+    |> add_breadcrumb(name: "Channels", url: "/channels")
+    |> add_breadcrumb(name: channel.name, url: "/channels/" <> channel_id)
+  end
+
+  defp add_post_crumb(conn, post) do
+    add_breadcrumb(conn, name: post.title, url: "/posts/" <> Integer.to_string(post.id))
   end
 
   def chat(conn, %{"post_id" => post_id}, _current_user, _claims) do
