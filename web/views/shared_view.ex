@@ -20,4 +20,12 @@ defmodule Danton.SharedView do
   def next_link(base_url, current_page) do
     base_url <> "?page=" <> Integer.to_string (current_page + 1)
   end
+
+  def footer_class(style) do
+    case style do
+      :light -> "footer-light"
+      :clear -> "footer-clear"
+      _ -> "footer-light"
+    end
+  end
 end

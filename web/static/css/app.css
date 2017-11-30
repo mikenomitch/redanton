@@ -8,6 +8,10 @@ body {
   margin-bottom: 0;
 }
 
+.container {
+  min-height: 92vh;
+}
+
 .navbar-inverse {
   background-color: #6495ED;
   border: none;
@@ -183,4 +187,33 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* FOOTER */
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0rem 2rem;
+  width: 100%;
+}
+
+.footer-clear {
+  height: 5rem;
+  margin-top: -5rem;
+}
+
+.footer-light {
+  border-top: solid 1px #ddd;
+}
+
+.footer-text{s
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.footer-item{
+  margin: 1.5rem 0.5rem;
 }

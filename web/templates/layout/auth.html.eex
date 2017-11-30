@@ -24,6 +24,9 @@
         </div>
       </main>
     </div>
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+    <%= render Danton.SharedView, "_footer.html", style: :clear %>
   </body>
 </html>
