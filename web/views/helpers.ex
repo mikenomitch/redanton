@@ -7,4 +7,8 @@ defmodule Danton.View.Helpers do
 
   def logged_in?(conn), do: Guardian.Plug.authenticated?(conn)
   def current_user(conn), do: Guardian.Plug.current_resource(conn)
+
+  def relative_time(time) do
+    Timex.from_now time
+  end
 end

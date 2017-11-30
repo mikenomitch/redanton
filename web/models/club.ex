@@ -13,6 +13,8 @@ defmodule Danton.Club do
     many_to_many :members, User, join_through: "memberships"
 
     field :channel_count, :integer, virtual: true
+    field :post_count, :integer, virtual: true
+    field :activity_at, Ecto.DateTime, virtual: true
 
     timestamps()
   end
@@ -111,5 +113,15 @@ defmodule Danton.Club do
 
   def preload_channel_counts(clubs) do
     Enum.map(clubs, &Club.with_channel_count/1)
+  end
+
+  # N + 1 ! (fix later)
+  def with_post_count(club) do
+    post_count = Post.for_club(club) |> Repo.aggregate(:count, :id)
+    %{club | post_count: post_count}
+  end
+
+  def preload_post_counts(clubs) do
+    Enum.map(clubs, &Club.with_post_count/1)
   end
 end

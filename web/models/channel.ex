@@ -11,7 +11,7 @@ defmodule Danton.Channel do
     belongs_to :club, Club
     has_many :posts, Post
 
-    field :activity_at, :integer, virtual: true
+    field :activity_at, Ecto.DateTime, virtual: true
     field :post_count, :integer, virtual: true
 
     timestamps()

@@ -12,4 +12,11 @@ defmodule Danton.ClubView do
       _ -> Integer.to_string(club.channel_count) <> " channels"
     end
   end
+
+  def post_count_string(club) do
+    case club.post_count do
+      1 -> Integer.to_string(club.post_count) <> " post"
+      _ -> Integer.to_string(club.post_count) <> " posts"
+    end
+  end
 end

@@ -17,7 +17,9 @@ defmodule Danton.ClubController do
       |> Ecto.assoc(:clubs)
       |> Repo.paginate(params)
 
-    clubs = page.entries |> Club.preload_channel_counts()
+    clubs = page.entries
+      |> Club.preload_channel_counts()
+      |> Club.preload_post_counts()
 
     render(conn,
     "index.html",

@@ -11,13 +11,22 @@
         <strong>
           <%= link club.name, to: club_path(@conn, :show, club), class: "" %>
         </strong>
-        (<%= channel_count_string(club) %>)
         <%= if user_is_admin(@user, club.id) do %>
           - <%= link "Edit", to: club_path(@conn, :edit, club), class: "" %>
         <% end %>
       </div>
-      <div class="col-xs-12 col-md-12 small">
-        <%= club.description %>
+      <div class="col-xs-12 col-md-12 small row">
+        <div class="col-xs-6 col-md-3">
+          <%= post_count_string(club) %> - <%= channel_count_string(club) %>
+        </div>
+
+        <div class="col-xs-6 col-md-6">
+          Last Activity: <%= relative_time(club.inserted_at) %>
+        </div>
+
+        <div class="col-xs-12 col-md-12">
+          <%= club.description %>
+        </div>
       </div>
     </div>
 <% end %>
