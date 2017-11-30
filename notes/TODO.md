@@ -2,9 +2,6 @@
 
 ## Top
 - paper cuts
-  - web
-    - confirm buttons working
-    - Web JS and CSS DRY and separated
   - sort channels and clubs
   - add more info to channel and club indeces
 
