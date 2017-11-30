@@ -1,9 +1,1 @@
-brunch build --production
-
-cd $phoenix_dir
-
-mix "phx.digest"
-
-if mix help "phx.digest.clean" 1>/dev/null 2>&1; then
-  mix "phx.digest.clean"
-fi
+echo not_compiling
