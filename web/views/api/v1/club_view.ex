@@ -13,7 +13,10 @@ defmodule Danton.Api.V1.ClubView do
     %{
       id: club.id,
       name: club.name,
-      description: club.description
+      description: club.description,
+      channel_count: club.channel_count,
+      post_count: club.post_count,
+      activity_at: club.activity_at
     }
   end
 end

@@ -4,9 +4,11 @@ import {
   StyleSheet,
   View,
   FlatList,
-  RefreshControl
+  RefreshControl,
+  Text
 } from 'react-native'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import {colors, spacing, border} from '../styleConstants'
 
@@ -34,13 +36,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row'
   },
+  counts: {
+    paddingLeft: spacing.medium,
+    paddingRight: spacing.medium
+  },
   clubItem: {
     borderBottomWidth: border.width,
     borderBottomColor: colors.border,
     display: 'flex',
     alignItems: 'flex-start',
-    justifyContent: 'center',
-    height: 60
+    justifyContent: 'center'
   }
 })
 
@@ -49,12 +54,23 @@ const styles = StyleSheet.create({
 // ===============
 
 const BaseClubItem = (props) => {
+  const activityAgo = moment(new Date(props.club.activity_at)).fromNow()
+
   return (
     <View style={styles.clubItem}>
-      <Button
-        onPress={() => props.debouncedNav('Club', {club: props.club, id: props.club.id})}
-        title={props.club.name}
-      />
+      <View style={styles.name}>
+        <Button
+          onPress={() => props.debouncedNav('Club', {club: props.club, id: props.club.id})}
+          title={props.club.name}
+        />
+      </View>
+      <View style={styles.details}>
+        <View style={styles.counts}>
+          <Text>last activity: {activityAgo}</Text>
+          <Text>posts: {props.club.post_count}</Text>
+          <Text>channels: {props.club.channel_count}</Text>
+        </View>
+      </View>
     </View>
   )
 }

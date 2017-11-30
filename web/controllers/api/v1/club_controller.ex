@@ -9,7 +9,12 @@ defmodule Danton.Api.V1.ClubController do
   # ===========================
 
   def index(conn, _params, current_user, _claims) do
-    clubs = Club.for_user(current_user) |> Repo.all
+    clubs = Club.for_user(current_user)
+    |> Repo.all()
+    |> Club.preload_channel_counts()
+    |> Club.preload_post_counts()
+    |> Club.preload_most_recent_activity()
+
     render(conn, "index.json", clubs: clubs)
   end
 
