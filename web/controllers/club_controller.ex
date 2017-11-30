@@ -15,6 +15,7 @@ defmodule Danton.ClubController do
   def index(conn, params, current_user, _claims) do
     page = current_user
       |> Ecto.assoc(:clubs)
+      |> order_by(asc: :inserted_at)
       |> Repo.paginate(params)
 
     clubs = page.entries

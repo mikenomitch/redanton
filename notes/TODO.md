@@ -1,10 +1,6 @@
 # Todos
 
 ## Top
-- paper cuts
-  - sort channels and clubs
-  - add more info to channel and club indeces
-
 - features
   - notification options
     - all, default, mute
