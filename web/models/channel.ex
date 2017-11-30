@@ -11,6 +11,8 @@ defmodule Danton.Channel do
     belongs_to :club, Club
     has_many :posts, Post
 
+    field :post_count, :integer, virtual: true
+
     timestamps()
   end
 
@@ -70,11 +72,15 @@ defmodule Danton.Channel do
 		Repo.delete!(channel)
   end
 
-  # @doc """
-  # Makes a channel associated to a given club
-  # """
-  # def make_post_for_user(chan, user, post_params) do
-  #   cs = Ecto.build_assoc(chan, :posts, %{post_params | user_id: user.id})
-  #   Repo.insert(cs)
-	# end
+  # N + 1 ! (fix later)
+  def with_post_count(channel) do
+    post_count = Ecto.assoc(channel, :posts)
+      |> Repo.aggregate(:count, :id)
+
+    %{channel | post_count: post_count}
+  end
+
+  def preload_post_counts(channels) do
+    Enum.map(channels, &Channel.with_post_count/1)
+  end
 end

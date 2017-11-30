@@ -18,6 +18,13 @@
 
 # Danton.User |> Repo.get_by(first_name: "Ryan")
 
+
+# =============================
+# querying by relatopnship
+# =============================
+
+# Danton.User |> Repo.get_by(first_name: "Ryan")
+
 # =============================
 # updating a model
 # =============================

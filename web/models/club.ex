@@ -12,6 +12,8 @@ defmodule Danton.Club do
     has_many :memberships, Membership
     many_to_many :members, User, join_through: "memberships"
 
+    field :channel_count, :integer, virtual: true
+
     timestamps()
   end
 
@@ -93,5 +95,21 @@ defmodule Danton.Club do
     club
     |> Ecto.build_assoc(:channels, channel_params)
     |> Repo.insert!()
+  end
+
+  # ===========================
+  # OTHER
+  # ===========================
+
+  # N + 1 ! (fix later)
+  def with_channel_count(club) do
+    channel_count = Ecto.assoc(club, :channels)
+      |> Repo.aggregate(:count, :id)
+
+    %{club | channel_count: channel_count}
+  end
+
+  def preload_channel_counts(clubs) do
+    Enum.map(clubs, &Club.with_channel_count/1)
   end
 end

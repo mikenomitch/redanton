@@ -17,7 +17,9 @@ defmodule Danton.ChannelController do
 
   def index(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
     page = Channel.for_club(club_id) |> Repo.paginate(params)
-    channels = page.entries |> Repo.preload(:club)
+    channels = page.entries
+      |> Repo.preload(:club)
+      |> Channel.preload_post_counts()
 
     render(conn, "index.html",
       channels: channels,
@@ -31,7 +33,9 @@ defmodule Danton.ChannelController do
 
   def index(conn, params, current_user, _claims) do
     page = Channel.for_user(current_user) |> Repo.paginate(params)
-    channels = page.entries |> Repo.preload(:club)
+    channels = page.entries
+      |> Repo.preload(:club)
+      |> Channel.preload_post_counts()
 
     render(conn, "index.html",
       channels: channels,

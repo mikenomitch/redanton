@@ -9,8 +9,9 @@
     <div class="row list-entry">
       <div class="col-xs-12 col-md-12">
         <strong>
-          <%= link  club.name, to: club_path(@conn, :show, club), class: "" %>
+          <%= link club.name, to: club_path(@conn, :show, club), class: "" %>
         </strong>
+        (<%= channel_count_string(club) %>)
         <%= if user_is_admin(@user, club.id) do %>
           - <%= link "Edit", to: club_path(@conn, :edit, club), class: "" %>
         <% end %>
