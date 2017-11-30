@@ -1,13 +1,9 @@
-<h1 class='header-text'>
-  <%= if @current_user do %>
-    Connect your account
-  <% else %>
-    Login
-  <% end %>
-</h1>
+<h2>
+  Login to Relayd.io
+</h2>
+
 <div>
   <%= if not Enum.member?(@current_auths, "identity") do %>
-    <hr>
     <%= form_tag auth_path(@conn, :callback, "identity"), method: "post", class: "login", novalidate: true do %>
       <div class='control-group login-input'>
         <label class='control-label' for='email-input'>Email</label>
@@ -19,10 +15,11 @@
         <input class='form-control' type='password' name='password' required/>
       </div>
 
-      <div class='control-group login-button'>
-        <button class='btn btn-primary'>Login</button>
+      <div class='control-group login-button centered-content'>
+        <button class='auth-form-btn'>Login</button>
         <span class='login-sign-up'>
-          <span class='login  -or'> or </span> <%= link " sign up", to: user_path(@conn, :new) %>
+          &nbsp <span> or </span> &nbsp
+          <%= link "sign up", to: user_path(@conn, :new) %>
         </span>
       </div>
     <% end %>

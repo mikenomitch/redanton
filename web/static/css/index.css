@@ -111,14 +111,14 @@
   color: #333;
 }
 
-.index-head-links {
+.head-links {
   width: 98%;
   text-align: right;
   position: absolute;
   margin: 1rem;
 }
 
-#index-head-sign-in-link {
+#head-link {
   color: white;
   padding: 1rem;
   font-size: 1.6rem;
@@ -166,4 +166,24 @@
 
 #index-feed-image {
   height: 17rem;
+}
+
+footer {
+  margin-top: 22rem;
+  border-top: solid 1px #ddd;
+  display: flex;
+  align-content: center;
+  justify-content: space;
+  width: 100%;
+}
+
+.footer-text{
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.footer-item{
+  margin: 1.5rem 0.5rem;
 }

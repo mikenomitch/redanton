@@ -1,6 +1,6 @@
-<h1 class='header-text'>
-  Sign Up For Relayd
-</h1>
+<h2>
+  Sign Up for Relayd.io
+</h2>
 
 <%= form_tag auth_path(@conn, :callback, "identity"), [method: "POST", novalidate: true] do %>
   <div class='control-group login-input'>
@@ -9,7 +9,7 @@
   </div>
 
   <div class='control-group login-input'>
-    <label class='control-label' for='name-input'>Name</label>
+    <label class='control-label' for='name-input'>First     Name</label>
     <input name='name' required class='form-control'/>
   </div>
 
@@ -23,10 +23,13 @@
     <input type='password' name='password_confirmation' required class='form-control'/>
   </div>
 
-  <div class='control-group login-button'>
-    <button class='btn btn-primary'>Sign up</button>
+  <div class='control-group login-button centered-content'>
+    <button class='auth-form-btn'>
+      Sign Up
+    </button>
     <span class='login-sign-up'>
-      <span class='login  -or'> or </span> <%= link " login", to: auth_path(@conn, :login) %>
-    </span>
+      &nbsp <span> or </span> &nbsp
+      <%= link "login", to: "/login" %>
+      </span>
   </div>
 <% end %>

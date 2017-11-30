@@ -1,6 +1,6 @@
 <div class="index-body">
-  <div class="index-head-links">
-    <a id="index-head-sign-in-link" href="/login"> Sign In </a>
+  <div class="head-links">
+    <a id="head-link" href="/login"> Sign In </a>
   </div>
   <div class="index-head">
     <div class="index-center">

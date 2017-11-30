@@ -1,11 +1,18 @@
 # Todos
 
 ## Top
-- features
+  - landing and auth pages work
+    - back to home btn
+    - footer on login
+    - footer on main site
+    - mobile tweaks for login/signup
+    - login page handles when logged in already
+    - about page (w back and footer and sign up)
+    - error displays on landing & auth pages!!
   - notification options
     - all, default, mute
       or just default and mute?
-  - landing page work
+  - user info stuff when logged in
   - one post => many channels?
     - refine concept of channels in general?
       - ask erik & victoria

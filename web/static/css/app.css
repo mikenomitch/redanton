@@ -178,3 +178,9 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
 .login-sign-up {
   margin: 0px 5px;
 }
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
