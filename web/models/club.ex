@@ -124,4 +124,15 @@ defmodule Danton.Club do
   def preload_post_counts(clubs) do
     Enum.map(clubs, &Club.with_post_count/1)
   end
+
+  # N + 1 ! (fix later)
+  def with_activity_at(club) do
+    most_recent_post = Post.most_recent_for_club(club) |> Repo.one
+    activity_at_time = most_recent_post && most_recent_post.activity_at || club.inserted_at
+    %{club | activity_at: activity_at_time}
+  end
+
+  def preload_most_recent_activity(clubs) do
+    Enum.map(clubs, &Club.with_activity_at/1)
+  end
 end

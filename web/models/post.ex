@@ -83,6 +83,10 @@ defmodule Danton.Post do
     Ecto.assoc(channel, :posts) |> most_recent()
   end
 
+  def most_recent_for_club(club) do
+    Post.for_club(club) |> most_recent()
+  end
+
   # does a full room load and does not need to
   def for_message(message) do
     message

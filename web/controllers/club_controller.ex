@@ -20,6 +20,7 @@ defmodule Danton.ClubController do
     clubs = page.entries
       |> Club.preload_channel_counts()
       |> Club.preload_post_counts()
+      |> Club.preload_most_recent_activity()
 
     render(conn,
     "index.html",
