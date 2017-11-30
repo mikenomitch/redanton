@@ -96,7 +96,7 @@ defmodule Danton.PostController do
       %{"club_id" => club_id, "channel_id" => channel_id} -> conn |> add_club_crumb(club_id) |> add_channel_crumb(channel_id)
       %{"club_id" => club_id} -> add_club_crumb(conn, club_id)
       %{"channel_id" => channel_id} -> add_channel_crumb(conn, channel_id)
-      _ -> conn
+      _ -> add_front_crumb(conn)
     end
   end
 
@@ -113,6 +113,10 @@ defmodule Danton.PostController do
     conn
     |> add_breadcrumb(name: "Channels", url: "/channels")
     |> add_breadcrumb(name: channel.name, url: "/channels/" <> channel_id)
+  end
+
+  defp add_front_crumb(conn) do
+    add_breadcrumb(conn, name: "My Stream", url: "/front")
   end
 
   defp add_post_crumb(conn, post) do

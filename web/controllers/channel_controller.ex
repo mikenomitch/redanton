@@ -9,7 +9,7 @@ defmodule Danton.ChannelController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
-  plug :add_breadcrumb, name: 'channels', url: '/channels'
+  plug :add_breadcrumb, name: "Channels", url: "/channels"
 
   # ===========================
   # ACTIONS
@@ -92,7 +92,9 @@ defmodule Danton.ChannelController do
 
     posts = page.entries |> Post.with_stream_preloads()
 
-    render(conn,
+    conn
+    |> add_channel_crumb(channel)
+    |> render(
       "show.html",
       channel: channel,
       club: channel.club,
@@ -102,6 +104,10 @@ defmodule Danton.ChannelController do
       total_pages: page.total_pages,
       total_entries: page.total_entries
     )
+  end
+
+  defp add_channel_crumb(conn, channel) do
+    add_breadcrumb(conn, name: channel.name, url: "/channels/" <> Integer.to_string(channel.id))
   end
 
   def edit(conn, %{"id" => id}, _current_user, _claims) do

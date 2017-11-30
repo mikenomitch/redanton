@@ -6,7 +6,7 @@ defmodule Danton.ClubController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
-  plug :add_breadcrumb, name: 'clubs', url: '/clubs'
+  plug :add_breadcrumb, name: "Clubs", url: "/clubs"
 
   # ===========================
   # ACTIONS
@@ -61,7 +61,9 @@ defmodule Danton.ClubController do
 
     posts = page.entries |> Post.with_stream_preloads()
 
-    render(conn,
+    conn
+    |> add_club_crumb(club)
+    |> render(
       "show.html",
       club: club,
       channels: channels,
@@ -71,6 +73,10 @@ defmodule Danton.ClubController do
       total_pages: page.total_pages,
       total_entries: page.total_entries
     )
+  end
+
+  defp add_club_crumb(conn, club) do
+    add_breadcrumb(conn, name: club.name, url: "/clubs/" <> Integer.to_string(club.id))
   end
 
   def edit(conn, %{"id" => id}, _current_user, _claims) do

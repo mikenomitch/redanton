@@ -1,3 +1,5 @@
+<%= render Danton.BreadcrumbleView, "breadcrumb.html", breadcrumb_trails: @breadcrumb_trails %>
+
 <div class="form-header">
   <h1 class="header-text">
     <%= @channel.name %>
