@@ -10,10 +10,12 @@ body {
 
 .container {
   min-height: 95vh;
+  padding-bottom: 5rem;
 }
 
 .index-container {
   min-height: 100vh;
+  padding-bottom: 5rem;
 }
 
 .navbar-inverse {

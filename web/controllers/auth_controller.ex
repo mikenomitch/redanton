@@ -17,7 +17,13 @@ defmodule Danton.AuthController do
   # ===========================
 
   def login(conn, _params, current_user, _claims) do
-    render conn, "login.html", current_user: current_user, current_auths: auths(current_user)
+    if current_user do
+      conn
+      |> put_flash(:info, "Signed in as #{current_user.name}")
+      |> redirect(to: "/front")
+    else
+      render conn, "login.html", current_user: current_user, current_auths: auths(current_user)
+    end
   end
 
   def callback(%Plug.Conn{assigns: %{ueberauth_failure: fails}} = conn, _params, current_user, _claims) do

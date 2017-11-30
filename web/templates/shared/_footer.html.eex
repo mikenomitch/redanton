@@ -1,13 +1,7 @@
 <footer class="<%=footer_class(@style)%>">
   <div class="footer-text">
     <div class="footer-item footer-about-link">
-      <a href="/about">About Relayd</a>
-    </div>
-    <div class="footer-item">
-      |
-    </div>
-    <div class="footer-item footer-email-link">
-      Get in touch at: <a href="mailto:hello@relayd.com"> hello@relayd.com</a>
+      <a href="/about">About Relayd </a> | Get in touch at: <a href="mailto:hello@relayd.com"> hello@relayd.com</a>
     </div>
   </div>
 </footer>
