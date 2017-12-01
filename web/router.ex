@@ -61,14 +61,14 @@ defmodule Danton.Router do
     get "/front", PostController, :front_page
 
     # Add public routes below
-    resources "/memberships", MembershipController
-    post "/memberships/:id/elevate", MembershipController, :elevate
 
     resources "/clubs", ClubController do
       delete "/leave", ClubController, :leave
       resources "/channels", ChannelController, only: [:new, :create]
       resources "/members", MembershipController, only: [:index, :new, :create, :update, :delete]
       resources "/posts", PostController, only: [:show]
+      resources "/memberships", MembershipController, only: [:index, :new, :update, :delete]
+      post "/memberships/:id/elevate", MembershipController, :elevate
     end
 
     resources "/channels", ChannelController do

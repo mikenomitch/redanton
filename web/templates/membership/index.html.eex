@@ -25,10 +25,10 @@
           Type: <%= membership.type %>
         </div>
         <div class="col-xs-6 col-md-12">
-          <%= link "Make Admin", to: membership_path(@conn, :elevate, membership.id), method: :post, data: [confirm: "Make this user an admin?"], class: "" %>
+          <%= link "Make Admin", to: club_membership_path(@conn, :elevate, @club.id, membership.id), method: :post, data: [confirm: "Make this user an admin?"], class: "" %>
         </div>
         <div class="col-xs-6 col-md-12">
-          <%= link "Kick From Group", to: membership_path(@conn, :delete, membership.id), method: :delete, data: [confirm: "Remove this user?"]%>
+          <%= link "Kick From Group", to: club_membership_path(@conn, :delete, @club.id, membership.id), method: :delete, data: [confirm: "Remove this user?"]%>
         </div>
       </div>
     </div>
