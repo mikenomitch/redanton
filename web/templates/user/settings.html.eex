@@ -21,7 +21,21 @@
     <%= error_tag f, :name %>
   </div>
 
+  <div> Leave password fields blank if you wish to keep the same password: </div>
+
   <div class="form-group">
-    <%= submit "Change Info", class: "btn btn-link" %>
+    <%= label f, :new_password, class: "control-label" %>
+    <%= password_input f, :password, class: "form-control" %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :password_confirmation, class: "control-label" %>
+    <%= password_input f, :password_confirmation, class: "form-control" %>
+    <%= error_tag f, :password_confirmation %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit Changes", class: "btn btn-link" %>
   </div>
 <% end %>

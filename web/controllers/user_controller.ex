@@ -1,8 +1,6 @@
 defmodule Danton.UserController do
   use Danton.Web, :controller
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
-
   plug :put_layout, "auth.html" when action in [:new]
 
   # ===========================
@@ -19,10 +17,10 @@ defmodule Danton.UserController do
     render(conn, "settings.html", user: current_user, changeset: changeset)
   end
 
-  def update(conn, params = %{"user" => user_params}, current_user, _claims) do
-    changeset = User.changeset(current_user, user_params)
+  def update(conn, params = %{"user" => user}, current_user, _claims) do
+    user_params = Map.merge(user, %{"email" => current_user.email})
 
-    case Repo.update(changeset) do
+    case User.update_info_and_auth(current_user, user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
