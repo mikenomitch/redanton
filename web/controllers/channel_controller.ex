@@ -11,8 +11,6 @@ defmodule Danton.ChannelController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
-  plug :add_breadcrumb, name: "Channels", url: "/channels"
-
   # ===========================
   # ACTIONS
   # ===========================
@@ -57,13 +55,19 @@ defmodule Danton.ChannelController do
 
   def new(conn, %{"club_id" => club_id}, _current_user, _claims) do
     changeset = Channel.changeset(%Channel{})
-    render(conn, "new.html", changeset: changeset, club_id: club_id, clubs: :empty)
+
+    conn
+    |> add_new_channel_crumbs(club_id)
+    |> render("new.html", changeset: changeset, club_id: club_id, clubs: :empty)
   end
 
   def new(conn, _params, current_user, _claims) do
     changeset = Channel.changeset(%Channel{})
     clubs = Club.for_user(current_user) |> Repo.all
-    render(conn, "new.html", changeset: changeset, club_id: :none, clubs: clubs)
+
+    conn
+    |> add_new_channel_crumbs(:none)
+    |> render("new.html", changeset: changeset, club_id: :none, clubs: clubs)
   end
 
   def create(conn, %{"channel" => channel_params, "club_id" => club_id}, _current_user, _claims) do
@@ -105,6 +109,7 @@ defmodule Danton.ChannelController do
     posts = page.entries |> Post.with_stream_preloads()
 
     conn
+    |> add_club_crumb(channel.club_id)
     |> add_channel_crumb(channel)
     |> render(
       "show.html",
@@ -118,14 +123,15 @@ defmodule Danton.ChannelController do
     )
   end
 
-  defp add_channel_crumb(conn, channel) do
-    add_breadcrumb(conn, name: channel.name, url: "/channels/" <> Integer.to_string(channel.id))
-  end
-
   def edit(conn, %{"id" => id}, _current_user, _claims) do
     channel = Repo.get!(Channel, id)
     changeset = Channel.changeset(channel)
-    render(conn, "edit.html", channel: channel, changeset: changeset)
+
+    conn
+    |> add_club_crumb(channel.club_id)
+    |> add_channel_crumb(channel)
+    |> add_channel_edit_crumb(channel)
+    |> render("edit.html", channel: channel, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "channel" => channel_params}, _current_user, _claims) do
@@ -152,5 +158,40 @@ defmodule Danton.ChannelController do
     conn
     |> put_flash(:info, "Channel deleted successfully.")
     |> redirect(to: channel_path(conn, :index))
+  end
+
+  # BREADCRUMBS
+
+  defp add_channels_crumb(conn) do
+    add_breadcrumb(conn, name: "Channels", url: "/channels/")
+  end
+
+  defp add_channel_crumb(conn, channel) do
+    add_breadcrumb(conn, name: channel.name, url: "/channels/" <> Integer.to_string(channel.id))
+  end
+
+  defp add_channel_edit_crumb(conn, channel) do
+    add_breadcrumb(conn, name: "Edit", url: "/channels/" <> Integer.to_string(channel.id) <> "/edit")
+  end
+
+  defp add_club_crumb(conn, club_id) when is_integer(club_id) do
+    club = Repo.get(Club, club_id)
+    add_club_crumb(conn, club)
+  end
+
+  defp add_club_crumb(conn, club) do
+    add_breadcrumb(conn, name: club.name, url: "/clubs/" <> Integer.to_string(club.id))
+  end
+
+  defp add_new_channel_crumbs(conn, club_id) when club_id == :none do
+    conn
+    |> add_channels_crumb()
+    |> add_breadcrumb(name: "New Channel", url: "/channels/new")
+  end
+
+  defp add_new_channel_crumbs(conn, club_id) do
+    conn
+    |> add_club_crumb(String.to_integer(club_id))
+    |> add_breadcrumb(name: "New Channel", url: "/clubs/" <> club_id <> "/channels/new")
   end
 end

@@ -4,12 +4,16 @@
   <h1 class="header-text">
     <%= @channel.name %>
   </h1>
-  <div class="form-header-nav">
-    <%= link "Back", to: channel_path(@conn, :index) %>
-  </div>
   <div class="form-header-info">
-    <div class="form-header-info-unit"> <%= @channel.description %> </div>
-    <div class="form-header-info-unit"> Club: <%= @club.name %> </div>
+    <div class="form-header-info-unit">
+      <%= link "Edit Channel", to: channel_path(@conn, :edit, @channel), class: "" %>
+    </div>
+    <div class="form-header-info-unit">
+      <%= @channel.description %>
+    </div>
+    <div class="form-header-info-unit">
+      Club: <%= @club.name %>
+    </div>
   </div>
 </div>
 
