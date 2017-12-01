@@ -36,6 +36,7 @@
               <li><a href="/front">Stream</a></li>
               <li><a href="/channels">Channels</a></li>
               <li><a href="/clubs">Clubs</a></li>
+              <li><a href="/settings">Settings</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="navbar-right">
