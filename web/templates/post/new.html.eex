@@ -1,10 +1,9 @@
+<%= render Danton.BreadcrumbleView, "breadcrumb.html", breadcrumb_trails: @breadcrumb_trails %>
+
 <div class="form-header">
   <h1 class="header-text">
     New Post
   </h1>
-  <div class="form-header-nav">
-    <%= link "Back", to: if (@channel_id == :none), do: post_path(@conn, :front_page), else: channel_path(@conn, :show, @channel_id) %>
-  </div>
 </div>
 
 <%=

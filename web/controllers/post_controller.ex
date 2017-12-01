@@ -34,14 +34,20 @@ defmodule Danton.PostController do
 
   def new(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
     changeset = Post.changeset(%Post{})
-    render(conn, "new.html", changeset: changeset, channel_id: channel_id, channels: :none, clubs: :none)
+
+    conn
+    |> add_new_post_crumb(channel_id)
+    |> render("new.html", changeset: changeset, channel_id: channel_id, channels: :none, clubs: :none)
   end
 
   def new(conn, _params, current_user, _claims) do
     changeset = Post.changeset(%Post{})
     channels = Channel.for_user(current_user) |> Repo.all()
     clubs = Club.for_user(current_user) |> Repo.all()
-    render(conn, "new.html", changeset: changeset, channel_id: :none, channels: channels, clubs: clubs)
+
+    conn
+    |> add_new_post_crumb(:front)
+    |> render("new.html", changeset: changeset, channel_id: :none, channels: channels, clubs: clubs)
   end
 
   def create(conn, %{"post" => post_params, "channel_id" => channel_id}, current_user, _claims) do
@@ -80,7 +86,7 @@ defmodule Danton.PostController do
       |> Repo.preload(:user)
 
     conn
-    |> add_parent_crumbs(params)
+    |> add_parent_crumbs(post)
     |> add_post_crumb(post)
     |> render(
       "show.html",
@@ -91,38 +97,6 @@ defmodule Danton.PostController do
     )
   end
 
-  defp add_parent_crumbs(conn, params) do
-    case params do
-      %{"club_id" => club_id, "channel_id" => channel_id} -> conn |> add_club_crumb(club_id) |> add_channel_crumb(channel_id)
-      %{"club_id" => club_id} -> add_club_crumb(conn, club_id)
-      %{"channel_id" => channel_id} -> add_channel_crumb(conn, channel_id)
-      _ -> add_front_crumb(conn)
-    end
-  end
-
-  defp add_club_crumb(conn, club_id) do
-    club = Repo.get(Club, club_id)
-    conn
-    |> add_breadcrumb(name: "Clubs", url: "/clubs")
-    |> add_breadcrumb(name: club.name, url: "/clubs/" <> club_id)
-  end
-
-  defp add_channel_crumb(conn, channel_id) do
-    channel = Repo.get(Channel, channel_id)
-
-    conn
-    |> add_breadcrumb(name: "Channels", url: "/channels")
-    |> add_breadcrumb(name: channel.name, url: "/channels/" <> channel_id)
-  end
-
-  defp add_front_crumb(conn) do
-    add_breadcrumb(conn, name: "My Stream", url: "/front")
-  end
-
-  defp add_post_crumb(conn, post) do
-    add_breadcrumb(conn, name: post.title, url: "/posts/" <> Integer.to_string(post.id))
-  end
-
   def chat(conn, %{"post_id" => post_id}, _current_user, _claims) do
     post = Repo.get!(Post, post_id)
     render(conn, "chat.html", post: post)
@@ -131,7 +105,11 @@ defmodule Danton.PostController do
   def edit(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
-    render(conn, "edit.html", post: post, changeset: changeset, channel_id: post.channel_id)
+
+    conn
+    |> add_parent_crumbs(post)
+    |> add_post_and_edit_crumbs(post)
+    |> render("edit.html", post: post, changeset: changeset, channel_id: post.channel_id)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}, _current_user, _claims) do
@@ -153,5 +131,58 @@ defmodule Danton.PostController do
     conn
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: post_path(conn, :front_page))
+  end
+
+  # BREADCRUMBS
+
+  defp add_parent_crumbs(conn, post) do
+    channel_id = post.channel_id
+    channel = Repo.get(Channel, channel_id)
+
+    conn
+      |> add_club_crumb(channel.club_id)
+      |> add_channel_crumb(channel_id)
+  end
+
+  defp add_club_crumb(conn, club_id) do
+    club = Repo.get(Club, club_id)
+    conn
+    |> add_breadcrumb(name: "Clubs", url: "/clubs")
+    |> add_breadcrumb(name: club.name, url: "/clubs/" <> Integer.to_string(club_id))
+  end
+
+  defp add_channel_crumb(conn, channel_id) do
+    channel = Repo.get(Channel, channel_id)
+
+    conn
+    |> add_breadcrumb(name: "Channels", url: "/channels")
+    |> add_breadcrumb(name: channel.name, url: "/channels/" <> Integer.to_string(channel_id))
+  end
+
+  defp add_new_post_crumb(conn, channel) do
+    case channel do
+      :front ->
+        conn
+        |> add_breadcrumb(name: "My Stream", url: "/front")
+        |> add_breadcrumb(name: "New Post", url: "/posts/new")
+      channel_id ->
+        conn
+        |> add_channel_crumb(String.to_integer(channel_id)) # this is pretty gross (the interpolation issues)
+        |> add_breadcrumb(name: "New Post", url: "/channels/" <> channel_id <> "/posts/new")
+    end
+  end
+
+  defp add_post_and_edit_crumbs(conn, post) do
+    conn
+    |> add_post_crumb(post)
+    |> add_edit_post_crumb(post)
+  end
+
+  defp add_post_crumb(conn, post) do
+    add_breadcrumb(conn, name: post.title, url: "/posts/" <> Integer.to_string(post.id))
+  end
+
+  defp add_edit_post_crumb(conn, post) do
+    add_breadcrumb(conn, name: "Edit", url: "/posts/" <> Integer.to_string(post.id) <> "/edit")
   end
 end

@@ -1,11 +1,11 @@
+<%= render Danton.BreadcrumbleView, "breadcrumb.html", breadcrumb_trails: @breadcrumb_trails %>
+
 <div class="form-header">
   <h1 class="header-text">
     Edit Post
   </h1>
-  <div class="form-header-nav">
-    <%= link "Back", to: channel_path(@conn, :show, @post.channel_id) %>
-  </div>
 </div>
+
 <%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post), channel_id: @post.channel_id %>
 
 <%= link "Delete Post", to: post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure you want to remove this post?"], class: "pull-right" %>

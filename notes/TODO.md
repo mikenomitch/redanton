@@ -7,7 +7,7 @@
   - one post => many channels?
     - refine concept of channels in general?
       - ask erik & victoria
-  - new posts/activity info?
+  - new posts count/activity info?
   - sign up and new user walk thru
   - empty pages and list values/prompts
   - general design/UI/UX work
