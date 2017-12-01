@@ -1,9 +1,8 @@
+<%= render Danton.BreadcrumbleView, "breadcrumb.html", breadcrumb_trails: @breadcrumb_trails %>
+
 <div class="form-header">
   <div class="header-text">
     Edit Club
-  </div>
-  <div class="form-header-nav">
-    <%= link "Back", to: club_path(@conn, :show, @club) %>
   </div>
 </div>
 

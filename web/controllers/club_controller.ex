@@ -36,7 +36,10 @@ defmodule Danton.ClubController do
 
   def new(conn, _params, _current_user, _claims) do
     changeset = Club.changeset(%Club{})
-    render(conn, "new.html", changeset: changeset)
+
+    conn
+    |> add_new_club_crumb()
+    |> render("new.html", changeset: changeset)
   end
 
   def create(conn, %{"club" => club_params}, current_user, _claims) do
@@ -79,14 +82,14 @@ defmodule Danton.ClubController do
     )
   end
 
-  defp add_club_crumb(conn, club) do
-    add_breadcrumb(conn, name: club.name, url: "/clubs/" <> Integer.to_string(club.id))
-  end
-
   def edit(conn, %{"id" => id}, _current_user, _claims) do
     club = Repo.get!(Club, id)
     changeset = Club.changeset(club)
-    render(conn, "edit.html", club: club, changeset: changeset)
+
+    conn
+    |> add_club_crumb(club)
+    |> add_edit_club_crumb(club)
+    |> render("edit.html", club: club, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "club" => club_params}, _current_user, _claims) do
@@ -125,5 +128,19 @@ defmodule Danton.ClubController do
       |> put_flash(:info, "You have left the club.")
       |> redirect(to: club_path(conn, :index))
     end
+  end
+
+  # BREADCRUMBS
+
+  defp add_club_crumb(conn, club) do
+    add_breadcrumb(conn, name: club.name, url: "/clubs/" <> Integer.to_string(club.id))
+  end
+
+  defp add_new_club_crumb(conn) do
+    add_breadcrumb(conn, name: "New Club", url: "/clubs/new")
+  end
+
+  defp add_edit_club_crumb(conn, club) do
+    add_breadcrumb(conn, name: "Edit", url: "/clubs/" <> Integer.to_string(club.id) <> "/edit")
   end
 end

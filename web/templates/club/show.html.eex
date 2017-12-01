@@ -4,9 +4,6 @@
   <h1 class="header-text">
     <%= @club.name %>
   </h1>
-  <div class="form-header-nav">
-    <%= link "Back", to: club_path(@conn, :index) %>
-  </div>
   <div class="form-header-info">
     <div class="form-header-info-unit">
       <%= @club.description %>

@@ -13,13 +13,21 @@ defmodule Danton.MembershipController do
       |> Repo.all()
       |> Repo.preload(:user)
 
-    render(conn, "index.html", memberships: memberships, club: club)
+    conn
+    |> add_club_crumb(club)
+    |> add_club_membership_crumb(club)
+    |> render("index.html", memberships: memberships, club: club)
   end
 
   def new(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
     club = Repo.get(Club, club_id)
     changeset = Membership.changeset(%Danton.Membership{})
-    render(conn, "new.html", changeset: changeset, club: club)
+
+    conn
+    |> add_club_crumb(club)
+    |> add_club_membership_crumb(club)
+    |> add_new_membership_crumb(club)
+    |> render("new.html", changeset: changeset, club: club)
   end
 
   def create(conn, %{"membership" => membership_params, "club_id" => club_id}, _current_user, _claims) do
@@ -95,5 +103,19 @@ defmodule Danton.MembershipController do
     conn
     |> put_flash(:info, "Member kicked!")
     |> redirect(to: club_membership_path(conn, :index, club_id))
+  end
+
+  # BREADCRUMBS
+
+  defp add_club_crumb(conn, club) do
+    add_breadcrumb(conn, name: club.name, url: "/clubs/" <> Integer.to_string(club.id))
+  end
+
+  defp add_club_membership_crumb(conn, club) do
+    add_breadcrumb(conn, name: "Members", url: "/clubs/" <> Integer.to_string(club.id) <> "/members")
+  end
+
+  defp add_new_membership_crumb(conn, club) do
+    add_breadcrumb(conn, name: "Invite", url: "/clubs/" <> Integer.to_string(club.id) <> "/members/new")
   end
 end

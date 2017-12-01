@@ -1,10 +1,9 @@
+<%= render Danton.BreadcrumbleView, "breadcrumb.html", breadcrumb_trails: @breadcrumb_trails %>
+
 <div class="flex-wrapper">
   <h1 class="header-text">
     <%= @club.name %> members
   </h1>
-  <div class="form-header-nav">
-    <%= link "Back", to: club_path(@conn, :show, @club.id) %>
-  </div>
 
   <div class="container-fluid">
   <%= for membership <- @memberships do %>
