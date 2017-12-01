@@ -29,7 +29,7 @@
 # updating a model
 # =============================
 
-# Post.changeset(post, %{title: "some new title"}) |> Repo.insert
+# Post.changeset(post, %{title: "some new title"}) |> Repo.update
 
 # =============================
 # getting an association
