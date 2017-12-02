@@ -25,10 +25,12 @@ function formatTimes() {
 
 // SET UP CHAT
 
-function newMessageInnerHTML(payload) {
+function newMessageInnerHTML(payload, currentUserId) {
+  let name = payload.user_id == currentUserId ? 'Me' : payload.user_name
+
   return `
   <div class="message-user">
-  ${payload.user_name}
+  ${name}
   </div>
   <div class="message-body">
   ${payload.body}
@@ -70,7 +72,7 @@ function setUpChat() {
 
     let messageItem = document.createElement('div')
     messageItem.classList = newMessageClassList(payload, chatInput.dataset.currentuserid)
-    messageItem.innerHTML = newMessageInnerHTML(payload)
+    messageItem.innerHTML = newMessageInnerHTML(payload, chatInput.dataset.currentuserid)
 
 
     messagesContainer.appendChild(messageItem)
