@@ -53,6 +53,19 @@ defmodule Danton.PostView do
     end
   end
 
+  def chat_time(time) do
+    {:ok, formatted_time} = Timex.format(time, "{h12}:{m}{am} - {D}/{M}/{YY}")
+    formatted_time
+  end
+
+  def chat_name(user, current_user_id) do
+      if (user.id == current_user_id) do
+        ""
+      else
+        (user.name || user.email) <> "  "
+      end
+  end
+
   def latest_activity_text(post) do
     time = Post.latest_activity_time(post)
     activity_type = Post.latest_activity_type(post)
@@ -60,7 +73,7 @@ defmodule Danton.PostView do
       "Posted " <> Timex.from_now(time)
     else
       msg = Message.latest_for_post(post) |> Danton.Repo.preload(:user)
-      "Message from " <> msg.user.name <> " " <> Timex.from_now(time)
+      "Message from " <> msg.user.name <> " " <> time_from_now(time)
     end
   end
 
@@ -68,5 +81,9 @@ defmodule Danton.PostView do
   def dropdown_text(channel, clubs) do
     club = Enum.find(clubs, &(&1.id == channel.club_id))
     channel.name <> " (" <> club.name <> ")"
+  end
+
+  def time_from_now(time) do
+    Timex.from_now(time)
   end
 end

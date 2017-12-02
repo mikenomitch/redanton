@@ -9,36 +9,40 @@
       <%= if user_can_edit(@post, @conn.private.guardian_default_resource) do %>
         <%= link "Edit Post", to: post_path(@conn, :edit, @post), class: "" %>
       <% end %>
-    </div>
-    <div class="form-header-info-unit"> Posted By: <%= @post.user.name %> </div>
-    <div class="form-header-info-unit">
-      In Channel: <%= link @post.channel.name, to: channel_path(@conn, :show, @post.channel.id) %>
+      Posted By: <%= @post.user.name %>
     </div>
   </div>
 </div>
 
-<div class="association-header text-right"> Discussion: </div>
 <div class="chat">
   <div id="messages" class="message-list">
+    <%= if(length(@messages) === 0) do %>
+      <div id="chat-prompt">
+        <div> Nobody is talking 🙁 </div>
+        <div> You can fix that! 😃 </div>
+      </div>
+    <% end %>
+
+
     <%= for message <- @messages do %>
-    <div class="message <%=msg_class(message, @user_id)%>">
-      <div class="message-user">
-        <%= message.user.name || message.user.email %>
+      <div class="message <%=msg_class(message, @user_id)%>">
+        <div class="message-user">
+          <%= chat_name(message.user, @user_id) %> <%= chat_time(message.inserted_at)%>
+        </div>
+        <div class="message-body">
+          <%= message.body %>
+        </div>
       </div>
-      <div class="message-body">
-        <%= message.body %>
-      </div>
-    </div>
     <% end %>
   </div>
+
   <div class="chat-input-holder">
     <input
       id="chat-input"
-      class="form-control"
+      class="form-control chat-input-box"
       data-postid="<%=@post.id%>"
       data-roomid="<%=@room_id%>"
       data-currentuserid="<%=@user_id%>"
-      placeholder="enter message"
     />
   </div>
 </div>

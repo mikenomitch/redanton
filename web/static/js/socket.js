@@ -60,7 +60,6 @@ socket.connect()
 //   .receive("error", resp => { console.log("Unable to join", resp) })
 let chatInput = document.querySelector('#chat-input')
 
-
 function newMessageInnerHTML(payload) {
   return `
   <div class="message-user">
@@ -95,9 +94,13 @@ function setUpChat() {
   })
 
   channel.on('new_msg', payload => {
+    let chatPrompt = document.querySelector('#chat-prompt')
+    if (chatPrompt) { chatPrompt.remove() }
+
     let messageItem = document.createElement('div')
     messageItem.classList = newMessageClassList(payload, chatInput.dataset.currentuserid)
     messageItem.innerHTML = newMessageInnerHTML(payload)
+
 
     messagesContainer.appendChild(messageItem)
     messagesContainer.scrollTop = messagesContainer.scrollHeight
