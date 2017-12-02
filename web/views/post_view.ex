@@ -60,7 +60,7 @@ defmodule Danton.PostView do
 
   def chat_name(user, current_user_id) do
       if (user.id == current_user_id) do
-        ""
+        "Me"
       else
         (user.name || user.email) <> "  "
       end
