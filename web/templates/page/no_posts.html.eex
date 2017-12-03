@@ -1,0 +1,15 @@
+<div class="intro-prompt-holder">
+  <h2 class="intro-prompt-title">
+    No Posts!
+  </h2>
+
+  <div class="intro-prompt-description">
+    <p> This isn't much fun yet. Add some posts to get the ball rolling. </p>
+    <p> What are the best things you've seen on the internet recently. </p>
+    <p> Grab those URLs and share them with your group! </p>
+  </div>
+
+  <div class="intro-prompt-cta">
+    <%= link "Add your first Post!", to: post_path(@conn, :new) %>
+  </div>
+</div>

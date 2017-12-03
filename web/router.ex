@@ -60,6 +60,10 @@ defmodule Danton.Router do
     get "/about", PageController, :about
     get "/front", PostController, :front_page
 
+    get "/no_clubs", PageController, :no_clubs
+    get "/no_channels", PageController, :no_channels
+    get "/no_posts", PageController, :no_posts
+
     # Add public routes below
 
     resources "/clubs", ClubController do

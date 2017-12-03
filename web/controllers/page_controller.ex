@@ -16,4 +16,16 @@ defmodule Danton.PageController do
   def about(conn, _params, _current_user, _claims) do
     render put_layout(conn, "auth.html"), "about.html"
   end
+
+  def no_channels(conn, _params, _current_user, _claims) do
+    render(conn, "no_channels.html")
+  end
+
+  def no_clubs(conn, _params, _current_user, _claims) do
+    render(conn, "no_clubs.html")
+  end
+
+  def no_posts(conn, _params, _current_user, _claims) do
+    render(conn, "no_posts.html")
+  end
 end
