@@ -14,11 +14,41 @@ defmodule Danton.PostController do
   # ACTIONS
   # ===========================
 
+  # FRONT PAGE
+
+  def front_page(conn, params, current_user, _claims) do
+    case front_page_template(current_user) do
+      :no_clubs -> render_no_clubs(conn)
+      :no_channels -> render_no_channels(conn)
+      :no_posts -> render_no_posts(conn)
+      :front -> render_front(conn, params, current_user)
+    end
+  end
+
   def index(conn, _params, _current_user, _claims) do
     redirect(conn, to: post_path(conn, :front_page))
   end
 
-  def front_page(conn, params, current_user, _claims) do
+  defp front_page_template(user) do
+    ( Club.user_has_none(user) && :no_clubs )
+    || ( Channel.user_has_none(user) && :no_channels )
+    || ( Post.user_has_none(user) && :no_posts )
+    || :front
+  end
+
+  defp render_no_clubs(conn) do
+    render(conn, Danton.PageView, "no_clubs.html")
+  end
+
+  defp render_no_channels(conn) do
+    render(conn, Danton.PageView, "no_channels.html")
+  end
+
+  defp render_no_posts(conn) do
+    render(conn, Danton.PageView, "no_posts.html")
+  end
+
+  defp render_front(conn, params, current_user) do
     page = Post.for_front_page(current_user) |> Repo.paginate(params)
     posts = page.entries |> Post.with_stream_preloads()
 
@@ -31,6 +61,8 @@ defmodule Danton.PostController do
       total_entries: page.total_entries
     )
   end
+
+  # ===== END FRONT PAGE
 
   def new(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
     changeset = Post.changeset(%Post{})

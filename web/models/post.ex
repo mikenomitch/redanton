@@ -109,6 +109,11 @@ defmodule Danton.Post do
       |> preload([_, r, m], [room: {r, messages: m}])
   end
 
+  def user_has_none(user) do
+    post_count = Post.for_front_page(user) |> Repo.aggregate(:count, :id)
+    post_count == 0
+  end
+
   # ===========================
   # CREATE
   # ===========================

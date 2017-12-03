@@ -63,6 +63,11 @@ defmodule Danton.Club do
     for_user(user) |> Repo.get(club_id)
   end
 
+  def user_has_none(user) do
+    club_count = Club.for_user(user) |> Repo.aggregate(:count, :id)
+    club_count == 0
+  end
+
   # ===========================
   # CREATE
   # ===========================
