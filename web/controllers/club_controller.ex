@@ -69,8 +69,10 @@ defmodule Danton.ClubController do
   end
 
   def show(conn, params = %{"id" => id}, _current_user, _claims) do
-    club = Repo.get!(Club, id) |> Repo.preload(:channels)
-    channels = club.channels |> Repo.preload(:club)
+    club = Repo.get!(Club, id)
+      |> Repo.preload(:channels)
+      |> Club.with_post_count()
+      |> Club.with_channel_count()
 
     page = Post.for_club(club)
       |> Post.by_activity()
@@ -83,7 +85,6 @@ defmodule Danton.ClubController do
     |> render(
       "show.html",
       club: club,
-      channels: channels,
       posts: posts,
       page_number: page.page_number,
       page_size: page.page_size,

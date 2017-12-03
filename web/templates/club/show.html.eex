@@ -25,19 +25,27 @@
   </div>
 </div>
 
-<div class="associations">
-  <div class="association-header">Posts:</div>
+<%= if (@club.post_count > 0) do %>
+  <div class="associations">
+    <div class="association-header">Posts:</div>
+    <%= render(
+      Danton.PostView,
+      "stream.html",
+      posts: @posts,
+      conn: @conn,
+      total_pages: @total_pages,
+      page_number: @page_number,
+      parent_type: :club,
+      parent: @club,
+      base_url: "/clubs/" <> Integer.to_string(@club.id)
+    ) %>
+  </div>
+<% else %>
+  <br /> <br />
+  <%= if (@club.channel_count == 0) do %>
+      <%= render(Danton.PageView, "no_channels.html", conn: @conn)%>
+  <% else %>
+    <%= render(Danton.PageView, "no_posts.html", conn: @conn)%>
+  <% end %>
+<% end %>
 
-  <%= render(
-    Danton.PostView,
-    "stream.html",
-    posts: @posts,
-    conn: @conn,
-    total_pages: @total_pages,
-    page_number: @page_number,
-    parent_type: :club,
-    parent: @club,
-    base_url: "/clubs/" <> Integer.to_string(@club.id)
-  ) %>
-
-</div>
