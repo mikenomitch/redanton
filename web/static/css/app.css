@@ -254,3 +254,29 @@ footer {
 .footer-item{
   margin: 1.5rem 0.5rem;
 }
+
+/* PROMPTS FOR INTROS */
+
+.intro-prompt-holder{
+  border: solid 1px #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.intro-prompt-title{
+  width: 100%;
+  text-align: center;
+}
+
+.intro-prompt-description{
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.intro-prompt-cta{
+  width: 100%;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+}

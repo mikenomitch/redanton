@@ -5,11 +5,11 @@
 
   <div class="intro-prompt-description">
     <p> This isn't much fun yet. Add some posts to get the ball rolling. </p>
-    <p> What are the best things you've seen on the internet recently. </p>
-    <p> Grab those URLs and share them with your group! </p>
+    <p> What are the best things you've seen on the internet recently? </p>
+    <p> Grab their URLs and share them with your group! </p>
   </div>
 
   <div class="intro-prompt-cta">
-    <%= link "Add your first Post!", to: post_path(@conn, :new) %>
+    <%= link "Add your first Post", to: post_path(@conn, :new) %>
   </div>
 </div>
