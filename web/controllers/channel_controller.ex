@@ -1,6 +1,7 @@
 defmodule Danton.ChannelController do
   use Danton.Web, :controller
   use Danton.CheckIn, :controller
+  use Danton.Controller.Helpers, :no_items_rendering
 
   @page_size 20
 
@@ -15,26 +16,16 @@ defmodule Danton.ChannelController do
   # ACTIONS
   # ===========================
 
-  def index(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
-    pagination_params = Map.merge(params, %{page_size: @page_size})
-    page = Channel.for_club(club_id) |> Repo.paginate(pagination_params)
-
-    channels = page.entries
-      |> Repo.preload(:club)
-      |> Channel.preload_post_counts()
-      |> Channel.preload_most_recent_activity()
-
-    render(conn, "index.html",
-      channels: channels,
-      club_id: club_id,
-      page_number: page.page_number,
-      page_size: page.page_size,
-      total_pages: page.total_pages,
-      total_entries: page.total_entries
-    )
+  def index(conn, params, current_user, _claims) do
+    case index_template(current_user) do
+      :no_clubs -> render_no_clubs(conn)
+      :no_channels -> render_no_channels(conn)
+      :no_posts -> render_no_posts(conn)
+      :main -> render_channel_index(conn, params, current_user)
+    end
   end
 
-  def index(conn, params, current_user, _claims) do
+  defp render_channel_index(conn, params, current_user) do
     pagination_params = Map.merge(params, %{page_size: @page_size})
     page = Channel.for_user(current_user) |> Repo.paginate(pagination_params)
 

@@ -1,6 +1,7 @@
 defmodule Danton.PostController do
   use Danton.Web, :controller
   use Danton.CheckIn, :controller
+  use Danton.Controller.Helpers, :no_items_rendering
 
   plug Danton.WebAuthorization, [:post, :view] when action in [:show]
   plug Danton.WebAuthorization, [:post, :edit] when action in [:edit, :update, :delete]
@@ -17,35 +18,16 @@ defmodule Danton.PostController do
   # FRONT PAGE
 
   def front_page(conn, params, current_user, _claims) do
-    case front_page_template(current_user) do
+    case index_template(current_user) do
       :no_clubs -> render_no_clubs(conn)
       :no_channels -> render_no_channels(conn)
       :no_posts -> render_no_posts(conn)
-      :front -> render_front(conn, params, current_user)
+      :main -> render_front(conn, params, current_user)
     end
   end
 
   def index(conn, _params, _current_user, _claims) do
     redirect(conn, to: post_path(conn, :front_page))
-  end
-
-  defp front_page_template(user) do
-    ( Club.user_has_none(user) && :no_clubs )
-    || ( Channel.user_has_none(user) && :no_channels )
-    || ( Post.user_has_none(user) && :no_posts )
-    || :front
-  end
-
-  defp render_no_clubs(conn) do
-    render(conn, Danton.PageView, "no_clubs.html")
-  end
-
-  defp render_no_channels(conn) do
-    render(conn, Danton.PageView, "no_channels.html")
-  end
-
-  defp render_no_posts(conn) do
-    render(conn, Danton.PageView, "no_posts.html")
   end
 
   defp render_front(conn, params, current_user) do

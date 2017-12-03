@@ -1,5 +1,6 @@
 defmodule Danton.ClubController do
   use Danton.Web, :controller
+  use Danton.Controller.Helpers, :no_items_rendering
 
   plug Danton.WebAuthorization, [:club, :view] when action in [:show, :leave]
   plug Danton.WebAuthorization, [:club, :edit] when action in [:edit, :update, :delete]
@@ -13,6 +14,15 @@ defmodule Danton.ClubController do
   # ===========================
 
   def index(conn, params, current_user, _claims) do
+    case index_template(current_user) do
+      :no_clubs -> render_no_clubs(conn)
+      :no_channels -> render_no_channels(conn)
+      :no_posts -> render_no_posts(conn)
+      :main -> render_club_index(conn, params, current_user)
+    end
+  end
+
+  defp render_club_index(conn, params, current_user) do
     page = current_user
       |> Ecto.assoc(:clubs)
       |> order_by(asc: :inserted_at)
@@ -24,14 +34,14 @@ defmodule Danton.ClubController do
       |> Club.preload_most_recent_activity()
 
     render(conn,
-    "index.html",
-    clubs: clubs,
-    user: current_user,
-    page_number: page.page_number,
-    page_size: page.page_size,
-    total_pages: page.total_pages,
-    total_entries: page.total_entries
-  )
+      "index.html",
+      clubs: clubs,
+      user: current_user,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def new(conn, _params, _current_user, _claims) do
