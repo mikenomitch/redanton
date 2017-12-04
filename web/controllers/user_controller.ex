@@ -1,7 +1,7 @@
 defmodule Danton.UserController do
   use Danton.Web, :controller
 
-  plug :put_layout, "auth.html" when action in [:new, :password_reset]
+  plug :put_layout, "auth.html" when action in [:new, :password_reset, :set_password]
 
   # ===========================
   # ACTIONS
@@ -38,14 +38,24 @@ defmodule Danton.UserController do
     render(conn, "set_password.html")
   end
 
-  def set_new_password(conn, params = %{"password" => password, "confirm_password" => confirm_password}, _current_user, _claims) do
+  def set_new_password(conn, params = %{"password" => password, "password_confirmation" => password_confirmation}, _current_user, _claims) do
     # hrm... how do we ID the user here?
     user = Repo.get(User, 1)
 
     if (user) do
-      redirect(conn, to: "/front")
+      Authorization.update_authorization_for_user_params(%{
+        "password" => password,
+        "password_confirmation" => password_confirmation,
+        "email" => user.email
+      })
+
+      conn
+      |> put_flash(:info, "Password Updated.")
+      |> redirect(to: "/login")
     else
-      redirect(conn, to: "/front")
+      conn
+      |> put_flash(:error, "There was an issue updating your password.")
+      |> redirect(to: "/set_password")
     end
   end
 

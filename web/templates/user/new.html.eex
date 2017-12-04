@@ -9,7 +9,7 @@
   </div>
 
   <div class='control-group login-input'>
-    <label class='control-label' for='name-input'>First     Name</label>
+    <label class='control-label' for='name-input'>First Name</label>
     <input name='name' required class='form-control'/>
   </div>
 
