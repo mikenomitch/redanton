@@ -39,10 +39,9 @@ defmodule Danton.UserController do
   end
 
   def set_new_password(conn, params = %{"password" => password, "password_confirmation" => password_confirmation, "token" => token}, _current_user, _claims) do
-    # hrm... how do we ID the user here?
-    user = Repo.get(User, 1)
-
-    if (user) do
+    with {:ok, claims} <- Guardian.decode_and_verify(token),
+         {:ok, user} <- Guardian.serializer.from_token(claims["sub"])
+    do
       Authorization.update_authorization_for_user_params(%{
         "password" => password,
         "password_confirmation" => password_confirmation,
@@ -53,7 +52,7 @@ defmodule Danton.UserController do
       |> put_flash(:info, "Password Updated.")
       |> redirect(to: "/login")
     else
-      conn
+      err -> conn
       |> put_flash(:error, "There was an issue updating your password.")
       |> redirect(to: "/set_password")
     end
