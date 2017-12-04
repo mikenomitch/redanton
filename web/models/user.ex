@@ -118,8 +118,12 @@ defmodule Danton.User do
   end
 
   # =====================================
-  # TODO: EXTRACT SIGN UP INTO OWN MODULE
+  # TODO: EXTRACT AUTH STUFF INTO OWN MODULE
   # =====================================
+
+  def send_password_reset(user) do
+    Danton.Notification.notify_via_email(user, :password_reset, %{})
+  end
 
   def sign_up(params) do
     case validate_sign_up_params(params) do

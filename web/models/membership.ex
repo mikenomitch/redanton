@@ -77,8 +77,7 @@ defmodule Danton.Membership do
       membership.user_id,
       :new_club_invite,
       %{
-        club_name: club.name,
-        site_url: "https://danton.herokuapp.com"
+        club_name: club.name
       }
     )
   end

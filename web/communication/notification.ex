@@ -30,7 +30,11 @@ defmodule Danton.Notification do
     if push_token do
       apply(Push, type, [push_token.value, params])
     else
-      apply(Email, type, [user, params]) |> Mailer.deliver_later
+      notify_via_email(user, type, params)
     end
+  end
+
+  def notify_via_email(user, type, params) do
+    apply(Email, type, [user, params]) |> Mailer.deliver_later
   end
 end

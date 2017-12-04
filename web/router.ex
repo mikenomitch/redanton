@@ -93,6 +93,11 @@ defmodule Danton.Router do
     resources "/users", UserController
     get "/settings", UserController, :settings
     get "/sign_up", UserController, :new
+    get "/password_reset", UserController, :password_reset
+    post "/send_reset_email", UserController, :send_reset_email
+    get "/set_password", UserController, :set_password
+    post "/set_new_password", UserController, :set_new_password
+
     resources "/users", UserController
     resources "/authorizations", AuthorizationController
   end

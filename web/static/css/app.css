@@ -220,6 +220,11 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
   margin: 0px 5px;
 }
 
+.login-forgot-password a{
+  color: gray;
+  font-size: 1.1rem;
+}
+
 .centered-content {
   display: flex;
   justify-content: center;

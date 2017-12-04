@@ -22,6 +22,9 @@
           <%= link "sign up", to: user_path(@conn, :new) %>
         </span>
       </div>
+      <div class='centered-content login-forgot-password'>
+        <%= link "forgot password", to: user_path(@conn, :password_reset) %>
+      </div>
     <% end %>
   <% end %>
 </div>

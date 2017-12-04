@@ -163,7 +163,7 @@ defmodule Danton.Post do
       %{
         poster_name: user.name || user.email,
         post_title: post.title,
-        post_path: "https://danton.herokuapp.com/posts/#{post.id}"
+        post_path: "/posts/#{post.id}"
       }
     )
   end
