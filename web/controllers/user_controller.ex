@@ -38,25 +38,28 @@ defmodule Danton.UserController do
     render(conn, "set_password.html", token: token)
   end
 
-  def set_new_password(conn, params = %{"password" => password, "password_confirmation" => password_confirmation, "token" => token}, _current_user, _claims) do
+  def set_new_password(conn, %{"password" => pw, "password_confirmation" => pwc, "token" => token}, _current_user, _claims) do
     with {:ok, claims = %{"typ" => "reset"}} <- Guardian.decode_and_verify(token),
-         {:ok, user} <- Guardian.serializer.from_token(claims["sub"])
+         {:ok, user} <- Guardian.serializer.from_token(claims["sub"]),
+         {:ok, _new_auth} <- Authorization.update_authorization_for_user_params(%{"password" => pw, "password_confirmation" => pwc, "email" => user.email})
     do
-
-      Authorization.update_authorization_for_user_params(%{
-        "password" => password,
-        "password_confirmation" => password_confirmation,
-        "email" => user.email
-      })
-
-      conn
-      |> put_flash(:info, "Password Updated.")
-      |> redirect(to: "/login")
+      successful_password_reset(conn)
     else
-      err -> conn
-      |> put_flash(:error, "There was an issue updating your password.")
-      |> redirect(to: "/set_password")
+      {:error, err} -> bad_password_reset(conn, token, err)
+      err -> bad_password_reset(conn, token)
     end
+  end
+
+  defp successful_password_reset(conn) do
+    conn
+    |> put_flash(:info, "Password Updated.")
+    |> redirect(to: "/login")
+  end
+
+  defp bad_password_reset(conn, token, error \\ "There was an issue updating your password.") do
+    conn
+    |> put_flash(:error, error)
+    |> redirect(to: "/set_password?token=" <> token)
   end
 
   def send_reset_email(conn, params = %{"email" => email}, _current_user, _claims) do
