@@ -39,9 +39,10 @@ defmodule Danton.UserController do
   end
 
   def set_new_password(conn, params = %{"password" => password, "password_confirmation" => password_confirmation, "token" => token}, _current_user, _claims) do
-    with {:ok, claims} <- Guardian.decode_and_verify(token),
+    with {:ok, claims = %{"typ" => "reset"}} <- Guardian.decode_and_verify(token),
          {:ok, user} <- Guardian.serializer.from_token(claims["sub"])
     do
+
       Authorization.update_authorization_for_user_params(%{
         "password" => password,
         "password_confirmation" => password_confirmation,
