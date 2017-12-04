@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= label f, :description, class: "control-label" %>
-    <%= textarea f, :description, class: "form-control" %>
+    <%= textarea f, :description, class: "form-control", placeholder: "What is the purpose of the group? (optional)" %>
     <%= error_tag f, :description %>
   </div>
 

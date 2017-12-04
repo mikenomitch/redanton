@@ -9,7 +9,13 @@
     <p> We suggest inviting several interesting friends to a club, and immediately posting some links to get started. </p>
   </div>
 
-  <div class="intro-prompt-cta">
-    <%= link "Make your first Club!", to: club_path(@conn, :new) %>
+  <div class="intro-prompt-form">
+  <div class="form-header">
+    <h3 class="header-text">
+      Make your first club:
+    </h3>
+  </div>
+
+    <%= render Danton.ClubView, "form.html", changeset: @changeset, action: club_path(@conn, :create) %>
   </div>
 </div>
