@@ -3,13 +3,27 @@
     You need some Channels!
   </h2>
 
-  <div class="intro-prompt-description">
-    <p> You've got a club set up, but no channels! </p>
-    <p> Every time you post to Relayd, you broadcast to a channel. </p>
-    <p> Channels can be about any topic you like: humor, politics, culture, entertainment, etc... </p>
-  </div>
+  <%= if (@parent_type == :club) do %>
+    <div class="intro-prompt-description">
+      <p> You have a club... but without channels it can't do much. <p>
+      <p> Channels can be about any topic you like: humor, politics, culture, entertainment, etc... </p>
+    </div>
 
-  <div class="intro-prompt-cta">
-    <%= link "Add your first Channel!", to: channel_path(@conn, :new) %>
-  </div>
+    <div class="intro-prompt-cta">
+      <%= link "Add a Channel to the Club", to: club_channel_path(@conn, :new, @parent_id) %>
+    </div>
+
+  <% else %>
+
+    <div class="intro-prompt-description">
+      <p> You've got a club set up, but no channels! </p>
+      <p> Every time you post to Relayd, you broadcast to a channel. </p>
+      <p> Channels can be about any topic you like: humor, politics, culture, entertainment, etc... </p>
+    </div>
+
+    <div class="intro-prompt-cta">
+      <%= link "Add your first Channel!", to: channel_path(@conn, :new) %>
+    </div>
+
+  <% end %>
 </div>

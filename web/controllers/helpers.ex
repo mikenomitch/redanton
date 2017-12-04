@@ -32,15 +32,15 @@ defmodule Danton.Controller.Helpers do
       end
 
       def render_no_clubs(conn) do
-        render(conn, Danton.PageView, "no_clubs.html")
+        render(conn, Danton.PageView, "no_clubs.html", parent_type: nil, parent_id: nil)
       end
 
       def render_no_channels(conn) do
-        render(conn, Danton.PageView, "no_channels.html")
+        render(conn, Danton.PageView, "no_channels.html", parent_type: nil, parent_id: nil)
       end
 
       def render_no_posts(conn) do
-        render(conn, Danton.PageView, "no_posts.html")
+        render(conn, Danton.PageView, "no_posts.html", parent_type: nil, parent_id: nil)
       end
     end
   end

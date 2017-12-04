@@ -38,5 +38,5 @@
   </div>
 <% else %>
   <br /> <br />
-  <%= render(Danton.PageView, "no_posts.html", conn: @conn)%>
+  <%= render(Danton.PageView, "no_posts.html", conn: @conn, parent_type: :channel, parent_id: @channel.id)%>
 <% end %>

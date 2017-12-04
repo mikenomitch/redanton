@@ -18,14 +18,14 @@ defmodule Danton.PageController do
   end
 
   def no_channels(conn, _params, _current_user, _claims) do
-    render(conn, "no_channels.html")
+    render(conn, "no_channels.html", parent_type: nil, parent_id: nil)
   end
 
   def no_clubs(conn, _params, _current_user, _claims) do
-    render(conn, "no_clubs.html")
+    render(conn, "no_clubs.html", parent_type: nil, parent_id: nil)
   end
 
   def no_posts(conn, _params, _current_user, _claims) do
-    render(conn, "no_posts.html")
+    render(conn, "no_posts.html", parent_type: nil, parent_id: nil)
   end
 end

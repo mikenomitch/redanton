@@ -1,15 +1,39 @@
 <div class="intro-prompt-holder">
-  <h2 class="intro-prompt-title">
+  <h3 class="intro-prompt-title">
     No Posts!
-  </h2>
+  </h3>
 
-  <div class="intro-prompt-description">
-    <p> This isn't much fun yet. Add some posts to get the ball rolling. </p>
-    <p> What are the best things you've seen on the internet recently? </p>
-    <p> Grab their URLs and share them with your group! </p>
-  </div>
+  <%= if (@parent_type == :club) do %>
+    <div class="intro-prompt-description">
+      <p> This club has no posts yet. </p>
+      <p> Get the ball rolling by sharing with the group! </p>
+    </div>
 
-  <div class="intro-prompt-cta">
-    <%= link "Add your first Post", to: post_path(@conn, :new) %>
-  </div>
+    <div class="intro-prompt-cta">
+      <%= link "Add the first Post", to: post_path(@conn, :new) %>
+    </div>
+  <% end %>
+
+  <%= if (@parent_type == :channel) do %>
+    <div class="intro-prompt-description">
+      <p> This channel is empty. <p>
+      <p> Add some content to make it interesting. <p>
+    </div>
+
+    <div class="intro-prompt-cta">
+      <%= link "Post to the Channel", to: channel_post_path(@conn, :new, @parent_id) %>
+    </div>
+  <% end %>
+
+  <%= if (@parent_type == nil) do %>
+    <div class="intro-prompt-description">
+      <p> This isn't much fun yet. Add some posts to get the ball rolling. </p>
+      <p> What are the best things you've seen on the internet recently? </p>
+      <p> Grab their URLs and share them with your group! </p>
+    </div>
+
+    <div class="intro-prompt-cta">
+      <%= link "Make your first Post", to: post_path(@conn, :new) %>
+    </div>
+  <% end %>
 </div>
