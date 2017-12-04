@@ -12,7 +12,6 @@
   - general design/UI/UX work
   - timezones working
   - password change with old pw
-  - password reset links/emails
 
 ## Mobile Frontend
   - auth
