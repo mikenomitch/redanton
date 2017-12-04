@@ -34,11 +34,11 @@ defmodule Danton.UserController do
     render(conn, "password_reset.html")
   end
 
-  def set_password(conn, _params, _current_user, _claims) do
-    render(conn, "set_password.html")
+  def set_password(conn, %{"token" => token} , _current_user, _claims) do
+    render(conn, "set_password.html", token: token)
   end
 
-  def set_new_password(conn, params = %{"password" => password, "password_confirmation" => password_confirmation}, _current_user, _claims) do
+  def set_new_password(conn, params = %{"password" => password, "password_confirmation" => password_confirmation, "token" => token}, _current_user, _claims) do
     # hrm... how do we ID the user here?
     user = Repo.get(User, 1)
 

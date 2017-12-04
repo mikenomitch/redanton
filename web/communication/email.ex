@@ -44,14 +44,14 @@ defmodule Danton.Email do
     )
   end
 
-  def password_reset(user, _params) do
+  def password_reset(user, %{token: token}) do
     base_email()
     |> to(email_for_user(user)) # really should be `user.email`
     |> subject("Password Reset")
     |> assign(:person, user)
     |> render(
       "password_reset.html",
-      password_link: @base_site_url <> "/set_password",
+      password_link: @base_site_url <> "/set_password?token=" <> token,
       app_path: @app_path
     )
   end
