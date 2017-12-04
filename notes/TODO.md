@@ -8,11 +8,11 @@
     - refine concept of channels in general?
       - ask erik & victoria
   - new posts count/activity info?
-  - sign up and new user walk thru
-  - empty pages and list values/prompts
+  - mobile new user walk thru & empty page prompts
   - general design/UI/UX work
   - timezones working
-  - password reset links
+  - password change with old pw
+  - password reset links/emails
 
 ## Mobile Frontend
   - auth
