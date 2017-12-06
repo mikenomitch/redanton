@@ -177,7 +177,13 @@ class Stream extends PureComponent {
   }
 
   renderNoPosts () {
-    return <NeedPostPrompt navigation={this.props.navigation} />
+    return (
+      <NeedPostPrompt
+        inClub={this.props.inClub}
+        inChannel={this.props.inChannel}
+        navigation={this.props.navigation}
+      />
+    )
   }
 
   renderPostLink = (datum) => {

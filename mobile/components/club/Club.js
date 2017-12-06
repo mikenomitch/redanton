@@ -14,6 +14,8 @@ import { spacing } from '../styleConstants'
 
 import withPagination from '../helpers/withPagination'
 import NewChannelButton from '../channel/NewChannelButton'
+import NeedChannelPrompt from '../channel/NeedChannelPrompt'
+
 import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
 
@@ -72,6 +74,10 @@ class Club extends PureComponent {
       ))
   }
 
+  get needsPosts () {
+    return this.sortedPosts.length === 0
+  }
+
   componentDidMount() {
     this.props.getPostsForClub(this.club.id)
     this.props.getUsersForMain()
@@ -87,6 +93,14 @@ class Club extends PureComponent {
     })
   }
 
+  renderNoChannels = () => {
+    return (
+      <View style={styles.root}>
+        <NeedChannelPrompt inClub navigation={this.props.navigation} />
+      </View>
+    )
+  }
+
   render() {
     const {
       channels,
@@ -96,15 +110,17 @@ class Club extends PureComponent {
     } = this.props
 
     if (!channels[0]) {
-      return <NeedChannelPrompt inClub navigation={this.props.navigation} />
+      return this.renderNoChannels()
     }
 
     return (
       <View style={styles.root}>
         <Stream
+          inClub
           currentUserId={this.props.currentUserId}
           refresh={this.refresh}
           navigation={navigation}
+          needsPosts={this.needsPosts}
           content={this.sortedPosts}
           channels={channels}
           users={users}

@@ -25,24 +25,18 @@ const styles = {
 }
 
 const NeedChannelPrompt = (props) => {
-  if (props.inClub) {
-    return (
-      <View style={styles.root}>
-        <Text style={styles.textHeader}> This club has no channels! </Text>
-        <Text style={styles.text}> Add a category to get started! </Text>
-        <NewChannelButton navigation={props.navigation}/>
-      </View>
-    )
-  } else {
-    return (
-      <View style={styles.root}>
-        <Text style={styles.textHeader}> You have no channels! </Text>
-        <Text style={styles.text}> Every time you post to Relayd, you broadcast to a channel. </Text>
-        <Text style={styles.text}> Channels can be about any topic you like: humor, politics, culture, entertainment, etc... </Text>
-        <NewChannelButton navigation={props.navigation}/>
-      </View>
-    )
-  }
+  const titleText = props.inClub
+    ? 'This club has no channels!'
+    : 'You have no channels!'
+
+  return (
+    <View style={styles.root}>
+      <Text style={styles.textHeader}> {titleText} </Text>
+      <Text style={styles.text}> Every time you post to Relayd, you broadcast to a channel. </Text>
+      <Text style={styles.text}> Channels can be about any topic you like: humor, politics, culture, entertainment, etc... </Text>
+      <NewChannelButton navigation={props.navigation}/>
+    </View>
+  )
 }
 
 export default withDebouncedNav(NeedChannelPrompt)
