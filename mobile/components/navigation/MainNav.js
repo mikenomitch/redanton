@@ -27,6 +27,8 @@ import ConnectedHeader from '../ui/ConnectedHeader'
 
 import withOSPermissions from '../helpers/withOSPermissions'
 
+import { colors } from '../styleConstants'
+
 import NewClubButton from '../club/NewClubButton'
 import ManageClubButton from '../club/ManageClubButton'
 import NewChannelButton from '../channel/NewChannelButton'
@@ -93,7 +95,8 @@ const TabNav = TabNavigator(
   {
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false
+    swipeEnabled: false,
+    screen: MainStreamScreen
   }
 )
 
@@ -103,7 +106,7 @@ const TabNav = TabNavigator(
 
 const MainNav = StackNavigator({
   Root: {
-    screen: TabNav,
+    screen: TabNav
   },
   PostChat: {
     screen: ChatScreen,
@@ -180,6 +183,16 @@ const MainNav = StackNavigator({
     navigationOptions: {
       title: 'Edit User'
     }
+  }
+},
+{
+  navigationOptions: {
+    // headerStyle: {
+    //   backgroundColor: colors.primary
+    // },
+    // headerTitleStyle: {
+    //   color: colors.white
+    // }
   }
 })
 
