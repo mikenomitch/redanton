@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 import BasicTextInput from '../ui/BasicTextInput'
 
@@ -13,8 +13,20 @@ const EditUserInfo = (props) => (
       error={props.errorFor('name', props.userInfo.name)}
     />
 
+    <Text>
+      Leave Password fields blank if you don't wish to change your password.
+    </Text>
+
     <BasicTextInput
-      label="set password"
+      label="current password"
+      value={props.userInfo.currentPassword}
+      onChangeText={(currentPassword) => props.changeUserInfo({currentPassword})}
+      secureTextEntry
+      error={props.errorFor('currentPassword', props.userInfo.currentPassword)}
+    />
+
+    <BasicTextInput
+      label="new password"
       value={props.userInfo.password}
       onChangeText={(password) => props.changeUserInfo({password})}
       secureTextEntry

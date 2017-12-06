@@ -94,17 +94,16 @@ defmodule Danton.User do
 
   # updates self and potentially authorization
   def update_info_and_auth(current_user, params) do
-    case update_authorization_if_needed(params) do
+    case update_authorization_if_needed_and_valid(params) do
       {:ok, _auth} ->
         user = Repo.get!(User, current_user.id)
         changeset = User.changeset(user, params)
         Repo.update(changeset)
-      {:error, reason} ->
-        {:error, reason}
+      err -> err
     end
   end
 
-  defp update_authorization_if_needed(params) do
+  defp update_authorization_if_needed_and_valid(params) do
     if params_have_password(params) do
       Authorization.update_authorization_for_user_params(params)
     else

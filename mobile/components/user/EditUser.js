@@ -79,8 +79,6 @@ class EditUser extends Component {
   }
 
   render() {
-    const {email, password, passwordConfirmation, name} = this.state
-
     return (
       <View style={styles.root}>
         <Text style={styles.attributeLabel} > Email: </Text>

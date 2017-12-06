@@ -58,17 +58,28 @@ defmodule Danton.Authorization do
     end
   end
 
-  def update_authorization_for_user_params(%{"password" => pw, "password_confirmation" => pwc, "email" => uid}) do
-    case validate_password_and_confirmation(pw, pwc) do
-      :ok ->
-        auth = Repo.get_by(Authorization, uid: uid)
-        cs = Authorization.changeset(
-          auth,
-          %{token: Comeonin.Bcrypt.hashpwsalt(pw)}
-        )
-        Repo.update(cs)
-      err ->
-        err
+  def validate_current_password(uid, current_pw) do
+    auth = Repo.get_by(Authorization, uid: uid)
+
+    if  Comeonin.Bcrypt.checkpw(current_pw, auth.token) do
+      :ok
+    else
+      {:error, :old_password_does_not_match}
+    end
+  end
+
+  def update_authorization_for_user_params(%{"password" => pw, "password_confirmation" => pwc, "email" => uid, "current_password" => cpw}) do
+    with :ok <- validate_password_and_confirmation(pw, pwc),
+         :ok <- validate_current_password(uid, cpw)
+    do
+      auth = Repo.get_by(Authorization, uid: uid)
+      cs = Authorization.changeset(
+        auth,
+        %{token: Comeonin.Bcrypt.hashpwsalt(pw)}
+      )
+      Repo.update(cs)
+    else
+      err -> err
     end
   end
 end

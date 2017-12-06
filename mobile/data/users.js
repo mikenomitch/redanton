@@ -88,6 +88,7 @@ export const updateSelf = (params, onSuccess) => {
           avatar: params.avatar,
           email: params.email,
           name: params.name,
+          current_password: params.currentPassword,
           password: params.password,
           password_confirmation: params.passwordConfirmation
         }
