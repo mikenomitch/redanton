@@ -31,6 +31,10 @@ defmodule Danton.UserToken do
     from t in query, where: t.user_id == ^user_id
   end
 
+  def not_for_user(query \\ UserToken, user_id) do
+    from t in query, where: t.user_id != ^user_id
+  end
+
   def of_value(query \\ UserToken, value) do
     from t in query, where: t.value == ^value
   end
@@ -49,6 +53,23 @@ defmodule Danton.UserToken do
       status: "active"
     })
 
+    # Task.start( __MODULE__, :ensure_only_user, [user.id, token_value])
+
     {:ok, token}
+  end
+
+  # DON'T SEND PUSH NOTIFICATIONS FOR ONE
+  # USER TO ANY OTHER USER (IF THEY USED TO
+  # USE ONE DEVICE)
+  def ensure_only_user(user_id, token_value) do
+    nfu = of_value(token_value)
+    |> not_for_user(user_id)
+    |> Repo.all()
+
+    IO.puts "WOOT:"
+    IO.puts (inspect nfu)
+
+    # what I really want to do:
+    # |> Repo.delete_all()
   end
 end
