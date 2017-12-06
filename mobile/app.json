@@ -11,13 +11,18 @@
     "icon": "./assets/icons/app.png",
     "loading": {
       "icon": "./assets/icons/loading.png",
-      "hideExponentText": false
+      "hideExponentText": true
     },
     "packagerOpts": {
       "assetExts": ["ttf", "mp4"]
     },
     "ios": {
       "supportsTablet": true
+    },
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#007aff",
+      "resizeMode": "cover"
     }
   }
 }
