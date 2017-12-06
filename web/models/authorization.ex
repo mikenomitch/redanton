@@ -82,4 +82,19 @@ defmodule Danton.Authorization do
       err -> err
     end
   end
+
+  # DRY UP - THIS IS QUICK FIX
+
+  def update_authorization_for_user_params(%{"password" => pw, "password_confirmation" => pwc, "email" => uid}) do
+    if (:ok == validate_password_and_confirmation(pw, pwc)) do
+      auth = Repo.get_by(Authorization, uid: uid)
+      cs = Authorization.changeset(
+        auth,
+        %{token: Comeonin.Bcrypt.hashpwsalt(pw)}
+      )
+      Repo.update(cs)
+    else
+      err -> err
+    end
+  end
 end
