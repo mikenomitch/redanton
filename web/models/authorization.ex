@@ -86,7 +86,8 @@ defmodule Danton.Authorization do
   # DRY UP - THIS IS QUICK FIX
 
   def update_authorization_for_user_params(%{"password" => pw, "password_confirmation" => pwc, "email" => uid}) do
-    if (:ok == validate_password_and_confirmation(pw, pwc)) do
+    with :ok <- validate_password_and_confirmation(pw, pwc)
+    do
       auth = Repo.get_by(Authorization, uid: uid)
       cs = Authorization.changeset(
         auth,
