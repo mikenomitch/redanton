@@ -14,6 +14,8 @@ import { border, colors, spacing } from '../styleConstants'
 
 import withDebouncedNav from '../helpers/withDebouncedNav'
 import Loading from '../ui/Loading'
+import NeedClubPrompt from '../club/NeedClubPrompt'
+import NeedChannelPrompt from '../channel/NeedChannelPrompt'
 
 import { getChannels } from '../../data/channels'
 import { getClubs } from '../../data/clubs'
@@ -117,18 +119,32 @@ class ChannelList extends PureComponent {
     )
   }
 
-  render() {
-    const channelsList = Object.values(this.props.channels)
+  get needsChannels() {
+    return Object.values(this.props.channels).length === 0
+  }
 
-    if (!this.props.firstLoadComplete) {
-      <Loading />
-    }
+  get needsClubs() {
+    return Object.values(this.props.clubs).length === 0
+  }
+
+  renderNoClubs () {
+    return <NeedClubPrompt navigation={this.props.navigation} />
+  }
+
+  renderNoChannels () {
+    return <NeedChannelPrompt navigation={this.props.navigation} />
+  }
+
+  render() {
+    if (!this.props.firstLoadComplete) { return <Loading /> }
+    if (this.needsClubs) { return this.renderNoClubs() }
+    if (this.needsChannels) { return this.renderNoChannels() }
 
     return (
       <FlatList
         style={styles.list}
         initialNumToRender={10}
-        data={channelsList}
+        data={this.props.channels}
         renderItem={this.renderChannelLink}
         keyExtractor={(item) => item.id}
         refreshControl={

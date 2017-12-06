@@ -4,6 +4,8 @@
   - mobile new user walk thru & empty page prompts
   - fix notifications for changes phones
   - url working properly
+  - deleting channels and clubs
+  - prompts to invite others to clubs
   - notification options
     - all, default, mute
       or just default and mute?

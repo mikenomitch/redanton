@@ -56,6 +56,10 @@ class Channel extends PureComponent {
       ))
   }
 
+  get needsPosts () {
+    return this.sortedPosts.lenght === 0
+  }
+
   componentDidMount() {
     this.props.getPostsForChannel(this.channel.id)
     this.props.getUsersForMain()
@@ -99,6 +103,7 @@ class Channel extends PureComponent {
       <View style={styles.root}>
         <View style={styles.content}>
           <Stream
+            needsPosts={this.needsPosts}
             currentUserId={this.props.currentUserId}
             refresh={this.refresh}
             navigation={navigation}

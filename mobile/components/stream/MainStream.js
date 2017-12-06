@@ -2,9 +2,12 @@ import React, { PureComponent } from 'react'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
 
+import withPagination from '../helpers/withPagination'
+
 import Stream from './Stream'
 import Loading from '../ui/Loading'
-import withPagination from '../helpers/withPagination'
+import NeedClubPrompt from '../club/NeedClubPrompt'
+import NeedChannelPrompt from '../channel/NeedChannelPrompt'
 
 import { getUsersForMain } from '../../data/users'
 import { getFrontPagePosts } from '../../data/posts'
@@ -34,6 +37,18 @@ class MainStream extends PureComponent {
     ))
   }
 
+  get needsPosts() {
+    return Object.values(this.props.posts).length === 0
+  }
+
+  get needsChannels() {
+    return Object.values(this.props.channels).length === 0
+  }
+
+  get needsClubs() {
+    return Object.values(this.props.clubs).length === 0
+  }
+
   refresh = (cb) => {
     this.props.onRefresh()
     this.props.getFrontPagePosts(cb)
@@ -43,10 +58,18 @@ class MainStream extends PureComponent {
     return this.props.onEndHitCb(this.props.getFrontPagePosts)
   }
 
+  renderNoClubs () {
+    return <NeedClubPrompt navigation={this.props.navigation} />
+  }
+
+  renderNoChannels () {
+    return <NeedChannelPrompt navigation={this.props.navigation} />
+  }
+
   render() {
-    if (!this.props.firstLoadComplete) {
-      return <Loading />
-    }
+    if (!this.props.firstLoadComplete) { return <Loading /> }
+    if (this.needsClubs) { return this.renderNoClubs() }
+    if (this.needsChannels) { return this.renderNoChannels() }
 
     return (
       <Stream
@@ -56,6 +79,9 @@ class MainStream extends PureComponent {
         navigation={this.props.navigation}
         content={this.sortedPosts}
         channels={this.props.channels}
+        needsPosts={this.needsPosts}
+        needsChannels={this.needsChannels}
+        needsClubs={this.needsClubs}
         users={this.props.users}
         currentlyLoading={this.props.currentlyLoading && !this.props.atFinalPage}
       />
@@ -71,6 +97,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts,
     channels: state.channels,
+    clubs: state.clubs,
     users: state.users,
     firstLoadComplete: callsDone(
       state,

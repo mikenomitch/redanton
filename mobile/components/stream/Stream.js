@@ -17,8 +17,6 @@ import { border, colors, spacing, misc } from '../styleConstants'
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
 import EditPostButton from '../post/EditPostButton'
-import NeedClubPrompt from '../club/NeedClubPrompt'
-import NeedChannelPrompt from '../channel/NeedChannelPrompt'
 import NeedPostPrompt from '../post/NeedPostPrompt'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -170,10 +168,6 @@ class Stream extends PureComponent {
     users: {}
   }
 
-  get hasNoConent () {
-    return !this.props.content || this.props.content.length === 0
-  }
-
   _onRefresh() {
     this.setState({refreshing: true})
 
@@ -184,14 +178,6 @@ class Stream extends PureComponent {
 
   renderNoPosts () {
     return <NeedPostPrompt navigation={this.props.navigation} />
-  }
-
-  renderNoClubs () {
-    return <NeedClubPrompt navigation={this.props.navigation} />
-  }
-
-  renderNoChannels () {
-    return <NeedChannelPrompt navigation={this.props.navigation} />
   }
 
   renderPostLink = (datum) => {
@@ -218,7 +204,7 @@ class Stream extends PureComponent {
   }
 
   render() {
-    if (this.hasNoConent) return this.renderNoClubs()
+    if (this.props.needsPosts) return this.renderNoPosts()
 
     return (
       <FlatList

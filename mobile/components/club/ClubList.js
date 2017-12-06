@@ -12,8 +12,10 @@ import moment from 'moment'
 
 import {colors, spacing, border} from '../styleConstants'
 
-import Loading from '../ui/Loading'
 import withDebouncedNav from '../helpers/withDebouncedNav'
+
+import Loading from '../ui/Loading'
+import NeedClubPrompt from '../club/NeedClubPrompt'
 
 import { getClubs } from '../../data/clubs'
 import { callsDone } from '../../data/calls'
@@ -93,6 +95,10 @@ class ClubList extends PureComponent {
     }
   }
 
+  get needsClubs() {
+    return Object.values(this.props.clubs).length === 0
+  }
+
   newClubPress = () => {
     this.props.navigation.navigate('NewClub')
   }
@@ -111,10 +117,13 @@ class ClubList extends PureComponent {
     )
   }
 
+  renderNoClubs () {
+    return <NeedClubPrompt navigation={this.props.navigation} />
+  }
+
   render() {
-    if (!this.props.firstLoadComplete) {
-      <Loading />
-    }
+    if (!this.props.firstLoadComplete) { <Loading /> }
+    if (this.needsClubs) { return this.renderNoClubs() }
 
     return (
       <FlatList
