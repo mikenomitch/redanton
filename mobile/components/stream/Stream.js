@@ -17,7 +17,9 @@ import { border, colors, spacing, misc } from '../styleConstants'
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
 import EditPostButton from '../post/EditPostButton'
-import NewPostButton from '../post/NewPostButton'
+import NeedClubPrompt from '../club/NeedClubPrompt'
+import NeedChannelPrompt from '../channel/NeedChannelPrompt'
+import NeedPostPrompt from '../post/NeedPostPrompt'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 import SimpleButton from '../ui/SimpleButton'
@@ -65,10 +67,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: spacing.medium,
     paddingRight: spacing.medium
-  },
-  empty: {
-    alignItems: 'center',
-    padding: spacing.container
   },
   loadingThrobber: {
     flex: 1,
@@ -185,13 +183,15 @@ class Stream extends PureComponent {
   }
 
   renderNoPosts () {
-    return (
-      <View style={styles.empty}>
-        <Text> There's nothing here </Text>
-        <Text> Add a post to get started. </Text>
-        <NewPostButton navigation={this.props.navigation}/>
-      </View>
-    )
+    return <NeedPostPrompt navigation={this.props.navigation} />
+  }
+
+  renderNoClubs () {
+    return <NeedClubPrompt navigation={this.props.navigation} />
+  }
+
+  renderNoChannels () {
+    return <NeedChannelPrompt navigation={this.props.navigation} />
   }
 
   renderPostLink = (datum) => {
@@ -218,7 +218,7 @@ class Stream extends PureComponent {
   }
 
   render() {
-    if (this.hasNoConent) return this.renderNoPosts()
+    if (this.hasNoConent) return this.renderNoClubs()
 
     return (
       <FlatList
