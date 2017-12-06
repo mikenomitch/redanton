@@ -24,7 +24,7 @@ import EditUserInfo from './EditUserInfo'
 
 const styles = StyleSheet.create({
   root: {
-    paddingTop: 0,
+    paddingTop: spacing.container,
     paddingLeft: spacing.container,
     paddingRight: spacing.container
   },
