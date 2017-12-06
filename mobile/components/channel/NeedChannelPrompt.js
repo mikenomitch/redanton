@@ -29,7 +29,7 @@ const NeedChannelPrompt = (props) => {
     return (
       <View style={styles.root}>
         <Text style={styles.textHeader}> This club has no channels! </Text>
-        <Text style={styles.text}> Channels can be about any topic you like: humor, politics, culture, entertainment, etc... </Text>
+        <Text style={styles.text}> Add a category to get started! </Text>
         <NewChannelButton navigation={props.navigation}/>
       </View>
     )
