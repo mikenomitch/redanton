@@ -1,5 +1,6 @@
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_url(Danton.Endpoint, "/css/email.css") %>">
   </head>
   <body>

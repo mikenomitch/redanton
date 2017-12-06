@@ -59,12 +59,12 @@
   align-items: center;
   text-align: center;
 
-  max-width: 80rem;
+  max-width: 110rem;
 }
 
 .index-title {
   color: #fff;
-  font-size: 7rem;
+  font-size: 7.5rem;
   font-weight: 800;
 }
 
@@ -117,8 +117,9 @@
 
 .index-feature-title {
   text-align: center;
-  font-size: 2.7rem;
+  font-size: 3rem;
   color: #333;
+  margin: 3rem 0rem;
 }
 
 .head-links {
@@ -138,12 +139,17 @@
 .index-feature-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .index-feature {
-  flex: 1 0 20rem;
+  flex: 0 0 32rem;
   font-size: 2rem;
-  margin: 3rem 2rem;
+  padding: 2.5rem;
+  margin: 3rem 1rem;
+
+  border-radius: 15px;
+  box-shadow:  0 18px 50px -10px rgba(0,0,0,.2);
 
   display: flex;
   flex-direction: column;
