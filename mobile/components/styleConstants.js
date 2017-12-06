@@ -26,7 +26,8 @@ export const font = {
   small: 12,
   medium: 14,
   large: 16,
-  extraLarge: 22
+  extraLarge: 26,
+  jumbo: 30
 }
 
 export const misc = {

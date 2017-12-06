@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   welcomeText: {
-    fontSize: font.extraLarge,
-    paddingTop: spacing.large
+    fontSize: font.jumbo,
+    paddingTop: spacing.large,
+    paddingBottom: spacing.large
   }
 })
 
