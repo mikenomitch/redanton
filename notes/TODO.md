@@ -2,7 +2,6 @@
 
 ## Top
   - mobile new user walk thru
-  - fix notifications for changes phones
   - url working properly
   - deleting channels and clubs
   - prompts to invite others to clubs

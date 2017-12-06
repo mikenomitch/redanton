@@ -25,10 +25,13 @@ defmodule Danton.Notification do
   end
 
   def notify(user, type, params) do
-    push_token = UserToken.first_for_user(user.id)
+    push_tokens = UserToken.for_user(user.id) |> Repo.all()
 
-    if push_token do
-      apply(Push, type, [push_token.value, params])
+    if List.first(push_tokens) do
+      Enum.each(
+        push_tokens,
+        &(apply(Push, type, [&1.value, params]))
+      )
     else
       notify_via_email(user, type, params)
     end
