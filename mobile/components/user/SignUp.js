@@ -99,6 +99,7 @@ class SignUp extends Component {
         />
 
         <EditUserInfo
+          signUp
           errorFor={this.props.errorFor}
           userInfo={this.state}
           changeUserInfo={this.setState.bind(this)}

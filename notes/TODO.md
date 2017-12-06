@@ -1,17 +1,18 @@
 # Todos
 
 ## Top
+  - mobile new user walk thru & empty page prompts
+  - fix notifications for changes phones
+  - url working properly
   - notification options
     - all, default, mute
       or just default and mute?
   - one post => many channels?
     - refine concept of channels in general?
       - ask erik & victoria
-  - new posts count/activity info?
-  - mobile new user walk thru & empty page prompts
+  - new posts count & recent activity info
   - general design/UI/UX work
   - timezones working
-  - password change with old pw
 
 ## Mobile Frontend
   - auth
