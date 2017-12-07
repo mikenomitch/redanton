@@ -2,7 +2,6 @@
 
 ## Top
   - emailing from relayd.io email account
-  - deleting channels and clubs
 
   - mobile new user walk thru
   - prompts to invite others to clubs

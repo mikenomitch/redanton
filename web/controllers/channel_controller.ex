@@ -140,11 +140,7 @@ defmodule Danton.ChannelController do
   end
 
   def delete(conn, %{"id" => id}, _current_user, _claims) do
-    channel = Repo.get!(Channel, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(channel)
+    Channel.destroy(id)
 
     conn
     |> put_flash(:info, "Channel deleted successfully.")
