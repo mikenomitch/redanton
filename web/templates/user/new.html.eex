@@ -1,35 +1,38 @@
-<h2>
-  Sign Up for Relayd.io
-</h2>
+<div class="floating-tablet">
+  <h1 class="centered-content">
+    Sign Up for Relayd.io
+  </h1>
 
-<%= form_tag auth_path(@conn, :callback, "identity"), [method: "POST", novalidate: true] do %>
-  <div class='control-group login-input'>
-    <label class='control-label' for='email-input'>Email</label>
-    <input type='email' name='email' required class='form-control'/>
-  </div>
+  <%= form_tag auth_path(@conn, :callback, "identity"), [method: "POST", novalidate: true] do %>
+    <div class='control-group auth-input'>
+      <label class='control-label' for='email-input'>Email</label>
+      <input type='email' name='email' required class='form-control'/>
+    </div>
 
-  <div class='control-group login-input'>
-    <label class='control-label' for='name-input'>First Name</label>
-    <input name='name' required class='form-control'/>
-  </div>
+    <div class='control-group auth-input'>
+      <label class='control-label' for='name-input'>First Name</label>
+      <input name='name' required class='form-control'/>
+    </div>
 
-  <div class='control-group login-input'>
-    <label class='control-label' for='password-input'>Password</label>
-    <input type='password' name='password' required class='form-control'/>
-  </div>
+    <div class='control-group auth-input'>
+      <label class='control-label' for='password-input'>Password</label>
+      <input type='password' name='password' required class='form-control'/>
+    </div>
 
-  <div class='control-group login-input'>
-    <label class='control-label' for='password-confirmation-input'>Confirm Password</label>
-    <input type='password' name='password_confirmation' required class='form-control'/>
-  </div>
+    <div class='control-group auth-input'>
+      <label class='control-label' for='password-confirmation-input'>Confirm Password</label>
+      <input type='password' name='password_confirmation' required class='form-control'/>
+    </div>
 
-  <div class='control-group login-button centered-content'>
-    <button class='auth-form-btn'>
-      Sign Up
-    </button>
-    <span class='login-sign-up'>
-      &nbsp <span> or </span> &nbsp
-      <%= link "login", to: "/login" %>
-      </span>
-  </div>
-<% end %>
+    <div class='control-group auth-actions-holder'>
+      <div>
+        <button class='floating-button floating-button-gradient' id="index-sign-up-bottom">
+          Sign Up
+        </button>
+      <div>
+      <div>
+        <span> or </span> <%= link "login", to: "/login" %>
+      </div>
+    </div>
+  <% end %>
+</div>

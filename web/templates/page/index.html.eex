@@ -16,7 +16,7 @@
       </p>
 
       <div class="index-title-cta">
-        <button class="index-sign-up" id="index-sign-up-top" tabindex="0">
+        <button class="floating-button floating-button-white" id="index-sign-up-top" tabindex="0">
           Sign Up
         </button>
       </div>
@@ -60,7 +60,7 @@
 
   <div class="index-recap">
     <div class="index-center">
-      <button class="index-sign-up" id="index-sign-up-bottom" tabindex="0">
+      <button class="floating-button floating-button-gradient" id="index-sign-up-bottom" tabindex="0">
         Try It Out
       </button>
     </div>

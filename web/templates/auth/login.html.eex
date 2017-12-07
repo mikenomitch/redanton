@@ -1,30 +1,35 @@
-<h2>
-  Login to Relayd.io
-</h2>
+<div class="floating-tablet">
+  <h1 class="centered-content">
+    Login to Relayd.io
+  </h1>
 
-<div>
-  <%= if not Enum.member?(@current_auths, "identity") do %>
-    <%= form_tag auth_path(@conn, :callback, "identity"), method: "post", class: "login", novalidate: true do %>
-      <div class='control-group login-input'>
-        <label class='control-label' for='email-input'>Email</label>
-        <input class='form-control' type='email' name='email' value='<%= @conn.params["email"] %>' required/>
-      </div>
+  <div>
+    <%= if not Enum.member?(@current_auths, "identity") do %>
+      <%= form_tag auth_path(@conn, :callback, "identity"), method: "post", class: "login", novalidate: true do %>
+        <div class='control-group auth-input'>
+          <label class='control-label' for='email-input'>Email</label>
+          <input class='form-control' type='email' name='email' value='<%= @conn.params["email"] %>' required/>
+        </div>
 
-      <div class='control-group login-input'>
-        <label class='control-label ' for='password-input'>Password</label>
-        <input class='form-control' type='password' name='password' required/>
-      </div>
+        <div class='control-group auth-input'>
+          <label class='control-label ' for='password-input'>Password</label>
+          <input class='form-control' type='password' name='password' required/>
+        </div>
 
-      <div class='control-group login-button centered-content'>
-        <button class='auth-form-btn'>Login</button>
-        <span class='login-sign-up'>
-          &nbsp <span> or </span> &nbsp
-          <%= link "sign up", to: user_path(@conn, :new) %>
-        </span>
-      </div>
-      <div class='centered-content login-forgot-password'>
-        <%= link "forgot password", to: user_path(@conn, :password_reset) %>
-      </div>
+        <div class='control-group auth-actions-holder'>
+          <div>
+            <button class='floating-button floating-button-gradient'>
+              Login
+            </button>
+          </div>
+          <div>
+            or <%= link "sign up", to: user_path(@conn, :new) %>
+          </div>
+          <div class="login-forgot-password">
+            <%= link "forgot password", to: user_path(@conn, :password_reset) %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
