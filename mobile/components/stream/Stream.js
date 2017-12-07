@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import {
   View,
-  Button,
   Text,
   FlatList,
   StyleSheet,
@@ -21,6 +20,7 @@ import NeedPostPrompt from '../post/NeedPostPrompt'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 import SimpleButton from '../ui/SimpleButton'
+import LinkButton from '../ui/LinkButton'
 
 // =============
 //    STYLES
@@ -119,7 +119,7 @@ class BaseStreamItem extends PureComponent {
       <View style={styles.streamItem}>
         <View style={styles.streamItemLeft}>
           <View style={styles.title}>
-            <Button
+            <LinkButton
               onPress={this.onLinkPress}
               title={this.props.post.title}
             />
