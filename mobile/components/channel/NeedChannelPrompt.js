@@ -17,7 +17,7 @@ const styles = {
     margin: spacing.small
   },
   textHeader: {
-    alignItems: 'center',
+    textAlign: 'center',
     fontSize: font.extraLarge,
     fontWeight:font.heavyWeight,
     margin: spacing.small
