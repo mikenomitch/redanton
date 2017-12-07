@@ -1,7 +1,7 @@
 defmodule Danton.Email do
   use Bamboo.Phoenix, view: Danton.EmailView
   @app_path "exp://exp.host/@mikenomitch/danton"
-  @base_site_url "relayd.io"
+  @base_site_url "http://relayd.io"
 
   def new_chat_message(user, params) do
     base_email()
