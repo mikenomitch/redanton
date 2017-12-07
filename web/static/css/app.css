@@ -188,12 +188,19 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+}
+
+.about-wrapper h1 {
+  align-self: center;
 }
 
 .about-wrapper ul {
   margin: 0px;
+}
+
+.about-wrapper p {
+  margin: 1rem;
 }
 
 /* CHAT */
