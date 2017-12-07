@@ -178,6 +178,10 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
   text-align: center;
 }
 
+.full-width {
+  width: 100%;
+}
+
 /* ABOUT PAGE */
 
 .about-wrapper {
