@@ -1,7 +1,6 @@
 # Todos
 
 ## Top
-  - login and sign up errors
   - emailing from relayd.io email account
   - deleting channels and clubs
 
