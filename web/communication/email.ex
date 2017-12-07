@@ -58,8 +58,8 @@ defmodule Danton.Email do
 
   defp base_email do
     new_email()
-    |> from("Mike Nomitch<mikenomitch@gmail.com>")
-    |> put_header("Reply-To", "mikenomitch@gmail.com")
+    |> from("Relayd<notifications@relayd.io>")
+    |> put_header("Reply-To", "notifications@relayd.io")
     # This will use the "email.html.eex" file as a layout when rendering html emails.
     # Plain text emails will not use a layout unless you use `put_text_layout`
     |> put_html_layout({Danton.LayoutView, "email.html"})
