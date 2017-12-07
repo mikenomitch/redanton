@@ -2,7 +2,7 @@ defmodule Danton.ChannelAuthorization do
   alias Danton.Repo
   alias Danton.Channel
 
-  def authorization_status(conn, user, permission_type) do
+  def authorization_status(conn, user = %Danton.User{}, permission_type) do
     channel_id = get_resource_id(conn)
     case permission_type do
       :view ->
@@ -10,6 +10,10 @@ defmodule Danton.ChannelAuthorization do
       :edit ->
         get_edit_authorization(user, channel_id)
     end
+  end
+
+  def authorization_status(_conn, user = nil, _permission_type) do
+    :unauthorized
   end
 
   defp get_resource_id(conn) do

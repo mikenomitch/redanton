@@ -53,7 +53,7 @@ defmodule Danton.UserFromAuth do
       :ok ->
         case repo.transaction(fn -> create_user_from_auth(auth, current_user, repo) end) do
           {:ok, response} -> response
-          {:error, reason} -> {:error, reason}
+          {:error, reason} -> {:error, "there was an issue creating this user"}
         end
       {:error, reason} -> {:error, reason}
     end
@@ -112,18 +112,22 @@ defmodule Danton.UserFromAuth do
   end
 
   defp auth_and_validate(%{provider: :identity} = auth, repo) do
-    case repo.get_by(Authorization, uid: uid_from_auth(auth), provider: to_string(auth.provider)) do
-      nil -> {:error, :not_found}
-      authorization ->
-        case auth.credentials.other.password do
-          pass when is_binary(pass) ->
-            if Comeonin.Bcrypt.checkpw(auth.credentials.other.password, authorization.token) do
-              authorization
-            else
-              {:error, :password_does_not_match}
-            end
-          _ -> {:error, :password_required}
-        end
+    try do
+      case repo.get_by(Authorization, uid: uid_from_auth(auth), provider: to_string(auth.provider)) do
+        nil -> {:error, :not_found}
+        authorization ->
+          case auth.credentials.other.password do
+            pass when is_binary(pass) ->
+              if Comeonin.Bcrypt.checkpw(auth.credentials.other.password, authorization.token) do
+                authorization
+              else
+                {:error, :password_does_not_match}
+              end
+            _ -> {:error, :password_required}
+          end
+      end
+    rescue
+      _error -> {:error, :email_not_valid}
     end
   end
 

@@ -19,7 +19,7 @@ defmodule Danton.User do
   end
 
   @paramlist ~w(name email status avatar)a
-  @required_params ~w(email name status)a
+  @required_params ~w(email name)a
 
   def changeset(model, params \\ %{}) do
     model
@@ -191,7 +191,12 @@ defmodule Danton.User do
 
   # TODO: figure out if you can just use changeset above
   def registration_changeset(model, params \\ :empty) do
-    model |> cast(params, [:name, :email])
+    model
+    |> cast(params, [:name, :email])
+    |> validate_required(@required_params)
+    |> validate_length(:name, min: 1)
+    |> validate_format(:email, ~r/@/)
+    |> unique_constraint(:email)
   end
 
   def validate_email(email) do

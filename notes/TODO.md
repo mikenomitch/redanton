@@ -1,9 +1,11 @@
 # Todos
 
 ## Top
-  - mobile new user walk thru
-  - url working properly
+  - login and sign up errors
+  - emailing from relayd.io email account
   - deleting channels and clubs
+
+  - mobile new user walk thru
   - prompts to invite others to clubs
   - notification options
     - all, default, mute

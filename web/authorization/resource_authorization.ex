@@ -17,9 +17,8 @@ defmodule Danton.WebAuthorization do
 
   defp render_unauthorized(conn) do
     conn
-    |> put_status(:unauthorized)
-    |> render(Danton.PageView, "unauthorized.html")
-    |> halt
+    |> put_flash(:error, "Log in to see this page")
+    |> redirect(to: "/login")
   end
 
   defp render_not_found(conn) do

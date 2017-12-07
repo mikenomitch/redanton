@@ -2,7 +2,7 @@ defmodule Danton.PostAuthorization do
   alias Danton.Repo
   alias Danton.Post
 
-  def authorization_status(conn, user, permission_type) do
+  def authorization_status(conn, user = %Danton.User{}, permission_type) do
     post_id = get_resource_id(conn)
     case permission_type do
       :view ->
@@ -10,6 +10,10 @@ defmodule Danton.PostAuthorization do
       :edit ->
         get_edit_authorization(user, post_id)
     end
+  end
+
+  def authorization_status(_conn, user = nil, _permission_type) do
+    :unauthorized
   end
 
   defp get_resource_id(conn) do
