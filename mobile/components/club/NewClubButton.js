@@ -1,10 +1,10 @@
 import React from 'react'
-import { Button } from 'react-native'
+import LinkButton from '../ui/LinkButton'
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
 const NewClubButton = (props) => {
   const onPress = () => props.debouncedNav('NewClub')
-  return <Button title="+ Club" onPress={onPress} />
+  return <LinkButton title="+ Club" onPress={onPress} />
 }
 
 export default withDebouncedNav(NewClubButton)

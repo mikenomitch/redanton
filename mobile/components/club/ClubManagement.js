@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import {
-  Button,
   Text,
   StyleSheet,
   View
@@ -19,6 +18,7 @@ import {
   kickMember
 } from '../../data/memberships'
 
+import LinkButton from '../ui/LinkButton'
 import Footer from '../ui/Footer'
 
 // ===============
@@ -44,17 +44,11 @@ var membershipItemStyles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center'
   },
-  elevationButton: {
-    fontWeight: '100'
-  },
   kickHolder: {
     width: '33%',
     height: '100%',
     display: 'flex',
     alignItems: 'center'
-  },
-  kickButton:{
-    fontWeight: '100'
   },
   name: {
     fontSize: font.medium
@@ -80,8 +74,7 @@ class MembershipItem extends PureComponent {
 
       return (
         <View style={membershipItemStyles.elevationHolder} key="elevate">
-          <Button
-            style={membershipItemStyles.elevationButton}
+          <LinkButton
             title="make admin"
             onPress={onPress}
           />
@@ -101,8 +94,7 @@ class MembershipItem extends PureComponent {
 
       return (
         <View style={membershipItemStyles.kickHolder} key="kick">
-          <Button
-            style={membershipItemStyles.kickButton}
+          <LinkButton
             title="kick"
             onPress={onPress}
           />
@@ -213,7 +205,7 @@ class ClubManagement extends PureComponent {
   renderEdit() {
     if (this.props.currentUserIsAdmin) {
       return (
-        <Button title="Edit Club"
+        <LinkButton title="Edit Club"
           style={clubStyles.editClubButton}
           onPress={() => this.props.debouncedNav('EditClub', {clubInfo: this.club})}
         />
@@ -224,7 +216,7 @@ class ClubManagement extends PureComponent {
   renderMemberIniviteLink() {
     return (
       <View style={clubStyles.inviteMemberHolder}>
-        <Button
+        <LinkButton
           title="+ Invite"
           style={clubStyles.inviteButton}
           onPress={() => this.props.debouncedNav('Invite', {clubId: this.club.id})}
@@ -247,7 +239,7 @@ class ClubManagement extends PureComponent {
         </View>
         <Footer>
           <View style={clubStyles.footerContent}>
-            <Button
+            <LinkButton
               style={clubStyles.leaveClubButton}
               title="Leave Club"
               onPress={this.leaveClubPress}

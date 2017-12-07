@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import {
-  Button,
   StyleSheet,
   View,
   FlatList,
@@ -14,6 +13,7 @@ import {colors, spacing, border} from '../styleConstants'
 
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
+import LinkButton from '../ui/LinkButton'
 import Loading from '../ui/Loading'
 import NeedClubPrompt from '../club/NeedClubPrompt'
 
@@ -61,7 +61,7 @@ const BaseClubItem = (props) => {
   return (
     <View style={styles.clubItem}>
       <View style={styles.name}>
-        <Button
+        <LinkButton
           onPress={() => props.debouncedNav('Club', {club: props.club, id: props.club.id})}
           title={props.club.name}
         />

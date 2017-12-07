@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import {
-  Button,
   StyleSheet,
   View
  } from 'react-native'
@@ -15,6 +14,7 @@ import withPagination from '../helpers/withPagination'
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
 import Stream from '../stream/Stream'
+import LinkButton from '../ui/LinkButton'
 import Footer from '../ui/Footer'
 
 // ===============
@@ -117,8 +117,8 @@ class Channel extends PureComponent {
         </View>
         <Footer>
           <View style={styles.footerContent}>
-            <Button title="Remove Channel" onPress={this.removeChannelClick} />
-            <Button title="Edit Channel" onPress={this.editChannelClick} />
+            <LinkButton title="Remove Channel" onPress={this.removeChannelClick} />
+            <LinkButton title="Edit Channel" onPress={this.editChannelClick} />
           </View>
         </Footer>
       </View>

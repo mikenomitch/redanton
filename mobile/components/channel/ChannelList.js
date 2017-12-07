@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import {
   View,
-  Button,
   FlatList,
   StyleSheet,
   Text,
@@ -14,6 +13,8 @@ import { border, colors, spacing } from '../styleConstants'
 
 import withDebouncedNav from '../helpers/withDebouncedNav'
 import Loading from '../ui/Loading'
+import LinkButton from '../ui/LinkButton'
+
 import NeedClubPrompt from '../club/NeedClubPrompt'
 import NeedChannelPrompt from '../channel/NeedChannelPrompt'
 
@@ -58,7 +59,7 @@ const ChannelItemBase = (props) => {
   return (
     <View style={styles.channelItem}>
       <View style={styles.name}>
-        <Button
+        <LinkButton
           onPress={() => props.debouncedNav('Channel', {channel: props.channel, id: props.channel.id})}
           title={props.channel.name}
         />
