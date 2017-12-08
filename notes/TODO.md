@@ -1,37 +1,53 @@
 # Todos
 
-## Top
-  - emailing from relayd.io email account
+## Beautification and Clean up pre-Apple
+  - Web
+    - Club mgmt pages
+    - Edit and show page links & design
+    - Change base text input design
+    - Change alert desgin
+    - Tweak the header to be a little nicer on mobile
+    - About page looks nicer
+    - Customer support page just for Apple
+    - Max lengths on Post/Chan/Club names
+    - Timezones
+    - More chat design work
+    - Spacing on main stream (w longer user
+      and club names)
+    - Error message audit
+    - Empty Club prompt
+  - Mobile
+    - Club mgmt styling issues
+    - Prompts flashing
+    - New X Buttons when primpt showing
+    - App Walkthru w/ parralax thing
+    - First post not author bug
+    - Edit user page looking nicer
+    - Better error messages
+    - Link to site in Settings
+    - Nobody chatted message/prompt
+    - Chat shows name not email letter
+    - You are the only member message
+      & prompt in the invite page
+    - Apple Guidelines
+      - All font at least 11
+      - Check out hit targets
+      - Max lengths on post/chan/club
+        names (so the alignment isnt bad)
+      - Add link to user support
 
-  - mobile new user walk thru
-  - prompts to invite others to clubs
+## New Features
+  - unseen chat count
   - notification options
-    - all, default, mute
-      or just default and mute?
-  - one post => many channels?
-    - refine concept of channels in general?
+    - all, smart, mute @ user settings level
+    - all, smart, mute @ the channel level
+    - default channel notifications settings by user
+    - notification when person joins a group
+
+  - refine concept of channels in general
+    - one post => many channels?
       - ask erik & victoria
-  - new posts count & recent activity info
-  - general design/UI/UX work
-  - timezones working
+    - just make the channel when you make the club automatically?
+    - when you make the club have them provide at least 1 channel name (**)
 
-## Mobile Frontend
-  - auth
-    - If jwt will expire soon, reauth it before the next call
-    - unauthorized logic handling works nicely
-  - clean up socket logic
-
-## Ops
-- set secrets via kubernetes (show a test secret in the ui)
-- set environment to prod on the prod machines
-- point deployed boxes to cloud sql using secrets
-- figure out how to shell prod
-- script for:
-  - build and deploy local code => prod
-  - run migration on prod
-  - get into prod shell
-  - get prod app logs
-- set up prod branch on github with CD via
-  kubernetes/google container builder?
-- remove project on heroku
-- document all
+  - dedicated X-Post feature?
