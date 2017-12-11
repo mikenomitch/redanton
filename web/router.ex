@@ -58,7 +58,7 @@ defmodule Danton.Router do
 
     get "/", PageController, :index
     get "/about", PageController, :about
-    get "/front", PostController, :front_page
+    get "/stream", PostController, :front_page
 
     get "/no_clubs", PageController, :no_clubs
     get "/no_channels", PageController, :no_channels
@@ -132,7 +132,7 @@ defmodule Danton.Router do
     # TODO: recomment this once the mobile app handles users
 
     scope "/v1" do
-      get "/stream", Api.V1.PostController, :front_page
+      get "/front", Api.V1.PostController, :front_page
       resources "/memberships", Api.V1.MembershipController
 
       resources "/clubs", Api.V1.ClubController do

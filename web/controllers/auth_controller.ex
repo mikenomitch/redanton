@@ -20,7 +20,7 @@ defmodule Danton.AuthController do
     if current_user do
       conn
       |> put_flash(:info, "Signed in as #{current_user.name}")
-      |> redirect(to: "/front")
+      |> redirect(to: "/stream")
     else
       render conn, "login.html", current_user: current_user, current_auths: auths(current_user)
     end
