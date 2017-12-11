@@ -255,8 +255,9 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
   margin-top: 10px;
 }
 
-.chat-input-box {
+textarea.chat-input-box {
   text-align: left;
+  height: 4rem;
 }
 
 .message-current-user {

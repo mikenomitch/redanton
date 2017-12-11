@@ -38,12 +38,12 @@
   </div>
 
   <div class="chat-input-holder">
-    <input
+    <textarea
       id="chat-input"
       class="form-control chat-input-box"
       data-postid="<%=@post.id%>"
       data-roomid="<%=@room_id%>"
       data-currentuserid="<%=@user_id%>"
-    />
+    ></textarea>
   </div>
 </div>
