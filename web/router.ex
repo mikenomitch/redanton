@@ -132,7 +132,7 @@ defmodule Danton.Router do
     # TODO: recomment this once the mobile app handles users
 
     scope "/v1" do
-      get "/front", Api.V1.PostController, :front_page
+      get "/stream", Api.V1.PostController, :front_page
       resources "/memberships", Api.V1.MembershipController
 
       resources "/clubs", Api.V1.ClubController do
