@@ -26,6 +26,7 @@ defmodule Danton.Post do
     struct
     |> cast(params, [:title, :description, :type, :url, :activity_at])
     |> validate_required([:title])
+    |> validate_length(:title, min: 1, max: 150)
   end
 
   # ===========================
@@ -127,6 +128,7 @@ defmodule Danton.Post do
       user_id: user.id,
       activity_at: Ecto.DateTime.utc
     }
+
     post_cs = Ecto.build_assoc(chan, :posts, post_struct)
 
     multi = Multi.new
@@ -149,7 +151,7 @@ defmodule Danton.Post do
         Task.start(__MODULE__, :notify_new_post, [post, room, user])
         {:ok, res}
       other ->
-        other
+        {:error, post_cs}
     end
   end
 

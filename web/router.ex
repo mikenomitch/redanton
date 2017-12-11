@@ -80,10 +80,7 @@ defmodule Danton.Router do
       resources "/posts", PostController, only: [:new, :create, :show]
     end
 
-    resources "/posts", PostController do
-      get "/chat", PostController, :chat
-    end
-
+    resources "/posts", PostController
     resources "/messages", MessageController
     resources "/rooms", RoomController
 

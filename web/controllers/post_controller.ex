@@ -81,7 +81,9 @@ defmodule Danton.PostController do
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: channel_path(conn, :show, channel_id))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, channel_id: channel_id)
+        conn
+        |> add_new_post_crumb(:front)
+        |> render("new.html", changeset: changeset, channel_id: channel_id)
     end
   end
 
@@ -111,11 +113,6 @@ defmodule Danton.PostController do
     )
   end
 
-  def chat(conn, %{"post_id" => post_id}, _current_user, _claims) do
-    post = Repo.get!(Post, post_id)
-    render(conn, "chat.html", post: post)
-  end
-
   def edit(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
@@ -136,7 +133,10 @@ defmodule Danton.PostController do
         |> put_flash(:info, "Post updated successfully.")
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
-        render(conn, "edit.html", post: post, changeset: changeset)
+        conn
+        |> add_parent_crumbs(post)
+        |> add_post_and_edit_crumbs(post)
+        |> render("edit.html", post: post, changeset: changeset)
     end
   end
 
