@@ -6,7 +6,6 @@
     - Change base text input design
     - Change alert desgin
     - Customer support page just for Apple
-    - Max lengths on Post/Chan/Club names
     - Timezones
     - More chat design work
     - Error message audit
