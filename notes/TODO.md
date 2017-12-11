@@ -11,8 +11,6 @@
     - Max lengths on Post/Chan/Club names
     - Timezones
     - More chat design work
-    - Spacing on main stream (w longer user
-      and club names)
     - Error message audit
     - Empty Club prompt
   - Mobile

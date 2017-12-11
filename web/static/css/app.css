@@ -26,6 +26,10 @@ body {
   border-radius: 0px;
 }
 
+.navbar-inverse .navbar-collapse {
+  border-color: transparent;
+}
+
 .navbar-inverse .navbar-nav > li > a {
   color: white;
 }
