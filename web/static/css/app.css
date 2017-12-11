@@ -235,7 +235,7 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
 }
 
 .chat-input-box {
-  text-align: right;
+  text-align: left;
 }
 
 .message-current-user {
