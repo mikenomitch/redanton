@@ -87,3 +87,10 @@ config :danton, Danton.Mailer,
   api_key: System.get_env("SENDGRID_API_KEY")
 
 config :xain, :after_callback, {Phoenix.HTML, :raw}
+
+# CONFIGURE JOBS
+
+config :danton, Danton.Scheduler,
+jobs: [
+  {"* * * * *", {Danton.Notifier, :heartbeat, []}}
+]

@@ -14,6 +14,7 @@ defmodule Danton do
       supervisor(Danton.Endpoint, []),
       # Start your own worker by calling: Danton.Worker.start_link(arg1, arg2, arg3)
       # worker(Danton.Worker, [arg1, arg2, arg3]),
+      worker(Danton.Scheduler, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -29,3 +30,4 @@ defmodule Danton do
     :ok
   end
 end
+
