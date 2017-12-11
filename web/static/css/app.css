@@ -184,11 +184,12 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
 
 /* ABOUT PAGE */
 
-.about-wrapper {
+.about-wrapper, .license-wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
+  max-width: 80rem;
 }
 
 .about-wrapper h1 {
@@ -196,12 +197,28 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
 }
 
 .about-wrapper ul {
+  font-size: 2rem;
   margin: 0px;
 }
 
 .about-wrapper p {
+  font-size: 2rem;
   margin: 1rem;
 }
+
+.about-cta-wrapper {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.about-licencing {
+  text-align: left;
+}
+
+.about-licencing p, .about-licencing ul {
+  font-size: 1.3rem;
+}
+
 
 /* CHAT */
 

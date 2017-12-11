@@ -58,6 +58,7 @@ defmodule Danton.Router do
 
     get "/", PageController, :index
     get "/about", PageController, :about
+    get "/licenses", PageController, :licenses
     get "/stream", PostController, :front_page
 
     get "/no_clubs", PageController, :no_clubs

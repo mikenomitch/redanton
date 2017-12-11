@@ -5,25 +5,24 @@
 
   <p>
     Relayd is a link aggregator built for private groups.
+    If you want to share and discuss interesting stuff you find on the web without the whole world seeing, Relayd might be for you.
   </p>
   <p>
     If you would like to get in touch. Reach out to <a href="mailto:hello@relayd.io"> hello@relayd.io</a>.
   </p>
 
+  <p>
+    We use several icons under the Creative Commons License. Check them out <a href="/licenses">here</a>.
+  </p>
+
   <br/>
 
-  <p>
-    Relayd uses several icons under the Creative Commons Licence:
-  </p>
-  <ul>
-    <li>
-      "<a href="https://thenounproject.com/search/?q=group&i=1393008">Group”</a>" icon by Shastry, from <a href="https://thenounproject.com/"> the Noun Project </a>
-    </li>
-    <li>
-      "<a href="https://thenounproject.com/search/?q=signal&i=1119450">Signal</a>" icon by Agni, from <a href="https://thenounproject.com/"> the Noun Project </a>
-    </li>
-    <li>
-      "<a href="https://thenounproject.com/search/?q=mobile%20list&i=306668">Mobile List</a>" icon by Sharon Showalter, from <a href="https://thenounproject.com/"> the Noun Project </a>
-    </li>
-  </ul>
+  <div class="about-cta-wrapper">
+    <p>
+      If this sounds interesting you shoud try it out :)
+    </p>
+    <button class="floating-button floating-button-gradient" id="index-sign-up-bottom" tabindex="0">
+      Try Relayd
+    </button>
+  </div>
 </div>

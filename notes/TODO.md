@@ -7,7 +7,6 @@
     - Change base text input design
     - Change alert desgin
     - Tweak the header to be a little nicer on mobile
-    - About page looks nicer
     - Customer support page just for Apple
     - Max lengths on Post/Chan/Club names
     - Timezones
