@@ -1,8 +1,8 @@
 <%= render Danton.BreadcrumbleView, "breadcrumb.html", breadcrumb_trails: @breadcrumb_trails %>
 
-<div class="flex-wrapper">
+<div>
   <h1 class="header-text">
-    <%= @club.name %> members
+    <%= @club.name %> Members:
   </h1>
 
   <div class="container-fluid">
@@ -18,23 +18,22 @@
         <div class="col-xs-12 col-md-12">
           Email: <%= membership.user && membership.user.email || membership.email %>
         </div>
-        <div class="col-xs-6 col-md-12">
-          Status: <%= membership.status %>
+        <div class="col-xs-12 col-md-12">
+          Membership Type: <%= membership.type %>
         </div>
-        <div class="col-xs-6 col-md-12">
-          Type: <%= membership.type %>
-        </div>
-        <div class="col-xs-6 col-md-12">
-          <%= link "Make Admin", to: club_membership_path(@conn, :elevate, @club.id, membership.id), method: :post, data: [confirm: "Make this user an admin?"], class: "" %>
-        </div>
-        <div class="col-xs-6 col-md-12">
-          <%= link "Kick From Group", to: club_membership_path(@conn, :delete, @club.id, membership.id), method: :delete, data: [confirm: "Remove this user?"]%>
-        </div>
+        <%= unless (membership.type == "admin") do %>
+          <div class="col-xs-12 col-md-12">
+            <%= link "Make Admin", to: club_membership_path(@conn, :elevate, @club.id, membership.id), method: :post, data: [confirm: "Make this user an admin?"], class: "" %>
+          </div>
+          <div class="col-xs-12 col-md-12">
+            <%= link "Kick From Group", to: club_membership_path(@conn, :delete, @club.id, membership.id), method: :delete, data: [confirm: "Remove this user?"]%>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
   </div>
 </div>
 
-<%= link "+ Add Member", to: club_membership_path(@conn, :new, @club.id) %>
+<%= link "+ Invite", to: club_membership_path(@conn, :new, @club.id) %>
 <br /> <br />

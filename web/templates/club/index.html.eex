@@ -16,11 +16,11 @@
         <% end %>
       </div>
       <div class="col-xs-12 col-md-12 small row">
-        <div class="col-xs-6 col-md-3">
+        <div class="col-xs-12 col-md-12">
           <%= post_count_string(club) %> - <%= channel_count_string(club) %>
         </div>
 
-        <div class="col-xs-6 col-md-6">
+        <div class="col-xs-12 col-md-12">
           Last Activity: <%= relative_time(club.activity_at) %>
         </div>
 
