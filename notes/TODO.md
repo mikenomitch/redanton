@@ -2,11 +2,9 @@
 
 ## Beautification and Clean up pre-Apple
   - Web
-    - Club mgmt pages
     - Edit and show page links & design
     - Change base text input design
     - Change alert desgin
-    - Tweak the header to be a little nicer on mobile
     - Customer support page just for Apple
     - Max lengths on Post/Chan/Club names
     - Timezones
