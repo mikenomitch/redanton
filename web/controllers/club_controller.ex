@@ -64,7 +64,9 @@ defmodule Danton.ClubController do
         |> put_flash(:info, "Club created successfully.")
         |> redirect(to: club_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "There was an issue creating this club.")
+        |> render("new.html", changeset: changeset)
     end
   end
 
@@ -113,7 +115,9 @@ defmodule Danton.ClubController do
         |> put_flash(:info, "Club updated successfully.")
         |> redirect(to: club_path(conn, :show, club))
       {:error, changeset} ->
-        render(conn, "edit.html", club: club, changeset: changeset)
+        conn
+        |> put_flash(:error, "There was an issue updating this club.")
+        |> render("edit.html", club: club, changeset: changeset)
     end
   end
 

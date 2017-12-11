@@ -11,6 +11,8 @@
     - More chat design work
     - Error message audit
     - Empty Club prompt
+    - Error handling on Channel and Post creation
+      (associations with parent)
   - Mobile
     - Club mgmt styling issues
     - Prompts flashing

@@ -65,13 +65,14 @@ defmodule Danton.ChannelController do
     create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id})
   end
 
-  def create(conn, %{"channel" => channel_params}, _current_user, _claims) do
+  def create(conn, %{"channel" => channel_params}, current_user, _claims) do
     club_id = channel_params["club_id"]
-    create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id})
+    create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id, "current_user" => current_user})
   end
 
-  defp create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id}) do
+  defp create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id, "current_user" => current_user}) do
     club = Repo.get(Club, club_id)
+    clubs = Club.for_user(current_user) |> Repo.all
 
     # TODO: extract somehow
     %Danton.Channel{}
@@ -84,7 +85,10 @@ defmodule Danton.ChannelController do
         |> put_flash(:info, "Channel created successfully.")
         |> redirect(to: channel_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "There was an issue creating this channel")
+        |> add_new_channel_crumbs(club_id)
+        |> render("new.html", changeset: changeset, club_id: :none, clubs: clubs)
     end
   end
 
@@ -135,7 +139,12 @@ defmodule Danton.ChannelController do
         |> put_flash(:info, "Channel updated successfully.")
         |> redirect(to: channel_path(conn, :show, channel))
       {:error, changeset} ->
-        render(conn, "edit.html", channel: channel, changeset: changeset)
+        conn
+        |> put_flash(:error, "There was an issue updating this channel")
+        |> add_club_crumb(channel.club_id)
+        |> add_channel_crumb(channel)
+        |> add_channel_edit_crumb(channel)
+        |> render("edit.html", channel: channel, changeset: changeset)
     end
   end
 

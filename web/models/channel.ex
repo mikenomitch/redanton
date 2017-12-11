@@ -24,6 +24,8 @@ defmodule Danton.Channel do
     struct
     |> cast(params, [:name, :description])
     |> validate_required([:name])
+    |> validate_length(:name, min: 1, max: 60)
+    |> validate_length(:description, max: 250)
   end
 
   # ===========================
