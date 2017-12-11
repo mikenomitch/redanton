@@ -49,7 +49,8 @@ defmodule Danton.Mixfile do
      {:poison, "~> 2.2.0"},
      {:httpoison, "~> 0.13"},
      {:scrivener_ecto, "~> 1.0"},
-     {:breadcrumble, "~> 1.0.0"}]
+     {:breadcrumble, "~> 1.0.0"},
+     {:quantum, ">= 2.2.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

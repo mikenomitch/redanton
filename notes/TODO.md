@@ -47,3 +47,23 @@
     - when you make the club have them provide at least 1 channel name (**)
 
   - dedicated X-Post feature?
+
+
+## Notifications plan
+  - When a certain action happens (chat msg)
+  - Check each users preferences (start w/ just user settings)
+  - Add an object to a Notifications table
+  - On save kick off a job that either immediately sends the notification
+    to the person, or that waits N time (or til a time of day) and then
+    comes back and reads all their pending notifications & clears them out
+    then sends the messages (future jobs will come back too, but since
+    the messages are cleared out they wont do anything)
+    - if 6 jobs come back at 6 oclock... how do you make sure they dont
+      all fire off the same messages?
+      - dont make 6 of them
+
+
+<!-- table: notifications -->
+<!-- type: 'chat' | 'post' | 'invite' | 'new_user' -->
+<!-- info: serialized hash w/ structure that depends on type -->
+<!--  -->
