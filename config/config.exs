@@ -63,9 +63,7 @@ config :danton, Danton.Mailer,
   adapter: Bamboo.SendgridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
 
-config :xain, :after_callback, {Phoenix.HTML, :raw}
-
-# CONFIGURE JOBS
+  # CONFIGURE JOBS
 
 config :danton, Danton.Scheduler,
 jobs: [
