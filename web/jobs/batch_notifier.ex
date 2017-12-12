@@ -6,8 +6,8 @@ defmodule Danton.BatchNotifier do
   defp notify_user(notification_by_user = {user_id, notifications}) do
     # this should maybe just dispatch a post event if there is only one
     # but we can optimize this later
-    posts_waiting = Enum.count(notifications, &(&1.type == "post"))
-    messages_waiting = Enum.count(notifications, &(&1.type == "message"))
+    posts_waiting = Enum.count(notifications, &(&1.type == "new_post"))
+    messages_waiting = Enum.count(notifications, &(&1.type == "new_chat_message"))
 
     Danton.Notification.mark_pending(notifications)
 

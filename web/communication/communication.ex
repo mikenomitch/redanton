@@ -1,6 +1,7 @@
 alias Danton.Email
 alias Danton.Push
 alias Danton.Mailer
+alias Danton.Post
 alias Danton.Message
 alias Danton.Repo
 alias Danton.User
@@ -83,7 +84,7 @@ defmodule Danton.Communication do
   defp make_pending_notification(user, type, params) do
     Ecto.build_assoc(
       user, :notifications,
-      type: inspect(type),
+      type: Atom.to_string(type),
       data: params,
       status: "pending"
     ) |> Repo.insert()
