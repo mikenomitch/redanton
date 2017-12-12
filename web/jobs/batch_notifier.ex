@@ -11,7 +11,7 @@ defmodule Danton.BatchNotifier do
 
     Danton.Notification.mark_pending(notifications)
 
-    Danton.Communication.notify_user(
+    Danton.Communication.send_notification(
       user_id,
       :batch_notification,
       %{

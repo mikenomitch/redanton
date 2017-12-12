@@ -13,7 +13,7 @@ defmodule Danton.User do
 
     has_many :memberships, Membership
     has_many :authorizations, Authorization
-    has_many :notifications, Notifications
+    has_many :notifications, Notification
 
     many_to_many :clubs, Club, join_through: "memberships"
 
