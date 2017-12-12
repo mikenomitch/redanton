@@ -35,19 +35,12 @@
 
 ## New Features
   - unseen chat count
-  - notification options
+  - more notification options
     - all, smart, mute @ user and channel levels
     - notification when person joins a group
-
   - refine concept of channels in general
     - one post => many channels?
       - ask erik & victoria
     - just make the channel when you make the club automatically?
     - when you make the club have them provide at least 1 channel name (**)
-
   - dedicated X-Post feature?
-
-
-## Notifications plan
-  - Change strings to do plurals
-  - Add email for batch as well
