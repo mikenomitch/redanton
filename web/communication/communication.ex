@@ -100,8 +100,6 @@ end
 
 defmodule Danton.Timeframe.NewChatMessage do
   def get(user, params) do
-    # if the user has taken part in the discussion
-      # immediate
     if user_in_discussion(user, params) do
       :immediate
     else
@@ -110,10 +108,7 @@ defmodule Danton.Timeframe.NewChatMessage do
   end
 
   defp user_in_discussion(user, params = %{:post_id => post_id}) do
-    Message
-    |> Message.for_post(post_id)
-    |> Message.for_user(user.id)
-    |> Repo.one()
+    Post.user_is_owner(post_id, user.id) || Message.user_in_discussion(post_id, user.id)
   end
 end
 

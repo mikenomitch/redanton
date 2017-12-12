@@ -71,6 +71,13 @@ defmodule Danton.Message do
     |> Repo.one()
   end
 
+  def user_in_discussion(post_id, user_id) do
+    Message
+    |> for_post(post_id)
+    |> for_user(user_id)
+    |> Repo.one()
+  end
+
   # ===========================
   # OTHER
   # ===========================

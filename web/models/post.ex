@@ -203,6 +203,12 @@ defmodule Danton.Post do
   # OTHER
   # ===========================
 
+  def user_is_owner(post_id, user_id) do
+    # can just select the user_id down the line
+    post = Repo.get(Post, post_id)
+    post.user_id ==user_id
+  end
+
   def update_activity_for_message!(message) do
     post = Post.for_message(message) |> Repo.one()
     Post.changeset(post, %{activity_at: message.inserted_at}) |> Repo.update
