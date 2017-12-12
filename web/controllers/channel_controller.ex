@@ -70,6 +70,11 @@ defmodule Danton.ChannelController do
     create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id, "current_user" => current_user})
   end
 
+  defp create_and_respond(conn, %{"club_id" => "", "current_user" => current_user, "channel" => channel_params}) do
+    clubs = Club.for_user(current_user) |> Repo.all
+    render_create_error(conn, Channel.changeset(%Danton.Channel{}, channel_params), clubs, :none, "You must provide a club.")
+  end
+
   defp create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id, "current_user" => current_user}) do
     club = Repo.get(Club, club_id)
     clubs = Club.for_user(current_user) |> Repo.all
@@ -85,11 +90,15 @@ defmodule Danton.ChannelController do
         |> put_flash(:info, "Channel created successfully.")
         |> redirect(to: channel_path(conn, :show, channel))
       {:error, changeset} ->
-        conn
-        |> put_flash(:error, "There was an issue creating this channel")
-        |> add_new_channel_crumbs(club_id)
-        |> render("new.html", changeset: changeset, club_id: :none, clubs: clubs)
+        render_create_error(conn, changeset, clubs, club_id)
     end
+  end
+
+  defp render_create_error(conn, cs, clubs, club_id, message \\ "There was an issue creating this channel") do
+    conn
+    |> put_flash(:error, message)
+    |> add_new_channel_crumbs(club_id)
+    |> render("new.html", changeset: cs, club_id: club_id, clubs: clubs)
   end
 
   def show(conn, params = %{"id" => id}, _current_user, _claims) do
