@@ -25,7 +25,7 @@
       <%= @club.description %>
     </div>
     <div class="form-header-info-unit">
-      <%= link "+ Add Channel", to: club_channel_path(@conn, :new, @club) %>
+      <br /> <%= link "+ Add Channel", to: club_channel_path(@conn, :new, @club) %>
     </div>
   </div>
 </div>
