@@ -150,7 +150,7 @@ defmodule Danton.Post do
       {:ok, %{post: post, room: room} = res} ->
         Task.start(__MODULE__, :notify_new_post, [post, room, user])
         {:ok, res}
-      other ->
+      _ ->
         {:error, post_cs}
     end
   end

@@ -17,11 +17,11 @@ defmodule Danton.UserController do
     render(conn, "settings.html", user: current_user, changeset: changeset)
   end
 
-  def update(conn, params = %{"user" => user}, current_user, _claims) do
+  def update(conn, %{"user" => user}, current_user, _claims) do
     user_params = Map.merge(user, %{"email" => current_user.email})
 
     case User.update_info_and_auth(current_user, user_params) do
-      {:ok, user} ->
+      {:ok, _user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :settings))
@@ -49,7 +49,7 @@ defmodule Danton.UserController do
       successful_password_reset(conn)
     else
       {:error, err} -> bad_password_reset(conn, token, err)
-      err -> bad_password_reset(conn, token)
+      _err -> bad_password_reset(conn, token)
     end
   end
 
@@ -65,7 +65,7 @@ defmodule Danton.UserController do
     |> redirect(to: "/set_password?token=" <> token)
   end
 
-  def send_reset_email(conn, params = %{"email" => email}, _current_user, _claims) do
+  def send_reset_email(conn, %{"email" => email}, _current_user, _claims) do
     user = Repo.get_by(User, email: email)
 
     if (user) do

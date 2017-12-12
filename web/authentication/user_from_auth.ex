@@ -53,7 +53,7 @@ defmodule Danton.UserFromAuth do
       :ok ->
         case repo.transaction(fn -> create_user_from_auth(auth, current_user, repo) end) do
           {:ok, response} -> response
-          {:error, reason} -> {:error, "there was an issue creating this user"}
+          {:error, _reason} -> {:error, "there was an issue creating this user"}
         end
       {:error, reason} -> {:error, reason}
     end

@@ -26,16 +26,16 @@ defmodule Danton.Message do
   # QUERIES
   # ===========================
 
+  def for_post(post_id) do
+    Room.for_and_with_post(post_id) |> Ecto.assoc(:messages)
+  end
+
   def for_user(query \\ Message, user_id) do
     from m in query, where: m.user_id == ^user_id
   end
 
   def for_room(query \\ Message, room_id) do
     from m in query, where: m.room_id == ^room_id
-  end
-
-  def for_post(query \\ Post, post_id) do
-    Room.for_and_with_post(post_id) |> Ecto.assoc(:messages)
   end
 
   def count_distinct(query \\ Post) do
@@ -72,8 +72,7 @@ defmodule Danton.Message do
   end
 
   def user_in_discussion(post_id, user_id) do
-    Message
-    |> for_post(post_id)
+    for_post(post_id)
     |> for_user(user_id)
     |> Repo.all()
     |> Enum.any?()

@@ -8,11 +8,10 @@
     - Customer support page just for Apple
     - Timezones
     - More chat design work
-    - Error message audit
     - Empty Club prompt
     - Error handling on Channel and Post creation
       (associations with parent)
-    - Stream loading performance
+    - Form error audit (with message changes)
   - Mobile
     - Club mgmt styling issues
     - Prompts flashing
@@ -34,10 +33,11 @@
       - Add link to user support
 
 ## New Features
-  - unseen chat count
+  - unseen chat & post count
   - more notification options
-    - all, smart, mute @ user and channel levels
+    - check ins clear notifications
     - notification when person joins a group
+    - all, smart, mute @ user and channel levels
   - refine concept of channels in general
     - one post => many channels?
       - ask erik & victoria

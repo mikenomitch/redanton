@@ -12,7 +12,7 @@ defmodule Danton.PostAuthorization do
     end
   end
 
-  def authorization_status(_conn, user = nil, _permission_type) do
+  def authorization_status(_conn, _user = nil, _permission_type) do
     :unauthorized
   end
 

@@ -34,7 +34,7 @@ defmodule Danton.Communication do
     case notification_timeframe(user, type, params) do
       :immediate -> send_notification(user, type, params)
       :batch -> make_pending_notification(user, type, params)
-      :none -> no_send
+      :none -> no_send()
     end
   end
 
@@ -108,7 +108,7 @@ defmodule Danton.Timeframe.NewChatMessage do
     end
   end
 
-  defp user_in_discussion(user, params = %{:post_id => post_id}) do
+  defp user_in_discussion(user, %{:post_id => post_id}) do
     Post.user_is_owner(post_id, user.id) || Message.user_in_discussion(post_id, user.id)
   end
 end
@@ -120,7 +120,7 @@ defmodule Danton.Timeframe.NewPost do
 end
 
 defmodule Danton.Timeframe.Default do
-  def get(user, params) do
+  def get(_user, _params) do
     :batch
   end
 end

@@ -7,7 +7,7 @@ defmodule Danton.MembershipController do
   # ACTIONS
   # ===========================
 
-  def index(conn, params = %{"club_id" => club_id}, current_user, _claims) do
+  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
     club = Repo.get(Club, club_id)
     memberships = Membership.for_club(club_id)
       |> Repo.all()
@@ -19,7 +19,7 @@ defmodule Danton.MembershipController do
     |> render("index.html", memberships: memberships, club: club)
   end
 
-  def new(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
+  def new(conn, %{"club_id" => club_id}, _current_user, _claims) do
     club = Repo.get(Club, club_id)
     changeset = Membership.changeset(%Danton.Membership{})
 
@@ -80,11 +80,11 @@ defmodule Danton.MembershipController do
     changeset = Membership.changeset(membership, %{type: "admin"})
 
     case Repo.update(changeset) do
-      {:ok, membership} ->
+      {:ok, _membership} ->
         conn
         |> put_flash(:info, "Member Now Admin!")
         |> redirect(to: club_membership_path(conn, :index, club_id))
-      {:error, changeset} ->
+      {:error, _changeset} ->
         conn
         |> put_flash(:error, "There was an issue!")
         |> redirect(to: club_membership_path(conn, :index, club_id))

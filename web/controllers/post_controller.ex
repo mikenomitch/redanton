@@ -87,7 +87,7 @@ defmodule Danton.PostController do
     end
   end
 
-  def show(conn, %{"id" => id} = params, current_user, _claims) do
+  def show(conn, %{"id" => id}, current_user, _claims) do
     # TODO: make sure posts have rooms
     post = Repo.get!(Post, id)
       |> Repo.preload(:room)
