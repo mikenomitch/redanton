@@ -14,15 +14,15 @@
 <br />
 
 <div class="chat">
-  <div id="messages" class="message-list">
-    <%= if(length(@messages) === 0) do %>
-      <div id="chat-prompt">
-        <div> Nobody is talking 🙁 </div>
-        <div> You can fix that! 😃 </div>
+  <%= if(length(@messages) === 0) do %>
+    <div id="chat-prompt">
+      <div>
+         Nobody is talking 🙁 <br /> You can fix that! 😃
       </div>
-    <% end %>
+    </div>
+  <% end %>
 
-
+  <div id="messages" class="message-list">
     <%= for message <- @messages do %>
       <div class="message <%=msg_class(message, @user_id)%>">
         <div class="message-user">
