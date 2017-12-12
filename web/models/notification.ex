@@ -69,4 +69,21 @@ defmodule Danton.Notification do
     |> of_id()
     |> Repo.update_all(set: [status: "sent"])
   end
+
+  # =============
+  # CLEARING
+  # =============
+
+  def clear_chat_notifications(user_id, :room, id) do
+    post_id = Danton.Repo.get(Randon.Room, id).post_id
+    clear_chat_notifications(user_id, :post, post_id)
+  end
+
+  def clear_chat_notifications(user_id, :post, id) do
+    # FIND THEM AND DESTROY THEM
+  end
+
+  def clear_post_notifications(user_id) do
+    # FIND THEM AND DESTROY THEM
+  end
 end

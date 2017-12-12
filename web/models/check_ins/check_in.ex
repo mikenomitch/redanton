@@ -26,6 +26,22 @@ defmodule Danton.CheckIn do
       |> Repo.all()
   end
 
+  # ===========================
+  # NOTIFICAITON CLEARING
+  # ===========================
+
+  def queue_notifications_clear(user_id, :room, id) do
+    Task.start( Danton.Notification, :clear_chat_notifications, [user_id, :room, id])
+  end
+
+  def queue_notifications_clear(user_id, :post, id) do
+    Task.start( Danton.Notification, :clear_chat_notifications, [user_id, :post, id])
+  end
+
+  def queue_notifications_clear(user_id, :front) do
+    Task.start( Danton.Notification, :clear_post_notifications, [user_id])
+  end
+
   # =============================
   # USING MACRO
   # =============================

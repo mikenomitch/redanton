@@ -115,6 +115,8 @@ defmodule Danton.PostController do
       |> Repo.all()
       |> Repo.preload(:user)
 
+    CheckIn.check_in_room(post.room, current_user)
+
     conn
     |> add_parent_crumbs(post)
     |> add_post_crumb(post)
