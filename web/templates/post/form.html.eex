@@ -35,5 +35,8 @@
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
+    <%= unless @post_id == :none do %>
+      <%= link "Delete Post", to: post_path(@conn, :delete, @post_id), method: :delete, data: [confirm: "Are you sure you want to remove this post?"], class: "pull-right" %>
+    <% end %>
   </div>
 <% end %>

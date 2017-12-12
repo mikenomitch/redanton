@@ -6,6 +6,4 @@
   </h1>
 </div>
 
-<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post), channel_id: @post.channel_id %>
-
-<%= link "Delete Post", to: post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure you want to remove this post?"], class: "pull-right" %>
+<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post), channel_id: @post.channel_id, conn: @conn, post_id: @post.id %>

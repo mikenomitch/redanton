@@ -17,5 +17,7 @@ render "form.html", changeset: @changeset,
   action: action,
   channel_id: @channel_id,
   channels: @channels,
-  clubs: @clubs
+  clubs: @clubs,
+  conn: @conn,
+  post_id: :none
 %>
