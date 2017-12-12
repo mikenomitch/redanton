@@ -11,6 +11,7 @@ defmodule Danton.Post do
     field :type, :string
     field :url, :string
     field :activity_at, :naive_datetime
+
     belongs_to :channel, Channel
     belongs_to :user, User
     has_one :room, Room
@@ -129,7 +130,7 @@ defmodule Danton.Post do
       type: post_params["type"],
       url: post_params["url"],
       activity_at: Ecto.DateTime.utc
-    } )
+    })
 
     multi = Multi.new
       |> Multi.insert(:post, post_cs)

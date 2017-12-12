@@ -27,11 +27,6 @@ defmodule Danton.Api.V1.MembershipController do
     create_and_respond(conn, cs)
   end
 
-  def create(conn, %{"membership" => membership_params}, _current_user, _claims) do
-    changeset = Membership.changeset(%Danton.Membership{status: "pending"}, membership_params)
-    create_and_respond(conn, changeset)
-  end
-
   defp create_and_respond(conn, cs) do
     case Membership.invite_and_notify(cs) do
       {:ok, membership} ->
