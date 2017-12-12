@@ -27,14 +27,18 @@ defmodule Danton.Push do
 
   defp batch_message(%{messages_waiting: m, posts_waiting: p}) do
     if (m > 0 && p > 0) do
-      "#{p} new posts and #{m} new messages."
+      new_posts_str(p) <> " and " <> new_messages_str(m)
     else
-      if (m > 0) do
-        "#{m} new messages."
-      else
-        "#{p} new posts."
-      end
+      if (m > 0), do: new_messages_str(m), else: new_posts_str(p)
     end
+  end
+
+  defp new_messages_str(m) do
+    if m == 1, do: "1 new message", else: "#{m} new messages"
+  end
+
+  defp new_posts_str(p) do
+    if p == 1, do: "1 new post", else: "#{p} new posts"
   end
 
   defp make_message(body, token, opts \\ %{}) do

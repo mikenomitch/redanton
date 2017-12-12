@@ -56,7 +56,7 @@ defmodule Danton.Email do
     )
   end
 
-  def batch_notification(token, params) do
+  def batch_notification(_token, _params) do
     # NOOP - DONT SEND BATCHES VIA EMAIL
   end
 
