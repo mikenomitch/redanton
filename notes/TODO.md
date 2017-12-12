@@ -12,6 +12,7 @@
     - Empty Club prompt
     - Error handling on Channel and Post creation
       (associations with parent)
+    - Stream loading performance
   - Mobile
     - Club mgmt styling issues
     - Prompts flashing
@@ -35,9 +36,7 @@
 ## New Features
   - unseen chat count
   - notification options
-    - all, smart, mute @ user settings level
-    - all, smart, mute @ the channel level
-    - default channel notifications settings by user
+    - all, smart, mute @ user and channel levels
     - notification when person joins a group
 
   - refine concept of channels in general
@@ -50,14 +49,5 @@
 
 
 ## Notifications plan
-  - When a certain action happens (chat msg)
-  - Check each users preferences (start w/ just user settings)
-  - Add an object to a Notifications table
-  - On save kick off a job that either immediately sends the notification
-    to the person, or that waits N time (or til a time of day) and then
-    comes back and reads all their pending notifications & clears them out
-    then sends the messages (future jobs will come back too, but since
-    the messages are cleared out they wont do anything)
-    - if 6 jobs come back at 6 oclock... how do you make sure they dont
-      all fire off the same messages?
-      - dont make 6 of them
+  - Change strings to do plurals
+  - Add email for batch as well

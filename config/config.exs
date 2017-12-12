@@ -93,5 +93,5 @@ config :xain, :after_callback, {Phoenix.HTML, :raw}
 
 config :danton, Danton.Scheduler,
 jobs: [
-  {"* * * * *", {Danton.BatchNotifier, :run, []}}
+  {"0 */2 * * *", {Danton.BatchNotifier, :run, []}}
 ]
