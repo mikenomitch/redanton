@@ -75,7 +75,8 @@ defmodule Danton.Message do
     Message
     |> for_post(post_id)
     |> for_user(user_id)
-    |> Repo.one()
+    |> Repo.all()
+    |> Enum.any?()
   end
 
   # ===========================
