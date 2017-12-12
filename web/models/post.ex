@@ -120,16 +120,16 @@ defmodule Danton.Post do
   # ===========================
 
   def create_for_channel_and_user(chan, user, post_params, msg_params \\ false) do
-    post_struct = %Post{
+    post_cs = Post.changeset(%Post{
+      user_id: user.id,
+      channel_id: chan.id
+    }, %{
       title: post_params["title"],
       description: post_params["description"],
       type: post_params["type"],
       url: post_params["url"],
-      user_id: user.id,
       activity_at: Ecto.DateTime.utc
-    }
-
-    post_cs = Ecto.build_assoc(chan, :posts, post_struct)
+    } )
 
     multi = Multi.new
       |> Multi.insert(:post, post_cs)
