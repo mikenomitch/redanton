@@ -7,8 +7,6 @@
     - Customer support page just for Apple
     - Timezones
     - More chat design changes
-    - Error handling on Channel and Post creation
-      (associations with parent)
     - Form error audit (with message changes)
   - Mobile
     - Club mgmt styling issues
