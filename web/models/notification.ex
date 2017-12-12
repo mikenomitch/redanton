@@ -80,7 +80,9 @@ defmodule Danton.Notification do
   end
 
   def clear_chat_notifications(user_id, :post, _id) do
-    # THIS IS WRONG!
+    # THIS IS CLEARING ALL CHAT NOTIFICATIONS IF THEY
+    # CHECK INTO ANY CHAT (THIS IS OKAY FOR NOW BUT
+    # NOT THE RIGHT THING LONG TERM)
     moot_for_user_and_type(user_id, "new_chat_message")
   end
 
