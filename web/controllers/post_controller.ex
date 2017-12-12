@@ -86,7 +86,6 @@ defmodule Danton.PostController do
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: channel_path(conn, :show, channel_id))
       {:error, changeset} ->
-        IO.puts "WHOOPSIES"
         render_create_error(conn, current_user, changeset, channel_id)
     end
   end

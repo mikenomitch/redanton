@@ -15,7 +15,7 @@ defmodule Danton.Club do
     field :channel_count, :integer, virtual: true
     field :post_count, :integer, virtual: true
     field :member_count, :integer, virtual: true
-    field :activity_at, :naive_datetime, virtual: true
+    field :activity_at, Ecto.DateTime, virtual: true
 
     timestamps()
   end

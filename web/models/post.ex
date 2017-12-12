@@ -10,7 +10,7 @@ defmodule Danton.Post do
     field :description, :string
     field :type, :string
     field :url, :string
-    field :activity_at, :naive_datetime
+    field :activity_at, Ecto.DateTime
 
     belongs_to :channel, Channel
     belongs_to :user, User
