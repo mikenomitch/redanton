@@ -30,6 +30,17 @@ defmodule Danton.MembershipController do
     |> render("new.html", changeset: changeset, club: club)
   end
 
+  def create(conn, %{"membership" => %{"email" => ""}, "club_id" => club_id}, _current_user, _claims) do
+    club = Repo.get(Club, club_id)
+
+    conn
+    |> add_club_crumb(club)
+    |> add_club_membership_crumb(club)
+    |> add_new_membership_crumb(club)
+    |> put_flash(:error, "Email cannot be blank")
+    |> render("new.html", club: club, changeset: Membership.changeset(%Danton.Membership{}))
+  end
+
   def create(conn, %{"membership" => membership_params, "club_id" => club_id}, _current_user, _claims) do
     %{"email" => email, "type" => type} = membership_params
     user = User.get_or_create(%User{email: email})
@@ -38,13 +49,46 @@ defmodule Danton.MembershipController do
 
     cs = Ecto.build_assoc(user, :memberships, membership_params)
 
-    case Membership.invite_and_notify(cs) do
-      {:ok, _membership} ->
-        conn
-        |> put_flash(:info, "User Invited.")
-        |> redirect(to: club_membership_path(conn, :index, club_id))
+    with {:ok, _ } <- email_not_nil(cs),
+        {:ok, _ } <- email_has_format(cs),
+        {:ok, _membership } <- Membership.invite_and_notify(cs)
+    do
+      conn
+      |> put_flash(:info, "User Invited.")
+      |> redirect(to: club_membership_path(conn, :index, club_id))
+    else
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render_error(conn, club)
+      {:error_message, message} ->
+        render_error(conn, club, message)
+    end
+  end
+
+  defp render_error(conn, club, message \\ "There was an issue") do
+    conn
+    |> add_club_crumb(club)
+    |> add_club_membership_crumb(club)
+    |> add_new_membership_crumb(club)
+    |> put_flash(:error, message)
+    |> render("new.html", club: club, changeset: Membership.changeset(%Danton.Membership{}))
+  end
+
+  # THESE ARE AWFUL AND SHOULD GO ON THE MODEL
+  # AND BE CALLED VIA ECTO CS
+
+  def email_not_nil(cs) do
+    if (cs.email && cs.email != "") do
+      {:ok, cs}
+    else
+      {:error_message, "Email not valid"}
+    end
+  end
+
+  def email_has_format(cs) do
+    if (String.contains?(cs.email, "@")) do
+      {:ok, cs}
+    else
+      {:error_message, "Email not valid"}
     end
   end
 

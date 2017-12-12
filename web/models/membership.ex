@@ -22,6 +22,7 @@ defmodule Danton.Membership do
     struct
     |> cast(params, [:status, :type, :email])
     |> validate_required([:status, :type, :email])
+    |> validate_format(:email, ~r/@/)
   end
 
   # ===========================
@@ -33,10 +34,8 @@ defmodule Danton.Membership do
       {:ok, membership} ->
         Task.start(__MODULE__, :notify_new_club_invite, [membership])
         {:ok, membership}
-      {:error, changeset} ->
-        {:error, changeset}
+      err -> err
     end
-
   end
 
   # ===========================
