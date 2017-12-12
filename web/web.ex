@@ -26,7 +26,7 @@ defmodule Danton.Web do
       alias Danton.GeneralCheckIn
       alias Danton.Membership
       alias Danton.Message
-      alias Danton.Notification
+      alias Danton.Communication
       alias Danton.Post
       alias Danton.PostCheckIn
       alias Danton.Room

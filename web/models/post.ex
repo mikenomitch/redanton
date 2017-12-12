@@ -159,7 +159,7 @@ defmodule Danton.Post do
     users_for_room = Room.user_ids_for_room(room)
     users_to_send_to = users_for_room -- [user.id]
 
-    Danton.Notification.notify_users(
+    Danton.Communication.notify_users(
       users_to_send_to,
       :new_post,
       %{

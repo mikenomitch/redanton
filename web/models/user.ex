@@ -123,7 +123,7 @@ defmodule Danton.User do
   def send_password_reset(user) do
     {:ok, token, _claims} = Guardian.encode_and_sign(user, "reset", %{ttl: {30, :minute}})
 
-    Danton.Notification.notify_via_email(user, :password_reset, %{token: token})
+    Danton.Communication.notify_via_email(user, :password_reset, %{token: token})
   end
 
   def sign_up(params) do

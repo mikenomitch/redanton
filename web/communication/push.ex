@@ -19,6 +19,10 @@ defmodule Danton.Push do
     |> NotificationPusher.publish_message()
   end
 
+  def batch_notification(token, params) do
+    IO.puts "WOOT - #{inspect(token)} - #{inspect(params)}"
+  end
+
   defp make_message(body, token, opts \\ %{}) do
     base = %{
       "to" => token,

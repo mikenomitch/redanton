@@ -56,6 +56,10 @@ defmodule Danton.Email do
     )
   end
 
+  def batch_notification(token, params) do
+    IO.puts "WAHOOWAH - #{inspect(token)} - #{inspect(params)}"
+  end
+
   defp base_email do
     new_email()
     |> from("Relayd<notifications@relayd.io>")

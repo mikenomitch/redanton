@@ -101,7 +101,7 @@ defmodule Danton.Message do
     sender = User.for_message(message) |> Repo.one()
     post = Post.for_message(message) |> Repo.one()
 
-    Danton.Notification.notify_users(
+    Danton.Communication.notify_users(
       users_to_send_to,
       :new_chat_message,
       %{

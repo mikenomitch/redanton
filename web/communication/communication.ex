@@ -10,7 +10,7 @@ alias Danton.UserToken
 
 # each user should get their own process
 
-defmodule Danton.Notification do
+defmodule Danton.Communication do
   def notify_users(user_ids, type, params) do
     users = user_ids |> User.for_ids() |> Repo.all()
 

@@ -73,7 +73,7 @@ defmodule Danton.Membership do
   def notify_new_club_invite(membership) do
     club = Repo.get(Club, membership.club_id)
 
-    Danton.Notification.notify_user(
+    Danton.Communication.notify_user(
       membership.user_id,
       :new_club_invite,
       %{
