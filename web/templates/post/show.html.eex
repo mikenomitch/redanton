@@ -6,13 +6,12 @@
   </h1>
   <div class="form-header-info">
     <div class="form-header-info-unit">
-      <%= if user_can_edit(@post, @conn.private.guardian_default_resource) do %>
-        <%= link "Edit Post", to: post_path(@conn, :edit, @post), class: "" %>
-      <% end %>
       Posted By: <%= @post.user.name %>
     </div>
   </div>
 </div>
+
+<br />
 
 <div class="chat">
   <div id="messages" class="message-list">

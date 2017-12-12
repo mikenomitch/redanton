@@ -59,6 +59,15 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
   padding: 0px;
 }
 
+.btn-primary {
+  background-color: #6495ED;
+  border: none;
+}
+
+.btn-primary:focus, .btn-primary:hover {
+  background-color: #5586DE;
+}
+
 /* FLASH MESSAGES */
 
 #flash-holder {

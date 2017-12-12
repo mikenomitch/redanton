@@ -2,12 +2,10 @@
 
 ## Beautification and Clean up pre-Apple
   - Web
-    - Edit and show page links & design
     - Change base text input design
-    - Change alert desgin
     - Customer support page just for Apple
     - Timezones
-    - More chat design work
+    - More chat design changes
     - Empty Club prompt
     - Error handling on Channel and Post creation
       (associations with parent)
