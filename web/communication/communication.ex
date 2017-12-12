@@ -105,7 +105,7 @@ defmodule Danton.Timeframe.NewChatMessage do
     if user_in_discussion(user, params) do
       :immediate
     else
-      Danton.Timeframe.Default  .get(user, params)
+      Danton.Timeframe.Default.get(user, params)
     end
   end
 
@@ -119,7 +119,7 @@ end
 
 defmodule Danton.Timeframe.NewPost do
   def get(user, params) do
-    Danton.Timeframe.Default  .get(user, params)
+    Danton.Timeframe.Default.get(user, params)
   end
 end
 
