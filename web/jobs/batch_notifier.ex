@@ -1,13 +1,10 @@
 defmodule Danton.BatchNotifier do
   def run do
-    # this is the model, not the other thing (change its name)
-    # notifications_for_users = Danton.Notification.pending_by_user() |> Repo.get()
-      # where status = pending
-      # group_by user_id
+    notifications_for_users = Danton.Notification.for_batch_notification() |> Repo.all()
 
-    # Enum.each(notifications_for_users, &notify_user/1)
+    IO.puts "this is what is looks like: " <> inspect(notifications_for_users)
 
-    notify_user {1, [%{type: "post"}, %{type: "message"}, %{type: "message"}]}
+    Enum.each(notifications_for_users, &notify_user/1)
   end
 
   defp notify_user(notification_by_user = {user_id, notifications}) do

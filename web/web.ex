@@ -23,10 +23,11 @@ defmodule Danton.Web do
       alias Danton.ChannelCheckIn
       alias Danton.CheckIn
       alias Danton.Club
+      alias Danton.Communication
       alias Danton.GeneralCheckIn
       alias Danton.Membership
       alias Danton.Message
-      alias Danton.Communication
+      alias Danton.Notification
       alias Danton.Post
       alias Danton.PostCheckIn
       alias Danton.Room

@@ -61,9 +61,3 @@
     - if 6 jobs come back at 6 oclock... how do you make sure they dont
       all fire off the same messages?
       - dont make 6 of them
-
-
-<!-- table: notifications -->
-<!-- type: 'chat' | 'post' | 'invite' | 'new_user' -->
-<!-- info: serialized hash w/ structure that depends on type -->
-<!--  -->
