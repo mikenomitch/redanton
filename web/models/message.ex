@@ -26,11 +26,15 @@ defmodule Danton.Message do
   # QUERIES
   # ===========================
 
-  def for_room(query \\ Message, room_id) do
+  def for_user(query \\ Message, user_id) when is_number(user_id) do
+    from m in query, where: m.user_id == ^user_id
+  end
+
+  def for_room(query \\ Message, room_id) when is_number(room_id) do
     from m in query, where: m.room_id == ^room_id
   end
 
-  def for_post(post_id) do
+  def for_post(query \\ Post, post_id) when is_number(post_id) do
     Room.for_and_with_post(post_id) |> Ecto.assoc(:messages)
   end
 
@@ -107,7 +111,8 @@ defmodule Danton.Message do
       %{
         sender_name: sender.name || sender.email,
         post_title: post.title,
-        post_path: "/posts/#{post.id}"
+        post_path: "/posts/#{post.id}",
+        post_id: post.id
       }
     )
   end
