@@ -14,6 +14,6 @@ defmodule Danton.AuthorizationController do
   end
 
   defp authorizations(user) do
-    Ecto.Model.assoc(user, :authorizations) |> Repo.all
+    Ecto.assoc(user, :authorizations) |> Repo.all
   end
 end
