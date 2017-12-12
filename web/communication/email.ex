@@ -57,7 +57,7 @@ defmodule Danton.Email do
   end
 
   def batch_notification(token, params) do
-    IO.puts "WAHOOWAH - #{inspect(token)} - #{inspect(params)}"
+    # NOOP - DONT SEND BATCHES VIA EMAIL
   end
 
   defp base_email do

@@ -11,13 +11,16 @@ defmodule Danton.BatchNotifier do
 
     Danton.Notification.mark_pending(notifications)
 
-    Danton.Communication.send_notification(
-      user_id,
-      :batch_notification,
-      %{
-        posts_waiting: posts_waiting,
-        messages_waiting: messages_waiting
-      }
-    )
+    if (posts_waiting > 0 || messages_waiting > 0) do
+      Danton.Communication.send_notification(
+        user_id,
+        :batch_notification,
+        %{
+          posts_waiting: posts_waiting,
+          messages_waiting: messages_waiting
+        }
+      )
+    end
   end
+
 end

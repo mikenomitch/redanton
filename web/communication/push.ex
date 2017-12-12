@@ -20,7 +20,21 @@ defmodule Danton.Push do
   end
 
   def batch_notification(token, params) do
-    IO.puts "WOOT - #{inspect(token)} - #{inspect(params)}"
+    batch_message(params)
+    |> make_message(token)
+    |> NotificationPusher.publish_message()
+  end
+
+  defp batch_message(%{messages_waiting: m, posts_waiting: p}) do
+    if (m > 0 && p > 0) do
+      "There are #{p} new posts and #{m} new messages."
+    else
+      if (m > 0) do
+        "You have #{m} new messages."
+      else
+        "There are #{p} new posts."
+      end
+    end
   end
 
   defp make_message(body, token, opts \\ %{}) do
