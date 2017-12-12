@@ -68,6 +68,10 @@ navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand {
   background-color: #5586DE;
 }
 
+.dropdown-toggle-shift {
+  margin-top: -8px;
+}
+
 /* FLASH MESSAGES */
 
 #flash-holder {

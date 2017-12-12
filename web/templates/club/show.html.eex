@@ -4,7 +4,7 @@
   <h1 class="header-text">
     <%= @club.name %>
     <div class="btn-group">
-      <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-default btn-xs dropdown-toggle dropdown-toggle-shift" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
