@@ -2,11 +2,11 @@
 
 ## Beautification and Clean up pre-Apple
   - Web
+    - Empty Club prompt (no users)
     - Change base text input design
     - Customer support page just for Apple
     - Timezones
     - More chat design changes
-    - Empty Club prompt
     - Error handling on Channel and Post creation
       (associations with parent)
     - Form error audit (with message changes)

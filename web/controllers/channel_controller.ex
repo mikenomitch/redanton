@@ -61,8 +61,8 @@ defmodule Danton.ChannelController do
     |> render("new.html", changeset: changeset, club_id: :none, clubs: clubs)
   end
 
-  def create(conn, %{"channel" => channel_params, "club_id" => club_id}, _current_user, _claims) do
-    create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id})
+  def create(conn, %{"channel" => channel_params, "club_id" => club_id}, current_user, _claims) do
+    create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id, "current_user" => current_user})
   end
 
   def create(conn, %{"channel" => channel_params}, current_user, _claims) do
@@ -80,10 +80,10 @@ defmodule Danton.ChannelController do
       |> Ecto.Changeset.put_assoc(:club, club)
       |> Repo.insert()
       |> case do
-      {:ok, _channel} ->
+      {:ok, channel} ->
         conn
         |> put_flash(:info, "Channel created successfully.")
-        |> redirect(to: channel_path(conn, :index))
+        |> redirect(to: channel_path(conn, :show, channel))
       {:error, changeset} ->
         conn
         |> put_flash(:error, "There was an issue creating this channel")
