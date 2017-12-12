@@ -25,6 +25,10 @@ defmodule Danton.UserController do
         conn
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :settings))
+      {:error, reason = %Ecto.Changeset{}} ->
+        conn
+        |> put_flash(:error, "There was an issue updating. Try again.")
+        |> render("settings.html", user: current_user, changeset: User.changeset(current_user))
       {:error, reason} ->
         # this should validate thru the user but doesn't now
         conn

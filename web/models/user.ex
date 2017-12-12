@@ -27,6 +27,7 @@ defmodule Danton.User do
     model
     |> cast(params, @paramlist)
     |> validate_required(@required_params)
+    |> validate_length(:name, min: 1, max: 60)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
   end
