@@ -20,6 +20,10 @@ defmodule Danton.Notification do
     |> validate_required([:type, :status])
   end
 
+  def of_id(query \\ Notification, ids) do
+    from n in query, where: n.id in ^ids
+  end
+
   def for_user(query \\ Notification, user_id) do
     from n in query, where: n.user_id == ^user_id
   end
@@ -57,5 +61,12 @@ defmodule Danton.Notification do
       notifications_list,
       &(&1.user_id)
     )
+  end
+
+  def mark_pending(notifications_list) do
+    notifications_list
+    |> Enum.map(&(&1.id))
+    |> of_id()
+    |> Repo.update_all(set: [status: "sent"])
   end
 end

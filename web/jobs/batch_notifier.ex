@@ -9,6 +9,8 @@ defmodule Danton.BatchNotifier do
     posts_waiting = Enum.count(notifications, &(&1.type == "post"))
     messages_waiting = Enum.count(notifications, &(&1.type == "message"))
 
+    Danton.Notification.mark_pending(notifications)
+
     Danton.Communication.notify_user(
       user_id,
       :batch_notification,
