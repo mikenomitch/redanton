@@ -6,8 +6,6 @@
         <%= link channel.name, to: channel_path(@conn, :show, channel), class: "" %>
       </strong>
       (<%= post_count_string(channel) %>)
-      -
-      <%= link "Edit", to: channel_path(@conn, :edit, channel), class: "" %>
     </div>
 
     <div class="col-xs-12 col-md-12 small row">

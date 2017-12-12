@@ -3,16 +3,23 @@
 <div class="form-header">
   <h1 class="header-text">
     <%= @channel.name %>
+    <div class="btn-group">
+      <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link "Edit", to: channel_path(@conn, :edit, @channel), class: "" %>
+        </li>
+        <li>
+          <%= link "Delete", to: channel_path(@conn, :delete, @channel), method: :delete, data: [confirm: "Are you sure you want to remove this channel and its posts?"] %>
+        </li>
+      </ul>
+    </div>
   </h1>
   <div class="form-header-info">
     <div class="form-header-info-unit">
-      <%= link "Edit Channel", to: channel_path(@conn, :edit, @channel), class: "" %>
-    </div>
-    <div class="form-header-info-unit">
       <%= @channel.description %>
-    </div>
-    <div class="form-header-info-unit">
-      Club: <%= @club.name %>
     </div>
   </div>
 </div>

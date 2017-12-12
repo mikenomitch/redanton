@@ -7,5 +7,3 @@
 </div>
 
 <%= render "form.html", changeset: @changeset, action: club_path(@conn, :update, @club) %>
-
-<%= link "Leave Club", to: club_club_path(@conn, :leave, @club), method: :delete, data: [confirm: "Are you sure you want to leave the club?"], class: "pull-right" %>

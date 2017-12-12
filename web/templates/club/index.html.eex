@@ -11,9 +11,6 @@
         <strong>
           <%= link club.name, to: club_path(@conn, :show, club), class: "" %>
         </strong>
-        <%= if user_is_admin(@user, club.id) do %>
-          - <%= link "Edit", to: club_path(@conn, :edit, club), class: "" %>
-        <% end %>
       </div>
       <div class="col-xs-12 col-md-12 small row">
         <div class="col-xs-12 col-md-12">
