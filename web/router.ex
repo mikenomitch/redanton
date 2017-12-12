@@ -40,12 +40,9 @@ defmodule Danton.Router do
     pipe_through :browser
   end
 
-  use ExAdmin.Router
-  # your app's routes
-  scope "/admin", ExAdmin do
-    pipe_through [:browser, :browser_auth, :admin_browser_auth]
-    admin_routes()
-  end
+  # scope "/admin" do
+  #   pipe_through [:browser, :browser_auth, :admin_browser_auth]
+  # end
 
   # PRIVATE ROUTES
   scope "/", Danton do
