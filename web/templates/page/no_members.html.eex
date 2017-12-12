@@ -1,0 +1,14 @@
+<div class="intro-prompt-holder">
+  <h3 class="intro-prompt-title">
+    No Other Members
+  </h3>
+
+  <div class="intro-prompt-description">
+    <p> This club has no other members. </p>
+    <p> None of your interesting links will be seen! </p>
+  </div>
+
+  <div class="intro-prompt-cta">
+    <%= link "Invite A Friend", to: club_membership_path(@conn, :new, @club_id) %>
+  </div>
+</div>
