@@ -14,6 +14,7 @@ defmodule Danton.Club do
 
     field :channel_count, :integer, virtual: true
     field :post_count, :integer, virtual: true
+    field :member_count, :integer, virtual: true
     field :activity_at, Ecto.DateTime, virtual: true
 
     timestamps()
@@ -109,6 +110,14 @@ defmodule Danton.Club do
   # ===========================
   # OTHER
   # ===========================
+
+  # N + 1 ! (fix later)
+  def with_member_count(club) do
+    member_count = Ecto.assoc(club, :memberships)
+      |> Repo.aggregate(:count, :id)
+
+    %{club | member_count: member_count}
+  end
 
   # N + 1 ! (fix later)
   def with_channel_count(club) do

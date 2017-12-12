@@ -75,6 +75,7 @@ defmodule Danton.ClubController do
       |> Repo.preload(:channels)
       |> Club.with_post_count()
       |> Club.with_channel_count()
+      |> Club.with_member_count()
 
     page = Post.for_club(club)
       |> Post.by_activity()
