@@ -8,7 +8,7 @@ defmodule Danton.Notification do
   schema "notifications" do
     field :type, :string
     field :status, :string
-    field :data, :map
+    field :data, :map, default: %{}
     belongs_to :user, User
 
     timestamps()
@@ -20,33 +20,42 @@ defmodule Danton.Notification do
     |> validate_required([:type, :status])
   end
 
-  # ===========================
-  # QUERIES
-  # ===========================
-
   def for_user(query \\ Notification, user_id) do
-    from t in query, where: t.user_id == ^user_id
+    from n in query, where: n.user_id == ^user_id
   end
 
   def not_for_user(query \\ Notification, user_id) do
-    from t in query, where: t.user_id != ^user_id
+    from n in query, where: n.user_id != ^user_id
   end
 
-  def by_user(query \\ Notification) do
-    query |> group_by([n], [n.user_id])
+  def by_user_id(query \\ Notification) do
+    query |> group_by([n], [n.user_id, n.id])
   end
 
   def of_type(query \\ Notification, type) do
-    from t in query, where: t.type == ^type
+    from n in query, where: n.type == ^type
   end
 
-  def of_status(query \\ Notification, of_status) do
-    from t in query, where: t.of_status == ^of_status
+  def of_status(query \\ Notification, status) do
+    from n in query, where: n.status == ^status
   end
+
+  # ===========================
+  # OTHER
+  # ===========================
 
   def for_batch_notification(query \\ Notification) do
+    # add grouping by in here
     query
     |> of_status("pending")
+    |> Repo.all()
     |> by_user()
+  end
+
+  defp by_user(notifications_list) do
+    Enum.group_by(
+      notifications_list,
+      &(&1.user_id)
+    )
   end
 end

@@ -79,7 +79,8 @@ config :ex_admin,
     Danton.ExAdmin.PostCheckIn,
     Danton.ExAdmin.RoomCheckIn,
     Danton.ExAdmin.ChannelCheckIn,
-    Danton.ExAdmin.GeneralCheckIn
+    Danton.ExAdmin.GeneralCheckIn,
+    Danton.ExAdmin.Notification
   ]
 
 config :danton, Danton.Mailer,
