@@ -10,9 +10,9 @@ defmodule Danton.Email do
     |> assign(:person, user)
     |> render(
       "new_chat_message.html",
-      sender_name: params.sender_name,
-      post_title: params.post_title,
-      post_path: @base_site_url <> params.post_path,
+      sender_name: params[:sender_name],
+      post_title: params[:post_title],
+      post_path: @base_site_url <> params[:post_path],
       app_path: @app_path
     )
   end
@@ -24,7 +24,7 @@ defmodule Danton.Email do
     |> assign(:person, user)
     |> render(
       "new_club_invite.html",
-      club_name: params.club_name,
+      club_name: params[:club_name],
       site_url: @base_site_url,
       app_path: @app_path
     )
@@ -37,9 +37,9 @@ defmodule Danton.Email do
     |> assign(:person, user)
     |> render(
       "new_post.html",
-      poster_name: params.poster_name,
-      post_title: params.post_title,
-      post_path: params.post_path,
+      poster_name: params[:poster_name],
+      post_title: params[:post_title],
+      post_path: params[:post_path],
       app_path: @app_path
     )
   end
