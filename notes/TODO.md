@@ -4,8 +4,6 @@
   - Web
     - Change base text input design
     - Timezones
-    - More chat design changes
-    - Form error audit (with message changes)
   - Mobile
     - Club mgmt styling issues
     - Prompts flashing
