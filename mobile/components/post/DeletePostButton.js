@@ -1,4 +1,5 @@
 import React from 'react'
+import { Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { colors, misc } from '../styleConstants'
@@ -13,7 +14,7 @@ const DeletePostButton = (props) => {
 
   return (
     <SimpleButton onPress={onPress} >
-      <Icon name="trash" size={misc.iconSize} color={colors.primary} />
+      Remove Post
     </SimpleButton>
   )
 }

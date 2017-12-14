@@ -13,6 +13,7 @@ import { deletePost, updatePost } from '../../data/posts'
 import ActionButton from '../ui/ActionButton'
 import EditPostInfo from './EditPostInfo'
 import DeletePostButton from './DeletePostButton'
+import Footer from '../ui/Footer'
 
 // ===============
 //   VALIDATIONS
@@ -59,16 +60,20 @@ class EditPost extends PureComponent {
 
   render() {
     return (
-			<View style={{padding: spacing.container}}>
-        <EditPostInfo
-          errorFor={this.props.errorFor}
-          setPostState={this.setPostState}
-          postInfo={this.state.postInfo}
-        />
-				<ActionButton onPress={this.onSaveClick}>
-					save edits
-        </ActionButton>
-        <DeletePostButton removePost={this.removePost} />
+      <View>
+        <View style={{padding: spacing.container, height: '90%'}}>
+          <EditPostInfo
+            errorFor={this.props.errorFor}
+            setPostState={this.setPostState}
+            postInfo={this.state.postInfo}
+          />
+          <ActionButton onPress={this.onSaveClick}>
+            save edits
+          </ActionButton>
+        </View>
+        <Footer>
+          <DeletePostButton removePost={this.removePost} />
+        </Footer>
 			</View>
 		)
   }
