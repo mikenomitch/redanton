@@ -13,8 +13,8 @@ const EditClubInfo = (props) => (
       error={props.errorFor('name', props.clubInfo.name)}
     />
     <BasicTextInput
+      autoGrow
       label="description"
-      multiline
       value={props.clubInfo.description}
       returnKeyType="next"
       onChangeText={(description) => props.setClubState({description})}

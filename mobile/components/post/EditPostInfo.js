@@ -23,7 +23,7 @@ const EditPostInfo = (props) => (
       autoCapitalize="none"
       autoCorrect={false}
     />
-    <Text style={{color: colors.mediumGray}} >
+    <Text style={{color: colors.mediumGray, marginBottom: 14}} >
       leave url blank for discussion post
     </Text>
   </View>
