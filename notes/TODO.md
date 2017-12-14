@@ -5,7 +5,6 @@
     - Change base text input design
     - Timezones
   - Mobile
-    - Prompts flashing
     - First post not author bug
     - New X Buttons when primpt showing
     - Edit user page looking nicer

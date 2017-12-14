@@ -17,6 +17,7 @@ import NeedChannelPrompt from '../channel/NeedChannelPrompt'
 
 import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
+import Loading from '../ui/Loading'
 
 // ===============
 //     STYLES
@@ -57,6 +58,13 @@ const styles = StyleSheet.create({
 // ===============
 
 class Club extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      initialLoadDone: false
+    }
+  }
+
   get club() {
     return this.props.navigation.state.params.club
   }
@@ -78,8 +86,12 @@ class Club extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.getPostsForClub(this.club.id)
+    this.props.getPostsForClub(this.club.id, this.markLoaded)
     this.props.getUsersForMain()
+  }
+
+  markLoaded = () => {
+    this.setState({initialLoadDone: true})
   }
 
   refresh = (cb) => {
@@ -108,9 +120,8 @@ class Club extends PureComponent {
       users
     } = this.props
 
-    if (!channels[0]) {
-      return this.renderNoChannels()
-    }
+    if (!this.state.initialLoadDone && this.needsPosts) { return <Loading /> }
+    if (!channels[0]) { return this.renderNoChannels() }
 
     return (
       <View style={styles.root}>

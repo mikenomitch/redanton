@@ -14,6 +14,7 @@ import withPagination from '../helpers/withPagination'
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
 import Stream from '../stream/Stream'
+import Loading from '../ui/Loading'
 import LinkButton from '../ui/LinkButton'
 import Footer from '../ui/Footer'
 
@@ -44,6 +45,13 @@ const styles = StyleSheet.create({
 // ===============
 
 class Channel extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      initialLoadDone: false
+    }
+  }
+
   get channel() {
     return this.props.navigation.state.params.channel
   }
@@ -60,8 +68,12 @@ class Channel extends PureComponent {
     return this.sortedPosts.length === 0
   }
 
+  markLoaded = () => {
+    this.setState({initialLoadDone: true})
+  }
+
   componentDidMount() {
-    this.props.getPostsForChannel(this.channel.id)
+    this.props.getPostsForChannel(this.channel.id, this.markLoaded)
     this.props.getUsersForMain()
   }
 
@@ -91,7 +103,7 @@ class Channel extends PureComponent {
     })
   }
 
-  render() {
+  renderStream () {
     const {
       channels,
       navigation,
@@ -99,21 +111,29 @@ class Channel extends PureComponent {
       users
     } = this.props
 
+    if (!this.state.initialLoadDone && this.needsPosts) { return <Loading /> }
+
+    return (
+      <Stream
+        inChannel
+        needsPosts={this.needsPosts}
+        currentUserId={this.props.currentUserId}
+        refresh={this.refresh}
+        navigation={navigation}
+        content={this.sortedPosts}
+        channels={channels}
+        users={users}
+        onEndHit={this.onEndHitCb()}
+        currentlyLoading={!this.props.atFinalPage}
+      />
+    )
+  }
+
+  render() {
     return (
       <View style={styles.root}>
         <View style={styles.content}>
-          <Stream
-            inChannel
-            needsPosts={this.needsPosts}
-            currentUserId={this.props.currentUserId}
-            refresh={this.refresh}
-            navigation={navigation}
-            content={this.sortedPosts}
-            channels={channels}
-            users={users}
-            onEndHit={this.onEndHitCb()}
-            currentlyLoading={!this.props.atFinalPage}
-          />
+          {this.renderStream()}
         </View>
         <Footer>
           <View style={styles.footerContent}>
