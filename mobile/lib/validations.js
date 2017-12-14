@@ -10,6 +10,11 @@ const isOfLength = (minLength, value) => {
   return value && value.length >= minLength
 }
 
+// OR EQUAL TO
+const isLessThanOrEqualTo = (minLength, value) => {
+  return value && value.length <= minLength
+}
+
 const isValidEmail = (value) => {
   const emailRegex = /\S+@\S+\.\S+/
   return emailRegex.test(value)
@@ -29,6 +34,13 @@ export const validateEmail = (errorMessage) => (value) => {
   return isValidEmail(value) ? null : errorMessage
 }
 
+export const validateLength = ({min: min, max: max, msg: msg}) => (value) => {
+  const isValidMin = !value || (!min || isOfLength(min, value))
+  const isValidMax = !value || (!max || isLessThanOrEqualTo(max, value))
+
+  return isValidMin && isValidMax ? null : msg
+}
+
 export const validatePassword = (errorMessage) => (value) => {
   const minPasswordLength = 6
   return isOfLength(minPasswordLength, value) ? null : errorMessage
@@ -46,11 +58,11 @@ export const validatePassword = (errorMessage) => (value) => {
 // usage
 // combineValidations(
 //   validatePresence('you must have a password'),
-//   lengthCheck('the password must be 6 chars long')
+//   validateLength({min: 6, msg: 'the password must be 6 chars long'})
 // )(testValue)
 
-export const combineValidations = (checkList) => (value) => {
+export const combineValidations = (...validationsList) => (value) => {
   const validationFails = (validation) => (!!validation(value))
-  const failingValidation = find(validationFails, checkList)
+  const failingValidation = find(validationFails, validationsList)
   return failingValidation && failingValidation(value)
 }

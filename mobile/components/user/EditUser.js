@@ -13,7 +13,11 @@ import { updateSelf } from '../../data/users'
 
 import ActionButton from '../ui/ActionButton'
 
-import { validatePresence } from '../../lib/validations'
+import {
+  validatePresence,
+  validateLength,
+  combineValidations
+} from '../../lib/validations'
 import withValidation from '../helpers/withValidation'
 
 import EditUserInfo from './EditUserInfo'
@@ -43,7 +47,10 @@ const styles = StyleSheet.create({
 //   VALIDATIONS
 // ===============
 const validations = {
-  name: validatePresence('must provide a name')
+  name: combineValidations(
+    validatePresence('you must provide a name'),
+    validateLength({min: 1, max: 60, msg: 'must be between 1 and 60 characters'})
+  )
 }
 
 // ===============

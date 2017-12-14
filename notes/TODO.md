@@ -5,15 +5,13 @@
     - Change base text input design
     - Timezones
   - Mobile
-    - Better error messages
     - Club mgmt invite issue (unknown name)
     - App Walkthru w/ parralax thing
-    - Link to site in Settings
+    - Icons and Image/loading up to the apple standard
     - Apple Guidelines
-      - Check out hit targets
-      - Max lengths on post/chan/club
-        names (so the alignment isnt bad)
+      - Link to site in Settings
       - Add link to user support
+      - Add link for feedback
 
 ## New Features
   - unseen chat & post count

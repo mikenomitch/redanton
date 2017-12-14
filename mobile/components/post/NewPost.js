@@ -10,7 +10,11 @@ import merge from 'lodash/fp/merge'
 
 import { spacing } from '../styleConstants'
 
-import { validatePresence } from '../../lib/validations'
+import {
+  validatePresence,
+  validateLength,
+  combineValidations
+} from '../../lib/validations'
 import withValidation from '../helpers/withValidation'
 
 import ActionButton from '../ui/ActionButton'
@@ -53,7 +57,10 @@ const styles = StyleSheet.create({
 // ===============
 
 const validations = {
-  title: validatePresence('you must have a title'),
+  title: combineValidations(
+    validatePresence('you must have a title'),
+    validateLength({min: 1, max: 150, msg: 'must be between 1 and 150 characters'})
+  ),
   channel: validatePresence('you must select a channel')
 }
 

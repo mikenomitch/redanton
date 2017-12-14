@@ -8,7 +8,12 @@ import { updateChannel } from '../../data/channels'
 import ActionButton from '../ui/ActionButton'
 import EditChannelInfo from './EditChannelInfo'
 
-import { validatePresence } from '../../lib/validations'
+import {
+  validatePresence,
+  validateLength,
+  combineValidations
+} from '../../lib/validations'
+
 import withValidation from '../helpers/withValidation'
 
 // ===============
@@ -16,7 +21,11 @@ import withValidation from '../helpers/withValidation'
 // ===============
 
 const validations = {
-  name: validatePresence('you must have a name')
+  name: combineValidations(
+    validatePresence('you must have a name'),
+    validateLength({min: 1, max: 60, msg: 'must be between 1 and 60 characters'})
+  ),
+  description: validateLength({ max: 250, msg: 'must be under 250 characters'})
 }
 
 // ===============

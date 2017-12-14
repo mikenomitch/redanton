@@ -16,16 +16,24 @@ import ActionButton from '../ui/ActionButton'
 import EditChannelInfo from './EditChannelInfo'
 import ModalSelector from '../ui/ModalSelector'
 
-import { validatePresence } from '../../lib/validations'
 import withValidation from '../helpers/withValidation'
+import {
+  validatePresence,
+  validateLength,
+  combineValidations
+} from '../../lib/validations'
 
 // ===============
 //   VALIDATIONS
 // ===============
 
 const validations = {
-  name: validatePresence('you must have a name'),
-  club: validatePresence('you must select a club')
+  name: combineValidations(
+    validatePresence('you must have a name'),
+    validateLength({min: 1, max: 60, msg: 'must be between 1 and 60 characters'})
+  ),
+  club: validatePresence('you must select a club'),
+  description: validateLength({ max: 250, msg: 'must be under 250 characters'})
 }
 
 // =============

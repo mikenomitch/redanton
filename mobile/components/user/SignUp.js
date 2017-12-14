@@ -17,7 +17,9 @@ import { signUp } from '../../data/auth'
 import {
   validateEmail,
   validatePassword,
-  validatePresence
+  validatePresence,
+  validateLength,
+  combineValidations
 } from '../../lib/validations'
 import withValidation from '../helpers/withValidation'
 
@@ -40,7 +42,10 @@ const styles = StyleSheet.create({
 // ===============
 const validations = {
   email: validateEmail('email not valid'),
-  name: validatePresence('must provide a name'),
+  name: combineValidations(
+    validatePresence('you must provide a name'),
+    validateLength({min: 1, max: 60, msg: 'must be between 1 and 60 characters'})
+  ),
   password: validatePassword('must be 6 characters or more'),
   passwordConfirmation: validatePassword('must be 6 or more characters')
 }

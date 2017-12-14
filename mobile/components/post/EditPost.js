@@ -5,7 +5,11 @@ import { compose } from 'redux'
 
 import { spacing } from '../styleConstants'
 
-import { validatePresence } from '../../lib/validations'
+import {
+  validatePresence,
+  validateLength,
+  combineValidations
+} from '../../lib/validations'
 import withValidation from '../helpers/withValidation'
 
 import { deletePost, updatePost } from '../../data/posts'
@@ -20,7 +24,10 @@ import Footer from '../ui/Footer'
 // ===============
 
 const validations = {
-  title: validatePresence('you must have a title')
+  title: combineValidations(
+    validatePresence('you must have a title'),
+    validateLength({min: 1, max: 150, msg: 'must be between 1 and 150 characters'})
+  )
 }
 
 // ===============
