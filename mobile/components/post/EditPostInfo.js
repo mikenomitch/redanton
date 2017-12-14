@@ -1,7 +1,11 @@
 import React from 'react'
-import { View } from 'react-native'
+import {
+  Text,
+  View
+} from 'react-native'
 
 import BasicTextInput from '../ui/BasicTextInput'
+import { colors } from '../styleConstants'
 
 const EditPostInfo = (props) => (
   <View>
@@ -19,6 +23,9 @@ const EditPostInfo = (props) => (
       autoCapitalize="none"
       autoCorrect={false}
     />
+    <Text style={{color: colors.mediumGray}} >
+      leave url blank for discussion post
+    </Text>
   </View>
 )
 
