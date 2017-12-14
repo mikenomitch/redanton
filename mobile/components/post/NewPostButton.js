@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import LinkButton from '../ui/LinkButton'
 import ActionButton from '../ui/ActionButton'
 import withDebouncedNav from '../helpers/withDebouncedNav'
@@ -8,7 +10,16 @@ const NewPostButton = (props) => {
   const onPress = () => props.debouncedNav('NewPost', {channel: channel})
   return props.actionButton
     ? <ActionButton onPress={onPress}> Add Post </ActionButton>
-    : <LinkButton title="+ Post" onPress={onPress} />
+    : !props.hide && <LinkButton title="+ Post" onPress={onPress} />
 }
 
-export default withDebouncedNav(NewPostButton)
+const mapStateToProps = (state) => {
+  const hasChannelsAndClubs = Object.keys(state.channels).length && Object.keys(state.clubs).length
+  return { hide: !hasChannelsAndClubs }
+}
+
+export default connect(
+  mapStateToProps, null
+)(
+  withDebouncedNav(NewPostButton)
+)
