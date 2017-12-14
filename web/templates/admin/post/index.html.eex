@@ -1,0 +1,51 @@
+<section class="torch torch-toolbar-container">
+  <div class="torch-toolbar">
+    <h2>Posts</h2>
+    <%= link "New post", to: admin_post_path(@conn, :new), class: "torch-button" %>
+  </div>
+</section>
+
+<section class="torch torch-content">
+  <section class="torch-table">
+  <%= if length(@posts) > 0 do %>
+    <table class="torch-data">
+      <thead>
+        <tr>
+          <th><%= table_link(@conn, "Title", :title) %></th>
+          <th><%= table_link(@conn, "Description", :description) %></th>
+          <th><%= table_link(@conn, "Type", :type) %></th>
+          <th><%= table_link(@conn, "Url", :url) %></th>
+          <th><%= table_link(@conn, "Activity at", :activity_at) %></th>
+          <th><%= table_link(@conn, "Channel", :channel_id) %></th>
+          <th><%= table_link(@conn, "User", :user_id) %></th>
+
+          <th><span>Actions<span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for post <- @posts do %>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= post.description %></td>
+            <td><%= post.type %></td>
+            <td><%= post.url %></td>
+            <td><%= post.activity_at %></td>
+            <td><%= post.channel_id %></td>
+            <td><%= post.user_id %></td>
+
+            <td class="torch-actions">
+              <%= link "Edit", to: admin_post_path(@conn, :edit, post) %>
+              <%= link "Delete", to: admin_post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= render Torch.PaginationView, "_pagination.html", assigns %>
+  <% else %>
+    <p class="torch-no-data">No posts match your search.</p>
+  <% end %>
+
+  </section>
+  <%= render "_filters.html", assigns %>
+</section>

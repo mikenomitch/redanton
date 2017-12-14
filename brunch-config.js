@@ -8,7 +8,7 @@ exports.config = {
     },
     stylesheets: {
       joinTo: {
-        "css/app.css": /^(web\/static\/css)/
+        "css/app.css": /^(web\/static\/css)|(node_modules)/
       },
       order: {
         after: ["web/static/css/app.css"] // concat app.css last
@@ -42,6 +42,10 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+    sass: {
+      mode: 'native',
+      includePaths: ['node_modules']
     }
   },
 
@@ -52,6 +56,11 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    styles: {
+      torch: [
+        'priv/static/torch.css'
+      ]
+    }
   }
 };

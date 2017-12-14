@@ -18,6 +18,7 @@
   "ex_queb": {:hex, :ex_queb, "0.2.2", "64756a8e1a4f64f806aa3bd3604302bb8654ae668b868957282106e81f9c9875", [:mix], [{:ecto, "~> 2.0", [hex: :ecto, repo: "hexpm", optional: false]}], "hexpm"},
   "exactor": {:hex, :exactor, "2.2.4", "5efb4ddeb2c48d9a1d7c9b465a6fffdd82300eb9618ece5d34c3334d5d7245b1", [:mix], [], "hexpm"},
   "file_system": {:hex, :file_system, "0.2.2", "7f1e9de4746f4eb8a4ca8f2fbab582d84a4e40fa394cce7bfcb068b988625b06", [:mix], [], "hexpm"},
+  "filtrex": {:hex, :filtrex, "0.4.1", "fea45c814534778969342d346552d1bf213807d31410b413fbff6f81bc7f03bd", [], [{:ecto, "~> 2.1", [hex: :ecto, repo: "hexpm", optional: false]}, {:timex, "~> 3.1", [hex: :timex, repo: "hexpm", optional: false]}], "hexpm"},
   "gen_stage": {:hex, :gen_stage, "0.12.2", "e0e347cbb1ceb5f4e68a526aec4d64b54ad721f0a8b30aa9d28e0ad749419cbb", [:mix], [], "hexpm"},
   "gettext": {:hex, :gettext, "0.14.0", "1a019a2e51d5ad3d126efe166dcdf6563768e5d06c32a99ad2281a1fa94b4c72", [:mix], [], "hexpm"},
   "guardian": {:hex, :guardian, "0.14.5", "6d4e89b673accdacbc092ad000dc7494019426bd898eebf699caf1d19000cdcd", [:mix], [{:jose, "~> 1.8", [hex: :jose, repo: "hexpm", optional: false]}, {:phoenix, "~> 1.2 and < 1.4.0", [hex: :phoenix, repo: "hexpm", optional: true]}, {:plug, "~> 1.3", [hex: :plug, repo: "hexpm", optional: false]}, {:poison, ">= 1.3.0 and < 4.0.0", [hex: :poison, repo: "hexpm", optional: false]}, {:uuid, ">=1.1.1", [hex: :uuid, repo: "hexpm", optional: false]}], "hexpm"},

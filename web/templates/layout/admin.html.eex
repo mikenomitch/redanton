@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Admin</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <section class="torch torch-header">
+      <div class="torch-account">
+        <nav>
+          <ul>
+            <li><a href="/">user@infinite.red</a></li>
+            <li><a href="/">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <header class="torch-main-header">
+        <h1>Torch Admin</h1>
+        <nav>
+          <ul>
+            <li><%= Torch.NavigationView.nav_link @conn, "Authorizations", admin_authorization_path(@conn, :index) %></li>
+            <li><%= Torch.NavigationView.nav_link @conn, "Channels", admin_channel_path(@conn, :index) %></li>
+            <li><%= Torch.NavigationView.nav_link @conn, "Clubs", admin_club_path(@conn, :index) %></li>
+            <li><%= Torch.NavigationView.nav_link @conn, "Memberships", admin_membership_path(@conn, :index) %></li>
+            <li><%= Torch.NavigationView.nav_link @conn, "Messages", admin_message_path(@conn, :index) %></li>
+            <li><%= Torch.NavigationView.nav_link @conn, "Notifications", admin_notification_path(@conn, :index) %></li>
+            <li><%= Torch.NavigationView.nav_link @conn, "Posts", admin_post_path(@conn, :index) %></li>
+            <li><%= Torch.NavigationView.nav_link @conn, "Users", admin_user_path(@conn, :index) %></li>
+          </ul>
+        </nav>
+      </header>
+    </section>
+
+    <section class="torch">
+      <%= render @view_module, @view_template, assigns %>
+    </section>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<section class="torch-filters">
+  <h3>Search by Filters</h3>
+  <%= form_tag @conn.request_path, method: :get, id: "filters" do %>
+
+    <div class="field">
+      <label>Status</label>
+      <%= filter_select(:membership, :status, @conn.params) %>
+      <%= filter_string_input(:membership, :status, @conn.params) %>
+    </div>
+
+    <div class="field">
+      <label>Type</label>
+      <%= filter_select(:membership, :type, @conn.params) %>
+      <%= filter_string_input(:membership, :type, @conn.params) %>
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <%= filter_select(:membership, :email, @conn.params) %>
+      <%= filter_string_input(:membership, :email, @conn.params) %>
+    </div>
+
+    <div class="field">
+      <label>Inserted at</label>
+      <%= filter_date_input(:membership, :inserted_at, @conn.params) %>
+    </div>
+
+    <button type="submit" class="torch-button">Search</button>
+  <% end %>
+
+  <%= link "Clear Filters", to: admin_membership_path(@conn, :index) %>
+</section>

@@ -19,7 +19,7 @@ defmodule Danton.Mixfile do
   def application do
     [mod: {Danton, []},
      applications: [:comeonin, :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ueberauth, :ueberauth_identity, :bamboo, :scrivener_ecto]]
+                    :phoenix_ecto, :postgrex, :ueberauth, :ueberauth_identity, :bamboo, :scrivener_ecto, :torch]]
   end
 
   # Specifies which paths to compile per environment.
@@ -50,7 +50,8 @@ defmodule Danton.Mixfile do
      {:scrivener_ecto, "~> 1.0"},
      {:breadcrumble, "~> 1.0.0"},
      {:quantum, ">= 2.2.0"},
-     {:indifferent, "~> 0.9"}]
+     {:indifferent, "~> 0.9"},
+     {:torch, path: "./override_deps/torch"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -1,0 +1,47 @@
+<section class="torch torch-toolbar-container">
+  <div class="torch-toolbar">
+    <h2>Memberships</h2>
+    <%= link "New membership", to: admin_membership_path(@conn, :new), class: "torch-button" %>
+  </div>
+</section>
+
+<section class="torch torch-content">
+  <section class="torch-table">
+  <%= if length(@memberships) > 0 do %>
+    <table class="torch-data">
+      <thead>
+        <tr>
+          <th><%= table_link(@conn, "Status", :status) %></th>
+          <th><%= table_link(@conn, "Type", :type) %></th>
+          <th><%= table_link(@conn, "Email", :email) %></th>
+          <th><%= table_link(@conn, "User", :user_id) %></th>
+          <th><%= table_link(@conn, "Club", :club_id) %></th>
+
+          <th><span>Actions<span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for membership <- @memberships do %>
+          <tr>
+            <td><%= membership.status %></td>
+            <td><%= membership.type %></td>
+            <td><%= membership.email %></td>
+            <td><%= membership.user_id %></td>
+            <td><%= membership.club_id %></td>
+
+            <td class="torch-actions">
+              <%= link "Edit", to: admin_membership_path(@conn, :edit, membership) %>
+              <%= link "Delete", to: admin_membership_path(@conn, :delete, membership), method: :delete, data: [confirm: "Are you sure?"] %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= render Torch.PaginationView, "_pagination.html", assigns %>
+  <% else %>
+    <p class="torch-no-data">No memberships match your search.</p>
+  <% end %>
+
+  </section>
+  <%= render "_filters.html", assigns %>
+</section>

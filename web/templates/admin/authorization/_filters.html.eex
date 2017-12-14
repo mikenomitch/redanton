@@ -1,0 +1,33 @@
+<section class="torch-filters">
+  <h3>Search by Filters</h3>
+  <%= form_tag @conn.request_path, method: :get, id: "filters" do %>
+
+    <div class="field">
+      <label>Provider</label>
+      <%= filter_select(:authorization, :provider, @conn.params) %>
+      <%= filter_string_input(:authorization, :provider, @conn.params) %>
+    </div>
+
+    <div class="field">
+      <label>Uid</label>
+      <%= filter_select(:authorization, :uid, @conn.params) %>
+      <%= filter_string_input(:authorization, :uid, @conn.params) %>
+    </div>
+
+    <div class="field">
+      <label>Token</label>
+      <%= filter_select(:authorization, :token, @conn.params) %>
+      <%= filter_string_input(:authorization, :token, @conn.params) %>
+    </div>
+
+    <div class="field">
+      <label>Refresh token</label>
+      <%= filter_select(:authorization, :refresh_token, @conn.params) %>
+      <%= filter_string_input(:authorization, :refresh_token, @conn.params) %>
+    </div>
+
+    <button type="submit" class="torch-button">Search</button>
+  <% end %>
+
+  <%= link "Clear Filters", to: admin_authorization_path(@conn, :index) %>
+</section>

@@ -1,0 +1,47 @@
+<section class="torch torch-toolbar-container">
+  <div class="torch-toolbar">
+    <h2>Authorizations</h2>
+    <%= link "New authorization", to: admin_authorization_path(@conn, :new), class: "torch-button" %>
+  </div>
+</section>
+
+<section class="torch torch-content">
+  <section class="torch-table">
+  <%= if length(@authorizations) > 0 do %>
+    <table class="torch-data">
+      <thead>
+        <tr>
+          <th><%= table_link(@conn, "Provider", :provider) %></th>
+          <th><%= table_link(@conn, "Uid", :uid) %></th>
+          <th><%= table_link(@conn, "Token", :token) %></th>
+          <th><%= table_link(@conn, "Refresh token", :refresh_token) %></th>
+          <th><%= table_link(@conn, "User", :user_id) %></th>
+
+          <th><span>Actions<span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for authorization <- @authorizations do %>
+          <tr>
+            <td><%= authorization.provider %></td>
+            <td><%= authorization.uid %></td>
+            <td><%= authorization.token %></td>
+            <td><%= authorization.refresh_token %></td>
+            <td><%= authorization.user_id %></td>
+
+            <td class="torch-actions">
+              <%= link "Edit", to: admin_authorization_path(@conn, :edit, authorization) %>
+              <%= link "Delete", to: admin_authorization_path(@conn, :delete, authorization), method: :delete, data: [confirm: "Are you sure?"] %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= render Torch.PaginationView, "_pagination.html", assigns %>
+  <% else %>
+    <p class="torch-no-data">No authorizations match your search.</p>
+  <% end %>
+
+  </section>
+  <%= render "_filters.html", assigns %>
+</section>

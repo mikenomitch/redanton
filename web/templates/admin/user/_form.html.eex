@@ -1,0 +1,33 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <p>Oops, something went wrong! Please check the errors below.</p>
+  <% end %>
+
+  <div class="field">
+    <%= label f, :name %>
+    <%= text_input f, :name %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="field">
+    <%= label f, :avatar %>
+    <%= text_input f, :avatar %>
+    <%= error_tag f, :avatar %>
+  </div>
+
+  <div class="field">
+    <%= label f, :email %>
+    <%= text_input f, :email %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="field">
+    <%= label f, :status %>
+    <%= text_input f, :status %>
+    <%= error_tag f, :status %>
+  </div>
+
+  <div class="field">
+    <%= submit "Submit", class: "torch-button" %>
+  </div>
+<% end %>

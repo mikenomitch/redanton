@@ -1,3 +1,6 @@
+@import "admin_variables";
+@import "~torch/priv/static/torch";
+
 /* This file is for your main application css. */
 
 /* OVERRIDES */

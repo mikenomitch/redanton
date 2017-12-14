@@ -40,9 +40,18 @@ defmodule Danton.Router do
     pipe_through :browser
   end
 
-  # scope "/admin" do
-  #   pipe_through [:browser, :browser_auth, :admin_browser_auth]
-  # end
+  scope "/admin", Danton.Admin, as: :admin do
+    pipe_through [:browser, :browser_auth, :admin_browser_auth]
+
+    resources "/authorizations", AuthorizationController
+    resources "/channels", ChannelController
+    resources "/clubs", ClubController
+    resources "/memberships", MembershipController
+    resources "/messages", MessageController
+    resources "/notifications", NotificationController
+    resources "/posts", PostController
+    resources "/users", UserController
+  end
 
   # PRIVATE ROUTES
   scope "/", Danton do
