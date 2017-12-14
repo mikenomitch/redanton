@@ -113,6 +113,7 @@ class MembershipItem extends PureComponent {
 
     if (name) return `${name} (${email})`
     if (email) return email
+
     return "unknown user"
   }
 
@@ -174,7 +175,7 @@ class ClubManagement extends PureComponent {
   }
 
   userForMembership (membership) {
-    return Object.values(this.props.users).filter((u) => u.id === membership.user_id)[0] || {email: 'unknown user'}
+    return Object.values(this.props.users).filter((u) => u.id === membership.user_id)[0] || {email: null}
   }
 
   leaveClubPress = () => {
