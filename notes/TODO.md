@@ -5,7 +5,6 @@
     - Change base text input design
     - Timezones
   - Mobile
-    - First post not author bug
     - say no url needed
     - Edit user page looking nicer
     - New + Buttons when prompt showing

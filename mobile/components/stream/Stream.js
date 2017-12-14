@@ -111,7 +111,7 @@ class BaseStreamItem extends PureComponent {
 
   render () {
     const timeAgo = moment(new Date(this.props.post.last_activity_time)).fromNow()
-    const actionText = this.props.post.message_count > 1
+    const actionText = this.props.post.message_count == 0
       ? `message from ${this.props.actionUserName} ${timeAgo}`
       : `posted ${timeAgo}`
 
