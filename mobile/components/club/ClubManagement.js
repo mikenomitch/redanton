@@ -111,7 +111,7 @@ class MembershipItem extends PureComponent {
     const name = this.props.user.name
     const email = this.props.user.email || this.membership.email
 
-    if (name) return `${name} - ${email}`
+    if (name) return `${name} (${email})`
     if (email) return email
     return "unknown user"
   }

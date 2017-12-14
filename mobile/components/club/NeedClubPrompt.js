@@ -29,7 +29,7 @@ const NeedClubPrompt = (props) => (
     <Text style={styles.textHeader}> You have no clubs! </Text>
     <Text style={styles.text}> Clubs are groups of people you share links with. </Text>
     <Text style={styles.text}> For Relayd to be useful, make your first club. </Text>
-    <NewClubButton navigation={props.navigation}/>
+    <NewClubButton actionButton navigation={props.navigation}/>
   </View>
 )
 

@@ -30,7 +30,7 @@ const NeedPostPrompt = (props) => {
       <View style={styles.root}>
         <Text style={styles.textHeader}> This club has no posts! </Text>
         <Text style={styles.text}> Add a post to get started. </Text>
-        <NewPostButton navigation={props.navigation}/>
+        <NewPostButton actionButton navigation={props.navigation}/>
       </View>
     )
   }
@@ -38,18 +38,18 @@ const NeedPostPrompt = (props) => {
   if (props.inChannel) {
     return (
       <View style={styles.root}>
-        <Text style={styles.textHeader}> This channel has no Posts! </Text>
+        <Text style={styles.textHeader}> This channel has no posts! </Text>
         <Text style={styles.text}> Add a post to get started. </Text>
-        <NewPostButton navigation={props.navigation}/>
+        <NewPostButton actionButton navigation={props.navigation}/>
       </View>
     )
   }
 
   return (
     <View style={styles.root}>
-      <Text style={styles.textHeader}> You have no Posts! </Text>
+      <Text style={styles.textHeader}> You have no posts! </Text>
       <Text style={styles.text}> Add a post to get started. </Text>
-      <NewPostButton navigation={props.navigation}/>
+      <NewPostButton actionButton navigation={props.navigation}/>
     </View>
   )
 }

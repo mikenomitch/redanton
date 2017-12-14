@@ -34,7 +34,7 @@ const NeedChannelPrompt = (props) => {
       <Text style={styles.textHeader}> {titleText} </Text>
       <Text style={styles.text}> Every time you post to Relayd, you broadcast to a channel. </Text>
       <Text style={styles.text}> Channels can be about any topic you like: humor, politics, culture, entertainment, etc... </Text>
-      <NewChannelButton navigation={props.navigation}/>
+      <NewChannelButton actionButton navigation={props.navigation}/>
     </View>
   )
 }
