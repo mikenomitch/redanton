@@ -52,9 +52,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  header: {
-    fontSize: font.medium
-  },
   modalSelector: {
     borderRadius: 0
   },
@@ -122,11 +119,8 @@ class NewChannel extends PureComponent {
 
   render() {
     return (
-    <View style={styles.root}>
-      <ScrollView>
-          <Text style={styles.header}>
-            Create a channel:
-          </Text>
+      <View style={styles.root}>
+        <ScrollView>
           <ModalSelector
             style={styles.modalSelector}
             data={this.clubData()}

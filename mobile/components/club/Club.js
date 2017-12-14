@@ -8,16 +8,20 @@ import { connect } from 'react-redux'
 
 import { getUsersForMain } from '../../data/users'
 import { getPostsForClub } from '../../data/posts'
+import { getMemberships } from '../../data/memberships'
 
-import { spacing } from '../styleConstants'
+import { colors, spacing, font } from '../styleConstants'
 
 import withPagination from '../helpers/withPagination'
 import NewChannelButton from '../channel/NewChannelButton'
 import NeedChannelPrompt from '../channel/NeedChannelPrompt'
 
+import withDebouncedNav from '../helpers/withDebouncedNav'
+
 import Stream from '../stream/Stream'
 import Footer from '../ui/Footer'
 import Loading from '../ui/Loading'
+import LinkButton from '../ui/LinkButton'
 
 // ===============
 //     STYLES
@@ -50,6 +54,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
+  },
+  warningWrapper: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: spacing.medium
+  },
+  warning: {
+    borderWidth: 1,
+    borderColor: 'red',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: spacing.medium
+  },
+  warningText: {
+    width: '100%',
+    fontSize: font.large
   }
 })
 
@@ -86,6 +109,7 @@ class Club extends PureComponent {
   }
 
   componentDidMount() {
+    this.props.getMemberships(this.club.id)
     this.props.getPostsForClub(this.club.id, this.markLoaded)
     this.props.getUsersForMain()
   }
@@ -112,6 +136,24 @@ class Club extends PureComponent {
     )
   }
 
+  renderInvitePromptIfNeeded = () => {
+    if (this.props.singleMember) {
+      return (
+        <View style={styles.warningWrapper}>
+          <View style={styles.warning}>
+            <Text style={styles.warningText}>
+              This club has no other members
+            </Text>
+            <LinkButton
+              title="+ Invite Users"
+              onPress={() => this.props.debouncedNav('Invite', {clubId: this.club.id})}
+            />
+          </View>
+        </View>
+      )
+    }
+  }
+
   render() {
     const {
       channels,
@@ -125,6 +167,7 @@ class Club extends PureComponent {
 
     return (
       <View style={styles.root}>
+        {this.renderInvitePromptIfNeeded()}
         <Stream
           inClub
           currentUserId={this.props.currentUserId}
@@ -151,10 +194,17 @@ const mapStateToProps = (state, props) => {
   const channels = Object.values(state.channels)
   const currentUserId = state.auth.currentUser.id
 
+  const memberships = Object.values(state.memberships).filter(
+    (m) => m.club_id === clubId
+  )
+
+  const singleMember = memberships.length === 1
+
   return {
     posts: state.posts,
     channels: channelsForClub(channels, clubId),
     users: state.users,
+    singleMember: singleMember,
     clubId,
     currentUserId
   }
@@ -163,7 +213,8 @@ const mapStateToProps = (state, props) => {
 export default connect(
   mapStateToProps,
   {
+    getMemberships,
     getPostsForClub,
     getUsersForMain
   }
-)(withPagination(Club))
+)(withPagination(withDebouncedNav(Club)))

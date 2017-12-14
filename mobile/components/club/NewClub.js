@@ -33,9 +33,6 @@ const validations = {
 const styles = StyleSheet.create({
   root: {
     padding: spacing.container
-  },
-  header: {
-    fontSize: font.medium
   }
 })
 
@@ -87,7 +84,6 @@ class NewClub extends PureComponent {
     return (
       <View style={styles.root}>
         <ScrollView>
-          <Text style={styles.header}> Create New Club: </Text>
           <EditClubInfo
             setClubState={this.setClubState}
             clubInfo={this.state.clubInfo}

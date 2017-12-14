@@ -137,7 +137,6 @@ var clubStyles = StyleSheet.create({
   root: {},
   editClubButton: {},
   leaveClubButton: {},
-  inviteButton: {},
   inviteMemberHolder: {},
   content: {
     height: '90%'
@@ -243,7 +242,6 @@ class ClubManagement extends PureComponent {
       <View style={clubStyles.inviteMemberHolder}>
         <LinkButton
           title="+ Invite"
-          style={clubStyles.inviteButton}
           onPress={() => this.props.debouncedNav('Invite', {clubId: this.club.id})}
         />
       </View>
