@@ -182,7 +182,10 @@ class ClubManagement extends PureComponent {
     confirmMessage(
       'Leave Club',
       'Are you sure? This action is permanent.',
-      () => {this.props.leaveClub(this.club.id, this.props.navigation.goBack)}
+      () => {this.props.leaveClub(this.club.id, () => {
+        this.props.navigation.goBack()
+        this.props.navigation.goBack(null)
+      })}
     )
   }
 

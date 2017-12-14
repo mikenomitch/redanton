@@ -9,7 +9,7 @@
     - Better error messages
     - You are the only member message
       & prompt in the invite page
-    - Club mgmt invite issue
+    - Club mgmt invite issue (unknown name)
     - App Walkthru w/ parralax thing
     - Link to site in Settings
     - Apple Guidelines
