@@ -14,7 +14,7 @@ const EditUserInfo = (props) => (
     />
 
     { !props.signUp && (
-      <Text>
+      <Text style={{marginTop: 22}}>
         Leave Password fields blank if you don't wish to change your password.
       </Text>
     )}
