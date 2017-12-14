@@ -42,8 +42,8 @@ export default class Chat extends Component {
     const userInfo = this.props.users[userId] || defaultUser
     return {
       _id: userId,
-      name: userInfo.email,
-      avatar: userInfo.avatar,
+      name: userInfo.name || userInfo.email || "?"
+      // avatar: goes here once you make it
     }
   }
 

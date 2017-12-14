@@ -5,20 +5,19 @@
     - Change base text input design
     - Timezones
   - Mobile
-    - Club mgmt styling issues
-    - Prompts flashing
-    - New X Buttons when primpt showing
-    - App Walkthru w/ parralax thing
-    - First post not author bug
-    - Edit user page looking nicer
-    - Better error messages
-    - Link to site in Settings
     - Nobody chatted message/prompt
-    - Chat shows name not email letter
+    - Prompts flashing
+    - First post not author bug
+    - New X Buttons when primpt showing
+    - Edit user page looking nicer
+    - Description text inputs bigger and nicer
+    - Better error messages
     - You are the only member message
       & prompt in the invite page
+    - Club mgmt invite issue
+    - App Walkthru w/ parralax thing
+    - Link to site in Settings
     - Apple Guidelines
-      - All font at least 11
       - Check out hit targets
       - Max lengths on post/chan/club
         names (so the alignment isnt bad)
