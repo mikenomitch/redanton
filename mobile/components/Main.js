@@ -1,5 +1,4 @@
-import React, { Component} from 'react'
-
+import React, { Component } from 'react'
 import {
   View,
   Text
@@ -11,6 +10,7 @@ import { loadInitialAuth } from '../data/auth'
 
 import LoginOrSignUp from './user/LoginOrSignUp'
 import MainNav from './navigation/MainNav'
+import Intro from './intro/Intro'
 
 // =============
 //   PRESENTER
@@ -37,6 +37,10 @@ class Main extends Component {
     return <MainNav />
   }
 
+  renderWalkThru () {
+    return <Intro />
+  }
+
   render () {
     if (this.props.isLoading) {
       return this.renderLoading()
@@ -44,6 +48,10 @@ class Main extends Component {
 
     if (!this.props.jwt) {
       return this.renderLogin()
+    }
+
+    if (1 === 1) {
+      return this.renderWalkThru()
     }
 
     return this.renderMainApp()
