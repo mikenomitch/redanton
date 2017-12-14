@@ -6,8 +6,9 @@
     - Timezones
   - Mobile
     - First post not author bug
-    - New X Buttons when primpt showing
+    - say no url needed
     - Edit user page looking nicer
+    - New + Buttons when prompt showing
     - Description text inputs bigger and nicer
     - Better error messages
     - You are the only member message
