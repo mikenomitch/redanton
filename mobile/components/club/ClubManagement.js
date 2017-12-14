@@ -79,7 +79,7 @@ class MembershipItem extends PureComponent {
       return (
         <View style={membershipItemStyles.elevationHolder} key="elevate">
           <LinkButton
-            title={<Icon name="level-up" size={26} />}
+            title={<Icon name="level-up" size={26} color={colors.primary} />}
             onPress={onPress}
           />
         </View>
@@ -99,7 +99,7 @@ class MembershipItem extends PureComponent {
       return (
         <View style={membershipItemStyles.kickHolder} key="kick">
           <LinkButton
-            title={<Icon name="remove" size={26} />}
+            title={<Icon name="remove" size={26} color={colors.primary} />}
             onPress={onPress}
           />
         </View>
