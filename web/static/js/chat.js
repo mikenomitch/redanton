@@ -56,6 +56,8 @@ function setUpChat() {
   chatInput.addEventListener('keypress', event => {
     if(event.keyCode === 13){
 
+      event.preventDefault()
+
       channel.push('new_msg', {
         body: chatInput.value,
         post_id: chatInput.dataset.postid,
