@@ -23,13 +23,13 @@
 
   <div class="form-group">
     <%= label f, :title, class: "control-label" %>
-    <%= text_input f, :title, class: "form-control" %>
+    <%= text_input f, :title, class: "form-control", placeholder: "What's a brief description?" %>
     <%= error_tag f, :title %>
   </div>
 
   <div class="form-group">
     <%= label f, :url, class: "control-label" %>
-    <%= text_input f, :url, class: "form-control" %>
+    <%= text_input f, :url, class: "form-control", placeholder: "URL (leave blank for discussion post)" %>
     <%= error_tag f, :url %>
   </div>
 
