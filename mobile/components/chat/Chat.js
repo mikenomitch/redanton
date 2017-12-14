@@ -119,11 +119,15 @@ export default class Chat extends Component {
   // RENDER
 
   render() {
+    const messages = this.formatMessages()
+    const hasMessage = messages[0]
+    const prompt = hasMessage ? "add to the discussion..." : "get the discussion started..."
     return (
       <GiftedChat
-        messages={this.formatMessages()}
+        messages={messages}
         onSend={this.onSend}
         user={this.formattedUser(this.props.currentUserId)}
+        placeholder={prompt}
       />
     )
   }
