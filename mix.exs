@@ -51,7 +51,7 @@ defmodule Danton.Mixfile do
      {:breadcrumble, "~> 1.0.0"},
      {:quantum, ">= 2.2.0"},
      {:indifferent, "~> 0.9"},
-     {:torch, path: "./override_deps/torch"}]
+     {:torch, git: "https://github.com/josiahcampbell/torch.git"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -22,6 +22,6 @@
     "eslint-plugin-react": "^7.1.0",
     "javascript-brunch": "~2.0.0",
     "uglify-js-brunch": "~2.0.1",
-    "torch": "file:override_deps/torch"
+    "torch": "file:deps/torch"
   }
 }
