@@ -5,7 +5,6 @@
     - Change base text input design
     - Timezones
   - Mobile
-    - New + Buttons when prompt showing
     - Description text inputs bigger and nicer
     - Better error messages
     - You are the only member message
