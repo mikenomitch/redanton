@@ -29,7 +29,7 @@
 
   <div class="field">
     <%= label f, :activity_at %>
-    <%= date_select f, :activity_at %>
+    <%= datetime_select f, :activity_at %>
     <%= error_tag f, :activity_at %>
   </div>
 

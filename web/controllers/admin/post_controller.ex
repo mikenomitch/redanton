@@ -10,7 +10,7 @@ defmodule Danton.Admin.PostController do
   plug :put_layout, {Danton.LayoutView, "admin.html"}
   plug :scrub_params, "post" when action in [:create, :update]
   @filtrex [
-    %Config{type: :date, keys: ~w(inserted_at activity_at), options: %{format: "{YYYY}-{0M}-{0D}"}},
+    %Config{type: :date, keys: ~w(inserted_at), options: %{format: "{YYYY}-{0M}-{0D}"}},
     %Config{type: :text, keys: ~w(title description type url)}
   ]
 
@@ -22,7 +22,7 @@ defmodule Danton.Admin.PostController do
       params
       |> Map.put_new("sort_direction", "desc")
       |> Map.put_new("sort_field", "inserted_at")
-
+    
     {:ok, sort_direction} = Map.fetch(params, "sort_direction")
     {:ok, sort_field} = Map.fetch(params, "sort_field")
     {:ok, filter} = Filtrex.parse_params(@filtrex, params["post"] || %{})

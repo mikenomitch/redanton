@@ -31,11 +31,6 @@
       <%= filter_date_input(:post, :inserted_at, @conn.params) %>
     </div>
 
-    <div class="field">
-      <label>Activity at</label>
-      <%= filter_date_input(:post, :activity_at, @conn.params) %>
-    </div>
-
     <button type="submit" class="torch-button">Search</button>
   <% end %>
 

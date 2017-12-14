@@ -3,7 +3,7 @@ defmodule Danton.Admin.PostControllerTest do
 
   use Danton.ConnCase
 
-  @valid_attrs %{activity_at: %{day: 17, month: 4, year: 2010}, channel_id: 42, description: "some content", inserted_at: %{day: 17, month: 4, year: 2010}, title: "some content", type: "some content", url: "some content", user_id: 42}
+  @valid_attrs %{channel_id: 42, description: "some content", inserted_at: %{day: 17, month: 4, year: 2010}, title: "some content", type: "some content", url: "some content", user_id: 42}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
