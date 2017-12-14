@@ -2,9 +2,11 @@ import React, { PureComponent } from 'react'
 import {
   Text,
   StyleSheet,
-  View
+  View,
+  FlatList
 } from 'react-native'
 import { connect } from 'react-redux'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import {colors, spacing, font, border} from '../styleConstants'
 
@@ -32,20 +34,22 @@ var membershipItemStyles = StyleSheet.create({
     display: 'inline-flex',
     flexWrap: 'nowrap',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
-    padding: spacing.medium
+    padding: spacing.medium,
+    minHeight: 70
   },
   info: {
-    width: '33%'
+    width: '66%'
   },
   elevationHolder: {
-    width: '33%',
+    width: '17%',
     height: '100%',
     display: 'flex',
     alignItems: 'center'
   },
   kickHolder: {
-    width: '33%',
+    width: '17%',
     height: '100%',
     display: 'flex',
     alignItems: 'center'
@@ -75,7 +79,7 @@ class MembershipItem extends PureComponent {
       return (
         <View style={membershipItemStyles.elevationHolder} key="elevate">
           <LinkButton
-            title="make admin"
+            title={<Icon name="level-up" size={26} />}
             onPress={onPress}
           />
         </View>
@@ -95,7 +99,7 @@ class MembershipItem extends PureComponent {
       return (
         <View style={membershipItemStyles.kickHolder} key="kick">
           <LinkButton
-            title="kick"
+            title={<Icon name="remove" size={26} />}
             onPress={onPress}
           />
         </View>
@@ -104,7 +108,12 @@ class MembershipItem extends PureComponent {
   }
 
   displayName() {
-    return this.props.user.name || this.props.user.email || this.membership.email || "unknown user"
+    const name = this.props.user.name
+    const email = this.props.user.email || this.membership.email
+
+    if (name) return `${name} - ${email}`
+    if (email) return email
+    return "unknown user"
   }
 
   render() {
@@ -138,7 +147,9 @@ var clubStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: spacing.medium
+    padding: spacing.medium,
+    borderBottomWidth: border.width,
+    borderBottomColor: colors.border
   },
   membershipsHeader: {
     fontWeight: '600',
@@ -189,8 +200,8 @@ class ClubManagement extends PureComponent {
     )
   }
 
-  renderMemberships () {
-    return this.props.memberships.map((membership) => (
+  renderMembership = ({item: membership}) => {
+    return (
       <MembershipItem
         currentUserIsAdmin={this.props.currentUserIsAdmin}
         key={membership.id}
@@ -199,7 +210,18 @@ class ClubManagement extends PureComponent {
         kickMember={this.kickMemberCall(membership.id)}
         user={this.userForMembership(membership)}
       />
-    ))
+    )
+  }
+
+  renderMemberships () {
+    return (
+      <FlatList
+        initialNumToRender={10}
+        data={this.props.memberships}
+        renderItem={this.renderMembership}
+        keyExtractor={(item) => item.id}
+      />
+    )
   }
 
   renderEdit() {
