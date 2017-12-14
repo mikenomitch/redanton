@@ -60,19 +60,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: spacing.medium
-  },
-  warning: {
-    borderWidth: 1,
-    borderColor: 'red',
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    padding: spacing.medium
-  },
-  warningText: {
-    width: '100%',
-    fontSize: font.large
   }
 })
 
@@ -141,11 +128,8 @@ class Club extends PureComponent {
       return (
         <View style={styles.warningWrapper}>
           <View style={styles.warning}>
-            <Text style={styles.warningText}>
-              This club has no other members
-            </Text>
             <LinkButton
-              title="+ Invite Users"
+              title="+ Invite A Second User"
               onPress={() => this.props.debouncedNav('Invite', {clubId: this.club.id})}
             />
           </View>
