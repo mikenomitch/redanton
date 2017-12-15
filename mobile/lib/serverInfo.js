@@ -1,4 +1,4 @@
-// export const serverUrl = 'http://www.relayd.io'
-export const serverUrl = 'https://001ce86a.ngrok.io'
+export const serverUrl = 'http://www.relayd.io'
+// export const serverUrl = ''
 
 export default { serverUrl }
