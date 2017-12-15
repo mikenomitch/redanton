@@ -6,7 +6,12 @@ import {
 
 import { connect } from 'react-redux'
 
-import { loadInitialAuth } from '../data/auth'
+import {
+  authActions,
+  loadInitialAuth,
+  currentUserSeenIntro,
+  loadIntroCheck
+} from '../data/auth'
 
 import LoginOrSignUp from './user/LoginOrSignUp'
 import MainNav from './navigation/MainNav'
@@ -18,6 +23,7 @@ import Intro from './intro/Intro'
 
 class Main extends Component {
   componentDidMount(){
+    this.props.loadIntroCheck()
     this.props.loadInitialAuth()
   }
 
@@ -38,7 +44,7 @@ class Main extends Component {
   }
 
   renderWalkThru () {
-    return <Intro />
+    return <Intro onIntroDone={this.props.onIntroDone} />
   }
 
   render () {
@@ -50,7 +56,7 @@ class Main extends Component {
       return this.renderLogin()
     }
 
-    if (1 === 1) {
+    if (!this.props.introSeen) {
       return this.renderWalkThru()
     }
 
@@ -65,11 +71,12 @@ class Main extends Component {
 const mapStateToProps = (state) => {
   return {
     jwt: state.auth.jwt,
-    isLoading: !state.auth.initialStateLoaded
+    isLoading: !state.auth.initialStateLoaded,
+    introSeen: currentUserSeenIntro(state.auth)
   }
 }
 
 export default connect(
   mapStateToProps,
-  { loadInitialAuth }
+  { loadInitialAuth, loadIntroCheck, onIntroDone: authActions.onIntroDone }
 )(Main)

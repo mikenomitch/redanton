@@ -9,7 +9,7 @@ import signal from '../../assets/signal_white.png'
 import feed from '../../assets/feed_white.png'
 import run from '../../assets/run_white.png'
 
-const Intro = () => {
+const Intro = (props) => {
   const pageArray = [{
     title: 'Welcome',
     description: 'Relayd makes it easy to share links and have discussions with private groups.',
@@ -73,13 +73,10 @@ const Intro = () => {
     level: 5,
   }]
 
-  const onSkipBtnHandle = () => {}
-  const doneBtnHandle = () => {}
-
   return (
     <AppIntro
-      onDoneBtnClick={doneBtnHandle}
-      onSkipBtnClick={onSkipBtnHandle}
+      onDoneBtnClick={props.onIntroDone}
+      onSkipBtnClick={props.onIntroDone}
       pageArray={pageArray}
     />
   )
