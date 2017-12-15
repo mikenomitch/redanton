@@ -5,7 +5,6 @@
     - Change base text input design
     - Timezones
   - Mobile
-    - App Walkthru w/ parralax thing
     - Icons and Image/loading up to the apple standard
     - Apple Guidelines
       - Link to site in Settings
