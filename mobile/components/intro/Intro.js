@@ -54,7 +54,7 @@ const Intro = (props) => {
       width: 100 * 2.5,
       marginBottom: -50
     },
-    description: 'Your stream collects of the posts from every club you are in. Posts with recent activity float to the top.',
+    description: 'Your stream collects the posts from every club you are in. Posts with recent activity float to the top.',
     backgroundColor: colors.primary,
     fontColor: '#fff',
     level: 5,

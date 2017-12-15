@@ -192,14 +192,14 @@ class ClubManagement extends PureComponent {
   kickMemberCall = (membershipId) => () => {
     this.props.kickMember(
       membershipId,
-      alert('member kicked')
+      alert('user kicked from group')
     )
   }
 
   elevateMembershipCall = (membershipId) => () => {
     this.props.elevateMembership(
       membershipId,
-      alert('member made admin')
+      alert('member is now an admin')
     )
   }
 

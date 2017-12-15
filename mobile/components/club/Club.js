@@ -53,13 +53,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   warningWrapper: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: spacing.medium
   }
 })
 
@@ -129,7 +128,7 @@ class Club extends PureComponent {
         <View style={styles.warningWrapper}>
           <View style={styles.warning}>
             <LinkButton
-              title="+ Invite A Second User"
+              title="+ Invite a second member"
               onPress={() => this.props.debouncedNav('Invite', {clubId: this.club.id})}
             />
           </View>
