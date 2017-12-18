@@ -195,7 +195,7 @@ defmodule Danton.PostController do
     case channel do
       :front ->
         conn
-        |> add_breadcrumb(name: "My Stream", url: "/front")
+        |> add_breadcrumb(name: "My Stream", url: "/stream")
         |> add_breadcrumb(name: "New Post", url: "/posts/new")
       channel_id ->
         conn

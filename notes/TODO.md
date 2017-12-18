@@ -1,8 +1,6 @@
 # Todos
 
 ## Beautification and Clean up pre-Apple
-  - Web
-    - Change base text input design
   - Mobile
     - Icons and Image/loading up to the apple standard
     - Apple Guidelines
