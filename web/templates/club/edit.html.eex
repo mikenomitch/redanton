@@ -6,4 +6,4 @@
   </div>
 </div>
 
-<%= render "form.html", changeset: @changeset, action: club_path(@conn, :update, @club) %>
+<%= render "form.html", changeset: @changeset, action: club_path(@conn, :update, @club), new_club: false %>

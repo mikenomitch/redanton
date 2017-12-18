@@ -16,6 +16,6 @@
     </h3>
   </div>
 
-    <%= render Danton.ClubView, "form.html", changeset: @changeset, action: club_path(@conn, :create) %>
+    <%= render Danton.ClubView, "form.html", changeset: @changeset, action: club_path(@conn, :create), new_club: true %>
   </div>
 </div>
