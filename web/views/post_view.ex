@@ -1,10 +1,6 @@
 defmodule Danton.PostView do
   use Danton.Web, :view
 
-  # def render_stream(posts) do
-  #   render(Danton.PostView, "stream.html", posts: posts)
-  # end
-
   def user_can_edit(post, current_user) do
     post.user_id == current_user.id
   end

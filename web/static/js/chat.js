@@ -11,8 +11,7 @@ let chatInput = document.querySelector('#chat-input')
 // INSERT PROPER CHAT TIMES
 
 function formatTime(element) {
-  // hard coding chicago which is wrong
-  let time = moment(element.dataset.time).utcOffset(720).format('llll')
+  let time = moment.utc(element.dataset.time).local().format('llll')
   element.append(time)
 }
 
@@ -27,10 +26,12 @@ function formatTimes() {
 
 function newMessageInnerHTML(payload, currentUserId) {
   let name = payload.user_id == currentUserId ? 'Me' : payload.user_name
+  let inserted_at = payload.inserted_at
 
   return `
   <div class="message-user">
   ${name}
+  (<span class="message-time" data-time="${inserted_at}"></span>)
   </div>
   <div class="message-body">
   ${payload.body}
@@ -46,7 +47,7 @@ function setUpChat() {
 
   formatTimes()
 
-  let socket = new Socket("/socket", {params: {token: window.userToken}})
+  let socket = new Socket('/socket', {params: {token: window.userToken}})
   socket.connect()
 
   let channel           = socket.channel('room:' + chatInput.dataset.roomid, {})
@@ -79,6 +80,8 @@ function setUpChat() {
 
     messagesContainer.appendChild(messageItem)
     messagesContainer.scrollTop = messagesContainer.scrollHeight
+
+    formatTime(messageItem.children[0].children[0])
   })
 
   channel.join()

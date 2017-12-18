@@ -3,7 +3,6 @@
 ## Beautification and Clean up pre-Apple
   - Web
     - Change base text input design
-    - Timezones
   - Mobile
     - Icons and Image/loading up to the apple standard
     - Apple Guidelines

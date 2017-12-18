@@ -27,7 +27,7 @@
       <div class="message <%=msg_class(message, @user_id)%>">
         <div class="message-user">
           <%= chat_name(message.user, @user_id) %>
-          (<span class="message-time" data-time="<%= message.inserted_at%>"></span>)
+          (<span class="message-time" data-time="<%= message.inserted_at %>"></span>)
         </div>
         <div class="message-body">
           <%= message.body %>
