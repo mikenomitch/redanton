@@ -11,6 +11,7 @@ defmodule Danton.BatchNotifier do
 
     Danton.Notification.mark_pending(notifications)
 
+    has_notifications = (posts_waiting > 0 || messages_waiting > 0)
     single_post = (posts_waiting == 1 && messages_waiting == 0)
     single_msg = (messages_waiting == 1 && posts_waiting == 0)
 
@@ -18,7 +19,7 @@ defmodule Danton.BatchNotifier do
       n = Enum.at(notifications, 0)
       if single_post, do: send_new_post(n), else: send_new_msg(n)
     else
-      send_batch_notification(user_id, posts_waiting, messages_waiting)
+      has_notifications && send_batch_notification(user_id, posts_waiting, messages_waiting)
     end
   end
 
