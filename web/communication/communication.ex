@@ -101,7 +101,8 @@ end
 
 defmodule Danton.Timeframe.NewChatMessage do
   def get(user, params) do
-    if user_in_discussion(user, params) do
+    user_involved = user_in_discussion(user, params) || user_mentioned(user, params)
+    if user_involved do
       :immediate
     else
       Danton.Timeframe.Default.get(user, params)
@@ -110,6 +111,10 @@ defmodule Danton.Timeframe.NewChatMessage do
 
   defp user_in_discussion(user, %{:post_id => post_id}) do
     Post.user_is_owner(post_id, user.id) || Message.user_in_discussion(post_id, user.id)
+  end
+
+  defp user_mentioned(user, %{:message_body => message_body}) do
+    user.name && String.contains?(String.downcase(message_body), "@#{String.downcase(user.name)}")
   end
 end
 

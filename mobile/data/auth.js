@@ -118,7 +118,7 @@ export const authActions = {
     return (dispatch, getState) => {
       const auth = getState().auth
       const id = auth.currentUser && auth.currentUser.id
-      const newUsersSeen = auth.usersSeenIntro.concat([id])
+      const newUsersSeen = (auth.usersSeenIntro || []).concat([id])
 
       return dispatch(authActions.markIntroSeen(newUsersSeen))
     }
