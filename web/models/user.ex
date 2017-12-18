@@ -42,14 +42,14 @@ defmodule Danton.User do
   end
 
   def for_email(query \\ User, email) do
-    from(u in query, where: u.email == ^(String.downcase(email)))
+    from(u in query, where: u.email == ^downcase(email))
   end
 
   def for_clubs(query \\ User, club_ids) do
     from u in query,
       join: c in assoc(u, :clubs),
       where: c.id in ^club_ids
-  endendend
+  end
 
   def for_memberships(query \\ User, membership_ids) do
     from u in query,
@@ -85,8 +85,9 @@ defmodule Danton.User do
   # OTHER
   # ===========================
 
-  def get_or_create(params) do
-    Repo.get_by(User, email: downcase(params.email)) || Repo.insert!(%User{ params | status: "pending"})
+  def get_or_create_by_email(email) do
+    downcased_email = downcase(email)
+    Repo.get_by(User, email: downcased_email) || Repo.insert!(%User{ email: downcased_email, status: "pending"})
   end
 
   def is_admin(user) do
