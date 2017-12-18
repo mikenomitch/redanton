@@ -55,11 +55,8 @@ defmodule Danton.ClubController do
   def create(conn, %{"club" => club_params}, current_user, _claims) do
     changeset = Club.changeset(%Club{}, club_params)
 
-    case Repo.insert(changeset) do
+    case Club.create(club_params, current_user) do
       {:ok, club} ->
-        # TODO: pull this out somewhere
-        Club.make_admin(club, current_user)
-
         conn
         |> put_flash(:info, "Club created successfully.")
         |> redirect(to: club_path(conn, :index))

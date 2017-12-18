@@ -1,6 +1,8 @@
 # Todos
 
 ## Beautification and Clean up pre-Apple
+  - Password reset and other emails show up
+    correctly on iOS mail and other clients
   - Mobile
     - Icons and Image/loading up to the apple standard
     - Apple Guidelines

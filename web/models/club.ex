@@ -92,9 +92,18 @@ defmodule Danton.Club do
   @doc """
   Makes an admin level membership in a club for a user
   """
-  def make_member(club, user, type, status) do
+  defp make_member(club, user, type, status) do
     club
     |> Ecto.build_assoc(:memberships, %{user_id: user.id, type: type, status: status})
+    |> Repo.insert()
+  end
+
+  @doc """
+  Makes a channel associated to a given club
+  """
+  def make_channel(club, name) when is_binary(name) do
+    club
+    |> Ecto.build_assoc(:channels, %Danton.Channel{name: name})
     |> Repo.insert!()
   end
 
@@ -105,6 +114,34 @@ defmodule Danton.Club do
     club
     |> Ecto.build_assoc(:channels, channel_params)
     |> Repo.insert!()
+  end
+
+  def create(club_params, user = %Danton.User{}) do
+    with cs <- Club.changeset(%Club{}, club_params),
+         { :ok, club } <- Repo.insert(cs),
+         { :ok, user } <- Club.make_admin(club, user),
+         _channels <-Club.channels_from_list(club, club_params["channel_list"])
+    do
+      { :ok, club }
+    else
+      e -> e
+    end
+  end
+
+  def channels_from_list(club, chan_list = nil) do
+    channels_from_list(club, "General")
+  end
+
+  def channels_from_list(club, chan_list = "") do
+    channels_from_list(club, "General")
+  end
+
+  def channels_from_list(club, chan_list) when is_binary(chan_list) do
+    chan_list
+    |> String.split(",")
+    |> Enum.map(&String.trim/1)
+    |> Enum.filter(&(String.length(&1) > 0))
+    |> Enum.map(&(Club.make_channel(club, &1)))
   end
 
   # ===========================
