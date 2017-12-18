@@ -3,7 +3,17 @@
 <div class="form-header">
   <h1 class="header-text">
     Edit Post
+    <div class="btn-group">
+      <button class="btn btn-default btn-xs dropdown-toggle dropdown-toggle-shift" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link "Delete", to: post_path(@conn, :delete, @post.id), method: :delete, data: [confirm: "Are you sure you want to remove this post?"] %>
+        </li>
+      </ul>
+    </div>
   </h1>
 </div>
 
-<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post), channel_id: @post.channel_id, conn: @conn, post_id: @post.id %>
+<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post), channel_id: @post.channel_id, conn: @conn%>
