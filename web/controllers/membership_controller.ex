@@ -54,7 +54,7 @@ defmodule Danton.MembershipController do
         {:ok, _membership } <- Membership.invite_and_notify(cs)
     do
       conn
-      |> put_flash(:info, "User Invited.")
+      |> put_flash(:info, "Invite Sent.")
       |> redirect(to: club_membership_path(conn, :index, club_id))
     else
       {:error, changeset} ->
