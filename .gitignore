@@ -23,6 +23,9 @@ erl_crash.dump
 # variables.
 /config/prod.secret.exs
 
+# MOBILE BUILD
+/mobile/danton.app
+
 # secrets
 secrets.env
 

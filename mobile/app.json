@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "danton",
+    "name": "Relayd",
     "description": "Private clubs for sharing links and discussions.",
-    "slug": "danton",
+    "slug": "relayd",
     "privacy": "public",
     "sdkVersion": "18.0.0",
     "version": "1.0.0",
@@ -17,10 +17,9 @@
       "assetExts": ["ttf", "mp4"]
     },
     "ios": {
-      "bundleIdentifier": "io.relayd.Relayd",
+      "bundleIdentifier": "io.relayd.RelaydAppIOS",
       "buildNumber": "1.0.0",
       "supportsTablet": false,
-      "associatedDomains": ["relayd.io"],
       "splash": {
         "image": "./assets/images/splash.png",
         "backgroundColor": "#6495ED",
