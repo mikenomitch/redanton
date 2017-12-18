@@ -3,8 +3,8 @@ import {
   View,
   Text
 } from 'react-native'
-
 import { connect } from 'react-redux'
+import { AppLoading } from 'expo'
 
 import {
   authActions,
@@ -28,11 +28,7 @@ class Main extends Component {
   }
 
   renderLoading () {
-    return (
-      <View>
-        <Text> Loading! </Text>
-      </View>
-    )
+    return <AppLoading />
   }
 
   renderLogin () {

@@ -3,11 +3,11 @@ import AppIntro from 'react-native-app-intro'
 
 import { colors } from '../styleConstants'
 
-import hi from '../../assets/hi_white.png'
-import group from '../../assets/group_white.png'
-import signal from '../../assets/signal_white.png'
-import feed from '../../assets/feed_white.png'
-import run from '../../assets/run_white.png'
+import hi from '../../assets/images/hi_white.png'
+import group from '../../assets/images/group_white.png'
+import signal from '../../assets/images/signal_white.png'
+import feed from '../../assets/images/feed_white.png'
+import run from '../../assets/images/run_white.png'
 
 const Intro = (props) => {
   const pageArray = [{
