@@ -95,8 +95,7 @@ defmodule Danton.PostController do
     clubs = Club.for_user(current_user) |> Repo.all()
 
     conn
-    |> add_channel_crumb(channel_id)
-    |> add_new_post_crumb(:front)
+    |> add_new_post_crumb(channel_id)
     |> put_flash(:error, message)
     |> render("new.html", changeset: cs, channel_id: channel_id, channels: channels, clubs: clubs)
   end
@@ -193,7 +192,7 @@ defmodule Danton.PostController do
 
   defp add_new_post_crumb(conn, channel) do
     case channel do
-      :front ->
+      c when c in [:front, :none] ->
         conn
         |> add_breadcrumb(name: "My Stream", url: "/stream")
         |> add_breadcrumb(name: "New Post", url: "/posts/new")
