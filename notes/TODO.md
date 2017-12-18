@@ -1,8 +1,10 @@
 # Todos
 
 ## Beautification and Clean up pre-Apple
-  - Password reset and other emails show up
-    correctly on iOS mail and other clients
+  - Web
+    - password reset and other emails show up
+      correctly on iOS mail and other clients
+    - email column is case insensitive
   - Mobile
     - Icons and Image/loading up to the apple standard
     - Apple Guidelines

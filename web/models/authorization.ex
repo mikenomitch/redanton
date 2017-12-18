@@ -72,7 +72,7 @@ defmodule Danton.Authorization do
     with :ok <- validate_password_and_confirmation(pw, pwc),
          :ok <- validate_current_password(uid, cpw)
     do
-      update_pw(uid, pw)
+      update_pw(String.downcase(uid), pw)
     else
       err -> err
     end
@@ -82,7 +82,7 @@ defmodule Danton.Authorization do
 
   def update_authorization_for_user_params(%{"password" => pw, "password_confirmation" => pwc, "email" => uid}) do
     case validate_password_and_confirmation(pw, pwc) do
-      :ok -> update_pw(uid, pw)
+      :ok -> update_pw(String.downcase(uid), pw)
       err -> err
     end
   end

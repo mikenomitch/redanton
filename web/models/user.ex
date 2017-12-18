@@ -26,6 +26,7 @@ defmodule Danton.User do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @paramlist)
+    |> update_change(:email, &String.downcase/1)
     |> validate_required(@required_params)
     |> validate_length(:name, min: 1, max: 60)
     |> validate_format(:email, ~r/@/)
@@ -40,11 +41,15 @@ defmodule Danton.User do
     from(u in query, where: u.id in ^ids)
   end
 
+  def for_email(query \\ User, email) do
+    from(u in query, where: u.email == ^(String.downcase(email)))
+  end
+
   def for_clubs(query \\ User, club_ids) do
     from u in query,
       join: c in assoc(u, :clubs),
       where: c.id in ^club_ids
-  end
+  endendend
 
   def for_memberships(query \\ User, membership_ids) do
     from u in query,
@@ -81,7 +86,7 @@ defmodule Danton.User do
   # ===========================
 
   def get_or_create(params) do
-    Repo.get_by(User, email: params.email) || Repo.insert!(%User{ params | status: "pending"})
+    Repo.get_by(User, email: downcase(params.email)) || Repo.insert!(%User{ params | status: "pending"})
   end
 
   def is_admin(user) do
@@ -154,7 +159,7 @@ defmodule Danton.User do
   end
 
   defp update_or_create(params) do
-    user = Repo.get_by(User, email: params["email"], status: "pending")
+    user = Repo.get_by(User, email: downcase(params["email"]), status: "pending")
 
     if user do
       full_loaded_user = user
@@ -170,7 +175,7 @@ defmodule Danton.User do
       User.changeset(full_loaded_user, attrs) |> Repo.update()
     else
       usr_params = %{
-        email: params["email"],
+        email: downcase(params["email"]),
         name: params["name"],
         status: "active",
         avatar: ""
@@ -182,7 +187,7 @@ defmodule Danton.User do
 
   defp make_user_auth(user, params) do
     %Danton.Authorization{
-      uid: user.email,
+      uid: downcase(user.email),
       provider: "identity",
       token: Comeonin.Bcrypt.hashpwsalt(params["password"]),
       user_id: user.id
@@ -196,6 +201,7 @@ defmodule Danton.User do
   def registration_changeset(model, params \\ :empty) do
     model
     |> cast(params, [:name, :email])
+    |> update_change(:email, &String.downcase/1)
     |> validate_required(@required_params)
     |> validate_length(:name, min: 1)
     |> validate_format(:email, ~r/@/)
@@ -231,13 +237,13 @@ defmodule Danton.User do
   end
 
   defp get_auth(uuid) do
-    auth = Authorization |> Repo.get_by(uid: uuid)
+    auth = Authorization |> Repo.get_by(uid: downcase(uuid))
     {:ok, auth}
   end
 
   defp parse_email(params) do
     if params["email"] do
-      {:ok, params["email"]}
+      {:ok, downcase(params["email"])}
     end
   end
 
@@ -251,5 +257,9 @@ defmodule Danton.User do
     if Comeonin.Bcrypt.checkpw(password, token) do
       {:ok, "Password Matches"}
     end
+  end
+
+  defp downcase(str) do
+    String.downcase(str)
   end
 end

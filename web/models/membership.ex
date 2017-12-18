@@ -21,6 +21,7 @@ defmodule Danton.Membership do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:status, :type, :email])
+    |> update_change(:email, &String.downcase/1)
     |> validate_required([:status, :type, :email])
     |> validate_format(:email, ~r/@/)
   end
@@ -30,11 +31,26 @@ defmodule Danton.Membership do
   # ===========================
 
   def invite_and_notify(cs) do
-    case Repo.insert(cs) do
-      {:ok, membership} ->
-        Task.start(__MODULE__, :notify_new_club_invite, [membership])
-        {:ok, membership}
+    with {:ok, _ } <- none_for_email_and_club(cs),
+         {:ok, membership} <- Repo.insert(cs)
+    do
+      Task.start(__MODULE__, :notify_new_club_invite, [membership])
+      {:ok, membership}
+    else
       err -> err
+    end
+  end
+
+  defp none_for_email_and_club(cs) do
+    with user <- User.for_email(cs.email) |> Repo.one(),
+         membership = %Membership{} <- for_user(user)
+          |> for_club(cs.club.id)
+          |> Repo.all()
+          |> List.first()
+    do
+      {:error_message, "User already member"}
+    else
+      _ -> {:ok, "Membership okay"}
     end
   end
 
