@@ -42,10 +42,10 @@ defmodule Danton.MembershipController do
   end
 
   def create(conn, %{"membership" => membership_params, "club_id" => club_id}, _current_user, _claims) do
-    %{"email" => email, "type" => type} = membership_params
+    %{"email" => email} = membership_params
     user = User.get_or_create_by_email(email)
     club = Repo.get(Club, club_id)
-    membership_params = %{club: club, type: type, status: "pending", email: email}
+    membership_params = %{club: club, type: "standard", status: "pending", email: email}
 
     cs = Ecto.build_assoc(user, :memberships, membership_params)
 
