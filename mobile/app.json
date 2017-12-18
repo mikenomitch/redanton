@@ -17,7 +17,15 @@
       "assetExts": ["ttf", "mp4"]
     },
     "ios": {
-      "supportsTablet": false
+      "bundleIdentifier": "io.relayd.Relayd",
+      "buildNumber": "1.0.0",
+      "supportsTablet": false,
+      "associatedDomains": ["relayd.io"],
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "backgroundColor": "#6495ED",
+        "resizeMode": "cover"
+      }
     },
     "splash": {
       "image": "./assets/images/splash.png",
