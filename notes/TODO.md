@@ -1,26 +1,28 @@
-# Todos
+## TODOS
+  - anything to get the app out
 
-## Beautification and Clean up pre-Apple
-  - Web
-    - password reset and other emails show up
-      correctly on iOS mail and other clients
-    - email column is case insensitive
-  - Mobile
-    - Icons and Image/loading up to the apple standard
-    - Apple Guidelines
-      - Link to site in Settings
-      - Add link to user support
-      - Add link for feedback
+  - password reset and other emails show up
+    correctly on iOS mail and other clients
+  - sign in requires email activation
+  - email column is case insensitive
+  - pw reset link on mobile
 
-## New Features
+  - check-ins clear notifications
+  - new notification when person joins a group
+  - user notification setting
+  - channel mute & watch notification settings
+
+  - one post => many channels?
+  - refine concept of channels in general (ask erik & victoria)
+
   - unseen chat & post count
-  - more notification options
-    - check ins clear notifications
-    - notification when person joins a group
-    - all, smart, mute @ user and channel levels
-  - refine concept of channels in general
-    - one post => many channels?
-      - ask erik & victoria
-    - just make the channel when you make the club automatically?
-    - when you make the club have them provide at least 1 channel name (**)
-  - dedicated X-Post feature?
+  - TLC around new user walkthru (web)
+  - Posts show discussion vs Link
+  - Preview of content on stream item
+  - When you create a club the message tells you
+    how many channels you made
+
+  - Mobile club creation promps for channels
+    (with a nice input of some sort)
+  - TLC around new users/clubs/chans (mobile)
+  - Deep linking
