@@ -5,9 +5,9 @@
     - PUSH A (set up  club/post relationship)
       - migration to add new col - DONE
       - migration that caches the club ID on each post - DONE
-      - new posts get the club ID saved onto them
-        - api
-        - web
+      - new posts get the club ID saved onto them - DONE
+        - api - DONE
+        - web - DONE
     - PUSH A.2
       - associations on models are changed to be direct
       - getters for posts in clubs just use the club-id directly

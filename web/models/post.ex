@@ -124,7 +124,8 @@ defmodule Danton.Post do
   def create_for_channel_and_user(chan, user, post_params, msg_params \\ false) do
     post_cs = Post.changeset(%Post{
       user_id: user.id,
-      channel_id: chan.id
+      channel_id: chan.id,
+      club_id: chan.club_id
     }, %{
       title: post_params["title"],
       description: post_params["description"],
