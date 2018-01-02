@@ -5,7 +5,7 @@
     "slug": "relayd",
     "privacy": "public",
     "sdkVersion": "18.0.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "primaryColor": "#6495ED",
     "icon": "./assets/icons/app.png",
@@ -18,7 +18,7 @@
     },
     "ios": {
       "bundleIdentifier": "io.relayd.RelaydAppIOS",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "supportsTablet": false,
       "splash": {
         "image": "./assets/images/splash.png",
