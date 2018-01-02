@@ -69,7 +69,7 @@ defmodule Danton.PostView do
       "Posted " <> Timex.from_now(time)
     else
       msg = Message.latest_for_post(post) |> Danton.Repo.preload(:user)
-      "Message from " <> msg.user.name <> " " <> time_from_now(time)
+      "Message from " <> (msg.user.name || msg.user.email) <> " " <> time_from_now(time)
     end
   end
 
