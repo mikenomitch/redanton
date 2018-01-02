@@ -38,7 +38,7 @@ defmodule Danton.PostView do
   end
 
   def posted_text(post) do
-    post.user && post.user.name <> " posted to "
+    post.user && (post.user.name || post.user.email) <> " posted to "
   end
 
   def discussion_link_text(post) do
