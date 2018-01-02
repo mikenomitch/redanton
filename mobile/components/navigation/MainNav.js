@@ -54,19 +54,6 @@ const TabNav = TabNavigator(
         ),
       })
     },
-    ChannelsTab: {
-      screen: ChannelListScreen,
-      path: '/channels',
-      navigationOptions:  ({navigation}) => ({
-        title: 'Channels',
-        tabBarLabel: 'Channels',
-        headerBackTitle: null,
-        headerRight: (<NewChannelButton navigation={navigation} />),
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="filter" size={20} color={tintColor} />
-        ),
-      })
-    },
     ClubsTab: {
       screen: ClubListScreen,
       path: '/clubs',
@@ -77,6 +64,19 @@ const TabNav = TabNavigator(
         headerRight: (<NewClubButton navigation={navigation} />),
         tabBarIcon: ({ tintColor }) => (
           <Icon name="group" size={20} color={tintColor} />
+        ),
+      })
+    },
+    ChannelsTab: {
+      screen: ChannelListScreen,
+      path: '/channels',
+      navigationOptions:  ({navigation}) => ({
+        title: 'Channels',
+        tabBarLabel: 'Channels',
+        headerBackTitle: null,
+        headerRight: (<NewChannelButton navigation={navigation} />),
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="filter" size={20} color={tintColor} />
         ),
       })
     },
