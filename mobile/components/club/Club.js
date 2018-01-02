@@ -31,7 +31,7 @@ function channelsForClub(channels, clubId) {
 }
 
 const inChannels = (chanIds) => (post) => {
-  return chanIds.includes(post.channel_id)
+  return post.channel_id && chanIds.includes(post.channel_id)
 }
 
 const styles = StyleSheet.create({

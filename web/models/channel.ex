@@ -73,8 +73,8 @@ defmodule Danton.Channel do
   """
 	def destroy(chan_id) do
     # TODO: implement a soft-deletion system
-    posts = Repo.all(from(r in Post, where: r.channel_id == ^chan_id))
-		Post.destroy_list(posts)
+    # posts = Repo.all(from(p in Post, where: p.channel_id == ^chan_id))
+		# Post.destroy_list(posts)
 
 		channel = Repo.get(Channel, chan_id)
 		Repo.delete!(channel)

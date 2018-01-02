@@ -71,8 +71,7 @@ defmodule Danton.User do
 
   def for_post(post_id) do
     post = Repo.get(Post, post_id)
-    channel = Repo.get(Channel, post.channel_id)
-    User.for_clubs([channel.club_id])
+    User.for_clubs([post.club_id])
   end
 
   def for_room(room_id) do

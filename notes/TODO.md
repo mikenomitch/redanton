@@ -14,20 +14,20 @@
     - PUSH B (remove some channel stuff)
       - club comes thru on api stuff - DONE
       - breadcrumbs - DONE
-
       - channel names replaced with club names on stream - DONE
         - web - DONE
         - mobile - DONE
           - requests club names earlier - DONE
-
       - channels not needed when you create a club - DONE
-
       - channels not needed on the clubs page (prompts)
-        - web
-        - mobile
+        - web - DONE
+        - mobile - DONE
     - PUSH B.2
-      - any post.channel_id reference can fallback to nothing
+      - replace channel_id index with club_id index in migration - DONE
+      - any post.channel_id reference can fallback to nothing - DONE
+
       - club replaces channel in new
+
     - PUSH C (public renaming)
       - web
         - homepage
