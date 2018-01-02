@@ -142,6 +142,7 @@ class Club extends PureComponent {
       channels,
       navigation,
       posts,
+      clubs,
       users
     } = this.props
 
@@ -159,6 +160,7 @@ class Club extends PureComponent {
           needsPosts={this.needsPosts}
           content={this.sortedPosts}
           channels={channels}
+          clubs={clubs}
           users={users}
           currentlyLoading={!this.props.atFinalPage}
           onEndHit={this.onEndHitCb()}
@@ -186,6 +188,7 @@ const mapStateToProps = (state, props) => {
   return {
     posts: state.posts,
     channels: channelsForClub(channels, clubId),
+    clubs: Object.values(state.clubs),
     users: state.users,
     singleMember: singleMember,
     clubId,

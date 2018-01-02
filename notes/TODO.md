@@ -13,16 +13,22 @@
       - getters for posts in clubs just use the club-id directly - DONE
     - PUSH B (remove some channel stuff)
       - club comes thru on api stuff - DONE
-      - breadcrumbs
-      - club replaces channel on new posts
-      - channels not needed when you create a club
-      - channels not needed on the clubs page
-        - web
-        - mobile
+      - breadcrumbs - DONE
+
       - channel names replaced with club names on stream
         - web
         - mobile
           - requests club names earlier
+
+      - channels not needed when you create a club
+        - says that it is optional
+
+      - channels not needed on the clubs page (prompts)
+        - web
+        - mobile
+    - PUSH B.2
+      - any post.channel_id reference can fallback to nothing
+      - club replaces channel in new
     - PUSH C (public renaming)
       - web
         - homepage

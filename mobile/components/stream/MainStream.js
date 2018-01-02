@@ -79,6 +79,7 @@ class MainStream extends PureComponent {
         navigation={this.props.navigation}
         content={this.sortedPosts}
         channels={this.props.channels}
+        clubs={this.props.clubs}
         needsPosts={this.needsPosts}
         needsChannels={this.needsChannels}
         needsClubs={this.needsClubs}

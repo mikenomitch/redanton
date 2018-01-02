@@ -101,6 +101,7 @@ defmodule Danton.Post do
     |> Repo.preload(room: :messages)
     |> Repo.preload(:user)
     |> Repo.preload(:channel)
+    |> Repo.preload(:club)
   end
 
   def with_messages(query \\ Post) do

@@ -21,7 +21,7 @@
 
     <div class="col-xs-12 col-md-12 small row">
       <div class="col-xs-12 col-sm-12 col-md-12">
-        <%= posted_text(post) %> <%= link post.channel.name, to: channel_path(@conn, :show, post.channel.id), class: "" %>
+        <%= posted_text(post) %> <%= link post.club.name, to: club_path(@conn, :show, post.club.id), class: "" %>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12">
         <%= latest_activity_text(post) %>

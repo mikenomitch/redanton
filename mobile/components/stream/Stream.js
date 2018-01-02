@@ -126,7 +126,7 @@ class BaseStreamItem extends PureComponent {
           </View>
           <View style={styles.details}>
             <View style={styles.info}>
-              <Text>channel: {this.props.chanName}</Text>
+              <Text>club: {this.props.clubName}</Text>
             </View>
             <View style={styles.info}>
               <Text>posted by: <Text>{this.props.posterName}</Text></Text>
@@ -187,10 +187,10 @@ class Stream extends PureComponent {
   }
 
   renderPostLink = (datum) => {
-    const { channels, navigation, users } = this.props
+    const { clubs, navigation, users } = this.props
 
     const poster = users[datum.item.user_id] || {}
-    const chan = channels[datum.item.channel_id] || {}
+    const club = clubs[datum.item.club_id] || {}
     const user_id = datum.item.last_message && datum.item.last_message.user_id || datum.item.user_id
     const actionUser = users[user_id] || {}
 
@@ -201,7 +201,7 @@ class Stream extends PureComponent {
         post={datum.item}
         actionUserName={actionUser.name}
         posterName={poster.name}
-        chanName={chan.name}/>
+        clubName={club.name}/>
     )
   }
 
