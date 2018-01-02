@@ -15,10 +15,10 @@
       - club comes thru on api stuff - DONE
       - breadcrumbs - DONE
 
-      - channel names replaced with club names on stream
-        - web
-        - mobile
-          - requests club names earlier
+      - channel names replaced with club names on stream - DONE
+        - web - DONE
+        - mobile - DONE
+          - requests club names earlier - DONE
 
       - channels not needed when you create a club
         - says that it is optional
