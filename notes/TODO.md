@@ -9,9 +9,11 @@
         - api - DONE
         - web - DONE
     - PUSH A.2
-      - associations on models are changed to be direct
-      - getters for posts in clubs just use the club-id directly
+      - associations on models are changed to be direct - DONE
+      - getters for posts in clubs just use the club-id directly - DONE
     - PUSH B (remove some channel stuff)
+      - club comes thru on api stuff
+      - breadcrumbs
       - club replaces channel on new posts
       - channels not needed when you create a club
       - channels not needed on the clubs page
@@ -20,6 +22,7 @@
       - channel names replaced with club names on stream
         - web
         - mobile
+          - requests club names earlier
     - PUSH C (public renaming)
       - web
         - homepage

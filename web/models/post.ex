@@ -42,6 +42,10 @@ defmodule Danton.Post do
     from(p in query, where: p.channel_id in ^channel_ids)
   end
 
+  def for_club_ids(query \\ Post, club_ids) do
+    from(p in query, where: p.club_id in ^club_ids)
+  end
+
   def for_channel_stream(channel_id) do
     for_channel_ids([channel_id]) |> with_stream_preloads()
   end
@@ -59,12 +63,6 @@ defmodule Danton.Post do
   def for_club(club) do
     [club.id]
     |> for_club_ids()
-  end
-
-  def for_club_ids(club_ids) do
-    club_ids
-    |> Channel.ids_for_club_ids()
-    |> for_channel_ids()
   end
 
   def for_front_page(user) do
