@@ -27,6 +27,8 @@
       - any post.channel_id reference can fallback to nothing - DONE
 
       - club replaces channel in new
+        - web
+        - mobile
 
     - PUSH C (public renaming)
       - web
