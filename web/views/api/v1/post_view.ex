@@ -22,6 +22,7 @@ defmodule Danton.Api.V1.PostView do
       type: post.type,
       user_id: post.user_id,
       channel_id: post.channel_id,
+      club_id: post.club_id,
       room_id: room_id,
       message_count: message_count,
       last_activity_time: Post.latest_activity_time(post),
