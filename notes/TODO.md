@@ -1,5 +1,61 @@
 ## TODOS
-  - anything to get the app out
+
+
+  - CHANNELS => OPTIONAL TAGS
+    - PUSH A (set up  club/post relationship)
+      - migration that caches the club ID on each post
+      - getters for posts in clubs just use the club-id directly
+      - associations on models are changed to be direct
+      - new posts get the club ID saved onto them
+        - api
+        - web
+    - PUSH B (remove some channel stuff)
+      - club replaces channel on new posts
+      - channels not needed when you create a club
+      - channels not needed on the clubs page
+        - web
+        - mobile
+      - channel names replaced with club names on stream
+        - web
+        - mobile
+    - PUSH C (public renaming)
+      - web
+        - routes (api keeps old ones too, but adds new as well)
+        - header
+        - new, edit, index
+        - club page
+        - post show
+        - prompts
+        - notifications?
+      - mobile
+        - nav (and shuffle positions)
+        - new, edit, index
+        - posts, clubs
+        - prompts
+    - PUSH D (Channel now one to many, on backend)
+      - migration that adds Tag table and PostTag table
+      - migration that adds data for each channel
+      - new tags create the new model and Not the old
+        - web
+        - mobile
+      - indeces use the one to many
+        - web
+        - mobile
+    - PUSH E
+      - Multiple tags can be added on web
+      - Multiple tags can be added on mobile (backwards compat)
+      - Tags index shows the right stuff if it is empty (but doesn't roadblock you ever)
+      - Tags show up on the stream
+        - Web
+        - Mobile
+      - Tags show up on the post show
+        - Web
+        - Mobile
+    - PUSH F
+      - purge any Channel references anywhere on backend
+
+
+
 
   - password reset and other emails show up
     correctly on iOS mail and other clients
@@ -11,9 +67,6 @@
   - new notification when person joins a group
   - user notification setting
   - channel mute & watch notification settings
-
-  - one post => many channels?
-  - refine concept of channels in general (ask erik & victoria)
 
   - unseen chat & post count
   - TLC around new user walkthru (web)
