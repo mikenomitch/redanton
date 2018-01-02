@@ -12,7 +12,7 @@
       - associations on models are changed to be direct - DONE
       - getters for posts in clubs just use the club-id directly - DONE
     - PUSH B (remove some channel stuff)
-      - club comes thru on api stuff
+      - club comes thru on api stuff - DONE
       - breadcrumbs
       - club replaces channel on new posts
       - channels not needed when you create a club

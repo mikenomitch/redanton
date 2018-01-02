@@ -165,12 +165,7 @@ defmodule Danton.PostController do
   # BREADCRUMBS
 
   defp add_parent_crumbs(conn, post) do
-    channel_id = post.channel_id
-    channel = Repo.get(Channel, channel_id)
-
-    conn
-      |> add_club_crumb(channel.club_id)
-      |> add_channel_crumb(channel_id)
+    conn |> add_club_crumb(post.club_id)
   end
 
   defp add_club_crumb(conn, club_id) do
