@@ -1,4 +1,4 @@
-defmodule Danton.Repo.Migrations.SetDefaultActivityAt do
+defmodule Danton.Repo.Migrations.SetClubIds do
   use Ecto.Migration
 
   # inefficient, but fine at our scale
