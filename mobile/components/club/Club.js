@@ -14,7 +14,6 @@ import { colors, spacing, font } from '../styleConstants'
 
 import withPagination from '../helpers/withPagination'
 import NewChannelButton from '../channel/NewChannelButton'
-import NeedChannelPrompt from '../channel/NeedChannelPrompt'
 
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
@@ -114,14 +113,6 @@ class Club extends PureComponent {
     })
   }
 
-  renderNoChannels = () => {
-    return (
-      <View style={styles.root}>
-        <NeedChannelPrompt inClub navigation={this.props.navigation} />
-      </View>
-    )
-  }
-
   renderInvitePromptIfNeeded = () => {
     if (this.props.singleMember) {
       return (
@@ -147,7 +138,6 @@ class Club extends PureComponent {
     } = this.props
 
     if (!this.state.initialLoadDone && this.needsPosts) { return <Loading /> }
-    if (!channels[0]) { return this.renderNoChannels() }
 
     return (
       <View style={styles.root}>

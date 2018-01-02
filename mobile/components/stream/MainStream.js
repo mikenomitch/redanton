@@ -7,7 +7,6 @@ import withPagination from '../helpers/withPagination'
 import Stream from './Stream'
 import Loading from '../ui/Loading'
 import NeedClubPrompt from '../club/NeedClubPrompt'
-import NeedChannelPrompt from '../channel/NeedChannelPrompt'
 
 import { getUsersForMain } from '../../data/users'
 import { getFrontPagePosts } from '../../data/posts'
@@ -62,14 +61,9 @@ class MainStream extends PureComponent {
     return <NeedClubPrompt navigation={this.props.navigation} />
   }
 
-  renderNoChannels () {
-    return <NeedChannelPrompt navigation={this.props.navigation} />
-  }
-
   render() {
     if (!this.props.firstLoadComplete) { return <Loading /> }
     if (this.needsClubs) { return this.renderNoClubs() }
-    if (this.needsChannels) { return this.renderNoChannels() }
 
     return (
       <Stream

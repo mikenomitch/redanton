@@ -128,14 +128,8 @@ defmodule Danton.Club do
     end
   end
 
-  def channels_from_list(club, chan_list = nil) do
-    channels_from_list(club, "General")
-  end
-
-  def channels_from_list(club, chan_list = "") do
-    channels_from_list(club, "General")
-  end
-
+  def channels_from_list(club, chan_list = nil), do: []
+  def channels_from_list(club, chan_list = ""), do: []
   def channels_from_list(club, chan_list) when is_binary(chan_list) do
     chan_list
     |> String.split(",")

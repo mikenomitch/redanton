@@ -20,8 +20,7 @@
         - mobile - DONE
           - requests club names earlier - DONE
 
-      - channels not needed when you create a club
-        - says that it is optional
+      - channels not needed when you create a club - DONE
 
       - channels not needed on the clubs page (prompts)
         - web

@@ -16,7 +16,6 @@ defmodule Danton.ClubController do
   def index(conn, params, current_user, _claims) do
     case index_template(current_user) do
       :no_clubs -> render_no_clubs(conn)
-      :no_channels -> render_no_channels(conn)
       :no_posts -> render_no_posts(conn)
       :main -> render_club_index(conn, params, current_user)
     end

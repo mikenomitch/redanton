@@ -24,9 +24,9 @@ defmodule Danton.Controller.Helpers do
 
   defmacro __using__(:no_items_rendering) do
     quote do
-      def index_template(user) do
+      def index_template(user, opts \\ %{include_channels: false}) do
         ( Danton.Club.user_has_none(user) && :no_clubs )
-        || ( Danton.Channel.user_has_none(user) && :no_channels )
+        || ( opts.include_channels && Danton.Channel.user_has_none(user) && :no_channels )
         || ( Danton.Post.user_has_none(user) && :no_posts )
         || :main
       end

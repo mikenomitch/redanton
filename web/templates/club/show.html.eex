@@ -52,10 +52,6 @@
   </div>
 <% else %>
   <br /> <br />
-  <%= if (@club.channel_count == 0) do %>
-      <%= render(Danton.PageView, "no_channels.html", conn: @conn, parent_type: :club, parent_id: @club.id)%>
-  <% else %>
-    <%= render(Danton.PageView, "no_posts.html", conn: @conn, parent_type: :club, parent_id: @club.id)%>
-  <% end %>
+  <%= render(Danton.PageView, "no_posts.html", conn: @conn, parent_type: :club, parent_id: @club.id)%>
 <% end %>
 
