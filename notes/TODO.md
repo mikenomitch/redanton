@@ -20,6 +20,7 @@
         - mobile
     - PUSH C (public renaming)
       - web
+        - homepage
         - routes (api keeps old ones too, but adds new as well)
         - header
         - new, edit, index
@@ -32,6 +33,7 @@
         - new, edit, index
         - posts, clubs
         - prompts
+        - walkthru
     - PUSH D (Channel now one to many, on backend)
       - migration that adds Tag table and PostTag table
       - migration that adds data for each channel
