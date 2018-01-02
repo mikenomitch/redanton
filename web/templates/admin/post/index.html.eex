@@ -17,6 +17,7 @@
           <th><%= table_link(@conn, "Url", :url) %></th>
           <th><%= table_link(@conn, "Activity at", :activity_at) %></th>
           <th><%= table_link(@conn, "Channel", :channel_id) %></th>
+          <th><%= table_link(@conn, "Club", :club_id) %></th>
           <th><%= table_link(@conn, "User", :user_id) %></th>
 
           <th><span>Actions<span></th>

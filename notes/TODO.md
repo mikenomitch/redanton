@@ -3,7 +3,8 @@
 
   - CHANNELS => OPTIONAL TAGS
     - PUSH A (set up  club/post relationship)
-      - migration that caches the club ID on each post
+      - migration to add new col - DONE
+      - migration that caches the club ID on each post - DONE
       - getters for posts in clubs just use the club-id directly
       - associations on models are changed to be direct
       - new posts get the club ID saved onto them
