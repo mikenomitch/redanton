@@ -104,7 +104,7 @@ export const createPost = (postInfo, onSuccess) => {
     type: 'CREATE_POST_CALL',
     call: {
       action: 'POST',
-      endpoint: `/channels/${postInfo.channel}/posts`,
+      endpoint: `/clubs/${postInfo.club}/posts`,
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(postActions.mergePosts([res.data]))

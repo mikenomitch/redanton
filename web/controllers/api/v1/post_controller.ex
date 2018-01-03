@@ -40,11 +40,29 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
+  # TODO: REMOVE THIS ONCE CHAN => TAG is done
   def create(conn, %{"channel_id" => channel_id, "post" => post, "message" => message}, current_user, _claims) do
     msg_params = %{user_id: current_user.id, body: message["body"]}
     channel = Repo.get(Channel, channel_id)
 
     case Post.create_for_channel_and_user(channel, current_user, post, msg_params) do
+      {:ok, %{post: post}} ->
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", post_path(conn, :show, post))
+        |> render("show.json", post: Post.load_messages(post))
+      {:error, _, changeset, _} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Danton.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
+
+  def create(conn, %{"club_id" => club_id, "post" => post, "message" => message}, current_user, _claims) do
+    msg_params = %{user_id: current_user.id, body: message["body"]}
+    club = Repo.get(Club, club_id)
+
+    case Post.create_for_club_and_user(club, current_user, post, msg_params) do
       {:ok, %{post: post}} ->
         conn
         |> put_status(:created)

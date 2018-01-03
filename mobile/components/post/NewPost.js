@@ -21,8 +21,6 @@ import ActionButton from '../ui/ActionButton'
 import BasicTextInput from '../ui/BasicTextInput'
 import ModalSelector from '../ui/ModalSelector'
 
-import { getChannels } from '../../data/channels'
-import { getClubs } from '../../data/clubs'
 import { createPost } from '../../data/posts'
 
 import EditPostInfo from './EditPostInfo'
@@ -31,7 +29,7 @@ const defaultPostInfo = {
 	url: '',
 	title: '',
 	description: '',
-	channel: ''
+	club: ''
 }
 
 const defaultState = {
@@ -61,7 +59,7 @@ const validations = {
     validatePresence('you must have a title'),
     validateLength({min: 1, max: 150, msg: 'must be between 1 and 150 characters'})
   ),
-  channel: validatePresence('you must select a channel')
+  club: validatePresence('you must select a club'),
 }
 
 // ===============
@@ -76,37 +74,31 @@ class NewPost extends PureComponent {
 		super(props)
     this.state = merge(
       defaultState,
-      {postInfo: {channel: this.givenChannel().id}}
+      {postInfo: {club: this.givenClub().id}}
     )
   }
 
   // helpers
 
-  get channels () {
-    return Object.values(this.props.channels)
+  get clubs () {
+    return Object.values(this.props.clubs)
   }
 
-	channelData() {
-		return this.channels.map(
-      (chan) => {
-        const club = this.props.clubs[chan.club_id]
-        const label = (!club || Object.keys(this.props.clubs).length === 1)
-          ? chan.name
-          : `${chan.name} (${club.name})`
-        return { key: chan.id, label }
-      }
+	clubData() {
+		return this.clubs.map(
+      (club) => ({ key: club.id, label: club.name })
     )
   }
 
-  givenChannel () {
-    return this.props.navigation.state.params.channel || {}
+  givenClub () {
+    return this.props.navigation.state.params.club || {}
   }
 
   // actions
 
   onPostClick = () => {
     this.props.unlessErrors(
-      {channel: this.state.postInfo.channel, title: this.state.postInfo.title},
+      {club: this.state.postInfo.club, title: this.state.postInfo.title},
       this.createNewPost
     )
   }
@@ -140,10 +132,10 @@ class NewPost extends PureComponent {
         <ScrollView>
           <ModalSelector
             style={styles.modalSelector}
-            data={this.channelData()}
-            initValue={this.givenChannel().name || "select channel"}
-            onChange={(option)=> this.setPostState({channel: option.key})}
-            error={this.props.errorFor('channel', this.state.postInfo.channel)}
+            data={this.clubData()}
+            initValue={this.givenClub().name || "select club"}
+            onChange={(option)=> this.setPostState({club: option.key})}
+            error={this.props.errorFor('club', this.state.postInfo.club)}
           />
           <EditPostInfo
             errorFor={this.props.errorFor}
@@ -171,17 +163,10 @@ class NewPost extends PureComponent {
 // ===============
 
 const mapStateToProps = (state) => {
-  return {
-    channels: state.channels,
-    clubs: state.clubs
-  }
+  return { clubs: state.clubs }
 }
 
-const dispatchableActions = {
-  createPost,
-  getChannels,
-  getClubs
-}
+const dispatchableActions = { createPost }
 
 export default compose(
   withValidation(validations),

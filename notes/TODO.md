@@ -28,7 +28,7 @@
 
       - club replaces channel in new
         - web - DONE
-          - get rid of any channel_post routes
+          - get rid of any channel_post routes - DONE
         - mobile
 
     - PUSH C (public renaming)

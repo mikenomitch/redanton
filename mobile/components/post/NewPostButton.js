@@ -6,8 +6,8 @@ import ActionButton from '../ui/ActionButton'
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
 const NewPostButton = (props) => {
-  const channel = props.navigation.state.params && props.navigation.state.params.channel
-  const onPress = () => props.debouncedNav('NewPost', {channel: channel})
+  const club = props.navigation.state.params && props.navigation.state.params.club
+  const onPress = () => props.debouncedNav('NewPost', {club: club})
   return props.actionButton
     ? <ActionButton onPress={onPress}> Add Post </ActionButton>
     : !props.hide && <LinkButton title="+ Post" onPress={onPress} />
