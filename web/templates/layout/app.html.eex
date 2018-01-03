@@ -36,8 +36,8 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li><a href="/stream">Stream</a></li>
-              <li><a href="/channels">Channels</a></li>
               <li><a href="/clubs">Clubs</a></li>
+              <li><a href="/channels">Tags</a></li>
               <li><a href="/settings">Settings</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
