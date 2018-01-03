@@ -23,6 +23,16 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
+  def index(conn, params = %{"tag_id" => tag_id}, _current_user, _claims) do
+    page = Post.for_tag_id(tag_id)
+      |> Post.by_activity()
+      |> Repo.paginate(params)
+
+    posts = page.entries |> Post.with_stream_preloads()
+
+    render(conn, "index.json", posts: posts)
+  end
+
   def index(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
     page = Post.for_club_ids([club_id])
       |> Post.by_activity()

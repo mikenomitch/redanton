@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { confirmMessage } from '../../lib/uiActions'
 import { getUsersForMain } from '../../data/users'
 import { getPostsForTag } from '../../data/posts'
+import { postsForTag } from '../../data/postsTags'
 
 import withPagination from '../helpers/withPagination'
 import withDebouncedNav from '../helpers/withDebouncedNav'
@@ -43,10 +44,9 @@ class Tag extends PureComponent {
   }
 
   get sortedPosts() {
-    // FILTER DOWN WITH POSTS_TAGS
     return Object.values(this.props.posts).sort((a, b) => (
-        new Date(b.last_activity_time) - new Date(a.last_activity_time)
-      ))
+      new Date(b.last_activity_time) - new Date(a.last_activity_time)
+    ))
   }
 
   get needsPosts () {
@@ -118,7 +118,7 @@ const mapStateToProps = (state, props) => {
   const currentUserId = state.auth.currentUser.id
 
   return {
-    posts: state.posts,
+    posts: postsForTag(state, props.navigation.state.params.tag),
     tags: state.tags,
     users: state.users,
     clubs: state.clubs,

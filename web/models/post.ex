@@ -48,6 +48,12 @@ defmodule Danton.Post do
     from(p in query, where: p.club_id in ^club_ids)
   end
 
+  # TODO: do in one query
+  def for_tag_id(tag_id) do
+    tag = Repo.get(Tag, tag_id)
+    Ecto.assoc(tag, :posts)
+  end
+
   def for_channel_stream(channel_id) do
     for_channel_ids([channel_id]) |> with_stream_preloads()
   end
