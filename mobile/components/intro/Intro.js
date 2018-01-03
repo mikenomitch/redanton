@@ -35,14 +35,14 @@ const Intro = (props) => {
     fontColor: '#fff',
     level: 5,
   }, {
-    title: 'Channels',
+    title: 'Tags',
     img: signal,
     imgStyle: {
       height: 130 * 2.5,
       width: 120 * 2.5,
       marginBottom: -100
     },
-    description: 'Each club has multiple Channels. Channels help you group posts by topic (or however you want).',
+    description: 'Each time you post you can add tags. Tags help you group posts by topic (or however you want).',
     backgroundColor: colors.primary,
     fontColor: '#fff',
     level: 5,

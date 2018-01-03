@@ -38,7 +38,7 @@ const NeedPostPrompt = (props) => {
   if (props.inChannel) {
     return (
       <View style={styles.root}>
-        <Text style={styles.textHeader}> This channel has no posts! </Text>
+        <Text style={styles.textHeader}> This tag has no posts! </Text>
         <Text style={styles.text}> Add a post to get it started. </Text>
         <NewPostButton actionButton navigation={props.navigation}/>
       </View>
