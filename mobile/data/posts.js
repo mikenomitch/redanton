@@ -67,12 +67,29 @@ export const getFrontPagePosts = (onSuccess, pageNumber = 1) => {
   }
 }
 
+// TODO: REMOVE ME ONCE YOU GET RID OF CHANNELS
 export const getPostsForChannel = (channelId, onSuccess, pageNumber = 1) => {
   return {
     type: 'GET_POSTS_FOR_CHANNEL',
     call: {
       action: 'GET',
       endpoint: `/tags/${channelId}/posts?page=${pageNumber}`,
+      successActionCreator: (res) => {
+        return (dispatch) => {
+          dispatch(postActions.onPostsReturn(res))
+          onSuccess && onSuccess(res)
+        }
+      }
+    }
+  }
+}
+
+export const getPostsForTag = (tagId, onSuccess, pageNumber = 1) => {
+  return {
+    type: 'GET_POSTS_FOR_CHANNEL',
+    call: {
+      action: 'GET',
+      endpoint: `/tags/${tagId}/posts?page=${pageNumber}`,
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(postActions.onPostsReturn(res))

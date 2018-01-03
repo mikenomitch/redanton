@@ -164,8 +164,8 @@ class Stream extends PureComponent {
   }
 
   static defaultProps = {
-    channels: {},
-    users: {}
+    users: {},
+    tags: {}
   }
 
   _onRefresh() {
@@ -180,7 +180,7 @@ class Stream extends PureComponent {
     return (
       <NeedPostPrompt
         inClub={this.props.inClub}
-        inChannel={this.props.inChannel}
+        inTag={this.props.inTag}
         navigation={this.props.navigation}
       />
     )

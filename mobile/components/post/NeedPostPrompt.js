@@ -35,7 +35,7 @@ const NeedPostPrompt = (props) => {
     )
   }
 
-  if (props.inChannel) {
+  if (props.inTag) {
     return (
       <View style={styles.root}>
         <Text style={styles.textHeader}> This tag has no posts! </Text>
