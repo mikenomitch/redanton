@@ -60,8 +60,8 @@ defmodule Danton.Channel do
   end
 
   def user_has_none(user) do
-    channel_count = Channel.for_user(user) |> Repo.aggregate(:count, :id)
-    channel_count == 0
+    count = Channel.for_user(user) |> Repo.aggregate(:count, :id)
+    count == 0
   end
 
   # ===========================

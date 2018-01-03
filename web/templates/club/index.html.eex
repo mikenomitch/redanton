@@ -14,7 +14,7 @@
       </div>
       <div class="col-xs-12 col-md-12 small row">
         <div class="col-xs-12 col-md-12">
-          <%= post_count_string(club) %> - <%= channel_count_string(club) %>
+          <%= post_count_string(club) %>
         </div>
 
         <div class="col-xs-12 col-md-12">
@@ -29,6 +29,5 @@
 <% end %>
 
 <%= render Danton.SharedView, "_pager.html", total_pages: @total_pages, page_number: @page_number, base_url: "/clubs" %>
-
 </div>
 

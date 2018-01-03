@@ -70,7 +70,6 @@ const BaseClubItem = (props) => {
         <View style={styles.counts}>
           <Text>last activity: {activityAgo}</Text>
           <Text>posts: {props.club.post_count}</Text>
-          <Text>channels: {props.club.channel_count}</Text>
         </View>
       </View>
     </View>

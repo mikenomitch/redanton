@@ -28,7 +28,6 @@ defmodule Danton.ClubController do
       |> Repo.paginate(params)
 
     clubs = page.entries
-      |> Club.preload_channel_counts()
       |> Club.preload_post_counts()
       |> Club.preload_most_recent_activity()
 
@@ -70,7 +69,6 @@ defmodule Danton.ClubController do
     club = Repo.get!(Club, id)
       |> Repo.preload(:channels)
       |> Club.with_post_count()
-      |> Club.with_channel_count()
       |> Club.with_member_count()
 
     page = Post.for_club(club)
