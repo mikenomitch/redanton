@@ -9,18 +9,18 @@ defmodule Danton.Repo.Migrations.PopulateTagsAndPostsTags do
 
   def make_post_tag(tag, post) do
     Repo.insert!(
-      %Danton.PostsTags(post_id: post.id, tag_id: tag.id)
+      %Danton.PostsTags{post_id: post.id, tag_id: tag.id}
     )
   end
 
   def make_tag_and_relationship(chan) do
-    Repo.insert!(
+    {:ok, tag} = Repo.insert(
       %Danton.Tag{name: chan.name},
       on_conflict: [set: [name: chan.name]],
       conflict_target: :name
     )
 
-    posts = Post.for_channel(chan) |> Repo.all()
+    posts = Post.for_channel_ids([chan.id]) |> Repo.all()
     Enum.each(posts, &(make_post_tag(tag, &1)))
   end
 

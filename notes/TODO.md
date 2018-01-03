@@ -56,13 +56,15 @@
       - Add models and associations (in new models) - DONE
       - Add associations in old models - DONE
 
-      - remove old places to eplicitly create/edit channels/tags
-        - it will always just be on the post in future
       - tag index uses the new models, and automatically find the right tags
-        - web
+        - web - DONE
         - mobile
       - tag show only shows the posts you CAN see, that also have that tag
-        - web
+        - web - DONE
+        - mobile
+
+      - remove old places to eplicitly create/edit channels/tags
+        - web - DONE
         - mobile
 
     - PUSH E
@@ -82,6 +84,7 @@
       - purge any Channel references anywhere on backend
 
     - PUSH G
+      - Fix the awful N+1s
       - Tag page can redirect to a new post that has a tag already on it
         - something similar for mobile
 

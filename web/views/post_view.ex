@@ -23,7 +23,7 @@ defmodule Danton.PostView do
   def parent_post_path(post, parent_type, parent) do
     case (parent_type) do
       :club -> "/clubs/" <> Integer.to_string(parent.id) <> "/posts/" <> Integer.to_string(post.id)
-      :channel -> "/tags/" <> Integer.to_string(parent.id) <> "/posts/" <> Integer.to_string(post.id)
+      :tag -> "/tags/" <> Integer.to_string(parent.id) <> "/posts/" <> Integer.to_string(post.id)
       :none -> "/posts/" <> Integer.to_string(post.id)
     end
   end

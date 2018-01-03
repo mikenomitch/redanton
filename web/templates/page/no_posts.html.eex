@@ -14,7 +14,7 @@
     </div>
   <% end %>
 
-  <%= if (@parent_type == :channel) do %>
+  <%= if (@parent_type == :tag) do %>
     <div class="intro-prompt-description">
       <p> There are no posts for this tag. <p>
       <p> Add some content to make this category interesting. <p>

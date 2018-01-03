@@ -24,9 +24,6 @@
     <div class="form-header-info-unit">
       <%= @club.description %>
     </div>
-    <div class="form-header-info-unit">
-      <br /> <%= link "+ Add Tag", to: club_channel_path(@conn, :new, @club) %>
-    </div>
   </div>
 </div>
 
