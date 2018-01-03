@@ -76,7 +76,7 @@ const TabNav = TabNavigator(
         headerBackTitle: null,
         headerRight: (<NewChannelButton navigation={navigation} />),
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="filter" size={20} color={tintColor} />
+          <Icon name="tags" size={20} color={tintColor} />
         ),
       })
     },
