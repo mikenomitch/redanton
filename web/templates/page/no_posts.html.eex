@@ -16,12 +16,12 @@
 
   <%= if (@parent_type == :channel) do %>
     <div class="intro-prompt-description">
-      <p> This channel is empty. <p>
-      <p> Add some content to make it interesting. <p>
+      <p> There are no posts for this tag. <p>
+      <p> Add some content to make this category interesting. <p>
     </div>
 
     <div class="intro-prompt-cta">
-      <%= link "Post to the Channel", to: post_path(@conn, :new) %>
+      <%= link "Post with this Tag", to: post_path(@conn, :new) %>
     </div>
   <% end %>
 
