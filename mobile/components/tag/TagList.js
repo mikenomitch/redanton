@@ -102,12 +102,10 @@ class TagList extends PureComponent {
   }
 
   renderTagLink = (datum) => {
-    const { clubs, navigation } = this.props
-    const channel = datum.item
-    const club = clubs[channel.club_id] || {}
+    const { navigation } = this.props
 
     return (
-      <TagItem navigation={navigation} tag={tag} />
+      <TagItem navigation={navigation} tag={datum.item} />
     )
   }
 

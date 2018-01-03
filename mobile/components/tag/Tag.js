@@ -14,8 +14,6 @@ import withDebouncedNav from '../helpers/withDebouncedNav'
 
 import Stream from '../stream/Stream'
 import Loading from '../ui/Loading'
-import LinkButton from '../ui/LinkButton'
-import Footer from '../ui/Footer'
 
 // ===============
 //     STYLES
@@ -25,17 +23,6 @@ const styles = StyleSheet.create({
   root: {
     width: '100%',
     height: '100%'
-  },
-  content: {
-    height: '90%'
-  },
-  footerContent: {
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
   }
 })
 
@@ -57,8 +44,7 @@ class Tag extends PureComponent {
 
   get sortedPosts() {
     // FILTER DOWN WITH POSTS_TAGS
-    return Object.values(this.props.posts)
-      .sort((a, b) => (
+    return Object.values(this.props.posts).sort((a, b) => (
         new Date(b.last_activity_time) - new Date(a.last_activity_time)
       ))
   }
@@ -117,9 +103,7 @@ class Tag extends PureComponent {
   render() {
     return (
       <View style={styles.root}>
-        <View style={styles.content}>
-          {this.renderStream()}
-        </View>
+        {this.renderStream()}
       </View>
     )
   }
@@ -137,6 +121,7 @@ const mapStateToProps = (state, props) => {
     posts: state.posts,
     tags: state.tags,
     users: state.users,
+    clubs: state.clubs,
     tagId,
     currentUserId
   }

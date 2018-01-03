@@ -6,10 +6,8 @@ import MainStreamScreen from '../stream/MainStream'
 import SettingsScreen from '../settings/Settings'
 import EditUserScreen from '../user/EditUser'
 
-import ChannelListScreen from '../channel/ChannelList'
-import ChannelScreen from '../channel/Channel'
-import EditChannelScreen from '../channel/EditChannel'
-import NewChannelScreen from '../channel/NewChannel'
+import TagListScreen from '../tag/TagList'
+import TagScreen from '../tag/Tag'
 
 import EditPostScreen from '../post/EditPost'
 import NewPostScreen from '../post/NewPost'
@@ -31,7 +29,6 @@ import { colors } from '../styleConstants'
 
 import NewClubButton from '../club/NewClubButton'
 import ManageClubButton from '../club/ManageClubButton'
-import NewChannelButton from '../channel/NewChannelButton'
 import NewPostButton from '../post/NewPostButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -68,13 +65,12 @@ const TabNav = TabNavigator(
       })
     },
     TagsTab: {
-      screen: ChannelListScreen,
+      screen: TagListScreen,
       path: '/tags',
-      navigationOptions:  ({navigation}) => ({
+      navigationOptions:  () => ({
         title: 'Tags',
         tabBarLabel: 'Tags',
         headerBackTitle: null,
-        headerRight: (<NewChannelButton navigation={navigation} />),
         tabBarIcon: ({ tintColor }) => (
           <Icon name="tags" size={20} color={tintColor} />
         ),
@@ -129,23 +125,11 @@ const MainNav = StackNavigator({
     }
   },
   Tag: {
-    screen: ChannelScreen,
+    screen: TagScreen,
     navigationOptions: ({navigation}) => ({
-      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.channel.id} stateKey="channels" defaultTitle="tags" />),
+      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.tag.id} stateKey="tags" defaultTitle="tags" />),
       headerRight: (<NewPostButton navigation={navigation} />)
     })
-  },
-  NewTag: {
-    screen: NewChannelScreen,
-    navigationOptions: {
-      title: 'Add Tag'
-    }
-  },
-  EditTag: {
-    screen: EditChannelScreen,
-    navigationOptions: {
-      title: 'Edit Tag'
-    }
   },
   Club: {
     screen: ClubScreen,
