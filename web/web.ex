@@ -34,6 +34,8 @@ defmodule Danton.Web do
       alias Danton.RoomCheckIn
       alias Danton.User
       alias Danton.UserToken
+      alias Danton.Tag
+      alias Danton.PostsTags
     end
   end
 

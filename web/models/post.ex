@@ -17,6 +17,7 @@ defmodule Danton.Post do
     belongs_to :user, User
     has_one :room, Room
     many_to_many :messages, Message, join_through: "room"
+    many_to_many :tags, Tag, join_through: "posts_tags"
 
     timestamps()
   end
