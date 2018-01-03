@@ -42,7 +42,7 @@
             <img class="index-feature-image" id="index-signal-image" src="<%= static_path(@conn, "/images/signal.png") %>">
           </div>
           <div class="index-feature-text-holder">
-            <p> Share links with custom categories </p>
+            <p> Share links with specific clubs or everyone </p>
           </div>
         </div>
         <div class="index-feature">

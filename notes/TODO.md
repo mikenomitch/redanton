@@ -30,7 +30,6 @@
         - web - DONE
           - get rid of any channel_post routes - DONE
         - mobile - DONE
-
     - PUSH C (public renaming)
       - web
         - homepage - DONE
@@ -50,6 +49,7 @@
         - prompts - DONE
         - walkthru - DONE
         - errors - DONE
+
     - PUSH D (Channel now one to many, on backend)
       - migration that adds Tag table and PostTag table
       - migration that adds data for each channel
@@ -59,6 +59,7 @@
       - indeces use the one to many
         - web
         - mobile
+
     - PUSH E
       - Multiple tags can be added on web
       - Multiple tags can be added on mobile (backwards compat)
@@ -93,9 +94,7 @@
   - Posts show discussion vs Link
   - Preview of content on stream item
   - When you create a club the message tells you
-    how many channels you made
+    how many tags you made
 
-  - Mobile club creation promps for channels
-    (with a nice input of some sort)
-  - TLC around new users/clubs/chans (mobile)
-  - Deep linking
+  - TLC around new users/clubs/tags (mobile)
+  - Deep linking w push notifications
