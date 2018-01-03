@@ -146,7 +146,7 @@ defmodule Danton.Router do
         # REMOVE /channels once new version is published
         resources "/channels", Api.V1.ChannelController, only: [:index, :create]
 
-        resources "/tags", Api.V1.ChannelController, only: [:index, :create]
+        resources "/tags", Api.V1.TagController, only: [:index]
       end
 
       # REMOVE /channels once new version is published
@@ -154,7 +154,7 @@ defmodule Danton.Router do
         resources "/posts", Api.V1.PostController, only: [:index, :create]
       end
 
-      resources "/tags", Api.V1.ChannelController do
+      resources "/tags", Api.V1.TagController do
         resources "/posts", Api.V1.PostController, only: [:index, :create]
       end
 

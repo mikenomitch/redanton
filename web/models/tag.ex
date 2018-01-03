@@ -35,6 +35,10 @@ defmodule Danton.Tag do
     Post.user_posts(u) |> Tag.for_posts()
   end
 
+  def for_club(club_id) when is_integer(club_id) do
+    Post.for_club_ids([club_id]) |> Tag.for_posts()
+  end
+
   # THE WORST N+1 Ever
   def for_posts(query \\ Post) do
     all_posts = Repo.all(query)
@@ -64,5 +68,13 @@ defmodule Danton.Tag do
       |> Repo.aggregate(:count, :id)
 
     %{tag | post_count: count}
+  end
+
+  def include_posts_tags(tags) when is_list(tags) do
+    Enum.map(tags, &include_posts_tags/1)
+  end
+
+  def include_posts_tags(tag = %Tag{}) do
+    Repo.preload(tag, :posts_tags)
   end
 end
