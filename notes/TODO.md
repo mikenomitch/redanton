@@ -44,12 +44,12 @@
         - routes (api keeps old ones too, but adds new as well) - DONE
         - error messages - DONE
       - mobile
-        - nav (and shuffle positions)
-        - new, edit, index
-        - posts, clubs
-        - prompts
-        - walkthru
-        - errors
+        - nav (and shuffle positions) - DONE
+        - new, edit, index - DONE
+        - posts, clubs - DONE
+        - prompts - DONE
+        - walkthru - DONE
+        - errors - DONE
     - PUSH D (Channel now one to many, on backend)
       - migration that adds Tag table and PostTag table
       - migration that adds data for each channel
