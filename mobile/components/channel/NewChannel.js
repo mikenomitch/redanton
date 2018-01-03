@@ -142,7 +142,7 @@ class NewChannel extends PureComponent {
             channelInfo={this.state.channelInfo}
           />
           <ActionButton onPress={this.onMakeChannelClick} >
-            make channel
+            add tag
           </ActionButton>
         </ScrollView>
       </View>
