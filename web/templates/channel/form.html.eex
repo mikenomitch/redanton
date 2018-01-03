@@ -21,14 +21,8 @@
 
   <div class="form-group">
     <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control", placeholder: "What is this channel's topic?" %>
+    <%= text_input f, :name, class: "form-control", placeholder: "Tag name" %>
     <%= error_tag f, :name %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :description, class: "control-label" %>
-    <%= textarea f, :description, class: "form-control", placeholder: "Give some details (optional)" %>
-    <%= error_tag f, :description %>
   </div>
 
   <div class="form-group">

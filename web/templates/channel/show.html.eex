@@ -12,7 +12,7 @@
           <%= link "Edit", to: channel_path(@conn, :edit, @channel), class: "" %>
         </li>
         <li>
-          <%= link "Delete", to: channel_path(@conn, :delete, @channel), method: :delete, data: [confirm: "Are you sure you want to remove this channel and its posts?"] %>
+          <%= link "Delete", to: channel_path(@conn, :delete, @channel), method: :delete, data: [confirm: "Are you sure you want to remove this tag?"] %>
         </li>
       </ul>
     </div>

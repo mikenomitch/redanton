@@ -33,14 +33,16 @@
 
     - PUSH C (public renaming)
       - web
-        - homepage
-        - routes (api keeps old ones too, but adds new as well)
-        - header
+        - homepage - DONE
+        - header - DONE
         - new, edit, index
         - club page
         - post show
         - prompts
         - notifications?
+        - breadcrumbs
+        - routes (api keeps old ones too, but adds new as well)
+        - error messages
       - mobile
         - nav (and shuffle positions)
         - new, edit, index
