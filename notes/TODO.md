@@ -56,14 +56,14 @@
 
       - tag index uses the new models, and automatically find the right tags
         - web - DONE
-        - mobile
+        - mobile - DONE
       - tag show only shows the posts you CAN see, that also have that tag
         - web - DONE
-        - mobile
+        - mobile - DONE
 
       - remove old places to eplicitly create/edit channels/tags
         - web - DONE
-        - mobile
+        - mobile - DONE
 
     - PUSH E
       - Multiple tags can be added on web

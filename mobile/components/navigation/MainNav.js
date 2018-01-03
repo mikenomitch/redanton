@@ -127,8 +127,7 @@ const MainNav = StackNavigator({
   Tag: {
     screen: TagScreen,
     navigationOptions: ({navigation}) => ({
-      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.tag.id} stateKey="tags" defaultTitle="tags" />),
-      headerRight: (<NewPostButton navigation={navigation} />)
+      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.tag.id} stateKey="tags" defaultTitle="tags" />)
     })
   },
   Club: {
