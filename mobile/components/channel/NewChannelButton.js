@@ -6,10 +6,10 @@ import ActionButton from '../ui/ActionButton'
 import withDebouncedNav from '../helpers/withDebouncedNav'
 
 const NewChannelButton = (props) => {
-  const onPress = () => props.debouncedNav('NewChannel', {clubId: props.clubId})
+  const onPress = () => props.debouncedNav('NewTag', {clubId: props.clubId})
   return props.actionButton
-    ? <ActionButton onPress={onPress}> Add Channel </ActionButton>
-    : !props.hide && <LinkButton title="+ Channel" onPress={onPress} />
+    ? <ActionButton onPress={onPress}> Add Tag </ActionButton>
+    : !props.hide && <LinkButton title="+ Tag" onPress={onPress} />
 }
 
 const mapStateToProps = (state) => {

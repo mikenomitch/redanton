@@ -22,8 +22,8 @@ defmodule Danton.Admin.ChannelController do
       params
       |> Map.put_new("sort_direction", "desc")
       |> Map.put_new("sort_field", "inserted_at")
-    
-    {:ok, sort_direction} = Map.fetch(params, "sort_direction")
+
+      {:ok, sort_direction} = Map.fetch(params, "sort_direction")
     {:ok, sort_field} = Map.fetch(params, "sort_field")
     {:ok, filter} = Filtrex.parse_params(@filtrex, params["channel"] || %{})
 
@@ -55,7 +55,7 @@ defmodule Danton.Admin.ChannelController do
     case Repo.insert(changeset) do
       {:ok, _channel} ->
         conn
-        |> put_flash(:info, "Channel created successfully.")
+        |> put_flash(:info, "Tag created successfully.")
         |> redirect(to: admin_channel_path(conn, :index))
       {:error, changeset} ->
         conn
@@ -77,7 +77,7 @@ defmodule Danton.Admin.ChannelController do
     case Repo.update(changeset) do
       {:ok, _channel} ->
         conn
-        |> put_flash(:info, "Channel updated successfully.")
+        |> put_flash(:info, "Tag updated successfully.")
         |> redirect(to: admin_channel_path(conn, :index))
       {:error, changeset} ->
         conn
@@ -91,7 +91,7 @@ defmodule Danton.Admin.ChannelController do
     Repo.delete!(channel)
 
     conn
-    |> put_flash(:info, "Channel deleted successfully.")
+    |> put_flash(:info, "Tag deleted successfully.")
     |> redirect(to: admin_channel_path(conn, :index))
   end
 end

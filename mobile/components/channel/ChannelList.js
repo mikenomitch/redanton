@@ -60,7 +60,7 @@ const ChannelItemBase = (props) => {
     <View style={styles.channelItem}>
       <View style={styles.name}>
         <LinkButton
-          onPress={() => props.debouncedNav('Channel', {channel: props.channel, id: props.channel.id})}
+          onPress={() => props.debouncedNav('Tag', {channel: props.channel, id: props.channel.id})}
           title={props.channel.name}
         />
       </View>
@@ -83,7 +83,7 @@ const ChannelItem = withDebouncedNav(ChannelItemBase)
 
 class ChannelList extends PureComponent {
   static navigationOptions = {
-    title: 'Channels'
+    title: 'Tags'
   }
 
   constructor(props) {

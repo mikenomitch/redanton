@@ -91,7 +91,7 @@ class NewChannel extends PureComponent {
     const onPostSuccess = (res) => {
       this.clearState()
 			goBack()
-			navigate('Channel', {channel: res.data})
+			navigate('Tag', {channel: res.data})
     }
 
     this.props.createChannel(

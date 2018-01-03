@@ -12,14 +12,6 @@ const EditChannelInfo = (props) => (
       onChangeText={(name) => props.setChannelState({name})}
       error={props.errorFor('name', props.channelInfo.name)}
     />
-    <BasicTextInput
-      autoGrow
-      label="description"
-      value={props.channelInfo.description}
-      returnKeyType="next"
-      onChangeText={(description) => props.setChannelState({description})}
-      error={props.errorFor('description', props.channelInfo.description)}
-    />
   </View>
 )
 

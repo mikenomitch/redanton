@@ -180,8 +180,8 @@ defmodule Danton.PostController do
     channel = Repo.get(Channel, channel_id)
 
     conn
-    |> add_breadcrumb(name: "Channels", url: "/channels")
-    |> add_breadcrumb(name: channel.name, url: "/channels/#{inspect(channel_id)}")
+    |> add_breadcrumb(name: "Tags", url: "/tags")
+    |> add_breadcrumb(name: channel.name, url: "/tags/#{inspect(channel_id)}")
   end
 
   defp add_new_post_crumb(conn) do

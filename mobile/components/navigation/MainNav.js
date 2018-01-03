@@ -67,12 +67,12 @@ const TabNav = TabNavigator(
         ),
       })
     },
-    ChannelsTab: {
+    TagsTab: {
       screen: ChannelListScreen,
-      path: '/channels',
+      path: '/tags',
       navigationOptions:  ({navigation}) => ({
-        title: 'Channels',
-        tabBarLabel: 'Channels',
+        title: 'Tags',
+        tabBarLabel: 'Tags',
         headerBackTitle: null,
         headerRight: (<NewChannelButton navigation={navigation} />),
         tabBarIcon: ({ tintColor }) => (
@@ -128,23 +128,23 @@ const MainNav = StackNavigator({
       title: 'Edit Post'
     }
   },
-  Channel: {
+  Tag: {
     screen: ChannelScreen,
     navigationOptions: ({navigation}) => ({
-      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.channel.id} stateKey="channels" defaultTitle="channel" />),
+      headerTitle: (<ConnectedHeader resourceKey={navigation.state.params.channel.id} stateKey="channels" defaultTitle="tags" />),
       headerRight: (<NewPostButton navigation={navigation} />)
     })
   },
-  NewChannel: {
+  NewTag: {
     screen: NewChannelScreen,
     navigationOptions: {
-      title: 'Add Channel'
+      title: 'Add Tag'
     }
   },
-  EditChannel: {
+  EditTag: {
     screen: EditChannelScreen,
     navigationOptions: {
-      title: 'Edit Channel'
+      title: 'Edit Tag'
     }
   },
   Club: {
@@ -186,14 +186,7 @@ const MainNav = StackNavigator({
   }
 },
 {
-  navigationOptions: {
-    // headerStyle: {
-    //   backgroundColor: colors.primary
-    // },
-    // headerTitleStyle: {
-    //   color: colors.white
-    // }
-  }
+  navigationOptions: {}
 })
 
 export default withOSPermissions(MainNav)

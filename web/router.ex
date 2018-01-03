@@ -44,7 +44,7 @@ defmodule Danton.Router do
     pipe_through [:browser, :browser_auth, :admin_browser_auth]
 
     resources "/authorizations", AuthorizationController
-    resources "/channels", ChannelController
+    resources "/tags", ChannelController
     resources "/clubs", ClubController
     resources "/memberships", MembershipController
     resources "/messages", MessageController
@@ -69,21 +69,23 @@ defmodule Danton.Router do
     get "/stream", PostController, :front_page
 
     get "/no_clubs", PageController, :no_clubs
-    get "/no_channels", PageController, :no_channels
+    get "/no_tags", PageController, :no_tags
     get "/no_posts", PageController, :no_posts
 
     # Add public routes below
 
     resources "/clubs", ClubController do
       delete "/leave", ClubController, :leave
-      resources "/channels", ChannelController, only: [:new, :create]
+      resources "/tags", ChannelController, only: [:new, :create]
       resources "/members", MembershipController, only: [:index, :new, :create, :update, :delete]
       resources "/posts", PostController, only: [:new, :create, :show]
       resources "/memberships", MembershipController, only: [:index, :new, :update, :delete]
       post "/memberships/:id/elevate", MembershipController, :elevate
     end
 
-    resources "/channels", ChannelController
+    resources "/tags", ChannelController do
+      resources "/posts", PostController, only: [:new, :create, :show]
+    end
     resources "/posts", PostController
     resources "/messages", MessageController
     resources "/rooms", RoomController

@@ -36,19 +36,20 @@
         - homepage - DONE
         - header - DONE
         - new, edit, index
-        - club page
-        - post show
-        - prompts
-        - notifications?
-        - breadcrumbs
-        - routes (api keeps old ones too, but adds new as well)
-        - error messages
+        - club page - DONE
+        - post show - DONE
+        - prompts - DONE
+        - notifications - DONE
+        - breadcrumbs - DONE
+        - routes (api keeps old ones too, but adds new as well) - DONE
+        - error messages - DONE
       - mobile
         - nav (and shuffle positions)
         - new, edit, index
         - posts, clubs
         - prompts
         - walkthru
+        - errors
     - PUSH D (Channel now one to many, on backend)
       - migration that adds Tag table and PostTag table
       - migration that adds data for each channel

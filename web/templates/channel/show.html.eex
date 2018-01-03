@@ -36,7 +36,7 @@
       page_number: @page_number,
       parent_type: :channel,
       parent: @channel,
-      base_url: "/channels/" <> Integer.to_string(@channel.id)
+      base_url: "/tags/" <> Integer.to_string(@channel.id)
     ) %>
   </div>
 <% else %>

@@ -87,7 +87,7 @@ defmodule Danton.ChannelController do
       |> case do
       {:ok, channel} ->
         conn
-        |> put_flash(:info, "Channel created successfully.")
+        |> put_flash(:info, "Tag created successfully.")
         |> redirect(to: channel_path(conn, :show, channel))
       {:error, changeset} ->
         render_create_error(conn, changeset, clubs, club_id)
@@ -145,11 +145,11 @@ defmodule Danton.ChannelController do
     case Repo.update(changeset) do
       {:ok, channel} ->
         conn
-        |> put_flash(:info, "Channel updated successfully.")
+        |> put_flash(:info, "Tag updated successfully.")
         |> redirect(to: channel_path(conn, :show, channel))
       {:error, changeset} ->
         conn
-        |> put_flash(:error, "There was an issue updating this channel")
+        |> put_flash(:error, "There was an issue updating this tag")
         |> add_club_crumb(channel.club_id)
         |> add_channel_crumb(channel)
         |> add_channel_edit_crumb(channel)
@@ -161,22 +161,22 @@ defmodule Danton.ChannelController do
     Channel.destroy(id)
 
     conn
-    |> put_flash(:info, "Channel deleted successfully.")
+    |> put_flash(:info, "Tag deleted successfully.")
     |> redirect(to: channel_path(conn, :index))
   end
 
   # BREADCRUMBS
 
   defp add_channels_crumb(conn) do
-    add_breadcrumb(conn, name: "Channels", url: "/channels/")
+    add_breadcrumb(conn, name: "Tags", url: "/tags/")
   end
 
   defp add_channel_crumb(conn, channel) do
-    add_breadcrumb(conn, name: channel.name, url: "/channels/" <> Integer.to_string(channel.id))
+    add_breadcrumb(conn, name: channel.name, url: "/tags/" <> Integer.to_string(channel.id))
   end
 
   defp add_channel_edit_crumb(conn, channel) do
-    add_breadcrumb(conn, name: "Edit", url: "/channels/" <> Integer.to_string(channel.id) <> "/edit")
+    add_breadcrumb(conn, name: "Edit", url: "/tags/" <> Integer.to_string(channel.id) <> "/edit")
   end
 
   defp add_club_crumb(conn, club_id) when is_integer(club_id) do
@@ -191,12 +191,12 @@ defmodule Danton.ChannelController do
   defp add_new_channel_crumbs(conn, club_id) when club_id == :none do
     conn
     |> add_channels_crumb()
-    |> add_breadcrumb(name: "New Channel", url: "/channels/new")
+    |> add_breadcrumb(name: "New Tag", url: "/tags/new")
   end
 
   defp add_new_channel_crumbs(conn, club_id) do
     conn
     |> add_club_crumb(String.to_integer(club_id))
-    |> add_breadcrumb(name: "New Channel", url: "/clubs/" <> club_id <> "/channels/new")
+    |> add_breadcrumb(name: "New Tag", url: "/clubs/" <> club_id <> "/tags/new")
   end
 end

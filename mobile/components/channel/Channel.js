@@ -83,14 +83,14 @@ class Channel extends PureComponent {
 
   removeChannelClick = () => {
     confirmMessage(
-      'Remove Channel',
-      'Are you sure? This will remove all its posts.',
+      'Remove Tag',
+      'Are you sure?',
       this.removeChannel
     )
   }
 
   editChannelClick = () => {
-    this.props.debouncedNav('EditChannel', {channelInfo: this.channel})
+    this.props.debouncedNav('EditTag', {channelInfo: this.channel})
   }
 
   refresh = (cb) => {
@@ -139,8 +139,8 @@ class Channel extends PureComponent {
         </View>
         <Footer>
           <View style={styles.footerContent}>
-            <LinkButton title="Remove Channel" onPress={this.removeChannelClick} />
-            <LinkButton title="Edit Channel" onPress={this.editChannelClick} />
+            <LinkButton title="Remove Tag" onPress={this.removeChannelClick} />
+            <LinkButton title="Edit Tag" onPress={this.editChannelClick} />
           </View>
         </Footer>
       </View>
