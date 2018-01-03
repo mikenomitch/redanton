@@ -26,6 +26,8 @@ import clubs from '../data/clubs'
 import memberships from '../data/memberships'
 import messages from '../data/messages'
 import posts from '../data/posts'
+import postsTags from '../data/postsTags'
+import tags from '../data/tags'
 import users from '../data/users'
 
 const rootReducer = combineReducers({
@@ -36,6 +38,8 @@ const rootReducer = combineReducers({
   memberships,
   messages,
   posts,
+  postsTags,
+  tags,
   users
 })
 
