@@ -27,10 +27,6 @@
 <%= if (length(@posts) > 0) do %>
   <div class="associations">
     <div class="association-header">Posts:</div>
-    <div class="new_item_link">
-      <%= link "+ Add Post", to: channel_post_path(@conn, :new, @channel.id) %>
-    </div>
-
     <%= render(
       Danton.PostView,
       "stream.html",

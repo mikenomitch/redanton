@@ -67,8 +67,7 @@ defmodule Danton.Post do
 
   def for_front_page(user) do
     Club.ids_for_user(user)
-    |> Channel.ids_for_club_ids()
-    |> for_channel_ids()
+    |> for_club_ids()
     |> by_activity()
   end
 
@@ -120,11 +119,48 @@ defmodule Danton.Post do
   # CREATE
   # ===========================
 
+  # TODO: REMOVE THIS ONCE CHAN => TAG is done
   def create_for_channel_and_user(chan, user, post_params, msg_params \\ false) do
     post_cs = Post.changeset(%Post{
       user_id: user.id,
       channel_id: chan.id,
       club_id: chan.club_id
+    }, %{
+      title: post_params["title"],
+      description: post_params["description"],
+      type: post_params["type"],
+      url: post_params["url"],
+      activity_at: Ecto.DateTime.utc
+    })
+
+    multi = Multi.new
+      |> Multi.insert(:post, post_cs)
+      |> Multi.run(:room, fn %{post: post} ->
+        room_cs = Ecto.build_assoc(post, :room, %{})
+        Repo.insert(room_cs)
+      end)
+      |> Multi.run(:message, fn %{room: room} ->
+        if (msg_params && msg_params.body) do
+          msg_cs = Ecto.build_assoc(room, :messages, msg_params)
+          Repo.insert(msg_cs)
+        else
+          {:ok, :no_message}
+        end
+      end)
+
+    case Repo.transaction(multi) do
+      {:ok, %{post: post, room: room} = res} ->
+        Task.start(__MODULE__, :notify_new_post, [post, room, user])
+        {:ok, res}
+      _ ->
+        {:error, post_cs}
+    end
+  end
+
+  def create_for_club_and_user(club, user, post_params, msg_params \\ false) do
+    post_cs = Post.changeset(%Post{
+      user_id: user.id,
+      club_id: club.id
     }, %{
       title: post_params["title"],
       description: post_params["description"],

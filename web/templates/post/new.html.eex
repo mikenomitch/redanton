@@ -7,15 +7,9 @@
 </div>
 
 <%=
-action = if @channel_id == :none do
-  post_path(@conn, :create)
-  else
-  channel_post_path(@conn, :create, @channel_id)
-end
-
 render "form.html", changeset: @changeset,
-  action: action,
-  channel_id: @channel_id,
+  action: post_path(@conn, :create),
+  club_id: @club_id,
   channels: @channels,
   clubs: @clubs,
   conn: @conn,

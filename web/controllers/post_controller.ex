@@ -45,12 +45,12 @@ defmodule Danton.PostController do
 
   # ===== END FRONT PAGE
 
-  def new(conn, %{"channel_id" => channel_id}, _current_user, _claims) do
+  def new(conn, %{"club_id" => club_id}, _current_user, _claims) do
     changeset = Post.changeset(%Post{})
 
     conn
-    |> add_new_post_crumb(channel_id)
-    |> render("new.html", changeset: changeset, channel_id: channel_id, channels: :none, clubs: :none)
+    |> add_new_post_crumb()
+    |> render("new.html", changeset: changeset, club_id: club_id, channels: :none, clubs: :none)
   end
 
   def new(conn, _params, current_user, _claims) do
@@ -59,44 +59,44 @@ defmodule Danton.PostController do
     clubs = Club.for_user(current_user) |> Repo.all()
 
     conn
-    |> add_new_post_crumb(:front)
-    |> render("new.html", changeset: changeset, channel_id: :none, channels: channels, clubs: clubs)
+    |> add_new_post_crumb()
+    |> render("new.html", changeset: changeset, club_id: :none, channels: channels, clubs: clubs)
   end
 
-  def create(conn, %{"post" => post_params, "channel_id" => channel_id}, current_user, _claims) do
-    create_and_respond(conn, %{"post" => post_params, "channel_id" => channel_id}, current_user)
+  def create(conn, %{"post" => post_params, "club_id" => club_id}, current_user, _claims) do
+    create_and_respond(conn, %{"post" => post_params, "club_id" => club_id}, current_user)
   end
 
   def create(conn, %{"post" => post_params}, current_user, _claims) do
-    channel_id = post_params["channel_id"]
-    create_and_respond(conn, %{"post" => post_params, "channel_id" => channel_id}, current_user)
+    club_id = post_params["club_id"]
+    create_and_respond(conn, %{"post" => post_params, "club_id" => club_id}, current_user)
   end
 
-  defp create_and_respond(conn, %{"post" => post_params, "channel_id" => ""}, current_user) do
+  defp create_and_respond(conn, %{"post" => post_params, "club_id" => ""}, current_user) do
     cs = Post.changeset(%Post{}, post_params)
-    render_create_error(conn, current_user, cs, :none, "You must add a channel.")
+    render_create_error(conn, current_user, cs, :none, "You must add a club.")
   end
 
-  defp create_and_respond(conn, %{"post" => post_params, "channel_id" => channel_id}, current_user) do
-    channel = Repo.get(Channel, channel_id)
-    case Post.create_for_channel_and_user(channel, current_user, post_params) do
+  defp create_and_respond(conn, %{"post" => post_params, "club_id" => club_id}, current_user) do
+    club = Repo.get(Club, club_id)
+    case Post.create_for_club_and_user(club, current_user, post_params) do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: post_path(conn, :front_page))
       {:error, changeset} ->
-        render_create_error(conn, current_user, changeset, channel_id)
+        render_create_error(conn, current_user, changeset, club_id)
     end
   end
 
-  defp render_create_error(conn, current_user, cs, channel_id, message \\ "There was an issue creating the post.") do
+  defp render_create_error(conn, current_user, cs, club_id, message \\ "There was an issue creating the post.") do
     channels = Channel.for_user(current_user) |> Repo.all()
     clubs = Club.for_user(current_user) |> Repo.all()
 
     conn
-    |> add_new_post_crumb(channel_id)
+    |> add_new_post_crumb()
     |> put_flash(:error, message)
-    |> render("new.html", changeset: cs, channel_id: channel_id, channels: channels, clubs: clubs)
+    |> render("new.html", changeset: cs, club_id: club_id, channels: channels, clubs: clubs)
   end
 
   def show(conn, %{"id" => id}, current_user, _claims) do
@@ -134,7 +134,7 @@ defmodule Danton.PostController do
     conn
     |> add_parent_crumbs(post)
     |> add_post_and_edit_crumbs(post)
-    |> render("edit.html", post: post, changeset: changeset, channel_id: post.channel_id)
+    |> render("edit.html", post: post, changeset: changeset, club_id: post.club_id)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}, _current_user, _claims) do
@@ -184,17 +184,10 @@ defmodule Danton.PostController do
     |> add_breadcrumb(name: channel.name, url: "/channels/#{inspect(channel_id)}")
   end
 
-  defp add_new_post_crumb(conn, channel) do
-    case channel do
-      c when c in [:front, :none] ->
-        conn
-        |> add_breadcrumb(name: "My Stream", url: "/stream")
-        |> add_breadcrumb(name: "New Post", url: "/posts/new")
-      channel_id ->
-        conn
-        |> add_channel_crumb(String.to_integer(channel_id)) # this is pretty gross (the interpolation issues)
-        |> add_breadcrumb(name: "New Post", url: "/channels/#{inspect(channel_id)}/posts/new")
-    end
+  defp add_new_post_crumb(conn) do
+    conn
+    |> add_breadcrumb(name: "My Stream", url: "/stream")
+    |> add_breadcrumb(name: "New Post", url: "/posts/new")
   end
 
   defp add_post_and_edit_crumbs(conn, post) do

@@ -27,7 +27,8 @@
       - any post.channel_id reference can fallback to nothing - DONE
 
       - club replaces channel in new
-        - web
+        - web - DONE
+          - get rid of any channel_post routes
         - mobile
 
     - PUSH C (public renaming)
@@ -58,6 +59,8 @@
     - PUSH E
       - Multiple tags can be added on web
       - Multiple tags can be added on mobile (backwards compat)
+      - Tag page can redirect to a new post that has a tag already on it
+        - something similar for mobile
       - Tags index shows the right stuff if it is empty (but doesn't roadblock you ever)
       - Tags show up on the stream
         - Web

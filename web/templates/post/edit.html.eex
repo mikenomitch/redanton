@@ -16,4 +16,4 @@
   </h1>
 </div>
 
-<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post), channel_id: @post.channel_id, conn: @conn%>
+<%= render "form.html", changeset: @changeset, action: post_path(@conn, :update, @post), club_id: @post.club_id, conn: @conn%>

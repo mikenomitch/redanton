@@ -5,19 +5,19 @@
     </div>
   <% end %>
 
-  <%= if @channel_id == :none do %>
+  <%= if @club_id == :none do %>
     <div class="form-group">
-      <%= label f, :channel_id, class: "control-label" %>
+      <%= label f, :club_id, class: "control-label" %>
       <%= select(f,
-        :channel_id,
+        :club_id,
         Enum.map(
-          @channels,
-          &({[dropdown_text(&1, @clubs)], &1.id})
+          @clubs,
+          &{[&1.name], &1.id}
         ),
-        prompt: "Select Channel",
+        prompt: "Select Club",
         class: "form-control"
       ) %>
-      <%= error_tag f, :channel_id %>
+      <%= error_tag f, :club_id %>
     </div>
   <% end %>
 

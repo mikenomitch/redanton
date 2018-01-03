@@ -21,7 +21,7 @@
     </div>
 
     <div class="intro-prompt-cta">
-      <%= link "Post to the Channel", to: channel_post_path(@conn, :new, @parent_id) %>
+      <%= link "Post to the Channel", to: post_path(@conn, :new) %>
     </div>
   <% end %>
 
