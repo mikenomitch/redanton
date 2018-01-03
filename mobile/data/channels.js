@@ -45,7 +45,7 @@ export const getChannels = (onSuccess) => {
     type: 'GET_CHANNELS',
     call: {
       action: 'GET',
-      endpoint: '/channels',
+      endpoint: '/tags',
       callKey: 'channels',
       successActionCreator: (res) => {
         return (dispatch) => {
@@ -62,7 +62,7 @@ export const createChannel = (clubId, channelInfo, onSuccess) => {
     type: 'CREATE_CHANNEL_CALL',
     call: {
       action: 'POST',
-      endpoint: `/clubs/${clubId}/channels`,
+      endpoint: `/clubs/${clubId}/tags`,
       params: {
         channel: {
           name: channelInfo.name,
@@ -87,7 +87,7 @@ export const updateChannel = (channelInfo, onSuccess) => {
     type: 'UPDATE_CHANNEL_CALL',
     call: {
       action: 'PATCH',
-      endpoint: `/channels/${channelInfo.id}`,
+      endpoint: `/tags/${channelInfo.id}`,
       params: {
         channel: {
           name: channelInfo.name,
@@ -112,7 +112,7 @@ export const deleteChannel = (channelId, onSuccess) => {
     type: 'DELETE_CHANNEL_CALL',
     call: {
       action: 'DELETE',
-      endpoint: `/channels/${channelId}`,
+      endpoint: `/tags/${channelId}`,
       successActionCreator: () => {
         return (dispatch) => {
           onSuccess && onSuccess()

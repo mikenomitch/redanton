@@ -9,19 +9,19 @@ import withResetState from './withResetState'
 // ==================
 // ==================
 
-function __postsWithoutChannel (state, channelId) {
-  const belongsToChannel = (post) => {
-    return post.channel_id === channelId
+function __postsWithoutClub (state, clubId) {
+  const belongsToClub = (post) => {
+    return post.club_id === clubId
   }
 
-  return omitBy(state, belongsToChannel)
+  return omitBy(state, belongsToClub)
 }
 
 const defaultState = {}
 function postReducer (state = defaultState, action) {
   switch (action.type) {
-  case 'REMOVE_CHANNEL':
-    return __postsWithoutChannel(state, action.payload)
+  case 'REMOVE_CLUB':
+    return __postsWithoutClub(state, action.payload)
   default:
     return makeHashReducer('Post')(state, action)
   }
@@ -72,7 +72,7 @@ export const getPostsForChannel = (channelId, onSuccess, pageNumber = 1) => {
     type: 'GET_POSTS_FOR_CHANNEL',
     call: {
       action: 'GET',
-      endpoint: `/channels/${channelId}/posts?page=${pageNumber}`,
+      endpoint: `/tags/${channelId}/posts?page=${pageNumber}`,
       successActionCreator: (res) => {
         return (dispatch) => {
           dispatch(postActions.onPostsReturn(res))
