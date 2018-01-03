@@ -1,6 +1,4 @@
 ## TODOS
-
-
   - CHANNELS => OPTIONAL TAGS
     - PUSH A (set up  club/post relationship)
       - migration to add new col - DONE
@@ -79,6 +77,7 @@
         - Mobile
       - Tags show up on the post show
         - Web
+      - Deploy and migrate and publish app
 
     - PUSH F
       - purge any Channel references anywhere on backend
