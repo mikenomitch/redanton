@@ -83,7 +83,7 @@ class Club extends PureComponent {
 
   get sortedPosts() {
     return Object.values(this.props.posts)
-      .filter(inChannels(this.channelIds))
+      .filter( (p) => p.club_id == this.club.id )
       .sort((a, b) => (
         new Date(b.last_activity_time) - new Date(a.last_activity_time)
       ))
