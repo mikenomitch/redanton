@@ -139,18 +139,19 @@ defmodule Danton.PostController do
 
   def update(conn, %{"id" => id, "post" => post_params}, _current_user, _claims) do
     post = Repo.get!(Post, id)
-    changeset = Post.changeset(post, post_params)
 
-    case Repo.update(changeset) do
+    case Post.update_from_params(post, post_params) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post updated successfully.")
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
+        np = post |> Post.with_tag_names()
+
         conn
-        |> add_parent_crumbs(post)
-        |> add_post_and_edit_crumbs(post)
-        |> render("edit.html", post: post, changeset: changeset)
+        |> add_parent_crumbs(np)
+        |> add_post_and_edit_crumbs(np)
+        |> render("edit.html", post: np, changeset: changeset)
     end
   end
 
