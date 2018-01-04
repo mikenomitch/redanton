@@ -22,9 +22,42 @@ defmodule Danton.Tag do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name])
+    |> update_change(:name, &String.downcase/1)
     |> validate_required([:name])
     |> validate_length(:name, min: 1, max: 150)
     |> unique_constraint(:name)
+  end
+
+  # =========
+  #  HELPERS
+  # =========
+
+  def builg_tags_from_params(_post, nil), do: {:ok, :no_tags}
+  def builg_tags_from_params(_post, ""), do: {:ok, :no_tags}
+
+  def build_tags_from_params(post, params) do
+    tag_names = params
+      |> String.split(",")
+      |> Enum.map(&String.trim/1)
+      |> Enum.map(&String.downcase/1)
+
+    tags = Enum.map(tag_names, &(build_tag_from_name(post, &1)))
+
+    {:ok, tags}
+  end
+
+  def build_tag_from_name(post, tag_name) do
+    {:ok, tag} = Repo.insert(
+      %Danton.Tag{name: tag_name},
+      on_conflict: [set: [name: tag_name]],
+      conflict_target: :name
+    )
+
+    Repo.insert(
+      %Danton.PostsTags{post_id: post.id, tag_id: tag.id}
+    )
+
+    tag
   end
 
   # =========

@@ -3,25 +3,25 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: {
-        "js/app.js": /^(web\/static\/js)|(node_modules)/
+        'js/app.js': /^(web\/static\/js)|(node_modules)/
       }
     },
     stylesheets: {
       joinTo: {
-        "css/app.css": /^(web\/static\/css)|(node_modules)/
+        'css/app.css': /^(web\/static\/css)|(node_modules)/
       },
       order: {
-        after: ["web/static/css/app.css"] // concat app.css last
+        after: ['web/static/css/app.css'] // concat app.css last
       }
     },
     templates: {
-      joinTo: "js/app.js"
+      joinTo: 'js/app.js'
     }
   },
   conventions: {
     // This option sets where we should place non-css and non-js assets in.
-    // By default, we set this to "/web/static/assets". Files in this directory
-    // will be copied to `paths.public`, which is "priv/static" by default.
+    // By default, we set this to '/web/static/assets'. Files in this directory
+    // will be copied to `paths.public`, which is 'priv/static' by default.
     assets: /^(web\/static\/assets)/
   },
 
@@ -29,19 +29,23 @@ exports.config = {
   paths: {
     // Dependencies and current project directories to watch
     watched: [
-      "web/static",
-      "test/static"
+      'web/static',
+      'test/static'
     ],
 
     // Where to compile files to
-    public: "priv/static"
+    public: 'priv/static'
   },
 
   // Configure your plugins
   plugins: {
     babel: {
       // Do not use ES6 compiler in vendor code
-      ignore: [/web\/static\/vendor/]
+      ignore: [/web\/static\/vendor/],
+      presets: ['latest'],
+      plugins: [
+        ['transform-react-jsx', { 'pragma': 'h' }]
+      ]
     },
     sass: {
       mode: 'native',
@@ -51,7 +55,7 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      'js/app.js': ['web/static/js/app']
     }
   },
 

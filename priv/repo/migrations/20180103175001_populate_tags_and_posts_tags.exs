@@ -15,8 +15,8 @@ defmodule Danton.Repo.Migrations.PopulateTagsAndPostsTags do
 
   def make_tag_and_relationship(chan) do
     {:ok, tag} = Repo.insert(
-      %Danton.Tag{name: chan.name},
-      on_conflict: [set: [name: chan.name]],
+      %Danton.Tag{name: String.downcase(chan.name)},
+      on_conflict: [set: [name: String.downcase(chan.name)]],
       conflict_target: :name
     )
 

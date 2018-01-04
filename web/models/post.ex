@@ -177,6 +177,8 @@ defmodule Danton.Post do
       activity_at: Ecto.DateTime.utc
     })
 
+    tags_params = post_params["tags"]
+
     multi = Multi.new
       |> Multi.insert(:post, post_cs)
       |> Multi.run(:room, fn %{post: post} ->
@@ -190,6 +192,9 @@ defmodule Danton.Post do
         else
           {:ok, :no_message}
         end
+      end)
+      |> Multi.run(:tags, fn%{post: post} ->
+        Tag.build_tags_from_params(post, tags_params)
       end)
 
     case Repo.transaction(multi) do
