@@ -65,8 +65,8 @@
 
     - PUSH E
       - Multiple tags can be added on web
-        - new
-        - edit
+        - new - DONE
+        - edit - DONE
       - Multiple tags can be added on mobile (backwards compat)
         - new
         - edit
