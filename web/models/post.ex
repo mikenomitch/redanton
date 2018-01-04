@@ -20,6 +20,8 @@ defmodule Danton.Post do
     many_to_many :messages, Message, join_through: "room"
     many_to_many :tags, Tag, join_through: "posts_tags"
 
+    field :tag_names, :string, virtual: true
+
     timestamps()
   end
 
@@ -121,6 +123,15 @@ defmodule Danton.Post do
   def user_has_none(user) do
     post_count = Post.for_front_page(user) |> Repo.aggregate(:count, :id)
     post_count == 0
+  end
+
+  def with_tag_names(post) do
+    tag_names = Ecto.assoc(post, :tags)
+      |> Repo.all()
+      |> Enum.map(&(&1.name))
+      |> Enum.join(",")
+
+    %{post | tag_names: tag_names}
   end
 
   # ===========================

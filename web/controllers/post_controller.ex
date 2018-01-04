@@ -128,7 +128,7 @@ defmodule Danton.PostController do
   end
 
   def edit(conn, %{"id" => id}, _current_user, _claims) do
-    post = Repo.get!(Post, id)
+    post = Repo.get!(Post, id) |> Post.with_tag_names()
     changeset = Post.changeset(post)
 
     conn

@@ -5,17 +5,18 @@ import TokenInput from 'preact-token-input'
 
 class TokenInputWrapper extends Component {
   onChange({value}){
-    this.setState({tags: value, committedTags: value})
+    const downcased = value.map((s) => s.toLowerCase())
+    this.setState({tags: downcased, committedTags: downcased})
   }
 
-  render({name}, { tags, committedTags }) {
+  render({name, initialVal}, { tags, committedTags }) {
     let ct = committedTags || []
 
     return (
       <div>
         <TokenInput
           placeholder="Add tags"
-          value={tags}
+          value={tags || initialVal}
           onChange={this.onChange.bind(this)}
         />
         <input hidden name={name} value={committedTags} />
@@ -27,8 +28,9 @@ class TokenInputWrapper extends Component {
 function replaceTagInput(elem) {
   const input = elem.children[0]
   const name = `${input.name}`
+  const initialVal = `${input.value}`
   input.remove()
-  render(<TokenInputWrapper name={name} />, elem)
+  render(<TokenInputWrapper initialVal={initialVal} name={name} />, elem)
 }
 
 function replaceTagInputs() {

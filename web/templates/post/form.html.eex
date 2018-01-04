@@ -36,7 +36,7 @@
   <div class="form-group">
     <%= label f, :tags, class: "control-label" %>
     <div class="tag-input form-control">
-      <%= text_input :post, :tags, class: "form-control", placeholder: "Add tags separated by commas (optional)" %>
+      <%= text_input :post, :tags, class: "form-control", placeholder: "Add tags separated by commas (optional)", value: @tag_names%>
     </div>
     <%= error_tag f, :tags %>
   </div>
