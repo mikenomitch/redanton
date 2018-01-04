@@ -40,6 +40,7 @@ defmodule Danton.Tag do
       |> String.split(",")
       |> Enum.map(&String.trim/1)
       |> Enum.map(&String.downcase/1)
+      |> Enum.filter(&(String.length(&1) > 0))
 
     tags = Enum.map(tag_names, &(build_tag_from_name(post, &1)))
 
