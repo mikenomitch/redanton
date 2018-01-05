@@ -1,17 +1,7 @@
-import map from 'lodash/map'
-import flatten from 'lodash/flatten'
-import merge from 'lodash/fp/merge'
-import indexBy from 'lodash/fp/indexBy'
 import pick from 'lodash/fp/pick'
 
 import makeHashReducer, {mergeHashActions} from './hashReducer'
 import withResetState from './withResetState'
-
-function withPostsTags(state, tagsList) {
-  const allPostsTags = flatten(map(tagsList, (t) => t.posts_tags))
-  const keyed = indexBy('id', allPostsTags)
-  return merge(state, keyed)
-}
 
 // ==================
 // ==================
@@ -22,8 +12,6 @@ function withPostsTags(state, tagsList) {
 const defaultState = {}
 function postsTagsReducer (state = defaultState, action) {
   switch (action.type) {
-  case 'MERGE_TAGS':
-    return withPostsTags(state, action.payload)
   default:
     return makeHashReducer('PostsTags')(state, action)
   }
@@ -53,6 +41,8 @@ export const postsForTag = (state, tag) => {
   const postIdsForTag = Object.values(state.postsTags)
     .filter((pt) => pt.tag_id === tag.id)
     .map((pt) => pt.post_id)
+
+  console.warn("hola:" + JSON.stringify(state.postsTags))
 
   return pick(postIdsForTag, state.posts)
 }

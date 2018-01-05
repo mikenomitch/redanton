@@ -9,6 +9,7 @@ import {
 // ===============
 
 import thunk from 'redux-thunk'
+import multi from 'redux-multi'
 // import { createLogger } from 'redux-logger'
 import withAsyncStorage from './middleware/withAsyncStorage'
 import withFetching from './middleware/withFetching'
@@ -51,6 +52,7 @@ const configureStore = () => {
   return createStore(
     rootReducer,
     applyMiddleware(
+      multi,
       thunk,
       withAsyncStorage,
       withFetching

@@ -134,6 +134,12 @@ defmodule Danton.Post do
     %{post | tag_names: tag_names}
   end
 
+  def with_posts_tags_and_tags(list) do
+    list
+    |> Repo.preload(:posts_tags)
+    |> Repo.preload(:tags)
+  end
+
   # ===========================
   # CREATE
   # ===========================

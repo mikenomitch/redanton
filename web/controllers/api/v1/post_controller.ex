@@ -13,22 +13,14 @@ defmodule Danton.Api.V1.PostController do
   # ACTIONS
   # ===========================
 
-  def index(conn, params = %{"channel_id" => channel_id}, _current_user, _claims) do
-    page = Post.for_channel_ids([channel_id])
-      |> Post.by_activity()
-      |> Repo.paginate(params)
-
-    posts = page.entries |> Post.with_stream_preloads()
-
-    render(conn, "index.json", posts: posts)
-  end
-
   def index(conn, params = %{"tag_id" => tag_id}, _current_user, _claims) do
     page = Post.for_tag_id(tag_id)
       |> Post.by_activity()
       |> Repo.paginate(params)
 
-    posts = page.entries |> Post.with_stream_preloads()
+    posts = page.entries
+      |> Post.with_stream_preloads()
+      |> Post.with_posts_tags_and_tags()
 
     render(conn, "index.json", posts: posts)
   end
@@ -38,35 +30,21 @@ defmodule Danton.Api.V1.PostController do
       |> Post.by_activity()
       |> Repo.paginate(params)
 
-    posts = page.entries |> Post.with_stream_preloads()
+    posts = page.entries
+      |> Post.with_stream_preloads()
+      |> Post.with_posts_tags_and_tags()
 
     render(conn, "index.json", posts: posts)
   end
 
   def front_page(conn, params, current_user, _claims) do
     page = Post.for_front_page(current_user) |> Repo.paginate(params)
-    posts = page.entries |> Post.with_stream_preloads()
+    posts = page.entries
+      |> Post.with_stream_preloads()
+      |> Post.with_posts_tags_and_tags()
 
     render(conn, "index.json", posts: posts)
   end
-
-  # # TODO: REMOVE THIS ONCE CHAN => TAG is done
-  # def create(conn, %{"channel_id" => channel_id, "post" => post, "message" => message}, current_user, _claims) do
-  #   msg_params = %{user_id: current_user.id, body: message["body"]}
-  #   channel = Repo.get(Channel, channel_id)
-
-  #   case Post.create_for_channel_and_user(channel, current_user, post, msg_params) do
-  #     {:ok, %{post: post}} ->
-  #       conn
-  #       |> put_status(:created)
-  #       |> put_resp_header("location", post_path(conn, :show, post))
-  #       |> render("show.json", post: Post.load_messages(post))
-  #     {:error, _, changeset, _} ->
-  #       conn
-  #       |> put_status(:unprocessable_entity)
-  #       |> render(Danton.ChangesetView, "error.json", changeset: changeset)
-  #   end
-  # end
 
   def create(conn, %{"club_id" => club_id, "post" => post, "message" => message}, current_user, _claims) do
     msg_params = %{user_id: current_user.id, body: message["body"]}

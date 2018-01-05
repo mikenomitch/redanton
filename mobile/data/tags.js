@@ -1,3 +1,6 @@
+import flatten from 'lodash/flatten'
+import omit from 'lodash/fp/omit'
+
 import makeHashReducer, {mergeHashActions} from './hashReducer'
 import withResetState from './withResetState'
 
@@ -26,10 +29,21 @@ export default withResetState(defaultState, 'SIGN_OUT')(tagReducer)
 // ==================
 
 const customTagActions = {
-  onTagsReturn: (res) => ({
-    type: 'MERGE_TAGS',
-    payload: res.data
-  })
+  onTagsReturn: (res) => {
+    const tagsSansPostsTags = res.data.map(t => omit(['posts_tags'], t))
+    const postsTags = flatten(res.data.map((t) => t.posts_tags))
+
+    return [
+      {
+        type: 'MERGE_TAGS',
+        payload: tagsSansPostsTags
+      },
+      {
+        type: 'MERGE_POSTS_TAGS',
+        payload: postsTags
+      }
+    ]
+  }
 }
 
 export const tagActions = mergeHashActions(customTagActions, 'Tag')

@@ -72,12 +72,19 @@
         - tag values come in from the api and populate the input
         - updates add and remove tag values from the store properly
         - edit gets the tag vals, new gets an empty value
+          - posts are returned on the api with tags and posts_tags
+          - these get normalized (stripped from tags and stuck in store)
+            - note using normalizr later
+          - tagsForPost used on edit page
       - Tags show up on the stream
-        - Web
         - Mobile
-      - Tags show up on the post show
+          - tagsForPost used on the stream
+          - links are clickable
         - Web
       - Removing posts, tags, channels all works okay (with and without tags)
+        - Check on mobile while in the headspace
+      - Tags show up on the post show
+        - Web
       - Deploy and migrate and publish app
 
     - PUSH F
@@ -87,12 +94,14 @@
       - Fix the awful N+1s
 
 
+  - pw reset link on mobile
   - password reset and other emails show up
     correctly on iOS mail and other clients
   - sign in requires email activation
   - email column is case insensitive
-  - pw reset link on mobile
 
+  - turn email notificatiosn back on
+    (but maybe batch more aggressively?)
   - check-ins clear notifications
   - new notification when person joins a group
   - user notification setting

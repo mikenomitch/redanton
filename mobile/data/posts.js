@@ -1,3 +1,5 @@
+import flatten from 'lodash/flatten'
+import omit from 'lodash/fp/omit'
 import omitBy from 'lodash/fp/omitBy'
 
 import makeHashReducer, {mergeHashActions} from './hashReducer'
@@ -36,10 +38,28 @@ export default withResetState(defaultState, 'SIGN_OUT')(postReducer)
 // ==================
 
 const customPostActions = {
-  onPostsReturn: (res) => ({
-    type: 'MERGE_POSTS',
-    payload: res.data
-  })
+  onPostsReturn: (res) => {
+    const postsSansTagsAndPostsTags = res.data.map(p => omit(['tags', 'posts_tags'], p))
+    // these tags aren't complete (to avoid extra data calls,
+    // so make sure this merge is only additive)
+    const tags = flatten(res.data.map((p) => p.tags))
+    const postsTags = flatten(res.data.map((p) => p.posts_tags))
+
+    return [
+      {
+        type: 'MERGE_POSTS',
+        payload: postsSansTagsAndPostsTags
+      },
+      {
+        type: 'MERGE_TAGS',
+        payload: tags
+      },
+      {
+        type: 'MERGE_POSTS_TAGS',
+        payload: postsTags
+      }
+    ]
+  }
 }
 
 export const postActions = mergeHashActions(customPostActions, 'Post')

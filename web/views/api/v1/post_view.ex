@@ -29,7 +29,20 @@ defmodule Danton.Api.V1.PostView do
       last_message: message && %{
         body: message.body,
         user_id: message.user_id
-      }
+      },
+      tags: serialize_tags(post.tags),
+      posts_tags: serialize_post_tags(post.posts_tags)
     }
+  end
+
+  defp serialize_tags(tags) do
+    Enum.map(tags, &%{id: &1.id, name: &1.name})
+  end
+
+  defp serialize_post_tags(posts_tags) do
+    Enum.map(
+      posts_tags,
+      &%{id: &1.id, post_id: &1.post_id, tag_id: &1.tag_id}
+    )
   end
 end
