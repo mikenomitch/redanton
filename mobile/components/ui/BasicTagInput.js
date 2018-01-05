@@ -41,11 +41,13 @@ class EditPostInfo extends Component {
   }
 
   onSubmitEditing = ({nativeEvent}) => {
-    this.makeTag(nativeEvent.text)
+    const trimmedText = nativeEvent.text.trim()
+    trimmedText && this.makeTag(trimmedText)
   }
 
   onBlur = ({nativeEvent}) => {
-    this.makeTag(nativeEvent.text)
+    const trimmedText = nativeEvent.text.trim()
+    trimmedText && this.makeTag(trimmedText)
   }
 
   render () {
