@@ -1,3 +1,4 @@
+import omitBy from 'lodash/fp/omitBy'
 import pick from 'lodash/fp/pick'
 
 import makeHashReducer, {mergeHashActions} from './hashReducer'
@@ -9,9 +10,20 @@ import withResetState from './withResetState'
 // ==================
 // ==================
 
+function postsTagsWithoutTags(state, tags) {
+  const tagIds = tags.map((t) => t.id)
+  const belongsToTags = (postsTag) => {
+    return tagIds.includes(postsTag.tag_id)
+  }
+
+  return omitBy(state, belongsToTags)
+}
+
 const defaultState = {}
 function postsTagsReducer (state = defaultState, action) {
   switch (action.type) {
+  case 'REMOVE_POSTSTAGS_FOR_TAGS':
+    return postsTagsWithoutTags(state, action.payload)
   default:
     return makeHashReducer('PostsTag')(state, action)
   }
@@ -32,6 +44,7 @@ export const postsTags = mergeHashActions(customPostsTagsActions, 'PostsTag')
 //   ASYNC ACTIONS
 // =================
 
+// none
 
 // =================
 //   HELPERS

@@ -36,7 +36,7 @@ defmodule Danton.Api.V1.PostView do
   end
 
   defp serialize_tags(tags) do
-    Enum.map(tags, &%{id: &1.id, name: &1.name})
+    Enum.map(tags, &%{id: &1.id, name: &1.name, post_count: &1.post_count})
   end
 
   defp serialize_post_tags(posts_tags) do

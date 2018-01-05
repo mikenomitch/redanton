@@ -32,6 +32,7 @@ const customTagActions = {
   onTagsReturn: (res) => {
     const tagsSansPostsTags = res.data.map(t => omit(['posts_tags'], t))
     const postsTags = flatten(res.data.map((t) => t.posts_tags))
+    // TODO: set up normalizr
 
     return [
       {

@@ -69,13 +69,13 @@
         - edit - DONE
       - Multiple tags can be added on mobile (backwards compat)
         - tag input creates a string with comma separated tags - DONE
-        - tag values come in from the api and populate the input
-        - updates add and remove tag values from the store properly
-        - edit gets the tag vals, new gets an empty value
-          - posts are returned on the api with tags and posts_tags
-          - these get normalized (stripped from tags and stuck in store)
-            - note using normalizr later
-          - tagsForPost used on edit page
+        - tag values come in from the api and populate the input - DONE
+        - updates add and remove tag values from the store properly - DONE
+        - edit gets the tag vals, new gets an empty value - DONE
+          - posts are returned on the api with tags and posts_tags - DONE
+          - these get normalized (stripped from tags and stuck in store) - DONE
+            - note using normalizr later - DONE
+          - tagsForPost used on edit page - DONE
       - Tags show up on the stream
         - Mobile
           - tagsForPost used on the stream
@@ -88,6 +88,7 @@
       - Deploy and migrate and publish app
 
     - PUSH F
+      - add the post_count updates when you update or create a post!
       - purge any Channel references anywhere on backend
 
     - PUSH G

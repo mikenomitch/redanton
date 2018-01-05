@@ -38,12 +38,24 @@ export default withResetState(defaultState, 'SIGN_OUT')(postReducer)
 // ==================
 
 const customPostActions = {
+  onPostReturn: (res) => {
+    return flatten(
+      [
+        {
+          type: 'REMOVE_POSTSTAGS_FOR_TAGS',
+          payload: res.data.tags
+        },
+        customPostActions.onPostsReturn({data: [res.data]})
+      ]
+    )
+  },
   onPostsReturn: (res) => {
     const postsSansTagsAndPostsTags = res.data.map(p => omit(['tags', 'posts_tags'], p))
     // these tags aren't complete (to avoid extra data calls,
     // so make sure this merge is only additive)
     const tags = flatten(res.data.map((p) => p.tags))
     const postsTags = flatten(res.data.map((p) => p.posts_tags))
+    // TODO: set up normalizr
 
     return [
       {
@@ -144,7 +156,7 @@ export const createPost = (postInfo, onSuccess) => {
       endpoint: `/clubs/${postInfo.club}/posts`,
       successActionCreator: (res) => {
         return (dispatch) => {
-          dispatch(postActions.mergePosts([res.data]))
+          dispatch(postActions.onPostReturn(res))
           onSuccess && onSuccess(res)
         }
       },
@@ -173,7 +185,7 @@ export const updatePost = (postInfo, onSuccess) => {
       endpoint: `/posts/${postInfo.id}`,
       successActionCreator: (res) => {
         return (dispatch) => {
-          dispatch(postActions.mergePosts([res.data]))
+          dispatch(postActions.onPostReturn(res))
           onSuccess && onSuccess(res)
         }
       },
