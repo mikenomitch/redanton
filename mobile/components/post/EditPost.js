@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
@@ -13,6 +13,7 @@ import {
 import withValidation from '../helpers/withValidation'
 
 import { deletePost, updatePost } from '../../data/posts'
+import { postWithTagNames } from '../../data/postsTags'
 
 import ActionButton from '../ui/ActionButton'
 import EditPostInfo from './EditPostInfo'
@@ -40,7 +41,9 @@ class EditPost extends PureComponent {
 
 		this.state = {
 			showErrors: false,
-			postInfo: this.props.navigation.state.params.postInfo,
+			postInfo: this.props.withTagNames(
+        this.props.navigation.state.params.postInfo
+      )
 		}
   }
 
@@ -68,16 +71,16 @@ class EditPost extends PureComponent {
   render() {
     return (
       <View>
-        <View style={{padding: spacing.container, height: '90%'}}>
+        <ScrollView style={{padding: spacing.container, height: '90%'}}>
           <EditPostInfo
             errorFor={this.props.errorFor}
             setPostState={this.setPostState}
-            postInfo={Object.assign({}, this.state.postInfo, {tagNames: 'hey,ho'})}
+            postInfo={this.state.postInfo}
           />
           <ActionButton onPress={this.onSaveClick}>
             save edits
           </ActionButton>
-        </View>
+        </ScrollView>
         <Footer>
           <DeletePostButton removePost={this.removePost} />
         </Footer>
@@ -92,10 +95,16 @@ class EditPost extends PureComponent {
 
 const dispatchableActions = {
   deletePost,
-  updatePost
- }
+  updatePost,
+}
+
+const mapStateToProps = (state) => {
+  return {
+    withTagNames: (post) => postWithTagNames(state, post)
+  }
+}
 
 export default compose(
   withValidation(validations),
-  connect(null, dispatchableActions)
+  connect(mapStateToProps, dispatchableActions)
 )(EditPost)

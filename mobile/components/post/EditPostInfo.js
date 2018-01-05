@@ -12,7 +12,6 @@ import { colors } from '../styleConstants'
 class EditPostInfo extends Component {
   get tagNamesArray() {
     const tagsStr = this.props.postInfo.tagNames || ''
-    console.warn(tagsStr)
     return tagsStr ? tagsStr.split(",") : []
   }
 
@@ -49,7 +48,6 @@ class EditPostInfo extends Component {
           onChange={this.onTagInputChange}
           labelExtractor={(v) => v}
         />
-        <Text> wat </Text>
       </View>
     )
   }

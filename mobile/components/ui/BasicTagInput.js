@@ -48,7 +48,7 @@ class EditPostInfo extends Component {
     const propsSansChange = omit(this.props, ['onChange'])
 
     return (
-      <View style={{    borderBottomWidth: border.width, borderBottomColor: colors.border}}>
+      <View style={{borderBottomWidth: border.width, borderBottomColor: colors.border}}>
         <TagInput
           {...propsSansChange}
           onChange={this.onChange}
@@ -57,8 +57,7 @@ class EditPostInfo extends Component {
           inputProps={{
             returnKeyType: 'go',
             placeholder: 'add tags...',
-            onSubmitEditing: this.onSubmitEditing,
-            height: 38
+            onSubmitEditing: this.onSubmitEditing
           }}
         />
       </View>

@@ -18,11 +18,7 @@ defmodule Danton.Api.V1.PostController do
       |> Post.by_activity()
       |> Repo.paginate(params)
 
-    posts = page.entries
-      |> Post.with_stream_preloads()
-      |> Post.with_posts_tags_and_tags()
-
-    render(conn, "index.json", posts: posts)
+      render_page(conn, page)
   end
 
   def index(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
@@ -30,15 +26,15 @@ defmodule Danton.Api.V1.PostController do
       |> Post.by_activity()
       |> Repo.paginate(params)
 
-    posts = page.entries
-      |> Post.with_stream_preloads()
-      |> Post.with_posts_tags_and_tags()
-
-    render(conn, "index.json", posts: posts)
+    render_page(conn, page)
   end
 
   def front_page(conn, params, current_user, _claims) do
     page = Post.for_front_page(current_user) |> Repo.paginate(params)
+    render_page(conn, page)
+  end
+
+  defp render_page(conn, page) do
     posts = page.entries
       |> Post.with_stream_preloads()
       |> Post.with_posts_tags_and_tags()
@@ -52,10 +48,13 @@ defmodule Danton.Api.V1.PostController do
 
     case Post.create_for_club_and_user(club, current_user, post, msg_params) do
       {:ok, %{post: post}} ->
+        post_with_assoc = post
+          |> Post.load_messages()
+          |> Post.with_posts_tags_and_tags()
         conn
         |> put_status(:created)
-        |> put_resp_header("location", post_path(conn, :show, post))
-        |> render("show.json", post: Post.load_messages(post))
+        |> put_resp_header("location", post_path(conn, :show, post_with_assoc))
+        |> render("show.json", post: Post.load_messages(post_with_assoc))
       {:error, _, changeset, _} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -71,11 +70,14 @@ defmodule Danton.Api.V1.PostController do
   def update(conn, params, _current_user, _claims) do
     post = Repo.get!(Post, params["id"])
     post_params = Map.delete(params, "id")
-    changeset = Post.changeset(post, post_params)
 
-    case Repo.update(changeset) do
+    case Post.update_from_params(post, post_params) do
       {:ok, post} ->
-        render(conn, "show.json", post: Post.load_messages(post))
+        post_with_assoc = post
+          |> Post.load_messages()
+          |> Post.with_posts_tags_and_tags()
+
+        render(conn, "show.json", post: post_with_assoc)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

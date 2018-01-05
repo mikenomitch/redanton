@@ -68,7 +68,7 @@
         - new - DONE
         - edit - DONE
       - Multiple tags can be added on mobile (backwards compat)
-        - tag input creates a string with comma separated tags
+        - tag input creates a string with comma separated tags - DONE
         - tag values come in from the api and populate the input
         - updates add and remove tag values from the store properly
         - edit gets the tag vals, new gets an empty value

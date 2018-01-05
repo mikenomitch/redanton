@@ -52,3 +52,9 @@ export const tagsForPost = (state, post) => {
 
   return pick(tagIdsForPost, state.tags)
 }
+
+export const postWithTagNames = (state, post) => {
+  const tags = Object.values(tagsForPost(state, post))
+  const tagNames = tags.map(t => t.name).join(',')
+  return Object.assign({}, post, {tagNames})
+}
