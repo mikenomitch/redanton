@@ -76,15 +76,14 @@
           - these get normalized (stripped from tags and stuck in store) - DONE
             - note using normalizr later - DONE
           - tagsForPost used on edit page - DONE
-      - Tags show up on the stream
-        - Mobile
-          - tagsForPost used on the stream
-          - links are clickable
-        - Web
+      - Tags show up on the stream Mobile - DONE
+          - tagsForPost used on the stream - DONE
+          - links are clickable - DONE
       - Removing posts, tags, channels all works okay (with and without tags)
-        - Check on mobile while in the headspace
-      - Tags show up on the post show
+        - Check on mobile while in the headspace - DONE
+      - Tags show up on the post show and stream
         - Web
+      - post_count comes thru on all tags via api
       - Deploy and migrate and publish app
 
     - PUSH F

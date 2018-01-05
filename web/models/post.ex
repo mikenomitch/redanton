@@ -194,16 +194,7 @@ defmodule Danton.Post do
       activity_at: Ecto.DateTime.utc
     })
 
-    tags_params = post_params["tags"]
-
-    IO.puts "================"
-    IO.puts "================"
-    IO.puts "================"
-    IO.puts "tag params:"
-    IO.puts inspect(tags_params)
-    IO.puts "================"
-    IO.puts "================"
-    IO.puts "================"
+    tags_params = post_params["tags"] || ""
 
     multi = Multi.new
       |> Multi.insert(:post, post_cs)

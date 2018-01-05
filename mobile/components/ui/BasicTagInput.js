@@ -44,6 +44,10 @@ class EditPostInfo extends Component {
     this.makeTag(nativeEvent.text)
   }
 
+  onBlur = ({nativeEvent}) => {
+    this.makeTag(nativeEvent.text)
+  }
+
   render () {
     const propsSansChange = omit(this.props, ['onChange'])
 
@@ -57,7 +61,8 @@ class EditPostInfo extends Component {
           inputProps={{
             returnKeyType: 'go',
             placeholder: 'add tags...',
-            onSubmitEditing: this.onSubmitEditing
+            onSubmitEditing: this.onSubmitEditing,
+            onBlur: this.onBlur
           }}
         />
       </View>
