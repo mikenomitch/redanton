@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { confirmMessage } from '../../lib/uiActions'
 import { getUsersForMain } from '../../data/users'
 import { getPostsForTag } from '../../data/posts'
-import { postsForTag } from '../../data/postsTags'
+import { postsForTag, tagsForPost } from '../../data/postsTags'
 
 import withPagination from '../helpers/withPagination'
 import withDebouncedNav from '../helpers/withDebouncedNav'
@@ -96,6 +96,7 @@ class Tag extends PureComponent {
         users={users}
         onEndHit={this.onEndHitCb()}
         currentlyLoading={!this.props.atFinalPage}
+        getTagsForPost={this.props.getTagsForPost}
       />
     )
   }
@@ -123,7 +124,8 @@ const mapStateToProps = (state, props) => {
     users: state.users,
     clubs: state.clubs,
     tagId,
-    currentUserId
+    currentUserId,
+    getTagsForPost: (post) => (tagsForPost(state, post))
   }
 }
 

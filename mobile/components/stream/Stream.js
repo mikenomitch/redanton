@@ -66,6 +66,12 @@ const styles = StyleSheet.create({
     paddingLeft: spacing.medium,
     paddingRight: spacing.medium
   },
+  inlineInfo: {
+    flexWrap: 'nowrap',
+    alignItems: 'flex-start',
+    flexDirection:'row',
+    paddingLeft: spacing.medium
+  },
   loadingThrobber: {
     flex: 1,
     padding: 15
@@ -109,6 +115,29 @@ class BaseStreamItem extends PureComponent {
     this.props.debouncedNav('PostChat', {post: this.props.post})
   }
 
+  navigateToTag = (tag) => {
+    this.props.debouncedNav('Tag', {tag})
+  }
+
+  tagLinks = () => {
+    const tags = Object.values(this.props.getTagsForPost(this.props.post))
+    return tags.map((tag) => (
+      <LinkButton
+        onPress={() => this.navigateToTag(tag)}
+        key={tag.id}
+        title={`#${tag.name}`}
+        size="small"
+      />
+    ))
+  }
+
+  renderTags () {
+    const links = this.tagLinks()
+    if (links[0]) {
+      return (<View style={styles.inlineInfo}>{links}</View>)
+    }
+  }
+
   render () {
     const timeAgo = moment(new Date(this.props.post.last_activity_time)).fromNow()
     const actionText = this.props.post.message_count > 0
@@ -134,6 +163,7 @@ class BaseStreamItem extends PureComponent {
             <View style={styles.info}>
               <Text>{actionText}</Text>
             </View>
+            {this.renderTags()}
           </View>
         </View>
         <View style={styles.streamItemRight}>
@@ -187,7 +217,7 @@ class Stream extends PureComponent {
   }
 
   renderPostLink = (datum) => {
-    const { clubs, navigation, users } = this.props
+    const { clubs, navigation, users, getTagsForPost } = this.props
 
     const poster = users[datum.item.user_id] || {}
     const club = clubs[datum.item.club_id] || {}
@@ -199,6 +229,7 @@ class Stream extends PureComponent {
         currentUserId={this.props.currentUserId}
         navigation={navigation}
         post={datum.item}
+        getTagsForPost={getTagsForPost}
         actionUserName={actionUser.name}
         posterName={poster.name}
         clubName={club.name}/>

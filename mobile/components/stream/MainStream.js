@@ -12,6 +12,7 @@ import { getUsersForMain } from '../../data/users'
 import { getFrontPagePosts } from '../../data/posts'
 import { getClubs } from '../../data/clubs'
 import { getChannels } from '../../data/channels'
+import { tagsForPost } from '../../data/postsTags'
 import { callsDone, callSuccessfull } from '../../data/calls'
 
 // ===============
@@ -78,6 +79,7 @@ class MainStream extends PureComponent {
         needsChannels={this.needsChannels}
         needsClubs={this.needsClubs}
         users={this.props.users}
+        getTagsForPost={this.props.getTagsForPost}
         currentlyLoading={this.props.currentlyLoading && !this.props.atFinalPage}
       />
     )
@@ -99,7 +101,8 @@ const mapStateToProps = (state) => {
       ['frontPagePosts', 'mainUsers', 'clubs', 'channels']
     ),
     currentlyLoading: !callSuccessfull(state, ['frontPagePosts']),
-    currentUserId: state.auth.currentUser.id
+    currentUserId: state.auth.currentUser.id,
+    getTagsForPost: (post) => (tagsForPost(state, post))
   }
 }
 

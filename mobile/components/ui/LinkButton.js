@@ -19,12 +19,20 @@ const styles = {
   }
 }
 
-const LinkButton = (props) => (
-  <TouchableOpacity {...props}>
-    <Text style={styles.title}>
-      {props.title}
-    </Text>
-  </TouchableOpacity>
-)
+const LinkButton = (props) => {
+  const titleStyleOverrides = props.size === 'small'
+    ? { fontSize: 14, padding: 3 }
+    : {}
+
+  const titleStyle = Object.assign({}, styles.title, titleStyleOverrides)
+
+  return (
+    <TouchableOpacity {...props}>
+      <Text style={titleStyle}>
+        {props.title}
+      </Text>
+    </TouchableOpacity>
+  )
+}
 
 export default LinkButton

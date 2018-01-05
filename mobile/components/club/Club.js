@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { getUsersForMain } from '../../data/users'
 import { getPostsForClub } from '../../data/posts'
 import { getMemberships } from '../../data/memberships'
+import { tagsForPost } from '../../data/postsTags'
 
 import { colors, spacing, font } from '../styleConstants'
 
@@ -154,6 +155,7 @@ class Club extends PureComponent {
           users={users}
           currentlyLoading={!this.props.atFinalPage}
           onEndHit={this.onEndHitCb()}
+          getTagsForPost={this.props.getTagsForPost}
         />
       </View>
     )
@@ -182,7 +184,8 @@ const mapStateToProps = (state, props) => {
     users: state.users,
     singleMember: singleMember,
     clubId,
-    currentUserId
+    currentUserId,
+    getTagsForPost: (post) => (tagsForPost(state, post))
   }
 }
 
