@@ -39,7 +39,7 @@ const customTagActions = {
         payload: tagsSansPostsTags
       },
       {
-        type: 'MERGE_POSTS_TAGS',
+        type: 'MERGE_POSTSTAGS',
         payload: postsTags
       }
     ]

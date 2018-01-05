@@ -13,7 +13,7 @@ const defaultState = {}
 function postsTagsReducer (state = defaultState, action) {
   switch (action.type) {
   default:
-    return makeHashReducer('PostsTags')(state, action)
+    return makeHashReducer('PostsTag')(state, action)
   }
 }
 
@@ -26,7 +26,7 @@ export default withResetState(defaultState, 'SIGN_OUT')(postsTagsReducer)
 // ==================
 
 const customPostsTagsActions = {}
-export const postsTags = mergeHashActions(customPostsTagsActions, 'PostsTags')
+export const postsTags = mergeHashActions(customPostsTagsActions, 'PostsTag')
 
 // =================
 //   ASYNC ACTIONS
@@ -41,8 +41,6 @@ export const postsForTag = (state, tag) => {
   const postIdsForTag = Object.values(state.postsTags)
     .filter((pt) => pt.tag_id === tag.id)
     .map((pt) => pt.post_id)
-
-  console.warn("hola:" + JSON.stringify(state.postsTags))
 
   return pick(postIdsForTag, state.posts)
 }

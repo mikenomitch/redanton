@@ -55,7 +55,7 @@ const customPostActions = {
         payload: tags
       },
       {
-        type: 'MERGE_POSTS_TAGS',
+        type: 'MERGE_POSTSTAGS',
         payload: postsTags
       }
     ]
