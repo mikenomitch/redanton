@@ -10,6 +10,20 @@ import BasicTagInput from '../ui/BasicTagInput'
 import { colors } from '../styleConstants'
 
 class EditPostInfo extends Component {
+  get tagNamesArray() {
+    const tagsStr = this.props.postInfo.tagNames || ''
+    console.warn(tagsStr)
+    return tagsStr ? tagsStr.split(",") : []
+  }
+
+  parseTagNamesArray = (tagNamesList) => {
+    return tagNamesList.join(",")
+  }
+
+  onTagInputChange = (tagNamesList) => {
+    this.props.setPostState({ tagNames: this.parseTagNamesArray(tagNamesList) })
+  }
+
   render () {
     return (
       <View>
@@ -31,10 +45,11 @@ class EditPostInfo extends Component {
           leave url blank for discussion post
         </Text>
         <BasicTagInput
-          value={this.props.postInfo.tagNames || ['econ', 'politics']}
-          onChange={(tagNames) => this.props.setPostState({ tagNames })}
-          labelExtractor={(email) => email}
+          value={this.tagNamesArray}
+          onChange={this.onTagInputChange}
+          labelExtractor={(v) => v}
         />
+        <Text> wat </Text>
       </View>
     )
   }

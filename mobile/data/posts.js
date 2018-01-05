@@ -134,7 +134,8 @@ export const createPost = (postInfo, onSuccess) => {
       params: {
         post: {
           title: postInfo.title,
-          url: postInfo.url
+          url: postInfo.url,
+          tags: postInfo.tagNames
         },
         message: {
           body: postInfo.message
@@ -162,7 +163,8 @@ export const updatePost = (postInfo, onSuccess) => {
       params: {
         title: postInfo.title,
         description: postInfo.description,
-        url: postInfo.url
+        url: postInfo.url,
+        tags: postInfo.tagNames
       }
     }
   }

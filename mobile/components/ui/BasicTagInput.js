@@ -36,8 +36,7 @@ class EditPostInfo extends Component {
     this.onChange(newTags)
 
     setTimeout(
-      () => {this.setState({ tagText: ''})},
-      0
+      () => {this.setState({ tagText: ''})}, 0
     )
   }
 
@@ -58,7 +57,8 @@ class EditPostInfo extends Component {
           inputProps={{
             returnKeyType: 'go',
             placeholder: 'add tags...',
-            onSubmitEditing: this.onSubmitEditing
+            onSubmitEditing: this.onSubmitEditing,
+            height: 38
           }}
         />
       </View>

@@ -72,7 +72,7 @@ class EditPost extends PureComponent {
           <EditPostInfo
             errorFor={this.props.errorFor}
             setPostState={this.setPostState}
-            postInfo={this.state.postInfo}
+            postInfo={Object.assign({}, this.state.postInfo, {tagNames: 'hey,ho'})}
           />
           <ActionButton onPress={this.onSaveClick}>
             save edits
