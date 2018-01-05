@@ -67,7 +67,7 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "show.json", post: post)
   end
 
-  def update(conn, params, _current_user, _claims) do
+  def update(conn, params, current_user, _claims) do
     post = Repo.get!(Post, params["id"])
     post_params = Map.delete(params, "id")
 
@@ -76,6 +76,7 @@ defmodule Danton.Api.V1.PostController do
         post_with_assoc = post
           |> Post.load_messages()
           |> Post.with_posts_tags_and_tags()
+          |> Post.with_real_post_counts(current_user)
 
         render(conn, "show.json", post: post_with_assoc)
       {:error, changeset} ->

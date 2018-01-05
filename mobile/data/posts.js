@@ -42,8 +42,8 @@ const customPostActions = {
     return flatten(
       [
         {
-          type: 'REMOVE_POSTSTAGS_FOR_TAGS',
-          payload: res.data.tags
+          type: 'REMOVE_POSTSTAGS_FOR_POSTS',
+          payload: res.data
         },
         customPostActions.onPostsReturn({data: [res.data]})
       ]

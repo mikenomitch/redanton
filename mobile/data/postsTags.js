@@ -10,20 +10,19 @@ import withResetState from './withResetState'
 // ==================
 // ==================
 
-function postsTagsWithoutTags(state, tags) {
-  const tagIds = tags.map((t) => t.id)
-  const belongsToTags = (pt) => {
-    return tagIds.includes(pt.tag_id)
+function postsTagsWithoutPost(state, post) {
+  const belongsToPost = (pt) => {
+    return pt.post_id === post.id
   }
 
-  return omitBy(belongsToTags, state)
+  return omitBy(belongsToPost, state)
 }
 
 const defaultState = {}
 function postsTagsReducer (state = defaultState, action) {
   switch (action.type) {
-  case 'REMOVE_POSTSTAGS_FOR_TAGS':
-    return postsTagsWithoutTags(state, action.payload)
+  case 'REMOVE_POSTSTAGS_FOR_POSTS':
+    return postsTagsWithoutPost(state, action.payload)
   default:
     return makeHashReducer('PostsTag')(state, action)
   }
