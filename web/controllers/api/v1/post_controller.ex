@@ -15,6 +15,7 @@ defmodule Danton.Api.V1.PostController do
 
   def index(conn, params = %{"tag_id" => tag_id}, current_user, _claims) do
     page = Post.for_tag_id(tag_id)
+      |> Post.for_club_ids(Club.ids_for_user(current_user))
       |> Post.by_activity()
       |> Repo.paginate(params)
 

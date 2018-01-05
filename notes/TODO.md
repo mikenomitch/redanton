@@ -87,6 +87,7 @@
       - Deploy and migrate and publish app
 
     - PUSH F
+      - fix the empty tags page
       - purge any Channel references anywhere on backend
 
     - PUSH G
