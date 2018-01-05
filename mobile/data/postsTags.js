@@ -12,11 +12,11 @@ import withResetState from './withResetState'
 
 function postsTagsWithoutTags(state, tags) {
   const tagIds = tags.map((t) => t.id)
-  const belongsToTags = (postsTag) => {
-    return tagIds.includes(postsTag.tag_id)
+  const belongsToTags = (pt) => {
+    return tagIds.includes(pt.tag_id)
   }
 
-  return omitBy(state, belongsToTags)
+  return omitBy(belongsToTags, state)
 }
 
 const defaultState = {}

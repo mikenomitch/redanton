@@ -16,7 +16,7 @@ function __postsWithoutClub (state, clubId) {
     return post.club_id === clubId
   }
 
-  return omitBy(state, belongsToClub)
+  return omitBy(belongsToClub, state)
 }
 
 const defaultState = {}
