@@ -17,14 +17,6 @@
     <%= error_tag f, :description %>
   </div>
 
-  <%= if (@new_club) do %>
-    <div class="form-group">
-      <%= label f, "Tag Names:", class: "control-label" %>
-      <%= textarea f, :channel_list, class: "form-control", placeholder: "Add some post categories separated by commas (i.e.\"tech, politics, humor\")" %>
-      <%= error_tag f, :channel_list %>
-    </div>
-  <% end %>
-
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>

@@ -75,7 +75,7 @@ defmodule Danton.ClubController do
       |> Post.by_activity()
       |> Repo.paginate(params)
 
-    posts = page.entries |> Post.with_stream_preloads()
+    posts = page.entries |> Post.with_stream_preloads() |> Post.with_posts_tags_and_tags()
 
     conn
     |> add_club_crumb(club)

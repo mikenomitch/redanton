@@ -8,6 +8,13 @@
     <div class="form-header-info-unit">
       Posted By: <%= @post.user.name %>
     </div>
+    <div class="form-header-info-unit">
+      <%= for tag <- @post.tags do %>
+        <span>
+          <%= link "##{tag.name}", to: tag_path(@conn, :show, tag), class: "tag-link" %>
+        </span>
+      <% end %>
+    </div>
   </div>
 </div>
 

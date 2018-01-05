@@ -81,13 +81,12 @@
           - links are clickable - DONE
       - Removing posts, tags, channels all works okay (with and without tags)
         - Check on mobile while in the headspace - DONE
-      - Tags show up on the post show and stream
-        - Web
-      - post_count comes thru on all tags via api
+      - Tags show up on the post show and stream - DONE
+        - Web - DONE
+      - post_count comes thru on all tags via api - DONE
       - Deploy and migrate and publish app
 
     - PUSH F
-      - add the post_count updates when you update or create a post!
       - purge any Channel references anywhere on backend
 
     - PUSH G

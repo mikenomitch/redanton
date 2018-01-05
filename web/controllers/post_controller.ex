@@ -31,7 +31,7 @@ defmodule Danton.PostController do
 
   defp render_front(conn, params, current_user) do
     page = Post.for_front_page(current_user) |> Repo.paginate(params)
-    posts = page.entries |> Post.with_stream_preloads()
+    posts = page.entries |> Post.with_stream_preloads() |> Post.with_posts_tags_and_tags()
 
     render(conn,
       "front_page.html",
@@ -106,6 +106,7 @@ defmodule Danton.PostController do
       |> Post.load_messages()
       |> Repo.preload(:user)
       |> Repo.preload(:channel)
+      |> Post.with_posts_tags_and_tags()
 
     # TODO: get the actual messages for the room
     messages = Message.for_post(post.id)

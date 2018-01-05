@@ -289,6 +289,12 @@ input.form-control:focus, select.form-control:focus, .btn-primary:focus {
   border-color: #6495ED !important;
 }
 
+/* TAG LINKS */
+
+.tag-link {
+  margin-right: 3px;
+}
+
 /* CHAT */
 
 .chat {
