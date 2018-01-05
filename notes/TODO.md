@@ -68,13 +68,16 @@
         - new - DONE
         - edit - DONE
       - Multiple tags can be added on mobile (backwards compat)
-        - new
-        - edit
+        - tag input creates a string with comma separated tags
+        - tag values come in from the api and populate the input
+        - updates add and remove tag values from the store properly
+        - edit gets the tag vals, new gets an empty value
       - Tags show up on the stream
         - Web
         - Mobile
       - Tags show up on the post show
         - Web
+      - Removing posts, tags, channels all works okay (with and without tags)
       - Deploy and migrate and publish app
 
     - PUSH F
@@ -82,10 +85,6 @@
 
     - PUSH G
       - Fix the awful N+1s
-      - Tag page can redirect to a new post that has a tag already on it
-        - something similar for mobile
-
-
 
 
   - password reset and other emails show up

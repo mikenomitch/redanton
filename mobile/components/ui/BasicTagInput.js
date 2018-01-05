@@ -3,6 +3,7 @@ import {
   Text,
   View
 } from 'react-native'
+import omit from 'lodash/omit'
 
 import TagInput from 'react-native-tag-input'
 
@@ -16,22 +17,49 @@ class EditPostInfo extends Component {
     }
   }
 
+  onChange = (tagNames) => {
+    this.props.onChange(tagNames)
+  }
+
   textChange = (tagText) => {
     if (tagText[tagText.length - 1] == ",") {
-      console.warn('called')
+      this.makeTag(tagText.slice(0, -1))
     }
 
     this.setState({ tagText })
   }
 
+  makeTag = (text) => {
+    const oldTags = this.props.value
+    const newTags = oldTags.concat([text])
+
+    this.onChange(newTags)
+
+    setTimeout(
+      () => {this.setState({ tagText: ''})},
+      0
+    )
+  }
+
+  onSubmitEditing = ({nativeEvent}) => {
+    this.makeTag(nativeEvent.text)
+  }
+
   render () {
+    const propsSansChange = omit(this.props, ['onChange'])
 
     return (
       <View style={{    borderBottomWidth: border.width, borderBottomColor: colors.border}}>
         <TagInput
-          {... this.props}
+          {...propsSansChange}
+          onChange={this.onChange}
           text={this.state.tagText}
           onChangeText={this.textChange}
+          inputProps={{
+            returnKeyType: 'go',
+            placeholder: 'add tags...',
+            onSubmitEditing: this.onSubmitEditing
+          }}
         />
       </View>
     )

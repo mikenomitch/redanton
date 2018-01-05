@@ -27,14 +27,14 @@ class EditPostInfo extends Component {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <BasicTagInput
-          value={this.props.postInfo.tagNames || []}
-          onChange={(tagNames) => this.setPostState({ tagNames })}
-          labelExtractor={(email) => email}
-        />
         <Text style={{color: colors.mediumGray, marginBottom: 14}} >
           leave url blank for discussion post
         </Text>
+        <BasicTagInput
+          value={this.props.postInfo.tagNames || ['econ', 'politics']}
+          onChange={(tagNames) => this.props.setPostState({ tagNames })}
+          labelExtractor={(email) => email}
+        />
       </View>
     )
   }

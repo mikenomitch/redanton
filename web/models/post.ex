@@ -190,6 +190,15 @@ defmodule Danton.Post do
 
     tags_params = post_params["tags"]
 
+    IO.puts "================"
+    IO.puts "================"
+    IO.puts "================"
+    IO.puts "tag params:"
+    IO.puts inspect(tags_params)
+    IO.puts "================"
+    IO.puts "================"
+    IO.puts "================"
+
     multi = Multi.new
       |> Multi.insert(:post, post_cs)
       |> Multi.run(:room, fn %{post: post} ->
@@ -263,12 +272,16 @@ defmodule Danton.Post do
 	@doc """
   Removes a post and all associated content
   """
+
+  # TODO: put all of this in a transaction
 	def destroy(post_id) do
-    # TODO: implement a soft-deletion system
     rooms = Repo.all(from(r in Room, where: r.post_id == ^post_id))
 		Room.destroy_list(rooms)
 
-		post = Repo.get(Post, post_id)
+    post = Repo.get(Post, post_id)
+
+    Ecto.assoc(post, :posts_tags) |> Repo.delete_all()
+
 		Repo.delete!(post)
   end
 
