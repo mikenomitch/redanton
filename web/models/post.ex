@@ -140,13 +140,11 @@ defmodule Danton.Post do
     |> Repo.preload(:tags)
   end
 
-  # def list_with_real_post_counts(posts, user) do
-  #   club_ids = Club.ids_for_user(user)
-  #   Enum.map(posts, &(with_real_post_counts(&1, club_ids)))
-  # end
+  def with_real_post_counts(posts, club_ids) when is_list(posts) do
+    Enum.map(posts, &(with_real_post_counts(&1, club_ids)))
+  end
 
-  def with_real_post_counts(post, user) do
-    club_ids = Club.ids_for_user(user)
+  def with_real_post_counts(post, club_ids) do
     new_tags = Tag.with_post_counts_for_club_ids(post.tags, club_ids)
     %{post | tags: new_tags}
   end

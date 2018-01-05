@@ -13,31 +13,32 @@ defmodule Danton.Api.V1.PostController do
   # ACTIONS
   # ===========================
 
-  def index(conn, params = %{"tag_id" => tag_id}, _current_user, _claims) do
+  def index(conn, params = %{"tag_id" => tag_id}, current_user, _claims) do
     page = Post.for_tag_id(tag_id)
       |> Post.by_activity()
       |> Repo.paginate(params)
 
-      render_page(conn, page)
+      render_page(conn, page, current_user)
   end
 
-  def index(conn, params = %{"club_id" => club_id}, _current_user, _claims) do
+  def index(conn, params = %{"club_id" => club_id}, current_user, _claims) do
     page = Post.for_club_ids([club_id])
       |> Post.by_activity()
       |> Repo.paginate(params)
 
-    render_page(conn, page)
+    render_page(conn, page, current_user)
   end
 
   def front_page(conn, params, current_user, _claims) do
     page = Post.for_front_page(current_user) |> Repo.paginate(params)
-    render_page(conn, page)
+    render_page(conn, page, current_user)
   end
 
-  defp render_page(conn, page) do
+  defp render_page(conn, page, current_user) do
     posts = page.entries
       |> Post.with_stream_preloads()
       |> Post.with_posts_tags_and_tags()
+      |> Post.with_real_post_counts(Club.ids_for_user(current_user))
 
     render(conn, "index.json", posts: posts)
   end
@@ -51,6 +52,8 @@ defmodule Danton.Api.V1.PostController do
         post_with_assoc = post
           |> Post.load_messages()
           |> Post.with_posts_tags_and_tags()
+          |> Post.with_real_post_counts(Club.ids_for_user(current_user))
+
         conn
         |> put_status(:created)
         |> put_resp_header("location", post_path(conn, :show, post_with_assoc))
@@ -76,7 +79,7 @@ defmodule Danton.Api.V1.PostController do
         post_with_assoc = post
           |> Post.load_messages()
           |> Post.with_posts_tags_and_tags()
-          |> Post.with_real_post_counts(current_user)
+          |> Post.with_real_post_counts(Club.ids_for_user(current_user))
 
         render(conn, "show.json", post: post_with_assoc)
       {:error, changeset} ->
