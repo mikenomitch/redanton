@@ -7,7 +7,7 @@ defmodule Danton.MembershipController do
   # ACTIONS
   # ===========================
 
-  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
+  def index(conn, %{"club_id" => club_id}) do
     club = Repo.get(Club, club_id)
     memberships = Membership.for_club(club_id)
       |> Repo.all()
@@ -19,7 +19,7 @@ defmodule Danton.MembershipController do
     |> render("index.html", memberships: memberships, club: club)
   end
 
-  def new(conn, %{"club_id" => club_id}, _current_user, _claims) do
+  def new(conn, %{"club_id" => club_id}) do
     club = Repo.get(Club, club_id)
     changeset = Membership.changeset(%Danton.Membership{})
 
@@ -30,7 +30,7 @@ defmodule Danton.MembershipController do
     |> render("new.html", changeset: changeset, club: club)
   end
 
-  def create(conn, %{"membership" => %{"email" => ""}, "club_id" => club_id}, _current_user, _claims) do
+  def create(conn, %{"membership" => %{"email" => ""}, "club_id" => club_id}) do
     club = Repo.get(Club, club_id)
 
     conn
@@ -41,7 +41,7 @@ defmodule Danton.MembershipController do
     |> render("new.html", club: club, changeset: Membership.changeset(%Danton.Membership{}))
   end
 
-  def create(conn, %{"membership" => membership_params, "club_id" => club_id}, _current_user, _claims) do
+  def create(conn, %{"membership" => membership_params, "club_id" => club_id}) do
     %{"email" => email} = membership_params
     user = User.get_or_create_by_email(email)
     club = Repo.get(Club, club_id)
@@ -92,18 +92,18 @@ defmodule Danton.MembershipController do
     end
   end
 
-  def show(conn, %{"id" => id}, _current_user, _claims) do
+  def show(conn, %{"id" => id}) do
     membership = Repo.get!(Membership, id)
     render(conn, "show.html", membership: membership)
   end
 
-  def edit(conn, %{"id" => id}, _current_user, _claims) do
+  def edit(conn, %{"id" => id}) do
     membership = Repo.get!(Membership, id)
     changeset = Membership.changeset(membership)
     render(conn, "edit.html", membership: membership, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "membership" => membership_params}, _current_user, _claims) do
+  def update(conn, %{"id" => id, "membership" => membership_params}) do
     membership = Repo.get!(Membership, id)
     changeset = Membership.changeset(membership, membership_params)
 
@@ -117,7 +117,7 @@ defmodule Danton.MembershipController do
     end
   end
 
-  def elevate(conn, %{"id" => id}, _current_user, _claims) do
+  def elevate(conn, %{"id" => id}) do
     membership = Repo.get!(Membership, id)
     club_id = membership.club_id
 
@@ -136,7 +136,7 @@ defmodule Danton.MembershipController do
 
   end
 
-  def delete(conn, %{"id" => id}, _current_user, _claims) do
+  def delete(conn, %{"id" => id}) do
     membership = Repo.get!(Membership, id)
     club_id = membership.club_id
 

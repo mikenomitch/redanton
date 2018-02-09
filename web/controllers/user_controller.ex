@@ -7,17 +7,20 @@ defmodule Danton.UserController do
   # ACTIONS
   # ===========================
 
-  def new(conn, _params, current_user, _claims) do
+  def new(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     render conn, "new.html", current_user: current_user
   end
 
-  def settings(conn, _params, current_user, _claims) do
+  def settings(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     changeset = User.changeset(current_user)
 
     render(conn, "settings.html", user: current_user, changeset: changeset)
   end
 
-  def update(conn, %{"user" => user}, current_user, _claims) do
+  def update(conn, %{"user" => user}) do
+    current_user = Guardian.Plug.current_resource(conn)
     user_params = Map.merge(user, %{"email" => current_user.email})
 
     case User.update_info_and_auth(current_user, user_params) do
@@ -37,15 +40,15 @@ defmodule Danton.UserController do
     end
   end
 
-  def password_reset(conn, _params, _current_user, _claims) do
+  def password_reset(conn, _params) do
     render(conn, "password_reset.html")
   end
 
-  def set_password(conn, %{"token" => token} , _current_user, _claims) do
+  def set_password(conn, %{"token" => token} ) do
     render(conn, "set_password.html", token: token)
   end
 
-  def set_new_password(conn, %{"password" => pw, "password_confirmation" => pwc, "token" => token}, _current_user, _claims) do
+  def set_new_password(conn, %{"password" => pw, "password_confirmation" => pwc, "token" => token}) do
     with {:ok, claims = %{"typ" => "reset"}} <- Danton.Guardian.decode_and_verify(token),
          {:ok, user} <- Danton.Guardian.serializer.from_token(claims["sub"]),
          {:ok, _new_auth} <- Authorization.update_authorization_for_user_params(%{"password" => pw, "password_confirmation" => pwc, "email" => user.email})
@@ -69,7 +72,7 @@ defmodule Danton.UserController do
     |> redirect(to: "/set_password?token=" <> token)
   end
 
-  def send_reset_email(conn, %{"email" => email}, _current_user, _claims) do
+  def send_reset_email(conn, %{"email" => email}) do
     user = Repo.get_by(User, email: email)
 
     if (user) do

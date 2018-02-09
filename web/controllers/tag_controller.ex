@@ -12,16 +12,15 @@ defmodule Danton.TagController do
   # ACTIONS
   # ===========================
 
-  def index(conn, params, current_user, _claims) do
-    # TODO: implement this
-    # case index_template(current_user, %{include_tags: true}) do
-    #   :no_clubs -> render_no_clubs(conn)
-    #   :no_tags -> render_no_tags(conn)
-    #   :no_posts -> render_no_posts(conn)
-    #   :main -> render_tag_index(conn, params, current_user)
-    # end
+  def index(conn, params) do
+    current_user = Guardian.Plug.current_resource(conn)
 
-    render_tag_index(conn, params, current_user)
+    case index_template(current_user, %{include_tags: true}) do
+      :no_clubs -> render_no_clubs(conn)
+      :no_tags -> render_no_tags(conn)
+      :no_posts -> render_no_posts(conn)
+      :main -> render_tag_index(conn, params, current_user)
+    end
   end
 
   defp render_tag_index(conn, params, current_user) do
@@ -48,7 +47,9 @@ defmodule Danton.TagController do
     )
   end
 
-  def show(conn, params = %{"id" => id}, current_user, _claims) do
+  def show(conn, params = %{"id" => id}) do
+    current_user = Guardian.Plug.current_resource(conn)
+
     tag = Repo.get(Tag, id)
     club_ids = Club.for_user(current_user)
       |> Repo.all()
