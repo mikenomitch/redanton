@@ -39,10 +39,6 @@ config :danton, Danton.Guardian,
     "kty" => "oct"
   }
 
-config :danton, Danton.AuthAccessPipeline,
-  module: Danton.Guardian,
-  error_handler: Danton.AuthErrorHandler
-
 config :ueberauth, Ueberauth,
   base_path: "/login",
   providers: [

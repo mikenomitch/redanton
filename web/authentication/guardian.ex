@@ -5,12 +5,10 @@ defmodule Danton.Guardian do
   alias Danton.User
 
   def subject_for_token(user = %User{}, _claims) do
-    IO.puts "I WAS CALLED!"
     { :ok, "User:#{user.id}" }
   end
 
   def subject_for_token(_, _) do
-    IO.puts "WAT!"
     { :error, "Unknown resource type" }
   end
 
