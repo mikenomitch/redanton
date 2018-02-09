@@ -8,7 +8,7 @@ defmodule Danton.UserFromAuth do
       {:error, :not_found} -> register_user_from_auth(auth, current_user, repo)
       {:error, reason} -> {:error, reason}
       authorization ->
-        if authorization.expires_at && authorization.expires_at < Guardian.Utils.timestamp do
+        if authorization.expires_at && authorization.expires_at < Danton.Guardian.Utils.timestamp do
           replace_authorization(authorization, auth, current_user, repo)
         else
           user_from_authorization(authorization, current_user, repo)

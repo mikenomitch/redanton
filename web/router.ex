@@ -13,8 +13,7 @@ defmodule Danton.Router do
   # Then it will attempt to load the resource found in the JWT.
   # If it doesn't find a JWT in the default location it doesn't do anything
   pipeline :browser_auth do
-    plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.LoadResource
+    plug Danton.AuthAccessPipeline
   end
 
   # This pipeline is created for use within the admin namespace.
@@ -123,9 +122,11 @@ defmodule Danton.Router do
   # In this case, it should be prefixed with "Bearer" so that it's looking for
   # Authorization: Bearer <jwt>
   pipeline :api_auth do
-    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
-    plug Guardian.Plug.LoadResource
-    plug Guardian.Plug.EnsureAuthenticated, handler: Danton.Controller.APIHelper, typ: "access"
+    # replace with own module
+
+    # plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    # plug Guardian.Plug.LoadResource
+    # plug Guardian.Plug.EnsureAuthenticated, handler: Danton.Controller.APIHelper, typ: "access"
   end
 
   # Other scopes may use custom stacks.

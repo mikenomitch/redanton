@@ -18,9 +18,9 @@ defmodule Danton.Api.V1.AuthController do
 	def login(conn, params, _current_user, _claims) do
 		case User.find_and_confirm_password(params) do
       {:ok, user} ->
-        new_conn = Guardian.Plug.api_sign_in(conn, user)
-				jwt = Guardian.Plug.current_token(new_conn)
-				{:ok, claims} = Guardian.Plug.claims(new_conn)
+        new_conn = Danton.Guardian.Plug.sign_in(conn, user, token_type: :access)
+				jwt = Danton.Guardian.Plug.current_token(new_conn)
+				{:ok, claims} = Danton.Guardian.Plug.claims(new_conn)
 				exp = Map.get(claims, "exp")
 
 				new_conn
@@ -41,7 +41,7 @@ defmodule Danton.Api.V1.AuthController do
       # We could use sign_out(:default) to just revoke this token
       # but I prefer to clear out the session. This means that because we
       # use tokens in two locations - :default and :admin - we need to load it (see above)
-      |> Guardian.Plug.sign_out
+      |> Danton.Guardian.Plug.sign_out(current_user)
 			|> json(%{message: "Signed Out"})
     else
       conn
@@ -53,10 +53,10 @@ defmodule Danton.Api.V1.AuthController do
   def sign_up(conn, params, _current_user, _claims) do
     case User.sign_up(params) do
       {:ok, user} ->
-        new_conn = Guardian.Plug.api_sign_in(conn, user)
+        new_conn = Danton.Guardian.Plug.sign_in(conn, user, token_type: :access)
         IO.puts inspect(new_conn)
-				jwt = Guardian.Plug.current_token(new_conn)
-				{:ok, claims} = Guardian.Plug.claims(new_conn)
+				jwt = Danton.Guardian.Plug.current_token(new_conn)
+				{:ok, claims} = Danton.Guardian.Plug.claims(new_conn)
 				exp = Map.get(claims, "exp")
 
 				new_conn

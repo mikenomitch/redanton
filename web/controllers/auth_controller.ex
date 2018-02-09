@@ -37,7 +37,7 @@ defmodule Danton.AuthController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Signed in as #{user.name}")
-        |> Guardian.Plug.sign_in(user, :access, perms: %{default: Guardian.Permissions.max})
+        |> Danton.Guardian.Plug.sign_in(user, token_type: :access)
         |> redirect(to: post_path(conn, :front_page))
       {:error, error} ->
         conn
@@ -53,7 +53,7 @@ defmodule Danton.AuthController do
       # We could use sign_out(:default) to just revoke this token
       # but I prefer to clear out the session. This means that because we
       # use tokens in two locations - :default and :admin - we need to load it (see above)
-      |> Guardian.Plug.sign_out
+      |> Danton.Guardian.Plug.sign_out
       |> put_flash(:info, "Signed out")
       |> redirect(to: "/")
     else

@@ -38,7 +38,7 @@ defmodule Danton.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:guardian, "~> 0.14.1"},
+     {:guardian, "~> 1.0"},
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"},
      {:comeonin, "~> 4.0-rc"},

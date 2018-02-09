@@ -76,7 +76,7 @@ defmodule Danton.AuthorizationRouter do
         Danton.AlwaysSuccessfulAuthorization
     end
 
-    current_user = Guardian.Plug.current_resource(conn)
+    current_user = Danton.Guardian.Plug.current_resource(conn)
     auth_module.authorization_status(conn, current_user, permission_type)
   end
 end
