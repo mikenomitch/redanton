@@ -20,7 +20,6 @@
         <nav>
           <ul>
             <li><%= Torch.NavigationView.nav_link @conn, "Authorizations", admin_authorization_path(@conn, :index) %></li>
-            <li><%= Torch.NavigationView.nav_link @conn, "Tags", admin_channel_path(@conn, :index) %></li>
             <li><%= Torch.NavigationView.nav_link @conn, "Clubs", admin_club_path(@conn, :index) %></li>
             <li><%= Torch.NavigationView.nav_link @conn, "Memberships", admin_membership_path(@conn, :index) %></li>
             <li><%= Torch.NavigationView.nav_link @conn, "Messages", admin_message_path(@conn, :index) %></li>

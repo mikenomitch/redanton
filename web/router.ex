@@ -20,7 +20,7 @@ defmodule Danton.Router do
   end
 
   pipeline :admin_browser_auth do
-    Danton.AuthPipeline.Admin
+    plug Danton.AuthPipeline.Admin
   end
 
   pipeline :api do
@@ -28,11 +28,7 @@ defmodule Danton.Router do
   end
 
   pipeline :api_auth do
-    plug Danton.AuthPipeline.Browser
-  end
-
-  scope "/" do
-    pipe_through :browser
+    plug Danton.AuthPipeline.Api
   end
 
   # ===============
@@ -45,7 +41,6 @@ defmodule Danton.Router do
     pipe_through [:browser, :browser_auth, :admin_browser_auth]
 
     resources "/authorizations", AuthorizationController
-    resources "/tags", ChannelController
     resources "/clubs", ClubController
     resources "/memberships", MembershipController
     resources "/messages", MessageController

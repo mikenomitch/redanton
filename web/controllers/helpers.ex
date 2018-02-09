@@ -26,17 +26,12 @@ defmodule Danton.Controller.Helpers do
     quote do
       def index_template(user, opts \\ %{include_channels: false}) do
         ( Danton.Club.user_has_none(user) && :no_clubs )
-        || ( opts.include_channels && Danton.Channel.user_has_none(user) && :no_channels )
         || ( Danton.Post.user_has_none(user) && :no_posts )
         || :main
       end
 
       def render_no_clubs(conn) do
         render(conn, Danton.PageView, "no_clubs.html", changeset: Danton.Club.changeset(%Danton.Club{}))
-      end
-
-      def render_no_channels(conn) do
-        render(conn, Danton.PageView, "no_channels.html", parent_type: nil, parent_id: nil)
       end
 
       def render_no_posts(conn) do

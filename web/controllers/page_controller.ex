@@ -27,10 +27,6 @@ defmodule Danton.PageController do
     render put_layout(conn, "auth.html"), "licenses.html"
   end
 
-  def no_channels(conn, _params) do
-    render(conn, "no_channels.html", parent_type: nil, parent_id: nil)
-  end
-
   def no_clubs(conn, _params) do
     render(conn, "no_clubs.html", parent_type: nil, parent_id: nil)
   end

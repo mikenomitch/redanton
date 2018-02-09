@@ -8,7 +8,8 @@ defmodule Danton.Api.V1.TagController do
   # ACTIONS
   # ===========================
 
-  def index(conn, %{"club_id" => club_id}, current_user, _claims) do
+  def index(conn, %{"club_id" => club_id}) do
+    current_user = Guardian.Plug.current_resource(conn)
     all_club_ids = Club.for_user(current_user) |> Repo.all() |> Enum.map(&(&1.id))
 
     tags = Tag.for_club(club_id)
@@ -19,7 +20,8 @@ defmodule Danton.Api.V1.TagController do
     render_index(conn, tags)
   end
 
-  def index(conn, _params, current_user, _claims) do
+  def index(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     club_ids = Club.for_user(current_user) |> Repo.all() |> Enum.map(&(&1.id))
 
     tags = Tag.for_user(current_user)
@@ -34,7 +36,8 @@ defmodule Danton.Api.V1.TagController do
     render(conn, "index.json", tags: tags)
   end
 
-  def show(conn, %{"id" => id}, current_user, _claims) do
+  def show(conn, %{"id" => id}) do
+    current_user = Guardian.Plug.current_resource(conn)
     club_ids = Club.for_user(current_user) |> Repo.all() |> Enum.map(&(&1.id))
 
     tag = Repo.get!(Tag, id)

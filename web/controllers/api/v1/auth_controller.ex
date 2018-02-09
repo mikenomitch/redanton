@@ -15,12 +15,12 @@ defmodule Danton.Api.V1.AuthController do
   # ACTIONS
   # ===========================
 
-	def login(conn, params, _current_user, _claims) do
+	def login(conn, params) do
 		case User.find_and_confirm_password(params) do
       {:ok, user} ->
         new_conn = Danton.Guardian.Plug.sign_in(conn, user, token_type: :access)
 				jwt = Danton.Guardian.Plug.current_token(new_conn)
-				{:ok, claims} = Danton.Guardian.Plug.claims(new_conn)
+				{:ok, claims} = Danton.Guardian.decode_and_verify(jwt)
 				exp = Map.get(claims, "exp")
 
 				new_conn
@@ -34,7 +34,8 @@ defmodule Danton.Api.V1.AuthController do
 		end
 	end
 
-  def logout(conn, _params, current_user, _claims) do
+  def logout(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     if current_user do
       conn
       # This clears the whole session.
@@ -50,13 +51,12 @@ defmodule Danton.Api.V1.AuthController do
     end
   end
 
-  def sign_up(conn, params, _current_user, _claims) do
+  def sign_up(conn, params) do
     case User.sign_up(params) do
       {:ok, user} ->
         new_conn = Danton.Guardian.Plug.sign_in(conn, user, token_type: :access)
-        IO.puts inspect(new_conn)
 				jwt = Danton.Guardian.Plug.current_token(new_conn)
-				{:ok, claims} = Danton.Guardian.Plug.claims(new_conn)
+        {:ok, claims} = Danton.Guardian.decode_and_verify(jwt)
 				exp = Map.get(claims, "exp")
 
 				new_conn

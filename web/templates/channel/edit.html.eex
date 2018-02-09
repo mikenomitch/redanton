@@ -1,9 +1,0 @@
-<%= render Danton.BreadcrumbleView, "breadcrumb.html", breadcrumb_trails: @breadcrumb_trails %>
-
-<div class="form-header">
-  <h1 class="header-text">
-    Edit Tag
-  </h1>
-</div>
-
-<%= render "form.html", changeset: @changeset, action: channel_path(@conn, :update, @channel), club_id: @channel.club_id, clubs: :empty %>

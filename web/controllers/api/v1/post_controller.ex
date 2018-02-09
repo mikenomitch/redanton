@@ -13,7 +13,8 @@ defmodule Danton.Api.V1.PostController do
   # ACTIONS
   # ===========================
 
-  def index(conn, params = %{"tag_id" => tag_id}, current_user, _claims) do
+  def index(conn, params = %{"tag_id" => tag_id}) do
+    current_user = Guardian.Plug.current_resource(conn)
     page = Post.for_tag_id(tag_id)
       |> Post.for_club_ids(Club.ids_for_user(current_user))
       |> Post.by_activity()
@@ -22,7 +23,8 @@ defmodule Danton.Api.V1.PostController do
       render_page(conn, page, current_user)
   end
 
-  def index(conn, params = %{"club_id" => club_id}, current_user, _claims) do
+  def index(conn, params = %{"club_id" => club_id}) do
+    current_user = Guardian.Plug.current_resource(conn)
     page = Post.for_club_ids([club_id])
       |> Post.by_activity()
       |> Repo.paginate(params)
@@ -30,7 +32,8 @@ defmodule Danton.Api.V1.PostController do
     render_page(conn, page, current_user)
   end
 
-  def front_page(conn, params, current_user, _claims) do
+  def front_page(conn, params) do
+    current_user = Guardian.Plug.current_resource(conn)
     page = Post.for_front_page(current_user) |> Repo.paginate(params)
     render_page(conn, page, current_user)
   end
@@ -44,7 +47,8 @@ defmodule Danton.Api.V1.PostController do
     render(conn, "index.json", posts: posts)
   end
 
-  def create(conn, %{"club_id" => club_id, "post" => post, "message" => message}, current_user, _claims) do
+  def create(conn, %{"club_id" => club_id, "post" => post, "message" => message}) do
+    current_user = Guardian.Plug.current_resource(conn)
     msg_params = %{user_id: current_user.id, body: message["body"]}
     club = Repo.get(Club, club_id)
 
@@ -66,12 +70,13 @@ defmodule Danton.Api.V1.PostController do
     end
   end
 
-  def show(conn, %{"id" => id}, _current_user, _claims) do
+  def show(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
     render(conn, "show.json", post: post)
   end
 
-  def update(conn, params, current_user, _claims) do
+  def update(conn, params) do
+    current_user = Guardian.Plug.current_resource(conn)
     post = Repo.get!(Post, params["id"])
     post_params = Map.delete(params, "id")
 
@@ -90,7 +95,7 @@ defmodule Danton.Api.V1.PostController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _current_user, _claims) do
+  def delete(conn, %{"id" => id}) do
 		Post.destroy(id)
     send_resp(conn, :no_content, "")
   end

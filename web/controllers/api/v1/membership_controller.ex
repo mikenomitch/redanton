@@ -5,19 +5,20 @@ defmodule Danton.Api.V1.MembershipController do
   # ACTIONS
   # ===========================
 
-  def index(conn, %{"club_id" => club_id}, _current_user, _claims) do
+  def index(conn, %{"club_id" => club_id}) do
     memberships = Repo.get(Club, club_id)
     |> Membership.for_club()
     |> Repo.all()
 		render(conn, "index.json", memberships: memberships)
   end
 
-  def index(conn, _params, current_user, _claims) do
+  def index(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     memberships = Membership.for_user(current_user) |> Repo.all()
     render(conn, "index.json", memberships: memberships)
   end
 
-  def create(conn, %{"email" => email, "club_id" => club_id}, _current_user, _claims) do
+  def create(conn, %{"email" => email, "club_id" => club_id}) do
     user = User.get_or_create_by_email(email)
     club = Repo.get(Club, club_id)
     membership_params = %{club: club, type: "standard", status: "pending", email: email}
@@ -41,12 +42,12 @@ defmodule Danton.Api.V1.MembershipController do
     end
   end
 
-  def show(conn, %{"id" => id}, _current_user, _claims) do
+  def show(conn, %{"id" => id}) do
     membership = Repo.get!(Membership, id)
     render(conn, "show.json", membership: membership)
   end
 
-  def update(conn, %{"id" => id, "membership" => membership_params}, _current_user, _claims) do
+  def update(conn, %{"id" => id, "membership" => membership_params}) do
     membership = Repo.get!(Membership, id)
     changeset = Membership.changeset(membership, membership_params)
 
@@ -60,7 +61,7 @@ defmodule Danton.Api.V1.MembershipController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _current_user, _claims) do
+  def delete(conn, %{"id" => id}) do
     membership = Repo.get!(Membership, id)
 
     # Here we use delete! (with a bang) because we expect
