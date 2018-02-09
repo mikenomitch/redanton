@@ -15,7 +15,7 @@ defmodule Danton.Api.V1.AuthController do
   # ACTIONS
   # ===========================
 
-	def login(conn, params) do
+  def login(conn, params) do
 		case User.find_and_confirm_password(params) do
       {:ok, user} ->
         new_conn = Danton.Guardian.Plug.sign_in(conn, user, token_type: :access)

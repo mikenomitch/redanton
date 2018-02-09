@@ -5,7 +5,7 @@ defmodule Danton.ClubController do
   plug Danton.WebAuthorization, [:club, :view] when action in [:show, :leave]
   plug Danton.WebAuthorization, [:club, :edit] when action in [:edit, :update, :delete]
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
+  # plug Guardian.Plug.EnsureAuthenticated, key: :access
 
   plug :add_breadcrumb, name: "Clubs", url: "/clubs"
 

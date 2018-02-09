@@ -146,12 +146,14 @@ defmodule Danton.Router do
 
     resources "/users", UserController
     resources "/authorizations", AuthorizationController
+  end
 
-    scope "/login", Danton do
-      get "/", AuthController, :login
-      get "/:identity", AuthController, :login
-      get "/:identity/callback", AuthController, :callback
-      post "/:identity/callback", AuthController, :callback
-    end
+  scope "/login", Danton do
+    pipe_through [:browser]
+
+    get "/", AuthController, :login
+    get "/:identity", AuthController, :login
+    get "/:identity/callback", AuthController, :callback
+    post "/:identity/callback", AuthController, :callback
   end
 end

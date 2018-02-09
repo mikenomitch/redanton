@@ -96,8 +96,13 @@ defmodule Danton.CheckIn do
       end
 
       defp get_user_id(%{private: private_params}) do
-        {:ok, id} = Danton.Guardian.resource_from_claims(private_params.guardian_default_claims)
-        id
+        with %{guardian_default_claims: claims} <- private_params,
+             {:ok, id} <- Danton.Guardian.resource_from_claims(claims)
+        do
+          id
+        else
+          _ -> nil
+        end
       end
     end
   end

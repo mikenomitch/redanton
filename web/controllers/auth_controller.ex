@@ -21,6 +21,7 @@ defmodule Danton.AuthController do
 
     if current_user do
       conn
+      |> Guardian.Plug.remember_me(current_user)
       |> put_flash(:info, "Signed in as #{current_user.name}")
       |> redirect(to: "/stream")
     else
@@ -42,7 +43,7 @@ defmodule Danton.AuthController do
         conn
         |> put_flash(:info, "Signed in as #{user.name}")
         |> Danton.Guardian.Plug.sign_in(user, token_type: :access)
-        |> redirect(to: post_path(conn, :front_page))
+        |> redirect(to: "/stream")
       {:error, error} ->
         conn
         |> put_flash(:error, "Could not authenticate. Error: #{error}")
