@@ -5,7 +5,7 @@ defmodule Danton.TagController do
 
   @page_size 20
 
-  # plug Danton.WebAuthorization, [:tag, :view] when action in [:show]
+  plug Danton.WebAuthorization, [:tag, :view] when action in [:show]
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
 
   # ===========================

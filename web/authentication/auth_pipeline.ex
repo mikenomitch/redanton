@@ -36,4 +36,6 @@ defmodule Danton.AuthPipeline.Admin do
 
   plug Guardian.Plug.VerifySession, key: :admin, claims: @claims
   plug Guardian.Plug.LoadResource, ensure: true, allow_blank: false
+
+  plug Danton.WebAuthorization, [:admin, :view]
 end
