@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   streamItem: {
     borderBottomWidth: border.width,
     borderBottomColor: colors.border,
-    display: 'inline-flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'stretch'

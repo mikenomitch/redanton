@@ -31,7 +31,7 @@ var membershipItemStyles = StyleSheet.create({
   root: {
     borderBottomWidth: border.width,
     borderBottomColor: colors.border,
-    display: 'inline-flex',
+    display: 'flex',
     flexWrap: 'nowrap',
     alignItems: 'center',
     justifyContent: 'flex-start',

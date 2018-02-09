@@ -15,7 +15,7 @@ import {
 
 import LoginOrSignUp from './user/LoginOrSignUp'
 import MainNav from './navigation/MainNav'
-import Intro from './intro/Intro'
+// import Intro from './intro/Intro'
 
 // =============
 //   PRESENTER
@@ -39,9 +39,9 @@ class Main extends Component {
     return <MainNav />
   }
 
-  renderWalkThru () {
-    return <Intro onIntroDone={this.props.onIntroDone} />
-  }
+  // renderWalkThru () {
+  //   return <Intro onIntroDone={this.props.onIntroDone} />
+  // }
 
   render () {
     if (this.props.isLoading) {
@@ -52,9 +52,9 @@ class Main extends Component {
       return this.renderLogin()
     }
 
-    if (!this.props.introSeen) {
-      return this.renderWalkThru()
-    }
+    // if (!this.props.introSeen) {
+    //   return this.renderWalkThru()
+    // }
 
     return this.renderMainApp()
   }

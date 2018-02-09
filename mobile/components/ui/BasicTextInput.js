@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
-import TextField from 'react-native-md-textinput'
+import TextField from 'tweaked-native-text-input'
 
 import ErrorText from './ErrorText'
 

@@ -127,7 +127,7 @@ export function registerPushNotifications() {
           }
 
           // Get the token that uniquely identifies this device
-          Notifications.getExponentPushTokenAsync().then((token) => {
+          Notifications.getExpoPushTokenAsync().then((token) => {
             dispatch({
               type: 'REGISTER_PUSH_NOTIFICATION',
               call: {

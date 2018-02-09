@@ -4,7 +4,7 @@
     "description": "Private clubs for sharing links and discussions.",
     "slug": "relayd",
     "privacy": "public",
-    "sdkVersion": "18.0.0",
+    "sdkVersion": "25.0.0",
     "version": "1.0.1",
     "orientation": "portrait",
     "primaryColor": "#6495ED",
