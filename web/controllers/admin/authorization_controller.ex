@@ -16,12 +16,12 @@ defmodule Danton.Admin.AuthorizationController do
   @pagination [page_size: 10]
   @pagination_distance 5
 
-  def index(conn, params, _, _) do
+  def index(conn, params) do
     params =
       params
       |> Map.put_new("sort_direction", "desc")
       |> Map.put_new("sort_field", "inserted_at")
-    
+
     {:ok, sort_direction} = Map.fetch(params, "sort_direction")
     {:ok, sort_field} = Map.fetch(params, "sort_field")
     {:ok, filter} = Filtrex.parse_params(@filtrex, params["authorization"] || %{})
@@ -43,12 +43,12 @@ defmodule Danton.Admin.AuthorizationController do
       sort_direction: sort_direction
   end
 
-  def new(conn, _params, _, _) do
+  def new(conn, _params) do
     changeset = Authorization.changeset(%Authorization{})
     render conn, "new.html", changeset: changeset
   end
 
-  def create(conn, %{"authorization" => authorization_params}, _, _) do
+  def create(conn, %{"authorization" => authorization_params}) do
     changeset = Authorization.changeset(%Authorization{}, authorization_params)
 
     case Repo.insert(changeset) do
@@ -63,7 +63,7 @@ defmodule Danton.Admin.AuthorizationController do
     end
   end
 
-  def edit(conn, %{"id" => id}, _, _) do
+  def edit(conn, %{"id" => id}) do
     authorization = Repo.get!(Authorization, id)
     changeset = Authorization.changeset(authorization)
     render conn, "edit.html", changeset: changeset, authorization: authorization
@@ -85,7 +85,7 @@ defmodule Danton.Admin.AuthorizationController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _, _) do
+  def delete(conn, %{"id" => id}) do
     authorization = Repo.get!(Authorization, id)
     Repo.delete!(authorization)
 

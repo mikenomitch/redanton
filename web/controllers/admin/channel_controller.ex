@@ -17,7 +17,7 @@ defmodule Danton.Admin.ChannelController do
   @pagination [page_size: 10]
   @pagination_distance 5
 
-  def index(conn, params, _, _) do
+  def index(conn, params) do
     params =
       params
       |> Map.put_new("sort_direction", "desc")
@@ -44,12 +44,12 @@ defmodule Danton.Admin.ChannelController do
       sort_direction: sort_direction
   end
 
-  def new(conn, _params, _, _) do
+  def new(conn, _params) do
     changeset = Channel.changeset(%Channel{})
     render conn, "new.html", changeset: changeset
   end
 
-  def create(conn, %{"channel" => channel_params}, _, _) do
+  def create(conn, %{"channel" => channel_params}) do
     changeset = Channel.changeset(%Channel{}, channel_params)
 
     case Repo.insert(changeset) do
@@ -64,13 +64,13 @@ defmodule Danton.Admin.ChannelController do
     end
   end
 
-  def edit(conn, %{"id" => id}, _, _) do
+  def edit(conn, %{"id" => id}) do
     channel = Repo.get!(Channel, id)
     changeset = Channel.changeset(channel)
     render conn, "edit.html", changeset: changeset, channel: channel
   end
 
-  def update(conn, %{"id" => id, "channel" => channel_params}, _, _) do
+  def update(conn, %{"id" => id, "channel" => channel_params}) do
     channel = Repo.get!(Channel, id)
     changeset = Channel.changeset(channel, channel_params)
 
@@ -86,7 +86,7 @@ defmodule Danton.Admin.ChannelController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _, _) do
+  def delete(conn, %{"id" => id}) do
     channel = Repo.get!(Channel, id)
     Repo.delete!(channel)
 

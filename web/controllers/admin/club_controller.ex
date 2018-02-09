@@ -17,12 +17,12 @@ defmodule Danton.Admin.ClubController do
   @pagination [page_size: 10]
   @pagination_distance 5
 
-  def index(conn, params, _, _) do
+  def index(conn, params) do
     params =
       params
       |> Map.put_new("sort_direction", "desc")
       |> Map.put_new("sort_field", "inserted_at")
-    
+
     {:ok, sort_direction} = Map.fetch(params, "sort_direction")
     {:ok, sort_field} = Map.fetch(params, "sort_field")
     {:ok, filter} = Filtrex.parse_params(@filtrex, params["club"] || %{})
@@ -44,12 +44,12 @@ defmodule Danton.Admin.ClubController do
       sort_direction: sort_direction
   end
 
-  def new(conn, _params, _, _) do
+  def new(conn, _params) do
     changeset = Club.changeset(%Club{})
     render conn, "new.html", changeset: changeset
   end
 
-  def create(conn, %{"club" => club_params}, _, _) do
+  def create(conn, %{"club" => club_params}) do
     changeset = Club.changeset(%Club{}, club_params)
 
     case Repo.insert(changeset) do
@@ -64,13 +64,13 @@ defmodule Danton.Admin.ClubController do
     end
   end
 
-  def edit(conn, %{"id" => id}, _, _) do
+  def edit(conn, %{"id" => id}) do
     club = Repo.get!(Club, id)
     changeset = Club.changeset(club)
     render conn, "edit.html", changeset: changeset, club: club
   end
 
-  def update(conn, %{"id" => id, "club" => club_params}, _, _) do
+  def update(conn, %{"id" => id, "club" => club_params}) do
     club = Repo.get!(Club, id)
     changeset = Club.changeset(club, club_params)
 
@@ -86,7 +86,7 @@ defmodule Danton.Admin.ClubController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _, _) do
+  def delete(conn, %{"id" => id}) do
     club = Repo.get!(Club, id)
     Repo.delete!(club)
 

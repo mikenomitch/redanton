@@ -17,7 +17,7 @@ defmodule Danton.Admin.MessageController do
   @pagination [page_size: 10]
   @pagination_distance 5
 
-  def index(conn, params, _, _) do
+  def index(conn, params) do
     params =
       params
       |> Map.put_new("sort_direction", "desc")
@@ -44,12 +44,12 @@ defmodule Danton.Admin.MessageController do
       sort_direction: sort_direction
   end
 
-  def new(conn, _params, _, _) do
+  def new(conn, _params) do
     changeset = Message.changeset(%Message{})
     render conn, "new.html", changeset: changeset
   end
 
-  def create(conn, %{"message" => message_params}, _, _) do
+  def create(conn, %{"message" => message_params}) do
     changeset = Message.changeset(%Message{}, message_params)
 
     case Repo.insert(changeset) do
@@ -64,13 +64,13 @@ defmodule Danton.Admin.MessageController do
     end
   end
 
-  def edit(conn, %{"id" => id}, _, _) do
+  def edit(conn, %{"id" => id}) do
     message = Repo.get!(Message, id)
     changeset = Message.changeset(message)
     render conn, "edit.html", changeset: changeset, message: message
   end
 
-  def update(conn, %{"id" => id, "message" => message_params}, _, _) do
+  def update(conn, %{"id" => id, "message" => message_params}) do
     message = Repo.get!(Message, id)
     changeset = Message.changeset(message, message_params)
 
@@ -86,7 +86,7 @@ defmodule Danton.Admin.MessageController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _, _) do
+  def delete(conn, %{"id" => id}) do
     message = Repo.get!(Message, id)
     Repo.delete!(message)
 

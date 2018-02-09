@@ -17,12 +17,12 @@ defmodule Danton.Admin.MembershipController do
   @pagination [page_size: 10]
   @pagination_distance 5
 
-  def index(conn, params, _, _) do
+  def index(conn, params) do
     params =
       params
       |> Map.put_new("sort_direction", "desc")
       |> Map.put_new("sort_field", "inserted_at")
-    
+
     {:ok, sort_direction} = Map.fetch(params, "sort_direction")
     {:ok, sort_field} = Map.fetch(params, "sort_field")
     {:ok, filter} = Filtrex.parse_params(@filtrex, params["membership"] || %{})
@@ -44,12 +44,12 @@ defmodule Danton.Admin.MembershipController do
       sort_direction: sort_direction
   end
 
-  def new(conn, _params, _, _) do
+  def new(conn, _params) do
     changeset = Membership.changeset(%Membership{})
     render conn, "new.html", changeset: changeset
   end
 
-  def create(conn, %{"membership" => membership_params}, _, _) do
+  def create(conn, %{"membership" => membership_params}) do
     changeset = Membership.changeset(%Membership{}, membership_params)
 
     case Repo.insert(changeset) do
@@ -64,13 +64,13 @@ defmodule Danton.Admin.MembershipController do
     end
   end
 
-  def edit(conn, %{"id" => id}, _, _) do
+  def edit(conn, %{"id" => id}) do
     membership = Repo.get!(Membership, id)
     changeset = Membership.changeset(membership)
     render conn, "edit.html", changeset: changeset, membership: membership
   end
 
-  def update(conn, %{"id" => id, "membership" => membership_params}, _, _) do
+  def update(conn, %{"id" => id, "membership" => membership_params}) do
     membership = Repo.get!(Membership, id)
     changeset = Membership.changeset(membership, membership_params)
 
@@ -86,7 +86,7 @@ defmodule Danton.Admin.MembershipController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _, _) do
+  def delete(conn, %{"id" => id}) do
     membership = Repo.get!(Membership, id)
     Repo.delete!(membership)
 
