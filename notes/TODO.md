@@ -4,7 +4,6 @@
 
   - Leftovers from channel removal
     - fix the empty tags page
-    - purge any Channel references anywhere on backend
     - Fix the awful N+1s
 
   - pw reset link on mobile
