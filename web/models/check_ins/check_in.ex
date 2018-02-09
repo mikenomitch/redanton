@@ -96,7 +96,8 @@ defmodule Danton.CheckIn do
       end
 
       defp get_user_id(%{private: private_params}) do
-        private_params.guardian_default_resource && private_params.guardian_default_resource.id
+        {:ok, id} = Danton.Guardian.resource_from_claims(private_params.guardian_default_claims)
+        id
       end
     end
   end

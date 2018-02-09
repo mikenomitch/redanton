@@ -24,16 +24,16 @@ defmodule Danton.Router do
   # This does not conflict with the browser_auth pipeline.
   # If it doesn't find a JWT in the location it doesn't do anything
   pipeline :admin_browser_auth do
-    plug Guardian.Plug.VerifySession, key: :admin
-    plug Guardian.Plug.LoadResource, key: :admin
-    plug Danton.WebAuthorization, [:admin, :admin]
+    # plug Guardian.Plug.VerifySession, key: :admin
+    # plug Guardian.Plug.LoadResource, key: :admin
+    # plug Danton.WebAuthorization, [:admin, :admin]
   end
 
   # We need this pipeline to load the token when we're impersonating.
   # We don't want to load the resource though, just verify the token
-  pipeline :impersonation_browser_auth do
-    plug Guardian.Plug.VerifySession, key: :admin
-  end
+  # pipeline :impersonation_browser_auth do
+  #   plug Guardian.Plug.VerifySession, key: :admin
+  # end
 
   scope "/" do
     pipe_through :browser
@@ -59,7 +59,7 @@ defmodule Danton.Router do
 
   # PROTECTED ROUTES
   scope "/", Danton do
-    pipe_through [:browser, :browser_auth, :impersonation_browser_auth]
+    pipe_through [:browser, :browser_auth]
 
     get "/", PageController, :index
     get "/about", PageController, :about

@@ -9,15 +9,15 @@ defmodule Danton.PostController do
   plug :check_in, :front_page when action in [:front_page]
   plug :check_in, :post when action in [:show]
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__, typ: "access"
-
   # ===========================
   # ACTIONS
   # ===========================
 
   # FRONT PAGE
 
-  def front_page(conn, params, current_user, _claims) do
+  def front_page(conn, params) do
+    current_user = Guardian.Plug.current_resource(conn)
+
     case index_template(current_user) do
       :no_clubs -> render_no_clubs(conn)
       :no_posts -> render_no_posts(conn)
@@ -25,7 +25,7 @@ defmodule Danton.PostController do
     end
   end
 
-  def index(conn, _params, _current_user, _claims) do
+  def index(conn, _params) do
     redirect(conn, to: post_path(conn, :front_page))
   end
 
@@ -45,7 +45,7 @@ defmodule Danton.PostController do
 
   # ===== END FRONT PAGE
 
-  def new(conn, %{"club_id" => club_id}, _current_user, _claims) do
+  def new(conn, %{"club_id" => club_id}) do
     changeset = Post.changeset(%Post{})
 
     conn
@@ -53,7 +53,8 @@ defmodule Danton.PostController do
     |> render("new.html", changeset: changeset, club_id: club_id, channels: :none, clubs: :none)
   end
 
-  def new(conn, _params, current_user, _claims) do
+  def new(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     changeset = Post.changeset(%Post{})
     channels = Channel.for_user(current_user) |> Repo.all()
     clubs = Club.for_user(current_user) |> Repo.all()
@@ -63,11 +64,13 @@ defmodule Danton.PostController do
     |> render("new.html", changeset: changeset, club_id: :none, channels: channels, clubs: clubs)
   end
 
-  def create(conn, %{"post" => post_params, "club_id" => club_id}, current_user, _claims) do
+  def create(conn, %{"post" => post_params, "club_id" => club_id}) do
+    current_user = Guardian.Plug.current_resource(conn)
     create_and_respond(conn, %{"post" => post_params, "club_id" => club_id}, current_user)
   end
 
-  def create(conn, %{"post" => post_params}, current_user, _claims) do
+  def create(conn, %{"post" => post_params}) do
+    current_user = Guardian.Plug.current_resource(conn)
     club_id = post_params["club_id"]
     create_and_respond(conn, %{"post" => post_params, "club_id" => club_id}, current_user)
   end
@@ -99,7 +102,8 @@ defmodule Danton.PostController do
     |> render("new.html", changeset: cs, club_id: club_id, channels: channels, clubs: clubs)
   end
 
-  def show(conn, %{"id" => id}, current_user, _claims) do
+  def show(conn, %{"id" => id}) do
+    current_user = Guardian.Plug.current_resource(conn)
     # TODO: make sure posts have rooms
     post = Repo.get!(Post, id)
       |> Repo.preload(:room)
@@ -128,7 +132,7 @@ defmodule Danton.PostController do
     )
   end
 
-  def edit(conn, %{"id" => id}, _current_user, _claims) do
+  def edit(conn, %{"id" => id}) do
     post = Repo.get!(Post, id) |> Post.with_tag_names()
     changeset = Post.changeset(post)
 
@@ -138,7 +142,7 @@ defmodule Danton.PostController do
     |> render("edit.html", post: post, changeset: changeset, club_id: post.club_id)
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}, _current_user, _claims) do
+  def update(conn, %{"id" => id, "post" => post_params}) do
     post = Repo.get!(Post, id)
 
     case Post.update_from_params(post, post_params) do
@@ -156,7 +160,7 @@ defmodule Danton.PostController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _current_user, _claims) do
+  def delete(conn, %{"id" => id}) do
     Post.destroy(id)
     conn
     |> put_flash(:info, "Post deleted successfully.")

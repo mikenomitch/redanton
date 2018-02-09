@@ -33,11 +33,11 @@ config :danton, Danton.Guardian,
   issuer: "Danton",
   ttl: { 30, :days },
   allowed_drift: 2000,
+  # TODO: replace this with something real
   secret_key: %{
     "k" => "XxSBVJfYyNiEJviIhSv2-jGNXcuZj8yHHg3CypsYD0Xe0WfcA1J1e9vlxo2isc0CmGLAeT_88ut6TGQGTGw2rw",
     "kty" => "oct"
-  } # TODO: replace this with something real
-  # serializer: Danton.GuardianSerializer DOES THIS GET UNCOMMENTED?
+  }
 
 config :danton, Danton.AuthAccessPipeline,
   module: Danton.Guardian,

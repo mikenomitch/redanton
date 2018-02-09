@@ -16,7 +16,9 @@ defmodule Danton.ChannelController do
   # ACTIONS
   # ===========================
 
-  def index(conn, params, current_user, _claims) do
+  def index(conn, params) do
+    current_user = Guardian.Plug.current_resource(conn)
+
     case index_template(current_user, %{include_channels: true}) do
       :no_clubs -> render_no_clubs(conn)
       :no_channels -> render_no_channels(conn)
@@ -44,7 +46,7 @@ defmodule Danton.ChannelController do
     )
   end
 
-  def new(conn, %{"club_id" => club_id}, _current_user, _claims) do
+  def new(conn, %{"club_id" => club_id}) do
     changeset = Channel.changeset(%Channel{})
 
     conn
@@ -52,7 +54,8 @@ defmodule Danton.ChannelController do
     |> render("new.html", changeset: changeset, club_id: club_id, clubs: :empty)
   end
 
-  def new(conn, _params, current_user, _claims) do
+  def new(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     changeset = Channel.changeset(%Channel{})
     clubs = Club.for_user(current_user) |> Repo.all
 
@@ -61,11 +64,13 @@ defmodule Danton.ChannelController do
     |> render("new.html", changeset: changeset, club_id: :none, clubs: clubs)
   end
 
-  def create(conn, %{"channel" => channel_params, "club_id" => club_id}, current_user, _claims) do
+  def create(conn, %{"channel" => channel_params, "club_id" => club_id}) do
+    current_user = Guardian.Plug.current_resource(conn)
     create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id, "current_user" => current_user})
   end
 
-  def create(conn, %{"channel" => channel_params}, current_user, _claims) do
+  def create(conn, %{"channel" => channel_params}) do
+    current_user = Guardian.Plug.current_resource(conn)
     club_id = channel_params["club_id"]
     create_and_respond(conn, %{"channel" => channel_params, "club_id" => club_id, "current_user" => current_user})
   end
@@ -101,7 +106,7 @@ defmodule Danton.ChannelController do
     |> render("new.html", changeset: cs, club_id: club_id, clubs: clubs)
   end
 
-  def show(conn, params = %{"id" => id}, _current_user, _claims) do
+  def show(conn, params = %{"id" => id}) do
     channel = Repo.get!(Channel, id)
       |> Repo.preload(:posts)
       |> Repo.preload(:club)
@@ -127,7 +132,7 @@ defmodule Danton.ChannelController do
     )
   end
 
-  def edit(conn, %{"id" => id}, _current_user, _claims) do
+  def edit(conn, %{"id" => id}) do
     channel = Repo.get!(Channel, id)
     changeset = Channel.changeset(channel)
 
@@ -138,7 +143,7 @@ defmodule Danton.ChannelController do
     |> render("edit.html", channel: channel, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "channel" => channel_params}, _current_user, _claims) do
+  def update(conn, %{"id" => id, "channel" => channel_params}) do
     channel = Repo.get!(Channel, id)
     changeset = Channel.changeset(channel, channel_params)
 
@@ -157,7 +162,7 @@ defmodule Danton.ChannelController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _current_user, _claims) do
+  def delete(conn, %{"id" => id}) do
     Channel.destroy(id)
 
     conn

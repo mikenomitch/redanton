@@ -16,23 +16,27 @@ defmodule Danton.AuthController do
   # ACTIONS
   # ===========================
 
-  def login(conn, _params, current_user, _claims) do
+  def login(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
+
     if current_user do
       conn
       |> put_flash(:info, "Signed in as #{current_user.name}")
       |> redirect(to: "/stream")
     else
-      render conn, "login.html", current_user: current_user, current_auths: auths(current_user)
+      render conn, "login.html", current_user: nil, current_auths: []
     end
   end
 
-  def callback(%Plug.Conn{assigns: %{ueberauth_failure: fails}} = conn, _params, current_user, _claims) do
+  def callback(%Plug.Conn{assigns: %{ueberauth_failure: fails}} = conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     conn
     |> put_flash(:error, hd(fails.errors).message)
     |> render("login.html", current_user: current_user, current_auths: auths(current_user))
   end
 
-  def callback(%Plug.Conn{assigns: %{ueberauth_auth: auth}} = conn, _params, current_user, _claims) do
+  def callback(%Plug.Conn{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     case UserFromAuth.get_or_insert(auth, current_user, Repo) do
       {:ok, user} ->
         conn
@@ -46,7 +50,8 @@ defmodule Danton.AuthController do
     end
   end
 
-  def logout(conn, _params, current_user, _claims) do
+  def logout(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
     if current_user do
       conn
       # This clears the whole session.

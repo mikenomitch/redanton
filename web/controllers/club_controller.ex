@@ -13,7 +13,9 @@ defmodule Danton.ClubController do
   # ACTIONS
   # ===========================
 
-  def index(conn, params, current_user, _claims) do
+  def index(conn, params) do
+    current_user = Guardian.Plug.current_resource(conn)
+
     case index_template(current_user) do
       :no_clubs -> render_no_clubs(conn)
       :no_posts -> render_no_posts(conn)
@@ -42,7 +44,7 @@ defmodule Danton.ClubController do
     )
   end
 
-  def new(conn, _params, _current_user, _claims) do
+  def new(conn, _params) do
     changeset = Club.changeset(%Club{})
 
     conn
@@ -50,7 +52,8 @@ defmodule Danton.ClubController do
     |> render("new.html", changeset: changeset)
   end
 
-  def create(conn, %{"club" => club_params}, current_user, _claims) do
+  def create(conn, %{"club" => club_params}) do
+    current_user = Guardian.Plug.current_resource(conn)
     changeset = Club.changeset(%Club{}, club_params)
 
     case Club.create(club_params, current_user) do
@@ -65,7 +68,7 @@ defmodule Danton.ClubController do
     end
   end
 
-  def show(conn, params = %{"id" => id}, _current_user, _claims) do
+  def show(conn, params = %{"id" => id}) do
     club = Repo.get!(Club, id)
       |> Repo.preload(:channels)
       |> Club.with_post_count()
@@ -90,7 +93,7 @@ defmodule Danton.ClubController do
     )
   end
 
-  def edit(conn, %{"id" => id}, _current_user, _claims) do
+  def edit(conn, %{"id" => id}) do
     club = Repo.get!(Club, id)
     changeset = Club.changeset(club)
 
@@ -100,7 +103,7 @@ defmodule Danton.ClubController do
     |> render("edit.html", club: club, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "club" => club_params}, _current_user, _claims) do
+  def update(conn, %{"id" => id, "club" => club_params}) do
     club = Repo.get!(Club, id)
     changeset = Club.changeset(club, club_params)
 
@@ -116,7 +119,7 @@ defmodule Danton.ClubController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _current_user, _claims) do
+  def delete(conn, %{"id" => id}) do
     club = Repo.get!(Club, id)
 
     # Here we use delete! (with a bang) because we expect
@@ -128,7 +131,9 @@ defmodule Danton.ClubController do
     |> redirect(to: club_path(conn, :index))
   end
 
-  def leave(conn, %{"club_id" => club_id}, current_user, _claims) do
+  def leave(conn, %{"club_id" => club_id}) do
+    current_user = Guardian.Plug.current_resource(conn)
+
     membership = Membership.for_user(current_user) |> Repo.get_by(club_id: club_id)
     if membership do
       # Here we use delete! (with a bang) because we expect
